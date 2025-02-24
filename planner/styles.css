@@ -22,48 +22,18 @@
 /*____________________________________________________________________*/
 /* //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/*/
 /*____________________________________________________________________*/
-
-page-title
-{
-  color: #d75faf;
-    font-family: 'Trebuchet MS'
-  , 'Lucida Sans Unicode'
-  , 'Lucida Grande'
-  , 'Lucida Sans'
-  , Arial, sans-serif;
-  font-size: xx-large;
-}
-
 body {
-  background-color: #ffffff;
-  font-size: 20;
   margin: 0;
+  text-align: left;
 }
 
-h1
-{
-  color: #d75faf;
-  font-family: 'Trebuchet MS'
-  , 'Lucida Sans Unicode'
-  , 'Lucida Grande'
-  , 'Lucida Sans'
-  , Arial, sans-serif;
-  font-size: 28;
-}
-
-h2
-{
-  color: #d75faf;
-  font-size: 24;
-}
 
 /*____________________________________________________________________*/
 table, th, td
 {
-  height  : 100%;
-  width   : 100%;
-  vertical-align    : top;
-  border  : 1px solid white;
+  height          : 100%;
+  width           : 100%;
+  margin          : 0;
 }
 
 /* Table Header */
@@ -75,22 +45,15 @@ th
   , 'Lucida Grande'
   , 'Lucida Sans'
   , Arial, sans-serif;
-  text-align: left;
-  padding-bottom: 20px;
+  font-size: large;
+  background-color: #eeeeee;
 }
 
 td
 {
-  font-family       : 'Consolas',  monospace;
+  font-family : 'Consolas',  monospace;
+  font-size: medium;
 }
-
-/*____________________________________________________________________*/
-/* Prompts to be answered */
-prompt
-{
-  color: #d75faf;
-}
-
 
 /*____________________________________________________________________*/
 /* For tables to fill an entire page
@@ -105,34 +68,117 @@ prompt
 {
   height  : 960px;
   width   : 672px;
-  border  : 4px solid rgb(89, 0, 255);
+  border  : 1px solid #d7d7d7;
+  padding : 10px;
 }
 
 .letter-size td
 {
-  width: auto;
+  width   : auto;
+  height  : auto;
 }
+
+.letter-size td, th
+{
+  border  : 0px solid #FF8700
+}
+
+
+/*____________________________________________________________________*/
+/* Table for page header
+/*____________________________________________________________________*/
+.page-header
+{
+  border-bottom: 2px solid #282828;
+}
+
+.page-header th
+{
+  color: #d75faf;
+    font-family: 'Trebuchet MS'
+  , 'Lucida Sans Unicode'
+  , 'Lucida Grande'
+  , 'Lucida Sans'
+  , Arial, sans-serif;
+  font-size: xx-large;
+  background-color: #ffffff;
+}
+
+.page-header td
+{
+  font-size: small;
+}
+
 
 /*____________________________________________________________________*/
 /* Table for daily time schedule
 /*____________________________________________________________________*/
-.schedule-table td, th
+.schedule-table
 {
-  padding-top: 20px;
+  padding: 20px;
+  border-right: 1px solid #cccccc;
 }
 
-.schedule-table td:nth-child(2), th:nth-child(2)
+.schedule-table td
 {
-  width: 75px;
+  height: 24px;
+}
+
+
+.schedule-table td:nth-child(2)
+{
+  width: 25px;
   border-bottom: 1px solid #5f0087;
 }
 
 /*____________________________________________________________________*/
 /* Table for prompt responses
 /*____________________________________________________________________*/
+
+.prompt-table
+{
+  padding: 12px;
+  /*border: .25px solid #00af87;*/
+}
+
+.prompt-table th
+{
+  height: auto;
+}
+
 .prompt-table td
 {
   width         : 100%;
-  padding-top: 20px;
-  border-bottom: 1px solid #d75faf;
+  padding-top   : 24px;
+  border-bottom : 1px solid #d75faf;
+}
+
+.prompt-table tdd
+{
+  background-color: #ff0000;
+}
+
+prompt
+{
+  font-size   : small;
+  font-style  : italic;
+  color       : #d75faf;
+}
+
+
+/*____________________________________________________________________*/
+/* Class for 50% columns
+/*____________________________________________________________________*/
+.two-columns-50 td, th
+{
+  width: 50%;
+}
+
+
+/*____________________________________________________________________*/
+/* Class for 25% columns
+/*____________________________________________________________________*/
+.four-columns-25 td, th
+{
+  width: 25%;
 }
