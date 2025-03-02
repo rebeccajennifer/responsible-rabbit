@@ -30,16 +30,35 @@
 //______________________________________________________________________
 
 //______________________________________________________________________
+// TODO
+//______________________________________________________________________
+// half-letter-portrait and half-letter-landscape have a lot of
+// duplicate code - these should be refactored to eliminate
+// duplication.
+//______________________________________________________________________
+
+//______________________________________________________________________
 // CONSTANTS
 //______________________________________________________________________
-const letter_wdth_portrait_in  = 11;
-const letter_hght_portrait_in  = 8.5;
+// Note: This file uses constants from an external file. The html that
+// calls this script should first list the constants file before
+// listing this file.
+//______________________________________________________________________
+const letter_wdth_portrait_in  = 8.5;
+const letter_hght_portrait_in  = 11;
 
-// Standard dpi for html
-const dpi                = 96;
+const letter_wdth_portrait_px  = DPI * letter_wdth_portrait_in;
+const letter_hght_portrait_px  = DPI * letter_hght_portrait_in;
 
-const letter_wdth_portrait_px  = dpi * letter_wdth_portrait_in;
-const letter_hght_portrait_px  = dpi * letter_hght_portrait_in;
+// Container for left and right content tables
+let half_letter_layout = document.createElement("table");
+half_letter_layout.style.width   = letter_wdth_portrait_px + "px";
+half_letter_layout.style.height  = letter_hght_portrait_px + "px";
+half_letter_layout.style.border  = CONTENT_BORDER_STYLE;
+half_letter_layout.style.margin  = 0;
+
+document.getElementById("table-container")
+  .appendChild(half_letter_layout);
 
 const half_letter_wdth_portrait_px  = letter_wdth_portrait_px * 0.5;
 const half_letter_hght_portrait_px  = letter_hght_portrait_px * 0.5;
@@ -56,16 +75,15 @@ const r_margin_in       = std_margin_in;
 const t_margin_in       = binder_margin_in;
 const b_margin_in       = std_margin_in;
 
-const l_margin_px   = l_margin_in   * dpi;
-const std_margin_px = std_margin_in * dpi;
-const r_margin_px   = r_margin_in   * dpi;
-const t_margin_px   = t_margin_in   * dpi;
-const b_margin_px   = b_margin_in   * dpi;
+const l_margin_px   = l_margin_in   * DPI;
+const std_margin_px = std_margin_in * DPI;
+const r_margin_px   = r_margin_in   * DPI;
+const t_margin_px   = t_margin_in   * DPI;
+const b_margin_px   = b_margin_in   * DPI;
 
 //______________________________________________________________________
 // Content Dimensions
 //______________________________________________________________________
-//
 
 const content_size_wdth_px =
   half_letter_wdth_portrait_px - l_margin_px - r_margin_px;
@@ -77,52 +95,32 @@ const content_size_hght_px =
 const mid_margin_hght = t_margin_px + b_margin_px;
 //______________________________________________________________________
 
-let half_letter_layout = document.createElement("table");
+let row0 = document.createElement("tr");
+let row1 = document.createElement("tr");
+let row2 = document.createElement("tr");
 
-half_letter_layout.style.width  = content_size_wdth_px + "px";
-half_letter_layout.style.height = content_size_hght_px + "px";
+let top_content          = document.createElement("td");
+top_content.style.height = content_size_hght_px + "px";
 
-const page_border_color     = "#888888";
-const color                 = "#880888";
-const color_page_border_style     = `1px solid ${color}`;
-const page_border_style     = `1px solid ${page_border_color}`;
-half_letter_layout.style.border = color_page_border_style;
+let bottom_content          = document.createElement("td");
+bottom_content.style.height = content_size_hght_px + "px";
 
+let mid_margins           = document.createElement("td");
+mid_margins.style.height  = mid_margin_hght+ "px";
 
-function create_half_page_layout()
-{
-  document.getElementById("table-container").appendChild(half_letter_layout);
+half_letter_layout.style.padding  = "0px";
+top_content.style.padding         = "0px";
+bottom_content.style.padding      = "0px";
+mid_margins.style.padding         = "0px";
 
-  let row0 = document.createElement("tr");
-  let row1 = document.createElement("tr");
-  let row2 = document.createElement("tr");
+top_content.style.border    = CONTENT_BORDER_STYLE;
+bottom_content.style.border = CONTENT_BORDER_STYLE;
 
-  let top_content          = document.createElement("td");
-  top_content.style.height = content_size_hght_px + "px";
+row0.appendChild(top_content);
+row1.appendChild(mid_margins);
+row2.appendChild(bottom_content);
 
-  let bottom_content          = document.createElement("td");
-  bottom_content.style.height = content_size_hght_px + "px";
-
-  let mid_margins           = document.createElement("td");
-  mid_margins.style.height  = mid_margin_hght+ "px";
-
-  half_letter_layout.style.padding  = "0px";
-  top_content.style.padding         = "0px";
-  bottom_content.style.padding      = "0px";
-  mid_margins.style.padding         = "0px";
-
-  top_content.style.border   = page_border_style;
-  bottom_content.style.border  = page_border_style;
-
-  row0.appendChild(top_content);
-  row1.appendChild(mid_margins);
-  row2.appendChild(bottom_content);
-
-  half_letter_layout.style.borderCollapse = "collapse";
-  half_letter_layout.appendChild(row0);
-  half_letter_layout.appendChild(row1);
-  half_letter_layout.appendChild(row2);
-}
-
-create_half_page_layout();
-
+half_letter_layout.style.borderCollapse = "collapse";
+half_letter_layout.appendChild(row0);
+half_letter_layout.appendChild(row1);
+half_letter_layout.appendChild(row2);
