@@ -45,7 +45,11 @@ const letter_hght_lndscp_px  = DPI * letter_hght_lndscp_in;
 let half_letter_layout = document.createElement("table");
 half_letter_layout.style.width   = letter_wdth_lndscp_px + "px";
 half_letter_layout.style.height  = letter_hght_lndscp_px + "px";
-half_letter_layout.style.border  = CONTENT_BORDER_STYLE;
+//______________________________________________________________________
+// Debug
+//______________________________________________________________________
+// half_letter_layout.style.border  = CONTENT_BORDER_STYLE;
+//______________________________________________________________________
 
 document.getElementById("table-container")
   .appendChild(half_letter_layout);
