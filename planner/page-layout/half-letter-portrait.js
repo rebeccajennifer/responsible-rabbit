@@ -101,12 +101,14 @@ else
 let letter_size_div = document.createElement('div');
 letter_size_div.style.width   = letter_wdth_portrait_px + 'px';
 letter_size_div.style.height  = letter_hght_portrait_px + 'px';
-//letter_size_div.style.border  = DEBUG0_BORDER_STYLE;
 
 let letter_content_div = document.createElement('div');
 letter_content_div.style.width  = '100%';
 letter_content_div.style.height = '100%';
-//letter_content_div.style.border = DEBUG0_BORDER_STYLE;
+
+// DEBUG
+letter_size_div.style.border    = DEBUG0_BORDER_STYLE;
+letter_content_div.style.border = DEBUG0_BORDER_STYLE;
 
 // Set content margins through padding
 letter_size_div.style.margin        = '0px';

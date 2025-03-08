@@ -54,18 +54,11 @@ let l_margin_in       = 0;
 
 // Change margin sides depending on double-sided print
 if (DOUBLE_SIDED)
-{
   l_margin_in       = STD_MARGIN_IN;
-}
 else
-{
   l_margin_in       = BINDER_MARGIN_IN;
-}
 
 // Convert in to px
-const std_margin_px     = STD_MARGIN_IN     * DPI;
-const binder_margin_px  = BINDER_MARGIN_IN  * DPI;
-
 const l_margin_px = l_margin_in * DPI;
 const r_margin_px = r_margin_in * DPI;
 const t_margin_px = t_margin_in * DPI;
@@ -80,24 +73,25 @@ const b_margin_px = b_margin_in * DPI;
 let mid_margin_wdth = 0;
 
 if (DOUBLE_SIDED)
-{
-  mid_margin_wdth = 2 * binder_margin_px;
-}
+  mid_margin_wdth = 2 * BINDER_MARGIN_PX;
 else
-{
   mid_margin_wdth = l_margin_px + r_margin_px;
-}
 
 // Create whole letter
 let letter_size_div = document.createElement('div');
 letter_size_div.style.width   = letter_wdth_landscape_px + 'px';
 letter_size_div.style.height  = letter_hght_landscape_px + 'px';
-//letter_size_div.style.border  = DEBUG0_BORDER_STYLE;
 
 let letter_content_div = document.createElement('div');
 letter_content_div.style.width  = '100%';
 letter_content_div.style.height = '100%';
-//letter_content_div.style.border = DEBUG0_BORDER_STYLE;
+
+//______________________________________________________________________
+// DEBUG
+//______________________________________________________________________
+letter_size_div.style.border  = DEBUG0_BORDER_STYLE;
+letter_content_div.style.border = DEBUG0_BORDER_STYLE;
+//______________________________________________________________________
 
 // Set content margins through padding
 letter_size_div.style.margin        = '0px';

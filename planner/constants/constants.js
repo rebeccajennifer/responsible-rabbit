@@ -33,19 +33,20 @@
 // 0: not double-sided
 // 1: double-sided
 const DOUBLE_SIDED          = 0;
+const DPI = 96;
 
-const STD_MARGIN_IN    = 0.3;
-const BINDER_MARGIN_IN = 0.5;
+const STD_MARGIN_IN    = 0.25;
+const BINDER_MARGIN_IN = 1;
 
+const STD_MARGIN_PX    = STD_MARGIN_IN    * DPI;
+const BINDER_MARGIN_PX = BINDER_MARGIN_IN * DPI;
 
-const BORDER_WIDTH          = 1;
+const BORDER_WIDTH           = 1;
 const DEBUG0_BORDER_STYLE    = `${BORDER_WIDTH}px solid #800080`;
 const DEBUG1_BORDER_STYLE    = `${BORDER_WIDTH}px solid #008080`;
+
 const CONTENT_BORDER_COLOR  = "#444444";
-const CONTENT_BORDER_STYLE  = `${BORDER_WIDTH}px solid ${CONTENT_BORDER_COLOR}`;
+const CONTENT_BORDER_STYLE  =
+  `${BORDER_WIDTH}px solid ${CONTENT_BORDER_COLOR}`;
+
 const CONTENT_PADDING       = `10px`;
-
-
-
-
-const DPI = 96;
