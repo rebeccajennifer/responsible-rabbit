@@ -33,10 +33,11 @@
 // 0: not double-sided
 // 1: double-sided
 const DOUBLE_SIDED          = 0;
-
-const DEBUG_BORDER_STYLE    = `1px solid #800080`;
+const BORDER_WIDTH          = 1;
+const DEBUG0_BORDER_STYLE    = `${BORDER_WIDTH}px solid #800080`;
+const DEBUG1_BORDER_STYLE    = `${BORDER_WIDTH}px solid #008080`;
 const CONTENT_BORDER_COLOR  = "#444444";
-const CONTENT_BORDER_STYLE  = `1px solid ${CONTENT_BORDER_COLOR}`;
+const CONTENT_BORDER_STYLE  = `${BORDER_WIDTH}px solid ${CONTENT_BORDER_COLOR}`;
 const CONTENT_PADDING       = `10px`;
 
 

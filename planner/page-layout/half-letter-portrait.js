@@ -50,17 +50,6 @@ const letter_hght_portrait_in  = 11;
 const letter_wdth_portrait_px  = DPI * letter_wdth_portrait_in;
 const letter_hght_portrait_px  = DPI * letter_hght_portrait_in;
 
-// Container for left and right content tables
-// Table the entire size of a sheet
-let half_letter_layout = document.createElement("table");
-half_letter_layout.style.width   = letter_wdth_portrait_px + "px";
-half_letter_layout.style.height  = letter_hght_portrait_px + "px";
-half_letter_layout.style.border  = CONTENT_BORDER_STYLE;
-half_letter_layout.style.margin  = 0;
-
-//document.getElementById("table-container")
-//  .appendChild(half_letter_layout);
-
 //______________________________________________________________________
 // Margins
 //______________________________________________________________________
@@ -99,16 +88,8 @@ const b_margin_px = b_margin_in * DPI;
 // Content Dimensions
 //______________________________________________________________________
 
-// Full width of half sheet with no margins
-const half_letter_wdth_portrait_px  = letter_wdth_portrait_px;
-
-// Content size (with margins)
-const content_size_wdth_px =
-  half_letter_wdth_portrait_px - l_margin_px - r_margin_px;
-
 // Width of middle column that serves as margin
 // Will account for two binder margins if printing double sided
-// Otherwise will assume
 let mid_margin_hght = 0;
 
 if (DOUBLE_SIDED)
@@ -120,85 +101,64 @@ else
   mid_margin_hght = t_margin_px + b_margin_px;
 }
 
-// Height of
-const content_size_hght_px =
-  0.5 * (letter_hght_portrait_px - mid_margin_hght);
-
-//______________________________________________________________________
-/*
-let row0 = document.createElement("tr");
-let row1 = document.createElement("tr");
-let row2 = document.createElement("tr");
-
-let top_content           = document.createElement("td");
-top_content.style.height  = content_size_hght_px + "px";
-let top_content_container = document.createElement("div");
-
-top_content_container.style.border  = CONTENT_BORDER_STYLE;
-top_content_container.style.width   =
-  content_size_wdth_px - CONTENT_PADDING + "px";
-top_content.appendChild(top_content_container);
-
-let bottom_content          = document.createElement("td");
-bottom_content.style.height = content_size_hght_px + "px";
-bottom_content.style.padding = "10px";
-let bot_content_container = document.createElement("div");
-//bot_content_container.border.style = CONTENT_BORDER_STYLE;
-//bottom_content.appendChild(bot_content_container);
-
-let mid_margins           = document.createElement("td");
-mid_margins.style.height  = mid_margin_hght + "px";
-
-//half_letter_layout.style.paddingTop     = t_margin_px + "px";
-//half_letter_layout.style.paddingBottom  = b_margin_px + "px";
-//half_letter_layout.style.paddingLeft    = l_margin_px + "px";
-//half_letter_layout.style.paddingRight   = r_margin_px + "px";
-
-top_content.style.padding         = "0px";
-bottom_content.style.padding      = "0px";
-mid_margins.style.padding         = "0px";
-
-top_content.style.border    = CONTENT_BORDER_STYLE;
-bottom_content.style.border = CONTENT_BORDER_STYLE;
-
-row0.appendChild(top_content);
-row1.appendChild(mid_margins);
-row2.appendChild(bottom_content);
-
-//half_letter_layout.style.borderCollapse = "collapse";
-half_letter_layout.appendChild(row0);
-half_letter_layout.appendChild(row1);
-half_letter_layout.appendChild(row2);
-*/
-
+// Create whole letter
 let letter_size_div = document.createElement("div");
 letter_size_div.style.width   = letter_wdth_portrait_px + "px";
 letter_size_div.style.height  = letter_hght_portrait_px + "px";
-letter_size_div.style.border  = DEBUG_BORDER_STYLE;
-letter_size_div.style.padding = CONTENT_PADDING;
-letter_size_div.style.padding = CONTENT_PADDING;
+//letter_size_div.style.border  = DEBUG0_BORDER_STYLE;
 
-document.getElementById("table-container")
+let letter_content_div = document.createElement("div");
+letter_content_div.style.width  = "100%";
+letter_content_div.style.height = "100%";
+//letter_content_div.style.border = DEBUG0_BORDER_STYLE;
+
+// Set content margins through padding
+letter_size_div.style.margin        = "0px";
+letter_size_div.style.paddingTop    = t_margin_px + "px";
+letter_size_div.style.paddingBottom = b_margin_px + "px";
+letter_size_div.style.paddingLeft   = l_margin_px + "px";
+letter_size_div.style.paddingRight  = r_margin_px + "px";
+
+document.getElementById("content-container")
   .appendChild(letter_size_div);
 
-page_wdth = half_letter_wdth_portrait_px + "px";
+letter_size_div.appendChild(letter_content_div);
 
-let top_content_box = document.createElement("div");
-top_content_box.style.height  = content_size_hght_px + "px";
-top_content_box.style.width   = page_wdth;
-top_content_box.style.border  = DEBUG_BORDER_STYLE;
+let content_table   = document.createElement("table");
 
-let mid_margin_box = document.createElement("div");
-mid_margin_box.style.height = mid_margin_hght + "px";
-mid_margin_box.style.width  = page_wdth;
-mid_margin_box.style.border  = DEBUG_BORDER_STYLE;
+let top_content_row = document.createElement("tr");
+let mddl_margin_row = document.createElement("tr");
+let bot_content_row = document.createElement("tr");
 
-let bot_content_box = document.createElement("div");
-bot_content_box.style.height  = content_size_hght_px  + "px";
-bot_content_box.style.width   = page_wdth;
-bot_content_box.style.border  = DEBUG_BORDER_STYLE;
+let top_content_box = document.createElement("td");
+let mddl_margin_box = document.createElement("td");
+let bot_content_box = document.createElement("td");
 
+letter_content_div.appendChild(content_table);
 
-letter_size_div.appendChild(top_content_box);
-letter_size_div.appendChild(mid_margin_box);
-letter_size_div.appendChild(bot_content_box);
+content_table.appendChild(top_content_row);
+content_table.appendChild(mddl_margin_row);
+content_table.appendChild(bot_content_row);
+
+top_content_row.appendChild(top_content_box);
+mddl_margin_row.appendChild(mddl_margin_box);
+bot_content_row.appendChild(bot_content_box);
+
+content_table.style.width   = "100%";
+top_content_row.style.width = "100%";
+mddl_margin_row.style.width = "100%";
+bot_content_row.style.width = "100%";
+
+content_table.style.height   = "100%";
+top_content_row.style.height = "auto";
+mddl_margin_row.style.height = mid_margin_hght + "px";
+bot_content_row.style.height = "auto";
+
+//content_table.style.border   = DEBUG1_BORDER_STYLE;
+top_content_box.style.border = CONTENT_BORDER_STYLE;
+//mddl_margin_box.style.border = DEBUG1_BORDER_STYLE;
+bot_content_box.style.border = CONTENT_BORDER_STYLE;
+
+top_content_box.style.padding = "0px";
+mddl_margin_box.style.padding = "0px";
+bot_content_box.style.padding = "0px";
