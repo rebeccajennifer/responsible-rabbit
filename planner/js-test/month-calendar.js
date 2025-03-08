@@ -3,9 +3,9 @@
 //      _   __   _   _ _   _   _   _         _
 // |   |_| | _  | | | V | | | | / |_/ |_| | /
 // |__ | | |__| |_| |   | |_| | \ |   | | | \_
-//  _  _         _ ___  _       _ ___   _                    / /
-// /  | | |\ |  \   |  | / | | /   |   \                    (^^)
-// \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+//  _  _         _ ___  _       _ ___   _                     / /
+// /  | | |\ |  \   |  | / | | /   |   \                     (^^)
+// \_ |_| | \| _/   |  | \ |_| \_  |  _/                     (____)o
 //______________________________________________________________________
 //______________________________________________________________________
 //
@@ -85,7 +85,6 @@ function set_table_styles()
     {
       border  : ${day_border_style};
       vertical-align : top;
-
     }
 
     .letter-size td
@@ -136,7 +135,8 @@ function create_month_calendar(rows, cols)
   {
     let row = document.createElement("tr");
 
-    for (let j = 0; j < cols; j++) {
+    for (let j = 0; j < cols; j++)
+    {
       let cell = document.createElement("td");
       cell.style.position = "relative";
       cell.appendChild(create_date_box());

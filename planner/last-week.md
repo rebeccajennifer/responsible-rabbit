@@ -12,11 +12,11 @@
 
 ## Last Week in Review
 
-What accomplishments from last week am I most proud of?
+What accomplishments from last week am I proud of?
 
 What do I need to work on the most?
 
-What things am I most grateful for?
+I am grateful for:
 
 ## How can I make next week the most fulfilling?
 
@@ -32,7 +32,7 @@ ________________________________________________________________________
 ________________________________________________________________________
 ________________________________________________________________________
 
-### Recreation
+### Fun
 
 ________________________________________________________________________
 ________________________________________________________________________
@@ -66,7 +66,7 @@ Considerations:
 
 [] Measurable
 
-What am I looking forward to this week?
+This week I am looking forward to:
 ________________________________________________________________________
 ________________________________________________________________________
 ________________________________________________________________________
