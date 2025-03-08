@@ -96,12 +96,12 @@ else
 let letter_size_div = document.createElement("div");
 letter_size_div.style.width   = letter_wdth_landscape_px + "px";
 letter_size_div.style.height  = letter_hght_landscape_px + "px";
-letter_size_div.style.border  = DEBUG0_BORDER_STYLE;
+//letter_size_div.style.border  = DEBUG0_BORDER_STYLE;
 
 let letter_content_div = document.createElement("div");
 letter_content_div.style.width  = "100%";
 letter_content_div.style.height = "100%";
-letter_content_div.style.border = DEBUG0_BORDER_STYLE;
+//letter_content_div.style.border = DEBUG0_BORDER_STYLE;
 
 // Set content margins through padding
 letter_size_div.style.margin        = "0px";
@@ -137,9 +137,9 @@ l_content_box.style.width = "auto";
  m_margin_box.style.width  = mid_margin_wdth + "px";
 r_content_box.style.width = "auto";
 
-content_table.style.border = DEBUG1_BORDER_STYLE;
+//content_table.style.border = DEBUG1_BORDER_STYLE;
 l_content_box.style.border = CONTENT_BORDER_STYLE;
-m_margin_box.style.border  = DEBUG1_BORDER_STYLE;
+//m_margin_box.style.border  = DEBUG1_BORDER_STYLE;
 r_content_box.style.border = CONTENT_BORDER_STYLE;
 
 l_content_box.style.padding = "0px";
