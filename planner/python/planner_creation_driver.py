@@ -16,3 +16,6 @@ if __name__ == '__main__':
   PlannerCreationParser.init_parser(parser)
 
   args: argparse.Namespace = parser.parse_args()
+
+  # Generate the SVG file
+  HalfLetterSize.create_svg('boxy.svg')
