@@ -71,9 +71,6 @@ else
 }
 
 // Convert in to px
-const std_margin_px     = STD_MARGIN_IN     * DPI;
-const binder_margin_px  = BINDER_MARGIN_IN  * DPI;
-
 const l_margin_px = l_margin_in * DPI;
 const r_margin_px = r_margin_in * DPI;
 const t_margin_px = t_margin_in * DPI;
@@ -86,23 +83,29 @@ const b_margin_px = b_margin_in * DPI;
 
 // Width of middle column that serves as margin
 // Will account for two binder margins if printing double sided
-let mid_margin_hght = 0;
+let mid_margin_hght_in = 0;
 
 if (DOUBLE_SIDED)
 {
-  mid_margin_hght = 2 * binder_margin_px;
+  mid_margin_hght_in = 2 * BINDER_MARGIN_IN;
 }
 else
 {
-  mid_margin_hght = t_margin_px + b_margin_px;
+  mid_margin_hght_in = t_margin_in + b_margin_in;
 }
 
 // Create whole letter
 let letter_size_div = document.createElement('div');
-letter_size_div.style.width   = letter_wdth_portrait_px + 'px';
-letter_size_div.style.height  = letter_hght_portrait_px + 'px';
-
 let letter_content_div = document.createElement('div');
+
+document.getElementById('content-container')
+  .appendChild(letter_size_div);
+letter_size_div.appendChild(letter_content_div);
+
+//letter_size_div.style.position  = 'fixed';
+letter_size_div.style.width     = letter_wdth_portrait_in + 'in';
+letter_size_div.style.height    = letter_hght_portrait_in + 'in';
+
 letter_content_div.style.width  = '100%';
 letter_content_div.style.height = '100%';
 
@@ -112,15 +115,11 @@ letter_content_div.style.border = DEBUG0_BORDER_STYLE;
 
 // Set content margins through padding
 letter_size_div.style.margin        = '0px';
-letter_size_div.style.paddingTop    = t_margin_px + 'px';
-letter_size_div.style.paddingBottom = b_margin_px + 'px';
-letter_size_div.style.paddingLeft   = l_margin_px + 'px';
-letter_size_div.style.paddingRight  = r_margin_px + 'px';
+letter_size_div.style.paddingTop    = t_margin_in + 'in';
+letter_size_div.style.paddingBottom = b_margin_in + 'in';
+letter_size_div.style.paddingLeft   = l_margin_in + 'in';
+letter_size_div.style.paddingRight  = r_margin_in + 'in';
 
-document.getElementById('content-container')
-  .appendChild(letter_size_div);
-
-letter_size_div.appendChild(letter_content_div);
 
 let content_table   = document.createElement('table');
 
@@ -149,7 +148,7 @@ bot_content_row.style.width = '100%';
 
 content_table.style.height   = '100%';
 top_content_row.style.height = 'auto';
-mddl_margin_row.style.height = mid_margin_hght + 'px';
+mddl_margin_row.style.height = mid_margin_hght_in + 'in';
 bot_content_row.style.height = 'auto';
 
 //content_table.style.border   = DEBUG1_BORDER_STYLE;

@@ -35,7 +35,7 @@
 const DOUBLE_SIDED          = 0;
 const DPI = 96;
 
-const STD_MARGIN_IN    = 0.25;
+const STD_MARGIN_IN    = 0.3;
 const BINDER_MARGIN_IN = 1;
 
 const STD_MARGIN_PX    = STD_MARGIN_IN    * DPI;
