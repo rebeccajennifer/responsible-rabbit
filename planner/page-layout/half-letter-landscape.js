@@ -36,99 +36,112 @@
 // listing this file.
 //______________________________________________________________________
 
-const letter_wdth_lndscp_in  = 11;
-const letter_hght_lndscp_in  = 8.5;
+const letter_wdth_landscape_in  = 11;
+const letter_hght_landscape_in  = 8.5;
 
-const letter_wdth_lndscp_px  = DPI * letter_wdth_lndscp_in;
-const letter_hght_lndscp_px  = DPI * letter_hght_lndscp_in;
-
-let half_letter_layout = document.createElement("table");
-half_letter_layout.style.width   = letter_wdth_lndscp_px + "px";
-half_letter_layout.style.height  = letter_hght_lndscp_px + "px";
-//______________________________________________________________________
-// Debug
-//______________________________________________________________________
-// half_letter_layout.style.border  = CONTENT_BORDER_STYLE;
-//______________________________________________________________________
-
-document.getElementById("table-container")
-  .appendChild(half_letter_layout);
-
-const half_letter_wdth_lndscp_px  = letter_wdth_lndscp_px * 0.5;
-const half_letter_hght_lndscp_px  = letter_hght_lndscp_px * 0.5;
+const letter_wdth_landscape_px  = DPI * letter_wdth_landscape_in;
+const letter_hght_landscape_px  = DPI * letter_hght_landscape_in;
 
 //______________________________________________________________________
 // Margins
 //______________________________________________________________________
 
 // To account for left binding
-const l_margin_in     = 0.5;
-const std_margin_in   = 0.25;
-const r_margin_in     = std_margin_in;
-const t_margin_in     = std_margin_in;
-const b_margin_in     = std_margin_in;
+const std_margin_in     = 0.25;
+const binder_margin_in  = 0.5;
 
-const l_margin_px   = l_margin_in   * DPI;
-const std_margin_px = std_margin_in * DPI;
-const r_margin_px   = r_margin_in   * DPI;
-const t_margin_px   = t_margin_in   * DPI;
-const b_margin_px   = b_margin_in   * DPI;
+const t_margin_in       = std_margin_in;
+const r_margin_in       = std_margin_in;
+const b_margin_in       = std_margin_in;
+
+let l_margin_in       = 0;
+
+// Change margin sides depending on double-sided print
+if (DOUBLE_SIDED)
+{
+  l_margin_in       = std_margin_in;
+}
+else
+{
+  l_margin_in       = binder_margin_in;
+}
+
+// Convert in to px
+const std_margin_px     = std_margin_in     * DPI;
+const binder_margin_px  = binder_margin_in  * DPI;
+
+const l_margin_px = l_margin_in * DPI;
+const r_margin_px = r_margin_in * DPI;
+const t_margin_px = t_margin_in * DPI;
+const b_margin_px = b_margin_in * DPI;
 
 //______________________________________________________________________
 // Content Dimensions
 //______________________________________________________________________
-//
-// |<------ 5.5in ------>|<------ 5.5in ------>|
-//  0.5 left margin
-//  -------------------------------------------
-// |   ----------------  |   ----------------  |
-// |  |                | |  |  ^             | |
-// | o|                | | o|  |             | |
-// |  |<- .5 left      | |  |  .25 top &     | |
-// |  |     margin     | |  |     bottom     | |
-// | o|                | | o|     margin     | |
-// |  |    .25 right ->| |  |                | |
-// |  |         margin | |  |                | |
-// | o|                | | o|                | |
-// |  |                | | ^|                | |
-// |   ----------------  | | ----------------  |
-//  -----------------------|-------------------
-//                         holes for binding
-//______________________________________________________________________
-
-const content_size_wdth_px =
-  half_letter_wdth_lndscp_px - l_margin_px - r_margin_px;
-
-const content_size_hght_px =
-  half_letter_hght_lndscp_px - t_margin_px - b_margin_px;
 
 // Width of middle column that serves as margin
-const mid_margin_width = l_margin_px + r_margin_px;
-//______________________________________________________________________
+// Will account for two binder margins if printing double sided
+let mid_margin_wdth = 0;
 
+if (DOUBLE_SIDED)
+{
+  mid_margin_wdth = 2 * binder_margin_px;
+}
+else
+{
+  mid_margin_wdth = l_margin_px + r_margin_px;
+}
 
-let row = document.createElement("tr");
+// Create whole letter
+let letter_size_div = document.createElement("div");
+letter_size_div.style.width   = letter_wdth_landscape_px + "px";
+letter_size_div.style.height  = letter_hght_landscape_px + "px";
+letter_size_div.style.border  = DEBUG0_BORDER_STYLE;
 
-let left_content          = document.createElement("td");
-left_content.style.width  = content_size_wdth_px + "px";
+let letter_content_div = document.createElement("div");
+letter_content_div.style.width  = "100%";
+letter_content_div.style.height = "100%";
+letter_content_div.style.border = DEBUG0_BORDER_STYLE;
 
-let right_content         = document.createElement("td");
-right_content.style.width = content_size_wdth_px + "px";
+// Set content margins through padding
+letter_size_div.style.margin        = "0px";
+letter_size_div.style.paddingTop    = t_margin_px + "px";
+letter_size_div.style.paddingBottom = b_margin_px + "px";
+letter_size_div.style.paddingLeft   = l_margin_px + "px";
+letter_size_div.style.paddingRight  = r_margin_px + "px";
 
-let mid_margins           = document.createElement("td");
-mid_margins.style.width   = mid_margin_width + "px";
+document.getElementById("content-container")
+  .appendChild(letter_size_div);
 
-half_letter_layout.style.padding  = "0px";
-left_content.style.padding        = "0px";
-right_content.style.padding       = "0px";
-mid_margins.style.padding         = "0px";
+letter_size_div.appendChild(letter_content_div);
 
-left_content.style.border   = CONTENT_BORDER_STYLE;
-right_content.style.border  = CONTENT_BORDER_STYLE;
+let content_table = document.createElement("table");
+let content_row   = document.createElement("tr");
 
-row.appendChild(left_content);
-row.appendChild(mid_margins);
-row.appendChild(right_content);
+let l_content_box = document.createElement("td");
+let m_margin_box  = document.createElement("td");
+let r_content_box = document.createElement("td");
 
-half_letter_layout.style.borderCollapse = "collapse";
-half_letter_layout.appendChild(row);
+letter_content_div.appendChild(content_table);
+
+content_table.appendChild(content_row);
+content_row.appendChild(l_content_box);
+content_row.appendChild(m_margin_box);
+content_row.appendChild(r_content_box);
+
+content_table.style.height = "100%";
+content_row.style.height = "100%";
+
+content_table.style.width = "100%";
+l_content_box.style.width = "auto";
+ m_margin_box.style.width  = mid_margin_wdth + "px";
+r_content_box.style.width = "auto";
+
+content_table.style.border = DEBUG1_BORDER_STYLE;
+l_content_box.style.border = CONTENT_BORDER_STYLE;
+m_margin_box.style.border  = DEBUG1_BORDER_STYLE;
+r_content_box.style.border = CONTENT_BORDER_STYLE;
+
+l_content_box.style.padding = "0px";
+m_margin_box.style.padding  = "0px";
+r_content_box.style.padding = "0px";
