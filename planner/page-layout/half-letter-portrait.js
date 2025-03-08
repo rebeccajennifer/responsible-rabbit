@@ -54,29 +54,25 @@ const letter_hght_portrait_px  = DPI * letter_hght_portrait_in;
 // Margins
 //______________________________________________________________________
 
-// To account for left binding
-const std_margin_in     = 0.25;
-const binder_margin_in  = 0.5;
-
-const l_margin_in       = std_margin_in;
-const r_margin_in       = std_margin_in;
-const b_margin_in       = std_margin_in;
+const l_margin_in       = STD_MARGIN_IN;
+const r_margin_in       = STD_MARGIN_IN;
+const b_margin_in       = STD_MARGIN_IN;
 
 let t_margin_in       = 0;
 
 // Change margin sides depending on double-sided print
 if (DOUBLE_SIDED)
 {
-  t_margin_in       = std_margin_in;
+  t_margin_in       = STD_MARGIN_IN;
 }
 else
 {
-  t_margin_in       = binder_margin_in;
+  t_margin_in       = BINDER_MARGIN_IN;
 }
 
 // Convert in to px
-const std_margin_px     = std_margin_in     * DPI;
-const binder_margin_px  = binder_margin_in  * DPI;
+const std_margin_px     = STD_MARGIN_IN     * DPI;
+const binder_margin_px  = BINDER_MARGIN_IN  * DPI;
 
 const l_margin_px = l_margin_in * DPI;
 const r_margin_px = r_margin_in * DPI;
@@ -102,37 +98,37 @@ else
 }
 
 // Create whole letter
-let letter_size_div = document.createElement("div");
-letter_size_div.style.width   = letter_wdth_portrait_px + "px";
-letter_size_div.style.height  = letter_hght_portrait_px + "px";
+let letter_size_div = document.createElement('div');
+letter_size_div.style.width   = letter_wdth_portrait_px + 'px';
+letter_size_div.style.height  = letter_hght_portrait_px + 'px';
 //letter_size_div.style.border  = DEBUG0_BORDER_STYLE;
 
-let letter_content_div = document.createElement("div");
-letter_content_div.style.width  = "100%";
-letter_content_div.style.height = "100%";
+let letter_content_div = document.createElement('div');
+letter_content_div.style.width  = '100%';
+letter_content_div.style.height = '100%';
 //letter_content_div.style.border = DEBUG0_BORDER_STYLE;
 
 // Set content margins through padding
-letter_size_div.style.margin        = "0px";
-letter_size_div.style.paddingTop    = t_margin_px + "px";
-letter_size_div.style.paddingBottom = b_margin_px + "px";
-letter_size_div.style.paddingLeft   = l_margin_px + "px";
-letter_size_div.style.paddingRight  = r_margin_px + "px";
+letter_size_div.style.margin        = '0px';
+letter_size_div.style.paddingTop    = t_margin_px + 'px';
+letter_size_div.style.paddingBottom = b_margin_px + 'px';
+letter_size_div.style.paddingLeft   = l_margin_px + 'px';
+letter_size_div.style.paddingRight  = r_margin_px + 'px';
 
-document.getElementById("content-container")
+document.getElementById('content-container')
   .appendChild(letter_size_div);
 
 letter_size_div.appendChild(letter_content_div);
 
-let content_table   = document.createElement("table");
+let content_table   = document.createElement('table');
 
-let top_content_row = document.createElement("tr");
-let mddl_margin_row = document.createElement("tr");
-let bot_content_row = document.createElement("tr");
+let top_content_row = document.createElement('tr');
+let mddl_margin_row = document.createElement('tr');
+let bot_content_row = document.createElement('tr');
 
-let top_content_box = document.createElement("td");
-let mddl_margin_box = document.createElement("td");
-let bot_content_box = document.createElement("td");
+let top_content_box = document.createElement('td');
+let mddl_margin_box = document.createElement('td');
+let bot_content_box = document.createElement('td');
 
 letter_content_div.appendChild(content_table);
 
@@ -144,21 +140,29 @@ top_content_row.appendChild(top_content_box);
 mddl_margin_row.appendChild(mddl_margin_box);
 bot_content_row.appendChild(bot_content_box);
 
-content_table.style.width   = "100%";
-top_content_row.style.width = "100%";
-mddl_margin_row.style.width = "100%";
-bot_content_row.style.width = "100%";
+content_table.style.width   = '100%';
+top_content_row.style.width = '100%';
+mddl_margin_row.style.width = '100%';
+bot_content_row.style.width = '100%';
 
-content_table.style.height   = "100%";
-top_content_row.style.height = "auto";
-mddl_margin_row.style.height = mid_margin_hght + "px";
-bot_content_row.style.height = "auto";
+content_table.style.height   = '100%';
+top_content_row.style.height = 'auto';
+mddl_margin_row.style.height = mid_margin_hght + 'px';
+bot_content_row.style.height = 'auto';
 
 //content_table.style.border   = DEBUG1_BORDER_STYLE;
 top_content_box.style.border = CONTENT_BORDER_STYLE;
 //mddl_margin_box.style.border = DEBUG1_BORDER_STYLE;
 bot_content_box.style.border = CONTENT_BORDER_STYLE;
 
-top_content_box.style.padding = "0px";
-mddl_margin_box.style.padding = "0px";
-bot_content_box.style.padding = "0px";
+top_content_box.style.padding = '0px';
+mddl_margin_box.style.padding = '0px';
+bot_content_box.style.padding = '0px';
+
+let top_content_box_box = document.createElement('div');
+top_content_box.appendChild(top_content_box_box);
+top_content_box_box.style.height = '100%';
+
+let bot_content_box_box = document.createElement('div');
+bot_content_box.appendChild(bot_content_box_box);
+bot_content_box_box.style.height = '100%';
