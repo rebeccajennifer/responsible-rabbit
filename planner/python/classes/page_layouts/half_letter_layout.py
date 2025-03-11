@@ -140,19 +140,16 @@ class HalfLetterSize:
         insert_pos01 = Dims.STD_MARGIN
 
     else:
-      insert_pos00 = Dims.STND_MARGIN
-      insert_pos01 = Dims.BIND_MARGIN
+      insert_pos00 = Dims.BND_MARGIN
+      insert_pos01 = Dims.STD_MARGIN
+      insert_pos11 = Dims.STD_MARGIN
 
-      insert_pos10 = Dims.STD_MARGIN
-      insert_pos11 = content_hght\
+      insert_pos10 = content_wdth\
         + Dims.STD_MARGIN\
         + 2 * Dims.BND_MARGIN
 
       if (self.is_dbl_sided_):
-        insert_pos01 = Dims.STD_MARGIN
-
-
-
+        insert_pos00 = Dims.STD_MARGIN
 
     insert_pos0: Tuple = (insert_pos00, insert_pos01)
     insert_pos1: Tuple = (insert_pos10, insert_pos11)

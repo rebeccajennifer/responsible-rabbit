@@ -17,11 +17,11 @@ if __name__ == '__main__':
 
   args: argparse.Namespace = parser.parse_args()
 
-  layout_landscpe: HalfLetterSize = HalfLetterSize(False, True)
+  layout_landscpe: HalfLetterSize = HalfLetterSize(False, False)
   layout_portrait: HalfLetterSize = HalfLetterSize(True, False)
 
   # Generate the SVG file
-  layout_portrait.create_layout('portrait_1.svg')
-  #layout_landscpe.create_layout('landscpe.svg')
+  layout_portrait.create_layout('portrait.svg')
+  layout_landscpe.create_layout('landscpe.svg')
 
   Day.create_daily_schedule('09:00', '21:00')
