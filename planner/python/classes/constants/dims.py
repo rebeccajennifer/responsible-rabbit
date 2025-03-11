@@ -8,7 +8,7 @@ class PlannerDims:
   LETTER_SIZE_LNGTH: int = 11
   LETTER_SIZE_WIDTH: int = 8.5
 
-  BINDER_MARGIN: int = 0.75
+  BND_MARGIN: int = 0.75
   STD_MARGIN: int = 0.3
 
 
@@ -53,9 +53,9 @@ class PlannerDims:
     """
 
     if (dbl_sided):
-      return 2 * PlannerDims.BINDER_MARGIN
+      return 2 * PlannerDims.BND_MARGIN
 
-    return PlannerDims.BINDER_MARGIN + PlannerDims.STD_MARGIN
+    return PlannerDims.BND_MARGIN + PlannerDims.STD_MARGIN
 
   #_____________________________________________________________________
   def calc_content_size(is_portrait: bool) -> Tuple:
@@ -83,7 +83,7 @@ class PlannerDims:
     short_side : int = 0.5 * (
       Dims.LETTER_SIZE_LNGTH \
       - 2 * (Dims.STD_MARGIN) \
-      - 2 * (Dims.BINDER_MARGIN)
+      - 2 * (Dims.BND_MARGIN)
     )
 
     long_side: int =\

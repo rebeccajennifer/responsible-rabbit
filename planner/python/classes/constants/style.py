@@ -6,6 +6,7 @@ class PlannerColors:
   MEDIUM_GREY: str   = '#444444'
   CYAN: str          = '#008080'
   VIOLET: str        = '#800080'
+  WHITE: str         = '#ffffff'
 
   BORDER_COLOR: str = MEDIUM_GREY
   DEBUG0_COLOR: str = CYAN

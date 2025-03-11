@@ -72,29 +72,16 @@ class HalfLetterSize:
       , size=(wdth, hght)
     )
 
-    content_wdth, content_hght =\
-      Dims.calc_content_size(self.is_portrait_)
-
-    if (True):#self.is_portrait_):
-      insert_pos00 = Dims.STD_MARGIN
-      insert_pos01 = Dims.BINDER_MARGIN
-
-      insert_pos10 = Dims.STD_MARGIN
-      insert_pos11 = content_hght\
-        + Dims.STD_MARGIN\
-        + 2 * Dims.BINDER_MARGIN
-
-      if (self.is_dbl_sided_):
-        insert_pos01 = Dims.STD_MARGIN
+    insert_pos0, insert_pos1 = self.determine_insertion_pts()
 
     insert_pos0: Tuple =\
-    ( Dims.to_in_str(insert_pos00)
-    , Dims.to_in_str(insert_pos01)
+    ( Dims.to_in_str(insert_pos0[0])
+    , Dims.to_in_str(insert_pos0[1])
     )
 
     insert_pos1: Tuple =\
-    ( Dims.to_in_str(insert_pos10)
-    , Dims.to_in_str(insert_pos11)
+    ( Dims.to_in_str(insert_pos1[0])
+    , Dims.to_in_str(insert_pos1[1])
     )
 
     content_box_0: svgwrite.shapes.Rect =\
@@ -123,6 +110,52 @@ class HalfLetterSize:
       , id="flux"
       , insert=insert_position
       , stroke=Colors.DEBUG0_COLOR
-      , fill=Colors.DEBUG1_COLOR)
+      , fill=Colors.WHITE)
 
     return content_box
+
+  #_____________________________________________________________________
+  def determine_insertion_pts(self) -> Tuple:
+    """
+    Determines top left insertion points for content boxes.
+
+    Returns:
+    Tuple of tuples
+    ((x_content_box0, y_content_box0), (x_content_box1, y_content_box1))
+    """
+
+    content_wdth, content_hght =\
+      Dims.calc_content_size(self.is_portrait_)
+
+    if (self.is_portrait_):
+      insert_pos00 = Dims.STD_MARGIN
+      insert_pos01 = Dims.BND_MARGIN
+
+      insert_pos10 = Dims.STD_MARGIN
+      insert_pos11 = content_hght\
+        + Dims.STD_MARGIN\
+        + 2 * Dims.BND_MARGIN
+
+      if (self.is_dbl_sided_):
+        insert_pos01 = Dims.STD_MARGIN
+
+    else:
+      insert_pos00 = Dims.STND_MARGIN
+      insert_pos01 = Dims.BIND_MARGIN
+
+      insert_pos10 = Dims.STD_MARGIN
+      insert_pos11 = content_hght\
+        + Dims.STD_MARGIN\
+        + 2 * Dims.BND_MARGIN
+
+      if (self.is_dbl_sided_):
+        insert_pos01 = Dims.STD_MARGIN
+
+
+
+
+    insert_pos0: Tuple = (insert_pos00, insert_pos01)
+    insert_pos1: Tuple = (insert_pos10, insert_pos11)
+
+    return(insert_pos0, insert_pos1)
+
