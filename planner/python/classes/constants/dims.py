@@ -9,7 +9,7 @@ class PlannerDims:
   LETTER_SIZE_WIDTH: int = 8.5
 
   BND_MARGIN: int = 0.75
-  STD_MARGIN: int = 0.3
+  STD_MARGIN: int = 0.25
 
 
 
