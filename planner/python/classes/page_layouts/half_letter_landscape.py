@@ -35,62 +35,86 @@ from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerStrokes as Strokes
 
+
+#_______________________________________________________________________
 class HalfLetterSize:
+  """
+  Layout for half letter size prints. Intended to print two pages on
+  one sheet and cut in half.
+  """
 
   #_____________________________________________________________________
-  def print_something() -> None:
-    """
-    Test print function.
+  def __init__(self
+    , is_portrait: bool = False
+    , is_dbl_sided: bool = False):
+    self.is_portrait_: bool   = is_portrait
+    self.is_dbl_sided_: bool  = is_dbl_sided
 
+  #_____________________________________________________________________
+  def create_layout(self, file_path: str) -> None:
+    """
     Parameters:
-    None
+    file_path - resulting svg path
 
     Returns:
     None
     """
-    print('hi there')
-    return
 
-  #_____________________________________________________________________
-  def create_svg(file_path:str) -> None:
-    """
-    Test function to create an svg. This function was taken directly
-    from ChatGPT
+    hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH)
+    wdth: int = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH)
 
-    Parameters:
-    filename - resulting svg path
-
-    Returns:
-    None
-    """
+    if (self.is_portrait_):
+      hght = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH)
+      wdth = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH)
 
     page_layout = svgwrite.Drawing(file_path
       , profile='tiny'
-      , size=(Dims.to_in_str(Dims.LETTER_SIZE_LNGTH)
-        , Dims.to_in_str(Dims.LETTER_SIZE_WIDTH)
-        )
-      )
+      , size=(wdth, hght)
+    )
 
-    insert_pos: Tuple =\
-      Dims.to_in_str(Dims.STD_MARGIN), Dims.to_in_str(Dims.STD_MARGIN)
+    content_wdth, content_hght =\
+      Dims.calc_content_size(self.is_portrait_)
+
+    if (True):#self.is_portrait_):
+      insert_pos00 = Dims.STD_MARGIN
+      insert_pos01 = Dims.BINDER_MARGIN
+
+      insert_pos10 = Dims.STD_MARGIN
+      insert_pos11 = content_hght\
+        + Dims.STD_MARGIN\
+        + 2 * Dims.BINDER_MARGIN
+
+      if (self.is_dbl_sided_):
+        insert_pos01 = Dims.STD_MARGIN
+
+    insert_pos0: Tuple =\
+    ( Dims.to_in_str(insert_pos00)
+    , Dims.to_in_str(insert_pos01)
+    )
+
+    insert_pos1: Tuple =\
+    ( Dims.to_in_str(insert_pos10)
+    , Dims.to_in_str(insert_pos11)
+    )
 
     content_box_0: svgwrite.shapes.Rect =\
-      HalfLetterSize.create_content_box(True, insert_pos)
+      self.create_content_box(insert_pos0)
 
     content_box_1: svgwrite.shapes.Rect =\
-      HalfLetterSize.create_content_box(True, insert_pos)
+      self.create_content_box(insert_pos1)
 
     page_layout.add(content_box_0)
+    page_layout.add(content_box_1)
 
     page_layout.save()
 
   #_____________________________________________________________________
-  def create_content_box(is_portrait: bool
-    , insert_position) -> svgwrite.shapes.Rect:
+  def create_content_box(self
+    , insert_position: Tuple) -> svgwrite.shapes.Rect:
     """
     Creates rectangle that will contain content.
     """
-    size: Tuple = Dims.calc_content_size(is_portrait)
+    size: Tuple = Dims.calc_content_size(self.is_portrait_)
     w: str = Dims.to_in_str(size[0])
     h: str = Dims.to_in_str(size[1])
 

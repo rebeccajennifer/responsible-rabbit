@@ -11,14 +11,17 @@ def new_line (new_line_count: int = 1) -> None:
 
 if __name__ == '__main__':
   new_line(2)
-  HalfLetterSize.print_something()
 
   parser: argparse.ArgumentParser = argparse.ArgumentParser()
   PlannerCreationParser.init_parser(parser)
 
   args: argparse.Namespace = parser.parse_args()
 
+  layout_landscpe: HalfLetterSize = HalfLetterSize(False)
+  layout_portrait: HalfLetterSize = HalfLetterSize(True)
+
   # Generate the SVG file
-  HalfLetterSize.create_svg('boxy.svg')
+  layout_portrait.create_layout('portrait.svg')
+  layout_landscpe.create_layout('landscpe.svg')
 
   Day.create_daily_schedule('09:00', '21:00')

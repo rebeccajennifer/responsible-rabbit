@@ -73,18 +73,25 @@ class PlannerDims:
 
     Dims = PlannerDims
 
-    long_side: int = 0.5 * (
+    if (is_portrait):
+      page_wdth: int = Dims.LETTER_SIZE_WIDTH
+      page_hght: int = Dims.LETTER_SIZE_LNGTH
+    else:
+      page_wdth: int = Dims.LETTER_SIZE_LNGTH
+      page_hght: int = Dims.LETTER_SIZE_WIDTH
+
+    short_side : int = 0.5 * (
       Dims.LETTER_SIZE_LNGTH \
       - 2 * (Dims.STD_MARGIN) \
       - 2 * (Dims.BINDER_MARGIN)
     )
 
-    short_side: int =\
+    long_side: int =\
       Dims.LETTER_SIZE_WIDTH - 2 * Dims.STD_MARGIN
 
     if (is_portrait):
-      content_hght = short_side
       content_wdth = long_side
+      content_hght = short_side
 
     else:
       content_wdth = short_side
