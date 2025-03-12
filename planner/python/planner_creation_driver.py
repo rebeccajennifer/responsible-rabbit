@@ -48,4 +48,4 @@ if __name__ == '__main__':
   layout_portrait_no_dbl_sided.create_layout('portrait.svg')
   layout_portrait_dbl_sided.create_layout('portrait_dbl.svg')
 
-  Day.create_daily_schedule('09:00', '21:00')
+  Day.create_daily_schedule('19:00', '11:00')
