@@ -31,6 +31,8 @@ import svgwrite.shapes
 
 from typing import Tuple
 
+import svgwrite.text
+
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerStrokes as Strokes
@@ -51,7 +53,10 @@ class HalfLetterSize:
     self.is_dbl_sided_: bool  = is_dbl_sided
 
   #_____________________________________________________________________
-  def create_layout(self, file_path: str) -> None:
+  def create_layout(self
+    , file_path: str
+    , content=svgwrite.text.Text(" ")
+    ) -> None:
     """
     Parameters:
     file_path - resulting svg path
@@ -92,6 +97,9 @@ class HalfLetterSize:
 
     page_layout.add(content_box_0)
     page_layout.add(content_box_1)
+
+    # TODO integrate
+    page_layout.add(content)
 
     page_layout.save()
 

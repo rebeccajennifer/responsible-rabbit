@@ -48,4 +48,18 @@ if __name__ == '__main__':
   layout_portrait_no_dbl_sided.create_layout('portrait.svg')
   layout_portrait_dbl_sided.create_layout('portrait_dbl.svg')
 
-  Day.create_daily_schedule('19:00', '11:00')
+  txt = Day.create_daily_schedule\
+  ( strt_time_str='19:00'
+  , stop_time_str='11:00'
+  , wdth=2
+  , hght=7.9
+  )
+
+  layout_test: HalfLetterSize =\
+    HalfLetterSize\
+    ( is_portrait=False
+    , is_dbl_sided=False
+    )
+
+  layout_test.create_layout('test-layout.svg', txt)
+
