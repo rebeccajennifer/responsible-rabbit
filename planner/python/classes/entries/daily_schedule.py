@@ -48,6 +48,9 @@ class DailySchedule:
   DEF_STRT_24: str = '05:00'
   DEF_STOP_24: str = '21:00'
 
+  HEADER_SIZE: int = Font.NORMAL_SIZE
+  PADDING: int = Font.NORMAL_PADDING
+
   #_____________________________________________________________________
   def create_daily_schedule\
   ( strt_time_str: str = DEF_STRT_24
@@ -98,12 +101,15 @@ class DailySchedule:
     crnt_datetime_str = strt_time_str
 
     #___________________________________________________________________
-    time_block_count: int = 1 +\
-    ( stop_datetime - strt_datetime).total_seconds()\
-    / 60\
-    / time_inc_min
+    time_block_count: int =\
+      1 +\
+      (stop_datetime - strt_datetime).total_seconds()\
+      / 60\
+      / time_inc_min
 
-    header_space: int = Font.NORMAL_SIZE + Font.NORMAL_PADDING
+    header_space: int =\
+      DailySchedule.HEADER_SIZE\
+    + DailySchedule.PADDING
 
     # TODO account for padding
     time_box_wdth: int = wdth
@@ -233,7 +239,7 @@ class DailySchedule:
       svgwrite Text object with header
     """
 
-    font_size: int = Font.NORMAL_SIZE
+    font_size: int = DailySchedule.HEADER_SIZE
     font_size_str: int = Dims.to_in_str(font_size)
     insert_y: int = font_size / 2
     insert_y_str = Dims.to_in_str(insert_y)
