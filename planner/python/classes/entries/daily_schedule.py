@@ -40,6 +40,7 @@ from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerStrokes as Strokes
 from classes.constants.style import PlannerFontStyle as Font
+from classes.constants.strings import PlannerStrings as Strings
 
 class Day:
   DEF_STRT_12: str = '09:00'
@@ -102,18 +103,16 @@ class Day:
     / 60\
     / time_inc_min
 
-    # Used in the calculation of box height
-    # Assumes lines are 1 px
-    stroke_wdth_total: int    = Strokes.STD_STROKE * time_block_count
-    stroke_wdth_total_in: float = stroke_wdth_total * 1/72
+    header_space: int = Font.HEAD_2_SIZE + Font.HEAD_2_PADDING
 
     # TODO account for padding
     time_box_wdth: int = wdth
-    time_box_hght: int = hght / time_block_count
+    time_box_hght: int = (hght - header_space) / time_block_count
 
-    crnt_y: int = 0.5 * Font.NORMAL_SIZE
+    crnt_y: int = header_space + Font.HEAD_2_SIZE/ 2
 
     group = svgwrite.container.Group()
+    group.add(Day.create_schedule_header())
 
     #___________________________________________________________________
     # Create boxes with time increments
@@ -181,14 +180,6 @@ class Day:
 
     return strt_datetime, stop_datetime
 
-
-  #_____________________________________________________________________
-  def is_half_hour(t: dt.time) -> bool:
-    """
-    Verifies that time is in the half hour
-    """
-    return t.minute in {0, 30}
-
   #_____________________________________________________________________
   def create_time_entry(time_str: str
   , insert_y
@@ -202,7 +193,7 @@ class Day:
       wdth:     Width of container in inches
     """
 
-    line_y: float = insert_y + 0.5 * Font.NORMAL_SIZE
+    line_y: float = insert_y + 0.5 * Font.LITTLE_SIZE
     insert_y_str: str = Dims.to_in_str(insert_y)
     line_y_in_str: str = Dims.to_in_str(line_y)
 
@@ -212,7 +203,7 @@ class Day:
     , insert=('0in', insert_y_str)
     , text_anchor='start'
     , alignment_baseline='middle'
-    , fill=Colors.HEADING
+    , fill=Colors.NORMAL
     , font_size=Font.NORMAL_IN
     , font_family=Font.FONT_FAMILY_NORMAL
     )
@@ -231,3 +222,31 @@ class Day:
     group.add(line)
 
     return group
+
+  #_____________________________________________________________________
+  def create_schedule_header() -> svgwrite.text.Text:
+    """
+    Parameters:
+      None
+
+    Returns:
+      svgwrite Text object with header
+    """
+
+    font_size: int = Font.HEAD_2_SIZE
+    font_size_str: int = Dims.to_in_str(font_size)
+    insert_y: int = font_size / 2
+    insert_y_str = Dims.to_in_str(insert_y)
+
+    header: svgwrite.txt.Text = svgwrite.text.Text\
+    ( Strings.DAILY_SCHEDULE_HEADER
+    , insert=('0in', insert_y_str)
+    , text_anchor='start'
+    , alignment_baseline='middle'
+    , fill=Colors.HEADING
+    , font_size=font_size_str
+    , font_family=Font.FONT_FAMILY_HEADER
+    )
+
+    return header
+

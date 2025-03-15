@@ -76,7 +76,7 @@ if __name__ == '__main__':
   layout_portrait_dbl_sided.create_layout('portrait_dbl.svg')
 
   txt = Day.create_daily_schedule\
-  ( strt_time_str='05:00'
+  ( strt_time_str='04:00'
   , stop_time_str='21:00'
   , wdth=2
   , hght=6
