@@ -41,7 +41,6 @@ if __name__ == '__main__':
     , is_dbl_sided=True
     )
 
-
   # Generate the SVG file
   layout_landscpe_no_dbl_sided.create_layout('landscpe.svg')
   layout_landscpe_dbl_sided.create_layout('landscpe_dbl.svg')
@@ -49,10 +48,11 @@ if __name__ == '__main__':
   layout_portrait_dbl_sided.create_layout('portrait_dbl.svg')
 
   txt = Day.create_daily_schedule\
-  ( strt_time_str='19:00'
-  , stop_time_str='11:00'
+  ( strt_time_str='99:00'
+  , stop_time_str='21:00'
   , wdth=2
-  , hght=7.9
+  , hght=6
+  , use_24=True
   )
 
   layout_test: HalfLetterSize =\

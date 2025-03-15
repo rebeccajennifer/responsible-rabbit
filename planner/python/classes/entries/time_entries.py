@@ -14,22 +14,38 @@ from classes.constants.style import PlannerStrokes as Strokes
 from classes.constants.style import PlannerFontStyle as Font
 
 class Day:
-  DEF_STRT: str = '09:00'
-  DEF_STOP: str = '21:00'
+  DEF_STRT_12: str = '09:00'
+  DEF_STOP_12: str = '09:00'
+  DEF_STRT_24: str = '09:00'
+  DEF_STOP_24: str = '21:00'
+
   #_____________________________________________________________________
   def create_daily_schedule(strt_time_str: str
     , stop_time_str: str
     , wdth: int
     , hght: str
     , time_inc_min: int = 30
-    , use_24hr: bool = True
+    , use_24: bool = True
     , use_px:bool = False
   ) -> svgwrite.container.Group:
     """
-    Creates schedule table listing time
+    Creates schedule with times in increments as indicated. Assumes
+    entry is in 24 hour format, though printed strings will reflect
+    selection for use_24.
+
+    Parameters:
+    strt_time_str: start time of schedule
+    stop_time_str: stop time of schedule
+    wdth         : width of container
+    hght         : height of container
+    time_inc_min : incremental  time
+    use_24       : use 24 hour time
+    use_px       : use pixels for dimensions
     """
 
-    fmt_24hr: str = '%H:%M'
+    fmt: str = '%I:%M'
+    if (use_24):
+      fmt: str = '%H:%M'
 
     #___________________________________________________________________
     # Convert to datetime objects
@@ -43,9 +59,9 @@ class Day:
     # Convert to strings
     #___________________________________________________________________
     stop_time_str =\
-        stop_datetime.strftime(fmt_24hr)
+        stop_datetime.strftime(fmt)
     strt_time_str =\
-        strt_datetime.strftime(fmt_24hr)
+        strt_datetime.strftime(fmt)
     #___________________________________________________________________
 
     print()
@@ -77,9 +93,9 @@ class Day:
 
     #___________________________________________________________________
     # Create boxes with time increments
-    while crnt_datetime_str != stop_time_str:
+    while crnt_datetime <= stop_datetime:
       crnt_datetime_str =\
-        crnt_datetime.strftime(fmt_24hr)
+        crnt_datetime.strftime(fmt)
 
       group.add(Day.create_time_box(crnt_datetime_str, crnt_y))
       crnt_y = crnt_y + time_box_hght
@@ -91,11 +107,10 @@ class Day:
   #_____________________________________________________________________
   def start_stop_err_check(strt_time_str: str
     , stop_time_str: str
-    , use_24=True
   ) -> Tuple:
     """
     Checks if start time is greater than stop time. Converts times to
-    datetime objects with dates.
+    datetime objects with dates. Assumes input is in 24 hour format
 
     Parameters:
     strt_time_str -
@@ -108,20 +123,32 @@ class Day:
 
     dt.dt = dt.datetime
 
-    fmt_24hr: str = '%H:%M'
+    fmt_24: str = '%H:%M'
+
+    DEF_STRT: str = Day.DEF_STRT_24
+    DEF_STOP: str = Day.DEF_STOP_24
 
     #___________________________________________________________________
     # Convert to datetime objects for error handling
     #___________________________________________________________________
-    strt_datetime: dt.dt = dt.dt.strptime(strt_time_str, fmt_24hr)
-    stop_datetime: dt.dt = dt.dt.strptime(stop_time_str, fmt_24hr)
+    try:
+      strt_datetime: dt.dt = dt.dt.strptime(strt_time_str, fmt_24)
+      stop_datetime: dt.dt = dt.dt.strptime(stop_time_str, fmt_24)
 
-    strt_datetime = dt.dt.combine(dt.dt.today(), strt_datetime.time())
-    stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
+      strt_datetime = dt.dt.combine(dt.dt.today(), strt_datetime.time())
+      stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
+
+    except:
+      print(Err.INVALID_TIME)
+      strt_datetime: dt.dt = dt.dt.strptime(DEF_STRT, fmt_24)
+      stop_datetime: dt.dt = dt.dt.strptime(DEF_STOP, fmt_24)
+
+      strt_datetime = dt.dt.combine(dt.dt.today(), strt_datetime.time())
+      stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
 
     if (stop_datetime < strt_datetime):
-      strt_datetime: dt.dt = dt.dt.strptime(Day.DEF_STRT, fmt_24hr)
-      stop_datetime: dt.dt = dt.dt.strptime(Day.DEF_STOP, fmt_24hr)
+      strt_datetime: dt.dt = dt.dt.strptime(Day.DEF_STRT, fmt_24)
+      stop_datetime: dt.dt = dt.dt.strptime(Day.DEF_STOP, fmt_24)
 
       strt_datetime = dt.dt.combine(dt.dt.today(), strt_datetime.time())
       stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
