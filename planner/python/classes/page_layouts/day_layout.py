@@ -1,29 +1,29 @@
 #_______________________________________________________________________
 #_______________________________________________________________________
-#       _   __   _   _ _   _   _   _         _
-#  |   |_| | _  | | | V | | | | / |_/ |_| | /
-#  |__ | | |__| |_| |   | |_| | \ |   | | | \_
-#   _  _         _ ___  _       _ ___   _                    / /
-#  /  | | |\ |  \   |  | / | | /   |   \                    (^^)
-#  \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
 #_______________________________________________________________________
 #_______________________________________________________________________
 #
 #-----------------------------------------------------------------------
-#  Copyright 2024, Rebecca Rashkin
-#  -------------------------------
-#  This code may be copied, redistributed, transformed, or built
-#  upon in any format for educational, non-commercial purposes.
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
 #
-#  Please give me appropriate credit should you choose to use this
-#  resource. Thank you :)
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
 #-----------------------------------------------------------------------
 #
 #_______________________________________________________________________
 #  //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\
 #_______________________________________________________________________
-#  DESCRIPTION
-#  Layout for daily entry.
+#   DESCRIPTION
+#   Layout for daily entry.
 #_______________________________________________________________________
 
 from classes.page_layouts.half_letter_layout import HalfLetterSize

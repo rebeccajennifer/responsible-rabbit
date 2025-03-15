@@ -1,29 +1,29 @@
 #_______________________________________________________________________
 #_______________________________________________________________________
-#       _   __   _   _ _   _   _   _         _
-#  |   |_| | _  | | | V | | | | / |_/ |_| | /
-#  |__ | | |__| |_| |   | |_| | \ |   | | | \_
-#   _  _         _ ___  _       _ ___   _                    / /
-#  /  | | |\ |  \   |  | / | | /   |   \                    (^^)
-#  \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
 #_______________________________________________________________________
 #_______________________________________________________________________
 #
 #-----------------------------------------------------------------------
-#  Copyright 2024, Rebecca Rashkin
-#  -------------------------------
-#  This code may be copied, redistributed, transformed, or built
-#  upon in any format for educational, non-commercial purposes.
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
 #
-#  Please give me appropriate credit should you choose to use this
-#  resource. Thank you :)
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
 #-----------------------------------------------------------------------
 #
 #_______________________________________________________________________
 #  //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\
 #_______________________________________________________________________
-#  DESCRIPTION
-#  Half-letter sheet layout
+#   DESCRIPTION
+#   Half-letter sheet layout
 #_______________________________________________________________________
 
 import svgwrite
@@ -59,9 +59,11 @@ class HalfLetterSize:
     self.content_wdth_str_: int =Dims.to_in_str(self.content_wdth_)
     self.content_hght_str_: int =Dims.to_in_str(self.content_hght_)
 
+    # Content insertion points for top left
     self.insert_pt_0_, self.insert_pt_1_ =\
       self.determine_insertion_pts()
 
+    # Content insertion points as strings
     self.insert_pt_0_str_: Tuple =\
     ( Dims.to_in_str(self.insert_pt_0_[0])
     , Dims.to_in_str(self.insert_pt_0_[1])
