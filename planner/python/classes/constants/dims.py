@@ -1,3 +1,31 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#       _   __   _   _ _   _   _   _         _
+#  |   |_| | _  | | | V | | | | / |_/ |_| | /
+#  |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#   _  _         _ ___  _       _ ___   _                    / /
+#  /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#  \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#  Copyright 2024, Rebecca Rashkin
+#  -------------------------------
+#  This code may be copied, redistributed, transformed, or built
+#  upon in any format for educational, non-commercial purposes.
+#
+#  Please give me appropriate credit should you choose to use this
+#  resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#  //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\
+#_______________________________________________________________________
+#  DESCRIPTION
+#  Dimensions used in planner
+#_______________________________________________________________________
+
 from typing import Tuple
 
 class PlannerDims:
@@ -19,10 +47,10 @@ class PlannerDims:
     Converts integer value to string appended with 'in'.
 
     Parameters:
-    dim - Dimension to convert
+      dim: Dimension to convert
 
     Returns:
-    String indicating value appended with 'in'
+      String indicating value appended with 'in'
     """
     return f'{dim}in'
 
@@ -32,10 +60,10 @@ class PlannerDims:
     Converts integer value to string appended with 'px'.
 
     Parameters:
-    dim - Dimension to convert
+      dim: Dimension to convert
 
     Returns:
-    String indicating value appended with 'px'
+      String indicating value appended with 'px'
     """
     return f'{dim}px'
 
@@ -46,10 +74,10 @@ class PlannerDims:
     double-sided print. Binder + standard margin for single-sided print.
 
     Parameters:
-    dbl_sided - is the layout intended to be printed double-sided
+      dbl_sided: is the layout intended to be printed double-sided
 
     Returns:
-    Width of middle margin
+      Width of middle margin
     """
 
     if (dbl_sided):
@@ -65,10 +93,10 @@ class PlannerDims:
     of landscape orientation.
 
     Parameters:
-    is_portrait - is the page intended to be printed as a portrait
+      is_portrait:  is the page intended to be printed as a portrait
 
     Returns:
-    width, height of content
+      width, height of content
     """
 
     Dims = PlannerDims

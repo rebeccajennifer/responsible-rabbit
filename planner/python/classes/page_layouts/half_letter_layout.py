@@ -47,22 +47,23 @@ class HalfLetterSize:
 
   #_____________________________________________________________________
   def __init__(self
-    , is_portrait: bool = False
-    , is_dbl_sided: bool = False):
+  , is_portrait: bool = False
+  , is_dbl_sided: bool = False
+  ):
     self.is_portrait_: bool   = is_portrait
     self.is_dbl_sided_: bool  = is_dbl_sided
 
   #_____________________________________________________________________
   def create_layout(self
-    , file_path: str
-    , content=svgwrite.text.Text(" ")
-    ) -> None:
+  , file_path: str
+  , content=svgwrite.text.Text(" ")
+  ) -> None:
     """
     Parameters:
-    file_path - resulting svg path
+      file_path: resulting svg path
 
     Returns:
-    None
+      None
     """
 
     hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH)
@@ -105,9 +106,15 @@ class HalfLetterSize:
 
   #_____________________________________________________________________
   def create_content_box(self
-    , insert_position: Tuple) -> svgwrite.shapes.Rect:
+  , insert_position: Tuple
+  ) -> svgwrite.shapes.Rect:
     """
     Creates rectangle that will contain content.
+
+    Parameters:
+
+    Returns:
+      svgwrite rectangle the size of the content
     """
     size: Tuple = Dims.calc_content_size(self.is_portrait_)
     w: str = Dims.to_in_str(size[0])

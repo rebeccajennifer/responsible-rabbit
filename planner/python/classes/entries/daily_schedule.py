@@ -1,3 +1,31 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#       _   __   _   _ _   _   _   _         _
+#  |   |_| | _  | | | V | | | | / |_/ |_| | /
+#  |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#   _  _         _ ___  _       _ ___   _                    / /
+#  /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#  \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#  Copyright 2024, Rebecca Rashkin
+#  -------------------------------
+#  This code may be copied, redistributed, transformed, or built
+#  upon in any format for educational, non-commercial purposes.
+#
+#  Please give me appropriate credit should you choose to use this
+#  resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#  //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\
+#_______________________________________________________________________
+#  DESCRIPTION
+#  Creates hourly entry for daily schedule.
+#_______________________________________________________________________
+
 import datetime as dt
 import svgwrite
 
@@ -21,12 +49,11 @@ class Day:
 
   #_____________________________________________________________________
   def create_daily_schedule(strt_time_str: str
-    , stop_time_str: str
-    , wdth: int
-    , hght: str
-    , time_inc_min: int = 30
-    , use_24: bool = True
-    , use_px:bool = False
+  , stop_time_str: str
+  , wdth: int
+  , hght: int
+  , time_inc_min: int = 15
+  , use_24: bool = True
   ) -> svgwrite.container.Group:
     """
     Creates schedule with times in increments as indicated. Assumes
@@ -34,13 +61,15 @@ class Day:
     selection for use_24.
 
     Parameters:
-    strt_time_str: start time of schedule
-    stop_time_str: stop time of schedule
-    wdth         : width of container
-    hght         : height of container
-    time_inc_min : incremental  time
-    use_24       : use 24 hour time
-    use_px       : use pixels for dimensions
+      strt_time_str: start time of schedule
+      stop_time_str: stop time of schedule
+      wdth         : width of container
+      hght         : height of container
+      time_inc_min : incremental  time
+      use_24       : use 24 hour time
+
+    Returns:
+      svgwrite Group containing all objects making up the time schedule
     """
 
     fmt: str = '%I:%M'
@@ -74,18 +103,13 @@ class Day:
     / time_inc_min
 
     # Used in the calculation of box height
-    stoke_wdth_total: int = Strokes.STD_STROKE * time_block_count
+    # Assumes lines are 1 px
+    stroke_wdth_total: int    = Strokes.STD_STROKE * time_block_count
+    stroke_wdth_total_in: float = stroke_wdth_total * 1/72
 
     # TODO account for padding
     time_box_wdth: int = wdth
     time_box_hght: int = hght / time_block_count
-
-    if (use_px):
-      time_box_wdth_str: str = Dims.to_in_px(time_box_wdth)
-      time_box_hght_str: str = Dims.to_in_px(time_box_hght)
-    else:
-      time_box_wdth_str: str = Dims.to_in_str(wdth)
-      time_box_hght_str: str = Dims.to_in_str(time_box_hght)
 
     crnt_y: int = 0.5 * Font.NORMAL_SIZE
 
@@ -97,7 +121,9 @@ class Day:
       crnt_datetime_str =\
         crnt_datetime.strftime(fmt)
 
-      group.add(Day.create_time_box(crnt_datetime_str, crnt_y))
+      group.add(
+        Day.create_time_entry(crnt_datetime_str, crnt_y, time_box_wdth))
+
       crnt_y = crnt_y + time_box_hght
 
       crnt_datetime = crnt_datetime + dt.timedelta(minutes=time_inc_min)
@@ -106,18 +132,18 @@ class Day:
 
   #_____________________________________________________________________
   def start_stop_err_check(strt_time_str: str
-    , stop_time_str: str
+  , stop_time_str: str
   ) -> Tuple:
     """
     Checks if start time is greater than stop time. Converts times to
     datetime objects with dates. Assumes input is in 24 hour format
 
     Parameters:
-    strt_time_str -
-    stop_time_str -
+      strt_time_str: start time of daily schedule
+      stop_time_str: stop time of daily schedule
 
     Returns:
-    (datetime.datetime obj start, datetime.datetime obj stop)
+      (datetime.datetime obj start, datetime.datetime obj stop)
 
     """
 
@@ -164,8 +190,17 @@ class Day:
     return t.minute in {0, 30}
 
   #_____________________________________________________________________
-  def create_time_box(time_str: str
-    , insert_y) -> svgwrite.container.Group:
+  def create_time_entry(time_str: str
+  , insert_y
+  , wdth: int
+  ) -> svgwrite.container.Group:
+    """
+    Creates text and lines for time entries
+
+    Parameters:
+      insert_y: Vertical insert point of entry
+      wdth:     Width of container in inches
+    """
 
     line_y: float = insert_y + 0.5 * Font.NORMAL_SIZE
     insert_y_str: str = Dims.to_in_str(insert_y)
@@ -184,7 +219,7 @@ class Day:
 
     line: svgwrite.shapes.Line = svgwrite.shapes.Line\
     ( start=('0in', line_y_in_str)
-    , end=('1.5in', line_y_in_str)
+    , end=(Dims.to_in_str(wdth), line_y_in_str)
     , stroke=Colors.DEBUG0_COLOR
     )
 
