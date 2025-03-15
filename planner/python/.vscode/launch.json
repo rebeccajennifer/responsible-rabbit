@@ -26,7 +26,7 @@
     [ { "name": "help"
       , "type": "debugpy"
       , "request": "launch"
-      , "program": "${workspaceFolder}/python/planner_creation_driver.py"
+      , "program": "${workspaceFolder}/planner_creation_driver.py"
       , "console": "integratedTerminal"
       , "args":
         [ "--help"]
@@ -34,7 +34,7 @@
     , { "name": "command-line-input"
       , "type": "debugpy"
       , "request": "launch"
-      , "program": "${workspaceFolder}/python/planner_creation_driver.py"
+      , "program": "${workspaceFolder}/planner_creation_driver.py"
       , "console": "integratedTerminal"
       //, "args":
       //  [ "--help"
