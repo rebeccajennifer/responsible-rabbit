@@ -20,7 +20,7 @@ CreateDateBox()
 import datetime as dt
 import svgwrite
 
-class Day:
+class DailySchedule:
   #_____________________________________________________________________
   def create_daily_schedule(strt_time: str
     , stop_time: str

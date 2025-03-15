@@ -20,12 +20,14 @@
 #-----------------------------------------------------------------------
 #
 #_______________________________________________________________________
-#  //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
 #   Layout for daily entry.
 #_______________________________________________________________________
 
+from classes.constants.strings import PlannerStrings as Strings
+from classes.entries.daily_schedule import DailySchedule as Sched
 from classes.page_layouts.half_letter_layout import HalfLetterSize
 
 
@@ -35,9 +37,26 @@ class DayLayout(HalfLetterSize):
   Daily entry layout.
   """
 
-  def __init__(self, is_dbl_sided: bool = False):
+  #_____________________________________________________________________
+  def __init__(self
+  , is_dbl_sided: bool = False
+  , file_path: str = Strings.DEF_DAY_LAYOUT_PATH):
+    """
+    Constructor for class. Assumes portrait orientation
+    """
     super().__init__(
-      is_portrait=False, is_dbl_sided=is_dbl_sided)
+      is_portrait=False, is_dbl_sided=is_dbl_sided, file_path=file_path)
 
+  #_____________________________________________________________________
+  def add_content(self) -> None:
 
+    # Width of daily schedule content group
+    self.schedule_wdth_: int = self.content_wdth_ * 0.25
+    self.schedule_hght_: int = self.content_hght_
 
+    self.layout_dwg_.add\
+    ( Sched.create_daily_schedule
+      ( wdth=self.schedule_wdth_
+      , hght=self.schedule_hght_
+      )
+    )

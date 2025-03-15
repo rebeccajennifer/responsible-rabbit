@@ -1,29 +1,29 @@
 #_______________________________________________________________________
 #_______________________________________________________________________
-#       _   __   _   _ _   _   _   _         _
-#  |   |_| | _  | | | V | | | | / |_/ |_| | /
-#  |__ | | |__| |_| |   | |_| | \ |   | | | \_
-#   _  _         _ ___  _       _ ___   _                    / /
-#  /  | | |\ |  \   |  | / | | /   |   \                    (^^)
-#  \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
 #_______________________________________________________________________
 #_______________________________________________________________________
 #
 #-----------------------------------------------------------------------
-#  Copyright 2024, Rebecca Rashkin
-#  -------------------------------
-#  This code may be copied, redistributed, transformed, or built
-#  upon in any format for educational, non-commercial purposes.
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
 #
-#  Please give me appropriate credit should you choose to use this
-#  resource. Thank you :)
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
 #-----------------------------------------------------------------------
 #
 #_______________________________________________________________________
-#  //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
-#  DESCRIPTION
-#  Creates hourly entry for daily schedule.
+#   DESCRIPTION
+#   Creates hourly entry for daily schedule.
 #_______________________________________________________________________
 
 import datetime as dt
@@ -42,18 +42,19 @@ from classes.constants.style import PlannerStrokes as Strokes
 from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
 
-class Day:
-  DEF_STRT_12: str = '09:00'
+class DailySchedule:
+  DEF_STRT_12: str = '05:00'
   DEF_STOP_12: str = '09:00'
-  DEF_STRT_24: str = '09:00'
+  DEF_STRT_24: str = '05:00'
   DEF_STOP_24: str = '21:00'
 
   #_____________________________________________________________________
-  def create_daily_schedule(strt_time_str: str
-  , stop_time_str: str
-  , wdth: int
-  , hght: int
-  , time_inc_min: int = 15
+  def create_daily_schedule\
+  ( strt_time_str: str = DEF_STRT_24
+  , stop_time_str: str = DEF_STOP_24
+  , wdth: int = 3
+  , hght: int = 3
+  , time_inc_min: int = 30
   , use_24: bool = True
   ) -> svgwrite.container.Group:
     """
@@ -81,7 +82,7 @@ class Day:
     # Convert to datetime objects
     #___________________________________________________________________
     strt_datetime, stop_datetime =\
-      Day.start_stop_err_check(strt_time_str, stop_time_str)
+      DailySchedule.start_stop_err_check(strt_time_str, stop_time_str)
 
     crnt_datetime: dt.datetime = strt_datetime
 
@@ -112,7 +113,7 @@ class Day:
     crnt_y: int = header_space + Font.HEAD_2_SIZE/ 2
 
     group = svgwrite.container.Group()
-    group.add(Day.create_schedule_header())
+    group.add(DailySchedule.create_schedule_header())
 
     #___________________________________________________________________
     # Create boxes with time increments
@@ -121,7 +122,7 @@ class Day:
         crnt_datetime.strftime(fmt)
 
       group.add(
-        Day.create_time_entry(crnt_datetime_str, crnt_y, time_box_wdth))
+        DailySchedule.create_time_entry(crnt_datetime_str, crnt_y, time_box_wdth))
 
       crnt_y = crnt_y + time_box_hght
 
@@ -150,8 +151,8 @@ class Day:
 
     fmt_24: str = '%H:%M'
 
-    DEF_STRT: str = Day.DEF_STRT_24
-    DEF_STOP: str = Day.DEF_STOP_24
+    DEF_STRT: str = DailySchedule.DEF_STRT_24
+    DEF_STOP: str = DailySchedule.DEF_STOP_24
 
     #___________________________________________________________________
     # Convert to datetime objects for error handling
@@ -172,8 +173,8 @@ class Day:
       stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
 
     if (stop_datetime < strt_datetime):
-      strt_datetime: dt.dt = dt.dt.strptime(Day.DEF_STRT, fmt_24)
-      stop_datetime: dt.dt = dt.dt.strptime(Day.DEF_STOP, fmt_24)
+      strt_datetime: dt.dt = dt.dt.strptime(DailySchedule.DEF_STRT, fmt_24)
+      stop_datetime: dt.dt = dt.dt.strptime(DailySchedule.DEF_STOP, fmt_24)
 
       strt_datetime = dt.dt.combine(dt.dt.today(), strt_datetime.time())
       stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())

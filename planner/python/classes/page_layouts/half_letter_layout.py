@@ -20,22 +20,18 @@
 #-----------------------------------------------------------------------
 #
 #_______________________________________________________________________
-#  //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\   //\^.^/\\
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
 #   Half-letter sheet layout
 #_______________________________________________________________________
 
 import svgwrite
-import svgwrite.shapes
 
 from typing import Tuple
 
-import svgwrite.text
-
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerStrokes as Strokes
 
 
 #_______________________________________________________________________
@@ -49,15 +45,20 @@ class HalfLetterSize:
   def __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
+  , file_path: str = 'layout.svg'
   ):
+
     self.is_portrait_: bool   = is_portrait
     self.is_dbl_sided_: bool  = is_dbl_sided
+    self.file_path_: str = file_path
+
+    self.layout_dwg_ = self.create_dwg()
 
     self.content_wdth_, self.content_hght_ =\
        Dims.calc_content_size(self.is_portrait_)
 
-    self.content_wdth_str_: int =Dims.to_in_str(self.content_wdth_)
-    self.content_hght_str_: int =Dims.to_in_str(self.content_hght_)
+    self.content_wdth_str_: int = Dims.to_in_str(self.content_wdth_)
+    self.content_hght_str_: int = Dims.to_in_str(self.content_hght_)
 
     # Content insertion points for top left
     self.insert_pt_0_, self.insert_pt_1_ =\
@@ -74,17 +75,19 @@ class HalfLetterSize:
     , Dims.to_in_str(self.insert_pt_1_[1])
     )
 
+    self.create_layout()
+    self.add_content()
+
   #_____________________________________________________________________
-  def create_layout(self
-  , file_path: str
-  , content=svgwrite.text.Text(" ")
-  ) -> None:
+  def create_dwg(self) -> svgwrite.Drawing:
     """
+    Creates Drawing object with height and width of letter size paper.
+
     Parameters:
-      file_path: resulting svg path
+      None
 
     Returns:
-      None
+      svgwrite.Drawing
     """
 
     hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH)
@@ -94,10 +97,33 @@ class HalfLetterSize:
       hght = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH)
       wdth = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH)
 
-    page_layout = svgwrite.Drawing(file_path
+    return svgwrite.Drawing(self.file_path_
       , profile='tiny'
       , size=(wdth, hght)
     )
+
+  #_____________________________________________________________________
+  def save_svg(self) -> None:
+    """
+    Saves layout as svg file.
+
+    Parameters:
+      None
+
+    Returns:
+      None
+    """
+    self.layout_dwg_.save()
+
+  #_____________________________________________________________________
+  def create_layout(self) -> None:
+    """
+    Parameters:
+      file_path: resulting svg path
+
+    Returns:
+      None
+    """
 
     content_box_0: svgwrite.shapes.Rect =\
       self.create_content_box(self.insert_pt_0_str_)
@@ -105,38 +131,8 @@ class HalfLetterSize:
     content_box_1: svgwrite.shapes.Rect =\
       self.create_content_box(self.insert_pt_1_str_)
 
-    page_layout.add(content_box_0)
-    page_layout.add(content_box_1)
-
-    # TODO integrate
-    page_layout.add(content)
-
-    page_layout.save()
-
-  #_____________________________________________________________________
-  def create_content_box(self
-  , insert_position: Tuple
-  ) -> svgwrite.shapes.Rect:
-    """
-    Creates rectangle that will contain content.
-
-    Parameters:
-
-    Returns:
-      svgwrite rectangle the size of the content
-    """
-    size: Tuple = Dims.calc_content_size(self.is_portrait_)
-    w: str = Dims.to_in_str(size[0])
-    h: str = Dims.to_in_str(size[1])
-
-    content_box: svgwrite.shapes.Rect =\
-      svgwrite.shapes.Rect(size=(w, h)
-      , id="flux"
-      , insert=insert_position
-      , stroke=Colors.MEDIUM_GREY
-      , fill='none')
-
-    return content_box
+    self.layout_dwg_.add(content_box_0)
+    self.layout_dwg_.add(content_box_1)
 
   #_____________________________________________________________________
   def determine_insertion_pts(self) -> Tuple:
@@ -180,3 +176,31 @@ class HalfLetterSize:
 
     return(insert_pos0, insert_pos1)
 
+  #_____________________________________________________________________
+  def create_content_box(self
+  , insert_position: Tuple
+  ) -> svgwrite.shapes.Rect:
+    """
+    Creates rectangle that will contain content.
+
+    Parameters:
+
+    Returns:
+      svgwrite rectangle the size of the content
+    """
+    size: Tuple = Dims.calc_content_size(self.is_portrait_)
+    w: str = Dims.to_in_str(size[0])
+    h: str = Dims.to_in_str(size[1])
+
+    content_box: svgwrite.shapes.Rect =\
+      svgwrite.shapes.Rect(size=(w, h)
+      , id="flux"
+      , insert=insert_position
+      , stroke=Colors.MEDIUM_GREY
+      , fill='none')
+
+    return content_box
+
+  #_____________________________________________________________________
+  def add_content(self) -> None:
+    return
