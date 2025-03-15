@@ -39,6 +39,7 @@ class PlannerDims:
   BND_MARGIN: int = 0.75
   STD_MARGIN: int = 0.25
 
+  PX_PER_INCH: int = 96
 
 
   #_____________________________________________________________________
@@ -127,4 +128,17 @@ class PlannerDims:
 
     return (content_wdth, content_hght)
 
+  #_____________________________________________________________________
+  def inch_to_px(inches: int) -> int:
+    """
+    Converts inch unit to pixels.
+
+    Parameters:
+      inches: Value in inches
+
+    Returns:
+      Value in pixels
+    """
+
+    return inches * PlannerDims.PX_PER_INCH
 

@@ -26,6 +26,7 @@
 #   Layout for daily entry.
 #_______________________________________________________________________
 
+from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.entries.daily_schedule import DailySchedule as Sched
 from classes.page_layouts.half_letter_layout import HalfLetterSize
@@ -54,9 +55,20 @@ class DayLayout(HalfLetterSize):
     self.schedule_wdth_: int = self.content_wdth_ * 0.25
     self.schedule_hght_: int = self.content_hght_
 
-    self.layout_dwg_.add\
-    ( Sched.create_daily_schedule
+    self.schedule_ =\
+      Sched.create_daily_schedule\
       ( wdth=self.schedule_wdth_
       , hght=self.schedule_hght_
       )
+
+    insert_x_px: int = Dims.inch_to_px(self.insert_pt_0_[0])
+    insert_y_px: int = Dims.inch_to_px(self.insert_pt_0_[1])
+
+    self.schedule_['transform'] = f'translate({insert_x_px}, {insert_y_px})'
+
+    self.layout_dwg_.add\
+    (
+      self.schedule_
     )
+
+

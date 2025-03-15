@@ -95,16 +95,15 @@ class DailySchedule:
         strt_datetime.strftime(fmt)
     #___________________________________________________________________
 
-    print()
     crnt_datetime_str = strt_time_str
 
     #___________________________________________________________________
-    time_block_count: int =\
+    time_block_count: int = 1 +\
     ( stop_datetime - strt_datetime).total_seconds()\
     / 60\
     / time_inc_min
 
-    header_space: int = Font.HEAD_2_SIZE + Font.HEAD_2_PADDING
+    header_space: int = Font.NORMAL_SIZE + Font.NORMAL_PADDING
 
     # TODO account for padding
     time_box_wdth: int = wdth
@@ -205,7 +204,7 @@ class DailySchedule:
     , text_anchor='start'
     , alignment_baseline='middle'
     , fill=Colors.NORMAL
-    , font_size=Font.NORMAL_IN
+    , font_size=Font.LITTLE_IN
     , font_family=Font.FONT_FAMILY_NORMAL
     )
 
@@ -234,7 +233,7 @@ class DailySchedule:
       svgwrite Text object with header
     """
 
-    font_size: int = Font.HEAD_2_SIZE
+    font_size: int = Font.NORMAL_SIZE
     font_size_str: int = Dims.to_in_str(font_size)
     insert_y: int = font_size / 2
     insert_y_str = Dims.to_in_str(insert_y)
