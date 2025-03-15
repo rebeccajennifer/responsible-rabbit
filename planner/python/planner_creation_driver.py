@@ -24,11 +24,15 @@
 #_______________________________________________________________________
 #  DESCRIPTION
 #  Driver for planner creation.
+#
+#  NOTES
+#  All dimensions in planner are in inches.
 #_______________________________________________________________________
 
 import argparse
 
 from classes.page_layouts.half_letter_layout import HalfLetterSize
+from classes.page_layouts.day_layout import DayLayout
 from classes.planner_parser import PlannerCreationParser
 from classes.entries.daily_schedule import Day
 
@@ -84,10 +88,9 @@ if __name__ == '__main__':
   , use_24=True
   )
 
-  layout_test: HalfLetterSize =\
-    HalfLetterSize\
-    ( is_portrait=False
-    , is_dbl_sided=False
+  layout_test: DayLayout =\
+    DayLayout\
+    ( is_dbl_sided=False
     )
 
   layout_test.create_layout('test-layout.svg', txt)

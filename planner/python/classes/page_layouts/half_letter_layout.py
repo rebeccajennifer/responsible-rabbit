@@ -53,6 +53,25 @@ class HalfLetterSize:
     self.is_portrait_: bool   = is_portrait
     self.is_dbl_sided_: bool  = is_dbl_sided
 
+    self.content_wdth_, self.content_hght_ =\
+       Dims.calc_content_size(self.is_portrait_)
+
+    self.content_wdth_str_: int =Dims.to_in_str(self.content_wdth_)
+    self.content_hght_str_: int =Dims.to_in_str(self.content_hght_)
+
+    self.insert_pt_0_, self.insert_pt_1_ =\
+      self.determine_insertion_pts()
+
+    self.insert_pt_0_str_: Tuple =\
+    ( Dims.to_in_str(self.insert_pt_0_[0])
+    , Dims.to_in_str(self.insert_pt_0_[1])
+    )
+
+    self.insert_pt_1_str_: Tuple =\
+    ( Dims.to_in_str(self.insert_pt_1_[0])
+    , Dims.to_in_str(self.insert_pt_1_[1])
+    )
+
   #_____________________________________________________________________
   def create_layout(self
   , file_path: str
@@ -78,23 +97,11 @@ class HalfLetterSize:
       , size=(wdth, hght)
     )
 
-    insert_pos0, insert_pos1 = self.determine_insertion_pts()
-
-    insert_pos0: Tuple =\
-    ( Dims.to_in_str(insert_pos0[0])
-    , Dims.to_in_str(insert_pos0[1])
-    )
-
-    insert_pos1: Tuple =\
-    ( Dims.to_in_str(insert_pos1[0])
-    , Dims.to_in_str(insert_pos1[1])
-    )
-
     content_box_0: svgwrite.shapes.Rect =\
-      self.create_content_box(insert_pos0)
+      self.create_content_box(self.insert_pt_0_str_)
 
     content_box_1: svgwrite.shapes.Rect =\
-      self.create_content_box(insert_pos1)
+      self.create_content_box(self.insert_pt_1_str_)
 
     page_layout.add(content_box_0)
     page_layout.add(content_box_1)
