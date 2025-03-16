@@ -48,6 +48,9 @@ if __name__ == '__main__':
 
   args: argparse.Namespace = parser.parse_args()
 
+  #_____________________________________________________________________
+  # DEGUG
+  #_____________________________________________________________________
   layout_landscpe_no_dbl_sided: HalfLetterSize =\
     HalfLetterSize\
     ( is_portrait=False
@@ -77,6 +80,7 @@ if __name__ == '__main__':
   #layout_landscpe_dbl_sided.create_layout('landscpe_dbl.svg')
   #layout_portrait_no_dbl_sided.create_layout('portrait.svg')
   #layout_portrait_dbl_sided.create_layout('portrait_dbl.svg')
+  #_____________________________________________________________________
 
   layout_test: DayLayout =\
     DayLayout\

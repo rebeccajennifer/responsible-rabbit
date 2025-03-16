@@ -74,8 +74,11 @@ class DayLayout(HalfLetterSize):
       self.insert_pt_0_[0]\
     + self.content_wdth_ - self.schedule_wdth_
 
-    insert_x_px: int = Dims.inch_to_px(insert_sched_x)
-    insert_y_px: int = Dims.inch_to_px(self.insert_pt_0_[1])
+    #insert_x_px: int = Dims.inch_to_px(insert_sched_x)
+    #insert_y_px: int = Dims.inch_to_px(self.insert_pt_0_[1])
+
+    insert_x_px: int = insert_sched_x
+    insert_y_px: int = self.insert_pt_0_[1]
 
     self.schedule_['transform'] =\
       f'translate({insert_x_px}, {insert_y_px})'

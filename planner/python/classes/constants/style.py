@@ -74,23 +74,17 @@ class PlannerFontStyle:
   Contains standard font sizes.
   """
 
-  HEAD_1_SIZE: int = 0.3
-  HEAD_2_SIZE: int = 0.25
-  PROMPT_SIZE: int = 0.2
-  NORMAL_SIZE: int = 0.15
-  LITTLE_SIZE: int = 0.1
+  HEAD_1_SIZE: int = 20
+  HEAD_2_SIZE: int = 18
+  PROMPT_SIZE: int = 14
+  NORMAL_SIZE: int = 10
+  LITTLE_SIZE: int = 8
 
   HEAD_1_PADDING: int = HEAD_1_SIZE / 2
   HEAD_2_PADDING: int = HEAD_2_SIZE / 2
   PROMPT_PADDING: int = PROMPT_SIZE / 2
   NORMAL_PADDING: int = NORMAL_SIZE / 2
   LITTLE_PADDING: int = LITTLE_SIZE / 2
-
-  HEAD_1_IN: int = Dims.to_in_str(HEAD_1_SIZE)
-  HEAD_2_IN: int = Dims.to_in_str(HEAD_2_SIZE)
-  PROMPT_IN: int = Dims.to_in_str(PROMPT_SIZE)
-  NORMAL_IN: int = Dims.to_in_str(NORMAL_SIZE)
-  LITTLE_IN: int = Dims.to_in_str(LITTLE_SIZE)
 
   FONT_FAMILY_NORMAL: str = 'Ubuntu Mono'
   FONT_FAMILY_HEADER: str = 'Trebuchet MS'

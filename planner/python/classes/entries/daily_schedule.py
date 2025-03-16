@@ -230,23 +230,20 @@ class DailySchedule(svgwrite.container.Group):
     """
 
     line_y: float = insert_y + 0.5 * Font.LITTLE_SIZE
-    insert_y_str: str = Dims.to_in_str(insert_y)
-    line_y_in_str: str = Dims.to_in_str(line_y)
-    wdth_in: str = Dims.to_in_str(wdth)
 
     the_time: svgwrite.txt.Text = svgwrite.text.Text\
     ( time_str
-    , insert=(wdth_in, insert_y_str)
+    , insert=(wdth, insert_y)
     , text_anchor='end'
     , alignment_baseline='middle'
     , fill=Colors.NORMAL
-    , font_size=Font.LITTLE_IN
+    , font_size=Font.LITTLE_SIZE
     , font_family=Font.FONT_FAMILY_NORMAL
     )
 
     line: svgwrite.shapes.Line = svgwrite.shapes.Line\
-    ( start=('0in', line_y_in_str)
-    , end=(Dims.to_in_str(wdth), line_y_in_str)
+    ( start=('0in', line_y)
+    , end=(wdth, line_y)
     , stroke=Colors.DEBUG0_COLOR
     )
 
@@ -271,17 +268,15 @@ class DailySchedule(svgwrite.container.Group):
     """
 
     font_size: int = DailySchedule.HEADER_SIZE
-    font_size_str: int = Dims.to_in_str(font_size)
     insert_y: int = font_size / 2
-    insert_y_str = Dims.to_in_str(insert_y)
 
     header: svgwrite.txt.Text = svgwrite.text.Text\
     ( Strings.DAILY_SCHEDULE_HEADER
-    , insert=('0in', insert_y_str)
+    , insert=('0in', insert_y)
     , text_anchor='start'
     , alignment_baseline='middle'
     , fill=Colors.HEADING
-    , font_size=font_size_str
+    , font_size=font_size
     , font_family=Font.FONT_FAMILY_HEADER
     )
 

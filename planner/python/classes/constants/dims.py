@@ -89,9 +89,9 @@ class PlannerDims:
     """
 
     if (dbl_sided):
-      return 2 * PlannerDims.BND_MARGIN_IN
+      return 2 * PlannerDims.BND_MARGIN_PX
 
-    return PlannerDims.BND_MARGIN_IN + PlannerDims.STD_MARGIN_IN
+    return PlannerDims.BND_MARGIN_PX+ PlannerDims.STD_MARGIN_PX
 
   #_____________________________________________________________________
   def calc_content_size(is_portrait: bool) -> Tuple:
@@ -110,20 +110,20 @@ class PlannerDims:
     Dims = PlannerDims
 
     if (is_portrait):
-      page_wdth: int = Dims.LETTER_SIZE_WIDTH_IN
-      page_hght: int = Dims.LETTER_SIZE_LNGTH_IN
+      page_wdth: int = Dims.LETTER_SIZE_WIDTH_PX
+      page_hght: int = Dims.LETTER_SIZE_LNGTH_PX
     else:
-      page_wdth: int = Dims.LETTER_SIZE_LNGTH_IN
-      page_hght: int = Dims.LETTER_SIZE_WIDTH_IN
+      page_wdth: int = Dims.LETTER_SIZE_LNGTH_PX
+      page_hght: int = Dims.LETTER_SIZE_WIDTH_PX
 
     short_side : int = 0.5 * (
-      Dims.LETTER_SIZE_LNGTH_IN \
-      - 2 * (Dims.STD_MARGIN_IN) \
-      - 2 * (Dims.BND_MARGIN_IN)
+      Dims.LETTER_SIZE_LNGTH_PX \
+      - 2 * (Dims.STD_MARGIN_PX) \
+      - 2 * (Dims.BND_MARGIN_PX)
     )
 
     long_side: int =\
-      Dims.LETTER_SIZE_WIDTH_IN - 2 * Dims.STD_MARGIN_IN
+      Dims.LETTER_SIZE_WIDTH_PX - 2 * Dims.STD_MARGIN_PX
 
     if (is_portrait):
       content_wdth = long_side

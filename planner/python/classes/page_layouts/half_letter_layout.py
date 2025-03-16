@@ -50,30 +50,16 @@ class HalfLetterSize:
 
     self.is_portrait_: bool   = is_portrait
     self.is_dbl_sided_: bool  = is_dbl_sided
-    self.file_path_: str = file_path
+    self.file_path_: str      = file_path
 
     self.layout_dwg_ = self.create_dwg()
 
     self.content_wdth_, self.content_hght_ =\
        Dims.calc_content_size(self.is_portrait_)
 
-    self.content_wdth_str_: int = Dims.to_in_str(self.content_wdth_)
-    self.content_hght_str_: int = Dims.to_in_str(self.content_hght_)
-
     # Content insertion points for top left
     self.insert_pt_0_, self.insert_pt_1_ =\
       self.determine_insertion_pts()
-
-    # Content insertion points as strings
-    self.insert_pt_0_str_: Tuple =\
-    ( Dims.to_in_str(self.insert_pt_0_[0])
-    , Dims.to_in_str(self.insert_pt_0_[1])
-    )
-
-    self.insert_pt_1_str_: Tuple =\
-    ( Dims.to_in_str(self.insert_pt_1_[0])
-    , Dims.to_in_str(self.insert_pt_1_[1])
-    )
 
     self.create_layout()
     self.add_content()
@@ -90,6 +76,7 @@ class HalfLetterSize:
       svgwrite.Drawing
     """
 
+    # Leaving these as inches
     hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
     wdth: int = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
 
@@ -126,10 +113,10 @@ class HalfLetterSize:
     """
 
     content_box_0: svgwrite.shapes.Rect =\
-      self.create_content_box(self.insert_pt_0_str_)
+      self.create_content_box(self.insert_pt_0_)
 
     content_box_1: svgwrite.shapes.Rect =\
-      self.create_content_box(self.insert_pt_1_str_)
+      self.create_content_box(self.insert_pt_1_)
 
     self.layout_dwg_.add(content_box_0)
     self.layout_dwg_.add(content_box_1)
@@ -148,28 +135,28 @@ class HalfLetterSize:
       Dims.calc_content_size(self.is_portrait_)
 
     if (self.is_portrait_):
-      insert_pos00 = Dims.STD_MARGIN_IN
-      insert_pos01 = Dims.BND_MARGIN_IN
+      insert_pos00 = Dims.STD_MARGIN_PX
+      insert_pos01 = Dims.BND_MARGIN_PX
 
-      insert_pos10 = Dims.STD_MARGIN_IN
+      insert_pos10 = Dims.STD_MARGIN_PX
       insert_pos11 = content_hght\
-        + Dims.STD_MARGIN_IN\
-        + 2 * Dims.BND_MARGIN_IN
+        + Dims.STD_MARGIN_PX\
+        + 2 * Dims.BND_MARGIN_PX
 
       if (self.is_dbl_sided_):
-        insert_pos01 = Dims.STD_MARGIN_IN
+        insert_pos01 = Dims.STD_MARGIN_PX
 
     else:
-      insert_pos00 = Dims.BND_MARGIN_IN
-      insert_pos01 = Dims.STD_MARGIN_IN
-      insert_pos11 = Dims.STD_MARGIN_IN
+      insert_pos00 = Dims.BND_MARGIN_PX
+      insert_pos01 = Dims.STD_MARGIN_PX
+      insert_pos11 = Dims.STD_MARGIN_PX
 
       insert_pos10 = content_wdth\
-        + Dims.STD_MARGIN_IN\
-        + 2 * Dims.BND_MARGIN_IN
+        + Dims.STD_MARGIN_PX\
+        + 2 * Dims.BND_MARGIN_PX
 
       if (self.is_dbl_sided_):
-        insert_pos00 = Dims.STD_MARGIN_IN
+        insert_pos00 = Dims.STD_MARGIN_PX
 
     insert_pos0: Tuple = (insert_pos00, insert_pos01)
     insert_pos1: Tuple = (insert_pos10, insert_pos11)
@@ -188,9 +175,7 @@ class HalfLetterSize:
     Returns:
       svgwrite rectangle the size of the content
     """
-    size: Tuple = Dims.calc_content_size(self.is_portrait_)
-    w: str = Dims.to_in_str(size[0])
-    h: str = Dims.to_in_str(size[1])
+    w,h = Dims.calc_content_size(self.is_portrait_)
 
     content_box: svgwrite.shapes.Rect =\
       svgwrite.shapes.Rect(size=(w, h)
