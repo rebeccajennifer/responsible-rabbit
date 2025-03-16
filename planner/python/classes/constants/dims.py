@@ -33,13 +33,20 @@ class PlannerDims:
   Dimensions used in planner creation
   """
 
-  LETTER_SIZE_LNGTH: int = 11
-  LETTER_SIZE_WIDTH: int = 8.5
+  DPI: int = 96
 
-  BND_MARGIN: int = 0.75
-  STD_MARGIN: int = 0.25
+  LETTER_SIZE_LNGTH_IN: int = 11
+  LETTER_SIZE_WIDTH_IN: int = 8.5
 
-  PX_PER_INCH: int = 96
+  BND_MARGIN_IN: int = 0.75
+  STD_MARGIN_IN: int = 0.25
+
+  LETTER_SIZE_LNGTH_PX: int = DPI * LETTER_SIZE_LNGTH_IN
+  LETTER_SIZE_WIDTH_PX: int = DPI * LETTER_SIZE_WIDTH_IN
+
+  BND_MARGIN_PX: int = DPI * BND_MARGIN_IN
+  STD_MARGIN_PX: int = DPI * STD_MARGIN_IN
+
 
 
   #_____________________________________________________________________
@@ -82,9 +89,9 @@ class PlannerDims:
     """
 
     if (dbl_sided):
-      return 2 * PlannerDims.BND_MARGIN
+      return 2 * PlannerDims.BND_MARGIN_IN
 
-    return PlannerDims.BND_MARGIN + PlannerDims.STD_MARGIN
+    return PlannerDims.BND_MARGIN_IN + PlannerDims.STD_MARGIN_IN
 
   #_____________________________________________________________________
   def calc_content_size(is_portrait: bool) -> Tuple:
@@ -103,20 +110,20 @@ class PlannerDims:
     Dims = PlannerDims
 
     if (is_portrait):
-      page_wdth: int = Dims.LETTER_SIZE_WIDTH
-      page_hght: int = Dims.LETTER_SIZE_LNGTH
+      page_wdth: int = Dims.LETTER_SIZE_WIDTH_IN
+      page_hght: int = Dims.LETTER_SIZE_LNGTH_IN
     else:
-      page_wdth: int = Dims.LETTER_SIZE_LNGTH
-      page_hght: int = Dims.LETTER_SIZE_WIDTH
+      page_wdth: int = Dims.LETTER_SIZE_LNGTH_IN
+      page_hght: int = Dims.LETTER_SIZE_WIDTH_IN
 
     short_side : int = 0.5 * (
-      Dims.LETTER_SIZE_LNGTH \
-      - 2 * (Dims.STD_MARGIN) \
-      - 2 * (Dims.BND_MARGIN)
+      Dims.LETTER_SIZE_LNGTH_IN \
+      - 2 * (Dims.STD_MARGIN_IN) \
+      - 2 * (Dims.BND_MARGIN_IN)
     )
 
     long_side: int =\
-      Dims.LETTER_SIZE_WIDTH - 2 * Dims.STD_MARGIN
+      Dims.LETTER_SIZE_WIDTH_IN - 2 * Dims.STD_MARGIN_IN
 
     if (is_portrait):
       content_wdth = long_side
@@ -140,5 +147,5 @@ class PlannerDims:
       Value in pixels
     """
 
-    return inches * PlannerDims.PX_PER_INCH
+    return inches * PlannerDims.DPI
 

@@ -34,7 +34,6 @@ import argparse
 from classes.page_layouts.half_letter_layout import HalfLetterSize
 from classes.page_layouts.day_layout import DayLayout
 from classes.planner_parser import PlannerCreationParser
-from classes.entries.daily_schedule import DailySchedule
 
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:

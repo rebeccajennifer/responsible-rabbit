@@ -90,12 +90,12 @@ class HalfLetterSize:
       svgwrite.Drawing
     """
 
-    hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH)
-    wdth: int = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH)
+    hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
+    wdth: int = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
 
     if (self.is_portrait_):
-      hght = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH)
-      wdth = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH)
+      hght = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
+      wdth = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
 
     return svgwrite.Drawing(self.file_path_
       , profile='tiny'
@@ -148,28 +148,28 @@ class HalfLetterSize:
       Dims.calc_content_size(self.is_portrait_)
 
     if (self.is_portrait_):
-      insert_pos00 = Dims.STD_MARGIN
-      insert_pos01 = Dims.BND_MARGIN
+      insert_pos00 = Dims.STD_MARGIN_IN
+      insert_pos01 = Dims.BND_MARGIN_IN
 
-      insert_pos10 = Dims.STD_MARGIN
+      insert_pos10 = Dims.STD_MARGIN_IN
       insert_pos11 = content_hght\
-        + Dims.STD_MARGIN\
-        + 2 * Dims.BND_MARGIN
+        + Dims.STD_MARGIN_IN\
+        + 2 * Dims.BND_MARGIN_IN
 
       if (self.is_dbl_sided_):
-        insert_pos01 = Dims.STD_MARGIN
+        insert_pos01 = Dims.STD_MARGIN_IN
 
     else:
-      insert_pos00 = Dims.BND_MARGIN
-      insert_pos01 = Dims.STD_MARGIN
-      insert_pos11 = Dims.STD_MARGIN
+      insert_pos00 = Dims.BND_MARGIN_IN
+      insert_pos01 = Dims.STD_MARGIN_IN
+      insert_pos11 = Dims.STD_MARGIN_IN
 
       insert_pos10 = content_wdth\
-        + Dims.STD_MARGIN\
-        + 2 * Dims.BND_MARGIN
+        + Dims.STD_MARGIN_IN\
+        + 2 * Dims.BND_MARGIN_IN
 
       if (self.is_dbl_sided_):
-        insert_pos00 = Dims.STD_MARGIN
+        insert_pos00 = Dims.STD_MARGIN_IN
 
     insert_pos0: Tuple = (insert_pos00, insert_pos01)
     insert_pos1: Tuple = (insert_pos10, insert_pos11)
