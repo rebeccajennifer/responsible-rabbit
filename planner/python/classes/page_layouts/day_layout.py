@@ -23,71 +23,63 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Standard styles used throughout program.
+#   Layout for daily entry.
 #_______________________________________________________________________
 
 from classes.constants.dims import PlannerDims as Dims
-
-#_______________________________________________________________________
-class PlannerColors:
-  """
-  Contains colors used in the planner.
-  """
-
-  MEDIUM_GREY: str   = '#444444'
-  CYAN: str          = '#008080'
-  VIOLET: str        = '#800080'
-  WHITE: str         = '#ffffff'
-
-  FLUX_RED: str = '#d75f87'
-  FLUX_GRN: str = '#87d75f'
-  FLUX_YEL: str = '#d7875f'
-  FLUX_BLU: str = '#5f5f87'
-  FLUX_MAG: str = '#af5fd7'
-  FLUX_CYA: str = '#5fafd7'
-  FLUX_WHT: str = '#d7d7d7'
-  FLUX_BLK: str = '#5f5f5f'
-  FLUX_GRY: str = '#444444'
-
-  PROMPT: str = FLUX_MAG
-  NORMAL: str = FLUX_GRY
-  HEADING: str = FLUX_RED
-
-  BORDER_COLOR: str = MEDIUM_GREY
-  DEBUG0_COLOR: str = CYAN
-  DEBUG1_COLOR: str = VIOLET
+from classes.constants.strings import PlannerStrings as Strings
+from classes.entries.daily_schedule import DailySchedule as Sched
+from classes.page_layouts.half_letter_layout import HalfLetterSize
 
 
 #_______________________________________________________________________
-class PlannerStrokes:
+class DayLayout(HalfLetterSize):
   """
-  Contains stroke definitions.
-  """
-
-  STD_STROKE: int = 1
-  DEBUG0_STROKE: int = 5
-
-
-#_______________________________________________________________________
-class PlannerFontStyle:
-  """
-  Contains standard font sizes.
+  Daily entry layout.
   """
 
-  HEAD_1_SIZE: int = 30
-  HEAD_2_SIZE: int = 24
-  PROMPT_SIZE: int = 14
-  NORMAL_SIZE: int = 10
-  LITTLE_SIZE: int = 8
+  #_____________________________________________________________________
+  def __init__(self
+  , is_dbl_sided: bool = False
+  , file_path: str = Strings.DEF_DAY_LAYOUT_PATH):
+    """
+    Constructor for class. Assumes landscape orientation.
+    """
+    super().__init__\
+      ( is_portrait=False
+      , is_dbl_sided=is_dbl_sided
+      , file_path=file_path
+      )
 
-  HEAD_1_PADDING: int = HEAD_1_SIZE / 4
-  HEAD_2_PADDING: int = HEAD_2_SIZE / 4
-  PROMPT_PADDING: int = PROMPT_SIZE / 4
-  NORMAL_PADDING: int = NORMAL_SIZE / 4
-  LITTLE_PADDING: int = LITTLE_SIZE / 4
+    return
 
-  FONT_FAMILY_NORMAL: str = 'Ubuntu Mono'
-  FONT_FAMILY_HEADER: str = 'Trebuchet MS'
-  FONT_FAMILY_PROMPT: str = 'Trebuchet MS'
+  #_____________________________________________________________________
+  def add_content(self) -> None:
 
-  STYLE_PROMPT: str = 'italics'
+    # Width of daily schedule content group
+    self.schedule_wdth_: int = self.content_wdth_ * 0.25
+    self.schedule_hght_: int = self.content_hght_
+
+    self.schedule_ =\
+      Sched\
+      ( strt_time_str = Sched.DEF_STRT_24
+      , stop_time_str = Sched.DEF_STOP_24
+      , wdth=self.schedule_wdth_
+      , hght=self.schedule_hght_
+      , time_inc_min=30
+      , use_24=True
+      )
+
+    insert_sched_x: int =\
+      self.insert_pt_content_0_[0]\
+    + self.content_wdth_ - self.schedule_wdth_ - Dims.BRD_MARGIN_PX
+
+    insert_x_px: int = insert_sched_x
+    insert_y_px: int = self.insert_pt_content_0_[1]
+
+    self.schedule_['transform'] =\
+      f'translate({insert_x_px}, {insert_y_px})'
+
+    self.layout_dwg_.add(self.schedule_)
+
+    return

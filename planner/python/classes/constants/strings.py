@@ -23,11 +23,19 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Error strings.
+#   Strings used throughout planner.
 #_______________________________________________________________________
 
-class ErrorStrings:
+class PlannerStrings:
+  """
+  Strings used in planner.
+  """
 
-  BAD_INPUT: str = 'BAD INPUT'
-  INVALID_TIME: str =\
-    "\nInvalid time format input. Using default values."
+  DAILY_SCHEDULE_HEADER: str =\
+    "Time Well Spent"
+
+  DEF_LAYOUT_PATH: str =\
+    'layout.svg'
+
+  DEF_DAY_LAYOUT_PATH: str =\
+    'day_layout.svg'
