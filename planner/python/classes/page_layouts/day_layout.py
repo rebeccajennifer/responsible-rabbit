@@ -43,10 +43,15 @@ class DayLayout(HalfLetterSize):
   , is_dbl_sided: bool = False
   , file_path: str = Strings.DEF_DAY_LAYOUT_PATH):
     """
-    Constructor for class. Assumes portrait orientation
+    Constructor for class. Assumes landscape orientation.
     """
-    super().__init__(
-      is_portrait=False, is_dbl_sided=is_dbl_sided, file_path=file_path)
+    super().__init__\
+      ( is_portrait=False
+      , is_dbl_sided=is_dbl_sided
+      , file_path=file_path
+      )
+
+    return
 
   #_____________________________________________________________________
   def add_content(self) -> None:
@@ -56,19 +61,25 @@ class DayLayout(HalfLetterSize):
     self.schedule_hght_: int = self.content_hght_
 
     self.schedule_ =\
-      Sched.create_daily_schedule\
-      ( wdth=self.schedule_wdth_
+      Sched\
+      ( strt_time_str = Sched.DEF_STRT_24
+      , stop_time_str = Sched.DEF_STOP_24
+      , wdth=self.schedule_wdth_
       , hght=self.schedule_hght_
+      , time_inc_min=30
+      , use_24=True
       )
 
-    insert_x_px: int = Dims.inch_to_px(self.insert_pt_0_[0])
+    insert_sched_x: int =\
+      self.insert_pt_0_[0]\
+    + self.content_wdth_ - self.schedule_wdth_
+
+    insert_x_px: int = Dims.inch_to_px(insert_sched_x)
     insert_y_px: int = Dims.inch_to_px(self.insert_pt_0_[1])
 
-    self.schedule_['transform'] = f'translate({insert_x_px}, {insert_y_px})'
+    self.schedule_['transform'] =\
+      f'translate({insert_x_px}, {insert_y_px})'
 
-    self.layout_dwg_.add\
-    (
-      self.schedule_
-    )
+    self.layout_dwg_.add(self.schedule_)
 
-
+    return

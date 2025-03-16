@@ -38,11 +38,10 @@ import svgwrite.text
 from classes.constants.error_strings import ErrorStrings as Err
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerStrokes as Strokes
 from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
 
-class DailySchedule:
+class DailySchedule(svgwrite.container.Group):
   DEF_STRT_12: str = '05:00'
   DEF_STOP_12: str = '09:00'
   DEF_STRT_24: str = '05:00'
@@ -52,40 +51,63 @@ class DailySchedule:
   PADDING: int = Font.NORMAL_PADDING
 
   #_____________________________________________________________________
-  def create_daily_schedule\
-  ( strt_time_str: str = DEF_STRT_24
+  def __init__(self
+  , strt_time_str: str = DEF_STRT_24
   , stop_time_str: str = DEF_STOP_24
-  , wdth: int = 3
-  , hght: int = 3
+  , wdth: int = 0
+  , hght: int = 0
   , time_inc_min: int = 30
   , use_24: bool = True
-  ) -> svgwrite.container.Group:
+  ):
+    """
+      Parameters:
+        strt_time_str: start time of schedule
+        stop_time_str: stop time of schedule
+        wdth         : width of container
+        hght         : height of container
+        time_inc_min : incremental  time
+        use_24       : use 24 hour time
+    """
+
+    super().__init__()
+
+    self.strt_time_str_: str  = strt_time_str
+    self.stop_time_str_: str  = stop_time_str
+    self.wdth_: int           = wdth
+    self.hght_: int           = hght
+    self.time_inc_min_: int   = time_inc_min
+    self.use_24_: bool        = use_24
+
+    self.create_daily_schedule()
+
+    return
+
+  #_____________________________________________________________________
+  def create_daily_schedule(self) -> None:
     """
     Creates schedule with times in increments as indicated. Assumes
     entry is in 24 hour format, though printed strings will reflect
     selection for use_24.
 
     Parameters:
-      strt_time_str: start time of schedule
-      stop_time_str: stop time of schedule
-      wdth         : width of container
-      hght         : height of container
-      time_inc_min : incremental  time
-      use_24       : use 24 hour time
+      None
 
     Returns:
-      svgwrite Group containing all objects making up the time schedule
+      None
     """
 
     fmt: str = '%I:%M'
-    if (use_24):
+    if (self.use_24_):
       fmt: str = '%H:%M'
 
     #___________________________________________________________________
     # Convert to datetime objects
     #___________________________________________________________________
     strt_datetime, stop_datetime =\
-      DailySchedule.start_stop_err_check(strt_time_str, stop_time_str)
+      DailySchedule.start_stop_err_check\
+      ( self.strt_time_str_
+      , self.stop_time_str_
+      )
 
     crnt_datetime: dt.datetime = strt_datetime
 
@@ -105,20 +127,19 @@ class DailySchedule:
       1 +\
       (stop_datetime - strt_datetime).total_seconds()\
       / 60\
-      / time_inc_min
+      / self.time_inc_min_
 
     header_space: int =\
       DailySchedule.HEADER_SIZE\
     + DailySchedule.PADDING
 
     # TODO account for padding
-    time_box_wdth: int = wdth
-    time_box_hght: int = (hght - header_space) / time_block_count
+    time_box_wdth: int = self.wdth_
+    time_box_hght: int = (self.hght_ - header_space) / time_block_count
 
     crnt_y: int = header_space + Font.HEAD_2_SIZE/ 2
 
-    group = svgwrite.container.Group()
-    group.add(DailySchedule.create_schedule_header())
+    self.add(DailySchedule.create_schedule_header())
 
     #___________________________________________________________________
     # Create boxes with time increments
@@ -126,16 +147,24 @@ class DailySchedule:
       crnt_datetime_str =\
         crnt_datetime.strftime(fmt)
 
-      group.add(
-        DailySchedule.create_time_entry(crnt_datetime_str, crnt_y, time_box_wdth))
+      self.add(
+        DailySchedule.create_time_entry\
+        ( crnt_datetime_str
+        , crnt_y
+        , time_box_wdth
+        )
+      )
 
       crnt_y = crnt_y + time_box_hght
 
-      crnt_datetime = crnt_datetime + dt.timedelta(minutes=time_inc_min)
+      crnt_datetime =\
+        crnt_datetime\
+      + dt.timedelta(minutes=self.time_inc_min_)
 
-    return group
+    return
 
   #_____________________________________________________________________
+  @staticmethod
   def start_stop_err_check(strt_time_str: str
   , stop_time_str: str
   ) -> Tuple:
@@ -187,6 +216,7 @@ class DailySchedule:
     return strt_datetime, stop_datetime
 
   #_____________________________________________________________________
+  @staticmethod
   def create_time_entry(time_str: str
   , insert_y
   , wdth: int
@@ -202,12 +232,12 @@ class DailySchedule:
     line_y: float = insert_y + 0.5 * Font.LITTLE_SIZE
     insert_y_str: str = Dims.to_in_str(insert_y)
     line_y_in_str: str = Dims.to_in_str(line_y)
-
+    wdth_in: str = Dims.to_in_str(wdth)
 
     the_time: svgwrite.txt.Text = svgwrite.text.Text\
     ( time_str
-    , insert=('0in', insert_y_str)
-    , text_anchor='start'
+    , insert=(wdth_in, insert_y_str)
+    , text_anchor='end'
     , alignment_baseline='middle'
     , fill=Colors.NORMAL
     , font_size=Font.LITTLE_IN
@@ -230,6 +260,7 @@ class DailySchedule:
     return group
 
   #_____________________________________________________________________
+  @staticmethod
   def create_schedule_header() -> svgwrite.text.Text:
     """
     Parameters:
@@ -255,4 +286,3 @@ class DailySchedule:
     )
 
     return header
-
