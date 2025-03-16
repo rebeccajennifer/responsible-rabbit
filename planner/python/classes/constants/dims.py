@@ -40,14 +40,14 @@ class PlannerDims:
 
   BND_MARGIN_IN: int = 0.75
   STD_MARGIN_IN: int = 0.25
+  BRD_MARGIN_IN: int = 0.125
 
   LETTER_SIZE_LNGTH_PX: int = DPI * LETTER_SIZE_LNGTH_IN
   LETTER_SIZE_WIDTH_PX: int = DPI * LETTER_SIZE_WIDTH_IN
 
   BND_MARGIN_PX: int = DPI * BND_MARGIN_IN
   STD_MARGIN_PX: int = DPI * STD_MARGIN_IN
-
-
+  BRD_MARGIN_PX: int = DPI * BRD_MARGIN_IN
 
   #_____________________________________________________________________
   def to_in_str(dim: int) -> str:
@@ -91,14 +91,26 @@ class PlannerDims:
     if (dbl_sided):
       return 2 * PlannerDims.BND_MARGIN_PX
 
-    return PlannerDims.BND_MARGIN_PX+ PlannerDims.STD_MARGIN_PX
+    return PlannerDims.BND_MARGIN_PX + PlannerDims.STD_MARGIN_PX
 
   #_____________________________________________________________________
   def calc_content_size(is_portrait: bool) -> Tuple:
     """
-    Calculates the size of the content container depending on page
-    orientation. Portrait orientation means that each half sheet is
-    of landscape orientation.
+    Calculates content size based on border size accounting for padding.
+    """
+
+    w, h = PlannerDims.calc_border_size(is_portrait)
+    w = w - 2 * PlannerDims.BRD_MARGIN_PX
+    h = h - 2 * PlannerDims.BRD_MARGIN_PX
+
+    return (w, h)
+
+  #_____________________________________________________________________
+  def calc_border_size(is_portrait: bool) -> Tuple:
+    """
+    Calculates the size of the content border for page orientation.
+    Portrait orientation means that each half sheet is of landscape
+    orientation.
 
     Parameters:
       is_portrait:  is the page intended to be printed as a portrait
@@ -108,13 +120,6 @@ class PlannerDims:
     """
 
     Dims = PlannerDims
-
-    if (is_portrait):
-      page_wdth: int = Dims.LETTER_SIZE_WIDTH_PX
-      page_hght: int = Dims.LETTER_SIZE_LNGTH_PX
-    else:
-      page_wdth: int = Dims.LETTER_SIZE_LNGTH_PX
-      page_hght: int = Dims.LETTER_SIZE_WIDTH_PX
 
     short_side : int = 0.5 * (
       Dims.LETTER_SIZE_LNGTH_PX \

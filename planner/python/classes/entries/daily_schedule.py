@@ -48,7 +48,8 @@ class DailySchedule(svgwrite.container.Group):
   DEF_STOP_24: str = '21:00'
 
   HEADER_SIZE: int = Font.NORMAL_SIZE
-  PADDING: int = Font.NORMAL_PADDING
+  HEADER_PADDING: int = HEADER_SIZE / 2
+  HEADER_PADDING: int = 0
 
   #_____________________________________________________________________
   def __init__(self
@@ -124,20 +125,19 @@ class DailySchedule(svgwrite.container.Group):
 
     #___________________________________________________________________
     time_block_count: int =\
-      1 +\
-      (stop_datetime - strt_datetime).total_seconds()\
+      1\
+      + (stop_datetime - strt_datetime).total_seconds()\
       / 60\
       / self.time_inc_min_
 
     header_space: int =\
-      DailySchedule.HEADER_SIZE\
-    + DailySchedule.PADDING
+      DailySchedule.HEADER_SIZE + DailySchedule.HEADER_PADDING
 
     # TODO account for padding
     time_box_wdth: int = self.wdth_
     time_box_hght: int = (self.hght_ - header_space) / time_block_count
 
-    crnt_y: int = header_space + Font.HEAD_2_SIZE/ 2
+    crnt_y: int = header_space + time_box_hght
 
     self.add(DailySchedule.create_schedule_header())
 
@@ -218,7 +218,7 @@ class DailySchedule(svgwrite.container.Group):
   #_____________________________________________________________________
   @staticmethod
   def create_time_entry(time_str: str
-  , insert_y
+  , bottom_y
   , wdth: int
   ) -> svgwrite.container.Group:
     """
@@ -229,12 +229,13 @@ class DailySchedule(svgwrite.container.Group):
       wdth:     Width of container in inches
     """
 
-    line_y: float = insert_y + 0.5 * Font.LITTLE_SIZE
+    line_y: float = bottom_y
+    text_y: float = bottom_y - 0.5 * Font.LITTLE_SIZE
 
     the_time: svgwrite.txt.Text = svgwrite.text.Text\
     ( time_str
-    , insert=(wdth, insert_y)
-    , text_anchor='end'
+    , insert=(0, text_y)
+    , text_anchor='start'
     , alignment_baseline='middle'
     , fill=Colors.NORMAL
     , font_size=Font.LITTLE_SIZE
@@ -242,7 +243,7 @@ class DailySchedule(svgwrite.container.Group):
     )
 
     line: svgwrite.shapes.Line = svgwrite.shapes.Line\
-    ( start=('0in', line_y)
+    ( start=(0, line_y)
     , end=(wdth, line_y)
     , stroke=Colors.DEBUG0_COLOR
     )

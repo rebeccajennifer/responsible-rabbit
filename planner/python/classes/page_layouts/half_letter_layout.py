@@ -32,6 +32,7 @@ from typing import Tuple
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
+from classes.constants.strings import PlannerStrings as Strings
 
 
 #_______________________________________________________________________
@@ -45,7 +46,7 @@ class HalfLetterSize:
   def __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
-  , file_path: str = 'layout.svg'
+  , file_path: str = Strings.DEF_LAYOUT_PATH
   ):
 
     self.is_portrait_: bool   = is_portrait
@@ -58,10 +59,9 @@ class HalfLetterSize:
        Dims.calc_content_size(self.is_portrait_)
 
     # Content insertion points for top left
-    self.insert_pt_0_, self.insert_pt_1_ =\
-      self.determine_insertion_pts()
+    self.determine_insertion_pts()
 
-    self.create_layout()
+    self.add_borders()
     self.add_content()
 
   #_____________________________________________________________________
@@ -103,36 +103,34 @@ class HalfLetterSize:
     self.layout_dwg_.save()
 
   #_____________________________________________________________________
-  def create_layout(self) -> None:
+  def add_borders(self) -> None:
     """
+    Adds content borders to page.
     Parameters:
-      file_path: resulting svg path
+      None
 
     Returns:
       None
     """
 
     content_box_0: svgwrite.shapes.Rect =\
-      self.create_content_box(self.insert_pt_0_)
+      self.create_content_box(self.insert_pt_border_0_)
 
     content_box_1: svgwrite.shapes.Rect =\
-      self.create_content_box(self.insert_pt_1_)
+      self.create_content_box(self.insert_pt_border_1_)
 
     self.layout_dwg_.add(content_box_0)
     self.layout_dwg_.add(content_box_1)
 
   #_____________________________________________________________________
-  def determine_insertion_pts(self) -> Tuple:
+  def determine_insertion_pts(self) -> None:
     """
-    Determines top left insertion points for content boxes.
-
-    Returns:
-    Tuple of tuples
-    ((x_content_box0, y_content_box0), (x_content_box1, y_content_box1))
+    Determines top left insertion points for content boxes and borders.
+    Has side effect of changing member variables.
     """
 
     content_wdth, content_hght =\
-      Dims.calc_content_size(self.is_portrait_)
+      Dims.calc_border_size(self.is_portrait_)
 
     if (self.is_portrait_):
       insert_pos00 = Dims.STD_MARGIN_PX
@@ -161,7 +159,21 @@ class HalfLetterSize:
     insert_pos0: Tuple = (insert_pos00, insert_pos01)
     insert_pos1: Tuple = (insert_pos10, insert_pos11)
 
-    return(insert_pos0, insert_pos1)
+    self.insert_pt_border_0_: int =  insert_pos0
+    self.insert_pt_border_1_: int =  insert_pos1
+
+    # Determine insertion points for content based on border size
+    self.insert_pt_content_0_: Tuple =\
+    ( self.insert_pt_border_0_[0] + Dims.BRD_MARGIN_PX
+    , self.insert_pt_border_0_[1] + Dims.BRD_MARGIN_PX
+    )
+
+    self.insert_pt_content_1_: Tuple =\
+    ( self.insert_pt_border_1_[0] + Dims.BRD_MARGIN_PX
+    , self.insert_pt_border_1_[1] + Dims.BRD_MARGIN_PX
+    )
+
+    return
 
   #_____________________________________________________________________
   def create_content_box(self
@@ -175,7 +187,7 @@ class HalfLetterSize:
     Returns:
       svgwrite rectangle the size of the content
     """
-    w,h = Dims.calc_content_size(self.is_portrait_)
+    w,h = Dims.calc_border_size(self.is_portrait_)
 
     content_box: svgwrite.shapes.Rect =\
       svgwrite.shapes.Rect(size=(w, h)
