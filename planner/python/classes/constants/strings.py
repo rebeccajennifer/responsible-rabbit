@@ -31,6 +31,9 @@ class PlannerStrings:
   Strings used in planner.
   """
 
+  DEF_PAGE_HEADER: str =\
+    "Page Header"
+
   DAILY_SCHEDULE_HEADER: str =\
     "Time Well Spent"
 

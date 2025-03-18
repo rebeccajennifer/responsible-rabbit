@@ -35,6 +35,7 @@ class PlannerColors:
   """
 
   MEDIUM_GREY: str   = '#444444'
+  LIGHT_GREY: str    = '#d7d7d7'
   CYAN: str          = '#008080'
   VIOLET: str        = '#800080'
   WHITE: str         = '#ffffff'
@@ -74,17 +75,13 @@ class PlannerFontStyle:
   Contains standard font sizes.
   """
 
-  HEAD_1_SIZE: int = 30
+  HEAD_1_SIZE: int = 12
   HEAD_2_SIZE: int = 24
   PROMPT_SIZE: int = 14
   NORMAL_SIZE: int = 10
   LITTLE_SIZE: int = 8
 
-  HEAD_1_PADDING: int = HEAD_1_SIZE / 4
-  HEAD_2_PADDING: int = HEAD_2_SIZE / 4
-  PROMPT_PADDING: int = PROMPT_SIZE / 4
-  NORMAL_PADDING: int = NORMAL_SIZE / 4
-  LITTLE_PADDING: int = LITTLE_SIZE / 4
+  TEXT_PADDING: int = 5
 
   FONT_FAMILY_NORMAL: str = 'Ubuntu Mono'
   FONT_FAMILY_HEADER: str = 'Trebuchet MS'

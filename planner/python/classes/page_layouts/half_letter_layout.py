@@ -191,7 +191,6 @@ class HalfLetterSize:
 
     content_box: svgwrite.shapes.Rect =\
       svgwrite.shapes.Rect(size=(w, h)
-      , id="flux"
       , insert=insert_position
       , stroke=Colors.MEDIUM_GREY
       , fill='none')

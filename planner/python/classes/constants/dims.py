@@ -40,14 +40,13 @@ class PlannerDims:
 
   BND_MARGIN_IN: int = 0.75
   STD_MARGIN_IN: int = 0.25
-  BRD_MARGIN_IN: int = 0.125
 
   LETTER_SIZE_LNGTH_PX: int = DPI * LETTER_SIZE_LNGTH_IN
   LETTER_SIZE_WIDTH_PX: int = DPI * LETTER_SIZE_WIDTH_IN
 
   BND_MARGIN_PX: int = DPI * BND_MARGIN_IN
   STD_MARGIN_PX: int = DPI * STD_MARGIN_IN
-  BRD_MARGIN_PX: int = DPI * BRD_MARGIN_IN
+  BRD_MARGIN_PX: int = 4
 
   #_____________________________________________________________________
   def to_in_str(dim: int) -> str:
