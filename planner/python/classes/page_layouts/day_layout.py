@@ -33,8 +33,8 @@ from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
-from classes.entries.daily_schedule import DailySchedule as Sched
-from classes.entries.header_box import HeaderBox
+from classes.elements.daily_schedule import DailySchedule as Sched
+from classes.elements.header_box import HeaderBox
 from classes.page_layouts.half_letter_layout import HalfLetterSize
 
 
