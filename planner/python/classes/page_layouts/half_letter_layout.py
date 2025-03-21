@@ -73,7 +73,6 @@ class HalfLetterSize:
 
     return
 
-
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
@@ -107,13 +106,13 @@ class HalfLetterSize:
       None
     """
 
-    x: int = self.insert_pt_border_0_[0]
-    y: int = self.insert_pt_border_0_[1]
+    x: int = self.insert_pt_content_0_[0]
+    y: int = self.insert_pt_content_0_[1]
 
     self.page_header_0_['transform'] = f'translate({x}, {y})'
 
-    x: int = self.insert_pt_border_1_[0]
-    y: int = self.insert_pt_border_1_[1]
+    x: int = self.insert_pt_content_1_[0]
+    y: int = self.insert_pt_content_1_[1]
     self.page_header_1_['transform'] = f'translate({x}, {y})'
 
     self.layout_dwg_.add(self.page_header_0_)
@@ -122,6 +121,20 @@ class HalfLetterSize:
     self.layout_dwg_.add(self.half_page_border_1_)
 
     return
+
+  #_____________________________________________________________________
+  def save_svg(self) -> None:
+    """
+    Saves layout as svg file.
+
+    Parameters:
+      None
+
+    Returns:
+      None
+    """
+
+    self.layout_dwg_.save()
 
   #_____________________________________________________________________
   def create_dwg(self) -> svgwrite.Drawing:
@@ -148,20 +161,7 @@ class HalfLetterSize:
       , size=(wdth, hght)
     )
 
-  #_____________________________________________________________________
-  def save_svg(self) -> None:
-    """
-    Saves layout as svg file.
-
-    Parameters:
-      None
-
-    Returns:
-      None
-    """
-    self.layout_dwg_.save()
-
-  #_____________________________________________________________________
+ #_____________________________________________________________________
   def create_borders(self) -> Tuple:
     """
     Adds content borders to page.
@@ -181,10 +181,35 @@ class HalfLetterSize:
     return content_box_0, content_box_1
 
   #_____________________________________________________________________
+  def create_content_box(self
+  , insert_position: Tuple
+  ) -> svgwrite.shapes.Rect:
+    """
+    Creates rectangle that will contain content.
+
+    Parameters:
+
+    Returns:
+      svgwrite rectangle the size of the content
+    """
+
+    w,h = Dims.calc_border_size(self.is_portrait_)
+
+    content_box: svgwrite.shapes.Rect =\
+      svgwrite.shapes.Rect(size=(w, h)
+      , insert=insert_position
+      , stroke=Colors.DEBUG0_COLOR
+      , fill='none')
+
+    return content_box
+
+  #_____________________________________________________________________
   def calc_border_insert_pts(self) -> None:
     """
     Determines top left insertion points for content boxes and borders.
-    Has side effect of changing member variables.
+
+    Side Effects:
+      Adds class variables for insertion points.
     """
 
     content_wdth, content_hght =\
@@ -232,28 +257,6 @@ class HalfLetterSize:
     )
 
     return
-
-  #_____________________________________________________________________
-  def create_content_box(self
-  , insert_position: Tuple
-  ) -> svgwrite.shapes.Rect:
-    """
-    Creates rectangle that will contain content.
-
-    Parameters:
-
-    Returns:
-      svgwrite rectangle the size of the content
-    """
-    w,h = Dims.calc_border_size(self.is_portrait_)
-
-    content_box: svgwrite.shapes.Rect =\
-      svgwrite.shapes.Rect(size=(w, h)
-      , insert=insert_position
-      , stroke=Colors.DEBUG0_COLOR
-      , fill='none')
-
-    return content_box
 
   #_____________________________________________________________________
   def create_page_headers(self) -> Tuple:
