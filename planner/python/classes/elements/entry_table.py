@@ -46,7 +46,7 @@ class EntryTable(svgwrite.container.Group):
   def __init__(self
   , wdth: int = 0
   , hght: int = 0
-  , text_lst: str = ['header0', 'header1']
+  , text_lst: str = [Strings.DEF_TABLE_HEADER]
   , font_color: str = Colors.NORMAL
   , font_size: int = Font.NORMAL_SIZE
   , font: str = Font.FONT_FAMILY_NORMAL
@@ -54,6 +54,10 @@ class EntryTable(svgwrite.container.Group):
   , box_brdr_color: str = Colors.BORDER_COLOR
   , entry_col_count: int = 1
   , entry_row_count: int = 1
+  , pad_top: bool = False
+  , pad_bot: bool = False
+  , pad_rgt: bool = False
+  , pad_lft: bool = False
   ):
     """
       Parameters:
@@ -67,12 +71,35 @@ class EntryTable(svgwrite.container.Group):
         box_brdr_color  : border color
         entry_col_count : column count of table
         entry_row_count : row count of table
+        pad_top         : add padding to top
+        pad_bot         : add padding to bottom
+        pad_rgt         : add padding to right
+        pad_lft         : add padding to left
     """
 
     super().__init__()
 
-    self.wdth_: int             = wdth - 2 * Font.TEXT_PADDING
-    self.hght_: int             = hght - 2 * Font.TEXT_PADDING
+    self.wdth_: int     = wdth
+    self.hght_: int     = hght
+
+    self.pad_top_: bool = pad_top
+    self.pad_bot_: bool = pad_bot
+    self.pad_rgt_: bool = pad_rgt
+    self.pad_lft_: bool = pad_lft
+
+
+    #___________________________________________________________________
+    # Adjust dims for padding
+    if (pad_top):
+      self.hght_ = self.hght_ - Dims.BRD_MARGIN_PX
+    if (pad_bot):
+      self.hght_ = self.hght_ - Dims.BRD_MARGIN_PX
+    if (pad_rgt):
+      self.wdth_ = self.wdth_ - Dims.BRD_MARGIN_PX
+    if (pad_lft):
+      self.wdth_ = self.wdth_ - Dims.BRD_MARGIN_PX
+    #___________________________________________________________________
+
     self.box_brdr_color_: str   = box_brdr_color
     self.entry_col_count_: int  = entry_col_count
     self.entry_row_count_: int  = entry_row_count
@@ -120,8 +147,6 @@ class EntryTable(svgwrite.container.Group):
 
     self.add(self.header_box_)
     self.add(self.outline_)
-    self['transform'] =\
-      f'translate({100}, {100})'
 
 #    row_height
 #

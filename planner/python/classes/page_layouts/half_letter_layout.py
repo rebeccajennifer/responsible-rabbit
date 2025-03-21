@@ -57,7 +57,6 @@ class HalfLetterSize:
     self.is_dbl_sided_: bool  = is_dbl_sided
     self.file_path_: str      = file_path
 
-
     self.content_wdth_, self.content_hght_ =\
        Dims.calc_content_size(self.is_portrait_)
 
@@ -65,8 +64,6 @@ class HalfLetterSize:
     self.calc_border_insert_pts()
 
     self.create_content()
-
-    self.content_hght_ = self.content_hght_ - self.page_header_0_.hght_
 
     self.add_content()
 
@@ -85,11 +82,18 @@ class HalfLetterSize:
     """
 
     self.layout_dwg_: svgwrite.Drawing  = self.create_dwg()
+
     self.page_header_0_, self.page_header_1_ =\
       self.create_page_headers()
 
     self.half_page_border_0_, self.half_page_border_1_ =\
       self.create_borders()
+
+    self.content_hght_0_ =\
+      self.content_hght_ - self.page_header_0_.hght_
+
+    self.content_hght_1_ =\
+      self.content_hght_ - self.page_header_1_.hght_
 
     return
 

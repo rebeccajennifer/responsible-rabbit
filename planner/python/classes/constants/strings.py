@@ -31,6 +31,9 @@ class PlannerStrings:
   Strings used in planner.
   """
 
+  DEF_TABLE_HEADER: str =\
+    'Table Header'
+
   DEF_PAGE_HEADER: str =\
     'Page Header'
 

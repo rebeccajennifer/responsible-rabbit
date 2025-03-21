@@ -92,15 +92,17 @@ class DayLayout(HalfLetterSize):
     self.entry_: EntryTable =\
       EntryTable\
       ( wdth=self.content_wdth_ - self.schedule_.wdth_
-      , hght=self.content_hght_
+      , hght=self.content_hght_0_
       , text_lst=['hello', 'trevor']
+      , pad_top=True
+      , pad_lft=True
       )
 
-    entry_insert_x: int =\
-      self.insert_pt_content_0_[0]
+    entry_insert_x: int = self.insert_pt_content_0_[0]\
+      + Dims.BRD_MARGIN_PX * self.entry_.pad_lft_
 
-    entry_insert_y: int =\
-      self.insert_pt_content_0_[1] + Font.TEXT_PADDING
+    entry_insert_y: int = self.insert_pt_content_0_[1]\
+      + Dims.BRD_MARGIN_PX * self.entry_.pad_top_
 
     self.entry_['transform'] =\
       f'translate({entry_insert_x},{entry_insert_y})'
@@ -128,7 +130,7 @@ class DayLayout(HalfLetterSize):
 
     # Width of daily schedule content group
     self.schedule_wdth_: int = self.content_wdth_ * 0.25
-    self.schedule_hght_: int = self.content_hght_
+    self.schedule_hght_: int = self.content_hght_0_
 
     self.schedule_ =\
       Sched\
