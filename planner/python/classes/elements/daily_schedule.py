@@ -27,7 +27,7 @@
 #_______________________________________________________________________
 
 import datetime as dt
-import svgwrite
+import math
 
 from typing import Tuple
 
@@ -35,11 +35,213 @@ import svgwrite.container
 import svgwrite.shapes
 import svgwrite.text
 
+from classes.elements.entry_table import EntryTable
 from classes.constants.error_strings import ErrorStrings as Err
-from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
+
+class DaySchedule(EntryTable):
+  """
+  Lists hours in daily schedule.
+  """
+
+  DEF_STRT_12: str = '05:00'
+  DEF_STOP_12: str = '09:00'
+  DEF_STRT_24: str = '05:00'
+  DEF_STOP_24: str = '21:00'
+
+  def __init__(self
+  , wdth: int = 0
+  , hght: int = 0
+  , strt_time_str: str = DEF_STRT_24
+  , stop_time_str: str = DEF_STOP_24
+  , time_inc_min: int = 30
+  , use_24: bool = True
+  ):
+    """
+      Parameters:
+        wdth         : width of container
+        hght         : height of container
+        strt_time_str: start time of schedule
+        stop_time_str: stop time of schedule
+        time_inc_min : incremental  time
+        use_24       : use 24 hour time
+    """
+
+    self.time_inc_min_: int   = time_inc_min
+    self.use_24_: bool        = use_24
+
+    #___________________________________________________________________
+    # Convert to datetime objects
+    #___________________________________________________________________
+    self.strt_datetime_, self.stop_datetime_ =\
+      DailySchedule.start_stop_err_check\
+      ( strt_time_str
+      , stop_time_str
+      )
+
+    entry_row_count: int = self.calc_row_count()
+
+    super().__init__\
+      ( wdth=wdth
+      , hght=hght
+      , text_lst=[Strings.DAILY_SCHEDULE_HEADER]
+      , font_color=Colors.NORMAL
+      , font_size=Font.NORMAL_SIZE
+      , font=Font.FONT_FAMILY_HEADER
+      , box_fill_color='none'
+      , box_brdr_color=Colors.FLUX_RED
+      , entry_row_count=entry_row_count
+      , pad_top=True
+      , pad_bot=False
+      , pad_lft=False
+      , pad_rgt=False
+      , show_outline=False
+      )
+
+
+    return
+
+  #_____________________________________________________________________
+  def calc_row_count(self) -> int:
+
+    time_block_count: float = 1\
+      + (self.stop_datetime_ - self.strt_datetime_).total_seconds()\
+      / 60\
+      / self.time_inc_min_
+
+    return math.floor(time_block_count)
+
+  #_____________________________________________________________________
+  def create_content(self):
+
+    super().create_content()
+
+    return
+
+  #_____________________________________________________________________
+  def create_schedule(self):
+
+    fmt: str = '%I:%M'
+    if (self.use_24_):
+      fmt: str = '%H:%M'
+
+    #___________________________________________________________________
+    # Convert to strings
+    #___________________________________________________________________
+    stop_time_str =\
+        stop_datetime.strftime(fmt)
+    strt_time_str =\
+        strt_datetime.strftime(fmt)
+    #___________________________________________________________________
+
+
+    #___________________________________________________________________
+    crnt_datetime: dt.datetime = strt_datetime
+    crnt_datetime_str = strt_time_str
+
+    return
+
+  #_____________________________________________________________________
+  #_____________________________________________________________________
+  #_____________________________________________________________________
+  #_____________________________________________________________________
+  #_____________________________________________________________________
+  #_____________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+  #_____________________________________________________________________
+  def start_stop_err_check(self
+  , strt_time_str: str
+  , stop_time_str: str
+  ) -> Tuple:
+    """
+    Checks if start time is greater than stop time. Converts times to
+    datetime objects with dates. Assumes input is in 24 hour format
+
+    Parameters:
+      strt_time_str: start time of daily schedule
+      stop_time_str: stop time of daily schedule
+
+    Returns:
+      (datetime.datetime obj start, datetime.datetime obj stop)
+    """
+
+    dt.dt = dt.datetime
+
+    fmt_24: str = '%H:%M'
+
+    DEF_STRT: str = DailySchedule.DEF_STRT_24
+    DEF_STOP: str = DailySchedule.DEF_STOP_24
+
+    #___________________________________________________________________
+    # Convert to datetime objects for error handling
+    #___________________________________________________________________
+    try:
+      strt_datetime: dt.dt = dt.dt.strptime(strt_time_str, fmt_24)
+      stop_datetime: dt.dt = dt.dt.strptime(stop_time_str, fmt_24)
+
+      strt_datetime = dt.dt.combine(dt.dt.today(), strt_datetime.time())
+      stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
+
+    except:
+      print(Err.INVALID_TIME)
+      strt_datetime: dt.dt = dt.dt.strptime(DEF_STRT, fmt_24)
+      stop_datetime: dt.dt = dt.dt.strptime(DEF_STOP, fmt_24)
+
+      strt_datetime = dt.dt.combine(dt.dt.today(), strt_datetime.time())
+      stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
+
+    if (stop_datetime < strt_datetime):
+      strt_datetime: dt.dt = dt.dt.strptime(DailySchedule.DEF_STRT, fmt_24)
+      stop_datetime: dt.dt = dt.dt.strptime(DailySchedule.DEF_STOP, fmt_24)
+
+      strt_datetime = dt.dt.combine(dt.dt.today(), strt_datetime.time())
+      stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
+
+    return strt_datetime, stop_datetime
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class DailySchedule(svgwrite.container.Group):
   DEF_STRT_12: str = '05:00'
