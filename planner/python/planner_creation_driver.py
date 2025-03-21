@@ -55,42 +55,42 @@ if __name__ == '__main__':
     HalfLetterSize\
     ( is_portrait=False
     , is_dbl_sided=False
-    , file_path='portrait_sgl.svg'
-    )
-
-  layout_landscpe_dbl_sided: HalfLetterSize =\
-    HalfLetterSize\
-    ( is_portrait=False
-    , is_dbl_sided=True
-    , file_path='portrait_dbl.svg'
-    )
-
-  layout_portrait_no_dbl_sided: HalfLetterSize =\
-    HalfLetterSize\
-    ( is_portrait=True
-    , is_dbl_sided=False
     , file_path='landscpe_sgl.svg'
     )
 
-  layout_portrait_dbl_sided: HalfLetterSize =\
-    HalfLetterSize\
-    ( is_portrait=True
-    , is_dbl_sided=True
-    , file_path='landscpe_dbl.svg'
-    )
+  #layout_landscpe_dbl_sided: HalfLetterSize =\
+  #  HalfLetterSize\
+  #  ( is_portrait=False
+  #  , is_dbl_sided=True
+  #  , file_path='portrait_dbl.svg'
+  #  )
+
+  #layout_portrait_no_dbl_sided: HalfLetterSize =\
+  #  HalfLetterSize\
+  #  ( is_portrait=True
+  #  , is_dbl_sided=False
+  #  , file_path='landscpe_sgl.svg'
+  #  )
+
+  #layout_portrait_dbl_sided: HalfLetterSize =\
+  #  HalfLetterSize\
+  #  ( is_portrait=True
+  #  , is_dbl_sided=True
+  #  , file_path='landscpe_dbl.svg'
+  #  )
 
   # Generate the SVG file
   layout_landscpe_no_dbl_sided.save_svg()
-  layout_landscpe_dbl_sided.save_svg()
-  layout_portrait_no_dbl_sided.save_svg()
-  layout_portrait_dbl_sided.save_svg()
+  #layout_landscpe_dbl_sided.save_svg()
+  #layout_portrait_no_dbl_sided.save_svg()
+  #layout_portrait_dbl_sided.save_svg()
   #_____________________________________________________________________
 
-  layout_test: DayLayout =\
-    DayLayout\
-    ( is_dbl_sided=False
-    )
+  #layout_test: DayLayout =\
+  #  DayLayout\
+  #  ( is_dbl_sided=False
+  #  )
 
-  layout_test.save_svg()
+  #layout_test.save_svg()
   print("all done")
 

@@ -30,9 +30,13 @@ import svgwrite
 
 from typing import Tuple
 
+import svgwrite.container
+
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
+from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
+from classes.elements.header_box import HeaderBox
 
 
 #_______________________________________________________________________
@@ -53,16 +57,71 @@ class HalfLetterSize:
     self.is_dbl_sided_: bool  = is_dbl_sided
     self.file_path_: str      = file_path
 
-    self.layout_dwg_ = self.create_dwg()
 
     self.content_wdth_, self.content_hght_ =\
        Dims.calc_content_size(self.is_portrait_)
 
     # Content insertion points for top left
-    self.determine_insertion_pts()
+    self.calc_border_insert_pts()
 
-    self.add_borders()
+    self.create_content()
+
+
+    self.content_hght_ = self.content_hght_ - self.page_header_0_.hght_
+
     self.add_content()
+
+    return
+
+
+  #_____________________________________________________________________
+  def create_content(self) -> None:
+    """
+    Creates page borders, page header,
+
+    Parameters:
+      None
+
+    Returns:
+      None
+    """
+
+    self.layout_dwg_: svgwrite.Drawing  = self.create_dwg()
+    self.page_header_0_, self.page_header_1_ =\
+      self.create_page_headers()
+
+    self.half_page_border_0_, self.half_page_border_1_ =\
+      self.create_borders()
+
+    return
+
+  #_____________________________________________________________________
+  def add_content(self):
+    """
+    Adds content as class variables to page.
+
+    Parameters:
+      None
+
+    Returns:
+      None
+    """
+
+    x: int = self.insert_pt_border_0_[0]
+    y: int = self.insert_pt_border_0_[1]
+
+    self.page_header_0_['transform'] = f'translate({x}, {y})'
+
+    x: int = self.insert_pt_border_1_[0]
+    y: int = self.insert_pt_border_1_[1]
+    self.page_header_1_['transform'] = f'translate({x}, {y})'
+
+    self.layout_dwg_.add(self.page_header_0_)
+    self.layout_dwg_.add(self.page_header_1_)
+    self.layout_dwg_.add(self.half_page_border_0_)
+    self.layout_dwg_.add(self.half_page_border_1_)
+
+    return
 
   #_____________________________________________________________________
   def create_dwg(self) -> svgwrite.Drawing:
@@ -103,7 +162,7 @@ class HalfLetterSize:
     self.layout_dwg_.save()
 
   #_____________________________________________________________________
-  def add_borders(self) -> None:
+  def create_borders(self) -> Tuple:
     """
     Adds content borders to page.
     Parameters:
@@ -119,11 +178,10 @@ class HalfLetterSize:
     content_box_1: svgwrite.shapes.Rect =\
       self.create_content_box(self.insert_pt_border_1_)
 
-    self.layout_dwg_.add(content_box_0)
-    self.layout_dwg_.add(content_box_1)
+    return content_box_0, content_box_1
 
   #_____________________________________________________________________
-  def determine_insertion_pts(self) -> None:
+  def calc_border_insert_pts(self) -> None:
     """
     Determines top left insertion points for content boxes and borders.
     Has side effect of changing member variables.
@@ -192,11 +250,56 @@ class HalfLetterSize:
     content_box: svgwrite.shapes.Rect =\
       svgwrite.shapes.Rect(size=(w, h)
       , insert=insert_position
-      , stroke=Colors.MEDIUM_GREY
+      , stroke=Colors.DEBUG0_COLOR
       , fill='none')
 
     return content_box
 
   #_____________________________________________________________________
-  def add_content(self) -> None:
-    return
+  def create_page_headers(self) -> Tuple:
+    """
+    Creates page headers for both half sheets.
+    """
+
+    page_header_0: HeaderBox =\
+      self.create_page_header(header_txt=f'{Strings.DEF_PAGE_HEADER}_0')
+
+    page_header_1: HeaderBox =\
+      self.create_page_header(header_txt=f'{Strings.DEF_PAGE_HEADER}_1')
+
+    return page_header_0, page_header_1
+
+  #_____________________________________________________________________
+  def create_page_header(self
+  , header_txt = Strings.DEF_PAGE_HEADER
+  , font_color: str = Colors.NORMAL
+  , font_size: int = Font.HEAD_2_SIZE
+  , font: str = Font.FONT_FAMILY_HEADER
+  ) -> HeaderBox:
+    """
+    Creates page header and saves it to class variable.
+
+    Parameters:
+      None
+
+    Returns:
+      HeaderBox for page header
+    """
+
+    box_fill_color: str = Colors.LIGHT_GREY
+    box_brdr_color: str = Colors.BORDER_COLOR
+
+    page_header: HeaderBox =\
+      HeaderBox\
+      ( wdth=self.content_wdth_
+      , text_lst=[header_txt]
+      , font_color=font_color
+      , font_size=font_size
+      , font=font
+      , box_fill_color=box_fill_color
+      , box_brdr_color=box_brdr_color
+      )
+
+    return page_header
+
+

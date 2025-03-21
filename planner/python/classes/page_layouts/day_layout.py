@@ -35,6 +35,7 @@ from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 from classes.elements.daily_schedule import DailySchedule as Sched
 from classes.elements.header_box import HeaderBox
+from classes.elements.entry_table import EntryTable
 from classes.page_layouts.half_letter_layout import HalfLetterSize
 
 
@@ -93,6 +94,23 @@ class DayLayout(HalfLetterSize):
     #self.layout_dwg_.add(self.pri_efforts_box_)
     self.layout_dwg_.add(self.schedule_)
 
+    self.entry_: EntryTable =\
+      EntryTable\
+      ( wdth=self.content_wdth_
+      , hght=self.content_hght_ - self.page_header_.hght_
+      , text_lst=['hello', 'trevor']
+      )
+
+    entry_insert_x: int =\
+      self.insert_pt_content_0_[0]
+
+    entry_insert_y: int =\
+      self.insert_pt_content_0_[1] + self.page_header_.hght_ + Font.TEXT_PADDING
+
+    self.entry_['transform'] =\
+      f'translate({entry_insert_x},{entry_insert_y})'
+    self.layout_dwg_.add(self.entry_)
+
     return
 
   #_____________________________________________________________________
@@ -140,9 +158,9 @@ class DayLayout(HalfLetterSize):
     #  , font=Font.FONT_FAMILY_PROMPT
     #  )
 
-    self.create_page_header()
     return
 
+  #_____________________________________________________________________
   def create_page_header(self) -> svgwrite.container.Group:
     """
     Creates page header and saves it to class variable.

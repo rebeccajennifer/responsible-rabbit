@@ -32,10 +32,10 @@ class PlannerStrings:
   """
 
   DEF_PAGE_HEADER: str =\
-    "Page Header"
+    'Page Header'
 
   DAILY_SCHEDULE_HEADER: str =\
-    "Time Well Spent"
+    'Time Well Spent'
 
   DEF_LAYOUT_PATH: str =\
     'layout.svg'
