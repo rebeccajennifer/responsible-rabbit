@@ -71,8 +71,7 @@ class DayLayout(HalfLetterSize):
     Returns:
       None
     """
-
-    self.create_content()
+    super().add_content()
 
     insert_sched_x: int =\
       self.insert_pt_content_0_[0]\
@@ -84,20 +83,16 @@ class DayLayout(HalfLetterSize):
     self.schedule_['transform'] =\
       f'translate({insert_x_px}, {insert_y_px})'
 
-    self.page_header_['transform'] =\
-      f'translate({self.insert_pt_content_0_[0]}, {self.insert_pt_content_0_[1]})'
-
     #self.pri_efforts_box_['transform'] =\
     #  f'translate({self.insert_pt_content_0_[0] }, {self.insert_pt_content_0_[1] + self.page_header_.hght_})'
 
-    self.layout_dwg_.add(self.page_header_)
     #self.layout_dwg_.add(self.pri_efforts_box_)
     self.layout_dwg_.add(self.schedule_)
 
     self.entry_: EntryTable =\
       EntryTable\
-      ( wdth=self.content_wdth_
-      , hght=self.content_hght_ - self.page_header_.hght_
+      ( wdth=self.content_wdth_ - self.schedule_.wdth_
+      , hght=self.content_hght_
       , text_lst=['hello', 'trevor']
       )
 
@@ -105,7 +100,7 @@ class DayLayout(HalfLetterSize):
       self.insert_pt_content_0_[0]
 
     entry_insert_y: int =\
-      self.insert_pt_content_0_[1] + self.page_header_.hght_ + Font.TEXT_PADDING
+      self.insert_pt_content_0_[1] + Font.TEXT_PADDING
 
     self.entry_['transform'] =\
       f'translate({entry_insert_x},{entry_insert_y})'
@@ -129,7 +124,7 @@ class DayLayout(HalfLetterSize):
 
     """
 
-
+    super().create_content()
 
     # Width of daily schedule content group
     self.schedule_wdth_: int = self.content_wdth_ * 0.25
@@ -161,7 +156,7 @@ class DayLayout(HalfLetterSize):
     return
 
   #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
+  def create_page_headers(self) -> svgwrite.container.Group:
     """
     Creates page header and saves it to class variable.
 
@@ -171,25 +166,27 @@ class DayLayout(HalfLetterSize):
     Returns:
 
     """
-    font_size: int = Font.HEAD_1_SIZE
+    font_size: int = Font.NORMAL_SIZE
     font_family: str = Font.FONT_FAMILY_NORMAL
-    sp: str ='\u00A0\u00A0'
+    sp: str ='\u00A0\u00A0\u00A0'
 
     days: str =\
-      'Mon' + sp +\
-      'Tue' + sp +\
-      'Wed' + sp +\
-      'Thu' + sp +\
-      'Fri' + sp +\
-      'Sat' + sp +\
+      'Mon' + sp + sp +\
+      'Tue' + sp + sp +\
+      'Wed' + sp + sp +\
+      'Thu' + sp + sp +\
+      'Fri' + sp + sp +\
+      'Sat' + sp + sp +\
       'Sun'
 
-    self.page_header_ =\
-      HeaderBox\
-      ( wdth=self.content_wdth_
-      , text_lst=[days]
+    page_header_0 = super().create_page_header\
+      ( header_txt=days
       , font_size=font_size
-      , font=font_family
+      )
+
+    page_header_1 = super().create_page_header\
+      ( header_txt=Strings.QUOTE0
+      , font_size=font_size
       )
 
     date_str: str = '____ / ____ / 20 ____'
@@ -208,11 +205,6 @@ class DayLayout(HalfLetterSize):
       , font_family=font_family
       )
 
-    self.page_header_.add(date_txt)
+    page_header_0.add(date_txt)
 
-    return
-
-
-  #_____________________________________________________________________
-  #_____________________________________________________________________
-
+    return page_header_0, page_header_1

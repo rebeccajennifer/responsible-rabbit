@@ -42,3 +42,15 @@ class PlannerStrings:
 
   DEF_DAY_LAYOUT_PATH: str =\
     'day_layout.svg'
+
+  QUOTE0: str =\
+    'It’s not always that we need to do more, but rather that we need '\
+    'to focus on less.'
+
+  QUOTE1: str =\
+    'Your future is created by what you do today, not tomorrow.'
+
+  QUOTES: list =\
+  [ {'quote': QUOTE0, 'author': 'Nathan W. Morris'}
+  , {'quote': QUOTE1, 'author': 'Robert Kiyosaki'}
+  ]

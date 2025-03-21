@@ -86,11 +86,11 @@ if __name__ == '__main__':
   #layout_portrait_dbl_sided.save_svg()
   #_____________________________________________________________________
 
-  #layout_test: DayLayout =\
-  #  DayLayout\
-  #  ( is_dbl_sided=False
-  #  )
+  layout_test: DayLayout =\
+    DayLayout\
+    ( is_dbl_sided=False
+    )
 
-  #layout_test.save_svg()
+  layout_test.save_svg()
   print("all done")
 

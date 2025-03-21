@@ -66,7 +66,6 @@ class HalfLetterSize:
 
     self.create_content()
 
-
     self.content_hght_ = self.content_hght_ - self.page_header_0_.hght_
 
     self.add_content()
@@ -108,12 +107,21 @@ class HalfLetterSize:
 
     x: int = self.insert_pt_content_0_[0]
     y: int = self.insert_pt_content_0_[1]
-
     self.page_header_0_['transform'] = f'translate({x}, {y})'
 
     x: int = self.insert_pt_content_1_[0]
     y: int = self.insert_pt_content_1_[1]
     self.page_header_1_['transform'] = f'translate({x}, {y})'
+
+    self.insert_pt_content_0_=\
+    ( self.insert_pt_content_0_[0]
+    , self.insert_pt_content_0_[1] + self.page_header_0_.hght_
+    )
+
+    self.insert_pt_content_1_=\
+    ( self.insert_pt_content_1_[0]
+    , self.insert_pt_content_1_[1] + self.page_header_1_.hght_
+    )
 
     self.layout_dwg_.add(self.page_header_0_)
     self.layout_dwg_.add(self.page_header_1_)
