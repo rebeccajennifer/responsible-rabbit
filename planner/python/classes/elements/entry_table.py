@@ -58,6 +58,7 @@ class EntryTable(svgwrite.container.Group):
   , pad_bot: bool = False
   , pad_rgt: bool = False
   , pad_lft: bool = False
+  , show_outline: bool = True
   ):
     """
       Parameters:
@@ -75,6 +76,7 @@ class EntryTable(svgwrite.container.Group):
         pad_bot         : add padding to bottom
         pad_rgt         : add padding to right
         pad_lft         : add padding to left
+        show_outline    : show table outline
     """
 
     super().__init__()
@@ -102,6 +104,7 @@ class EntryTable(svgwrite.container.Group):
     self.box_brdr_color_: str   = box_brdr_color
     self.entry_col_count_: int  = entry_col_count
     self.entry_row_count_: int  = entry_row_count
+    self.show_outline_: bool    = show_outline
 
 
     # Used to make header box
@@ -112,7 +115,6 @@ class EntryTable(svgwrite.container.Group):
     self.box_fill_color_: str   = box_fill_color
 
     self.create_content()
-
     self.add_content()
 
     return
@@ -146,20 +148,17 @@ class EntryTable(svgwrite.container.Group):
       , fill='none'
       )
 
-    self.total_row_hght_: int = self.hght_ - self.header_box_.hght_
+    combined_row_hght: int = self.hght_ - self.header_box_.hght_
+
+    self.rows_: svgwrite.container.Group =\
+      self.create_rows(combined_row_hght)
+
+    return
 
   #_____________________________________________________________________
-  def add_content(self):
-    """
-    Add content to EntryTable.
-    """
-
-    self.add(self.header_box_)
-    self.add(self.outline_)
-
-
-  #_____________________________________________________________________
-  def create_rows(self) -> svgwrite.container.Group:
+  def create_rows(self
+  , combined_row_hght
+  ) -> svgwrite.container.Group:
     """
     Creates group containing all rows of content entry.
 
@@ -172,21 +171,16 @@ class EntryTable(svgwrite.container.Group):
 
     row_group: svgwrite.container.Group = svgwrite.container.Group()
 
-    row_height: int = self.total_row_hght_ / self.entry_row_count_
-
-    line_len: int = self.wdth_ - 2 * Dims.BRD_MARGIN_PX
-
-    line_start_x: int = Dims.BRD_MARGIN_PX
-    line_end_x: int   = line_start_x + line_len
+    row_height: int = combined_row_hght / self.entry_row_count_
 
     for i in range(self.entry_row_count_):
 
-      line_y: int = i * row_height
+      line_y: int = self.header_box_.hght_ + row_height + i * row_height
 
       row_line: svgwrite.shapes.Line =\
         svgwrite.shapes.Line\
-        ( start=(line_start_x, line_y)
-        , end=(line_end_x, line_y)
+        ( start=(0, line_y)
+        , end=(self.wdth_, line_y)
         , stroke=Colors.DEBUG1_COLOR
         )
 
@@ -195,25 +189,13 @@ class EntryTable(svgwrite.container.Group):
     return row_group
 
   #_____________________________________________________________________
-  def create_table_outline(self) -> None:
-    """
-    Creates table from column and row count
-
-    Parameters:
-      None
-
-    Returns:
-      None
-    """
-
-
-    return outline
-
-  #_____________________________________________________________________
   def add_content(self):
 
     self.add(self.header_box_)
-    self.add(self.outline_)
+    self.add(self.rows_)
+
+    if (self.show_outline_):
+      self.add(self.outline_)
 
 #    row_height
 #

@@ -94,6 +94,7 @@ class DayLayout(HalfLetterSize):
       ( wdth=self.content_wdth_ - self.schedule_.wdth_
       , hght=self.content_hght_0_
       , text_lst=['hello', 'trevor']
+      , entry_row_count=20
       , pad_top=True
       , pad_lft=True
       )
@@ -106,6 +107,7 @@ class DayLayout(HalfLetterSize):
 
     self.entry_['transform'] =\
       f'translate({entry_insert_x},{entry_insert_y})'
+
     self.layout_dwg_.add(self.entry_)
 
     return
