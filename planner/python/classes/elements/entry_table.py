@@ -240,7 +240,7 @@ class PromptTable(EntryTable):
     , pad_bot=pad_bot
     , pad_rgt=pad_rgt
     , pad_lft=pad_lft
-    , show_outline=False
+    , show_outline=True
     )
 
     return

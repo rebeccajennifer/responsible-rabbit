@@ -38,7 +38,7 @@ class PlannerDims:
   LETTER_SIZE_LNGTH_IN: int = 11
   LETTER_SIZE_WIDTH_IN: int = 8.5
 
-  BND_MARGIN_IN: int = 0.75
+  BND_MARGIN_IN: int = 1
   STD_MARGIN_IN: int = 0.25
 
   LETTER_SIZE_LNGTH_PX: int = DPI * LETTER_SIZE_LNGTH_IN

@@ -62,7 +62,7 @@ class OneDayLayout(TwoPageHalfLetterSize_):
       )
 
     self.content_1_ =\
-      OnePageHalfLetterLayout\
+      DayEntry\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX

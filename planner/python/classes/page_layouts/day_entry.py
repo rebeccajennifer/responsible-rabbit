@@ -189,7 +189,6 @@ class DayEntry(OnePageHalfLetterLayout):
     self.pri_efforts_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , hght=100
       , text_lst=Strings.DAY_PRIMARY_EFFORTS
       , entry_row_count=4
       , pad_top=True
@@ -207,31 +206,11 @@ class DayEntry(OnePageHalfLetterLayout):
       , pad_rgt=True
       )
 
-    self.focus_: EntryTable =\
-      EntryTable\
-      ( wdth=self.main_content_wdth_
-      , text_lst=[Strings.DAY_FOCUS]
-      , entry_row_count=1
-      , pad_top=True
-      , pad_rgt=True
-      , show_outline=True
-      )
-
     self.todo_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
       , text_lst=['To Do']
-      , entry_row_count=4
-      , pad_top=True
-      , pad_rgt=True
-      , show_outline=True
-      )
-
-    self.gratitude_: EntryTable =\
-      EntryTable\
-      ( wdth=self.main_content_wdth_
-      , text_lst=[Strings.DAY_GRATITUDE]
-      , entry_row_count=1
+      , entry_row_count=8
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -241,7 +220,7 @@ class DayEntry(OnePageHalfLetterLayout):
       PromptTable\
       ( wdth=self.main_content_wdth_
       , txt=Strings.DAY_PROMPTS[0]
-      , entry_row_count=3
+      , entry_row_count=4
       , pad_top=True
       , pad_rgt=True
       )
@@ -259,9 +238,41 @@ class DayEntry(OnePageHalfLetterLayout):
       PromptTable\
       ( wdth=self.main_content_wdth_
       , txt=Strings.DAY_PROMPTS[2]
-      , entry_row_count=3
+      , entry_row_count=4
       , pad_top=True
       , pad_rgt=True
+      )
+
+    # Calculate remaining height to evenly distribute spanning tables
+    remaining_hght: int = self.content_hght_\
+      - self.pri_efforts_.total_hght_\
+      - self.checklist_.total_hght_\
+      - self.todo_.total_hght_\
+      - self.prompt0_.total_hght_\
+      - self.prompt1_.total_hght_\
+      - self.prompt2_.total_hght_\
+
+    # Fill half of remaining space
+    self.focus_: EntryTable =\
+      EntryTable\
+      ( wdth=self.main_content_wdth_
+      , hght=remaining_hght/2
+      , text_lst=[Strings.DAY_FOCUS]
+      , entry_row_count=1
+      , pad_top=True
+      , pad_rgt=True
+      , show_outline=True
+      )
+
+    # Fill half of remaining space
+    self.gratitude_: EntryTable =\
+      EntryTable\
+      ( wdth=self.main_content_wdth_
+      , hght=remaining_hght/2
+      , text_lst=[Strings.DAY_GRATITUDE]
+      , pad_top=True
+      , pad_rgt=True
+      , show_outline=True
       )
 
     return
@@ -277,17 +288,17 @@ class DayEntry(OnePageHalfLetterLayout):
     Returns:
 
     """
-    font_size: int = Font.NORMAL_SIZE
+    font_size: int = Font.HEAD_1_SIZE
     font_family: str = Font.FONT_FAMILY_NORMAL
     sp: str ='\u00A0\u00A0'
 
     days: str =\
-      'Mon' + sp + sp +\
-      'Tue' + sp + sp +\
-      'Wed' + sp + sp +\
-      'Thu' + sp + sp +\
-      'Fri' + sp + sp +\
-      'Sat' + sp + sp +\
+      'Mon' + sp +\
+      'Tue' + sp +\
+      'Wed' + sp +\
+      'Thu' + sp +\
+      'Fri' + sp +\
+      'Sat' + sp +\
       'Sun'
 
     page_header = super().create_page_header\
@@ -296,7 +307,7 @@ class DayEntry(OnePageHalfLetterLayout):
       , font=font_family
       )
 
-    date_str: str = '____ / ____ / 20 ____'
+    date_str: str = sp + sp + '/' + sp + sp + '/' +'20' + sp + sp
 
     insert_date_x: int = self.content_wdth_ - Font.TEXT_PADDING
     insert_date_y: int = font_size + Font.TEXT_PADDING
