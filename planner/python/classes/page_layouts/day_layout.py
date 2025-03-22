@@ -33,10 +33,10 @@ from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
-from classes.elements.daily_schedule import DailySchedule as Sched
+
 from classes.elements.daily_schedule import DaySchedule as DaySched
-from classes.elements.header_box import HeaderBox
 from classes.elements.entry_table import EntryTable
+
 from classes.page_layouts.half_letter_layout import HalfLetterSize
 
 
@@ -88,15 +88,15 @@ class DayLayout(HalfLetterSize):
 
     #___________________________________________________________________
     sched_insert_x: int = self.insert_pt_content_0_[0]\
-      + self.content_wdth_ - self.schedule_wdth_ + Dims.BRD_MARGIN_PX * self.day_schedule_.pad_lft_
+      + self.content_wdth_ - self.schedule_wdth_ + Dims.BRD_MARGIN_PX * self.sched_.pad_lft_
 
     sched_insert_y: int = self.insert_pt_content_0_[1]\
-      + Dims.BRD_MARGIN_PX * self.day_schedule_.pad_top_
+      + Dims.BRD_MARGIN_PX * self.sched_.pad_top_
 
-    self.day_schedule_['transform'] =\
+    self.sched_['transform'] =\
       f'translate({sched_insert_x},{sched_insert_y})'
 
-    self.layout_dwg_.add(self.day_schedule_)
+    self.layout_dwg_.add(self.sched_)
     self.layout_dwg_.add(self.entry_)
 
     return
@@ -107,7 +107,7 @@ class DayLayout(HalfLetterSize):
 
     Side Effects:
       Populates the following class variables:
-      self.schedule_
+      self.sched_
 
     Parameters:
       None
@@ -131,41 +131,20 @@ class DayLayout(HalfLetterSize):
       , entry_row_count=20
       , pad_top=True
       , pad_rgt=True
-      , show_outline=False
+      , show_outline=True
       )
 
-    self.schedule_ =\
-      Sched\
-      ( strt_time_str = Sched.DEF_STRT_24
-      , stop_time_str = Sched.DEF_STOP_24
-      , wdth=self.schedule_wdth_
+    self.sched_: DaySched =\
+      DaySched\
+      ( wdth=self.schedule_wdth_
       , hght=self.schedule_hght_
       , time_inc_min=30
       , use_24=True
       )
 
-    self.day_schedule_: DaySched =\
-      DaySched\
-      ( wdth=self.schedule_wdth_
-      , hght=self.schedule_hght_
-      , time_inc_min=60
-      , strt_time_str='05:00'
-      , stop_time_str='08:00'
-      , use_24=True
-      )
-
     self.main_content_wdth_: int = self.content_wdth_\
-      - self.schedule_.wdth_\
+      - self.sched_.wdth_\
       - Dims.BRD_MARGIN_PX
-
-    #self.pri_efforts_box_ =\
-    # EntryTable\
-    #  ( wdth=main_content_wdth_
-    #  , hght=self.content_hght_
-    #  , text_lst=['Primary Efforts', 'Alignment']
-    #  , font_size=Font.PROMPT_SIZE
-    #  , font=Font.FONT_FAMILY_PROMPT
-    #  )
 
     return
 
