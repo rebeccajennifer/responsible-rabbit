@@ -34,7 +34,7 @@ class PlannerColors:
   Contains colors used in the planner.
   """
 
-  MEDIUM_GREY: str   = '#444444'
+  MEDIUM_GREY: str   = '#888888'
   LIGHT_GREY: str    = '#d7d7d7'
   CYAN: str          = '#008080'
   VIOLET: str        = '#800080'
@@ -54,19 +54,16 @@ class PlannerColors:
   NORMAL: str = FLUX_GRY
   HEADING: str = FLUX_RED
 
-  BORDER_COLOR: str = MEDIUM_GREY
-  DEBUG0_COLOR: str = CYAN
-  DEBUG1_COLOR: str = VIOLET
+  DEF_PAGE_HEADER_COLOR : str = LIGHT_GREY
 
+  DEF_TBLE_HEADER_FILL  : str = MEDIUM_GREY
+  DEF_TBLE_HEADER_TEXT  : str = WHITE
 
-#_______________________________________________________________________
-class PlannerStrokes:
-  """
-  Contains stroke definitions.
-  """
+  BORDER_COLOR          : str = MEDIUM_GREY
+  DEF_ROW_COLOR         : str = LIGHT_GREY
 
-  STD_STROKE: int = 1
-  DEBUG0_STROKE: int = 5
+  DEBUG0_COLOR          : str = CYAN
+  DEBUG1_COLOR          : str = VIOLET
 
 
 #_______________________________________________________________________

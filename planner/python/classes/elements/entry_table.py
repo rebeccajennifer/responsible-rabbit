@@ -47,10 +47,10 @@ class EntryTable(svgwrite.container.Group):
   , wdth: int = 0
   , hght: int = 0
   , text_lst: str = [Strings.DEF_TABLE_HEADER]
-  , font_color: str = Colors.NORMAL
+  , font_color: str = Colors.DEF_TBLE_HEADER_TEXT
   , font_size: int = Font.NORMAL_SIZE
   , font: str = Font.FONT_FAMILY_HEADER
-  , box_fill_color: str = Colors.LIGHT_GREY
+  , box_fill_color: str = Colors.DEF_TBLE_HEADER_FILL
   , box_brdr_color: str = Colors.BORDER_COLOR
   , entry_col_count: int = 1
   , entry_row_count: int = 1
@@ -193,7 +193,7 @@ class EntryTable(svgwrite.container.Group):
         svgwrite.shapes.Line\
         ( start=(0, line_y)
         , end=(self.content_wdth_, line_y)
-        , stroke=Colors.DEBUG1_COLOR
+        , stroke=Colors.DEF_ROW_COLOR
         )
 
       row_group.add(row_line)
@@ -229,7 +229,7 @@ class PromptTable(EntryTable):
     ( wdth=wdth
     , hght=hght
     , text_lst=[txt]
-    , font_color=Colors.DEBUG1_COLOR
+    , font_color=Colors.NORMAL
     , font_size=Font.NORMAL_SIZE
     , font=Font.FONT_FAMILY_NORMAL
     , box_fill_color='none'

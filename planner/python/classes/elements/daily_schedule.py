@@ -170,7 +170,7 @@ class DaySchedule(EntryTable):
         svgwrite.shapes.Line\
         ( start=(0, line_y)
         , end=(self.content_wdth_, line_y)
-        , stroke=Colors.DEBUG1_COLOR
+        , stroke=Colors.DEF_ROW_COLOR
         )
 
       row_group.add(row_line)

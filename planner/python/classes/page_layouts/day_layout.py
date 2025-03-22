@@ -31,7 +31,6 @@ from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_layouts.day_entry import DayEntry
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________

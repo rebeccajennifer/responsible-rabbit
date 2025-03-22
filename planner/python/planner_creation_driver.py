@@ -31,8 +31,6 @@
 
 import argparse
 
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.planner_parser import PlannerCreationParser
 
@@ -48,46 +46,6 @@ if __name__ == '__main__':
   PlannerCreationParser.init_parser(parser)
 
   args: argparse.Namespace = parser.parse_args()
-
-  #_____________________________________________________________________
-  # DEGUG
-  #_____________________________________________________________________
-  layout_landscpe_no_dbl_sided: TwoPageHalfLetterSize =\
-    TwoPageHalfLetterSize\
-    ( is_portrait=False
-    , is_dbl_sided=False
-    , file_path='landscpe_sgl.svg'
-    )
-
-  layout_landscpe_no_dbl_sided.save_svg()
-
-  #layout_landscpe_dbl_sided: TwoPageHalfLetterSize =\
-  #  TwoPageHalfLetterSize\
-  #  ( is_portrait=False
-  #  , is_dbl_sided=True
-  #  , file_path='portrait_dbl.svg'
-  #  )
-
-  #layout_portrait_no_dbl_sided: TwoPageHalfLetterSize =\
-  #  TwoPageHalfLetterSize\
-  #  ( is_portrait=True
-  #  , is_dbl_sided=False
-  #  , file_path='landscpe_sgl.svg'
-  #  )
-
-  #layout_portrait_dbl_sided: TwoPageHalfLetterSize =\
-  #  TwoPageHalfLetterSize\
-  #  ( is_portrait=True
-  #  , is_dbl_sided=True
-  #  , file_path='landscpe_dbl.svg'
-  #  )
-
-  # Generate the SVG file
-  layout_landscpe_no_dbl_sided.save_svg()
-  #layout_landscpe_dbl_sided.save_svg()
-  #layout_portrait_no_dbl_sided.save_svg()
-  #layout_portrait_dbl_sided.save_svg()
-  #_____________________________________________________________________
 
   #_____________________________________________________________________
   new_layout_test =\
