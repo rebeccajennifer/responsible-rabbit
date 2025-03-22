@@ -57,3 +57,21 @@ class PlannerStrings:
   [ {'quote': QUOTE0, 'author': 'Nathan W. Morris'}
   , {'quote': QUOTE1, 'author': 'Robert Kiyosaki'}
   ]
+
+  DAY_PRIMARY_EFFORTS: list =\
+    ['Primary Efforts', 'Alignment']
+
+  DAY_CHECKLIST: list =\
+  ['[] Vision ', '[] Goals', '[] Calendar', '[] Habit']
+
+  DAY_FOCUS: str =\
+    'Today I will pay most attention to:'
+
+  DAY_GRATITUDE: str =\
+    'Gratitude'
+
+  DAY_PROMPTS: str =\
+    [ 'How can I embrace discomfort and grow today?'
+    , 'One acheivement I take pride in:'
+    , 'How can I move towards my ideal self?'
+    ]

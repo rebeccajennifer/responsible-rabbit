@@ -36,6 +36,7 @@ from classes.constants.style import PlannerFontStyle as Font
 
 from classes.elements.daily_schedule import DaySchedule as DaySched
 from classes.elements.entry_table import EntryTable
+from classes.elements.header_box import HeaderBox
 
 from classes.page_layouts.half_letter_layout import HalfLetterSize
 
@@ -75,20 +76,10 @@ class DayLayout(HalfLetterSize):
     super().add_content()
 
     #___________________________________________________________________
-    # Entry insert calculations
-    #___________________________________________________________________
-    entry_insert_x: int = self.insert_pt_content_0_[0]\
-      + Dims.BRD_MARGIN_PX * self.entry_.pad_lft_
-
-    entry_insert_y: int = self.insert_pt_content_0_[1]\
-      + Dims.BRD_MARGIN_PX * self.entry_.pad_top_
-
-    self.entry_['transform'] =\
-      f'translate({entry_insert_x},{entry_insert_y})'
-
-    #___________________________________________________________________
     sched_insert_x: int = self.insert_pt_content_0_[0]\
-      + self.content_wdth_ - self.schedule_wdth_ + Dims.BRD_MARGIN_PX * self.sched_.pad_lft_
+      + self.content_wdth_\
+      - self.schedule_wdth_\
+      + Dims.BRD_MARGIN_PX * self.sched_.pad_lft_
 
     sched_insert_y: int = self.insert_pt_content_0_[1]\
       + Dims.BRD_MARGIN_PX * self.sched_.pad_top_
@@ -96,8 +87,28 @@ class DayLayout(HalfLetterSize):
     self.sched_['transform'] =\
       f'translate({sched_insert_x},{sched_insert_y})'
 
+
+    #___________________________________________________________________
+    # Entry insert calculations
+    #___________________________________________________________________
+    insert_x: int = self.insert_pt_content_0_[0]\
+      + Dims.BRD_MARGIN_PX * self.entry_.pad_lft_
+
+    insert_y: int = self.insert_pt_content_0_[1]\
+      + Dims.BRD_MARGIN_PX * self.pri_efforts_.pad_top_
+
+    self.pri_efforts_['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
+    insert_y: int = insert_y\
+      + self.pri_efforts_.hght_
+
+    self.checklist_['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
     self.layout_dwg_.add(self.sched_)
-    self.layout_dwg_.add(self.entry_)
+    self.layout_dwg_.add(self.pri_efforts_)
+    self.layout_dwg_.add(self.checklist_)
 
     return
 
@@ -121,11 +132,42 @@ class DayLayout(HalfLetterSize):
 
     # Width of daily schedule content group
     self.schedule_wdth_: int = self.content_wdth_ * 0.25
-    self.schedule_hght_: int = self.content_hght_0_
+    self.main_content_wdth_: int =\
+      self.content_wdth_ - self.schedule_wdth_
+
+    self.sched_: DaySched =\
+      DaySched\
+      ( wdth=self.schedule_wdth_
+      , hght=self.content_hght_0_
+      , time_inc_min=30
+      , use_24=True
+      )
+
+    self.pri_efforts_: EntryTable =\
+      EntryTable\
+      ( wdth=self.main_content_wdth_
+      , hght=100
+      , text_lst=Strings.DAY_PRIMARY_EFFORTS
+      , entry_row_count=4
+      , pad_top=True
+      , pad_rgt=True
+      , show_outline=False
+      )
+
+    self.checklist_: HeaderBox=\
+      HeaderBox\
+      ( wdth=self.main_content_wdth_
+      , text_lst=Strings.DAY_CHECKLIST
+      , box_brdr_color='none'
+      , box_fill_color='none'
+      , pad_top=True
+      , pad_rgt=True
+      )
+
 
     self.entry_: EntryTable =\
       EntryTable\
-      ( wdth=self.content_wdth_ - self.schedule_wdth_
+      ( wdth=self.main_content_wdth_
       , hght=self.content_hght_0_
       , text_lst=['hello', 'trevor']
       , entry_row_count=20
@@ -133,18 +175,6 @@ class DayLayout(HalfLetterSize):
       , pad_rgt=True
       , show_outline=True
       )
-
-    self.sched_: DaySched =\
-      DaySched\
-      ( wdth=self.schedule_wdth_
-      , hght=self.schedule_hght_
-      , time_inc_min=30
-      , use_24=True
-      )
-
-    self.main_content_wdth_: int = self.content_wdth_\
-      - self.sched_.wdth_\
-      - Dims.BRD_MARGIN_PX
 
     return
 

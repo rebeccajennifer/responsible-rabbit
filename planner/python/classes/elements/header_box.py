@@ -2,6 +2,7 @@ import svgwrite.container
 import svgwrite.shapes
 import svgwrite.text
 
+from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
@@ -22,11 +23,20 @@ class HeaderBox(svgwrite.container.Group):
   , font: str = Font.FONT_FAMILY_NORMAL
   , box_fill_color: str = Colors.LIGHT_GREY
   , box_brdr_color: str = Colors.BORDER_COLOR
+  , pad_top: bool = False
+  , pad_bot: bool = False
+  , pad_rgt: bool = False
+  , pad_lft: bool = False
   ):
 
     super().__init__()
 
     self.wdth_: int = wdth
+
+    self.pad_top_: bool = pad_top
+    self.pad_bot_: bool = pad_bot
+    self.pad_rgt_: bool = pad_rgt
+    self.pad_lft_: bool = pad_lft
 
     self.text_lst_: str = text_lst
 
@@ -34,10 +44,18 @@ class HeaderBox(svgwrite.container.Group):
     self.font_size_: int = font_size
     self.font_: str = font
 
-    self.hght_: int = self.font_size_ + 2 * Font.TEXT_PADDING
+    self.box_hght_: int = self.font_size_ + 2 * Font.TEXT_PADDING
+    self.hght_: int = self.box_hght_ + self.pad_top_ + self.pad_bot_
 
     self.box_fill_color_: str = box_fill_color
     self.box_brdr_color_: str = box_brdr_color
+
+
+    if (pad_rgt):
+      self.wdth_ = self.wdth_ - Dims.BRD_MARGIN_PX
+
+    if (pad_lft):
+      self.wdth_ = self.wdth_ - Dims.BRD_MARGIN_PX
 
     self.create_header()
 
@@ -52,18 +70,22 @@ class HeaderBox(svgwrite.container.Group):
     # Width of each header
     header_wdth: int = self.wdth_ / len(self.text_lst_)
 
+    insert_box_x: int = Dims.BRD_MARGIN_PX * self.pad_lft_
+    insert_box_y: int = Dims.BRD_MARGIN_PX * self.pad_top_
+
+
     header_box: svgwrite.shapes.Rect =\
       svgwrite.shapes.Rect\
-      ( size=(self.wdth_, self.hght_)
-      , insert=(0,0)
+      ( size=(self.wdth_, self.box_hght_)
+      , insert=(insert_box_x, insert_box_y)
       , stroke=self.box_brdr_color_
       , fill=self.box_fill_color_
       )
 
     self.add(header_box)
 
-    insert_txt_x: int = Font.TEXT_PADDING
-    insert_txt_y: int = self.hght_ - Font.TEXT_PADDING
+    insert_txt_x: int = insert_box_x + Font.TEXT_PADDING
+    insert_txt_y: int = insert_box_y + self.box_hght_ - Font.TEXT_PADDING
 
     for header in self.text_lst_:
 
