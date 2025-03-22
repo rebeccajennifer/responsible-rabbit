@@ -90,10 +90,10 @@ class HalfLetterSize:
       self.create_borders()
 
     self.content_hght_0_ =\
-      self.content_hght_ - self.page_header_0_.hght_
+      self.content_hght_ - self.page_header_0_.total_hght_
 
     self.content_hght_1_ =\
-      self.content_hght_ - self.page_header_1_.hght_
+      self.content_hght_ - self.page_header_1_.total_hght_
 
     return
 
@@ -119,12 +119,12 @@ class HalfLetterSize:
 
     self.insert_pt_content_0_=\
     ( self.insert_pt_content_0_[0]
-    , self.insert_pt_content_0_[1] + self.page_header_0_.hght_
+    , self.insert_pt_content_0_[1] + self.page_header_0_.total_hght_
     )
 
     self.insert_pt_content_1_=\
     ( self.insert_pt_content_1_[0]
-    , self.insert_pt_content_1_[1] + self.page_header_1_.hght_
+    , self.insert_pt_content_1_[1] + self.page_header_1_.total_hght_
     )
 
     self.layout_dwg_.add(self.page_header_0_)

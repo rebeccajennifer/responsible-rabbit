@@ -145,7 +145,7 @@ class DaySchedule(EntryTable):
 
     for i in range(self.entry_row_count_):
 
-      line_y: int = self.header_box_.hght_ + row_height + i * row_height
+      line_y: int = self.header_box_.total_hght_ + row_height + i * row_height
       text_y: int = line_y - 2
 
       crnt_datetime_str =\
@@ -171,7 +171,7 @@ class DaySchedule(EntryTable):
       row_line: svgwrite.shapes.Line =\
         svgwrite.shapes.Line\
         ( start=(0, line_y)
-        , end=(self.wdth_, line_y)
+        , end=(self.content_wdth_, line_y)
         , stroke=Colors.DEBUG1_COLOR
         )
 

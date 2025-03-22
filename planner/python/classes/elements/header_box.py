@@ -31,7 +31,8 @@ class HeaderBox(svgwrite.container.Group):
 
     super().__init__()
 
-    self.wdth_: int = wdth
+    self.total_wdth_: int = wdth
+    self.content_wdth_: int = self.total_wdth_
 
     self.pad_top_: bool = pad_top
     self.pad_bot_: bool = pad_bot
@@ -45,17 +46,15 @@ class HeaderBox(svgwrite.container.Group):
     self.font_: str = font
 
     self.box_hght_: int = self.font_size_ + 2 * Font.TEXT_PADDING
-    self.hght_: int = self.box_hght_ + self.pad_top_ + self.pad_bot_
+    self.total_hght_: int = self.box_hght_\
+      + Dims.BRD_MARGIN_PX * (self.pad_top_ + self.pad_bot_)
 
     self.box_fill_color_: str = box_fill_color
     self.box_brdr_color_: str = box_brdr_color
 
 
-    if (pad_rgt):
-      self.wdth_ = self.wdth_ - Dims.BRD_MARGIN_PX
-
-    if (pad_lft):
-      self.wdth_ = self.wdth_ - Dims.BRD_MARGIN_PX
+    self.content_wdth_ = self.total_wdth_\
+      - Dims.BRD_MARGIN_PX * (self.pad_lft_ + self.pad_rgt_)
 
     self.create_header()
 
@@ -68,15 +67,14 @@ class HeaderBox(svgwrite.container.Group):
     """
 
     # Width of each header
-    header_wdth: int = self.wdth_ / len(self.text_lst_)
+    header_wdth: int = self.content_wdth_ / len(self.text_lst_)
 
     insert_box_x: int = Dims.BRD_MARGIN_PX * self.pad_lft_
     insert_box_y: int = Dims.BRD_MARGIN_PX * self.pad_top_
 
-
     header_box: svgwrite.shapes.Rect =\
       svgwrite.shapes.Rect\
-      ( size=(self.wdth_, self.box_hght_)
+      ( size=(self.content_wdth_, self.box_hght_)
       , insert=(insert_box_x, insert_box_y)
       , stroke=self.box_brdr_color_
       , fill=self.box_fill_color_
@@ -84,8 +82,12 @@ class HeaderBox(svgwrite.container.Group):
 
     self.add(header_box)
 
-    insert_txt_x: int = insert_box_x + Font.TEXT_PADDING
-    insert_txt_y: int = insert_box_y + self.box_hght_ - Font.TEXT_PADDING
+    #___________________________________________________________________
+    insert_txt_x: int =\
+      insert_box_x + Font.TEXT_PADDING
+    insert_txt_y: int =\
+      insert_box_y + self.box_hght_ - Font.TEXT_PADDING
+    #___________________________________________________________________
 
     for header in self.text_lst_:
 

@@ -81,8 +81,9 @@ class EntryTable(svgwrite.container.Group):
 
     super().__init__()
 
-    self.wdth_: int     = wdth
-    self.hght_: int     = hght
+    self.total_wdth_: int = wdth
+    self.content_wdth_: int = self.total_wdth_
+    self.total_hght_: int     = hght
 
     self.pad_top_: bool = pad_top
     self.pad_bot_: bool = pad_bot
@@ -91,14 +92,12 @@ class EntryTable(svgwrite.container.Group):
 
     #___________________________________________________________________
     # Adjust dims for padding
-    if (pad_top):
-      self.hght_ = self.hght_ - Dims.BRD_MARGIN_PX
-    if (pad_bot):
-      self.hght_ = self.hght_ - Dims.BRD_MARGIN_PX
-    if (pad_rgt):
-      self.wdth_ = self.wdth_ - Dims.BRD_MARGIN_PX
-    if (pad_lft):
-      self.wdth_ = self.wdth_ - Dims.BRD_MARGIN_PX
+    self.content_hght_ =\
+      self.total_hght_ - (pad_top + pad_bot) * Dims.BRD_MARGIN_PX
+
+    self.content_wdth_ =\
+      self.total_wdth_ - (pad_lft + pad_rgt) * Dims.BRD_MARGIN_PX
+
     #___________________________________________________________________
 
     self.box_brdr_color_: str   = box_brdr_color
@@ -128,27 +127,31 @@ class EntryTable(svgwrite.container.Group):
 
     self.header_box_: HeaderBox =\
       HeaderBox\
-      ( wdth=self.wdth_
+      ( wdth=self.content_wdth_
       , text_lst=self.text_lst_
       , font_color=self.font_color_
       , font_size=self.font_size_
       , font=self.font_
       , box_fill_color=self.box_fill_color_
       , box_brdr_color=self.box_brdr_color_
+      , pad_top=self.pad_top_
       )
 
-    entry_height: int = self.hght_ - self.header_box_.hght_
+    entry_height: int = self.total_hght_ - self.header_box_.total_hght_
+
+    insert_y: int = (self.pad_top_) * Dims.BRD_MARGIN_PX
 
     # Table outline
     self.outline_: svgwrite.shapes.Rect =\
       svgwrite.shapes.Rect\
-      ( size=(self.wdth_, entry_height)
-      , insert=(0, self.header_box_.hght_)
-      , stroke=self.box_brdr_color_
+      ( size=(self.content_wdth_, self.content_hght_)
+      , insert=(0, insert_y)
+      , stroke=Colors.DEBUG0_COLOR
       , fill='none'
       )
 
-    combined_row_hght: int = self.hght_ - self.header_box_.hght_
+    combined_row_hght: int =\
+      self.total_hght_ - self.header_box_.total_hght_
 
     self.rows_: svgwrite.container.Group =\
       self.create_rows(combined_row_hght)
@@ -175,12 +178,14 @@ class EntryTable(svgwrite.container.Group):
 
     for i in range(self.entry_row_count_):
 
-      line_y: int = self.header_box_.hght_ + row_height + i * row_height
+      line_y: int = self.header_box_.total_hght_\
+        + row_height\
+        + i * row_height\
 
       row_line: svgwrite.shapes.Line =\
         svgwrite.shapes.Line\
         ( start=(0, line_y)
-        , end=(self.wdth_, line_y)
+        , end=(self.content_wdth_, line_y)
         , stroke=Colors.DEBUG1_COLOR
         )
 
@@ -196,111 +201,3 @@ class EntryTable(svgwrite.container.Group):
 
     if (self.show_outline_):
       self.add(self.outline_)
-
-#    row_height
-#
-#    #___________________________________________________________________
-#    time_block_count: int =\
-#      1\
-#      + (stop_datetime - strt_datetime).total_seconds()\
-#      / 60\
-#      / self.time_inc_min_
-#
-#    header_space: int =\
-#      DailySchedule.HEADER_SIZE + DailySchedule.HEADER_PADDING
-#
-#    time_box_wdth: int = self.wdth_
-#    time_box_hght: int = (self.hght_ - header_space) / time_block_count
-#
-#    crnt_y: int = header_space + time_box_hght
-#
-#    #___________________________________________________________________
-#    # Create boxes with time increments
-#    while crnt_datetime <= stop_datetime:
-#      crnt_datetime_str =\
-#        crnt_datetime.strftime(fmt)
-#
-#      self.add(
-#        DailySchedule.create_time_entry\
-#        ( crnt_datetime_str
-#        , crnt_y
-#        , time_box_wdth
-#        )
-#      )
-#
-#      crnt_y = crnt_y + time_box_hght
-#
-#      crnt_datetime =\
-#        crnt_datetime\
-#      + dt.timedelta(minutes=self.time_inc_min_)
-#
-#    return
-#
-#  #_____________________________________________________________________
-#  @staticmethod
-#  def create_time_entry(time_str: str
-#  , bottom_y
-#  , wdth: int
-#  ) -> svgwrite.container.Group:
-#    """
-#    Creates text and lines for time entries
-#
-#    Parameters:
-#      insert_y: Vertical insert point of entry
-#      wdth:     Width of container in inches
-#    """
-#
-#    line_y: float = bottom_y
-#    text_y: float = bottom_y - 0.5 * Font.LITTLE_SIZE
-#
-#    the_time: svgwrite.txt.Text = svgwrite.text.Text\
-#    ( time_str
-#    , insert=(0, text_y)
-#    , text_anchor='start'
-#    , alignment_baseline='middle'
-#    , fill=Colors.NORMAL
-#    , font_size=Font.LITTLE_SIZE
-#    , font_family=Font.FONT_FAMILY_NORMAL
-#    )
-#
-#    line: svgwrite.shapes.Line = svgwrite.shapes.Line\
-#    ( start=(0, line_y)
-#    , end=(wdth, line_y)
-#    , stroke=Colors.DEBUG0_COLOR
-#    )
-#
-#    group: svgwrite.container.Group = svgwrite.container.Group()
-#
-#    if (':00' in time_str):
-#      group.add(the_time)
-#
-#    group.add(line)
-#
-#    return group
-#
-#  #_____________________________________________________________________
-#  @staticmethod
-#  def create_schedule_header() -> svgwrite.text.Text:
-#    """
-#    Parameters:
-#      None
-#
-#    Returns:
-#      svgwrite Text object with header
-#    """
-#
-#    font_size: int = DailySchedule.HEADER_SIZE
-#    insert_y: int = font_size / 2
-#
-#    header: svgwrite.txt.Text = svgwrite.text.Text\
-#    ( Strings.DAILY_SCHEDULE_HEADER
-#    , insert=('0in', insert_y)
-#    , text_anchor='start'
-#    , alignment_baseline='middle'
-#    , fill=Colors.HEADING
-#    , font_size=font_size
-#    , font_family=Font.FONT_FAMILY_HEADER
-#    )
-#
-#    return header
-#

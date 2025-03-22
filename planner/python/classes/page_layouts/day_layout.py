@@ -82,11 +82,9 @@ class DayLayout(HalfLetterSize):
       + Dims.BRD_MARGIN_PX * self.sched_.pad_lft_
 
     sched_insert_y: int = self.insert_pt_content_0_[1]\
-      + Dims.BRD_MARGIN_PX * self.sched_.pad_top_
 
     self.sched_['transform'] =\
       f'translate({sched_insert_x},{sched_insert_y})'
-
 
     #___________________________________________________________________
     # Entry insert calculations
@@ -94,21 +92,32 @@ class DayLayout(HalfLetterSize):
     insert_x: int = self.insert_pt_content_0_[0]\
       + Dims.BRD_MARGIN_PX * self.entry_.pad_lft_
 
-    insert_y: int = self.insert_pt_content_0_[1]\
-      + Dims.BRD_MARGIN_PX * self.pri_efforts_.pad_top_
+    insert_y: int = self.insert_pt_content_0_[1]
 
+    #___________________________________________________________________
     self.pri_efforts_['transform'] =\
       f'translate({insert_x},{insert_y})'
 
     insert_y: int = insert_y\
-      + self.pri_efforts_.hght_
-
+      + self.pri_efforts_.total_hght_
+    #___________________________________________________________________
     self.checklist_['transform'] =\
       f'translate({insert_x},{insert_y})'
+
+    insert_y: int = insert_y\
+      + self.checklist_.total_hght_
+    #___________________________________________________________________
+    self.focus_['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
+    insert_y: int = insert_y\
+      + self.focus_.total_hght_
+    #___________________________________________________________________
 
     self.layout_dwg_.add(self.sched_)
     self.layout_dwg_.add(self.pri_efforts_)
     self.layout_dwg_.add(self.checklist_)
+    self.layout_dwg_.add(self.focus_)
 
     return
 
@@ -151,7 +160,7 @@ class DayLayout(HalfLetterSize):
       , entry_row_count=4
       , pad_top=True
       , pad_rgt=True
-      , show_outline=False
+      , show_outline=True
       )
 
     self.checklist_: HeaderBox=\
@@ -164,6 +173,16 @@ class DayLayout(HalfLetterSize):
       , pad_rgt=True
       )
 
+    self.focus_: EntryTable =\
+      EntryTable\
+      ( wdth=self.main_content_wdth_
+      , hght=50
+      , text_lst=[Strings.DAY_FOCUS]
+      , entry_row_count=1
+      , pad_top=True
+      , pad_rgt=True
+      , show_outline=True
+      )
 
     self.entry_: EntryTable =\
       EntryTable\
