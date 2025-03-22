@@ -367,7 +367,7 @@ class TwoPageHalfLetterSize_(svgwrite.Drawing):
     #___________________________________________________________________
 
     self.content_wdth_, self.content_hght_ =\
-       Dims.calc_content_size(self.is_portrait_)
+       Dims.calc_border_size(self.is_portrait_)
 
     # Content insertion points for top left
     self.calc_border_insert_pts()
@@ -437,8 +437,8 @@ class TwoPageHalfLetterSize_(svgwrite.Drawing):
       Adds class variables for insertion points.
     """
 
-    content_wdth, content_hght =\
-      Dims.calc_border_size(self.is_portrait_)
+    content_wdth: int = self.content_wdth_
+    content_hght: int = self.content_hght_
 
     if (self.is_portrait_):
       insert_pos00 = Dims.STD_MARGIN_PX

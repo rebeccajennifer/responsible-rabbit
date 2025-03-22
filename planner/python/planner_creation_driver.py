@@ -33,7 +33,6 @@ import argparse
 
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
-from classes.page_layouts.day_layout import DayLayout
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.planner_parser import PlannerCreationParser
 
@@ -88,18 +87,11 @@ if __name__ == '__main__':
   #layout_portrait_dbl_sided.save_svg()
   #_____________________________________________________________________
 
-  layout_test: DayLayout =\
-    DayLayout\
-    ( is_dbl_sided=False
-    )
-
-  layout_test.save_svg()
-  #_____________________________________________________________________
   #_____________________________________________________________________
   new_layout_test =\
     OneDayLayout\
     ( is_portrait=False
-    , is_dbl_sided=True
+    , is_dbl_sided=False
     , file_path='new.svg'
     )
 
