@@ -36,6 +36,7 @@ from classes.constants.style import PlannerFontStyle as Font
 
 from classes.elements.daily_schedule import DaySchedule as DaySched
 from classes.elements.entry_table import EntryTable
+from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
 
 from classes.page_layouts.half_letter_layout import HalfLetterSize
@@ -89,11 +90,8 @@ class DayLayout(HalfLetterSize):
     #___________________________________________________________________
     # Entry insert calculations
     #___________________________________________________________________
-    insert_x: int = self.insert_pt_content_0_[0]\
-      + Dims.BRD_MARGIN_PX * self.entry_.pad_lft_
-
+    insert_x: int = self.insert_pt_content_0_[0]
     insert_y: int = self.insert_pt_content_0_[1]
-
     #___________________________________________________________________
     self.pri_efforts_['transform'] =\
       f'translate({insert_x},{insert_y})'
@@ -113,11 +111,46 @@ class DayLayout(HalfLetterSize):
     insert_y: int = insert_y\
       + self.focus_.total_hght_
     #___________________________________________________________________
+    self.todo_['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
+    insert_y: int = insert_y\
+      + self.todo_.total_hght_
+    #___________________________________________________________________
+    self.gratitude_['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
+    insert_y: int = insert_y\
+      + self.gratitude_.total_hght_
+    #___________________________________________________________________
+    self.prompt0_['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
+    insert_y: int = insert_y\
+      + self.prompt0_.total_hght_
+    #___________________________________________________________________
+    self.prompt1_['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
+    insert_y: int = insert_y\
+      + self.prompt1_.total_hght_
+    #___________________________________________________________________
+    self.prompt2_['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
+    insert_y: int = insert_y\
+      + self.prompt2_.total_hght_
+    #___________________________________________________________________
 
     self.layout_dwg_.add(self.sched_)
     self.layout_dwg_.add(self.pri_efforts_)
     self.layout_dwg_.add(self.checklist_)
     self.layout_dwg_.add(self.focus_)
+    self.layout_dwg_.add(self.todo_)
+    self.layout_dwg_.add(self.gratitude_)
+    self.layout_dwg_.add(self.prompt0_)
+    self.layout_dwg_.add(self.prompt1_)
+    self.layout_dwg_.add(self.prompt2_)
 
     return
 
@@ -184,15 +217,56 @@ class DayLayout(HalfLetterSize):
       , show_outline=True
       )
 
-    self.entry_: EntryTable =\
+    self.todo_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , hght=self.content_hght_0_
-      , text_lst=['hello', 'trevor']
-      , entry_row_count=20
+      , hght=100
+      , text_lst=['To Do']
+      , entry_row_count=4
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
+      )
+
+    self.gratitude_: EntryTable =\
+      EntryTable\
+      ( wdth=self.main_content_wdth_
+      , hght=50
+      , text_lst=[Strings.DAY_GRATITUDE]
+      , entry_row_count=1
+      , pad_top=True
+      , pad_rgt=True
+      , show_outline=True
+      )
+
+    self.prompt0_: PromptTable =\
+      PromptTable\
+      ( wdth=self.main_content_wdth_
+      , hght=100
+      , txt=Strings.DAY_PROMPTS[0]
+      , entry_row_count=3
+      , pad_top=True
+      , pad_rgt=True
+      )
+
+    self.prompt1_: PromptTable =\
+      PromptTable\
+      ( wdth=self.main_content_wdth_
+      , hght=100
+      , txt=Strings.DAY_PROMPTS[1]
+      , entry_row_count=3
+      , pad_top=True
+      , pad_rgt=True
+      )
+
+    self.prompt2_: PromptTable =\
+      PromptTable\
+      ( wdth=self.main_content_wdth_
+      , hght=100
+      , txt=Strings.DAY_PROMPTS[2]
+      , entry_row_count=3
+      , pad_top=True
+      , pad_rgt=True
       )
 
     return
@@ -210,7 +284,7 @@ class DayLayout(HalfLetterSize):
     """
     font_size: int = Font.NORMAL_SIZE
     font_family: str = Font.FONT_FAMILY_NORMAL
-    sp: str ='\u00A0\u00A0\u00A0'
+    sp: str ='\u00A0\u00A0'
 
     days: str =\
       'Mon' + sp + sp +\
@@ -224,11 +298,13 @@ class DayLayout(HalfLetterSize):
     page_header_0 = super().create_page_header\
       ( header_txt=days
       , font_size=font_size
+      , font=font_family
       )
 
     page_header_1 = super().create_page_header\
       ( header_txt=Strings.QUOTE0
       , font_size=font_size
+      , font=font_family
       )
 
     date_str: str = '____ / ____ / 20 ____'

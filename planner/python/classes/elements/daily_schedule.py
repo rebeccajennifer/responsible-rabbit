@@ -91,7 +91,7 @@ class DaySchedule(EntryTable):
       , font_size=Font.NORMAL_SIZE
       , font=Font.FONT_FAMILY_HEADER
       , box_fill_color='none'
-      , box_brdr_color=Colors.BORDER_COLOR
+      , box_brdr_color='none'
       , entry_row_count=entry_row_count
       , pad_top=True
       , pad_bot=False

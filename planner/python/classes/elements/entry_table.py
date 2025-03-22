@@ -26,8 +26,6 @@
 #   Creates hourly entry for daily schedule.
 #_______________________________________________________________________
 
-from typing import Tuple
-
 import svgwrite.container
 import svgwrite.shapes
 import svgwrite.text
@@ -49,7 +47,7 @@ class EntryTable(svgwrite.container.Group):
   , text_lst: str = [Strings.DEF_TABLE_HEADER]
   , font_color: str = Colors.NORMAL
   , font_size: int = Font.NORMAL_SIZE
-  , font: str = Font.FONT_FAMILY_NORMAL
+  , font: str = Font.FONT_FAMILY_HEADER
   , box_fill_color: str = Colors.LIGHT_GREY
   , box_brdr_color: str = Colors.BORDER_COLOR
   , entry_col_count: int = 1
@@ -201,3 +199,39 @@ class EntryTable(svgwrite.container.Group):
 
     if (self.show_outline_):
       self.add(self.outline_)
+
+
+#_______________________________________________________________________
+class PromptTable(EntryTable):
+
+  def __init__(self
+  , wdth: int = 0
+  , hght: int = 0
+  , txt: str = Strings.DEF_TABLE_HEADER
+  , entry_col_count: int = 1
+  , entry_row_count: int = 1
+  , pad_top: bool = False
+  , pad_bot: bool = False
+  , pad_rgt: bool = False
+  , pad_lft: bool = False
+  ):
+
+    super().__init__\
+    ( wdth=wdth
+    , hght=hght
+    , text_lst=[txt]
+    , font_color=Colors.DEBUG1_COLOR
+    , font_size=Font.NORMAL_SIZE
+    , font=Font.FONT_FAMILY_NORMAL
+    , box_fill_color='none'
+    , box_brdr_color='none'
+    , entry_col_count=entry_col_count
+    , entry_row_count=entry_row_count
+    , pad_top=pad_top
+    , pad_bot=pad_bot
+    , pad_rgt=pad_rgt
+    , pad_lft=pad_lft
+    , show_outline=False
+    )
+
+    return
