@@ -31,6 +31,8 @@
 
 import argparse
 
+from os import path
+
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.planner_parser import PlannerCreationParser
 
@@ -52,7 +54,7 @@ if __name__ == '__main__':
     OneDayLayout\
     ( is_portrait=False
     , is_dbl_sided=False
-    , file_path='new.svg'
+    , file_path=path.join('svg', 'day-layout.svg')
     )
 
   new_layout_test.save()
