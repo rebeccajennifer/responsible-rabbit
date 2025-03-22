@@ -30,13 +30,19 @@ import svgwrite
 
 from typing import Tuple
 
+import svgwrite.container
+import svgwrite.drawing
+import svgwrite.shapes
+
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
+from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
+from classes.elements.header_box import HeaderBox
 
 
 #_______________________________________________________________________
-class HalfLetterSize:
+class TwoPageHalfLetterSize_(svgwrite.Drawing):
   """
   Layout for half letter size prints. Intended to print two pages on
   one sheet and cut in half.
@@ -49,34 +55,11 @@ class HalfLetterSize:
   , file_path: str = Strings.DEF_LAYOUT_PATH
   ):
 
-    self.is_portrait_: bool   = is_portrait
-    self.is_dbl_sided_: bool  = is_dbl_sided
-    self.file_path_: str      = file_path
+    self.is_portrait_   : bool  = is_portrait
+    self.is_dbl_sided_  : bool  = is_dbl_sided
+    self.file_path_     : str   = file_path
 
-    self.layout_dwg_ = self.create_dwg()
-
-    self.content_wdth_, self.content_hght_ =\
-       Dims.calc_content_size(self.is_portrait_)
-
-    # Content insertion points for top left
-    self.determine_insertion_pts()
-
-    self.add_borders()
-    self.add_content()
-
-  #_____________________________________________________________________
-  def create_dwg(self) -> svgwrite.Drawing:
-    """
-    Creates Drawing object with height and width of letter size paper.
-
-    Parameters:
-      None
-
-    Returns:
-      svgwrite.Drawing
-    """
-
-    # Leaving these as inches
+    #___________________________________________________________________
     hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
     wdth: int = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
 
@@ -84,15 +67,27 @@ class HalfLetterSize:
       hght = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
       wdth = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
 
-    return svgwrite.Drawing(self.file_path_
+    super().__init__\
+      ( self.file_path_
       , profile='tiny'
       , size=(wdth, hght)
-    )
+      )
+    #___________________________________________________________________
+
+    self.content_wdth_, self.content_hght_ =\
+       Dims.calc_border_size(self.is_portrait_)
+
+    # Content insertion points for top left
+    self.calc_border_insert_pts()
+    self.create_content()
+    self.add_content()
+
+    return
 
   #_____________________________________________________________________
-  def save_svg(self) -> None:
+  def create_content(self) -> None:
     """
-    Saves layout as svg file.
+    Creates page borders, page header,
 
     Parameters:
       None
@@ -100,12 +95,26 @@ class HalfLetterSize:
     Returns:
       None
     """
-    self.layout_dwg_.save()
+
+    self.content_0_: OnePageHalfLetterLayout =\
+      OnePageHalfLetterLayout\
+      ( total_wdth=self.content_wdth_
+      , total_hght=self.content_hght_
+      )
+
+    self.content_1_: OnePageHalfLetterLayout =\
+      OnePageHalfLetterLayout\
+      ( total_wdth=self.content_wdth_
+      , total_hght=self.content_hght_
+      )
+
+    return
 
   #_____________________________________________________________________
-  def add_borders(self) -> None:
+  def add_content(self):
     """
-    Adds content borders to page.
+    Adds content as class variables to page.
+
     Parameters:
       None
 
@@ -113,24 +122,30 @@ class HalfLetterSize:
       None
     """
 
-    content_box_0: svgwrite.shapes.Rect =\
-      self.create_content_box(self.insert_pt_border_0_)
+    x: int = self.insert_pt_border_0_[0]
+    y: int = self.insert_pt_border_0_[1]
+    self.content_0_['transform'] = f'translate({x}, {y})'
 
-    content_box_1: svgwrite.shapes.Rect =\
-      self.create_content_box(self.insert_pt_border_1_)
+    x: int = self.insert_pt_border_1_[0]
+    y: int = self.insert_pt_border_1_[1]
+    self.content_1_['transform'] = f'translate({x}, {y})'
 
-    self.layout_dwg_.add(content_box_0)
-    self.layout_dwg_.add(content_box_1)
+    self.add(self.content_0_)
+    self.add(self.content_1_)
+
+    return
 
   #_____________________________________________________________________
-  def determine_insertion_pts(self) -> None:
+  def calc_border_insert_pts(self) -> None:
     """
     Determines top left insertion points for content boxes and borders.
-    Has side effect of changing member variables.
+
+    Side Effects:
+      Adds class variables for insertion points.
     """
 
-    content_wdth, content_hght =\
-      Dims.calc_border_size(self.is_portrait_)
+    content_wdth: int = self.content_wdth_
+    content_hght: int = self.content_hght_
 
     if (self.is_portrait_):
       insert_pos00 = Dims.STD_MARGIN_PX
@@ -162,42 +177,120 @@ class HalfLetterSize:
     self.insert_pt_border_0_: int =  insert_pos0
     self.insert_pt_border_1_: int =  insert_pos1
 
-    # Determine insertion points for content based on border size
-    self.insert_pt_content_0_: Tuple =\
-    ( self.insert_pt_border_0_[0] + Dims.BRD_MARGIN_PX
-    , self.insert_pt_border_0_[1] + Dims.BRD_MARGIN_PX
-    )
+    return
 
-    self.insert_pt_content_1_: Tuple =\
-    ( self.insert_pt_border_1_[0] + Dims.BRD_MARGIN_PX
-    , self.insert_pt_border_1_[1] + Dims.BRD_MARGIN_PX
-    )
+
+##_______________________________________________________________________
+class OnePageHalfLetterLayout(svgwrite.container.Group):
+  """
+  """
+
+  #_____________________________________________________________________
+  def __init__(self
+  , total_hght: int = 0
+  , total_wdth: int = 0
+  , padding: int = 0
+  ):
+
+    super().__init__()
+
+    self.total_hght_: int = total_hght
+    self.total_wdth_: int = total_wdth
+    self.padding_   : int = padding
+
+    self.page_header_insert_pt_x_ : int = padding
+    self.page_header_insert_pt_y_ : int = padding
+
+    self.content_wdth_: int = self.total_wdth_ - 2 * padding
+
+    self.page_header_: HeaderBox = self.create_page_header()
+
+    # Content height is affected by generation of page header
+    self.content_hght_: int =\
+      self.total_hght_ - 2 * padding - self.page_header_.total_hght_
+
+    self.content_insert_pt_x_ : int = self.page_header_insert_pt_x_
+    self.content_insert_pt_y_ : int =\
+      self.page_header_insert_pt_y_ + self.page_header_.total_hght_
+
+    self.create_content()
+    self.add_content()
 
     return
 
   #_____________________________________________________________________
-  def create_content_box(self
-  , insert_position: Tuple
-  ) -> svgwrite.shapes.Rect:
+  def create_content(self) -> None:
     """
-    Creates rectangle that will contain content.
-
-    Parameters:
-
-    Returns:
-      svgwrite rectangle the size of the content
+    Creates content.
     """
-    w,h = Dims.calc_border_size(self.is_portrait_)
 
-    content_box: svgwrite.shapes.Rect =\
-      svgwrite.shapes.Rect(size=(w, h)
-      , id="flux"
-      , insert=insert_position
-      , stroke=Colors.MEDIUM_GREY
-      , fill='none')
 
-    return content_box
+    self.border_: svgwrite.shapes.Rect = self.create_border()
+
+    return
 
   #_____________________________________________________________________
   def add_content(self) -> None:
+    """
+    Adds content to group.
+    """
+
+    x: int = self.page_header_insert_pt_x_
+    y: int = self.page_header_insert_pt_y_
+    self.page_header_['transform'] = f'translate({x}, {y})'
+
+    self.add(self.border_)
+    self.add(self.page_header_)
+
     return
+
+  #_____________________________________________________________________
+  def create_border(self) -> svgwrite.shapes.Rect:
+    """
+    Parameters:
+      None
+
+    Returns:
+      svgwrite.shapes.Rect: outline of half page
+    """
+
+    border_box: svgwrite.shapes.Rect =\
+      svgwrite.shapes.Rect(size=(self.total_wdth_, self.total_hght_)
+      , insert=(0,0)
+      , stroke=Colors.DEBUG0_COLOR
+      , fill='none')
+
+    return border_box
+
+  #_____________________________________________________________________
+  def create_page_header(self
+  , header_txt = Strings.DEF_PAGE_HEADER
+  , font_color: str = Colors.NORMAL
+  , font_size: int = Font.HEAD_2_SIZE
+  , font: str = Font.FONT_FAMILY_HEADER
+  ) -> HeaderBox:
+    """
+    Creates page header and saves it to class variable.
+
+    Parameters:
+      None
+
+    Returns:
+      HeaderBox for page header
+    """
+
+    box_fill_color: str = Colors.DEF_PAGE_HEADER_COLOR
+    box_brdr_color: str = Colors.BORDER_COLOR
+
+    page_header: HeaderBox =\
+      HeaderBox\
+      ( wdth=self.content_wdth_
+      , text_lst=[header_txt]
+      , font_color=font_color
+      , font_size=font_size
+      , font=font
+      , box_fill_color=box_fill_color
+      , box_brdr_color=box_brdr_color
+      )
+
+    return page_header

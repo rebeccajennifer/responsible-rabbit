@@ -28,58 +28,47 @@
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.entries.daily_schedule import DailySchedule as Sched
-from classes.page_layouts.half_letter_layout import HalfLetterSize
+
+from classes.page_layouts.day_entry import DayEntry
+from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
 
 
 #_______________________________________________________________________
-class DayLayout(HalfLetterSize):
-  """
-  Daily entry layout.
-  """
+class OneDayLayout(TwoPageHalfLetterSize_):
 
   #_____________________________________________________________________
-  def __init__(self
+  def  __init__(self
+  , is_portrait: bool = False
   , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_DAY_LAYOUT_PATH):
-    """
-    Constructor for class. Assumes landscape orientation.
-    """
+  , file_path: str = Strings.DEF_LAYOUT_PATH
+  ):
     super().__init__\
-      ( is_portrait=False
+      ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
       , file_path=file_path
       )
+    return
+
+  #_____________________________________________________________________
+  def create_content(self):
+    super().create_content()
+
+    self.content_0_ =\
+      DayEntry\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      )
+
+    self.content_1_ =\
+      DayEntry\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      )
 
     return
 
   #_____________________________________________________________________
-  def add_content(self) -> None:
-
-    # Width of daily schedule content group
-    self.schedule_wdth_: int = self.content_wdth_ * 0.25
-    self.schedule_hght_: int = self.content_hght_
-
-    self.schedule_ =\
-      Sched\
-      ( strt_time_str = Sched.DEF_STRT_24
-      , stop_time_str = Sched.DEF_STOP_24
-      , wdth=self.schedule_wdth_
-      , hght=self.schedule_hght_
-      , time_inc_min=30
-      , use_24=True
-      )
-
-    insert_sched_x: int =\
-      self.insert_pt_content_0_[0]\
-    + self.content_wdth_ - self.schedule_wdth_ - Dims.BRD_MARGIN_PX
-
-    insert_x_px: int = insert_sched_x
-    insert_y_px: int = self.insert_pt_content_0_[1]
-
-    self.schedule_['transform'] =\
-      f'translate({insert_x_px}, {insert_y_px})'
-
-    self.layout_dwg_.add(self.schedule_)
-
-    return
+  def add_content(self):
+    super().add_content()

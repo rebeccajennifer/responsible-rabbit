@@ -27,7 +27,7 @@
 #_______________________________________________________________________
 
 import datetime as dt
-import svgwrite
+import math
 
 from typing import Tuple
 
@@ -35,56 +35,86 @@ import svgwrite.container
 import svgwrite.shapes
 import svgwrite.text
 
+from classes.elements.entry_table import EntryTable
 from classes.constants.error_strings import ErrorStrings as Err
-from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
 
-class DailySchedule(svgwrite.container.Group):
+class DaySchedule(EntryTable):
+  """
+  Lists hours in daily schedule.
+  """
+
   DEF_STRT_12: str = '05:00'
   DEF_STOP_12: str = '09:00'
   DEF_STRT_24: str = '05:00'
   DEF_STOP_24: str = '21:00'
 
-  HEADER_SIZE: int = Font.NORMAL_SIZE
-  HEADER_PADDING: int = HEADER_SIZE / 2
-  HEADER_PADDING: int = 0
-
-  #_____________________________________________________________________
   def __init__(self
-  , strt_time_str: str = DEF_STRT_24
-  , stop_time_str: str = DEF_STOP_24
   , wdth: int = 0
   , hght: int = 0
+  , strt_time_str: str = DEF_STRT_24
+  , stop_time_str: str = DEF_STOP_24
   , time_inc_min: int = 30
   , use_24: bool = True
   ):
     """
       Parameters:
-        strt_time_str: start time of schedule
-        stop_time_str: stop time of schedule
         wdth         : width of container
         hght         : height of container
+        strt_time_str: start time of schedule
+        stop_time_str: stop time of schedule
         time_inc_min : incremental  time
         use_24       : use 24 hour time
     """
 
-    super().__init__()
-
-    self.strt_time_str_: str  = strt_time_str
-    self.stop_time_str_: str  = stop_time_str
-    self.wdth_: int           = wdth
-    self.hght_: int           = hght
     self.time_inc_min_: int   = time_inc_min
     self.use_24_: bool        = use_24
 
-    self.create_daily_schedule()
+    #___________________________________________________________________
+    # Convert to datetime objects
+    #___________________________________________________________________
+    self.strt_datetime_, self.stop_datetime_ =\
+      self.start_stop_err_check\
+      ( strt_time_str
+      , stop_time_str
+      )
+
+    entry_row_count: int = self.calc_row_count()
+
+    super().__init__\
+      ( wdth=wdth
+      , hght=hght
+      , text_lst=[Strings.DAILY_SCHEDULE_HEADER]
+      , font_color=Colors.NORMAL
+      , font_size=Font.NORMAL_SIZE
+      , font=Font.FONT_FAMILY_HEADER
+      , box_fill_color='none'
+      , box_brdr_color='none'
+      , entry_row_count=entry_row_count
+      , pad_top=True
+      , pad_bot=False
+      , pad_lft=False
+      , pad_rgt=False
+      , show_outline=False
+      )
+
 
     return
 
   #_____________________________________________________________________
-  def create_daily_schedule(self) -> None:
+  def calc_row_count(self) -> int:
+
+    time_block_count: float = 1\
+      + (self.stop_datetime_ - self.strt_datetime_).total_seconds()\
+      / 60\
+      / self.time_inc_min_
+
+    return math.floor(time_block_count)
+
+  #_____________________________________________________________________
+  def create_rows(self) -> svgwrite.container.Group:
     """
     Creates schedule with times in increments as indicated. Assumes
     entry is in 24 hour format, though printed strings will reflect
@@ -94,78 +124,62 @@ class DailySchedule(svgwrite.container.Group):
       None
 
     Returns:
-      None
+      Group containing all rows.
     """
+
+    row_group: svgwrite.container.Group = svgwrite.container.Group()
 
     fmt: str = '%I:%M'
     if (self.use_24_):
       fmt: str = '%H:%M'
 
-    #___________________________________________________________________
-    # Convert to datetime objects
-    #___________________________________________________________________
-    strt_datetime, stop_datetime =\
-      DailySchedule.start_stop_err_check\
-      ( self.strt_time_str_
-      , self.stop_time_str_
-      )
+    row_height: int = self.row_hght_
 
-    crnt_datetime: dt.datetime = strt_datetime
+    crnt_datetime: dt.datetime = self.strt_datetime_
 
-    #___________________________________________________________________
-    # Convert to strings
-    #___________________________________________________________________
-    stop_time_str =\
-        stop_datetime.strftime(fmt)
-    strt_time_str =\
-        strt_datetime.strftime(fmt)
-    #___________________________________________________________________
+    text_x: int = 0
+    if (self.show_outline_):
+      text_x = Font.TEXT_PADDING
 
-    crnt_datetime_str = strt_time_str
+    for i in range(self.entry_row_count_):
 
-    #___________________________________________________________________
-    time_block_count: int =\
-      1\
-      + (stop_datetime - strt_datetime).total_seconds()\
-      / 60\
-      / self.time_inc_min_
+      line_y: int = self.header_box_.total_hght_ + row_height + i * row_height
+      text_y: int = line_y - 2
 
-    header_space: int =\
-      DailySchedule.HEADER_SIZE + DailySchedule.HEADER_PADDING
-
-    # TODO account for padding
-    time_box_wdth: int = self.wdth_
-    time_box_hght: int = (self.hght_ - header_space) / time_block_count
-
-    crnt_y: int = header_space + time_box_hght
-
-    self.add(DailySchedule.create_schedule_header())
-
-    #___________________________________________________________________
-    # Create boxes with time increments
-    while crnt_datetime <= stop_datetime:
       crnt_datetime_str =\
         crnt_datetime.strftime(fmt)
 
-      self.add(
-        DailySchedule.create_time_entry\
-        ( crnt_datetime_str
-        , crnt_y
-        , time_box_wdth
-        )
+      the_time: svgwrite.txt.Text = svgwrite.text.Text\
+      ( crnt_datetime_str
+      , insert=(text_x, text_y)
+      , text_anchor='start'
+      , alignment_baseline='text-after-edge'
+      , fill=Colors.NORMAL
+      , font_size=Font.LITTLE_SIZE
+      , font_family=Font.FONT_FAMILY_NORMAL
       )
 
-      crnt_y = crnt_y + time_box_hght
+      if (':00' in crnt_datetime_str):
+        row_group.add(the_time)
 
       crnt_datetime =\
         crnt_datetime\
       + dt.timedelta(minutes=self.time_inc_min_)
 
-    return
+      row_line: svgwrite.shapes.Line =\
+        svgwrite.shapes.Line\
+        ( start=(0, line_y)
+        , end=(self.content_wdth_, line_y)
+        , stroke=Colors.DEF_ROW_COLOR
+        )
+
+      row_group.add(row_line)
+
+    return row_group
 
   #_____________________________________________________________________
-  @staticmethod
-  def start_stop_err_check(strt_time_str: str
+  def start_stop_err_check(self
+  , strt_time_str: str
   , stop_time_str: str
   ) -> Tuple:
     """
@@ -178,15 +192,14 @@ class DailySchedule(svgwrite.container.Group):
 
     Returns:
       (datetime.datetime obj start, datetime.datetime obj stop)
-
     """
 
     dt.dt = dt.datetime
 
     fmt_24: str = '%H:%M'
 
-    DEF_STRT: str = DailySchedule.DEF_STRT_24
-    DEF_STOP: str = DailySchedule.DEF_STOP_24
+    DEF_STRT: str = self.DEF_STRT_24
+    DEF_STOP: str = self.DEF_STOP_24
 
     #___________________________________________________________________
     # Convert to datetime objects for error handling
@@ -207,78 +220,27 @@ class DailySchedule(svgwrite.container.Group):
       stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
 
     if (stop_datetime < strt_datetime):
-      strt_datetime: dt.dt = dt.dt.strptime(DailySchedule.DEF_STRT, fmt_24)
-      stop_datetime: dt.dt = dt.dt.strptime(DailySchedule.DEF_STOP, fmt_24)
+      strt_datetime: dt.dt = dt.dt.strptime(self.DEF_STRT, fmt_24)
+      stop_datetime: dt.dt = dt.dt.strptime(self.DEF_STOP, fmt_24)
 
       strt_datetime = dt.dt.combine(dt.dt.today(), strt_datetime.time())
       stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
 
     return strt_datetime, stop_datetime
 
-  #_____________________________________________________________________
-  @staticmethod
-  def create_time_entry(time_str: str
-  , bottom_y
-  , wdth: int
-  ) -> svgwrite.container.Group:
-    """
-    Creates text and lines for time entries
 
-    Parameters:
-      insert_y: Vertical insert point of entry
-      wdth:     Width of container in inches
-    """
 
-    line_y: float = bottom_y
-    text_y: float = bottom_y - 0.5 * Font.LITTLE_SIZE
 
-    the_time: svgwrite.txt.Text = svgwrite.text.Text\
-    ( time_str
-    , insert=(0, text_y)
-    , text_anchor='start'
-    , alignment_baseline='middle'
-    , fill=Colors.NORMAL
-    , font_size=Font.LITTLE_SIZE
-    , font_family=Font.FONT_FAMILY_NORMAL
-    )
 
-    line: svgwrite.shapes.Line = svgwrite.shapes.Line\
-    ( start=(0, line_y)
-    , end=(wdth, line_y)
-    , stroke=Colors.DEBUG0_COLOR
-    )
 
-    group: svgwrite.container.Group = svgwrite.container.Group()
 
-    if (':00' in time_str):
-      group.add(the_time)
 
-    group.add(line)
 
-    return group
 
-  #_____________________________________________________________________
-  @staticmethod
-  def create_schedule_header() -> svgwrite.text.Text:
-    """
-    Parameters:
-      None
 
-    Returns:
-      svgwrite Text object with header
-    """
 
-    font_size: int = DailySchedule.HEADER_SIZE
-    insert_y: int = font_size / 2
 
-    header: svgwrite.txt.Text = svgwrite.text.Text\
-    ( Strings.DAILY_SCHEDULE_HEADER
-    , insert=('0in', insert_y)
-    , text_anchor='start'
-    , alignment_baseline='middle'
-    , fill=Colors.HEADING
-    , font_size=font_size
-    , font_family=Font.FONT_FAMILY_HEADER
-    )
 
-    return header
+
+
+

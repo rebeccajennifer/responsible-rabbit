@@ -34,7 +34,8 @@ class PlannerColors:
   Contains colors used in the planner.
   """
 
-  MEDIUM_GREY: str   = '#444444'
+  MEDIUM_GREY: str   = '#888888'
+  LIGHT_GREY: str    = '#d7d7d7'
   CYAN: str          = '#008080'
   VIOLET: str        = '#800080'
   WHITE: str         = '#ffffff'
@@ -53,19 +54,16 @@ class PlannerColors:
   NORMAL: str = FLUX_GRY
   HEADING: str = FLUX_RED
 
-  BORDER_COLOR: str = MEDIUM_GREY
-  DEBUG0_COLOR: str = CYAN
-  DEBUG1_COLOR: str = VIOLET
+  DEF_PAGE_HEADER_COLOR : str = LIGHT_GREY
 
+  DEF_TBLE_HEADER_FILL  : str = MEDIUM_GREY
+  DEF_TBLE_HEADER_TEXT  : str = WHITE
 
-#_______________________________________________________________________
-class PlannerStrokes:
-  """
-  Contains stroke definitions.
-  """
+  BORDER_COLOR          : str = MEDIUM_GREY
+  DEF_ROW_COLOR         : str = LIGHT_GREY
 
-  STD_STROKE: int = 1
-  DEBUG0_STROKE: int = 5
+  DEBUG0_COLOR          : str = CYAN
+  DEBUG1_COLOR          : str = VIOLET
 
 
 #_______________________________________________________________________
@@ -74,17 +72,13 @@ class PlannerFontStyle:
   Contains standard font sizes.
   """
 
-  HEAD_1_SIZE: int = 30
+  HEAD_1_SIZE: int = 12
   HEAD_2_SIZE: int = 24
   PROMPT_SIZE: int = 14
   NORMAL_SIZE: int = 10
   LITTLE_SIZE: int = 8
 
-  HEAD_1_PADDING: int = HEAD_1_SIZE / 4
-  HEAD_2_PADDING: int = HEAD_2_SIZE / 4
-  PROMPT_PADDING: int = PROMPT_SIZE / 4
-  NORMAL_PADDING: int = NORMAL_SIZE / 4
-  LITTLE_PADDING: int = LITTLE_SIZE / 4
+  TEXT_PADDING: int = 4
 
   FONT_FAMILY_NORMAL: str = 'Ubuntu Mono'
   FONT_FAMILY_HEADER: str = 'Trebuchet MS'
