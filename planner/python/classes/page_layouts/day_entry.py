@@ -39,26 +39,28 @@ from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
 
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
+from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________
-class DayEntry(svgwrite.container.Group):
+class DayEntry(OnePageHalfLetterLayout):
   """
   Daily entry layout.
   """
 
   #_____________________________________________________________________
   def __init__(self
-  , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_DAY_LAYOUT_PATH):
+  , total_hght: int = 0
+  , total_wdth: int = 0
+  , padding: int = 0
+  ):
     """
     Constructor for class. Assumes landscape orientation.
     """
     super().__init__\
-      ( is_portrait=False
-      , is_dbl_sided=is_dbl_sided
-      , file_path=file_path
+      ( total_hght=total_hght
+      , total_wdth=total_wdth
+      , padding=padding
       )
 
     return
@@ -77,12 +79,12 @@ class DayEntry(svgwrite.container.Group):
     super().add_content()
 
     #___________________________________________________________________
-    sched_insert_x: int = self.insert_pt_content_0_[0]\
+    sched_insert_x: int = self.content_insert_pt_x_\
       + self.content_wdth_\
       - self.schedule_wdth_\
       + Dims.BRD_MARGIN_PX * self.sched_.pad_lft_
 
-    sched_insert_y: int = self.insert_pt_content_0_[1]\
+    sched_insert_y: int = self.content_insert_pt_y_
 
     self.sched_['transform'] =\
       f'translate({sched_insert_x},{sched_insert_y})'
@@ -90,8 +92,8 @@ class DayEntry(svgwrite.container.Group):
     #___________________________________________________________________
     # Entry insert calculations
     #___________________________________________________________________
-    insert_x: int = self.insert_pt_content_0_[0]
-    insert_y: int = self.insert_pt_content_0_[1]
+    insert_x: int = self.content_insert_pt_x_
+    insert_y: int = self.content_insert_pt_y_
     #___________________________________________________________________
     self.pri_efforts_['transform'] =\
       f'translate({insert_x},{insert_y})'
@@ -142,22 +144,16 @@ class DayEntry(svgwrite.container.Group):
       + self.prompt2_.total_hght_
     #___________________________________________________________________
 
-    self.test_=svgwrite.container.Group()
 
-    self.test_.add(self.sched_)
-    self.test_.add(self.pri_efforts_)
-    self.test_.add(self.checklist_)
-    self.test_.add(self.focus_)
-    self.test_.add(self.todo_)
-    self.test_.add(self.gratitude_)
-    self.test_.add(self.prompt0_)
-    self.test_.add(self.prompt1_)
-    self.test_.add(self.prompt2_)
-
-    self.test_['transform'] =\
-      f'translate({self.insert_pt_content_1_[0]},{self.insert_pt_content_1_[1]})'
-
-    self.layout_dwg_.add(self.test_)
+    self.add(self.sched_)
+    self.add(self.pri_efforts_)
+    self.add(self.checklist_)
+    self.add(self.focus_)
+    self.add(self.todo_)
+    self.add(self.gratitude_)
+    self.add(self.prompt0_)
+    self.add(self.prompt1_)
+    self.add(self.prompt2_)
 
     return
 
@@ -187,7 +183,7 @@ class DayEntry(svgwrite.container.Group):
     self.sched_: DaySched =\
       DaySched\
       ( wdth=self.schedule_wdth_
-      , hght=self.content_hght_0_
+      , hght=self.content_hght_
       , time_inc_min=30
       , use_24=True
       )
@@ -279,7 +275,7 @@ class DayEntry(svgwrite.container.Group):
     return
 
   #_____________________________________________________________________
-  def create_page_headers(self) -> svgwrite.container.Group:
+  def create_page_header(self) -> svgwrite.container.Group:
     """
     Creates page header and saves it to class variable.
 
@@ -302,14 +298,8 @@ class DayEntry(svgwrite.container.Group):
       'Sat' + sp + sp +\
       'Sun'
 
-    page_header_0 = super().create_page_header\
+    page_header = super().create_page_header\
       ( header_txt=days
-      , font_size=font_size
-      , font=font_family
-      )
-
-    page_header_1 = super().create_page_header\
-      ( header_txt=Strings.QUOTE0
       , font_size=font_size
       , font=font_family
       )
@@ -330,6 +320,6 @@ class DayEntry(svgwrite.container.Group):
       , font_family=font_family
       )
 
-    page_header_0.add(date_txt)
+    page_header.add(date_txt)
 
-    return page_header_0, page_header_1
+    return page_header

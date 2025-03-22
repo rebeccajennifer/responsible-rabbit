@@ -40,6 +40,8 @@ from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
 
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
+from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
+from classes.page_layouts.day_entry import DayEntry
 
 
 #_______________________________________________________________________
@@ -330,3 +332,49 @@ class DayLayout(TwoPageHalfLetterSize):
     page_header_0.add(date_txt)
 
     return page_header_0, page_header_1
+
+
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+#_______________________________________________________________________
+class OneDayLayout(TwoPageHalfLetterSize_):
+
+  #_____________________________________________________________________
+  def  __init__(self
+  , is_portrait: bool = False
+  , is_dbl_sided: bool = False
+  , file_path: str = Strings.DEF_LAYOUT_PATH
+  ):
+    super().__init__\
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=file_path
+      )
+    return
+
+  #_____________________________________________________________________
+  def create_content(self):
+    super().create_content()
+
+    self.content_0_ =\
+      DayEntry\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      )
+
+    return
+
+  #_____________________________________________________________________
+  def add_content(self):
+    super().add_content()

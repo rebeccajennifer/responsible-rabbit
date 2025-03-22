@@ -347,9 +347,9 @@ class TwoPageHalfLetterSize_(svgwrite.Drawing):
   , file_path: str = Strings.DEF_LAYOUT_PATH
   ):
 
-    self.is_portrait_: bool   = is_portrait
-    self.is_dbl_sided_: bool  = is_dbl_sided
-    self.file_path_: str      = file_path
+    self.is_portrait_   : bool  = is_portrait
+    self.is_dbl_sided_  : bool  = is_dbl_sided
+    self.file_path_     : str   = file_path
 
     #___________________________________________________________________
     hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
@@ -394,11 +394,11 @@ class TwoPageHalfLetterSize_(svgwrite.Drawing):
       , total_hght=self.content_hght_
       )
 
-    self.content_1_: OnePageHalfLetterLayout =\
-      OnePageHalfLetterLayout\
-      ( total_wdth=self.content_wdth_
-      , total_hght=self.content_hght_
-      )
+    #self.content_1_: OnePageHalfLetterLayout =\
+    #  OnePageHalfLetterLayout\
+    #  ( total_wdth=self.content_wdth_
+    #  , total_hght=self.content_hght_
+    #  )
 
 
     return
@@ -421,10 +421,10 @@ class TwoPageHalfLetterSize_(svgwrite.Drawing):
 
     x: int = self.insert_pt_border_1_[0]
     y: int = self.insert_pt_border_1_[1]
-    self.content_1_['transform'] = f'translate({x}, {y})'
+    #self.content_1_['transform'] = f'translate({x}, {y})'
 
     self.add(self.content_0_)
-    self.add(self.content_1_)
+    #self.add(self.content_1_)
 
     return
 
@@ -506,10 +506,20 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     self.total_wdth_: int = total_wdth
     self.padding_   : int = padding
 
-    self.content_hght_: int = self.total_hght_ - 2 * padding
+    self.page_header_insert_pt_x_ : int = padding
+    self.page_header_insert_pt_y_ : int = padding
+
     self.content_wdth_: int = self.total_wdth_ - 2 * padding
-    self.content_insert_pt_x_ : int = padding
-    self.content_insert_pt_y_ : int = padding
+
+    self.page_header_: HeaderBox = self.create_page_header()
+
+    # Content height is affected by generation of page header
+    self.content_hght_: int =\
+      self.total_hght_ - 2 * padding - self.page_header_.total_hght_
+
+    self.content_insert_pt_x_ : int = self.page_header_insert_pt_x_
+    self.content_insert_pt_y_ : int =\
+      self.page_header_insert_pt_y_ + self.page_header_.total_hght_
 
     self.create_content()
     self.add_content()
@@ -519,11 +529,9 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
-    Creates content
+    Creates content.
     """
 
-    self.page_header_: HeaderBox =\
-      self.create_page_header(header_txt=f'{Strings.DEF_PAGE_HEADER}_0')
 
     self.border_: svgwrite.shapes.Rect = self.create_border()
 
@@ -533,8 +541,11 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   def add_content(self) -> None:
     """
     Adds content to group.
-
     """
+
+    x: int = self.page_header_insert_pt_x_
+    y: int = self.page_header_insert_pt_y_
+    self.page_header_['transform'] = f'translate({x}, {y})'
 
     self.add(self.border_)
     self.add(self.page_header_)
