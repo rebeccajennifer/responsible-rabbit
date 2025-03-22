@@ -114,9 +114,7 @@ class DaySchedule(EntryTable):
     return math.floor(time_block_count)
 
   #_____________________________________________________________________
-  def create_rows(self
-  , combined_row_hght
-  ) -> svgwrite.container.Group:
+  def create_rows(self) -> svgwrite.container.Group:
     """
     Creates schedule with times in increments as indicated. Assumes
     entry is in 24 hour format, though printed strings will reflect
@@ -135,7 +133,7 @@ class DaySchedule(EntryTable):
     if (self.use_24_):
       fmt: str = '%H:%M'
 
-    row_height: int = combined_row_hght / self.entry_row_count_
+    row_height: int = self.row_hght_
 
     crnt_datetime: dt.datetime = self.strt_datetime_
 

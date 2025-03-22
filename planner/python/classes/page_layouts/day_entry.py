@@ -162,15 +162,13 @@ class DayEntry(OnePageHalfLetterLayout):
     """
 
     Side Effects:
-      Populates the following class variables:
-      self.sched_
+      Populates the following class variables.
 
     Parameters:
       None
 
     Returns:
       None
-
     """
 
     super().create_content()
@@ -212,7 +210,6 @@ class DayEntry(OnePageHalfLetterLayout):
     self.focus_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , hght=50
       , text_lst=[Strings.DAY_FOCUS]
       , entry_row_count=1
       , pad_top=True
@@ -223,7 +220,6 @@ class DayEntry(OnePageHalfLetterLayout):
     self.todo_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , hght=100
       , text_lst=['To Do']
       , entry_row_count=4
       , pad_top=True
@@ -234,7 +230,6 @@ class DayEntry(OnePageHalfLetterLayout):
     self.gratitude_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , hght=50
       , text_lst=[Strings.DAY_GRATITUDE]
       , entry_row_count=1
       , pad_top=True
@@ -245,7 +240,6 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt0_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , hght=100
       , txt=Strings.DAY_PROMPTS[0]
       , entry_row_count=3
       , pad_top=True
@@ -255,7 +249,6 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt1_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , hght=100
       , txt=Strings.DAY_PROMPTS[1]
       , entry_row_count=3
       , pad_top=True
@@ -265,7 +258,6 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt2_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , hght=100
       , txt=Strings.DAY_PROMPTS[2]
       , entry_row_count=3
       , pad_top=True

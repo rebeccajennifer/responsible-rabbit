@@ -394,12 +394,11 @@ class TwoPageHalfLetterSize_(svgwrite.Drawing):
       , total_hght=self.content_hght_
       )
 
-    #self.content_1_: OnePageHalfLetterLayout =\
-    #  OnePageHalfLetterLayout\
-    #  ( total_wdth=self.content_wdth_
-    #  , total_hght=self.content_hght_
-    #  )
-
+    self.content_1_: OnePageHalfLetterLayout =\
+      OnePageHalfLetterLayout\
+      ( total_wdth=self.content_wdth_
+      , total_hght=self.content_hght_
+      )
 
     return
 
@@ -421,10 +420,10 @@ class TwoPageHalfLetterSize_(svgwrite.Drawing):
 
     x: int = self.insert_pt_border_1_[0]
     y: int = self.insert_pt_border_1_[1]
-    #self.content_1_['transform'] = f'translate({x}, {y})'
+    self.content_1_['transform'] = f'translate({x}, {y})'
 
     self.add(self.content_0_)
-    #self.add(self.content_1_)
+    self.add(self.content_1_)
 
     return
 

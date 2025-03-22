@@ -40,6 +40,8 @@ from classes.constants.strings import PlannerStrings as Strings
 
 class EntryTable(svgwrite.container.Group):
 
+  DEF_ROW_HGHT: int = 20
+
   #_____________________________________________________________________
   def __init__(self
   , wdth: int = 0
@@ -52,6 +54,7 @@ class EntryTable(svgwrite.container.Group):
   , box_brdr_color: str = Colors.BORDER_COLOR
   , entry_col_count: int = 1
   , entry_row_count: int = 1
+  , entry_row_hght: int = DEF_ROW_HGHT
   , pad_top: bool = False
   , pad_bot: bool = False
   , pad_rgt: bool = False
@@ -70,6 +73,7 @@ class EntryTable(svgwrite.container.Group):
         box_brdr_color  : border color
         entry_col_count : column count of table
         entry_row_count : row count of table
+        entry_row_hght  : height of row, optional
         pad_top         : add padding to top
         pad_bot         : add padding to bottom
         pad_rgt         : add padding to right
@@ -79,49 +83,28 @@ class EntryTable(svgwrite.container.Group):
 
     super().__init__()
 
-    self.total_wdth_: int = wdth
-    self.content_wdth_: int = self.total_wdth_
-    self.total_hght_: int     = hght
+    self.total_wdth_  : int = wdth
+    self.total_hght_  : int = hght
+
+    self.content_wdth_: int =\
+      self.total_wdth_ - Dims.BRD_MARGIN_PX * (pad_lft + pad_rgt)
+
+    # Used to make header box
+    self.text_lst_        : str   = text_lst
+    self.font_color_      : str   = font_color
+    self.font_size_       : int   = font_size
+    self.font_            : str   = font
+    self.box_fill_color_  : str   = box_fill_color
+
+    self.box_brdr_color_  : str   = box_brdr_color
+    self.entry_col_count_ : int   = entry_col_count
+    self.entry_row_count_ : int   = entry_row_count
+    self.show_outline_    : bool  = show_outline
 
     self.pad_top_: bool = pad_top
     self.pad_bot_: bool = pad_bot
     self.pad_rgt_: bool = pad_rgt
     self.pad_lft_: bool = pad_lft
-
-    #___________________________________________________________________
-    # Adjust dims for padding
-    self.content_hght_ =\
-      self.total_hght_ - (pad_top + pad_bot) * Dims.BRD_MARGIN_PX
-
-    self.content_wdth_ =\
-      self.total_wdth_ - (pad_lft + pad_rgt) * Dims.BRD_MARGIN_PX
-
-    #___________________________________________________________________
-
-    self.box_brdr_color_: str   = box_brdr_color
-    self.entry_col_count_: int  = entry_col_count
-    self.entry_row_count_: int  = entry_row_count
-    self.show_outline_: bool    = show_outline
-
-
-    # Used to make header box
-    self.text_lst_: str         = text_lst
-    self.font_color_: str       = font_color
-    self.font_size_: int        = font_size
-    self.font_: str             = font
-    self.box_fill_color_: str   = box_fill_color
-
-    self.create_content()
-    self.add_content()
-
-    return
-
-
-  #_____________________________________________________________________
-  def create_content(self) -> None:
-    """
-    Create elements
-    """
 
     self.header_box_: HeaderBox =\
       HeaderBox\
@@ -135,7 +118,38 @@ class EntryTable(svgwrite.container.Group):
       , pad_top=self.pad_top_
       )
 
-    entry_height: int = self.total_hght_ - self.header_box_.total_hght_
+    # Height will take priority in calculation of row height
+    if (self.total_hght_):
+      self.row_hght_  = (self.total_hght_\
+        - self.header_box_.total_hght_) / entry_row_count
+
+    else:
+      self.row_hght_ = entry_row_hght
+      self.total_hght_ =\
+        self.header_box_.total_hght_ + entry_row_hght * entry_row_count
+
+    #___________________________________________________________________
+    # Adjust dims for padding
+    #___________________________________________________________________
+    self.content_hght_ =\
+      self.total_hght_ - (pad_top + pad_bot) * Dims.BRD_MARGIN_PX
+
+    self.content_wdth_ =\
+      self.total_wdth_ - (pad_lft + pad_rgt) * Dims.BRD_MARGIN_PX
+    #___________________________________________________________________
+
+    #___________________________________________________________________
+
+    self.create_content()
+    self.add_content()
+
+    return
+
+  #_____________________________________________________________________
+  def create_content(self) -> None:
+    """
+    Create elements
+    """
 
     insert_y: int = (self.pad_top_) * Dims.BRD_MARGIN_PX
 
@@ -148,18 +162,13 @@ class EntryTable(svgwrite.container.Group):
       , fill='none'
       )
 
-    combined_row_hght: int =\
-      self.total_hght_ - self.header_box_.total_hght_
-
     self.rows_: svgwrite.container.Group =\
-      self.create_rows(combined_row_hght)
+      self.create_rows()
 
     return
 
   #_____________________________________________________________________
-  def create_rows(self
-  , combined_row_hght
-  ) -> svgwrite.container.Group:
+  def create_rows(self) -> svgwrite.container.Group:
     """
     Creates group containing all rows of content entry.
 
@@ -172,7 +181,7 @@ class EntryTable(svgwrite.container.Group):
 
     row_group: svgwrite.container.Group = svgwrite.container.Group()
 
-    row_height: int = combined_row_hght / self.entry_row_count_
+    row_height: int = self.row_hght_
 
     for i in range(self.entry_row_count_):
 

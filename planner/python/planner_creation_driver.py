@@ -59,6 +59,8 @@ if __name__ == '__main__':
     , file_path='landscpe_sgl.svg'
     )
 
+  layout_landscpe_no_dbl_sided.save_svg()
+
   #layout_landscpe_dbl_sided: TwoPageHalfLetterSize =\
   #  TwoPageHalfLetterSize\
   #  ( is_portrait=False
