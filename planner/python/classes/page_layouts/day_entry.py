@@ -43,7 +43,7 @@ from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
 #_______________________________________________________________________
-class DayLayout(TwoPageHalfLetterSize):
+class DayEntry(svgwrite.container.Group):
   """
   Daily entry layout.
   """
@@ -153,6 +153,9 @@ class DayLayout(TwoPageHalfLetterSize):
     self.test_.add(self.prompt0_)
     self.test_.add(self.prompt1_)
     self.test_.add(self.prompt2_)
+
+    self.test_['transform'] =\
+      f'translate({self.insert_pt_content_1_[0]},{self.insert_pt_content_1_[1]})'
 
     self.layout_dwg_.add(self.test_)
 
