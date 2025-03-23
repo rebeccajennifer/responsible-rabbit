@@ -34,8 +34,8 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 
-from classes.elements.daily_schedule import DaySchedule as DaySched
 from classes.elements.entry_table import EntryTable
+from classes.elements.entry_table import NumberedTable
 from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
 
@@ -111,16 +111,17 @@ class GoalEntry(OnePageHalfLetterLayout):
     self.entries_: list =\
     [ HeaderBox\
       ( wdth=self.content_wdth_
-      , text_lst=[Strings.GOAL_CHECKLIST]
+      , header_lst=[Strings.GOAL_CHECKLIST]
       , font_size=9
       , box_brdr_color='none'
       , box_fill_color='none'
       , pad_top=True
       )
 
-    , EntryTable\
+    , NumberedTable\
       ( wdth=self.content_wdth_
-      , text_lst=[Strings.GOAL_ACTIONS]
+      , header_lst=[Strings.GOAL_ACTIONS]
+      , text_lst=['[]','[]','[]','[]','[]','[]','[]']
       , entry_row_count=7
       , pad_top=True
       , show_outline=True
@@ -128,36 +129,40 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , EntryTable\
       ( wdth=self.content_wdth_
-      , text_lst=[Strings.GOAL_MEASUREMENT]
+      , header_lst=[Strings.GOAL_MEASUREMENT]
       , entry_row_count=2
       , pad_top=True
       , show_outline=False
       )
 
-    , PromptTable\
+    , NumberedTable\
       ( wdth=self.content_wdth_
-      , txt=Strings.GOAL_COST
-      , entry_row_count=3
+      , header_lst=[Strings.GOAL_COST]
+      , entry_row_count=5
       , pad_top=True
+      , font_color=Colors.NORMAL
+      , box_brdr_color='none'
+      , box_fill_color='none'
+      , show_outline=True
       )
 
-    , EntryTable\
+    , NumberedTable\
       ( wdth=self.content_wdth_
-      , text_lst=[Strings.GOAL_BENCHMARKS]
-      , entry_row_count=5
+      , header_lst=[Strings.GOAL_BENCHMARKS]
+      , text_lst=Strings.GOAL_MONTHS
+      , entry_row_count=3
       , pad_top=True
       , show_outline=True
       )
 
-    , EntryTable\
+    , NumberedTable\
       ( wdth=self.content_wdth_
-      , text_lst=[Strings.GOAL_LIFE_IMPROVEMENT]
-      , entry_row_count=4
+      , header_lst=[Strings.GOAL_LIFE_IMPROVEMENT]
+      , entry_row_count=3
       , pad_top=True
       , show_outline=False
       )
     ]
-
 
     # Calculate remaining height to evenly distribute spanning tables
     remaining_hght: int = self.content_hght_

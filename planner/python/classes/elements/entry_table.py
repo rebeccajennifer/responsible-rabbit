@@ -46,7 +46,7 @@ class EntryTable(svgwrite.container.Group):
   def __init__(self
   , wdth: int = 0
   , hght: int = 0
-  , text_lst: str = [Strings.DEF_TABLE_HEADER]
+  , header_lst: str = [Strings.DEF_TABLE_HEADER]
   , font_color: str = Colors.DEF_TBLE_HEADER_TEXT
   , font_size: int = Font.NORMAL_SIZE
   , font: str = Font.FONT_FAMILY_HEADER
@@ -65,7 +65,7 @@ class EntryTable(svgwrite.container.Group):
       Parameters:
         wdth            : width of table
         hght            : height of table
-        text_lst        : list of headers
+        header_lst      : list of headers
         font_color      : color of header text
         font_size       : size of header text
         font            : font of header text
@@ -90,7 +90,7 @@ class EntryTable(svgwrite.container.Group):
       self.total_wdth_ - Dims.BRD_MARGIN_PX * (pad_lft + pad_rgt)
 
     # Used to make header box
-    self.text_lst_        : str   = text_lst
+    self.header_lst_      : str   = header_lst
     self.font_color_      : str   = font_color
     self.font_size_       : int   = font_size
     self.font_            : str   = font
@@ -109,7 +109,7 @@ class EntryTable(svgwrite.container.Group):
     self.header_box_: HeaderBox =\
       HeaderBox\
       ( wdth=self.content_wdth_
-      , text_lst=self.text_lst_
+      , header_lst=self.header_lst_
       , font_color=self.font_color_
       , font_size=self.font_size_
       , font=self.font_
@@ -228,7 +228,7 @@ class PromptTable(EntryTable):
     super().__init__\
     ( wdth=wdth
     , hght=hght
-    , text_lst=[txt]
+    , header_lst=[txt]
     , font_color=Colors.NORMAL
     , font_size=Font.NORMAL_SIZE
     , font=Font.FONT_FAMILY_NORMAL
@@ -244,3 +244,126 @@ class PromptTable(EntryTable):
     )
 
     return
+
+class NumberedTable(EntryTable):
+
+  def __init__(self
+  , wdth: int = 0
+  , hght: int = 0
+  , header_lst: str = [Strings.DEF_TABLE_HEADER]
+  , text_lst: str = []
+  , font_color: str = Colors.DEF_TBLE_HEADER_TEXT
+  , font_size: int = Font.NORMAL_SIZE
+  , font: str = Font.FONT_FAMILY_HEADER
+  , box_fill_color: str = Colors.DEF_TBLE_HEADER_FILL
+  , box_brdr_color: str = Colors.BORDER_COLOR
+  , entry_col_count: int = 1
+  , entry_row_count: int = 1
+  , entry_row_hght: int = EntryTable.DEF_ROW_HGHT
+  , pad_top: bool = False
+  , pad_bot: bool = False
+  , pad_rgt: bool = False
+  , pad_lft: bool = False
+  , show_outline: bool = True
+  ):
+    """
+      Parameters:
+        wdth            : width of table
+        hght            : height of table
+        header_lst      : list of headers
+        text_lst        : list of headers
+        font_color      : color of header text
+        font_size       : size of header text
+        font            : font of header text
+        box_fill_color  : header fill color
+        box_brdr_color  : border color
+        entry_col_count : column count of table
+        entry_row_count : row count of table
+        entry_row_hght  : height of row, optional
+        pad_top         : add padding to top
+        pad_bot         : add padding to bottom
+        pad_rgt         : add padding to right
+        pad_lft         : add padding to left
+        show_outline    : show table outline
+    """
+
+    self.text_lst_ = text_lst
+
+    if (not text_lst):
+
+      for i in range(entry_row_count):
+        self.text_lst_ = self.text_lst_ + [i+1]
+
+    super().__init__\
+    ( wdth           =wdth
+    , hght           =hght
+    , header_lst     =header_lst
+    , font_color     =font_color
+    , font_size      =font_size
+    , font           =font
+    , box_fill_color =box_fill_color
+    , box_brdr_color =box_brdr_color
+    , entry_col_count=entry_col_count
+    , entry_row_count=entry_row_count
+    , entry_row_hght =entry_row_hght
+    , pad_top        =pad_top
+    , pad_bot        =pad_bot
+    , pad_rgt        =pad_rgt
+    , pad_lft        =pad_lft
+    , show_outline   =show_outline
+    )
+
+
+  #_____________________________________________________________________
+  def create_rows(self) -> svgwrite.container.Group:
+    """
+    Creates group containing all rows of content entry.
+
+    Parameters:
+      None
+
+    Returns:
+      Group containing all rows.
+    """
+
+    row_group: svgwrite.container.Group = svgwrite.container.Group()
+
+    row_height: int = self.row_hght_
+
+    text_x: int = 0
+
+    if (self.show_outline_):
+      text_x = Font.TEXT_PADDING
+
+
+    for i in range(self.entry_row_count_):
+
+      line_y: int = self.header_box_.total_hght_\
+        + row_height\
+        + i * row_height\
+
+      text_y: int = line_y - 2
+
+      row_line: svgwrite.shapes.Line =\
+        svgwrite.shapes.Line\
+        ( start=(0, line_y)
+        , end=(self.content_wdth_, line_y)
+        , stroke=Colors.DEF_ROW_COLOR
+        )
+
+      txt: svgwrite.txt.Text = svgwrite.text.Text\
+      ( self.text_lst_[i]
+      , insert=(text_x, text_y)
+      , text_anchor='start'
+      , alignment_baseline='text-after-edge'
+      , fill=Colors.NORMAL
+      , font_size=Font.LITTLE_SIZE
+      , font_family=Font.FONT_FAMILY_NORMAL
+      )
+
+      row_group.add(row_line)
+      row_group.add(txt)
+
+    return row_group
+
+

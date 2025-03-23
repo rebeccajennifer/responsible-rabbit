@@ -119,3 +119,9 @@ class PlannerStrings:
 
   GOAL_REWARD: str =\
     'Celebration Plan'
+
+  GOAL_MONTHS: list =\
+  [ 'Month 1:'
+  , 'Month 2:'
+  , 'Month 3:'
+  ]

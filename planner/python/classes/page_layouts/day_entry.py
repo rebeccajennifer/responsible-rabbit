@@ -189,7 +189,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.pri_efforts_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , text_lst=Strings.DAY_PRIMARY_EFFORTS
+      , header_lst=Strings.DAY_PRIMARY_EFFORTS
       , entry_row_count=4
       , pad_top=True
       , pad_rgt=True
@@ -199,7 +199,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.checklist_: HeaderBox=\
       HeaderBox\
       ( wdth=self.main_content_wdth_
-      , text_lst=Strings.DAY_CHECKLIST
+      , header_lst=Strings.DAY_CHECKLIST
       , box_brdr_color='none'
       , box_fill_color='none'
       , pad_top=True
@@ -209,7 +209,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.todo_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , text_lst=['To Do']
+      , header_lst=['To Do']
       , entry_row_count=8
       , pad_top=True
       , pad_rgt=True
@@ -257,7 +257,7 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , hght=remaining_hght/2
-      , text_lst=[Strings.DAY_FOCUS]
+      , header_lst=[Strings.DAY_FOCUS]
       , entry_row_count=1
       , pad_top=True
       , pad_rgt=True
@@ -269,7 +269,7 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , hght=remaining_hght/2
-      , text_lst=[Strings.DAY_GRATITUDE]
+      , header_lst=[Strings.DAY_GRATITUDE]
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
