@@ -129,7 +129,6 @@ class WeekEntry0(OnePageHalfLetterLayout):
       )
     ]
 
-
     return
 
   #_____________________________________________________________________
@@ -177,4 +176,94 @@ class WeekEntry1(OnePageHalfLetterLayout):
       )
 
     return
+
+
+  #_____________________________________________________________________
+  def create_content(self) -> None:
+    """
+    Side Effects:
+      Populates self.entries_ class variable.
+
+    Parameters:
+      None
+
+    Returns:
+      None
+    """
+    super().create_content()
+
+    self.entries_: list =\
+    [ PromptTable\
+      ( wdth=self.content_wdth_
+      , header_txt=Strings.WEEK_ACCOMPLISHMENTS
+      , entry_row_count=4
+      , pad_top=True
+      )
+
+    , PromptTable\
+      ( wdth=self.content_wdth_
+      , header_txt=Strings.WEEK_IMPROVEMENT
+      , entry_row_count=4
+      , pad_top=True
+      )
+
+    , EntryTable\
+      ( wdth=self.content_wdth_
+      , header_txt=Strings.WEEK_GRATITUDE
+      , entry_row_count=3
+      , pad_top=True
+      , show_outline=False
+      )
+
+    , HeaderBox\
+      ( wdth=self.content_wdth_
+      , header_txt=[Strings.WEEK_FULFILLMENT]
+      , font=Font.FONT_FAMILY_HEADER
+      , pad_top=True
+      )
+    ]
+
+    # Calculate remaining height to evenly distribute spanning tables
+    remaining_hght: int = self.calc_remaining_hght()
+
+    self.entries_ = self.entries_ +\
+    [ EntryTable\
+      ( wdth=self.content_wdth_
+      , hght=remaining_hght / 2
+      , header_txt=Strings.WEEK_FULFILLMENT_AREAS_0
+      , pad_top=True
+      )
+
+    , EntryTable\
+      ( wdth=self.content_wdth_
+      , hght=remaining_hght / 2
+      , header_txt=Strings.WEEK_FULFILLMENT_AREAS_1
+      , pad_top=True
+      )
+    ]
+
+    return
+
+  #_____________________________________________________________________
+  def create_page_header(self) -> svgwrite.container.Group:
+    """
+    Creates page header and saves it to class variable.
+
+    Parameters:
+      None
+
+    Returns:
+
+    """
+    font_size: int = Font.WEEK_PAGE_HEADER_SIZE
+    font_family: str = Font.FONT_FAMILY_HEADER
+
+    page_header = super().create_page_header\
+      ( header_txt=Strings.WEEK_PAGE_HEADER_1
+      , font_size=font_size
+      , font=font_family
+      , box_fill_color=Colors.DEF_PAGE_HEADER_COLOR
+      )
+
+    return page_header
 

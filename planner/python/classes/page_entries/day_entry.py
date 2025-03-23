@@ -309,14 +309,12 @@ class DayEntry(OnePageHalfLetterLayout):
       , font=font_family
       )
 
-    date_str: str = sp + sp + '/' + sp + sp + '/' + sp + '20' + sp + sp
-
     insert_date_x: int = self.content_wdth_ - Font.TEXT_PADDING
     insert_date_y: int = font_size + Font.TEXT_PADDING
 
     date_txt: svgwrite.text.Text =\
       svgwrite.text.Text\
-      ( text=date_str
+      ( text=Strings.DATE_STR
       , insert=(insert_date_x, insert_date_y)
       , text_anchor='end'
       , alignment_baseline='text-after-edge'

@@ -1,9 +1,37 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+#   DESCRIPTION
+#   Header used in tables and pages. Creates a group with a rectangle
+#   with text inside.
+#_______________________________________________________________________
+
 import svgwrite.container
 import svgwrite.shapes
 import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
-from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 

@@ -30,7 +30,20 @@ class PlannerStrings:
   """
   Strings used in planner.
   """
-  SPACE: str ='\u00A0\u00A0'
+  SPACE: str =\
+    '\u00A0\u00A0'
+
+  RIGHT_ARROW: str =\
+    '\u2192'
+
+  DATE_STR: str =\
+    3 * SPACE\
+    + '/'\
+    + 3 * SPACE\
+    + '/'\
+    + SPACE\
+    + '20'\
+    + 2 * SPACE
 
   DEF_TABLE_HEADER: str =\
     'Table Header'
@@ -145,7 +158,13 @@ class PlannerStrings:
     + "%"
 
   WEEK_PAGE_HEADER_1: str =\
-    'Goal #'
+    'Goals for Week: '\
+    + 6 * SPACE\
+    + DATE_STR\
+    + 3 * SPACE\
+    + RIGHT_ARROW\
+    + 3 * SPACE\
+    + DATE_STR
 
   WEEK_ACCOMPLISHMENTS: str =\
     "Notable achievements from last week include:"
@@ -166,7 +185,8 @@ class PlannerStrings:
   WEEK_FULFILLMENT_AREAS_1 =\
     ['Enjoyment', 'Job']
 
-
+  WEEK_CHECKLIST: list =\
+    ['[] Specific', '[] Measurable', '[] Acheiveable']
 
   #_____________________________________________________________________
   # Month layout strings
