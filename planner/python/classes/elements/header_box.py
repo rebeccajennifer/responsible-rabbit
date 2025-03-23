@@ -17,7 +17,7 @@ class HeaderBox(svgwrite.container.Group):
   #_____________________________________________________________________
   def __init__(self
   , wdth: int = 0
-  , header_lst: str = ['header0', 'header1']
+  , header_txt: str = ['header0', 'header1']
   , font_color: str = Colors.NORMAL
   , font_size: int = Font.NORMAL_SIZE
   , font: str = Font.FONT_FAMILY_NORMAL
@@ -39,7 +39,7 @@ class HeaderBox(svgwrite.container.Group):
     self.pad_rgt_: bool = pad_rgt
     self.pad_lft_: bool = pad_lft
 
-    self.header_lst_: str = header_lst
+    self.header_txt_: str = header_txt
 
     self.font_color_: str = font_color
     self.font_size_: int = font_size
@@ -67,7 +67,7 @@ class HeaderBox(svgwrite.container.Group):
     """
 
     # Width of each header
-    header_wdth: int = self.content_wdth_ / len(self.header_lst_)
+    header_wdth: int = self.content_wdth_ / len(self.header_txt_)
 
     insert_box_x: int = Dims.BRD_MARGIN_PX * self.pad_lft_
     insert_box_y: int = Dims.BRD_MARGIN_PX * self.pad_top_
@@ -89,7 +89,7 @@ class HeaderBox(svgwrite.container.Group):
       insert_box_y + self.box_hght_ - Font.TEXT_PADDING
     #___________________________________________________________________
 
-    for header in self.header_lst_:
+    for header in self.header_txt_:
 
       # Note: The SVG to PDF tool rsvg-convert only seems to support
       # 'text-after-edge' for alignment baseline, so this option

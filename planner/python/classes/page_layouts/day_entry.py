@@ -189,7 +189,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.pri_efforts_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , header_lst=Strings.DAY_PRIMARY_EFFORTS
+      , header_txt=Strings.DAY_PRIMARY_EFFORTS
       , entry_row_count=4
       , pad_top=True
       , pad_rgt=True
@@ -199,7 +199,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.checklist_: HeaderBox=\
       HeaderBox\
       ( wdth=self.main_content_wdth_
-      , header_lst=Strings.DAY_CHECKLIST
+      , header_txt=Strings.DAY_CHECKLIST
       , box_brdr_color='none'
       , box_fill_color='none'
       , pad_top=True
@@ -209,7 +209,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.todo_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , header_lst=['To Do']
+      , header_txt='To Do'
       , entry_row_count=8
       , pad_top=True
       , pad_rgt=True
@@ -219,7 +219,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt0_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , txt=Strings.DAY_PROMPTS[0]
+      , header_txt=Strings.DAY_PROMPTS[0]
       , entry_row_count=4
       , pad_top=True
       , pad_rgt=True
@@ -228,7 +228,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt1_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , txt=Strings.DAY_PROMPTS[1]
+      , header_txt=Strings.DAY_PROMPTS[1]
       , entry_row_count=3
       , pad_top=True
       , pad_rgt=True
@@ -237,7 +237,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt2_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , txt=Strings.DAY_PROMPTS[2]
+      , header_txt=Strings.DAY_PROMPTS[2]
       , entry_row_count=4
       , pad_top=True
       , pad_rgt=True
@@ -257,7 +257,7 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , hght=remaining_hght/2
-      , header_lst=[Strings.DAY_FOCUS]
+      , header_txt=[Strings.DAY_FOCUS]
       , entry_row_count=1
       , pad_top=True
       , pad_rgt=True
@@ -269,7 +269,7 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , hght=remaining_hght/2
-      , header_lst=[Strings.DAY_GRATITUDE]
+      , header_txt=[Strings.DAY_GRATITUDE]
       , pad_top=True
       , pad_rgt=True
       , show_outline=True

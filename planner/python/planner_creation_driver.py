@@ -55,7 +55,6 @@ if __name__ == '__main__':
     OneDayLayout\
     ( is_portrait=False
     , is_dbl_sided=False
-    , file_path=path.join('svg', 'day-layout.svg')
     )
 
   day_layout .save()

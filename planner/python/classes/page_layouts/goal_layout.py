@@ -23,7 +23,7 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for daily entry.
+#   Layout for goal. Populated with entry group for goal.
 #_______________________________________________________________________
 
 from classes.constants.dims import PlannerDims as Dims

@@ -23,7 +23,7 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for daily entry.
+#   Entry for goal. Fills content for one half sheet.
 #_______________________________________________________________________
 
 import svgwrite.container
@@ -111,7 +111,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     self.entries_: list =\
     [ HeaderBox\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_CHECKLIST]
+      , header_txt=[Strings.GOAL_CHECKLIST]
       , font_size=9
       , box_brdr_color='none'
       , box_fill_color='none'
@@ -120,7 +120,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_ACTIONS]
+      , header_txt=[Strings.GOAL_ACTIONS]
       , text_lst=['[]','[]','[]','[]','[]','[]','[]']
       , entry_row_count=7
       , pad_top=True
@@ -129,7 +129,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , EntryTable\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_MEASUREMENT]
+      , header_txt=[Strings.GOAL_MEASUREMENT]
       , entry_row_count=2
       , pad_top=True
       , show_outline=False
@@ -137,7 +137,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_COST]
+      , header_txt=[Strings.GOAL_COST]
       , entry_row_count=5
       , pad_top=True
       , font_color=Colors.NORMAL
@@ -148,7 +148,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_BENCHMARKS]
+      , header_txt=[Strings.GOAL_BENCHMARKS]
       , text_lst=Strings.GOAL_MONTHS
       , entry_row_count=3
       , pad_top=True
@@ -157,7 +157,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_LIFE_IMPROVEMENT]
+      , header_txt=[Strings.GOAL_LIFE_IMPROVEMENT]
       , entry_row_count=3
       , pad_top=True
       , show_outline=False
@@ -174,14 +174,14 @@ class GoalEntry(OnePageHalfLetterLayout):
     [ PromptTable\
       ( wdth=self.content_wdth_
       , hght=remaining_hght / 2
-      , txt=Strings.GOAL_PLAN
+      , header_txt=Strings.GOAL_PLAN
       , pad_top=True
       )
 
     , PromptTable\
       ( wdth=self.content_wdth_
       , hght=remaining_hght / 2
-      , txt=Strings.GOAL_REWARD
+      , header_txt=Strings.GOAL_REWARD
       , pad_top=True
       )
     ]

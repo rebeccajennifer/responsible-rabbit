@@ -106,7 +106,7 @@ class PlannerStrings:
     'Evaluation Metrics'
 
   GOAL_COST: str =\
-    'Compromises & Costs'
+    'Costs & Challenges'
 
   GOAL_LIFE_IMPROVEMENT: str =\
     'Impacts of Success'

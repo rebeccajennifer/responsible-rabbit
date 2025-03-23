@@ -285,7 +285,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     page_header: HeaderBox =\
       HeaderBox\
       ( wdth=self.content_wdth_
-      , header_lst=[header_txt]
+      , header_txt=[header_txt]
       , font_color=font_color
       , font_size=font_size
       , font=font
