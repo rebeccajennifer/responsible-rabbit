@@ -37,6 +37,7 @@ from classes.constants.style import PlannerFontStyle as Font
 from classes.elements.daily_schedule import DaySchedule as DaySched
 from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import PromptTable
+from classes.elements.entry_table import NumberedTable
 from classes.elements.header_box import HeaderBox
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
@@ -206,10 +207,11 @@ class DayEntry(OnePageHalfLetterLayout):
       , pad_rgt=True
       )
 
-    self.todo_: EntryTable =\
-      EntryTable\
+    self.todo_: NumberedTable =\
+      NumberedTable\
       ( wdth=self.main_content_wdth_
-      , header_txt='To Do'
+      , header_txt=Strings.DAY_TODO
+      , prepend_txt='[]'
       , entry_row_count=8
       , pad_top=True
       , pad_rgt=True

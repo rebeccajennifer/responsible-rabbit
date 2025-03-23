@@ -254,13 +254,19 @@ class PromptTable(EntryTable):
 
     return
 
+
+#_______________________________________________________________________
 class NumberedTable(EntryTable):
+  """
+  EntryTable with numbered rows.
+
+  """
 
   def __init__(self
   , wdth: int = 0
   , hght: int = 0
   , header_txt: str = [Strings.DEF_TABLE_HEADER]
-  , text_lst: str = []
+  , prepend_txt: str = ''
   , font_color: str = Colors.DEF_TBLE_HEADER_TEXT
   , font_size: int = Font.NORMAL_SIZE
   , font: str = Font.FONT_FAMILY_HEADER
@@ -280,7 +286,7 @@ class NumberedTable(EntryTable):
         wdth            : width of table
         hght            : height of table
         header_txt      : list of headers
-        text_lst        : list of headers
+        prepend_txt        : list of text to include in rows
         font_color      : color of header text
         font_size       : size of header text
         font            : font of header text
@@ -296,12 +302,30 @@ class NumberedTable(EntryTable):
         show_outline    : show table outline
     """
 
-    self.text_lst_ = text_lst
-
-    if (not text_lst):
-
+    self.prepend_txt_ = [''] * entry_row_count
+    #___________________________________________________________________
+    # If prepend_txt is not provided, default to numbered.
+    #___________________________________________________________________
+    if (not prepend_txt):
       for i in range(entry_row_count):
-        self.text_lst_ = self.text_lst_ + [i+1]
+        self.prepend_txt_ = self.prepend_txt_ + [i+1]
+    #___________________________________________________________________
+    # If prepend_txt is a string, prepend it to each row.
+    #___________________________________________________________________
+    elif (isinstance(prepend_txt, str)):
+      self.prepend_txt_ = [prepend_txt] * entry_row_count
+    #___________________________________________________________________
+    # Otherwise, assign prepend_txt to class variable
+    #___________________________________________________________________
+    else:
+      for i in range(entry_row_count):
+        try:
+          self.prepend_txt_[i] = prepend_txt[i]
+
+        except IndexError:
+          self.prepend_txt_[i] = ''
+    #___________________________________________________________________
+
 
     super().__init__\
     ( wdth           =wdth
@@ -361,7 +385,7 @@ class NumberedTable(EntryTable):
         )
 
       txt: svgwrite.txt.Text = svgwrite.text.Text\
-      ( self.text_lst_[i]
+      ( self.prepend_txt_[i]
       , insert=(text_x, text_y)
       , text_anchor='start'
       , alignment_baseline='text-after-edge'

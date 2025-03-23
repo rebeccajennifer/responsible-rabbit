@@ -268,6 +268,8 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   , font_color: str = Colors.NORMAL
   , font_size: int = Font.HEAD_2_SIZE
   , font: str = Font.FONT_FAMILY_HEADER
+  , box_fill_color: str = Colors.DEF_PAGE_HEADER_COLOR
+  , box_brdr_color: str = Colors.BORDER_COLOR
   ) -> HeaderBox:
     """
     Creates page header and saves it to class variable.
@@ -278,9 +280,6 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     Returns:
       HeaderBox for page header
     """
-
-    box_fill_color: str = Colors.DEF_PAGE_HEADER_COLOR
-    box_brdr_color: str = Colors.BORDER_COLOR
 
     page_header: HeaderBox =\
       HeaderBox\

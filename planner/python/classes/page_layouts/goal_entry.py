@@ -121,7 +121,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     , NumberedTable\
       ( wdth=self.content_wdth_
       , header_txt=[Strings.GOAL_ACTIONS]
-      , text_lst=['[]','[]','[]','[]','[]','[]','[]']
+      , prepend_txt='[]'
       , entry_row_count=7
       , pad_top=True
       , show_outline=True
@@ -149,7 +149,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     , NumberedTable\
       ( wdth=self.content_wdth_
       , header_txt=[Strings.GOAL_BENCHMARKS]
-      , text_lst=Strings.GOAL_MONTHS
+      , prepend_txt=Strings.GOAL_MONTHS
       , entry_row_count=3
       , pad_top=True
       , show_outline=True
@@ -207,6 +207,7 @@ class GoalEntry(OnePageHalfLetterLayout):
       ( header_txt=Strings.GOAL_PAGE_HEADER
       , font_size=font_size
       , font=font_family
+      , box_fill_color='none'
       )
 
     return page_header

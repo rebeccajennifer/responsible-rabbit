@@ -69,6 +69,9 @@ class PlannerStrings:
   DAY_PRIMARY_EFFORTS: list =\
     ['Primary Efforts', 'Alignment']
 
+  DAY_TODO: str =\
+    'To Do'
+
   DAY_CHECKLIST: list =\
   ['[] Vision ', '[] Goals', '[] Calendar', '[] Habit']
 
