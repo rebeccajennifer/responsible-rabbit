@@ -30,6 +30,7 @@ class PlannerStrings:
   """
   Strings used in planner.
   """
+  SPACE: str ='\u00A0\u00A0'
 
   DEF_TABLE_HEADER: str =\
     'Table Header'
@@ -44,8 +45,15 @@ class PlannerStrings:
     'layout.svg'
 
   DEF_DAY_LAYOUT_PATH: str =\
-    'day_layout.svg'
+    'day-layout.svg'
 
+  DEF_GOAL_LAYOUT_PATH: str =\
+    'goal-layout.svg'
+
+
+  #_____________________________________________________________________
+  # Day layout strings
+  #_____________________________________________________________________
   QUOTE0: str =\
     'It’s not always that we need to do more, but rather that we need '\
     'to focus on less.'
@@ -75,3 +83,39 @@ class PlannerStrings:
     , 'One acheivement I take pride in:'
     , 'How can I move towards my ideal self?'
     ]
+  #_____________________________________________________________________
+
+  #_____________________________________________________________________
+  # Goal layout strings
+  #_____________________________________________________________________
+  GOAL_PAGE_HEADER: str =\
+    'Goal #'
+
+  GOAL_CHECKLIST: str =\
+     '[] Specific'    + SPACE\
+   + '[] Actionable'  + SPACE\
+   + '[] Measureable' + SPACE\
+   + '[] Exciting'    + SPACE\
+   + '[] Challenging'
+
+
+  GOAL_ACTIONS: str =\
+    'Critical Steps'
+
+  GOAL_MEASUREMENT: str =\
+    'Evaluation Metrics'
+
+  GOAL_COST: str =\
+    'Compromises & Costs'
+
+  GOAL_LIFE_IMPROVEMENT: str =\
+    'Impacts of Success'
+
+  GOAL_BENCHMARKS: str =\
+    'Monthly Benchmarks'
+
+  GOAL_PLAN: str =\
+    'Execution Plan'
+
+  GOAL_REWARD: str =\
+    'Celebration Plan'

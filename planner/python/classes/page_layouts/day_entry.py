@@ -288,9 +288,9 @@ class DayEntry(OnePageHalfLetterLayout):
     Returns:
 
     """
-    font_size: int = Font.HEAD_1_SIZE
+    font_size: int = Font.DAY_PAGE_HEADER_SIZE
     font_family: str = Font.FONT_FAMILY_NORMAL
-    sp: str ='\u00A0\u00A0'
+    sp: str = Strings.SPACE
 
     days: str =\
       'Mon' + sp +\
@@ -307,7 +307,7 @@ class DayEntry(OnePageHalfLetterLayout):
       , font=font_family
       )
 
-    date_str: str = sp + sp + '/' + sp + sp + '/' +'20' + sp + sp
+    date_str: str = sp + sp + '/' + sp + sp + '/' + sp + '20' + sp + sp
 
     insert_date_x: int = self.content_wdth_ - Font.TEXT_PADDING
     insert_date_y: int = font_size + Font.TEXT_PADDING
