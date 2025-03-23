@@ -86,7 +86,7 @@ class DaySchedule(EntryTable):
     super().__init__\
       ( wdth=wdth
       , hght=hght
-      , text_lst=[Strings.DAILY_SCHEDULE_HEADER]
+      , header_lst=[Strings.DAILY_SCHEDULE_HEADER]
       , font_color=Colors.NORMAL
       , font_size=Font.NORMAL_SIZE
       , font=Font.FONT_FAMILY_HEADER

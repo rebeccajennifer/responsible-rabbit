@@ -189,7 +189,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.pri_efforts_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , text_lst=Strings.DAY_PRIMARY_EFFORTS
+      , header_lst=Strings.DAY_PRIMARY_EFFORTS
       , entry_row_count=4
       , pad_top=True
       , pad_rgt=True
@@ -199,7 +199,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.checklist_: HeaderBox=\
       HeaderBox\
       ( wdth=self.main_content_wdth_
-      , text_lst=Strings.DAY_CHECKLIST
+      , header_lst=Strings.DAY_CHECKLIST
       , box_brdr_color='none'
       , box_fill_color='none'
       , pad_top=True
@@ -209,7 +209,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.todo_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , text_lst=['To Do']
+      , header_lst=['To Do']
       , entry_row_count=8
       , pad_top=True
       , pad_rgt=True
@@ -257,7 +257,7 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , hght=remaining_hght/2
-      , text_lst=[Strings.DAY_FOCUS]
+      , header_lst=[Strings.DAY_FOCUS]
       , entry_row_count=1
       , pad_top=True
       , pad_rgt=True
@@ -269,7 +269,7 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , hght=remaining_hght/2
-      , text_lst=[Strings.DAY_GRATITUDE]
+      , header_lst=[Strings.DAY_GRATITUDE]
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -288,9 +288,9 @@ class DayEntry(OnePageHalfLetterLayout):
     Returns:
 
     """
-    font_size: int = Font.HEAD_1_SIZE
+    font_size: int = Font.DAY_PAGE_HEADER_SIZE
     font_family: str = Font.FONT_FAMILY_NORMAL
-    sp: str ='\u00A0\u00A0'
+    sp: str = Strings.SPACE
 
     days: str =\
       'Mon' + sp +\
@@ -307,7 +307,7 @@ class DayEntry(OnePageHalfLetterLayout):
       , font=font_family
       )
 
-    date_str: str = sp + sp + '/' + sp + sp + '/' +'20' + sp + sp
+    date_str: str = sp + sp + '/' + sp + sp + '/' + sp + '20' + sp + sp
 
     insert_date_x: int = self.content_wdth_ - Font.TEXT_PADDING
     insert_date_y: int = font_size + Font.TEXT_PADDING

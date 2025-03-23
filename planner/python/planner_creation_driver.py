@@ -34,6 +34,7 @@ import argparse
 from os import path
 
 from classes.page_layouts.day_layout import OneDayLayout
+from classes.page_layouts.goal_layout import GoalLayout
 from classes.planner_parser import PlannerCreationParser
 
 #_______________________________________________________________________
@@ -50,14 +51,22 @@ if __name__ == '__main__':
   args: argparse.Namespace = parser.parse_args()
 
   #_____________________________________________________________________
-  new_layout_test =\
+  day_layout =\
     OneDayLayout\
     ( is_portrait=False
     , is_dbl_sided=False
     , file_path=path.join('svg', 'day-layout.svg')
     )
 
-  new_layout_test.save()
+  day_layout .save()
+
+  goal_layout =\
+    GoalLayout\
+    ( is_portrait=False
+    , is_dbl_sided=False
+    )
+
+  goal_layout.save()
 
   print("all done")
 

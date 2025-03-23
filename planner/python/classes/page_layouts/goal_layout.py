@@ -23,68 +23,52 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Standard styles used throughout program.
+#   Layout for daily entry.
 #_______________________________________________________________________
 
 from classes.constants.dims import PlannerDims as Dims
+from classes.constants.strings import PlannerStrings as Strings
 
-#_______________________________________________________________________
-class PlannerColors:
-  """
-  Contains colors used in the planner.
-  """
-
-  MEDIUM_GREY: str   = '#888888'
-  LIGHT_GREY: str    = '#d7d7d7'
-  CYAN: str          = '#008080'
-  VIOLET: str        = '#800080'
-  WHITE: str         = '#ffffff'
-
-  FLUX_RED: str = '#d75f87'
-  FLUX_GRN: str = '#87d75f'
-  FLUX_YEL: str = '#d7875f'
-  FLUX_BLU: str = '#5f5f87'
-  FLUX_MAG: str = '#af5fd7'
-  FLUX_CYA: str = '#5fafd7'
-  FLUX_WHT: str = '#d7d7d7'
-  FLUX_BLK: str = '#5f5f5f'
-  FLUX_GRY: str = '#444444'
-
-  PROMPT: str = FLUX_MAG
-  NORMAL: str = FLUX_GRY
-  HEADING: str = FLUX_RED
-
-  DEF_PAGE_HEADER_COLOR : str = LIGHT_GREY
-
-  DEF_TBLE_HEADER_FILL  : str = MEDIUM_GREY
-  DEF_TBLE_HEADER_TEXT  : str = WHITE
-
-  BORDER_COLOR          : str = MEDIUM_GREY
-  DEF_ROW_COLOR         : str = LIGHT_GREY
-
-  DEBUG0_COLOR          : str = CYAN
-  DEBUG1_COLOR          : str = VIOLET
+from classes.page_layouts.goal_entry import GoalEntry
+from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
 
 
 #_______________________________________________________________________
-class PlannerFontStyle:
-  """
-  Contains standard font sizes.
-  """
+class GoalLayout(TwoPageHalfLetterSize_):
 
-  GOAL_HEADER_SIZE      : int = 28
-  DAY_PAGE_HEADER_SIZE  : int = 12
+  #_____________________________________________________________________
+  def  __init__(self
+  , is_portrait: bool = False
+  , is_dbl_sided: bool = False
+  , file_path: str = Strings.DEF_GOAL_LAYOUT_PATH
+  ):
+    super().__init__\
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=file_path
+      )
+    return
 
-  HEAD_1_SIZE: int = 12
-  HEAD_2_SIZE: int = 24
-  PROMPT_SIZE: int = 14
-  NORMAL_SIZE: int = 10
-  LITTLE_SIZE: int = 8
+  #_____________________________________________________________________
+  def create_content(self):
+    super().create_content()
 
-  TEXT_PADDING: int = 4
+    self.content_0_ =\
+      GoalEntry\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      )
 
-  FONT_FAMILY_NORMAL: str = 'Ubuntu Mono'
-  FONT_FAMILY_HEADER: str = 'Trebuchet MS'
-  FONT_FAMILY_PROMPT: str = 'Trebuchet MS'
+    self.content_1_ =\
+      GoalEntry\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      )
 
-  STYLE_PROMPT: str = 'italics'
+    return
+
+  #_____________________________________________________________________
+  def add_content(self):
+    super().add_content()
