@@ -17,7 +17,7 @@ class HeaderBox(svgwrite.container.Group):
   #_____________________________________________________________________
   def __init__(self
   , wdth: int = 0
-  , header_txt: str = ['header0', 'header1']
+  , header_txt: str = ''
   , font_color: str = Colors.NORMAL
   , font_size: int = Font.NORMAL_SIZE
   , font: str = Font.FONT_FAMILY_NORMAL
@@ -39,8 +39,6 @@ class HeaderBox(svgwrite.container.Group):
     self.pad_rgt_: bool = pad_rgt
     self.pad_lft_: bool = pad_lft
 
-    self.header_txt_: str = header_txt
-
     self.font_color_: str = font_color
     self.font_size_: int = font_size
     self.font_: str = font
@@ -55,6 +53,14 @@ class HeaderBox(svgwrite.container.Group):
 
     self.content_wdth_ = self.total_wdth_\
       - Dims.BRD_MARGIN_PX * (self.pad_lft_ + self.pad_rgt_)
+
+    #___________________________________________________________________
+    # Header can be a string or list
+    if (isinstance(header_txt, str)):
+      self.header_txt_ = [header_txt]
+    else:
+      self.header_txt_ = header_txt
+    #___________________________________________________________________
 
     self.create_header()
 

@@ -105,20 +105,11 @@ class EntryTable(svgwrite.container.Group):
     self.pad_rgt_: bool = pad_rgt
     self.pad_lft_: bool = pad_lft
 
-    self.header_txt_      : str   = header_txt
-
-    #___________________________________________________________________
-    # Header can be a string or list
-    if (isinstance(header_txt, str)):
-      self.header_txt_ = [header_txt]
-    else:
-      self.header_txt_ = header_txt
-    #___________________________________________________________________
 
     self.header_box_: HeaderBox =\
       HeaderBox\
       ( wdth=self.content_wdth_
-      , header_txt=self.header_txt_
+      , header_txt=header_txt
       , font_color=self.font_color_
       , font_size=self.font_size_
       , font=self.font_

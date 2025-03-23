@@ -83,7 +83,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     self.entries_: list =\
     [ HeaderBox\
       ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_CHECKLIST]
+      , header_txt=Strings.GOAL_CHECKLIST
       , font_size=9
       , box_brdr_color='none'
       , box_fill_color='none'
@@ -92,7 +92,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_ACTIONS]
+      , header_txt=Strings.GOAL_ACTIONS
       , prepend_txt='[]'
       , entry_row_count=7
       , pad_top=True
@@ -101,7 +101,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , EntryTable\
       ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_MEASUREMENT]
+      , header_txt=Strings.GOAL_MEASUREMENT
       , entry_row_count=2
       , pad_top=True
       , show_outline=False
@@ -109,7 +109,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_COST]
+      , header_txt=Strings.GOAL_COST
       , entry_row_count=5
       , pad_top=True
       , font_color=Colors.NORMAL
@@ -120,7 +120,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_BENCHMARKS]
+      , header_txt=Strings.GOAL_BENCHMARKS
       , prepend_txt=Strings.GOAL_MONTHS
       , entry_row_count=3
       , pad_top=True
@@ -129,7 +129,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_LIFE_IMPROVEMENT]
+      , header_txt=Strings.GOAL_LIFE_IMPROVEMENT
       , entry_row_count=3
       , pad_top=True
       , show_outline=False
@@ -137,10 +137,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     ]
 
     # Calculate remaining height to evenly distribute spanning tables
-    remaining_hght: int = self.content_hght_
-
-    for entry in self.entries_:
-      remaining_hght = remaining_hght - entry.total_hght_
+    remaining_hght: int = self.calc_remaining_hght()
 
     self.entries_ = self.entries_ +\
     [ PromptTable\
