@@ -74,6 +74,7 @@ class PlannerFontStyle:
 
   GOAL_HEADER_SIZE      : int = 28
   DAY_PAGE_HEADER_SIZE  : int = 12
+  WEEK_PAGE_HEADER_SIZE : int = 12
 
   HEAD_1_SIZE: int = 12
   HEAD_2_SIZE: int = 24

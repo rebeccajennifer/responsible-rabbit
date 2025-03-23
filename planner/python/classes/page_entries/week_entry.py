@@ -80,79 +80,51 @@ class WeekEntry0(OnePageHalfLetterLayout):
     super().create_content()
 
     self.entries_: list =\
-    [ HeaderBox\
-      ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_CHECKLIST]
-      , font_size=9
-      , box_brdr_color='none'
-      , box_fill_color='none'
-      , pad_top=True
-      )
-
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_ACTIONS]
-      , prepend_txt='[]'
-      , entry_row_count=7
-      , pad_top=True
-      , show_outline=True
-      )
-
-    , EntryTable\
-      ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_MEASUREMENT]
-      , entry_row_count=2
-      , pad_top=True
-      , show_outline=False
-      )
-
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_COST]
-      , entry_row_count=5
-      , pad_top=True
-      , font_color=Colors.NORMAL
-      , box_brdr_color='none'
-      , box_fill_color='none'
-      , show_outline=True
-      )
-
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_BENCHMARKS]
-      , prepend_txt=Strings.GOAL_MONTHS
-      , entry_row_count=3
-      , pad_top=True
-      , show_outline=True
-      )
-
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=[Strings.GOAL_LIFE_IMPROVEMENT]
-      , entry_row_count=3
-      , pad_top=True
-      , show_outline=False
-      )
-    ]
-
-    # Calculate remaining height to evenly distribute spanning tables
-    remaining_hght: int = self.content_hght_
-
-    for entry in self.entries_:
-      remaining_hght = remaining_hght - entry.total_hght_
-
-    self.entries_ = self.entries_ +\
     [ PromptTable\
       ( wdth=self.content_wdth_
-      , hght=remaining_hght / 2
-      , header_txt=Strings.GOAL_PLAN
+      , header_txt=Strings.WEEK_ACCOMPLISHMENTS
+      , entry_row_count=4
       , pad_top=True
       )
 
     , PromptTable\
       ( wdth=self.content_wdth_
+      , header_txt=Strings.WEEK_IMPROVEMENT
+      , entry_row_count=4
+      , pad_top=True
+      )
+
+    , EntryTable\
+      ( wdth=self.content_wdth_
+      , header_txt=Strings.WEEK_GRATITUDE
+      , entry_row_count=3
+      , pad_top=True
+      , show_outline=False
+      )
+
+    , HeaderBox\
+      ( wdth=self.content_wdth_
+      , header_txt=[Strings.WEEK_FULFILLMENT]
+      , font=Font.FONT_FAMILY_HEADER
+      , pad_top=True
+      )
+    ]
+
+    # Calculate remaining height to evenly distribute spanning tables
+    remaining_hght: int = self.calc_remaining_hght()
+
+    self.entries_ = self.entries_ +\
+    [ EntryTable\
+      ( wdth=self.content_wdth_
       , hght=remaining_hght / 2
-      , header_txt=Strings.GOAL_REWARD
+      , header_txt=Strings.WEEK_FULFILLMENT_AREAS_0
+      , pad_top=True
+      )
+
+    , EntryTable\
+      ( wdth=self.content_wdth_
+      , hght=remaining_hght / 2
+      , header_txt=Strings.WEEK_FULFILLMENT_AREAS_1
       , pad_top=True
       )
     ]
@@ -171,14 +143,14 @@ class WeekEntry0(OnePageHalfLetterLayout):
     Returns:
 
     """
-    font_size: int = Font.GOAL_HEADER_SIZE
+    font_size: int = Font.WEEK_PAGE_HEADER_SIZE
     font_family: str = Font.FONT_FAMILY_HEADER
 
     page_header = super().create_page_header\
-      ( header_txt=Strings.GOAL_PAGE_HEADER
+      ( header_txt=Strings.WEEK_PAGE_HEADER_0
       , font_size=font_size
       , font=font_family
-      , box_fill_color='none'
+      , box_fill_color=Colors.DEF_PAGE_HEADER_COLOR
       )
 
     return page_header

@@ -140,10 +140,33 @@ class PlannerStrings:
   # Week layout strings
   #_____________________________________________________________________
   WEEK_PAGE_HEADER_0: str =\
-    'Goal #'
+    "Last Week's Primary Effort Completion:"\
+    + 10 * SPACE\
+    + "%"
 
   WEEK_PAGE_HEADER_1: str =\
     'Goal #'
+
+  WEEK_ACCOMPLISHMENTS: str =\
+    "Notable achievements from last week include:"
+
+  WEEK_IMPROVEMENT: str =\
+    'What do I need to prioritize for growth?'
+
+  WEEK_GRATITUDE: str =\
+    'I appreciate...'
+
+  WEEK_FULFILLMENT: str =\
+    'In the coming week, how can I find the most fulfillment in '\
+    'these areas?'
+
+  WEEK_FULFILLMENT_AREAS_0 =\
+    ['Health', 'Connections']
+
+  WEEK_FULFILLMENT_AREAS_1 =\
+    ['Enjoyment', 'Job']
+
+
 
   #_____________________________________________________________________
   # Month layout strings
