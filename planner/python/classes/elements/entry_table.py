@@ -342,7 +342,7 @@ class NumberedTable(EntryTable):
         + row_height\
         + i * row_height\
 
-      text_y: int = line_y - Font.TEXT_PADDING
+      text_y: int = line_y - 6
 
       row_line: svgwrite.shapes.Line =\
         svgwrite.shapes.Line\
