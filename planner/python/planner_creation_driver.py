@@ -35,6 +35,7 @@ from os import path
 
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
+from classes.page_layouts.week_layout import WeekLayout
 from classes.planner_parser import PlannerCreationParser
 
 #_______________________________________________________________________
@@ -50,22 +51,31 @@ if __name__ == '__main__':
 
   args: argparse.Namespace = parser.parse_args()
 
+  is_portrait: bool   = False
+  is_dbl_sided: bool  = False
+
   #_____________________________________________________________________
   day_layout =\
     OneDayLayout\
-    ( is_portrait=False
-    , is_dbl_sided=False
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
     )
-
   day_layout .save()
 
   goal_layout =\
     GoalLayout\
-    ( is_portrait=False
-    , is_dbl_sided=False
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
     )
-
   goal_layout.save()
+
+  week_layout =\
+    WeekLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    )
+  week_layout.save()
+
 
   print("all done")
 

@@ -66,38 +66,10 @@ class GoalEntry(OnePageHalfLetterLayout):
     return
 
   #_____________________________________________________________________
-  def add_content(self) -> None:
-    """
-    Add content to layout.
-
-    Parameters:
-      None
-
-    Returns:
-      None
-    """
-    super().add_content()
-
-    insert_x: int = self.content_insert_pt_x_
-    insert_y: int = self.content_insert_pt_y_
-
-    for entry in self.entries_:
-
-      entry['transform'] =\
-      f'translate({insert_x},{insert_y})'
-
-      insert_y = insert_y + entry.total_hght_
-
-      self.add(entry)
-
-    return
-
-  #_____________________________________________________________________
   def create_content(self) -> None:
     """
-
     Side Effects:
-      Populates the following class variables.
+      Populates self.entries_ class variable.
 
     Parameters:
       None
@@ -185,7 +157,6 @@ class GoalEntry(OnePageHalfLetterLayout):
       , pad_top=True
       )
     ]
-
 
     return
 

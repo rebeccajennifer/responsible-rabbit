@@ -23,24 +23,25 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for goal. Populated with entry group for goal.
+#   Layout for week . Populated with entry group for week.
 #_______________________________________________________________________
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_entries.goal_entry import GoalEntry
+from classes.page_entries.week_entry import WeekEntry0
+from classes.page_entries.week_entry import WeekEntry1
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
 
 
 #_______________________________________________________________________
-class GoalLayout(TwoPageHalfLetterSize_):
+class WeekLayout(TwoPageHalfLetterSize_):
 
   #_____________________________________________________________________
   def  __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_GOAL_LAYOUT_PATH
+  , file_path: str = Strings.DEF_WEEK_LAYOUT_PATH
   ):
     super().__init__\
       ( is_portrait=is_portrait
@@ -54,14 +55,14 @@ class GoalLayout(TwoPageHalfLetterSize_):
     super().create_content()
 
     self.content_0_ =\
-      GoalEntry\
+      WeekEntry0\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
       )
 
     self.content_1_ =\
-      GoalEntry\
+      WeekEntry1\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX

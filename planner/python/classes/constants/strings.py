@@ -41,6 +41,9 @@ class PlannerStrings:
   DAILY_SCHEDULE_HEADER: str =\
     'Time Well Spent'
 
+  #_____________________________________________________________________
+  # Default file names
+  #_____________________________________________________________________
   DEF_LAYOUT_PATH: str =\
     'layout.svg'
 
@@ -50,6 +53,11 @@ class PlannerStrings:
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout.svg'
 
+  DEF_GOAL_LAYOUT_PATH: str =\
+    'goal-layout.svg'
+
+  DEF_WEEK_LAYOUT_PATH: str =\
+    'week-layout.svg'
 
   #_____________________________________________________________________
   # Day layout strings
@@ -86,7 +94,6 @@ class PlannerStrings:
     , 'One acheivement I take pride in:'
     , 'How can I move towards my ideal self?'
     ]
-  #_____________________________________________________________________
 
   #_____________________________________________________________________
   # Goal layout strings
@@ -96,9 +103,9 @@ class PlannerStrings:
 
   GOAL_CHECKLIST: str =\
      '[] Specific'    + SPACE\
-   + '[] Actionable'  + SPACE\
    + '[] Measureable' + SPACE\
-   + '[] Exciting'    + SPACE\
+   + '[] Achievable'  + SPACE\
+   + '[] Relevant'    + SPACE\
    + '[] Challenging'
 
 
@@ -128,3 +135,27 @@ class PlannerStrings:
   , 'Month 2:'
   , 'Month 3:'
   ]
+
+  #_____________________________________________________________________
+  # Week layout strings
+  #_____________________________________________________________________
+  WEEK_PAGE_HEADER_0: str =\
+    'Goal #'
+
+  WEEK_PAGE_HEADER_1: str =\
+    'Goal #'
+
+  #_____________________________________________________________________
+  # Month layout strings
+  #_____________________________________________________________________
+  MONTH_PAGE_HEADER_0: str =\
+    'Goal #'
+
+  MONTH_PAGE_HEADER_1: str =\
+    'Goal #'
+
+  MONTH_FOOTER_0: str =\
+    "This month's # 1 priority"
+
+  MONTH_FOOTER_1: str =\
+    "This month's kaizen"

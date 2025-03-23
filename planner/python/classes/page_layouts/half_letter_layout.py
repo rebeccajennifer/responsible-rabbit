@@ -194,6 +194,8 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
     super().__init__()
 
+    self.entries_ = []
+
     self.total_hght_: int = total_hght
     self.total_wdth_: int = total_wdth
     self.padding_   : int = padding
@@ -224,7 +226,6 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     Creates content.
     """
 
-
     self.border_: svgwrite.shapes.Rect = self.create_border()
 
     return
@@ -233,14 +234,33 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   def add_content(self) -> None:
     """
     Adds content to group.
+
+    Parameters:
+      None
+
+    Returns:
+      None
     """
 
     x: int = self.page_header_insert_pt_x_
     y: int = self.page_header_insert_pt_y_
+
     self.page_header_['transform'] = f'translate({x}, {y})'
 
     self.add(self.border_)
     self.add(self.page_header_)
+
+    insert_x: int = self.content_insert_pt_x_
+    insert_y: int = self.content_insert_pt_y_
+
+    for entry in self.entries_:
+
+      entry['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
+      insert_y = insert_y + entry.total_hght_
+
+      self.add(entry)
 
     return
 
