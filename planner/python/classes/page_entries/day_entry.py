@@ -191,7 +191,7 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PRIMARY_EFFORTS
-      , entry_row_count=4
+      , row_count=4
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -212,7 +212,7 @@ class DayEntry(OnePageHalfLetterLayout):
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_TODO
       , prepend_txt='[]'
-      , entry_row_count=8
+      , row_count=8
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -222,7 +222,7 @@ class DayEntry(OnePageHalfLetterLayout):
       PromptTable\
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[0]
-      , entry_row_count=4
+      , row_count=4
       , pad_top=True
       , pad_rgt=True
       )
@@ -231,7 +231,7 @@ class DayEntry(OnePageHalfLetterLayout):
       PromptTable\
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[1]
-      , entry_row_count=3
+      , row_count=3
       , pad_top=True
       , pad_rgt=True
       )
@@ -240,7 +240,7 @@ class DayEntry(OnePageHalfLetterLayout):
       PromptTable\
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[2]
-      , entry_row_count=4
+      , row_count=4
       , pad_top=True
       , pad_rgt=True
       )
@@ -260,7 +260,7 @@ class DayEntry(OnePageHalfLetterLayout):
       ( wdth=self.main_content_wdth_
       , hght=remaining_hght/2
       , header_txt=[Strings.DAY_FOCUS]
-      , entry_row_count=1
+      , row_count=1
       , pad_top=True
       , pad_rgt=True
       , show_outline=True

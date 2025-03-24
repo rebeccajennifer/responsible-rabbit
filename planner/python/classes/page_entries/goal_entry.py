@@ -94,7 +94,7 @@ class GoalEntry(OnePageHalfLetterLayout):
       ( wdth=self.content_wdth_
       , header_txt=Strings.GOAL_ACTIONS
       , prepend_txt='[]'
-      , entry_row_count=7
+      , row_count=7
       , pad_top=True
       , show_outline=True
       )
@@ -102,7 +102,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     , EntryTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.GOAL_MEASUREMENT
-      , entry_row_count=2
+      , row_count=2
       , pad_top=True
       , show_outline=False
       )
@@ -110,7 +110,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     , NumberedTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.GOAL_COST
-      , entry_row_count=5
+      , row_count=5
       , pad_top=True
       , font_color=Colors.NORMAL
       , box_brdr_color='none'
@@ -122,7 +122,7 @@ class GoalEntry(OnePageHalfLetterLayout):
       ( wdth=self.content_wdth_
       , header_txt=Strings.GOAL_BENCHMARKS
       , prepend_txt=Strings.GOAL_MONTHS
-      , entry_row_count=3
+      , row_count=3
       , pad_top=True
       , show_outline=True
       )
@@ -130,7 +130,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     , NumberedTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.GOAL_LIFE_IMPROVEMENT
-      , entry_row_count=3
+      , row_count=3
       , pad_top=True
       , show_outline=False
       )

@@ -52,9 +52,10 @@ class EntryTable(svgwrite.container.Group):
   , font: str = Font.FONT_FAMILY_HEADER
   , box_fill_color: str = Colors.DEF_TBLE_HEADER_FILL
   , box_brdr_color: str = Colors.BORDER_COLOR
-  , entry_col_count: int = 1
-  , entry_row_count: int = 1
-  , entry_row_hght: int = DEF_ROW_HGHT
+  , row_count: int = 1
+  , row_hght: int = DEF_ROW_HGHT
+  , col_count: int = 1
+  , col_wdth: list = []
   , pad_top: bool = False
   , pad_bot: bool = False
   , pad_rgt: bool = False
@@ -71,9 +72,11 @@ class EntryTable(svgwrite.container.Group):
         font            : font of header text
         box_fill_color  : header fill color
         box_brdr_color  : border color
-        entry_col_count : column count of table
-        entry_row_count : row count of table
-        entry_row_hght  : height of row, optional
+        row_count       : row count of table
+        row_hght        : height of row, optional
+        col_count       : column count of table
+        col_wdth        : width of rows, optional
+                          expect that number of elements = col_count
         pad_top         : add padding to top
         pad_bot         : add padding to bottom
         pad_rgt         : add padding to right
@@ -96,8 +99,8 @@ class EntryTable(svgwrite.container.Group):
     self.box_fill_color_  : str   = box_fill_color
 
     self.box_brdr_color_  : str   = box_brdr_color
-    self.entry_col_count_ : int   = entry_col_count
-    self.entry_row_count_ : int   = entry_row_count
+    self.col_count_ : int   = col_count
+    self.row_count_ : int   = row_count
     self.show_outline_    : bool  = show_outline
 
     self.pad_top_: bool = pad_top
@@ -122,17 +125,30 @@ class EntryTable(svgwrite.container.Group):
       , pad_rgt=self.pad_rgt_
       )
 
+    #___________________________________________________________________
+    # Row height calculation
     # Height will take priority in calculation of row height
+    #___________________________________________________________________
     if (self.total_hght_):
       self.row_hght_  = (self.total_hght_\
-        - self.header_box_.total_hght_) / entry_row_count
+        - self.header_box_.total_hght_) / row_count
 
     else:
-      self.row_hght_ = entry_row_hght
-
+      self.row_hght_ = row_hght
       self.total_hght_ = self.header_box_.total_hght_\
-      + entry_row_hght * entry_row_count\
+      + row_hght * row_count\
       + self.pad_bot_ * Dims.BRD_MARGIN_PX
+
+    #___________________________________________________________________
+    # Column width calculation and error handling
+    # If no column widths specified, or number of elements in column
+    # width list does not match the number of columns, make all columns
+    # equal.
+    #___________________________________________________________________
+    col_wdths: list = col_wdth
+    if ( (not col_wdths) or len(col_wdths) != self.col_count):
+      col_wdths = col_count * [self.content_wdth_ / col_count]
+    #___________________________________________________________________
 
     #___________________________________________________________________
     # Adjust dims for padding
@@ -181,7 +197,7 @@ class EntryTable(svgwrite.container.Group):
 
     row_height: int = self.row_hght_
 
-    for i in range(self.entry_row_count_):
+    for i in range(self.row_count_):
 
       line_y: int = self.header_box_.total_hght_\
         + row_height\
@@ -197,6 +213,12 @@ class EntryTable(svgwrite.container.Group):
       row_group.add(row_line)
 
     return row_group
+
+
+  #_____________________________________________________________________
+  def add_rows_with_columns(self):
+
+   return
 
   #_____________________________________________________________________
   def add_content(self):
@@ -216,8 +238,8 @@ class PromptTable(EntryTable):
   , wdth: int = 0
   , hght: int = 0
   , header_txt: str = Strings.DEF_TABLE_HEADER
-  , entry_col_count: int = 1
-  , entry_row_count: int = 1
+  , col_count: int = 1
+  , row_count: int = 1
   , pad_top: bool = False
   , pad_bot: bool = False
   , pad_rgt: bool = False
@@ -233,8 +255,8 @@ class PromptTable(EntryTable):
     , font=Font.FONT_FAMILY_NORMAL
     , box_fill_color='none'
     , box_brdr_color='none'
-    , entry_col_count=entry_col_count
-    , entry_row_count=entry_row_count
+    , col_count=col_count
+    , row_count=row_count
     , pad_top=pad_top
     , pad_bot=pad_bot
     , pad_rgt=pad_rgt
@@ -263,9 +285,9 @@ class NumberedTable(EntryTable):
   , font: str = Font.FONT_FAMILY_HEADER
   , box_fill_color: str = Colors.DEF_TBLE_HEADER_FILL
   , box_brdr_color: str = Colors.BORDER_COLOR
-  , entry_col_count: int = 1
-  , entry_row_count: int = 1
-  , entry_row_hght: int = EntryTable.DEF_ROW_HGHT
+  , col_count: int = 1
+  , row_count: int = 1
+  , row_hght: int = EntryTable.DEF_ROW_HGHT
   , pad_top: bool = False
   , pad_bot: bool = False
   , pad_rgt: bool = False
@@ -283,9 +305,9 @@ class NumberedTable(EntryTable):
         font            : font of header text
         box_fill_color  : header fill color
         box_brdr_color  : border color
-        entry_col_count : column count of table
-        entry_row_count : row count of table
-        entry_row_hght  : height of row, optional
+        col_count : column count of table
+        row_count : row count of table
+        row_hght  : height of row, optional
         pad_top         : add padding to top
         pad_bot         : add padding to bottom
         pad_rgt         : add padding to right
@@ -293,23 +315,23 @@ class NumberedTable(EntryTable):
         show_outline    : show table outline
     """
 
-    self.prepend_txt_ = [''] * entry_row_count
+    self.prepend_txt_ = [''] * row_count
     #___________________________________________________________________
     # If prepend_txt is not provided, default to numbered.
     #___________________________________________________________________
     if (not prepend_txt):
-      for i in range(entry_row_count):
+      for i in range(row_count):
         self.prepend_txt_ = self.prepend_txt_ + [i+1]
     #___________________________________________________________________
     # If prepend_txt is a string, prepend it to each row.
     #___________________________________________________________________
     elif (isinstance(prepend_txt, str)):
-      self.prepend_txt_ = [prepend_txt] * entry_row_count
+      self.prepend_txt_ = [prepend_txt] * row_count
     #___________________________________________________________________
     # Otherwise, assign prepend_txt to class variable
     #___________________________________________________________________
     else:
-      for i in range(entry_row_count):
+      for i in range(row_count):
         try:
           self.prepend_txt_[i] = prepend_txt[i]
 
@@ -327,9 +349,9 @@ class NumberedTable(EntryTable):
     , font           =font
     , box_fill_color =box_fill_color
     , box_brdr_color =box_brdr_color
-    , entry_col_count=entry_col_count
-    , entry_row_count=entry_row_count
-    , entry_row_hght =entry_row_hght
+    , col_count=col_count
+    , row_count=row_count
+    , row_hght =row_hght
     , pad_top        =pad_top
     , pad_bot        =pad_bot
     , pad_rgt        =pad_rgt
@@ -359,7 +381,7 @@ class NumberedTable(EntryTable):
       text_x = Font.TEXT_PADDING + self.insert_x_
 
 
-    for i in range(self.entry_row_count_):
+    for i in range(self.row_count_):
 
       line_y: int = self.header_box_.total_hght_\
         + row_height\

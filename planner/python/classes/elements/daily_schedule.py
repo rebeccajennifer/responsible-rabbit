@@ -81,7 +81,7 @@ class DaySchedule(EntryTable):
       , stop_time_str
       )
 
-    entry_row_count: int = self.calc_row_count()
+    row_count: int = self.calc_row_count()
 
     super().__init__\
       ( wdth=wdth
@@ -92,7 +92,7 @@ class DaySchedule(EntryTable):
       , font=Font.FONT_FAMILY_HEADER
       , box_fill_color='none'
       , box_brdr_color='none'
-      , entry_row_count=entry_row_count
+      , row_count=row_count
       , pad_top=True
       , pad_bot=False
       , pad_lft=False
@@ -141,7 +141,7 @@ class DaySchedule(EntryTable):
     if (self.show_outline_):
       text_x = Font.TEXT_PADDING
 
-    for i in range(self.entry_row_count_):
+    for i in range(self.row_count_):
 
       line_y: int = self.header_box_.total_hght_ + row_height + i * row_height
       text_y: int = line_y - 2

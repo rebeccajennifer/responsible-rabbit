@@ -84,21 +84,21 @@ class WeekEntry0(OnePageHalfLetterLayout):
     [ PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_ACCOMPLISHMENTS
-      , entry_row_count=4
+      , row_count=4
       , pad_top=True
       )
 
     , PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_IMPROVEMENT
-      , entry_row_count=4
+      , row_count=4
       , pad_top=True
       )
 
     , EntryTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_GRATITUDE
-      , entry_row_count=3
+      , row_count=3
       , pad_top=True
       , show_outline=False
       )
@@ -202,7 +202,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=half_content_width
       , header_txt='Goal 1'
-      , entry_row_count=5
+      , row_count=5
       , pad_top=True
       , pad_bot=True
       , pad_rgt=True
@@ -214,7 +214,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=half_content_width
       , header_txt='Goal 2'
-      , entry_row_count=5
+      , row_count=5
       , pad_top=True
       , pad_bot=True
       , pad_lft=True
@@ -226,9 +226,8 @@ class WeekEntry1(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=half_content_width
       , header_txt='Goal 3'
-      , entry_row_count=5
+      , row_count=5
       , pad_top=True
-      , pad_bot=True
       , pad_rgt=True
       )
     )
@@ -238,9 +237,8 @@ class WeekEntry1(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=half_content_width
       , header_txt='Goal 4'
-      , entry_row_count=5
+      , row_count=5
       , pad_top=True
-      , pad_bot=True
       , pad_lft=True
       )
     )
@@ -259,63 +257,11 @@ class WeekEntry1(OnePageHalfLetterLayout):
     , PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LOOKING_FORWARD
-      , entry_row_count=4
+      , row_count=4
       , pad_top=True
 
       )
     ]
-
-    """
-    self.entries_: list =\
-    [ PromptTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_ACCOMPLISHMENTS
-      , entry_row_count=4
-      , pad_top=True
-      )
-
-    , PromptTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_IMPROVEMENT
-      , entry_row_count=4
-      , pad_top=True
-      )
-
-    , EntryTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_GRATITUDE
-      , entry_row_count=3
-      , pad_top=True
-      , show_outline=False
-      )
-
-    , HeaderBox\
-      ( wdth=self.content_wdth_
-      , header_txt=[Strings.WEEK_FULFILLMENT]
-      , font=Font.FONT_FAMILY_HEADER
-      , pad_top=True
-      )
-    ]
-
-    # Calculate remaining height to evenly distribute spanning tables
-    remaining_hght: int = self.calc_remaining_hght()
-
-    self.entries_ = self.entries_ +\
-    [ EntryTable\
-      ( wdth=self.content_wdth_
-      , hght=remaining_hght / 2
-      , header_txt=Strings.WEEK_FULFILLMENT_AREAS_0
-      , pad_top=True
-      )
-
-    , EntryTable\
-      ( wdth=self.content_wdth_
-      , hght=remaining_hght / 2
-      , header_txt=Strings.WEEK_FULFILLMENT_AREAS_1
-      , pad_top=True
-      )
-    ]
-    """
 
     return
 
