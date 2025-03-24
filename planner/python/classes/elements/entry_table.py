@@ -105,10 +105,12 @@ class EntryTable(svgwrite.container.Group):
     self.pad_rgt_: bool = pad_rgt
     self.pad_lft_: bool = pad_lft
 
+    self.insert_y_: int = self.pad_top_ * Dims.BRD_MARGIN_PX
+    self.insert_x_: int = self.pad_lft_ * Dims.BRD_MARGIN_PX
 
     self.header_box_: HeaderBox =\
       HeaderBox\
-      ( wdth=self.content_wdth_
+      ( wdth=self.total_wdth_
       , header_txt=header_txt
       , font_color=self.font_color_
       , font_size=self.font_size_
@@ -116,6 +118,8 @@ class EntryTable(svgwrite.container.Group):
       , box_fill_color=self.box_fill_color_
       , box_brdr_color=self.box_brdr_color_
       , pad_top=self.pad_top_
+      , pad_lft=self.pad_lft_
+      , pad_rgt=self.pad_rgt_
       )
 
     # Height will take priority in calculation of row height
@@ -125,20 +129,16 @@ class EntryTable(svgwrite.container.Group):
 
     else:
       self.row_hght_ = entry_row_hght
-      self.total_hght_ =\
-        self.header_box_.total_hght_ + entry_row_hght * entry_row_count
+
+      self.total_hght_ = self.header_box_.total_hght_\
+      + entry_row_hght * entry_row_count\
+      + self.pad_bot_ * Dims.BRD_MARGIN_PX
 
     #___________________________________________________________________
     # Adjust dims for padding
     #___________________________________________________________________
     self.content_hght_ =\
       self.total_hght_ - (pad_top + pad_bot) * Dims.BRD_MARGIN_PX
-
-    self.content_wdth_ =\
-      self.total_wdth_ - (pad_lft + pad_rgt) * Dims.BRD_MARGIN_PX
-    #___________________________________________________________________
-
-    #___________________________________________________________________
 
     self.create_content()
     self.add_content()
@@ -151,13 +151,11 @@ class EntryTable(svgwrite.container.Group):
     Create elements
     """
 
-    insert_y: int = (self.pad_top_) * Dims.BRD_MARGIN_PX
-
     # Table outline
     self.outline_: svgwrite.shapes.Rect =\
       svgwrite.shapes.Rect\
       ( size=(self.content_wdth_, self.content_hght_)
-      , insert=(0, insert_y)
+      , insert=(self.insert_x_, self.insert_y_)
       , stroke=Colors.DEBUG0_COLOR
       , fill='none'
       )
@@ -191,8 +189,8 @@ class EntryTable(svgwrite.container.Group):
 
       row_line: svgwrite.shapes.Line =\
         svgwrite.shapes.Line\
-        ( start=(0, line_y)
-        , end=(self.content_wdth_, line_y)
+        ( start=(self.insert_x_, line_y)
+        , end=(self.insert_x_ + self.content_wdth_, line_y)
         , stroke=Colors.DEF_ROW_COLOR
         )
 
@@ -213,6 +211,7 @@ class EntryTable(svgwrite.container.Group):
 #_______________________________________________________________________
 class PromptTable(EntryTable):
 
+  #_____________________________________________________________________
   def __init__(self
   , wdth: int = 0
   , hght: int = 0
@@ -253,6 +252,7 @@ class NumberedTable(EntryTable):
 
   """
 
+  #_____________________________________________________________________
   def __init__(self
   , wdth: int = 0
   , hght: int = 0
@@ -337,7 +337,6 @@ class NumberedTable(EntryTable):
     , show_outline   =show_outline
     )
 
-
   #_____________________________________________________________________
   def create_rows(self) -> svgwrite.container.Group:
     """
@@ -357,7 +356,7 @@ class NumberedTable(EntryTable):
     text_x: int = 0
 
     if (self.show_outline_):
-      text_x = Font.TEXT_PADDING
+      text_x = Font.TEXT_PADDING + self.insert_x_
 
 
     for i in range(self.entry_row_count_):
@@ -370,8 +369,8 @@ class NumberedTable(EntryTable):
 
       row_line: svgwrite.shapes.Line =\
         svgwrite.shapes.Line\
-        ( start=(0, line_y)
-        , end=(self.content_wdth_, line_y)
+        ( start=(self.insert_x_, line_y)
+        , end=(self.insert_x_ + self.content_wdth_, line_y)
         , stroke=Colors.DEF_ROW_COLOR
         )
 

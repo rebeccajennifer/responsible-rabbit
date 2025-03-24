@@ -34,6 +34,7 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 
+from classes.elements.entry_group import EntryRow
 from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import NumberedTable
 from classes.elements.entry_table import PromptTable
@@ -177,7 +178,6 @@ class WeekEntry1(OnePageHalfLetterLayout):
 
     return
 
-
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
@@ -192,6 +192,42 @@ class WeekEntry1(OnePageHalfLetterLayout):
     """
     super().create_content()
 
+    half_content_width: int = self.content_wdth_ / 2
+
+    goal_row_0: EntryRow = EntryRow()
+
+    goal1: NumberedTable =\
+      NumberedTable\
+      ( wdth=half_content_width
+      , header_txt='Goal 1'
+      , entry_row_count=4
+      , pad_top=True
+      , pad_bot=True
+      , pad_rgt=True
+      )
+
+    goal2: EntryTable =\
+      EntryTable\
+      ( wdth=half_content_width
+      , header_txt='Goal :)'
+      #, prepend_txt='[]'
+      , entry_row_count=4
+      , pad_top=True
+      #, pad_bot=True
+      , pad_lft=True
+      )
+
+
+    #goal_row_0.add_entry(goal1)
+    #goal_row_0.add_entry(goal2)
+
+    self.entries_: list =\
+    [
+      goal1, goal2
+
+    ]
+
+    """
     self.entries_: list =\
     [ PromptTable\
       ( wdth=self.content_wdth_
@@ -241,6 +277,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
       , pad_top=True
       )
     ]
+    """
 
     return
 
