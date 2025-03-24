@@ -188,6 +188,9 @@ class PlannerStrings:
   WEEK_CHECKLIST: list =\
     ['[] Specific', '[] Measurable', '[] Acheiveable']
 
+  WEEK_LOOKING_FORWARD: str =\
+    "In the coming week, I’m eager to experience:"
+
   #_____________________________________________________________________
   # Month layout strings
   #_____________________________________________________________________

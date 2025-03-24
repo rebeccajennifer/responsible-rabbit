@@ -195,36 +195,74 @@ class WeekEntry1(OnePageHalfLetterLayout):
     half_content_width: int = self.content_wdth_ / 2
 
     goal_row_0: EntryRow = EntryRow()
+    goal_row_1: EntryRow = EntryRow()
 
-    goal1: NumberedTable =\
-      NumberedTable\
+    goal_row_0.add_entry\
+    (
+      EntryTable\
       ( wdth=half_content_width
       , header_txt='Goal 1'
-      , entry_row_count=4
+      , entry_row_count=5
       , pad_top=True
       , pad_bot=True
       , pad_rgt=True
       )
+    )
 
-    goal2: EntryTable =\
+    goal_row_0.add_entry\
+    (
       EntryTable\
       ( wdth=half_content_width
-      , header_txt='Goal :)'
-      #, prepend_txt='[]'
-      , entry_row_count=4
+      , header_txt='Goal 2'
+      , entry_row_count=5
       , pad_top=True
-      #, pad_bot=True
+      , pad_bot=True
       , pad_lft=True
       )
+    )
 
+    goal_row_1.add_entry\
+    (
+      EntryTable\
+      ( wdth=half_content_width
+      , header_txt='Goal 3'
+      , entry_row_count=5
+      , pad_top=True
+      , pad_bot=True
+      , pad_rgt=True
+      )
+    )
 
-    #goal_row_0.add_entry(goal1)
-    #goal_row_0.add_entry(goal2)
+    goal_row_1.add_entry\
+    (
+      EntryTable\
+      ( wdth=half_content_width
+      , header_txt='Goal 4'
+      , entry_row_count=5
+      , pad_top=True
+      , pad_bot=True
+      , pad_lft=True
+      )
+    )
 
     self.entries_: list =\
-    [
-      goal1, goal2
+    [ goal_row_0
+    , goal_row_1
+    , HeaderBox\
+      ( wdth=self.content_wdth_
+      , header_txt=Strings.WEEK_CHECKLIST
+      , box_brdr_color='none'
+      , box_fill_color='none'
+      , pad_top=True
+      , pad_rgt=True
+      )
+    , PromptTable\
+      ( wdth=self.content_wdth_
+      , header_txt=Strings.WEEK_LOOKING_FORWARD
+      , entry_row_count=4
+      , pad_top=True
 
+      )
     ]
 
     """
