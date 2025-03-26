@@ -30,13 +30,12 @@ import svgwrite.container
 import svgwrite.shapes
 import svgwrite.text
 
-from classes.elements.header_box import HeaderBox
-
-from classes.constants.error_strings import ErrorStrings as Err
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
+
+from classes.elements.header_box import HeaderBox
 
 class EntryTable(svgwrite.container.Group):
 
@@ -55,7 +54,7 @@ class EntryTable(svgwrite.container.Group):
   , row_count: int = 1
   , row_hght: int = DEF_ROW_HGHT
   , col_count: int = 1
-  , col_wdth: list = []
+  , col_wdths: list = []
   , pad_top: bool = False
   , pad_bot: bool = False
   , pad_rgt: bool = False
@@ -74,6 +73,9 @@ class EntryTable(svgwrite.container.Group):
         box_brdr_color  : border color
         row_count       : row count of table
         row_hght        : height of row, optional
+        col_count       : column count of table
+        col_wdths       : width of rows, optional
+                          expect that number of elements = col_count
         col_count       : column count of table
         col_wdth        : width of rows, optional
                           expect that number of elements = col_count
@@ -145,9 +147,7 @@ class EntryTable(svgwrite.container.Group):
     # width list does not match the number of columns, make all columns
     # equal.
     #___________________________________________________________________
-    col_wdths: list = col_wdth
-    if ( (not col_wdths) or len(col_wdths) != self.col_count):
-      col_wdths = col_count * [self.content_wdth_ / col_count]
+    self.col_wdths: list = self.calc_col_wdths(col_count, col_wdths)
     #___________________________________________________________________
 
     #___________________________________________________________________
@@ -160,6 +160,52 @@ class EntryTable(svgwrite.container.Group):
     self.add_content()
 
     return
+  #_____________________________________________________________________
+  def calc_col_wdths(self
+    , col_count: int
+    , col_wdths: list
+    ) -> list:
+    """
+    Calculates columns widths.
+
+    Parameters:
+      col_count: Number of columns
+      col_wdths: List of column widths. One element of list should be -1
+                 -1 indicates to span that column to the remaining width
+    """
+
+    #___________________________________________________________________
+    # Column width calculation and error handling
+    #
+    # If no column widths specified, or number of elements in column
+    # width list does not match the number of columns, make all columns
+    # equal.
+    #___________________________________________________________________
+    if ( (not col_wdths) or len(col_wdths) != self.col_count_):
+      col_wdths = col_count * [self.content_wdth_ / col_count]
+
+    # List of col indices to span remaining width
+    span_col_idx: list = []
+    # Running sum of indicated column widths
+    wdth_sum: int = 0
+
+    for i in range(len(col_wdths)):
+      if (col_wdths[i] == -1):
+        span_col_idx = span_col_idx + [col_wdths[i]]
+
+      else:
+        wdth_sum = wdth_sum + col_wdths[i]
+
+    span_col_count: int = len(span_col_idx)
+
+    # Replace col width elements that should span remaining space
+    if (span_col_count):
+      remainder_col_wdth: int = self.content_wdth_ / span_col_count
+
+      for i in range(span_col_count):
+        col_wdths[span_col_idx[i]] = remainder_col_wdth
+
+    return col_wdths
 
   #_____________________________________________________________________
   def create_content(self) -> None:
@@ -238,8 +284,10 @@ class PromptTable(EntryTable):
   , wdth: int = 0
   , hght: int = 0
   , header_txt: str = Strings.DEF_TABLE_HEADER
-  , col_count: int = 1
   , row_count: int = 1
+  , row_hght: int = EntryTable.DEF_ROW_HGHT
+  , col_count: int = 1
+  , col_wdths: list = []
   , pad_top: bool = False
   , pad_bot: bool = False
   , pad_rgt: bool = False
@@ -255,8 +303,10 @@ class PromptTable(EntryTable):
     , font=Font.FONT_FAMILY_NORMAL
     , box_fill_color='none'
     , box_brdr_color='none'
-    , col_count=col_count
     , row_count=row_count
+    , row_hght=row_hght
+    , col_count=col_count
+    , col_wdths=col_wdths
     , pad_top=pad_top
     , pad_bot=pad_bot
     , pad_rgt=pad_rgt
@@ -271,7 +321,6 @@ class PromptTable(EntryTable):
 class NumberedTable(EntryTable):
   """
   EntryTable with numbered rows.
-
   """
 
   #_____________________________________________________________________
@@ -285,9 +334,10 @@ class NumberedTable(EntryTable):
   , font: str = Font.FONT_FAMILY_HEADER
   , box_fill_color: str = Colors.DEF_TBLE_HEADER_FILL
   , box_brdr_color: str = Colors.BORDER_COLOR
-  , col_count: int = 1
   , row_count: int = 1
   , row_hght: int = EntryTable.DEF_ROW_HGHT
+  , col_count: int = 1
+  , col_wdths: list = []
   , pad_top: bool = False
   , pad_bot: bool = False
   , pad_rgt: bool = False
@@ -299,7 +349,7 @@ class NumberedTable(EntryTable):
         wdth            : width of table
         hght            : height of table
         header_txt      : list of headers
-        prepend_txt        : list of text to include in rows
+        prepend_txt     : list of text to include in rows
         font_color      : color of header text
         font_size       : size of header text
         font            : font of header text
@@ -341,22 +391,23 @@ class NumberedTable(EntryTable):
 
 
     super().__init__\
-    ( wdth           =wdth
-    , hght           =hght
-    , header_txt     =header_txt
-    , font_color     =font_color
-    , font_size      =font_size
-    , font           =font
-    , box_fill_color =box_fill_color
-    , box_brdr_color =box_brdr_color
-    , col_count=col_count
-    , row_count=row_count
-    , row_hght =row_hght
-    , pad_top        =pad_top
-    , pad_bot        =pad_bot
-    , pad_rgt        =pad_rgt
-    , pad_lft        =pad_lft
-    , show_outline   =show_outline
+    ( wdth            =wdth
+    , hght            =hght
+    , header_txt      =header_txt
+    , font_color      =font_color
+    , font_size       =font_size
+    , font            =font
+    , box_fill_color  =box_fill_color
+    , box_brdr_color  =box_brdr_color
+    , row_count       =row_count
+    , row_hght        =row_hght
+    , col_count       =col_count
+    , col_wdths       =col_wdths
+    , pad_top         =pad_top
+    , pad_bot         =pad_bot
+    , pad_rgt         =pad_rgt
+    , pad_lft         =pad_lft
+    , show_outline    =show_outline
     )
 
   #_____________________________________________________________________
