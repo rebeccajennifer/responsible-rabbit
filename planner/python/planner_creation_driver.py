@@ -31,8 +31,6 @@
 
 import argparse
 
-from os import path
-
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
@@ -55,6 +53,13 @@ if __name__ == '__main__':
   is_dbl_sided: bool  = False
 
   #_____________________________________________________________________
+  week_layout =\
+    WeekLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    )
+  week_layout.save()
+
   day_layout =\
     OneDayLayout\
     ( is_portrait=is_portrait
@@ -68,13 +73,6 @@ if __name__ == '__main__':
     , is_dbl_sided=is_dbl_sided
     )
   goal_layout.save()
-
-  week_layout =\
-    WeekLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    )
-  week_layout.save()
 
 
   print("all done")

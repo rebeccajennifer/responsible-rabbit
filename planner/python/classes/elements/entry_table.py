@@ -147,7 +147,7 @@ class EntryTable(svgwrite.container.Group):
     # width list does not match the number of columns, make all columns
     # equal.
     #___________________________________________________________________
-    self.col_wdths: list = self.calc_col_wdths(col_count, col_wdths)
+    self.col_wdths_: list = self.calc_col_wdths(col_count, col_wdths)
     #___________________________________________________________________
 
     #___________________________________________________________________
@@ -191,7 +191,7 @@ class EntryTable(svgwrite.container.Group):
 
     for i in range(len(col_wdths)):
       if (col_wdths[i] == -1):
-        span_col_idx = span_col_idx + [col_wdths[i]]
+        span_col_idx = span_col_idx + [i]
 
       else:
         wdth_sum = wdth_sum + col_wdths[i]
@@ -200,7 +200,7 @@ class EntryTable(svgwrite.container.Group):
 
     # Replace col width elements that should span remaining space
     if (span_col_count):
-      remainder_col_wdth: int = self.content_wdth_ / span_col_count
+      remainder_col_wdth: int = (self.content_wdth_ - wdth_sum) / span_col_count
 
       for i in range(span_col_count):
         col_wdths[span_col_idx[i]] = remainder_col_wdth
@@ -240,7 +240,6 @@ class EntryTable(svgwrite.container.Group):
     """
 
     row_group: svgwrite.container.Group = svgwrite.container.Group()
-
     row_height: int = self.row_hght_
 
     for i in range(self.row_count_):
@@ -249,14 +248,36 @@ class EntryTable(svgwrite.container.Group):
         + row_height\
         + i * row_height\
 
-      row_line: svgwrite.shapes.Line =\
-        svgwrite.shapes.Line\
-        ( start=(self.insert_x_, line_y)
-        , end=(self.insert_x_ + self.content_wdth_, line_y)
-        , stroke=Colors.DEF_ROW_COLOR
-        )
+      start_line_x: int = self.insert_x_
 
-      row_group.add(row_line)
+      for i in range(len(self.col_wdths_)):
+
+        wdth: int = self.col_wdths_[i]
+        start_padding: int = Font.TEXT_PADDING/2
+        end_padding:   int = Font.TEXT_PADDING/2
+
+        # For the first column, don't pad left side
+        if (i == 0):
+          start_padding = 0
+
+        # For the first column, don't pad right side
+        if (i == (len(self.col_wdths_) - 1)):
+          end_padding = 0
+
+        line_len = wdth - start_padding - end_padding
+
+        insert_line_x: int = start_line_x + start_padding
+
+        row_line: svgwrite.shapes.Line =\
+          svgwrite.shapes.Line\
+          ( start=(insert_line_x, line_y)
+          , end=(insert_line_x + line_len, line_y)
+          , stroke=Colors.DEF_ROW_COLOR
+          )
+
+        start_line_x = start_line_x + wdth
+
+        row_group.add(row_line)
 
     return row_group
 
@@ -438,7 +459,7 @@ class NumberedTable(EntryTable):
         + row_height\
         + i * row_height\
 
-      text_y: int = line_y - 6
+      text_y: int = line_y - Font.TEXT_PADDING
 
       txt: svgwrite.txt.Text = svgwrite.text.Text\
       ( self.prepend_txt_[i]

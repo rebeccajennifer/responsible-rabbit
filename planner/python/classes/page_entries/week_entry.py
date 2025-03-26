@@ -254,12 +254,12 @@ class WeekEntry1(OnePageHalfLetterLayout):
       , pad_top=True
       , pad_rgt=True
       )
+
     , PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LOOKING_FORWARD
       , row_count=4
       , pad_top=True
-
       )
     ]
 
