@@ -104,7 +104,7 @@ class PlannerStrings:
 
   DAY_PROMPTS: str =\
     [ 'How can I embrace discomfort and grow today?'
-    , 'One acheivement I take pride in:'
+    , 'One achievement I take pride in:'
     , 'How can I move towards my ideal self?'
     ]
 
@@ -167,7 +167,16 @@ class PlannerStrings:
     + DATE_STR
 
   WEEK_ACCOMPLISHMENTS: str =\
-    "Notable achievements from last week include:"
+    'Notable achievements from last week include:'
+
+  WEEK_UNFINISHED_BUSINESS: str =\
+    'Unfinished Business'
+
+  WEEK_VISUALIZATION_HEADER: str =\
+    'Visualize Your Week'
+
+  WEEK_VISUALIZATION_PROMPT: str =\
+    'Sketch a visual of your expectations for the week.'
 
   WEEK_IMPROVEMENT: str =\
     'What do I need to prioritize for growth?'
@@ -175,9 +184,11 @@ class PlannerStrings:
   WEEK_GRATITUDE: str =\
     'I appreciate...'
 
+  WEEK_LESSONS_LEARNED: str =\
+    'Lessons Learned From Last Week'
+
   WEEK_FULFILLMENT: str =\
-    'In the coming week, how can I find the most fulfillment in '\
-    'these areas?'
+    'How can I find the most fulfillment in these areas?'
 
   WEEK_FULFILLMENT_AREAS_0 =\
     ['Health', 'Connections']
@@ -186,10 +197,23 @@ class PlannerStrings:
     ['Enjoyment', 'Job']
 
   WEEK_CHECKLIST: list =\
-    ['[] Specific', '[] Measurable', '[] Acheiveable']
+    ['[] Specific', '[] Measurable', '[] Achieveable']
 
   WEEK_LOOKING_FORWARD: str =\
     "In the coming week, I’m eager to experience:"
+
+  WEEK_HABIT_TRACKER_HEADINGS: list =\
+    [ 'Habit'
+    , 'Target'
+    , 'Mon'
+    , 'Tue'
+    , 'Wed'
+    , 'Thu'
+    , 'Fri'
+    , 'Sat'
+    , 'Sun'
+    , 'Tally'
+    ]
 
   #_____________________________________________________________________
   # Month layout strings

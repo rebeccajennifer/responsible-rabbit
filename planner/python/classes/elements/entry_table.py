@@ -102,6 +102,10 @@ class EntryTable(svgwrite.container.Group):
     self.font_            : str   = font
     self.box_fill_color_  : str   = box_fill_color
 
+    if (box_fill_color == 'none'):
+      self.font_color_ = Colors.NORMAL
+
+
     self.box_brdr_color_  : str   = box_brdr_color
     self.col_count_ : int   = col_count
     self.row_count_ : int   = row_count
@@ -119,6 +123,7 @@ class EntryTable(svgwrite.container.Group):
       HeaderBox\
       ( wdth=self.total_wdth_
       , header_txt=header_txt
+      , col_wdths=col_wdths
       , font_color=self.font_color_
       , font_size=self.font_size_
       , font=self.font_
@@ -269,6 +274,7 @@ class PromptTable(EntryTable):
   , pad_bot: bool = False
   , pad_rgt: bool = False
   , pad_lft: bool = False
+  , show_outline: bool = True
   ):
 
     super().__init__\
@@ -288,7 +294,7 @@ class PromptTable(EntryTable):
     , pad_bot=pad_bot
     , pad_rgt=pad_rgt
     , pad_lft=pad_lft
-    , show_outline=True
+    , show_outline=show_outline
     )
 
     return

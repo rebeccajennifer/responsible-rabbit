@@ -35,6 +35,8 @@ from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 
+from utils.utils import PlannerUtils as Utils
+
 
 #_______________________________________________________________________
 class HeaderBox(svgwrite.container.Group):
@@ -46,6 +48,7 @@ class HeaderBox(svgwrite.container.Group):
   def __init__(self
   , wdth: int = 0
   , header_txt: str = ''
+  , col_wdths: list = []
   , font_color: str = Colors.NORMAL
   , font_size: int = Font.NORMAL_SIZE
   , font: str = Font.FONT_FAMILY_NORMAL
@@ -90,6 +93,12 @@ class HeaderBox(svgwrite.container.Group):
       self.header_txt_ = header_txt
     #___________________________________________________________________
 
+    self.col_wdths_: list = Utils.calc_col_wdths\
+      ( wdth
+      , len(header_txt)
+      , col_wdths
+      )
+
     self.create_header()
 
     return
@@ -99,9 +108,6 @@ class HeaderBox(svgwrite.container.Group):
     """
     Create boxed header.
     """
-
-    # Width of each header
-    header_wdth: int = self.content_wdth_ / len(self.header_txt_)
 
     insert_box_x: int = Dims.BRD_MARGIN_PX * self.pad_lft_
     insert_box_y: int = Dims.BRD_MARGIN_PX * self.pad_top_
@@ -123,7 +129,9 @@ class HeaderBox(svgwrite.container.Group):
       insert_box_y + self.box_hght_ - Font.TEXT_PADDING
     #___________________________________________________________________
 
-    for header in self.header_txt_:
+    for i in range(len(self.header_txt_)):
+
+      header: str = self.header_txt_[i]
 
       # Note: The SVG to PDF tool rsvg-convert only seems to support
       # 'text-after-edge' for alignment baseline, so this option
@@ -142,7 +150,10 @@ class HeaderBox(svgwrite.container.Group):
 
       self.add(header_txt)
 
-      insert_txt_x = insert_txt_x + Font.TEXT_PADDING + header_wdth
+      if (i == 0):
+        insert_txt_x = insert_txt_x - Font.TEXT_PADDING
+
+      insert_txt_x = insert_txt_x + self.col_wdths_[i]
 
     return
 
