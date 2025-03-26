@@ -23,57 +23,53 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Driver for planner creation.
-#
-#   NOTES
-#   All dimensions in planner are in inches.
+#   Layout for week . Populated with entry group for week.
 #_______________________________________________________________________
 
-import argparse
+from classes.constants.dims import PlannerDims as Dims
+from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_layouts.day_layout import OneDayLayout
-from classes.page_layouts.goal_layout import GoalLayout
-from classes.page_layouts.week_layout import WeekLayout
-from classes.planner_parser import PlannerCreationParser
+from classes.page_entries.week_entry import WeekEntry0
+from classes.page_entries.week_entry import WeekEntry1
+from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
+
 
 #_______________________________________________________________________
-def new_line (new_line_count: int = 1) -> None:
-  for i in range(new_line_count):
-    print()
-
-if __name__ == '__main__':
-  new_line(2)
-
-  parser: argparse.ArgumentParser = argparse.ArgumentParser()
-  PlannerCreationParser.init_parser(parser)
-
-  args: argparse.Namespace = parser.parse_args()
-
-  is_portrait: bool   = False
-  is_dbl_sided: bool  = False
+class WeekLayout(TwoPageHalfLetterSize_):
 
   #_____________________________________________________________________
-  week_layout =\
-    WeekLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    )
-  week_layout.save()
+  def  __init__(self
+  , is_portrait: bool = False
+  , is_dbl_sided: bool = False
+  , file_path: str = Strings.DEF_WEEK_LAYOUT_PATH
+  ):
+    super().__init__\
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=file_path
+      )
+    return
 
-  day_layout =\
-    OneDayLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    )
-  day_layout .save()
+  #_____________________________________________________________________
+  def create_content(self):
+    super().create_content()
 
-  goal_layout =\
-    GoalLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    )
-  goal_layout.save()
+    self.content_0_ =\
+      WeekEntry0\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      )
 
+    self.content_1_ =\
+      WeekEntry1\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      )
 
-  print("all done")
+    return
 
+  #_____________________________________________________________________
+  def add_content(self):
+    super().add_content()

@@ -1,11 +1,41 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+#   DESCRIPTION
+#   Header used in tables and pages. Creates a group with a rectangle
+#   with text inside.
+#_______________________________________________________________________
+
 import svgwrite.container
 import svgwrite.shapes
 import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
-from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
+
+from utils.utils import PlannerUtils as Utils
 
 
 #_______________________________________________________________________
@@ -17,7 +47,8 @@ class HeaderBox(svgwrite.container.Group):
   #_____________________________________________________________________
   def __init__(self
   , wdth: int = 0
-  , header_lst: str = ['header0', 'header1']
+  , header_txt: str = ''
+  , col_wdths: list = []
   , font_color: str = Colors.NORMAL
   , font_size: int = Font.NORMAL_SIZE
   , font: str = Font.FONT_FAMILY_NORMAL
@@ -39,8 +70,6 @@ class HeaderBox(svgwrite.container.Group):
     self.pad_rgt_: bool = pad_rgt
     self.pad_lft_: bool = pad_lft
 
-    self.header_lst_: str = header_lst
-
     self.font_color_: str = font_color
     self.font_size_: int = font_size
     self.font_: str = font
@@ -56,6 +85,20 @@ class HeaderBox(svgwrite.container.Group):
     self.content_wdth_ = self.total_wdth_\
       - Dims.BRD_MARGIN_PX * (self.pad_lft_ + self.pad_rgt_)
 
+    #___________________________________________________________________
+    # Header can be a string or list
+    if (isinstance(header_txt, str)):
+      self.header_txt_ = [header_txt]
+    else:
+      self.header_txt_ = header_txt
+    #___________________________________________________________________
+
+    self.col_wdths_: list = Utils.calc_col_wdths\
+      ( wdth
+      , len(header_txt)
+      , col_wdths
+      )
+
     self.create_header()
 
     return
@@ -65,9 +108,6 @@ class HeaderBox(svgwrite.container.Group):
     """
     Create boxed header.
     """
-
-    # Width of each header
-    header_wdth: int = self.content_wdth_ / len(self.header_lst_)
 
     insert_box_x: int = Dims.BRD_MARGIN_PX * self.pad_lft_
     insert_box_y: int = Dims.BRD_MARGIN_PX * self.pad_top_
@@ -89,7 +129,9 @@ class HeaderBox(svgwrite.container.Group):
       insert_box_y + self.box_hght_ - Font.TEXT_PADDING
     #___________________________________________________________________
 
-    for header in self.header_lst_:
+    for i in range(len(self.header_txt_)):
+
+      header: str = self.header_txt_[i]
 
       # Note: The SVG to PDF tool rsvg-convert only seems to support
       # 'text-after-edge' for alignment baseline, so this option
@@ -108,7 +150,10 @@ class HeaderBox(svgwrite.container.Group):
 
       self.add(header_txt)
 
-      insert_txt_x = insert_txt_x + Font.TEXT_PADDING + header_wdth
+      if (i == 0):
+        insert_txt_x = insert_txt_x - Font.TEXT_PADDING
+
+      insert_txt_x = insert_txt_x + self.col_wdths_[i]
 
     return
 

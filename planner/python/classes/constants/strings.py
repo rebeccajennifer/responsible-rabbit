@@ -30,7 +30,20 @@ class PlannerStrings:
   """
   Strings used in planner.
   """
-  SPACE: str ='\u00A0\u00A0'
+  SPACE: str =\
+    '\u00A0\u00A0'
+
+  RIGHT_ARROW: str =\
+    '\u2192'
+
+  DATE_STR: str =\
+    3 * SPACE\
+    + '/'\
+    + 3 * SPACE\
+    + '/'\
+    + SPACE\
+    + '20'\
+    + 2 * SPACE
 
   DEF_TABLE_HEADER: str =\
     'Table Header'
@@ -41,6 +54,9 @@ class PlannerStrings:
   DAILY_SCHEDULE_HEADER: str =\
     'Time Well Spent'
 
+  #_____________________________________________________________________
+  # Default file names
+  #_____________________________________________________________________
   DEF_LAYOUT_PATH: str =\
     'layout.svg'
 
@@ -50,6 +66,11 @@ class PlannerStrings:
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout.svg'
 
+  DEF_GOAL_LAYOUT_PATH: str =\
+    'goal-layout.svg'
+
+  DEF_WEEK_LAYOUT_PATH: str =\
+    'week-layout.svg'
 
   #_____________________________________________________________________
   # Day layout strings
@@ -69,6 +90,9 @@ class PlannerStrings:
   DAY_PRIMARY_EFFORTS: list =\
     ['Primary Efforts', 'Alignment']
 
+  DAY_TODO: str =\
+    'To Do'
+
   DAY_CHECKLIST: list =\
   ['[] Vision ', '[] Goals', '[] Calendar', '[] Habit']
 
@@ -80,10 +104,9 @@ class PlannerStrings:
 
   DAY_PROMPTS: str =\
     [ 'How can I embrace discomfort and grow today?'
-    , 'One acheivement I take pride in:'
+    , 'One achievement I take pride in:'
     , 'How can I move towards my ideal self?'
     ]
-  #_____________________________________________________________________
 
   #_____________________________________________________________________
   # Goal layout strings
@@ -93,9 +116,9 @@ class PlannerStrings:
 
   GOAL_CHECKLIST: str =\
      '[] Specific'    + SPACE\
-   + '[] Actionable'  + SPACE\
    + '[] Measureable' + SPACE\
-   + '[] Exciting'    + SPACE\
+   + '[] Achievable'  + SPACE\
+   + '[] Relevant'    + SPACE\
    + '[] Challenging'
 
 
@@ -106,7 +129,7 @@ class PlannerStrings:
     'Evaluation Metrics'
 
   GOAL_COST: str =\
-    'Compromises & Costs'
+    'Costs & Challenges'
 
   GOAL_LIFE_IMPROVEMENT: str =\
     'Impacts of Success'
@@ -125,3 +148,84 @@ class PlannerStrings:
   , 'Month 2:'
   , 'Month 3:'
   ]
+
+  #_____________________________________________________________________
+  # Week layout strings
+  #_____________________________________________________________________
+  WEEK_PAGE_HEADER_0: str =\
+    "Last Week's Primary Effort Completion:"\
+    + 10 * SPACE\
+    + "%"
+
+  WEEK_PAGE_HEADER_1: str =\
+    'Goals for Week: '\
+    + 6 * SPACE\
+    + DATE_STR\
+    + 3 * SPACE\
+    + RIGHT_ARROW\
+    + 3 * SPACE\
+    + DATE_STR
+
+  WEEK_ACCOMPLISHMENTS: str =\
+    'Notable achievements from last week include:'
+
+  WEEK_UNFINISHED_BUSINESS: str =\
+    'Unfinished Business'
+
+  WEEK_VISUALIZATION_HEADER: str =\
+    'Visualize Your Week'
+
+  WEEK_VISUALIZATION_PROMPT: str =\
+    'Sketch a visual of your expectations for the week.'
+
+  WEEK_IMPROVEMENT: str =\
+    'What do I need to prioritize for growth?'
+
+  WEEK_GRATITUDE: str =\
+    'I appreciate...'
+
+  WEEK_LESSONS_LEARNED: str =\
+    'Lessons Learned From Last Week'
+
+  WEEK_FULFILLMENT: str =\
+    'How can I find the most fulfillment in these areas?'
+
+  WEEK_FULFILLMENT_AREAS_0 =\
+    ['Health', 'Connections']
+
+  WEEK_FULFILLMENT_AREAS_1 =\
+    ['Enjoyment', 'Job']
+
+  WEEK_CHECKLIST: list =\
+    ['[] Specific', '[] Measurable', '[] Achieveable']
+
+  WEEK_LOOKING_FORWARD: str =\
+    "In the coming week, I’m eager to experience:"
+
+  WEEK_HABIT_TRACKER_HEADINGS: list =\
+    [ 'Habit'
+    , 'Target'
+    , 'Mon'
+    , 'Tue'
+    , 'Wed'
+    , 'Thu'
+    , 'Fri'
+    , 'Sat'
+    , 'Sun'
+    , 'Tally'
+    ]
+
+  #_____________________________________________________________________
+  # Month layout strings
+  #_____________________________________________________________________
+  MONTH_PAGE_HEADER_0: str =\
+    'Goal #'
+
+  MONTH_PAGE_HEADER_1: str =\
+    'Goal #'
+
+  MONTH_FOOTER_0: str =\
+    "This month's # 1 priority"
+
+  MONTH_FOOTER_1: str =\
+    "This month's kaizen"

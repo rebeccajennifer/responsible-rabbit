@@ -23,7 +23,7 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for daily entry.
+#   Entry for goal. Fills content for one half sheet.
 #_______________________________________________________________________
 
 import svgwrite.container
@@ -66,38 +66,10 @@ class GoalEntry(OnePageHalfLetterLayout):
     return
 
   #_____________________________________________________________________
-  def add_content(self) -> None:
-    """
-    Add content to layout.
-
-    Parameters:
-      None
-
-    Returns:
-      None
-    """
-    super().add_content()
-
-    insert_x: int = self.content_insert_pt_x_
-    insert_y: int = self.content_insert_pt_y_
-
-    for entry in self.entries_:
-
-      entry['transform'] =\
-      f'translate({insert_x},{insert_y})'
-
-      insert_y = insert_y + entry.total_hght_
-
-      self.add(entry)
-
-    return
-
-  #_____________________________________________________________________
   def create_content(self) -> None:
     """
-
     Side Effects:
-      Populates the following class variables.
+      Populates self.entries_ class variable.
 
     Parameters:
       None
@@ -111,7 +83,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     self.entries_: list =\
     [ HeaderBox\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_CHECKLIST]
+      , header_txt=Strings.GOAL_CHECKLIST
       , font_size=9
       , box_brdr_color='none'
       , box_fill_color='none'
@@ -120,25 +92,25 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_ACTIONS]
-      , text_lst=['[]','[]','[]','[]','[]','[]','[]']
-      , entry_row_count=7
+      , header_txt=Strings.GOAL_ACTIONS
+      , prepend_txt='[]'
+      , row_count=7
       , pad_top=True
       , show_outline=True
       )
 
     , EntryTable\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_MEASUREMENT]
-      , entry_row_count=2
+      , header_txt=Strings.GOAL_MEASUREMENT
+      , row_count=2
       , pad_top=True
       , show_outline=False
       )
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_COST]
-      , entry_row_count=5
+      , header_txt=Strings.GOAL_COST
+      , row_count=5
       , pad_top=True
       , font_color=Colors.NORMAL
       , box_brdr_color='none'
@@ -148,44 +120,40 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_BENCHMARKS]
-      , text_lst=Strings.GOAL_MONTHS
-      , entry_row_count=3
+      , header_txt=Strings.GOAL_BENCHMARKS
+      , prepend_txt=Strings.GOAL_MONTHS
+      , row_count=3
       , pad_top=True
       , show_outline=True
       )
 
     , NumberedTable\
       ( wdth=self.content_wdth_
-      , header_lst=[Strings.GOAL_LIFE_IMPROVEMENT]
-      , entry_row_count=3
+      , header_txt=Strings.GOAL_LIFE_IMPROVEMENT
+      , row_count=3
       , pad_top=True
       , show_outline=False
       )
     ]
 
     # Calculate remaining height to evenly distribute spanning tables
-    remaining_hght: int = self.content_hght_
-
-    for entry in self.entries_:
-      remaining_hght = remaining_hght - entry.total_hght_
+    remaining_hght: int = self.calc_remaining_hght()
 
     self.entries_ = self.entries_ +\
     [ PromptTable\
       ( wdth=self.content_wdth_
       , hght=remaining_hght / 2
-      , txt=Strings.GOAL_PLAN
+      , header_txt=Strings.GOAL_PLAN
       , pad_top=True
       )
 
     , PromptTable\
       ( wdth=self.content_wdth_
       , hght=remaining_hght / 2
-      , txt=Strings.GOAL_REWARD
+      , header_txt=Strings.GOAL_REWARD
       , pad_top=True
       )
     ]
-
 
     return
 
@@ -207,6 +175,7 @@ class GoalEntry(OnePageHalfLetterLayout):
       ( header_txt=Strings.GOAL_PAGE_HEADER
       , font_size=font_size
       , font=font_family
+      , box_fill_color='none'
       )
 
     return page_header

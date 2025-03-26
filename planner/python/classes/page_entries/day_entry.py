@@ -37,6 +37,7 @@ from classes.constants.style import PlannerFontStyle as Font
 from classes.elements.daily_schedule import DaySchedule as DaySched
 from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import PromptTable
+from classes.elements.entry_table import NumberedTable
 from classes.elements.header_box import HeaderBox
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
@@ -189,8 +190,8 @@ class DayEntry(OnePageHalfLetterLayout):
     self.pri_efforts_: EntryTable =\
       EntryTable\
       ( wdth=self.main_content_wdth_
-      , header_lst=Strings.DAY_PRIMARY_EFFORTS
-      , entry_row_count=4
+      , header_txt=Strings.DAY_PRIMARY_EFFORTS
+      , row_count=4
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -199,18 +200,19 @@ class DayEntry(OnePageHalfLetterLayout):
     self.checklist_: HeaderBox=\
       HeaderBox\
       ( wdth=self.main_content_wdth_
-      , header_lst=Strings.DAY_CHECKLIST
+      , header_txt=Strings.DAY_CHECKLIST
       , box_brdr_color='none'
       , box_fill_color='none'
       , pad_top=True
       , pad_rgt=True
       )
 
-    self.todo_: EntryTable =\
-      EntryTable\
+    self.todo_: NumberedTable =\
+      NumberedTable\
       ( wdth=self.main_content_wdth_
-      , header_lst=['To Do']
-      , entry_row_count=8
+      , header_txt=Strings.DAY_TODO
+      , prepend_txt='[]'
+      , row_count=8
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -219,8 +221,8 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt0_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , txt=Strings.DAY_PROMPTS[0]
-      , entry_row_count=4
+      , header_txt=Strings.DAY_PROMPTS[0]
+      , row_count=4
       , pad_top=True
       , pad_rgt=True
       )
@@ -228,8 +230,8 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt1_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , txt=Strings.DAY_PROMPTS[1]
-      , entry_row_count=3
+      , header_txt=Strings.DAY_PROMPTS[1]
+      , row_count=3
       , pad_top=True
       , pad_rgt=True
       )
@@ -237,8 +239,8 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt2_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , txt=Strings.DAY_PROMPTS[2]
-      , entry_row_count=4
+      , header_txt=Strings.DAY_PROMPTS[2]
+      , row_count=4
       , pad_top=True
       , pad_rgt=True
       )
@@ -257,8 +259,8 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , hght=remaining_hght/2
-      , header_lst=[Strings.DAY_FOCUS]
-      , entry_row_count=1
+      , header_txt=[Strings.DAY_FOCUS]
+      , row_count=1
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -269,7 +271,7 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , hght=remaining_hght/2
-      , header_lst=[Strings.DAY_GRATITUDE]
+      , header_txt=[Strings.DAY_GRATITUDE]
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -307,16 +309,14 @@ class DayEntry(OnePageHalfLetterLayout):
       , font=font_family
       )
 
-    date_str: str = sp + sp + '/' + sp + sp + '/' + sp + '20' + sp + sp
-
-    insert_date_x: int = self.content_wdth_ - Font.TEXT_PADDING
+    insert_date_x: int = self.content_wdth_ - 110
     insert_date_y: int = font_size + Font.TEXT_PADDING
 
     date_txt: svgwrite.text.Text =\
       svgwrite.text.Text\
-      ( text=date_str
+      ( text=Strings.DATE_STR
       , insert=(insert_date_x, insert_date_y)
-      , text_anchor='end'
+      , text_anchor='start'
       , alignment_baseline='text-after-edge'
       , fill=Colors.NORMAL
       , font_size=font_size

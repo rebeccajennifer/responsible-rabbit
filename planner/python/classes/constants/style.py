@@ -74,6 +74,7 @@ class PlannerFontStyle:
 
   GOAL_HEADER_SIZE      : int = 28
   DAY_PAGE_HEADER_SIZE  : int = 12
+  WEEK_PAGE_HEADER_SIZE : int = 12
 
   HEAD_1_SIZE: int = 12
   HEAD_2_SIZE: int = 24
@@ -81,7 +82,7 @@ class PlannerFontStyle:
   NORMAL_SIZE: int = 10
   LITTLE_SIZE: int = 8
 
-  TEXT_PADDING: int = 4
+  TEXT_PADDING: int = 5
 
   FONT_FAMILY_NORMAL: str = 'Ubuntu Mono'
   FONT_FAMILY_HEADER: str = 'Trebuchet MS'

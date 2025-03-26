@@ -194,6 +194,8 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
     super().__init__()
 
+    self.entries_ = []
+
     self.total_hght_: int = total_hght
     self.total_wdth_: int = total_wdth
     self.padding_   : int = padding
@@ -224,7 +226,6 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     Creates content.
     """
 
-
     self.border_: svgwrite.shapes.Rect = self.create_border()
 
     return
@@ -233,14 +234,33 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   def add_content(self) -> None:
     """
     Adds content to group.
+
+    Parameters:
+      None
+
+    Returns:
+      None
     """
 
     x: int = self.page_header_insert_pt_x_
     y: int = self.page_header_insert_pt_y_
+
     self.page_header_['transform'] = f'translate({x}, {y})'
 
     self.add(self.border_)
     self.add(self.page_header_)
+
+    insert_x: int = self.content_insert_pt_x_
+    insert_y: int = self.content_insert_pt_y_
+
+    for entry in self.entries_:
+
+      entry['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
+      insert_y = insert_y + entry.total_hght_
+
+      self.add(entry)
 
     return
 
@@ -268,6 +288,8 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   , font_color: str = Colors.NORMAL
   , font_size: int = Font.HEAD_2_SIZE
   , font: str = Font.FONT_FAMILY_HEADER
+  , box_fill_color: str = Colors.DEF_PAGE_HEADER_COLOR
+  , box_brdr_color: str = Colors.BORDER_COLOR
   ) -> HeaderBox:
     """
     Creates page header and saves it to class variable.
@@ -279,13 +301,10 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       HeaderBox for page header
     """
 
-    box_fill_color: str = Colors.DEF_PAGE_HEADER_COLOR
-    box_brdr_color: str = Colors.BORDER_COLOR
-
     page_header: HeaderBox =\
       HeaderBox\
       ( wdth=self.content_wdth_
-      , header_lst=[header_txt]
+      , header_txt=[header_txt]
       , font_color=font_color
       , font_size=font_size
       , font=font
@@ -294,3 +313,23 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       )
 
     return page_header
+
+  #_____________________________________________________________________
+  def calc_remaining_hght(self) -> int:
+    """
+    Calculates empty space left on page by subtracting the total height
+    of all entries from the content height
+
+    Parameters:
+      None
+
+    Returns:
+      HeaderBox for page header
+    """
+
+    remaining_hght: int = self.content_hght_
+
+    for entry in self.entries_:
+      remaining_hght = remaining_hght - entry.total_hght_
+
+    return remaining_hght

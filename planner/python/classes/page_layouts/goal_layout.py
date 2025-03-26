@@ -23,13 +23,13 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for daily entry.
+#   Layout for goal. Populated with entry group for goal.
 #_______________________________________________________________________
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_layouts.goal_entry import GoalEntry
+from classes.page_entries.goal_entry import GoalEntry
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
 
 

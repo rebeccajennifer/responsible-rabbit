@@ -23,13 +23,13 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for daily entry.
+#   Layout for daily entry. Populated with DayEntry.
 #_______________________________________________________________________
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_layouts.day_entry import DayEntry
+from classes.page_entries.day_entry import DayEntry
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
 
 
@@ -40,7 +40,7 @@ class OneDayLayout(TwoPageHalfLetterSize_):
   def  __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_LAYOUT_PATH
+  , file_path: str = Strings.DEF_DAY_LAYOUT_PATH
   ):
     super().__init__\
       ( is_portrait=is_portrait
