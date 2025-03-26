@@ -422,7 +422,8 @@ class NumberedTable(EntryTable):
       Group containing all rows.
     """
 
-    row_group: svgwrite.container.Group = svgwrite.container.Group()
+    row_group: svgwrite.container.Group =\
+      super().create_rows()
 
     row_height: int = self.row_hght_
 
@@ -431,7 +432,6 @@ class NumberedTable(EntryTable):
     if (self.show_outline_):
       text_x = Font.TEXT_PADDING + self.insert_x_
 
-
     for i in range(self.row_count_):
 
       line_y: int = self.header_box_.total_hght_\
@@ -439,13 +439,6 @@ class NumberedTable(EntryTable):
         + i * row_height\
 
       text_y: int = line_y - 6
-
-      row_line: svgwrite.shapes.Line =\
-        svgwrite.shapes.Line\
-        ( start=(self.insert_x_, line_y)
-        , end=(self.insert_x_ + self.content_wdth_, line_y)
-        , stroke=Colors.DEF_ROW_COLOR
-        )
 
       txt: svgwrite.txt.Text = svgwrite.text.Text\
       ( self.prepend_txt_[i]
@@ -457,7 +450,6 @@ class NumberedTable(EntryTable):
       , font_family=Font.FONT_FAMILY_NORMAL
       )
 
-      row_group.add(row_line)
       row_group.add(txt)
 
     return row_group
