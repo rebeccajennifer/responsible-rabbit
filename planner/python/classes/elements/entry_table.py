@@ -34,8 +34,10 @@ from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
+from classes.constants.error_strings import ErrorStrings as Err
 
 from classes.elements.header_box import HeaderBox
+from classes.elements.base_element import BaseElement
 
 from utils.utils import PlannerUtils as Utils
 
@@ -103,7 +105,7 @@ class EntryTable(svgwrite.container.Group):
     self.box_fill_color_  : str   = box_fill_color
 
     if (box_fill_color == 'none'):
-      self.font_color_ = Colors.NORMAL
+      self.font_color_ = Colors.NORMAL_TXT
 
 
     self.box_brdr_color_  : str   = box_brdr_color
@@ -154,7 +156,8 @@ class EntryTable(svgwrite.container.Group):
     # width list does not match the number of columns, make all columns
     # equal.
     #___________________________________________________________________
-    self.col_wdths_: list = Utils.calc_col_wdths(self.content_wdth_, col_count, col_wdths)
+    self.col_wdths_: list = Utils.calc_col_wdths\
+      (self.content_wdth_, col_count, col_wdths)
     #___________________________________________________________________
 
     #___________________________________________________________________
@@ -281,7 +284,7 @@ class PromptTable(EntryTable):
     ( wdth=wdth
     , hght=hght
     , header_txt=header_txt
-    , font_color=Colors.NORMAL
+    , font_color=Colors.NORMAL_TXT
     , font_size=Font.NORMAL_SIZE
     , font=Font.FONT_FAMILY_NORMAL
     , box_fill_color='none'
@@ -428,7 +431,7 @@ class NumberedTable(EntryTable):
       , insert=(text_x, text_y)
       , text_anchor='start'
       , alignment_baseline='text-after-edge'
-      , fill=Colors.NORMAL
+      , fill=Colors.NORMAL_TXT
       , font_size=Font.LITTLE_SIZE
       , font_family=Font.FONT_FAMILY_NORMAL
       )
@@ -437,4 +440,159 @@ class NumberedTable(EntryTable):
 
     return row_group
 
+#_______________________________________________________________________
+class FreeWriteTable(svgwrite.container.Group):
 
+  DEF_ROW_HGHT: int = 20
+
+  def __init__(self
+    , wdth: int = 0
+    , hght: int = 0
+    , txt: str = ''
+    , font_color: str = Colors.DEF_TBLE_HEADER_TEXT
+    , font_size: int = Font.NORMAL_SIZE
+    , font: str = Font.FONT_FAMILY_HEADER
+    , box_fill_color: str = Colors.DEF_TBLE_HEADER_FILL
+    , box_brdr_color: str = Colors.BORDER_COLOR
+    , row_count: int = 1
+    , row_hght: int = DEF_ROW_HGHT
+    , pad_top: bool = False
+    , pad_bot: bool = False
+    , pad_rgt: bool = False
+    , pad_lft: bool = False
+    , show_outline: bool = True
+    ):
+      """
+      Parameters:
+        wdth            : width of table
+        hght            : height of table
+        txt             : text
+        font_color      : color of header text
+        font_size       : size of header text
+        font            : font of header text
+        box_fill_color  : header fill color
+        box_brdr_color  : border color
+        row_count       : row count of table
+        row_hght        : height of row, optional
+        col_count       : column count of table
+        col_wdths       : width of rows, optional
+                          expect that number of elements = col_count
+        col_count       : column count of table
+        col_wdth        : width of rows, optional
+                          expect that number of elements = col_count
+        pad_top         : add padding to top
+        pad_bot         : add padding to bottom
+        pad_rgt         : add padding to right
+        pad_lft         : add padding to left
+        show_outline    : show table outline
+      """
+
+
+#_______________________________________________________________________
+class TableRows(BaseElement):
+
+  DEF_ROW_HGHT: int = 30
+
+  #_____________________________________________________________________
+  def __init__(self
+  , wdth: int = 0
+  , hght: int = 0
+  , font_color: str = Colors.NORMAL_TXT
+  , font_size: int = Font.NORMAL_SIZE
+  , font: str = Font.FONT_FAMILY_HEADER
+  , pad_top: bool = False
+  , pad_bot: bool = False
+  , pad_rgt: bool = False
+  , pad_lft: bool = False
+  , show_outline: bool = True
+  , row_count: int = 1
+  , row_hght: int = DEF_ROW_HGHT
+  , col_count: int = 1
+  , col_wdths: list = []
+  ):
+    """
+    Parameters:
+      wdth            : width of table
+      hght            : height of table
+      font_color      : color of header text
+      font_size       : size of header text
+      font            : font of header text
+      pad_top         : add padding to top
+      pad_bot         : add padding to bottom
+      pad_rgt         : add padding to right
+      pad_lft         : add padding to left
+      show_outline    : show table outline
+
+      row_count       : row count of table
+      row_hght        : height of row, optional
+      col_count       : column count of table
+      col_wdths       : width of rows, optional
+                        expect that number of elements = col_count
+    """
+
+    self.row_count_ : int   = row_count
+    self.row_hght_  : int   = row_hght
+
+    self.col_count_ : int   = row_count
+    self.col_wdths_ : int   = col_wdths
+
+    return super().__init__\
+      ( wdth=wdth
+      , hght=hght
+      , font_color=font_color
+      , font_size=font_size
+      , font=font
+      , pad_top=pad_top
+      , pad_bot=pad_bot
+      , pad_rgt=pad_rgt
+      , pad_lft=pad_lft
+      , show_outline=show_outline
+      )
+
+  #_____________________________________________________________________
+  def set_hghts(self) -> int:
+    """
+    Calculates total_hght_, content_hght_, and/or row height depending
+    on what is provided.
+
+    Parameters:
+      None
+    """
+
+    #___________________________________________________________________
+    # Error handling
+    #___________________________________________________________________
+    if ( (not self.row_count_) or
+         (not self.total_hght_ and not self.row_hght_)
+    ):
+      raise ValueError(Err.INSUFFICIENT_ARGS)
+
+    if (self.total_hght_ and not self.content_hght_):
+      raise RuntimeError(Err.INVALID_CONDITION)
+    #___________________________________________________________________
+
+    #___________________________________________________________________
+    # Row height calculation
+    # Provided height will take priority in calculation of row height
+    #___________________________________________________________________
+    if (self.total_hght_):
+      self.row_hght_ = self.content_hght_ / self.row_count_
+
+    else:
+      self.content_hght_: int = self.row_hght * self.row_count_
+
+      self.total_hght_: int = self.content_hght_\
+        + Dims.BRD_MARGIN_PX * (self.pad_top_ + self.pad_bot_)
+
+    #___________________________________________________________________
+    # Column width calculation and error handling
+    #
+    # If no column widths specified, or number of elements in column
+    # width list does not match the number of columns, make all columns
+    # equal.
+    #___________________________________________________________________
+    self.col_wdths_: list = Utils.calc_col_wdths\
+      (self.content_wdth_, self.col_count_, self.col_wdths_)
+    #___________________________________________________________________
+
+    return

@@ -318,7 +318,7 @@ class DayEntry(OnePageHalfLetterLayout):
       , insert=(insert_date_x, insert_date_y)
       , text_anchor='start'
       , alignment_baseline='text-after-edge'
-      , fill=Colors.NORMAL
+      , fill=Colors.NORMAL_TXT
       , font_size=font_size
       , font_family=font_family
       )

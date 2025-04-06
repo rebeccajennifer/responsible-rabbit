@@ -23,59 +23,91 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for daily entry. Populated with DayEntry.
+#   Entry for week. Fills content for one half sheet.
 #_______________________________________________________________________
 
-from classes.constants.dims import PlannerDims as Dims
+import svgwrite.container
+import svgwrite.text
+
 from classes.constants.strings import PlannerStrings as Strings
+from classes.constants.style import PlannerColors as Colors
+from classes.constants.style import PlannerFontStyle as Font
 
-from classes.elements.free_write import FreeWrite
+from classes.elements.entry_group import EntryRow
+from classes.elements.entry_table import EntryTable
+from classes.elements.entry_table import NumberedTable
+from classes.elements.entry_table import PromptTable
+from classes.elements.header_box import HeaderBox
 
-from classes.page_entries.day_entry import DayEntry
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
+
+from utils.utils import PlannerUtils as Utils
+
+from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________
-class OneDayLayout(TwoPageHalfLetterSize_):
+class FreeWrite(OnePageHalfLetterLayout):
+  """
+  Free write layout.
+  """
 
   #_____________________________________________________________________
-  def  __init__(self
-  , is_portrait: bool = False
-  , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_DAY_LAYOUT_PATH
+  def __init__(self
+  , total_hght: int = 0
+  , total_wdth: int = 0
+  , padding: int = 0
+  , page_header: str = ''
+  , prompt: str = ''
   ):
+    """
+    Constructor for class. Assumes landscape orientation.
+    """
     super().__init__\
-      ( is_portrait=is_portrait
-      , is_dbl_sided=is_dbl_sided
-      , file_path=file_path
-      )
+    ( total_hght=total_hght
+    , total_wdth=total_wdth
+    , padding=padding
+    )
+
+    self.page_header_: str = page_header
+    self.prompt_: str      = prompt
+
     return
 
   #_____________________________________________________________________
-  def create_content(self):
+  def create_content(self) -> None:
+    """
+    Parameters:
+      None
+
+    Side Effects:
+      Populates self.entries_ class variable.
+
+    Returns:
+      None
+    """
     super().create_content()
 
-    self.content_0_ =\
-      DayEntry\
-      ( total_hght=self.content_hght_
-      , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
-      )
-
-    self.content_1_ =\
-      FreeWrite\
-      ( total_hght=self.content_hght_
-      , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
-      , page_header='Free Write'
-      , prompt=Strings.FREE_WRITE_FUTURE
-      )
-
     return
 
   #_____________________________________________________________________
-  def add_content(self):
-    super().add_content()
+  def create_page_header(self) -> svgwrite.container.Group:
+    """
+    Creates page header and saves it to class variable.
 
+    Parameters:
+      None
 
+    Returns:
 
+    """
+    font_size: int = Font.WEEK_PAGE_HEADER_SIZE
+    font_family: str = Font.FONT_FAMILY_HEADER
+
+    page_header = super().create_page_header\
+      ( header_txt=Strings.DEF_PAGE_HEADER
+      , font_size=font_size
+      , font=font_family
+      , box_fill_color=Colors.DEF_PAGE_HEADER_COLOR
+      )
+
+    return page_header

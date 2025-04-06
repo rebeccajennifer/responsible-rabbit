@@ -112,7 +112,7 @@ class GoalEntry(OnePageHalfLetterLayout):
       , header_txt=Strings.GOAL_COST
       , row_count=5
       , pad_top=True
-      , font_color=Colors.NORMAL
+      , font_color=Colors.NORMAL_TXT
       , box_brdr_color='none'
       , box_fill_color='none'
       , show_outline=True

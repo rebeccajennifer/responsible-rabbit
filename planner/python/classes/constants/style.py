@@ -51,7 +51,7 @@ class PlannerColors:
   FLUX_GRY: str = '#444444'
 
   PROMPT: str = FLUX_MAG
-  NORMAL: str = FLUX_GRY
+  NORMAL_TXT: str = FLUX_GRY
   HEADING: str = FLUX_RED
 
   DEF_PAGE_HEADER_COLOR : str = LIGHT_GREY

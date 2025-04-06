@@ -29,7 +29,6 @@
 import svgwrite.container
 import svgwrite.text
 
-from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
@@ -59,10 +58,10 @@ class WeekEntry0(OnePageHalfLetterLayout):
     Constructor for class. Assumes landscape orientation.
     """
     super().__init__\
-      ( total_hght=total_hght
-      , total_wdth=total_wdth
-      , padding=padding
-      )
+    ( total_hght=total_hght
+    , total_wdth=total_wdth
+    , padding=padding
+    )
 
     return
 

@@ -34,6 +34,13 @@ import argparse
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
+
+from classes.constants.dims import PlannerDims as Dims
+from classes.constants.style import PlannerColors as Colors
+from classes.constants.style import PlannerFontStyle as Font
+from classes.elements.base_element import BaseElement
+from classes.elements.entry_table import TableRows
+
 from classes.planner_parser import PlannerCreationParser
 
 #_______________________________________________________________________
@@ -75,5 +82,24 @@ if __name__ == '__main__':
   goal_layout.save()
 
 
-  print("all done")
+  wdth, hght = Dims.calc_border_size(False)
 
+  #base_element = BaseElement()
+
+  table_rows = TableRows\
+  ( wdth=wdth
+  , hght=hght
+  , font_color=Colors.FLUX_RED
+  , font_size=Font.NORMAL_SIZE
+  , font=Font.FONT_FAMILY_NORMAL
+  , pad_top=True
+  , pad_bot=True
+  , pad_rgt=True
+  , pad_lft=True
+  , row_count=5
+  , row_hght=0
+  , col_count=3
+  , col_wdths=[]
+  )
+
+  print("all done")

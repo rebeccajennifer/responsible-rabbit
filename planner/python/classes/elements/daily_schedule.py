@@ -87,7 +87,7 @@ class DaySchedule(EntryTable):
       ( wdth=wdth
       , hght=hght
       , header_txt=[Strings.DAILY_SCHEDULE_HEADER]
-      , font_color=Colors.NORMAL
+      , font_color=Colors.NORMAL_TXT
       , font_size=Font.NORMAL_SIZE
       , font=Font.FONT_FAMILY_HEADER
       , box_fill_color='none'
@@ -154,7 +154,7 @@ class DaySchedule(EntryTable):
       , insert=(text_x, text_y)
       , text_anchor='start'
       , alignment_baseline='text-after-edge'
-      , fill=Colors.NORMAL
+      , fill=Colors.NORMAL_TXT
       , font_size=Font.LITTLE_SIZE
       , font_family=Font.FONT_FAMILY_NORMAL
       )

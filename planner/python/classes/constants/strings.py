@@ -229,3 +229,21 @@ class PlannerStrings:
 
   MONTH_FOOTER_1: str =\
     "This month's kaizen"
+
+  #_____________________________________________________________________
+  # Free write strings
+  #_____________________________________________________________________
+
+  FUTURE_PAGE_HEADER: str =\
+    'An Imagined Future'
+
+  FREE_WRITE_FUTURE: str =\
+    'Write down your ideal future 3-5 years from now—the boldest ' \
+    'version you can imagine, even if it feels unrealistic. Ask ' \
+    'yourself: What do I want from life? What skills do I want to ' \
+    'master? What habits should I break or build? How will my health, ' \
+    'social life, and leisure look? What kind of family life do I ' \
+    'want? Where will I be financially and in my career? What ' \
+    'qualities do I admire and want to develop? What would I do if I ' \
+    'weren’t afraid? Who will I become? Start by freewriting a rough ' \
+    'draft before writing in your response below.'

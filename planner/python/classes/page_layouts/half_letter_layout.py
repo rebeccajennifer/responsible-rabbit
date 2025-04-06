@@ -285,7 +285,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   #_____________________________________________________________________
   def create_page_header(self
   , header_txt = Strings.DEF_PAGE_HEADER
-  , font_color: str = Colors.NORMAL
+  , font_color: str = Colors.NORMAL_TXT
   , font_size: int = Font.HEAD_2_SIZE
   , font: str = Font.FONT_FAMILY_HEADER
   , box_fill_color: str = Colors.DEF_PAGE_HEADER_COLOR
