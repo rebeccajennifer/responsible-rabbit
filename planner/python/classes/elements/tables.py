@@ -1,6 +1,8 @@
 import svgwrite
 
 
+from classes.constants.dims import PlannerDims as Dims
+from classes.constants.error_strings import ErrorStrings as Err
 from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.style import PlannerColors as Colors
 from utils.utils import PlannerUtils as Utils
@@ -27,32 +29,39 @@ class TableRows(BaseElement):
   , row_hght: int = DEF_ROW_HGHT
   , col_count: int = 1
   , col_wdths: list = []
+  , inner_pad_lft: bool = False
+  , inner_pad_rgt: bool = False
   ):
     """
     Parameters:
-      wdth            : width of table
-      hght            : height of table
-      font_color      : color of header text
-      font_size       : size of header text
-      font            : font of header text
-      pad_top         : add padding to top
-      pad_bot         : add padding to bottom
-      pad_rgt         : add padding to right
-      pad_lft         : add padding to left
-      show_outline    : show table outline
+      wdth            : Width of table
+      hght            : Height of table
+      font_color      : Color of header text
+      font_size       : Size of header text
+      font            : Font of header text
+      pad_top         : Add padding to top
+      pad_bot         : Add padding to bottom
+      pad_rgt         : Add padding to right
+      pad_lft         : Add padding to left
+      show_outline    : Show table outline
 
-      row_count       : row count of table
-      row_hght        : height of row, optional
-      col_count       : column count of table
-      col_wdths       : width of rows, optional
+      row_count       : Row count of table
+      row_hght        : Height of row, optional
+      col_count       : Column count of table
+      col_wdths       : Width of rows, optional
                         expect that number of elements = col_count
+      inner_pad_lft   : Pad left side of row inside border
+      inner_pad_rgt   : Pad right side of row inside border
     """
 
     self.row_count_ : int   = row_count
     self.row_hght_  : int   = row_hght
 
-    self.col_count_ : int   = row_count
+    self.col_count_ : int   = col_count
     self.col_wdths_ : int   = col_wdths
+
+    self.inner_pad_lft_ : bool = inner_pad_lft
+    self.inner_pad_rgt_ : bool = inner_pad_rgt
 
     return super().__init__\
       ( wdth=wdth
@@ -91,6 +100,7 @@ class TableRows(BaseElement):
 
     #___________________________________________________________________
     # Row height calculation
+    #
     # Provided height will take priority in calculation of row height
     #___________________________________________________________________
     if (self.total_hght_):
@@ -130,8 +140,8 @@ class TableRows(BaseElement):
     self.rows_: svgwrite.container.Group =\
       self.create_row_lines\
       ( total_len=self.content_wdth_
-      , pad_lft= False
-      , pad_rgt= False
+      , pad_lft=self.inner_pad_lft_
+      , pad_rgt=self.inner_pad_rgt_
       , y_offset= 0
       , y_coord=y_coord
       )
@@ -196,7 +206,7 @@ class TableRows(BaseElement):
     start_padding: int = Font.TEXT_PADDING/2 * pad_lft
     end_padding:   int = Font.TEXT_PADDING/2 * pad_rgt
     line_len:      int = total_len - start_padding - end_padding
-    insert_x:      int = start_padding
+    insert_x:      int = start_padding + self.insert_x_
 
     row_group: svgwrite.container.Group = svgwrite.container.Group()
 

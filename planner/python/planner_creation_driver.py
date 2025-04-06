@@ -84,22 +84,5 @@ if __name__ == '__main__':
 
   wdth, hght = Dims.calc_border_size(False)
 
-  #base_element = BaseElement()
-
-  table_rows = TableRows\
-  ( wdth=wdth
-  , hght=hght
-  , font_color=Colors.FLUX_RED
-  , font_size=Font.NORMAL_SIZE
-  , font=Font.FONT_FAMILY_NORMAL
-  , pad_top=True
-  , pad_bot=True
-  , pad_rgt=True
-  , pad_lft=True
-  , row_count=5
-  , row_hght=0
-  , col_count=3
-  , col_wdths=[]
-  )
 
   print("all done")

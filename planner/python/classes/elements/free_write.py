@@ -93,9 +93,8 @@ class FreeWrite(OnePageHalfLetterLayout):
         ( wdth= self.content_wdth_
         , hght=self.content_hght_
         , show_outline=True
-        , pad_lft=True
-        , row_count= 30
-        , row_hght= TableRows.DEF_ROW_HGHT
+        , row_count = 10
+        , row_hght=TableRows.DEF_ROW_HGHT
         )
       ]
 
