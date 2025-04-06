@@ -116,3 +116,47 @@ class PlannerUtils:
 
     return group
 
+  #_____________________________________________________________________
+  def split_txt_by_wdth\
+  ( txt: str = ''
+  , px_wdth: int = 0
+  , font_size: int = Font.NORMAL_SIZE
+  , font_family: int = Font.FONT_FAMILY_NORMAL
+  ) -> list[str]:
+    """
+    Splits a given string into a list of lines, where each line fits
+    within the specified width.
+
+    Parameters:
+      txt         : The input text to wrap.
+      px_wdth     : The maximum width (in pixels) allowed for each line.
+      font_size   : Size of text font
+      font_family : Font of text
+
+    Returns:
+        List[str]: A list of strings, each representing a line of wrapped text.
+    """
+
+    if (font_size <= 0):
+      raise ValueError
+
+    max_chars_per_line: int =\
+      floor(px_wdth / (font_size / Font.WDTH_MULTPLIER[font_family]))
+
+    lines: list = []
+    words: list = txt.split()
+
+    current_line: str = ''
+
+    for word in words:
+        if len(current_line) + len(word) + 1 <= max_chars_per_line:
+            current_line += (' ' if current_line else '') + word
+        else:
+            lines.append(current_line)
+            current_line = word
+
+    lines.append(current_line)
+
+    print(lines)
+
+    return lines

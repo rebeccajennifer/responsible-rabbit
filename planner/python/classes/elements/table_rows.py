@@ -81,8 +81,8 @@ class TableRows(Rows):
     , total_len: int = 0
     , pad_lft: bool = False
     , pad_rgt: bool = False
-    , y_offset: int = 0
     , y_coord: list = []
+    , y_offset: int = 0
     ) -> svgwrite.container.Group:
     """
     Creates group of lines.
@@ -93,7 +93,8 @@ class TableRows(Rows):
                   the actual drawn length
       pad_lft   : Add padding to left, modifies length of drawn line
       pad_rgt   : Add padding to right, modifies length of drawn line
-      y_coord   : List of y coordinates for line insertion
+      y_coord   : List of y coordinates for object insertion
+      y_offset  : Offset from y_coord to insert object
     """
 
     start_padding: int = Font.TEXT_PADDING/2 * pad_lft

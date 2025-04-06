@@ -55,8 +55,8 @@ class Rows(BaseElement):
       row_count       : Row count of table
       row_hght        : Height of row, optional
       col_count       : Column count of table
-      col_wdths       : Width of rows, optional
-                        expect that number of elements = col_count
+      col_wdths       : Width of columns, optional
+                        expect that # of elements = col_count
       inner_pad_lft   : Pad left side of row inside border
       inner_pad_rgt   : Pad right side of row inside border
     """

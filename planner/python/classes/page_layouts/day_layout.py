@@ -75,6 +75,3 @@ class OneDayLayout(TwoPageHalfLetterSize_):
   #_____________________________________________________________________
   def add_content(self):
     super().add_content()
-
-
-

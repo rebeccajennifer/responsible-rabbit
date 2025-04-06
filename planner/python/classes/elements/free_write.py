@@ -40,6 +40,7 @@ from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
 from classes.elements.table_rows import TableRows
 from classes.elements.table_rows import DoubleTableRows
+from classes.elements.text_box import TextBox
 
 
 from utils.utils import PlannerUtils as Utils
@@ -90,14 +91,20 @@ class FreeWrite(OnePageHalfLetterLayout):
     super().create_content()
 
     self.entries_: list =\
-      [ DoubleTableRows\
-        ( wdth= self.content_wdth_
+      [ TextBox\
+        ( wdth=self.content_wdth_
         , hght=self.content_hght_
         , show_outline=True
-        , row_count = 30
-        , row_hght=TableRows.DEF_ROW_HGHT
+        , txt='hellllllllllooooooooo this is a bunch of text that will be split into different lines I hope this works. this is more text flux is a bunny. so is bella. trevor is a monster. duke is a dog. caitlyn is our dog sitter. my name is rebecca. I wonder if this is enough text......'
         )
       ]
+      #[ DoubleTableRows\
+      #  ( wdth=self.content_wdth_
+      #  , hght=self.content_hght_
+      #  , show_outline=True
+      #  , row_count = 30
+      #  , row_hght=TableRows.DEF_ROW_HGHT
+      #  )
 
     return
 

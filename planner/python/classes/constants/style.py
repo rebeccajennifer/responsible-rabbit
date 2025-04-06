@@ -89,3 +89,11 @@ class PlannerFontStyle:
   FONT_FAMILY_PROMPT: str = 'Trebuchet MS'
 
   STYLE_PROMPT: str = 'italics'
+
+  DEF_LINE_SPC: int =\
+    1.2
+
+  WDTH_MULTPLIER: dict =\
+  { FONT_FAMILY_NORMAL: 1.8
+  , FONT_FAMILY_HEADER: 1.8
+  }

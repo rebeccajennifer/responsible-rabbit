@@ -27,6 +27,7 @@
 #_______________________________________________________________________
 
 import svgwrite
+import svgwrite.container
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.error_strings import ErrorStrings as Err
@@ -34,9 +35,9 @@ from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.style import PlannerColors as Colors
 from utils.utils import PlannerUtils as Utils
 
-from classes.elements.base_element import BaseElement
+from classes.elements.rows import Rows
 #_______________________________________________________________________
-class TextBox(BaseElement):
+class TextBox(Rows):
 
   #_____________________________________________________________________
   def __init__(self
@@ -44,15 +45,17 @@ class TextBox(BaseElement):
   , hght: int = 0
   , font_color: str = Colors.NORMAL_TXT
   , font_size: int = Font.NORMAL_SIZE
-  , font: str = Font.FONT_FAMILY_HEADER
+  , font: str = Font.FONT_FAMILY_NORMAL
   , pad_top: bool = False
   , pad_bot: bool = False
   , pad_rgt: bool = False
   , pad_lft: bool = False
   , show_outline: bool = True
   , outline_color: str = Colors.BORDER_COLOR
+  , row_hght: int = 0
+  , inner_pad_lft: bool = True
   , txt = ''
-  , line_spc: int = 1.2
+  , line_spc: int = Font.DEF_LINE_SPC
   ):
     """
     Parameters:
@@ -75,9 +78,11 @@ class TextBox(BaseElement):
     self.txt_: str = txt
     self.line_spc_: int = line_spc
 
+    if (not row_hght):
+      row_hght = line_spc * font_size
+
     return super().__init__\
       ( wdth=wdth
-      , hght=hght
       , font_color=font_color
       , font_size=font_size
       , font=font
@@ -87,7 +92,9 @@ class TextBox(BaseElement):
       , pad_lft=pad_lft
       , show_outline=show_outline
       , outline_color=outline_color
+      , row_hght=row_hght
       )
+
 
   #_____________________________________________________________________
   def create_content(self):
@@ -99,18 +106,21 @@ class TextBox(BaseElement):
       Populates class variables for entries.
     """
 
+    self.txt_rows_: list =\
+      Utils.split_txt_by_wdth\
+      ( txt=self.txt_
+      , px_wdth=self.content_wdth_
+      , font_size=self.font_size_
+      , font_family=self.font_
+      )
 
+    self.row_count_ = len(self.txt_rows_)
+    self.y_coord_: list = self.get_y_of_rows()
 
-
-    y_coord: list = self.get_y_of_rows()
-
-    self.txt_rows_: svgwrite.container.Group =\
-      self.create_row_lines\
-      ( total_len=self.content_wdth_
-      , pad_lft=self.inner_pad_lft_
-      , pad_rgt=self.inner_pad_rgt_
-      , y_offset= 0
-      , y_coord=y_coord
+    self.txt_row_group_: svgwrite.container.Group =\
+      self.create_row_txt\
+      ( pad_lft=self.inner_pad_lft_
+      , y_coord=self.y_coord_
       )
 
     return
@@ -126,106 +136,44 @@ class TextBox(BaseElement):
     Returns:
       None
     """
-    self.add(self.rows_)
+    self.add(self.txt_row_group_)
     return
 
   #_____________________________________________________________________
-  def get_y_of_rows(self) -> svgwrite.container.Group:
-    """
-    Returns list of y coordinates of rows.
-
-    Parameters:
-      None
-
-    Returns:
-      List of y coordinates where row objects will be inserted.
-    """
-
-    y_coord: list = []
-
-    for i in range(self.row_count_):
-      y: int = self.row_hght_ + i * self.row_hght_
-
-      y_coord = y_coord + [y]
-
-    return y_coord
-
-  #_____________________________________________________________________
-  def create_row_lines(self
-    , total_len: int = 0
+  def create_row_txt(self
     , pad_lft: bool = False
-    , pad_rgt: bool = False
-    , y_offset: int = 0
     , y_coord: list = []
+    , y_offset: int = 0
     ) -> svgwrite.container.Group:
     """
     Creates group of lines.
 
     Parameters:
-      total_len : Total length of line / width of column
-                  Does not account for padding; padding will reduce
-                  the actual drawn length
       pad_lft   : Add padding to left, modifies length of drawn line
       pad_rgt   : Add padding to right, modifies length of drawn line
-      y_coord   : List of y coordinates for line insertion
+      y_coord   : List of y coordinates for object insertion
+      y_offset  : Offset from y_coord to insert object
     """
 
     start_padding: int = Font.TEXT_PADDING/2 * pad_lft
-    end_padding:   int = Font.TEXT_PADDING/2 * pad_rgt
-    line_len:      int = total_len - start_padding - end_padding
     insert_x:      int = start_padding + self.insert_x_
 
     row_group: svgwrite.container.Group = svgwrite.container.Group()
 
-    for y in y_coord:
+    for i in range(len(y_coord)):
 
-      insert_y: int = y - y_offset
+      insert_y: int = y_coord[i] - y_offset
 
-      row_line: svgwrite.shapes.Line =\
-        svgwrite.shapes.Line\
-        ( start=(insert_x, insert_y)
-        , end=(insert_x + line_len, insert_y)
-        , stroke=Colors.DEF_ROW_COLOR
-        )
-
-      row_group.add(row_line)
-
-    return row_group
-
-#_______________________________________________________________________
-class DoubleTableRows(TableRows):
-  """
-  Double line rows for better spacing to allow for letter descenders,
-  i.e. the bottom part of letters g, j, p, q, y
-  """
-
-  #_____________________________________________________________________
-  def create_content(self):
-    """
-    Add two lines
-    """
-
-    super().create_content()
-
-    y_coord: list = self.get_y_of_rows()
-
-    y_offset: int = self.row_hght_ / 3
-
-    self.double_rows_: svgwrite.container.Group =\
-      self.create_row_lines\
-      ( total_len=self.content_wdth_
-      , pad_lft=self.inner_pad_lft_
-      , pad_rgt=self.inner_pad_rgt_
-      , y_offset=y_offset
-      , y_coord=y_coord
+      row_txt: svgwrite.txt.Text = svgwrite.text.Text\
+      ( self.txt_rows_[i]
+      , insert=(insert_x, insert_y)
+      , text_anchor='start'
+      , alignment_baseline='text-after-edge'
+      , fill=self.font_color_
+      , font_size=self.font_size_
+      , font_family=self.font_
       )
 
-    return
+      row_group.add(row_txt)
 
-  #_____________________________________________________________________
-  def add_content(self):
-
-    super().add_content()
-    self.add(self.double_rows_)
-    return
-
+    return row_group
