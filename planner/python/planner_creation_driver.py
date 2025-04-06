@@ -39,7 +39,7 @@ from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 from classes.elements.base_element import BaseElement
-from classes.elements.tables import TableRows
+from classes.elements.table_rows import TableRows
 
 from classes.planner_parser import PlannerCreationParser
 

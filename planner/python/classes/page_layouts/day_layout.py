@@ -32,7 +32,7 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.free_write import FreeWrite
 
 from classes.page_entries.day_entry import DayEntry
-from classes.elements.tables import TableRows
+from classes.elements.table_rows import TableRows
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
 
 

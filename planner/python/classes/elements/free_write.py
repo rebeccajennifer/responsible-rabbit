@@ -38,7 +38,8 @@ from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import NumberedTable
 from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
-from classes.elements.tables import TableRows
+from classes.elements.table_rows import TableRows
+from classes.elements.table_rows import DoubleTableRows
 
 
 from utils.utils import PlannerUtils as Utils
@@ -89,9 +90,9 @@ class FreeWrite(OnePageHalfLetterLayout):
     super().create_content()
 
     self.entries_: list =\
-      [ TableRows\
+      [ DoubleTableRows\
         ( wdth= self.content_wdth_
-        , hght=self.content_hght_
+        #, hght=self.content_hght_
         , show_outline=True
         , row_count = 10
         , row_hght=TableRows.DEF_ROW_HGHT
