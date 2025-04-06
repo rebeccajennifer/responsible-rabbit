@@ -72,7 +72,7 @@ class BaseElement(svgwrite.container.Group):
       self.content_hght_: int = self.total_hght_\
         - Dims.BRD_MARGIN_PX * (self.pad_top_ + self.pad_bot_)
 
-    self.set_hghts()
+    self.set_dims()
 
     if (not hasattr(self, 'content_hght_')):
       raise AttributeError(Err.ABSTRACT_INIT)
@@ -87,7 +87,7 @@ class BaseElement(svgwrite.container.Group):
     self.add_outline()
 
   #_____________________________________________________________________
-  def set_hghts(self) -> int:
+  def set_dims(self) -> int:
     """
     To be implemented by subclasses. Sets self.content_hght_ and
     self.total_height_ if total height is not provided in constructor.

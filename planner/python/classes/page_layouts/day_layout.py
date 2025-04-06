@@ -32,6 +32,7 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.free_write import FreeWrite
 
 from classes.page_entries.day_entry import DayEntry
+from classes.elements.tables import TableRows
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
 
 
@@ -67,8 +68,6 @@ class OneDayLayout(TwoPageHalfLetterSize_):
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
-      , page_header='Free Write'
-      , prompt=Strings.FREE_WRITE_FUTURE
       )
 
     return
