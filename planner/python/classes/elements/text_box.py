@@ -23,7 +23,7 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Block of rows for tables.
+#   Box of text.
 #_______________________________________________________________________
 
 import svgwrite
@@ -36,9 +36,7 @@ from utils.utils import PlannerUtils as Utils
 
 from classes.elements.base_element import BaseElement
 #_______________________________________________________________________
-class TableRows(BaseElement):
-
-  DEF_ROW_HGHT: int = 30
+class TextBox(BaseElement):
 
   #_____________________________________________________________________
   def __init__(self
@@ -53,15 +51,9 @@ class TableRows(BaseElement):
   , pad_lft: bool = False
   , show_outline: bool = True
   , outline_color: str = Colors.BORDER_COLOR
-  , row_color: str = Colors.BORDER_COLOR
-  , row_count: int = 1
-  , row_hght: int = DEF_ROW_HGHT
-  , col_count: int = 1
-  , col_wdths: list = []
-  , inner_pad_lft: bool = False
-  , inner_pad_rgt: bool = False
+  , txt = ''
+  , line_spc: int = 1.2
   ):
-
     """
     Parameters:
       wdth            : Width of table
@@ -76,24 +68,12 @@ class TableRows(BaseElement):
       show_outline    : Show table outline
       outline_color   : Color of outline
 
-      row_count       : Row count of table
-      row_hght        : Height of row, optional
-      col_count       : Column count of table
-      col_wdths       : Width of rows, optional
-                        expect that number of elements = col_count
-      inner_pad_lft   : Pad left side of row inside border
-      inner_pad_rgt   : Pad right side of row inside border
+      txt             : String or list of strings for text
+      line_spc        : Line spacing
     """
 
-    self.row_count_ : int   = row_count
-    self.row_hght_  : int   = row_hght
-    self.row_color_ : str   = Colors.DEBUG0_COLOR
-
-    self.col_count_ : int   = col_count
-    self.col_wdths_ : int   = col_wdths
-
-    self.inner_pad_lft_ : bool = inner_pad_lft
-    self.inner_pad_rgt_ : bool = inner_pad_rgt
+    self.txt_: str = txt
+    self.line_spc_: int = line_spc
 
     return super().__init__\
       ( wdth=wdth
@@ -110,55 +90,6 @@ class TableRows(BaseElement):
       )
 
   #_____________________________________________________________________
-  def set_dims(self) -> int:
-    """
-    Calculates total_hght_, content_hght_, and/or row height depending
-    on what is provided. Calculates column widths if necessary.
-
-    Parameters:
-      None
-    """
-
-    #___________________________________________________________________
-    # Error handling
-    #___________________________________________________________________
-    if ( (not self.row_count_) or
-         (not self.total_hght_ and not self.row_hght_)
-    ):
-      raise ValueError(Err.INSUFFICIENT_ARGS)
-
-    if (self.total_hght_ and not self.content_hght_):
-      raise RuntimeError(Err.INVALID_CONDITION)
-    #___________________________________________________________________
-
-    #___________________________________________________________________
-    # Row height calculation
-    #
-    # Provided height will take priority in calculation of row height
-    #___________________________________________________________________
-    if (self.total_hght_):
-      self.row_hght_ = self.content_hght_ / self.row_count_
-
-    else:
-      self.content_hght_: int = self.row_hght_ * self.row_count_
-
-      self.total_hght_: int = self.content_hght_\
-        + Dims.BRD_MARGIN_PX * (self.pad_top_ + self.pad_bot_)
-
-    #___________________________________________________________________
-    # Column width calculation and error handling
-    #
-    # If no column widths specified, or number of elements in column
-    # width list does not match the number of columns, make all columns
-    # equal.
-    #___________________________________________________________________
-    self.col_wdths_: list = Utils.calc_col_wdths\
-      (self.content_wdth_, self.col_count_, self.col_wdths_)
-    #___________________________________________________________________
-
-    return
-
-  #_____________________________________________________________________
   def create_content(self):
     """
     Parameters:
@@ -168,9 +99,12 @@ class TableRows(BaseElement):
       Populates class variables for entries.
     """
 
+
+
+
     y_coord: list = self.get_y_of_rows()
 
-    self.rows_: svgwrite.container.Group =\
+    self.txt_rows_: svgwrite.container.Group =\
       self.create_row_lines\
       ( total_len=self.content_wdth_
       , pad_lft=self.inner_pad_lft_
@@ -192,7 +126,6 @@ class TableRows(BaseElement):
     Returns:
       None
     """
-
     self.add(self.rows_)
     return
 
@@ -252,7 +185,7 @@ class TableRows(BaseElement):
         svgwrite.shapes.Line\
         ( start=(insert_x, insert_y)
         , end=(insert_x + line_len, insert_y)
-        , stroke=self.row_color_
+        , stroke=Colors.DEF_ROW_COLOR
         )
 
       row_group.add(row_line)
@@ -290,16 +223,7 @@ class DoubleTableRows(TableRows):
     return
 
   #_____________________________________________________________________
-  def add_content(self) -> None:
-    """
-    Adds extra guideline row to table.
-
-    Parameters:
-      None
-
-    Returns:
-      None
-    """
+  def add_content(self):
 
     super().add_content()
     self.add(self.double_rows_)

@@ -1,3 +1,31 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+#   DESCRIPTION
+#   Base class for all table elements.
+#_______________________________________________________________________
+
 import svgwrite.container
 import svgwrite.shapes
 
@@ -26,16 +54,17 @@ class BaseElement(svgwrite.container.Group):
   ):
     """
     Parameters:
-      wdth            : width of table
-      hght            : height of table
-      font_color      : color of header text
-      font_size       : size of header text
-      font            : font of header text
-      pad_top         : add padding to top
-      pad_bot         : add padding to bottom
-      pad_rgt         : add padding to right
-      pad_lft         : add padding to left
-      show_outline    : show table outline
+      wdth            : Width of table
+      hght            : Height of table
+      font_color      : Color of header text
+      font_size       : Size of header text
+      font            : Font of header text
+      pad_top         : Add padding to top
+      pad_bot         : Add padding to bottom
+      pad_rgt         : Add padding to right
+      pad_lft         : Add padding to left
+      show_outline    : Show table outline
+      outline_color   : Color of outline
     """
 
     super().__init__()

@@ -92,9 +92,9 @@ class FreeWrite(OnePageHalfLetterLayout):
     self.entries_: list =\
       [ DoubleTableRows\
         ( wdth= self.content_wdth_
-        #, hght=self.content_hght_
+        , hght=self.content_hght_
         , show_outline=True
-        , row_count = 10
+        , row_count = 30
         , row_hght=TableRows.DEF_ROW_HGHT
         )
       ]
