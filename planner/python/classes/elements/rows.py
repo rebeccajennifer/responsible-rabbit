@@ -63,7 +63,7 @@ class Rows(BaseElement):
 
     self.row_count_ : int   = row_count
     self.row_hght_  : int   = row_hght
-    self.row_color_ : str   = Colors.DEBUG0_COLOR
+    self.row_color_ : str   = row_color
 
     self.col_count_ : int   = col_count
     self.col_wdths_ : int   = col_wdths
