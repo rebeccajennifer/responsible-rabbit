@@ -43,7 +43,7 @@ from utils.utils import PlannerUtils as Utils
 
 class EntryTable(svgwrite.container.Group):
 
-  DEF_ROW_HGHT: int = 20
+  DEF_ROW_HGHT: int = 30
 
   #_____________________________________________________________________
   def __init__(self
@@ -439,52 +439,3 @@ class NumberedTable(EntryTable):
       row_group.add(txt)
 
     return row_group
-
-#_______________________________________________________________________
-class FreeWriteTable(svgwrite.container.Group):
-
-  DEF_ROW_HGHT: int = 20
-
-  def __init__(self
-    , wdth: int = 0
-    , hght: int = 0
-    , txt: str = ''
-    , font_color: str = Colors.DEF_TBLE_HEADER_TEXT
-    , font_size: int = Font.NORMAL_SIZE
-    , font: str = Font.FONT_FAMILY_HEADER
-    , box_fill_color: str = Colors.DEF_TBLE_HEADER_FILL
-    , box_brdr_color: str = Colors.BORDER_COLOR
-    , row_count: int = 1
-    , row_hght: int = DEF_ROW_HGHT
-    , pad_top: bool = False
-    , pad_bot: bool = False
-    , pad_rgt: bool = False
-    , pad_lft: bool = False
-    , show_outline: bool = True
-    ):
-      """
-      Parameters:
-        wdth            : width of table
-        hght            : height of table
-        txt             : text
-        font_color      : color of header text
-        font_size       : size of header text
-        font            : font of header text
-        box_fill_color  : header fill color
-        box_brdr_color  : border color
-        row_count       : row count of table
-        row_hght        : height of row, optional
-        col_count       : column count of table
-        col_wdths       : width of rows, optional
-                          expect that number of elements = col_count
-        col_count       : column count of table
-        col_wdth        : width of rows, optional
-                          expect that number of elements = col_count
-        pad_top         : add padding to top
-        pad_bot         : add padding to bottom
-        pad_rgt         : add padding to right
-        pad_lft         : add padding to left
-        show_outline    : show table outline
-      """
-
-

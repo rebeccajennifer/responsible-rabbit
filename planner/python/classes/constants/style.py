@@ -54,7 +54,7 @@ class PlannerColors:
   NORMAL_TXT: str = FLUX_GRY
   HEADING: str = FLUX_RED
 
-  DEF_PAGE_HEADER_COLOR : str = LIGHT_GREY
+  DEF_PAGE_HEADER_COLOR : str = 'none'
 
   DEF_TBLE_HEADER_FILL  : str = MEDIUM_GREY
   DEF_TBLE_HEADER_TEXT  : str = WHITE
@@ -93,7 +93,9 @@ class PlannerFontStyle:
   DEF_LINE_SPC: int =\
     1.2
 
+
+  # Empirically determined constants
   WDTH_MULTPLIER: dict =\
   { FONT_FAMILY_NORMAL: 1.8
-  , FONT_FAMILY_HEADER: 1.8
+  , FONT_FAMILY_HEADER: 2.3
   }

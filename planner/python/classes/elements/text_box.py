@@ -93,6 +93,7 @@ class TextBox(Rows):
       , show_outline=show_outline
       , outline_color=outline_color
       , row_hght=row_hght
+      , inner_pad_lft=inner_pad_lft
       )
 
 
@@ -106,10 +107,14 @@ class TextBox(Rows):
       Populates class variables for entries.
     """
 
+    txt_wdth: int =\
+      self.content_wdth_ -\
+      Dims.BRD_MARGIN_PX * (2 * self.inner_pad_lft_)
+
     self.txt_rows_: list =\
       Utils.split_txt_by_wdth\
       ( txt=self.txt_
-      , px_wdth=self.content_wdth_
+      , px_wdth=txt_wdth
       , font_size=self.font_size_
       , font_family=self.font_
       )
@@ -155,7 +160,7 @@ class TextBox(Rows):
       y_offset  : Offset from y_coord to insert object
     """
 
-    start_padding: int = Font.TEXT_PADDING/2 * pad_lft
+    start_padding: int = Font.TEXT_PADDING * pad_lft
     insert_x:      int = start_padding + self.insert_x_
 
     row_group: svgwrite.container.Group = svgwrite.container.Group()

@@ -54,6 +54,8 @@ class PlannerStrings:
   DAILY_SCHEDULE_HEADER: str =\
     'Time Well Spent'
 
+
+
   #_____________________________________________________________________
   # Default file names
   #_____________________________________________________________________
@@ -75,6 +77,10 @@ class PlannerStrings:
   #_____________________________________________________________________
   # Day layout strings
   #_____________________________________________________________________
+  SHORT_QUOTE_0: str =\
+    'Start where you are. Use what you have. Do what you can. '
+    #'-Arthur Ashe'
+
   QUOTE0: str =\
     'It’s not always that we need to do more, but rather that we need '\
     'to focus on less.'
@@ -106,7 +112,12 @@ class PlannerStrings:
     [ 'How can I embrace discomfort and grow today?'
     , 'One achievement I take pride in:'
     , 'How can I move towards my ideal self?'
+    , 'What am I avoiding and why?'
+    , 'What would make today feel meaningful?'
+    , 'What can I let go of to move forward?'
+    , 'Where can I invite more joy or ease?'
     ]
+
 
   #_____________________________________________________________________
   # Goal layout strings
@@ -153,9 +164,16 @@ class PlannerStrings:
   # Week layout strings
   #_____________________________________________________________________
   WEEK_PAGE_HEADER_0: str =\
-    "Last Week's Primary Effort Completion:"\
-    + 10 * SPACE\
-    + "%"
+    'Last week I built momentum:'\
+    + SPACE\
+    + SPACE + 'disagree'\
+    + SPACE + '-2'\
+    + SPACE + '-1'\
+    + SPACE + ' 0'\
+    + SPACE + '+1'\
+    + SPACE + '+2'\
+    + SPACE + 'agree'
+
 
   WEEK_PAGE_HEADER_1: str =\
     'Goals for Week: '\

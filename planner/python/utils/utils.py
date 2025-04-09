@@ -1,7 +1,11 @@
 from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.style import PlannerColors as Colors
+from classes.constants.error_strings import ErrorStrings as Err
 
 from math import floor
+
+import svgwrite
+
 from svgwrite.text import Text
 from svgwrite.container import Group
 
@@ -160,3 +164,62 @@ class PlannerUtils:
     print(lines)
 
     return lines
+
+  #_____________________________________________________________________
+  def get_hght_from_rows\
+  ( total_hght: int = 0
+  , row_count: int = 1
+  , row_hght: int = 30
+  ) -> tuple:
+    """
+    Returns total height and row height from number of rows. Will
+    calculate row height if total height is given. Will calculate
+    total height if row height is given. If both total height and row
+    height are given, will recalculate row height.
+
+    Parameters:
+      total_hght  : Total height of combined rows
+      row_count   : Number of rows
+      row_hght    : Height of rows
+
+    Returns:
+      tuple       : (total height, row height)
+    """
+
+    if ( (not row_count) or (not total_hght and not row_hght)):
+      raise ValueError(Err.INSUFFICIENT_ARGS)
+
+    if (total_hght):
+      row_hght = total_hght / row_count
+
+    else:
+      total_hght = row_hght * row_count
+
+    return (total_hght, row_hght)
+
+  #_____________________________________________________________________
+  def add_outline\
+  ( container = svgwrite
+  , hght: int = 0
+  , wdth: int = 0
+  , outline_color: str = Colors.BORDER_COLOR
+  , backgnd_color: str = 'none'
+  ) -> svgwrite:
+    """
+    Creates rectangular outline around box.
+
+    Parameters:
+      None
+    """
+
+    container.add
+    (
+      svgwrite.shapes.Rect\
+      ( size=(wdth, hght)
+      , insert=(0,0)
+      , stroke=outline_color
+      , fill=backgnd_color
+      )
+    )
+
+    return container

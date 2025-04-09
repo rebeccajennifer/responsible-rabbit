@@ -1,4 +1,5 @@
 import svgwrite
+import svgwrite.container
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.error_strings import ErrorStrings as Err
@@ -168,3 +169,90 @@ class Rows(BaseElement):
       y_coord = y_coord + [y]
 
     return y_coord
+
+
+#_______________________________________________________________________
+class RowGroup(svgwrite.container.Group):
+  """
+  Creates a group of objects, positioned in rows.
+  """
+
+  DEF_ROW_HGHT: int = 30
+
+  def __init__(self
+  , wdth: int = 0
+  , total_hght: int = 0
+  , show_outline: bool = True
+  , outline_color: str = Colors.BORDER_COLOR
+  , backgnd_color: str = 'none'
+  , row_hght: int = DEF_ROW_HGHT
+  , inner_pad_lft: bool = False
+  , inner_pad_rgt: bool = False
+  , obj_list: list = []
+  ):
+    """
+    Parameters:
+      wdth            : Width of table
+      hght            : Height of table
+      show_outline    : Show table outline
+      outline_color   : Color of outline
+      row_count       : Row count of table
+      row_hght        : Height of row, optional
+      inner_pad_lft   : Pad left side of row inside border
+      inner_pad_rgt   : Pad right side of row inside border
+    """
+
+    super().__init__()
+
+    self.wdth_          : int  = wdth
+    self.inner_pad_lft_ : bool = inner_pad_lft
+    self.inner_pad_rgt_ : bool = inner_pad_rgt
+    self.obj_list_      : list = obj_list
+    self.show_outline_  : bool = show_outline
+    self.outline_color_ : bool = outline_color
+    self.backgnd_color_ : bool = backgnd_color
+    self.row_count_     : int  = len(obj_list)
+
+    self.total_hght_, self.row_hght_ =\
+      Utils.get_hght_from_rows(total_hght, self.row_count_, row_hght)
+
+    self.add_content()
+
+    return
+
+  #_____________________________________________________________________
+  def add_content(self):
+    """
+    Adds row objects and outline to group.
+
+    Parameters:
+      None
+
+    Side Effects:
+      Adds objects in rows to self.
+
+    Returns:
+      None
+    """
+
+    insert_x: int = Dims.BRD_MARGIN_PX * self.inner_pad_lft_
+    insert_y: int = self.row_hght_
+
+    for obj in self.obj_list_:
+      obj['transform'] =\
+        f'translate({insert_x},{insert_y})'
+      self.add(obj)
+
+      insert_y = insert_y + self.row_hght_
+
+    #___________________________________________________________________
+    # Add outline
+    #___________________________________________________________________
+    if (self.show_outline_):
+      self = Utils.add_outline\
+      ( container=self
+      , hght=self.total_hght_
+      , wdth=self.wdth_
+      , outline_color=self.outline_color_
+      , backgnd_color=self.backgnd_color_
+      )

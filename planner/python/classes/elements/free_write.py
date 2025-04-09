@@ -27,7 +27,9 @@
 #_______________________________________________________________________
 
 import svgwrite.container
+import svgwrite.shapes
 import svgwrite.text
+import copy
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
@@ -41,6 +43,7 @@ from classes.elements.header_box import HeaderBox
 from classes.elements.table_rows import TableRows
 from classes.elements.table_rows import DoubleTableRows
 from classes.elements.text_box import TextBox
+from classes.elements.rows import RowGroup
 
 
 from utils.utils import PlannerUtils as Utils
@@ -90,21 +93,55 @@ class FreeWrite(OnePageHalfLetterLayout):
     """
     super().create_content()
 
-    self.entries_: list =\
-      [ TextBox\
-        ( wdth=self.content_wdth_
-        , hght=self.content_hght_
-        , show_outline=True
-        , txt='hellllllllllooooooooo this is a bunch of text that will be split into different lines I hope this works. this is more text flux is a bunny. so is bella. trevor is a monster. duke is a dog. caitlyn is our dog sitter. my name is rebecca. I wonder if this is enough text......'
+    row_line0: svgwrite.shapes.Line =\
+        svgwrite.shapes.Line\
+        ( start=(0,0)
+        , end=(self.content_wdth_, 0)
+        , stroke=Colors.CYAN
         )
-      ]
-      #[ DoubleTableRows\
-      #  ( wdth=self.content_wdth_
-      #  , hght=self.content_hght_
-      #  , show_outline=True
-      #  , row_count = 30
-      #  , row_hght=TableRows.DEF_ROW_HGHT
-      #  )
+
+    row_line1: svgwrite.shapes.Line =\
+        svgwrite.shapes.Line\
+        ( start=(0,0)
+        , end=(self.content_wdth_, 0)
+        , stroke=Colors.BORDER_COLOR
+        )
+
+    row_line2: svgwrite.shapes.Line =\
+        svgwrite.shapes.Line\
+        ( start=(0,0)
+        , end=(self.content_wdth_, 0)
+        , stroke=Colors.FLUX_MAG
+        )
+
+
+
+
+    self.entries_: list =\
+    [ RowGroup\
+      ( wdth=self.content_wdth_
+      , total_hght=self.content_hght_/2
+      , show_outline=True
+      , obj_list=[row_line0, row_line1, row_line2]
+      )
+    ]
+
+#[ DoubleTableRows\
+    #  ( wdth=self.content_wdth_
+    #  , hght=self.content_hght_
+    #  , show_outline=True
+    #  , row_count = 30
+    #  , row_hght=TableRows.DEF_ROW_HGHT
+    #  )
+    #]
+    #  [ TextBox\
+    #    ( wdth=self.content_wdth_
+    #    , hght=self.content_hght_
+    #    , font=Font.FONT_FAMILY_HEADER
+    #    #, show_outline=True
+    #    , txt='hellllllllllooooooooo this is a bunch of text that will be split into different lines I hope this works. this is more text flux is a bunny. so is bella. trevor is a monster. duke is a dog. caitlyn is our dog sitter. my name is rebecca. I wonder if this is enough text......'
+    #    )
+    #  ]
 
     return
 
@@ -123,7 +160,7 @@ class FreeWrite(OnePageHalfLetterLayout):
     font_family: str = Font.FONT_FAMILY_HEADER
 
     page_header = super().create_page_header\
-      ( header_txt=Strings.DEF_PAGE_HEADER
+      ( header_txt=Strings.SHORT_QUOTE_0
       , font_size=font_size
       , font=font_family
       , box_fill_color=Colors.DEF_PAGE_HEADER_COLOR

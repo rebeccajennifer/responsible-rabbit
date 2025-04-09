@@ -212,7 +212,7 @@ class DayEntry(OnePageHalfLetterLayout):
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_TODO
       , prepend_txt='[]'
-      , row_count=8
+      , row_count=5
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -221,7 +221,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt0_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PROMPTS[0]
+      , header_txt=Strings.DAY_PROMPTS[4]
       , row_count=4
       , pad_top=True
       , pad_rgt=True

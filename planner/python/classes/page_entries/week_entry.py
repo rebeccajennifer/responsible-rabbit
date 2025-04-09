@@ -83,7 +83,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
     [ PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_ACCOMPLISHMENTS
-      , row_count=4
+      , row_count=3
       , pad_top=True
       )
 
@@ -91,7 +91,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LESSONS_LEARNED
       , prepend_txt='[]'
-      , row_count=3
+      , row_count=2
       , pad_top=True
       , show_outline=False
       )
@@ -100,7 +100,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
     , EntryTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_UNFINISHED_BUSINESS
-      , row_count=4
+      , row_count=2
       , pad_top=True
       , show_outline=False
       )
@@ -114,7 +114,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
     , PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_IMPROVEMENT
-      , row_count=3
+      , row_count=2
       , pad_top=True
       , show_outline=False
       )
@@ -122,14 +122,14 @@ class WeekEntry0(OnePageHalfLetterLayout):
     , EntryTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_GRATITUDE
-      , row_count=2
+      , row_count=1
       , pad_top=True
       )
 
     , PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LOOKING_FORWARD
-      , row_count=3
+      , row_count=2
       , pad_top=True
       , show_outline=False
       )
@@ -222,7 +222,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=half_content_width
       , header_txt='Goal 1'
-      , row_count=4
+      , row_count=3
       , pad_top=True
       , pad_bot=True
       , pad_rgt=True
@@ -235,7 +235,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=half_content_width
       , header_txt='Goal 2'
-      , row_count=4
+      , row_count=3
       , pad_top=True
       , pad_bot=True
       , pad_lft=True
@@ -248,7 +248,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=half_content_width
       , header_txt='Goal 3'
-      , row_count=4
+      , row_count=3
       , pad_top=True
       , pad_rgt=True
       , show_outline=False
@@ -260,7 +260,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=half_content_width
       , header_txt='Goal 4'
-      , row_count=4
+      , row_count=3
       , pad_top=True
       , pad_lft=True
       , show_outline=False
