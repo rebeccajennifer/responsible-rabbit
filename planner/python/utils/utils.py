@@ -212,13 +212,14 @@ class PlannerUtils:
       None
     """
 
-    container.add
+    container.add\
     (
       svgwrite.shapes.Rect\
       ( size=(wdth, hght)
       , insert=(0,0)
       , stroke=outline_color
       , fill=backgnd_color
+      , stroke_width=1
       )
     )
 

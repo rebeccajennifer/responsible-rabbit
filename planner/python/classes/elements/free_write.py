@@ -44,6 +44,7 @@ from classes.elements.table_rows import TableRows
 from classes.elements.table_rows import DoubleTableRows
 from classes.elements.text_box import TextBox
 from classes.elements.rows import RowGroup
+from classes.elements.base_element import BaseElement
 
 
 from utils.utils import PlannerUtils as Utils
@@ -97,51 +98,73 @@ class FreeWrite(OnePageHalfLetterLayout):
         svgwrite.shapes.Line\
         ( start=(0,0)
         , end=(self.content_wdth_, 0)
-        , stroke=Colors.CYAN
+        , stroke=Colors.FLUX_RED
+        , stroke_width=5
         )
 
     row_line1: svgwrite.shapes.Line =\
         svgwrite.shapes.Line\
         ( start=(0,0)
         , end=(self.content_wdth_, 0)
-        , stroke=Colors.BORDER_COLOR
+        , stroke=Colors.FLUX_YEL
+        , stroke_width=5
         )
 
     row_line2: svgwrite.shapes.Line =\
         svgwrite.shapes.Line\
         ( start=(0,0)
         , end=(self.content_wdth_, 0)
-        , stroke=Colors.FLUX_MAG
+        , stroke=Colors.FLUX_GRN
+        , stroke_width=5
         )
 
+    row_line3: svgwrite.shapes.Line =\
+        svgwrite.shapes.Line\
+        ( start=(0,0)
+        , end=(self.content_wdth_, 0)
+        , stroke=Colors.FLUX_CYA
+        , stroke_width=5
+        )
 
+    row_line4: svgwrite.shapes.Line =\
+        svgwrite.shapes.Line\
+        ( start=(0,0)
+        , end=(self.content_wdth_, 0)
+        , stroke=Colors.FLUX_BLU
+        , stroke_width=5
+        )
 
+    row_line5: svgwrite.shapes.Line =\
+        svgwrite.shapes.Line\
+        ( start=(0,0)
+        , end=(self.content_wdth_, 0)
+        , stroke=Colors.FLUX_MAG
+        , stroke_width=5
+        )
 
-    self.entries_: list =\
-    [ RowGroup\
+    g0 = RowGroup\
       ( wdth=self.content_wdth_
       , total_hght=self.content_hght_/2
       , show_outline=True
+      , y_offset=20
+      , outline_color=Colors.FLUX_BLU
       , obj_list=[row_line0, row_line1, row_line2]
       )
-    ]
 
-#[ DoubleTableRows\
-    #  ( wdth=self.content_wdth_
-    #  , hght=self.content_hght_
-    #  , show_outline=True
-    #  , row_count = 30
-    #  , row_hght=TableRows.DEF_ROW_HGHT
-    #  )
-    #]
-    #  [ TextBox\
-    #    ( wdth=self.content_wdth_
-    #    , hght=self.content_hght_
-    #    , font=Font.FONT_FAMILY_HEADER
-    #    #, show_outline=True
-    #    , txt='hellllllllllooooooooo this is a bunch of text that will be split into different lines I hope this works. this is more text flux is a bunny. so is bella. trevor is a monster. duke is a dog. caitlyn is our dog sitter. my name is rebecca. I wonder if this is enough text......'
-    #    )
-    #  ]
+    g2 = RowGroup\
+      ( wdth=self.content_wdth_
+      , total_hght=self.content_hght_/2
+      , show_outline=True
+      , outline_color=Colors.FLUX_BLU
+      , obj_list=[row_line3, row_line4, row_line5]
+      )
+
+    g3 = BaseElement(hght=self.content_hght_/2, wdth=self.content_wdth_)
+    g3.add(g0)
+    g3.add(g2)
+
+    self.entries_: list =\
+      [g3]
 
     return
 

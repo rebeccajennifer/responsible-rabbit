@@ -1,5 +1,6 @@
 import svgwrite
 import svgwrite.container
+import svgwrite.shapes
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.error_strings import ErrorStrings as Err
@@ -186,6 +187,7 @@ class RowGroup(svgwrite.container.Group):
   , outline_color: str = Colors.BORDER_COLOR
   , backgnd_color: str = 'none'
   , row_hght: int = DEF_ROW_HGHT
+  , y_offset: int = 0
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , obj_list: list = []
@@ -193,11 +195,12 @@ class RowGroup(svgwrite.container.Group):
     """
     Parameters:
       wdth            : Width of table
-      hght            : Height of table
+      total_hght      : Height of table
       show_outline    : Show table outline
       outline_color   : Color of outline
-      row_count       : Row count of table
+      backgnd_color   : Background color of group
       row_hght        : Height of row, optional
+      y_offset        : Offset positioning og objects
       inner_pad_lft   : Pad left side of row inside border
       inner_pad_rgt   : Pad right side of row inside border
     """
@@ -212,6 +215,7 @@ class RowGroup(svgwrite.container.Group):
     self.outline_color_ : bool = outline_color
     self.backgnd_color_ : bool = backgnd_color
     self.row_count_     : int  = len(obj_list)
+    self.y_offset_      : int  = y_offset
 
     self.total_hght_, self.row_hght_ =\
       Utils.get_hght_from_rows(total_hght, self.row_count_, row_hght)
@@ -234,22 +238,24 @@ class RowGroup(svgwrite.container.Group):
     Returns:
       None
     """
-
+    #___________________________________________________________________
+    # Add rows
+    #___________________________________________________________________
     insert_x: int = Dims.BRD_MARGIN_PX * self.inner_pad_lft_
-    insert_y: int = self.row_hght_
+    insert_y: int = self.row_hght_ - self.y_offset_
 
     for obj in self.obj_list_:
       obj['transform'] =\
         f'translate({insert_x},{insert_y})'
       self.add(obj)
 
-      insert_y = insert_y + self.row_hght_
+      insert_y = insert_y  + self.row_hght_
 
     #___________________________________________________________________
     # Add outline
     #___________________________________________________________________
     if (self.show_outline_):
-      self = Utils.add_outline\
+      Utils.add_outline\
       ( container=self
       , hght=self.total_hght_
       , wdth=self.wdth_
