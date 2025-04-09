@@ -44,6 +44,7 @@ from classes.elements.table_rows import TableRows
 from classes.elements.table_rows import DoubleTableRows
 from classes.elements.text_box import TextBox
 from classes.elements.rows import RowGroup
+from classes.elements.rows import LineRowGroup
 from classes.elements.base_element import BaseElement
 
 
@@ -140,6 +141,7 @@ class FreeWrite(OnePageHalfLetterLayout):
         , end=(self.content_wdth_, 0)
         , stroke=Colors.FLUX_MAG
         , stroke_width=5
+        , stroke_dasharray='1,0'
         )
 
     g0 = RowGroup\
@@ -150,15 +152,16 @@ class FreeWrite(OnePageHalfLetterLayout):
       , outline_color=Colors.FLUX_BLU
       , obj_list=[row_line0, row_line1, row_line2]
       )
-
-    g2 = RowGroup\
-      ( wdth=self.content_wdth_
-      , total_hght=self.content_hght_/2
+    line_row_group = LineRowGroup\
+      ( total_wdth=self.content_wdth_
+      #, total_hght=self.content_hght_/2
+      , row_count=5
       , show_outline=True
       , outline_color=Colors.FLUX_BLU
-      , obj_list=[row_line3, row_line4, row_line5]
+      , dash_array='.5,2'
       )
 
+    g2 = line_row_group.line_row_group_
     g3 = BaseElement(hght=self.content_hght_/2, wdth=self.content_wdth_)
     g3.add(g0)
     g3.add(g2)

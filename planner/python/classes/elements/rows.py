@@ -1,3 +1,4 @@
+import copy
 import svgwrite
 import svgwrite.container
 import svgwrite.shapes
@@ -171,7 +172,6 @@ class Rows(BaseElement):
 
     return y_coord
 
-
 #_______________________________________________________________________
 class RowGroup(svgwrite.container.Group):
   """
@@ -262,3 +262,72 @@ class RowGroup(svgwrite.container.Group):
       , outline_color=self.outline_color_
       , backgnd_color=self.backgnd_color_
       )
+
+
+#_______________________________________________________________________
+class LineRowGroup():
+  """
+  Organizes a set of line elements into evenly spaced horizontal rows.
+  Ideal for creating multi-line visual groupings.
+  """
+
+  #_____________________________________________________________________
+  def __init__(self
+  , total_wdth: int = 0
+  , total_hght: int = 0
+  , row_count: int = 0
+  , line_wght: int = 1
+  , line_color: str = Colors.BORDER_COLOR
+  , show_outline: bool = False
+  , outline_color: bool = False
+  , inner_pad_lft: bool = False
+  , inner_pad_rgt: bool = False
+  , dash_array: str = '1,0'
+  ):
+    """
+    Parameters:
+      total_wdth    : Total width of group
+      total_hght    : Total height of group
+      line_wght     : Line weight
+      line_color    : Row color
+      show_outline  : Show outline bool
+      outline_color : Outline color
+      inner_pad_lft : Left padding, impacts length and insertion
+      inner_pad_rgt : Right padding, impacts length
+      dash_array    : Dash style in form 'dash length, space length'
+    """
+
+    super().__init__()
+
+    self.total_wdth_    : int = total_wdth
+    self.total_hght_    : int = total_hght
+    self.inner_pad_lft_ : bool = inner_pad_lft
+    self.inner_pad_rgt_ : bool = inner_pad_rgt
+
+    line_len: int =\
+      total_wdth - Dims.BRD_MARGIN_PX * (inner_pad_lft + inner_pad_rgt)
+
+    line: svgwrite.shapes.Line =\
+      svgwrite.shapes.Line\
+      ( start=(0,0)
+      , end=(line_len, 0)
+      , stroke=line_color
+      , stroke_width=line_wght
+      , stroke_dasharray=dash_array
+      )
+
+    line_array: list =\
+      [copy.deepcopy(line) for _ in range(row_count)]
+
+    self.line_row_group_: RowGroup =\
+      RowGroup\
+      ( wdth=total_wdth
+      , total_hght=total_hght
+      , show_outline=show_outline
+      , outline_color=outline_color
+      , inner_pad_lft=inner_pad_lft
+      , inner_pad_rgt=inner_pad_rgt
+      , obj_list=line_array
+      )
+
+    return
