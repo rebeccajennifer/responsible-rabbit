@@ -145,6 +145,7 @@ class FreeWrite(OnePageHalfLetterLayout):
         , stroke_dasharray='1,0'
         )
 
+    """
     g0 = RowGroup\
       ( wdth=self.content_wdth_
       , total_hght=self.content_hght_/2
@@ -166,19 +167,24 @@ class FreeWrite(OnePageHalfLetterLayout):
     g3 = BaseElement(hght=self.content_hght_/2, wdth=self.content_wdth_)
     g3.add(g0)
     g3.add(g2)
-    g4 = BaseElement(hght=self.content_hght_/2, wdth=self.content_wdth_)
+    """
+    g4 = BaseElement(hght=self.content_hght_/6, wdth=self.content_wdth_, outline_color=Colors.DEBUG1_COLOR)
 
     t = TextRowGroup\
-      (text="This is a long text string that will need to be split up into multiple lines. This is more text to make sure this test will work. The quick brown fox jumps over the lazy dog."
+      (text=50 * 'sf '
       , total_wdth=self.content_wdth_
+      , inner_pad_top=True
+      , inner_pad_bot=True
       , inner_pad_lft=True
+      , inner_pad_rgt=True
       , show_outline=True
       )
 
     g4.add(t.text_row_group_)
 
     self.entries_: list =\
-      [g3, g4]
+      [g4]
+      #[g3, g4]
 
     return
 

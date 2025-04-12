@@ -85,4 +85,6 @@ if __name__ == '__main__':
   wdth, hght = Dims.calc_border_size(False)
 
 
+  new_line(10)
   print("all done")
+  new_line(10)

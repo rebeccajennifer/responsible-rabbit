@@ -223,8 +223,25 @@ class RowGroup(svgwrite.container.Group):
 
     row_count     : int  = len(obj_list)
 
-    self.total_hght_, self.row_hght_ =\
+
+    #___________________________________________________________________
+    # Determine heights based on given information
+    #___________________________________________________________________
+    self.total_hght_ = total_hght
+    #___________________________________________________________________
+    if (total_hght and (inner_pad_top or inner_pad_top)):
+      self.content_height_ = total_hght -\
+        Dims.BRD_MARGIN_PX * (inner_pad_top + inner_pad_bot)
+
+    self.content_height_, self.row_hght_ =\
       Utils.get_hght_from_rows(total_hght, row_count, row_hght)
+
+    if ((not inner_pad_top) and (not inner_pad_bot)):
+      self.total_hght_ = self.content_height_
+
+    else:
+      self.total_hght_ = self.content_height_ + Dims.BRD_MARGIN_PX * (inner_pad_bot + inner_pad_top)
+
 
     self.add_content()
 
@@ -248,7 +265,7 @@ class RowGroup(svgwrite.container.Group):
     # Add rows
     #___________________________________________________________________
     insert_x: int = Dims.BRD_MARGIN_PX * self.inner_pad_lft_
-    insert_y: int = self.row_hght_ - self.y_offset_
+    insert_y: int = self.row_hght_ - self.y_offset_ + Dims.BRD_MARGIN_PX * self.inner_pad_top_
 
     for obj in self.obj_list_:
       obj['transform'] =\
@@ -288,6 +305,8 @@ class LineRowGroup():
   , show_outline: bool = False
   , outline_color: bool = False
   , y_offset: int = 0
+  , inner_pad_top: bool = False
+  , inner_pad_bot: bool = False
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , dash_array: str = '1,0'
@@ -412,7 +431,7 @@ class TextRowGroup(RowGroup):
       svg_text: svgwrite.text.Text =\
         svgwrite.text.Text\
         ( text=split_text[i]
-        , insert=(0, self.inner_pad_top_)
+        #, insert=(0, self.inner_pad_top_)
         , text_anchor='start'
         , alignment_baseline='text-after-edge'
         , fill=font_color
@@ -430,6 +449,8 @@ class TextRowGroup(RowGroup):
       , outline_color=outline_color
       , row_hght=self.row_hght_
       , y_offset=y_offset
+      , inner_pad_top=inner_pad_top
+      , inner_pad_bot=inner_pad_bot
       , inner_pad_lft=inner_pad_lft
       , inner_pad_rgt=inner_pad_rgt
       , obj_list=text_array
