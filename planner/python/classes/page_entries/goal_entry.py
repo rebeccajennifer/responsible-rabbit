@@ -38,8 +38,10 @@ from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import NumberedTable
 from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
+from classes.elements.rows import TextRowGroup
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+
 
 
 #_______________________________________________________________________
@@ -94,7 +96,7 @@ class GoalEntry(OnePageHalfLetterLayout):
       ( wdth=self.content_wdth_
       , header_txt=Strings.GOAL_ACTIONS
       , prepend_txt='[]'
-      , row_count=7
+      , row_count=4
       , pad_top=True
       , show_outline=True
       )
@@ -110,7 +112,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     , NumberedTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.GOAL_COST
-      , row_count=5
+      , row_count=2
       , pad_top=True
       , font_color=Colors.NORMAL_TXT
       , box_brdr_color='none'
@@ -130,7 +132,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     , NumberedTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.GOAL_LIFE_IMPROVEMENT
-      , row_count=3
+      , row_count=2
       , pad_top=True
       , show_outline=False
       )
@@ -171,11 +173,16 @@ class GoalEntry(OnePageHalfLetterLayout):
     font_size: int = Font.GOAL_HEADER_SIZE
     font_family: str = Font.FONT_FAMILY_HEADER
 
-    page_header = super().create_page_header\
-      ( header_txt=Strings.GOAL_PAGE_HEADER
+    page_header =\
+      TextRowGroup\
+      ( text=Strings.GOAL_PAGE_HEADER
+      , total_wdth=self.content_wdth_
       , font_size=font_size
-      , font=font_family
-      , box_fill_color='none'
-      )
+      , font_family=font_family
+      , show_outline=True
+      , inner_pad_top=2
+      , inner_pad_bot=2
+      , inner_pad_lft=True
+      ).text_row_group_
 
     return page_header

@@ -66,61 +66,6 @@ class PlannerUtils:
     return col_wdths
 
   #_____________________________________________________________________
-  def create_wrapped_text\
-  ( text: str = ''
-  , wdth: int = 0
-  , font_size: int = Font.NORMAL_SIZE
-  , font_family: int = Font.FONT_FAMILY_NORMAL
-  ) -> Text:
-    """
-    SVGs do not support blocks of wrapped text. This function will take
-    string and split it into multiple
-    """
-
-    if (font_size <= 0):
-      raise ValueError
-
-    max_chars_per_line: int = floor(wdth / (font_size / 2))
-
-    lines: list = []
-
-    words: list = text.split()
-
-    current_line=''
-
-    for word in words:
-        if len(current_line) + len(word) + 1 <= max_chars_per_line:
-            current_line += (" " if current_line else "") + word
-        else:
-            lines.append(current_line)
-            current_line = word
-
-    lines.append(current_line)
-
-    print(lines)
-
-    group: Group = Group()
-    line_inc: int = 1.2 * font_size
-    text_y: int = 0
-
-    for line in lines:
-      txt: Text = Text\
-      ( line
-      , insert=(0, text_y)
-      , text_anchor='start'
-      , alignment_baseline='text-after-edge'
-      , fill=Colors.NORMAL_TXT
-      , font_size=Font.LITTLE_SIZE
-      , font_family=Font.FONT_FAMILY_NORMAL
-      )
-
-      text_y = text_y + line_inc
-
-      group.add(txt)
-
-    return group
-
-  #_____________________________________________________________________
   def split_txt_by_wdth\
   ( txt: str = ''
   , px_wdth: int = 0
@@ -161,7 +106,16 @@ class PlannerUtils:
 
     lines.append(current_line)
 
-    print(lines)
+    #___________________________________________________________________
+    # TODO refactor logic - this feels hacky
+    #___________________________________________________________________
+    # Just return the original string if the text string doesn't need to
+    # be split - the split code above will destroy intentional white
+    # space which is sometimes used for headers.
+    #___________________________________________________________________
+    if (len(lines) == 1):
+      lines = [txt]
+    #___________________________________________________________________
 
     return lines
 

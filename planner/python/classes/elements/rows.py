@@ -352,6 +352,8 @@ class LineRowGroup():
       , show_outline=show_outline
       , outline_color=outline_color
       , y_offset=y_offset
+      , inner_pad_top=inner_pad_top
+      , inner_pad_bot=inner_pad_bot
       , inner_pad_lft=inner_pad_lft
       , inner_pad_rgt=inner_pad_rgt
       , obj_list=line_array
@@ -374,8 +376,8 @@ class TextRowGroup(RowGroup):
   , show_outline: bool = False
   , outline_color: str = Colors.BORDER_COLOR
   , y_offset: int = 0
-  , inner_pad_top: bool = 10
-  , inner_pad_bot: bool = 10
+  , inner_pad_top: bool = False
+  , inner_pad_bot: bool = False
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , text: str = ''
@@ -418,12 +420,13 @@ class TextRowGroup(RowGroup):
       total_wdth - Dims.BRD_MARGIN_PX * (inner_pad_lft + inner_pad_rgt)
 
     split_text: list =\
-      Utils.split_txt_by_wdth\
-      ( txt=text
-      , px_wdth=content_width
-      , font_size=font_size
-      , font_family=font_family
-      )
+        Utils.split_txt_by_wdth\
+        ( txt=text
+        , px_wdth=content_width
+        , font_size=font_size
+        , font_family=font_family
+        )
+
 
     text_array: list = len(split_text) * ['']
 
@@ -431,7 +434,6 @@ class TextRowGroup(RowGroup):
       svg_text: svgwrite.text.Text =\
         svgwrite.text.Text\
         ( text=split_text[i]
-        #, insert=(0, self.inner_pad_top_)
         , text_anchor='start'
         , alignment_baseline='text-after-edge'
         , fill=font_color

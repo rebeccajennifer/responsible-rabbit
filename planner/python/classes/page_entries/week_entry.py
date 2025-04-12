@@ -38,6 +38,7 @@ from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import NumberedTable
 from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
+from classes.elements.rows import TextRowGroup
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -334,12 +335,17 @@ class WeekEntry1(OnePageHalfLetterLayout):
     font_size: int = Font.WEEK_PAGE_HEADER_SIZE
     font_family: str = Font.FONT_FAMILY_HEADER
 
-    page_header = super().create_page_header\
-      ( header_txt=Strings.WEEK_PAGE_HEADER_1
+    page_header =\
+      TextRowGroup\
+      ( text=Strings.WEEK_PAGE_HEADER_1
+      , total_wdth=self.content_wdth_
       , font_size=font_size
-      , font=font_family
-      , box_fill_color=Colors.DEF_PAGE_HEADER_COLOR
-      )
+      , font_family=font_family
+      , show_outline=True
+      , inner_pad_lft=True
+      , inner_pad_top=True
+      , inner_pad_bot=True
+      ).text_row_group_
 
     return page_header
 

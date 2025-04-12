@@ -145,7 +145,6 @@ class FreeWrite(OnePageHalfLetterLayout):
         , stroke_dasharray='1,0'
         )
 
-    """
     g0 = RowGroup\
       ( wdth=self.content_wdth_
       , total_hght=self.content_hght_/2
@@ -161,13 +160,14 @@ class FreeWrite(OnePageHalfLetterLayout):
       , show_outline=True
       , outline_color=Colors.FLUX_BLU
       , dash_array='.5,2'
+      , inner_pad_top=0
+      , inner_pad_bot=0
       )
 
     g2 = line_row_group.line_row_group_
     g3 = BaseElement(hght=self.content_hght_/2, wdth=self.content_wdth_)
-    g3.add(g0)
+    #g3.add(g0)
     g3.add(g2)
-    """
     g4 = BaseElement(hght=self.content_hght_/6, wdth=self.content_wdth_, outline_color=Colors.DEBUG1_COLOR)
 
     t = TextRowGroup\
@@ -183,8 +183,7 @@ class FreeWrite(OnePageHalfLetterLayout):
     g4.add(t.text_row_group_)
 
     self.entries_: list =\
-      [g4]
-      #[g3, g4]
+      [g3, g4]
 
     return
 
