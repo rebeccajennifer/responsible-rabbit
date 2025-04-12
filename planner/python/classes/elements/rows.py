@@ -189,6 +189,8 @@ class RowGroup(svgwrite.container.Group):
   , backgnd_color: str = 'none'
   , row_hght: int = DEF_ROW_HGHT
   , y_offset: int = 0
+  , inner_pad_top: bool = False
+  , inner_pad_bot: bool = False
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , obj_list: list = []
@@ -209,6 +211,8 @@ class RowGroup(svgwrite.container.Group):
     super().__init__()
 
     self.wdth_          : int  = wdth
+    self.inner_pad_top_ : bool = inner_pad_top
+    self.inner_pad_bot_ : bool = inner_pad_bot
     self.inner_pad_lft_ : bool = inner_pad_lft
     self.inner_pad_rgt_ : bool = inner_pad_rgt
     self.obj_list_      : list = obj_list
@@ -351,8 +355,8 @@ class TextRowGroup(RowGroup):
   , show_outline: bool = False
   , outline_color: str = Colors.BORDER_COLOR
   , y_offset: int = 0
-  , inner_pad_top: bool = False
-  , inner_pad_bot: bool = False
+  , inner_pad_top: bool = 10
+  , inner_pad_bot: bool = 10
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , text: str = ''
@@ -377,7 +381,6 @@ class TextRowGroup(RowGroup):
     """
 
     self.total_wdth_    : int  = total_wdth
-    self.total_hght_    : int  = total_hght
     self.inner_pad_top_ : bool = inner_pad_top
     self.inner_pad_bot_ : bool = inner_pad_bot
     self.inner_pad_lft_ : bool = inner_pad_lft
@@ -409,6 +412,7 @@ class TextRowGroup(RowGroup):
       svg_text: svgwrite.text.Text =\
         svgwrite.text.Text\
         ( text=split_text[i]
+        , insert=(0, self.inner_pad_top_)
         , text_anchor='start'
         , alignment_baseline='text-after-edge'
         , fill=font_color
@@ -432,4 +436,3 @@ class TextRowGroup(RowGroup):
       )
 
     return
-
