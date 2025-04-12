@@ -45,6 +45,7 @@ from classes.elements.table_rows import DoubleTableRows
 from classes.elements.text_box import TextBox
 from classes.elements.rows import RowGroup
 from classes.elements.rows import LineRowGroup
+from classes.elements.rows import TextRowGroup
 from classes.elements.base_element import BaseElement
 
 
@@ -165,9 +166,19 @@ class FreeWrite(OnePageHalfLetterLayout):
     g3 = BaseElement(hght=self.content_hght_/2, wdth=self.content_wdth_)
     g3.add(g0)
     g3.add(g2)
+    g4 = BaseElement(hght=self.content_hght_/2, wdth=self.content_wdth_)
+
+    t = TextRowGroup\
+      (text="This is a long text string that will need to be split up into multiple lines. This is more text to make sure this test will work. The quick brown fox jumps over the lazy dog."
+      , total_wdth=self.content_wdth_
+      , inner_pad_lft=True
+      , show_outline=True
+      )
+
+    g4.add(t.text_row_group_)
 
     self.entries_: list =\
-      [g3]
+      [g3, g4]
 
     return
 

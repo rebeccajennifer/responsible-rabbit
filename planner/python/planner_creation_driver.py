@@ -72,7 +72,7 @@ if __name__ == '__main__':
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
     )
-  day_layout .save()
+  day_layout.save()
 
   goal_layout =\
     GoalLayout\

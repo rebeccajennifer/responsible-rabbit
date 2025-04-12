@@ -2,6 +2,7 @@ import copy
 import svgwrite
 import svgwrite.container
 import svgwrite.shapes
+import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.error_strings import ErrorStrings as Err
@@ -200,7 +201,7 @@ class RowGroup(svgwrite.container.Group):
       outline_color   : Color of outline
       backgnd_color   : Background color of group
       row_hght        : Height of row, optional
-      y_offset        : Offset positioning og objects
+      y_offset        : Offset positioning of objects
       inner_pad_lft   : Pad left side of row inside border
       inner_pad_rgt   : Pad right side of row inside border
     """
@@ -214,11 +215,12 @@ class RowGroup(svgwrite.container.Group):
     self.show_outline_  : bool = show_outline
     self.outline_color_ : bool = outline_color
     self.backgnd_color_ : bool = backgnd_color
-    self.row_count_     : int  = len(obj_list)
     self.y_offset_      : int  = y_offset
 
+    row_count     : int  = len(obj_list)
+
     self.total_hght_, self.row_hght_ =\
-      Utils.get_hght_from_rows(total_hght, self.row_count_, row_hght)
+      Utils.get_hght_from_rows(total_hght, row_count, row_hght)
 
     self.add_content()
 
@@ -276,10 +278,12 @@ class LineRowGroup():
   , total_wdth: int = 0
   , total_hght: int = 0
   , row_count: int = 0
+  , row_hght: int = RowGroup.DEF_ROW_HGHT
   , line_wght: int = 1
   , line_color: str = Colors.BORDER_COLOR
   , show_outline: bool = False
   , outline_color: bool = False
+  , y_offset: int = 0
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , dash_array: str = '1,0'
@@ -292,12 +296,11 @@ class LineRowGroup():
       line_color    : Row color
       show_outline  : Show outline bool
       outline_color : Outline color
+      y_offset      : Offset positioning of objects
       inner_pad_lft : Left padding, impacts length and insertion
       inner_pad_rgt : Right padding, impacts length
       dash_array    : Dash style in form 'dash length, space length'
     """
-
-    super().__init__()
 
     self.total_wdth_    : int = total_wdth
     self.total_hght_    : int = total_hght
@@ -325,9 +328,108 @@ class LineRowGroup():
       , total_hght=total_hght
       , show_outline=show_outline
       , outline_color=outline_color
+      , y_offset=y_offset
       , inner_pad_lft=inner_pad_lft
       , inner_pad_rgt=inner_pad_rgt
       , obj_list=line_array
       )
 
     return
+
+#_______________________________________________________________________
+class TextRowGroup(RowGroup):
+  """
+  Breaks a string into multiple lines and arranges them as rows of text
+  elements. Designed for displaying paragraph-like content within an SVG
+  layout.
+  """
+
+  #_____________________________________________________________________
+  def __init__(self
+  , total_wdth: int = 0
+  , total_hght: int = 0
+  , show_outline: bool = False
+  , outline_color: str = Colors.BORDER_COLOR
+  , y_offset: int = 0
+  , inner_pad_top: bool = False
+  , inner_pad_bot: bool = False
+  , inner_pad_lft: bool = False
+  , inner_pad_rgt: bool = False
+  , text: str = ''
+  , font_size: int = Font.NORMAL_SIZE
+  , font_family: int = Font.FONT_FAMILY_NORMAL
+  , font_color: str = Colors.NORMAL_TXT
+  , line_spc: int = 1
+  ):
+    """
+    Parameters:
+      total_wdth    : Total width of group
+      total_hght    : Total height of group
+      line_wght     : Line weight
+      line_color    : Row color
+      show_outline  : Show outline bool
+      outline_color : Outline color
+      y_offset      : Offset positioning of objects
+      inner_pad_top : Top padding, impacts height and text position
+      inner_pad_bot : Right padding, impacts height and text position
+      inner_pad_lft : Left padding, impacts length and insertion
+      inner_pad_rgt : Right padding, impacts length
+    """
+
+    self.total_wdth_    : int  = total_wdth
+    self.total_hght_    : int  = total_hght
+    self.inner_pad_top_ : bool = inner_pad_top
+    self.inner_pad_bot_ : bool = inner_pad_bot
+    self.inner_pad_lft_ : bool = inner_pad_lft
+    self.inner_pad_rgt_ : bool = inner_pad_rgt
+    self.font_size_     : int  = font_size
+    self.font_family_   : int  = font_family
+    self.line_spc_      : int  = line_spc
+
+    # Error handling for line space
+    if (line_spc < 1):
+      self.line_spc_ = 1
+
+    self.row_hght_ = self.line_spc_ * self.font_size_
+
+    content_width: int =\
+      total_wdth - Dims.BRD_MARGIN_PX * (inner_pad_lft + inner_pad_rgt)
+
+    split_text: list =\
+      Utils.split_txt_by_wdth\
+      ( txt=text
+      , px_wdth=content_width
+      , font_size=font_size
+      , font_family=font_family
+      )
+
+    text_array: list = len(split_text) * ['']
+
+    for i in range(len(split_text)):
+      svg_text: svgwrite.text.Text =\
+        svgwrite.text.Text\
+        ( text=split_text[i]
+        , text_anchor='start'
+        , alignment_baseline='text-after-edge'
+        , fill=font_color
+        , font_size=font_size
+        , font_family=font_family
+        )
+
+      text_array[i] = svg_text
+
+    self.text_row_group_: RowGroup =\
+      RowGroup\
+      ( wdth=total_wdth
+      , total_hght=total_hght
+      , show_outline=show_outline
+      , outline_color=outline_color
+      , row_hght=self.row_hght_
+      , y_offset=y_offset
+      , inner_pad_lft=inner_pad_lft
+      , inner_pad_rgt=inner_pad_rgt
+      , obj_list=text_array
+      )
+
+    return
+
