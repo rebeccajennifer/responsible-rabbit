@@ -54,8 +54,6 @@ class PlannerStrings:
   DAILY_SCHEDULE_HEADER: str =\
     'Time Well Spent'
 
-
-
   #_____________________________________________________________________
   # Default file names
   #_____________________________________________________________________
@@ -92,6 +90,15 @@ class PlannerStrings:
   [ {'quote': QUOTE0, 'author': 'Nathan W. Morris'}
   , {'quote': QUOTE1, 'author': 'Robert Kiyosaki'}
   ]
+
+  DAYS: str =\
+    'Mon' + SPACE +\
+    'Tue' + SPACE +\
+    'Wed' + SPACE +\
+    'Thu' + SPACE +\
+    'Fri' + SPACE +\
+    'Sat' + SPACE +\
+    'Sun' + SPACE + DATE_STR
 
   DAY_PRIMARY_EFFORTS: list =\
     ['Primary Efforts', 'Alignment']

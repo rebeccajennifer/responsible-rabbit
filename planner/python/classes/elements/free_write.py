@@ -28,25 +28,18 @@
 
 import svgwrite.container
 import svgwrite.shapes
-import svgwrite.text
-import copy
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 
-from classes.elements.entry_group import EntryRow
-from classes.elements.entry_table import EntryTable
-from classes.elements.entry_table import NumberedTable
-from classes.elements.entry_table import PromptTable
-from classes.elements.header_box import HeaderBox
-from classes.elements.table_rows import TableRows
-from classes.elements.table_rows import DoubleTableRows
-from classes.elements.text_box import TextBox
 from classes.elements.rows import RowGroup
 from classes.elements.rows import LineRowGroup
+from classes.elements.rows import LineRowGroupStyle
 from classes.elements.rows import TextRowGroup
 from classes.elements.base_element import BaseElement
+from classes.elements.base_element import VerticalStack
+
 
 
 from utils.utils import PlannerUtils as Utils
@@ -95,67 +88,35 @@ class FreeWrite(OnePageHalfLetterLayout):
       None
     """
     super().create_content()
-
-    row_line0: svgwrite.shapes.Line =\
-        svgwrite.shapes.Line\
-        ( start=(0,0)
-        , end=(self.content_wdth_, 0)
-        , stroke=Colors.FLUX_RED
-        , stroke_width=5
-        )
-
-    row_line1: svgwrite.shapes.Line =\
-        svgwrite.shapes.Line\
-        ( start=(0,0)
-        , end=(self.content_wdth_, 0)
-        , stroke=Colors.FLUX_YEL
-        , stroke_width=5
-        )
-
-    row_line2: svgwrite.shapes.Line =\
-        svgwrite.shapes.Line\
-        ( start=(0,0)
-        , end=(self.content_wdth_, 0)
-        , stroke=Colors.FLUX_GRN
-        , stroke_width=5
-        )
-
-    row_line3: svgwrite.shapes.Line =\
-        svgwrite.shapes.Line\
-        ( start=(0,0)
-        , end=(self.content_wdth_, 0)
-        , stroke=Colors.FLUX_CYA
-        , stroke_width=5
-        )
-
-    row_line4: svgwrite.shapes.Line =\
-        svgwrite.shapes.Line\
-        ( start=(0,0)
-        , end=(self.content_wdth_, 0)
-        , stroke=Colors.FLUX_BLU
-        , stroke_width=5
-        )
-
-    row_line5: svgwrite.shapes.Line =\
-        svgwrite.shapes.Line\
-        ( start=(0,0)
-        , end=(self.content_wdth_, 0)
-        , stroke=Colors.FLUX_MAG
-        , stroke_width=5
-        , stroke_dasharray='1,0'
-        )
-
-    g0 = RowGroup\
+    '''
       ( wdth=self.content_wdth_
       , total_hght=self.content_hght_/2
       , show_outline=True
       , y_offset=20
       , outline_color=Colors.FLUX_BLU
-      , obj_list=[row_line0, row_line1, row_line2]
+      '''
+    style =\
+      LineRowGroupStyle\
+      ( total_wdth=self.content_wdth_
+      , row_count=5
+      #, row_hght=
+      , line_wght=5
+      , line_color=Colors.FLUX_GRN
+      , show_outline=True
+      , outline_color=Colors.DEBUG0_COLOR
+      , y_offset=0
+      , inner_pad_top= False
+      , inner_pad_bot= False
+      , inner_pad_lft= False
+      , inner_pad_rgt= False
+      , dash_array='6, 4'
       )
+
+    row_group=LineRowGroup(style=style)
+
     line_row_group = LineRowGroup\
       ( total_wdth=self.content_wdth_
-      #, total_hght=self.content_hght_/2
+       , total_hght=self.content_hght_/2
       , row_count=5
       , show_outline=True
       , outline_color=Colors.FLUX_BLU
@@ -164,26 +125,27 @@ class FreeWrite(OnePageHalfLetterLayout):
       , inner_pad_bot=0
       )
 
-    g2 = line_row_group.line_row_group_
+
+    g2 = line_row_group.svg_group_
     g3 = BaseElement(hght=self.content_hght_/2, wdth=self.content_wdth_)
-    #g3.add(g0)
     g3.add(g2)
-    g4 = BaseElement(hght=self.content_hght_/6, wdth=self.content_wdth_, outline_color=Colors.DEBUG1_COLOR)
 
     t = TextRowGroup\
-      (text=50 * 'sf '
+      ( text=50 * 'sf '
       , total_wdth=self.content_wdth_
       , inner_pad_top=True
       , inner_pad_bot=True
       , inner_pad_lft=True
       , inner_pad_rgt=True
       , show_outline=True
-      )
+      , outline_color=Colors.FLUX_MAG
+      , backgnd_color=Colors.CYAN
+      ).text_row_group_
 
-    g4.add(t.text_row_group_)
+    group = VerticalStack(add_inner_pad=True, obj_list=[g2,t])
 
     self.entries_: list =\
-      [g3, g4]
+      [group, row_group.svg_group_]
 
     return
 

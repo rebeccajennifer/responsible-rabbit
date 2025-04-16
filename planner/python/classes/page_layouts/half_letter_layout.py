@@ -39,6 +39,8 @@ from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.header_box import HeaderBox
+from classes.elements.rows import RowGroup
+from classes.elements.rows import TextRowGroup
 
 
 #_______________________________________________________________________
@@ -205,7 +207,8 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
     self.content_wdth_: int = self.total_wdth_ - 2 * padding
 
-    self.page_header_: HeaderBox = self.create_page_header()
+    self.page_header_: svgwrite.container.Group =\
+      self.create_page_header()
 
     # Content height is affected by generation of page header
     self.content_hght_: int =\
@@ -290,7 +293,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   , font: str = Font.FONT_FAMILY_HEADER
   , box_fill_color: str = Colors.DEF_PAGE_HEADER_COLOR
   , box_brdr_color: str = Colors.BORDER_COLOR
-  ) -> HeaderBox:
+  ) -> RowGroup:
     """
     Creates page header and saves it to class variable.
 
@@ -301,18 +304,34 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       HeaderBox for page header
     """
 
-    page_header: HeaderBox =\
-      HeaderBox\
-      ( wdth=self.content_wdth_
-      , header_txt=[header_txt]
+    page_header =\
+      TextRowGroup\
+      ( total_wdth=self.content_wdth_
+      , show_outline=True
+      , outline_color=box_brdr_color
+      , backgnd_color=box_fill_color
+      , inner_pad_top=False
+      , inner_pad_bot=False
+      , inner_pad_lft=False
+      , inner_pad_rgt=False
+      , text= header_txt
       , font_color=font_color
       , font_size=font_size
-      , font=font
-      , box_fill_color=box_fill_color
-      , box_brdr_color=box_brdr_color
+      , font_family=font
       )
 
-    return page_header
+    #page_header: HeaderBox =\
+    #  HeaderBox\
+    #  ( wdth=self.content_wdth_
+    #  , header_txt=[header_txt]
+    #  , font_color=font_color
+    #  , font_size=font_size
+    #  , font=font
+    #  , box_fill_color=box_fill_color
+    #  , box_brdr_color=box_brdr_color
+    #  )
+
+    return page_header.text_row_group_
 
   #_____________________________________________________________________
   def calc_remaining_hght(self) -> int:

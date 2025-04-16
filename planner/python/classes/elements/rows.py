@@ -1,3 +1,33 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+#   DESCRIPTION
+#   Defines classes used to manage and render row-based layout elements.
+#   This includes both visual styling properties and row group
+#   positioning logic.
+#_______________________________________________________________________
+
 import copy
 import svgwrite
 import svgwrite.container
@@ -14,12 +44,128 @@ from classes.elements.base_element import BaseElement
 
 
 #_______________________________________________________________________
+class LineRowGroupStyle:
+  """
+  Encapsulates styling properties for row groups in a table.
+  Includes attributes such as stroke width, color, dash array,
+  and other visual characteristics used to render table elements
+  consistently.
+  """
+
+  #_____________________________________________________________________
+  def __init__(self
+  , total_wdth: int = 0
+  , total_hght: int = 0
+  , row_count: int = 0
+  , row_hght: int = Dims.DEF_ROW_HGHT
+  , line_wght: int = 1
+  , line_color: str = Colors.BORDER_COLOR
+  , show_outline: bool = False
+  , outline_color: bool = False
+  , y_offset: int = 0
+  , inner_pad_top: bool = False
+  , inner_pad_bot: bool = False
+  , inner_pad_lft: bool = False
+  , inner_pad_rgt: bool = False
+  , dash_array: str = '1,0'
+  ):
+    """
+    Parameters:
+      total_wdth    : Total width of group
+      total_hght    : Total height of group
+      row_count     : Number of rows
+      row_hght      : Height of rows
+      line_wght     : Line weight
+      line_color    : Row color
+      show_outline  : Show outline bool
+      outline_color : Outline color
+      y_offset      : Offset positioning of objects
+      inner_pad_top : Top padding, impacts height and text position
+      inner_pad_bot : Right padding, impacts height and text position
+      inner_pad_lft : Left padding, impacts length and insertion
+      inner_pad_rgt : Right padding, impacts length
+      dash_array    : Dash style in form 'dash length, space length'
+    """
+    self.total_wdth_    : int   = total_wdth
+    self.total_hght_    : int   = total_hght
+    self.row_count_     : int   = row_count
+    self.row_hght_      : int   = row_hght
+    self.line_wght_     : int   = line_wght
+    self.line_color_    : str   = line_color
+    self.show_outline_  : bool  = show_outline
+    self.outline_color_ : bool  = outline_color
+    self.y_offset_      : int   = y_offset
+    self.inner_pad_top_ : bool  = inner_pad_top
+    self.inner_pad_bot_ : bool  = inner_pad_bot
+    self.inner_pad_lft_ : bool  = inner_pad_lft
+    self.inner_pad_rgt_ : bool  = inner_pad_rgt
+    self.dash_array_    : str   = dash_array
+
+    return
+
+  #_____________________________________________________________________
+  def set_total_wdth(self, total_wdth: int):
+    self.total_wdth = total_wdth
+    return
+
+  def set_total_hght(self, total_hght: int):
+    self.total_hght = total_hght
+    return
+
+  def set_row_count(self, row_count: int):
+    self.row_count = row_count
+    return
+
+  def set_row_hght(self, row_hght: int):
+    self.row_hght = row_hght
+    return
+
+  def set_line_wght(self, line_wght: int):
+    self.line_wght = line_wght
+    return
+
+  def set_line_color(self, line_color: str):
+    self.line_color = line_color
+    return
+
+  def set_show_outline(self, show_outline: bool):
+    self.show_outline = show_outline
+    return
+
+  def set_outline_color(self, outline_color: bool):
+    self.outline_color = outline_color
+    return
+
+  def set_y_offset(self, y_offset: int):
+    self.y_offset = y_offset
+    return
+
+  def set_inner_pad_top(self, inner_pad_top: bool):
+    self.inner_pad_top = inner_pad_top
+    return
+
+  def set_inner_pad_bot(self, inner_pad_bot: bool):
+    self.inner_pad_bot = inner_pad_bot
+    return
+
+  def set_inner_pad_lft(self, inner_pad_lft: bool):
+    self.inner_pad_lft = inner_pad_lft
+    return
+
+  def set_inner_pad_rgt(self, inner_pad_rgt: bool):
+    self.inner_pad_rgt = inner_pad_rgt
+    return
+
+  def set_dash_array(self, dash_array: str):
+    self.dash_array = dash_array
+    return
+
+
+#_______________________________________________________________________
 class Rows(BaseElement):
   """
   Group of objects that are rendered in rows.
   """
-
-  DEF_ROW_HGHT: int = 30
 
   #_____________________________________________________________________
   def __init__(self
@@ -36,7 +182,7 @@ class Rows(BaseElement):
   , outline_color: str = Colors.BORDER_COLOR
   , row_color: str = Colors.BORDER_COLOR
   , row_count: int = 1
-  , row_hght: int = DEF_ROW_HGHT
+  , row_hght: int = Dims.DEF_ROW_HGHT
   , col_count: int = 1
   , col_wdths: list = []
   , inner_pad_lft: bool = False
@@ -179,15 +325,13 @@ class RowGroup(svgwrite.container.Group):
   Creates a group of objects, positioned in rows.
   """
 
-  DEF_ROW_HGHT: int = 30
-
   def __init__(self
   , wdth: int = 0
   , total_hght: int = 0
   , show_outline: bool = True
   , outline_color: str = Colors.BORDER_COLOR
   , backgnd_color: str = 'none'
-  , row_hght: int = DEF_ROW_HGHT
+  , row_hght: int = Dims.DEF_ROW_HGHT
   , y_offset: int = 0
   , inner_pad_top: bool = False
   , inner_pad_bot: bool = False
@@ -229,7 +373,7 @@ class RowGroup(svgwrite.container.Group):
     #___________________________________________________________________
     self.total_hght_ = total_hght
     #___________________________________________________________________
-    if (total_hght and (inner_pad_top or inner_pad_top)):
+    if (total_hght and (inner_pad_top or inner_pad_bot)):
       self.content_height_ = total_hght -\
         Dims.BRD_MARGIN_PX * (inner_pad_top + inner_pad_bot)
 
@@ -261,18 +405,6 @@ class RowGroup(svgwrite.container.Group):
     Returns:
       None
     """
-    #___________________________________________________________________
-    # Add rows
-    #___________________________________________________________________
-    insert_x: int = Dims.BRD_MARGIN_PX * self.inner_pad_lft_
-    insert_y: int = self.row_hght_ - self.y_offset_ + Dims.BRD_MARGIN_PX * self.inner_pad_top_
-
-    for obj in self.obj_list_:
-      obj['transform'] =\
-        f'translate({insert_x},{insert_y})'
-      self.add(obj)
-
-      insert_y = insert_y  + self.row_hght_
 
     #___________________________________________________________________
     # Add outline
@@ -285,6 +417,19 @@ class RowGroup(svgwrite.container.Group):
       , outline_color=self.outline_color_
       , backgnd_color=self.backgnd_color_
       )
+
+    #___________________________________________________________________
+    # Add rows
+    #___________________________________________________________________
+    insert_x: int = Dims.BRD_MARGIN_PX * self.inner_pad_lft_
+    insert_y: int = self.row_hght_ - self.y_offset_ + Dims.BRD_MARGIN_PX * self.inner_pad_top_
+
+    for obj in self.obj_list_:
+      obj['transform'] =\
+        f'translate({insert_x},{insert_y})'
+      self.add(obj)
+
+      insert_y = insert_y  + self.row_hght_
 
 
 #_______________________________________________________________________
@@ -299,7 +444,7 @@ class LineRowGroup():
   , total_wdth: int = 0
   , total_hght: int = 0
   , row_count: int = 0
-  , row_hght: int = RowGroup.DEF_ROW_HGHT
+  , row_hght: int = Dims.DEF_ROW_HGHT
   , line_wght: int = 1
   , line_color: str = Colors.BORDER_COLOR
   , show_outline: bool = False
@@ -310,6 +455,7 @@ class LineRowGroup():
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , dash_array: str = '1,0'
+  , style: LineRowGroupStyle = 0
   ):
     """
     Parameters:
@@ -325,37 +471,61 @@ class LineRowGroup():
       dash_array    : Dash style in form 'dash length, space length'
     """
 
-    self.total_wdth_    : int = total_wdth
-    self.total_hght_    : int = total_hght
-    self.inner_pad_lft_ : bool = inner_pad_lft
-    self.inner_pad_rgt_ : bool = inner_pad_rgt
+    if (style):
+      self.total_wdth_    : int   = style.total_wdth_
+      self.total_hght_    : int   = style.total_hght_
+      self.row_count_     : int   = style.row_count_
+      self.y_offset_      : int   = style.y_offset_
+      self.line_wght_     : str   = style.line_wght_
+      self.line_color_    : str   = style.line_color_
+      self.outline_color_ : str   = style.outline_color_
+      self.show_outline_  : bool  = style.show_outline_
+      self.inner_pad_lft_ : bool  = style.inner_pad_lft_
+      self.inner_pad_rgt_ : bool  = style.inner_pad_rgt_
+      self.inner_pad_top_ : bool  = style.inner_pad_top_
+      self.inner_pad_bot_ : bool  = style.inner_pad_bot_
 
-    line_len: int =\
-      total_wdth - Dims.BRD_MARGIN_PX * (inner_pad_lft + inner_pad_rgt)
+    else:
+      self.total_wdth_    : int   = total_wdth
+      self.total_hght_    : int   = total_hght
+      self.row_count_     : int   = row_count
+      self.y_offset_      : int   = y_offset
+      self.line_wght_     : str   = line_wght
+      self.line_color_    : str   = line_color
+      self.show_outline_  : bool  = show_outline
+      self.outline_color_ : bool  = outline_color
+      self.inner_pad_top_ : bool  = inner_pad_top
+      self.inner_pad_bot_ : bool  = inner_pad_bot
+      self.inner_pad_lft_ : bool  = inner_pad_lft
+      self.inner_pad_rgt_ : bool  = inner_pad_rgt
+
+    line_len: int = self.total_wdth_\
+      - Dims.BRD_MARGIN_PX\
+      * (self.inner_pad_lft_ + self.inner_pad_rgt_)
 
     line: svgwrite.shapes.Line =\
       svgwrite.shapes.Line\
       ( start=(0,0)
       , end=(line_len, 0)
-      , stroke=line_color
-      , stroke_width=line_wght
+      , stroke=self.line_color_
+      , stroke_width=self.line_wght_
       , stroke_dasharray=dash_array
       )
 
     line_array: list =\
-      [copy.deepcopy(line) for _ in range(row_count)]
+      [copy.deepcopy(line) for _ in range(self.row_count_)]
 
-    self.line_row_group_: RowGroup =\
+    self.svg_group_: RowGroup =\
       RowGroup\
-      ( wdth=total_wdth
-      , total_hght=total_hght
-      , show_outline=show_outline
-      , outline_color=outline_color
-      , y_offset=y_offset
-      , inner_pad_top=inner_pad_top
-      , inner_pad_bot=inner_pad_bot
-      , inner_pad_lft=inner_pad_lft
-      , inner_pad_rgt=inner_pad_rgt
+      ( wdth=self.total_wdth_
+      , total_hght=self.total_hght_
+      , show_outline=self.show_outline_
+      , outline_color=self.outline_color_
+      , y_offset=self.y_offset_
+      , inner_pad_top=self.inner_pad_top_
+      , inner_pad_bot=self.inner_pad_bot_
+      , inner_pad_lft=self.inner_pad_lft_
+      , inner_pad_rgt=self.inner_pad_rgt_
       , obj_list=line_array
       )
 
@@ -375,6 +545,7 @@ class TextRowGroup(RowGroup):
   , total_hght: int = 0
   , show_outline: bool = False
   , outline_color: str = Colors.BORDER_COLOR
+  , backgnd_color: str = 'none'
   , y_offset: int = 0
   , inner_pad_top: bool = False
   , inner_pad_bot: bool = False
@@ -394,6 +565,7 @@ class TextRowGroup(RowGroup):
       line_color    : Row color
       show_outline  : Show outline bool
       outline_color : Outline color
+      backgnd_color : Background of box
       y_offset      : Offset positioning of objects
       inner_pad_top : Top padding, impacts height and text position
       inner_pad_bot : Right padding, impacts height and text position
@@ -427,9 +599,9 @@ class TextRowGroup(RowGroup):
         , font_family=font_family
         )
 
-
     text_array: list = len(split_text) * ['']
 
+    # Create list of text objects
     for i in range(len(split_text)):
       svg_text: svgwrite.text.Text =\
         svgwrite.text.Text\
@@ -449,6 +621,7 @@ class TextRowGroup(RowGroup):
       , total_hght=total_hght
       , show_outline=show_outline
       , outline_color=outline_color
+      , backgnd_color=backgnd_color
       , row_hght=self.row_hght_
       , y_offset=y_offset
       , inner_pad_top=inner_pad_top
@@ -459,3 +632,43 @@ class TextRowGroup(RowGroup):
       )
 
     return
+
+
+#_______________________________________________________________________
+class DualLineRowGroup(svgwrite.container.Group):
+  """
+  A group of lines arranged in row pairs, typically used for
+  tables that are intended to be written in. Each pair includes
+  additional space to accommodate descenders in letters like
+  'y', 'p', and 'q'.
+  """
+
+  def __init__(self
+  , total_wdth: int = 0
+  , total_hght: int = 0
+  , row_count: int = 0
+  , row_hght: int = Dims.DEF_ROW_HGHT
+  , line_wght: int = 1
+  , line_color: str = Colors.BORDER_COLOR
+  , show_outline: bool = False
+  , outline_color: bool = False
+  , y_offset: int = 0
+  , inner_pad_top: bool = False
+  , inner_pad_bot: bool = False
+  , inner_pad_lft: bool = False
+  , inner_pad_rgt: bool = False
+  , dash_array: str = '1,0'
+  ):
+    """
+
+    """
+
+class OverLayGroup(svgwrite.container.Group):
+  """
+  A group of objects stacked at the same insertion point,
+  layered visually on top of one another.
+  """
+
+
+
+

@@ -191,7 +191,7 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PRIMARY_EFFORTS
-      , row_count=4
+      , row_count=3
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -212,7 +212,7 @@ class DayEntry(OnePageHalfLetterLayout):
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_TODO
       , prepend_txt='[]'
-      , row_count=5
+      , row_count=4
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -222,7 +222,7 @@ class DayEntry(OnePageHalfLetterLayout):
       PromptTable\
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[4]
-      , row_count=4
+      , row_count=3
       , pad_top=True
       , pad_rgt=True
       )
@@ -231,7 +231,7 @@ class DayEntry(OnePageHalfLetterLayout):
       PromptTable\
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[1]
-      , row_count=3
+      , row_count=2
       , pad_top=True
       , pad_rgt=True
       )
@@ -240,7 +240,7 @@ class DayEntry(OnePageHalfLetterLayout):
       PromptTable\
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[2]
-      , row_count=4
+      , row_count=3
       , pad_top=True
       , pad_rgt=True
       )
@@ -294,17 +294,8 @@ class DayEntry(OnePageHalfLetterLayout):
     font_family: str = Font.FONT_FAMILY_NORMAL
     sp: str = Strings.SPACE
 
-    days: str =\
-      'Mon' + sp +\
-      'Tue' + sp +\
-      'Wed' + sp +\
-      'Thu' + sp +\
-      'Fri' + sp +\
-      'Sat' + sp +\
-      'Sun'
-
     page_header = super().create_page_header\
-      ( header_txt=days
+      ( header_txt=Strings.DAYS
       , font_size=font_size
       , font=font_family
       )
@@ -323,6 +314,6 @@ class DayEntry(OnePageHalfLetterLayout):
       , font_family=font_family
       )
 
-    page_header.add(date_txt)
+    #page_header.add(date_txt)
 
     return page_header
