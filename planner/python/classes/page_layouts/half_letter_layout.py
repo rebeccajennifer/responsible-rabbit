@@ -310,26 +310,16 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       , show_outline=True
       , outline_color=box_brdr_color
       , backgnd_color=box_fill_color
-      , inner_pad_top=False
-      , inner_pad_bot=False
-      , inner_pad_lft=False
-      , inner_pad_rgt=False
+      , inner_pad_top=True
+      , inner_pad_bot=True
+      , inner_pad_lft=True
+      , inner_pad_rgt=True
       , text= header_txt
       , font_color=font_color
       , font_size=font_size
       , font_family=font
+      , line_spc=Font.DEF_LINE_SPC
       )
-
-    #page_header: HeaderBox =\
-    #  HeaderBox\
-    #  ( wdth=self.content_wdth_
-    #  , header_txt=[header_txt]
-    #  , font_color=font_color
-    #  , font_size=font_size
-    #  , font=font
-    #  , box_fill_color=box_fill_color
-    #  , box_brdr_color=box_brdr_color
-    #  )
 
     return page_header.text_row_group_
 

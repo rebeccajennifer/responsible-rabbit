@@ -38,6 +38,7 @@ from classes.constants.dims import PlannerDims as Dims
 from classes.constants.error_strings import ErrorStrings as Err
 from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.style import PlannerColors as Colors
+from classes.style.table_style import TextBoxStyle
 from utils.utils import PlannerUtils as Utils
 
 from classes.elements.base_element import BaseElement
@@ -556,6 +557,7 @@ class TextRowGroup(RowGroup):
   , font_family: int = Font.FONT_FAMILY_NORMAL
   , font_color: str = Colors.NORMAL_TXT
   , line_spc: int = 1
+  , style: TextBoxStyle = 0
   ):
     """
     Parameters:
@@ -573,14 +575,26 @@ class TextRowGroup(RowGroup):
       inner_pad_rgt : Right padding, impacts length
     """
 
-    self.total_wdth_    : int  = total_wdth
-    self.inner_pad_top_ : bool = inner_pad_top
-    self.inner_pad_bot_ : bool = inner_pad_bot
-    self.inner_pad_lft_ : bool = inner_pad_lft
-    self.inner_pad_rgt_ : bool = inner_pad_rgt
-    self.font_size_     : int  = font_size
-    self.font_family_   : int  = font_family
-    self.line_spc_      : int  = line_spc
+    if (style):
+      self.total_wdth_    = style.total_wdth_
+      self.inner_pad_top_ = style.inner_pad_top_
+      self.inner_pad_bot_ = style.inner_pad_bot_
+      self.inner_pad_lft_ = style.inner_pad_lft_
+      self.inner_pad_rgt_ = style.inner_pad_rgt_
+      self.font_size_     = style.font_size_
+      self.font_family_   = style.font_family_
+      self.line_spc_      = style.line_spc_
+
+    else:
+
+      self.total_wdth_    : int  = total_wdth
+      self.inner_pad_top_ : bool = inner_pad_top
+      self.inner_pad_bot_ : bool = inner_pad_bot
+      self.inner_pad_lft_ : bool = inner_pad_lft
+      self.inner_pad_rgt_ : bool = inner_pad_rgt
+      self.font_size_     : int  = font_size
+      self.font_family_   : int  = font_family
+      self.line_spc_      : int  = line_spc
 
     # Error handling for line space
     if (line_spc < 1):

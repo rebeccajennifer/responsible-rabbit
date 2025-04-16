@@ -27,22 +27,18 @@
 #_______________________________________________________________________
 
 import svgwrite.container
-import svgwrite.shapes
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
 
-from classes.elements.rows import RowGroup
 from classes.elements.rows import LineRowGroup
 from classes.elements.rows import LineRowGroupStyle
 from classes.elements.rows import TextRowGroup
+from classes.elements.table import SimpleTable
 from classes.elements.base_element import BaseElement
 from classes.elements.base_element import VerticalStack
-
-
-
-from utils.utils import PlannerUtils as Utils
+from classes.style.table_style import TextBoxStyle
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -144,8 +140,16 @@ class FreeWrite(OnePageHalfLetterLayout):
 
     group = VerticalStack(add_inner_pad=True, obj_list=[g2,t])
 
+
+    text_style = TextBoxStyle(total_wdth=self.content_wdth_)
+    table =\
+      SimpleTable\
+      ( header_txt='this is header text'
+      , style=text_style
+    )
+
     self.entries_: list =\
-      [group, row_group.svg_group_]
+      [table, group, row_group.svg_group_]
 
     return
 
@@ -164,7 +168,7 @@ class FreeWrite(OnePageHalfLetterLayout):
     font_family: str = Font.FONT_FAMILY_HEADER
 
     page_header = super().create_page_header\
-      ( header_txt=Strings.SHORT_QUOTE_0
+      ( header_txt=Strings.FREE_WRITE_FUTURE
       , font_size=font_size
       , font=font_family
       , box_fill_color=Colors.DEF_PAGE_HEADER_COLOR

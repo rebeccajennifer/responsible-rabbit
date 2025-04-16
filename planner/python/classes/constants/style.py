@@ -26,8 +26,6 @@
 #   Standard styles used throughout program.
 #_______________________________________________________________________
 
-from classes.constants.dims import PlannerDims as Dims
-
 #_______________________________________________________________________
 class PlannerColors:
   """
@@ -92,7 +90,6 @@ class PlannerFontStyle:
 
   DEF_LINE_SPC: int =\
     1.2
-
 
   # Empirically determined constants
   WDTH_MULTPLIER: dict =\

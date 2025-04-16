@@ -38,8 +38,7 @@ from classes.page_layouts.week_layout import WeekLayout
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.style import PlannerColors as Colors
 from classes.constants.style import PlannerFontStyle as Font
-from classes.elements.base_element import BaseElement
-from classes.elements.table_rows import TableRows
+from classes.elements.table import SimpleTable
 
 from classes.planner_parser import PlannerCreationParser
 
@@ -60,6 +59,8 @@ if __name__ == '__main__':
   is_dbl_sided: bool  = False
 
   #_____________________________________________________________________
+
+
   week_layout =\
     WeekLayout\
     ( is_portrait=is_portrait
