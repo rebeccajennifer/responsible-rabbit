@@ -28,7 +28,7 @@
 
 import argparse
 
-from classes.constants.dims import PlannerDims as Dims
+from classes.page_layouts.future_layout import FutureLayout
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
@@ -51,6 +51,14 @@ if __name__ == '__main__':
   is_dbl_sided: bool  = False
 
   #_____________________________________________________________________
+
+  future_layout =\
+    FutureLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    )
+  future_layout.save()
+
 
   goal_layout =\
     GoalLayout\

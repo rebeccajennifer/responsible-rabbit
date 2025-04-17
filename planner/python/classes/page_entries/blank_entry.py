@@ -23,26 +23,19 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for week. Fills content for one half sheet.
+#   Entry for future vision. Fills content for one half sheet.
 #_______________________________________________________________________
 
 import svgwrite.container
 
 from classes.constants.strings import PlannerStrings as Strings
-from classes.style.style import PlannerColors as Colors
-from classes.style.style import PlannerFontStyle as Font
-
-from classes.elements.rows import LineRowGroup
-from classes.elements.rows import TextRowGroup
 from classes.elements.rows import DualLineRowGroup
-from classes.style.std_styles import StdTextBoxStyles
-from classes.style.std_styles import StdLineRowGroupStyles
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________
-class FreeWrite(OnePageHalfLetterLayout):
+class BlankWrite(OnePageHalfLetterLayout):
   """
   Free write layout.
   """
@@ -90,24 +83,23 @@ class FreeWrite(OnePageHalfLetterLayout):
       , outline_color=Colors.FLUX_BLU
       '''
 
-    txt_box_test_style = StdTextBoxStyles.LTE_BACK_HEADER_FONT
-
-    txt_box_test = TextRowGroup\
-      ( total_wdth=self.content_wdth_
-      , text='hello'
-      , style=txt_box_test_style).text_row_group_
-
-    linegroup=DualLineRowGroup\
-      ( total_wdth=self.content_wdth_
-      , total_hght=self.content_hght_/2
-      , row_count=5
-      )
-
     self.entries_: list =\
-      [txt_box_test, linegroup]
-      #[table, group, row_group.svg_group_, txt_box_test]
+      [ DualLineRowGroup\
+        ( total_wdth=self.content_wdth_
+        , total_hght=self.content_hght_
+        , row_count=30
+        )
+      ]
 
     return
+
+  #_____________________________________________________________________
+  def add_content(self) -> None:
+    """
+    Calls parent function, setting pad_bet_elements to True.
+    """
+
+    super().add_content(pad_bet_elements=False)
 
   #_____________________________________________________________________
   def create_page_header(self) -> svgwrite.container.Group:
@@ -122,7 +114,7 @@ class FreeWrite(OnePageHalfLetterLayout):
     """
 
     page_header = super().create_page_header\
-      ( header_txt=Strings.FREE_WRITE_FUTURE
+      ( header_txt=Strings.FUTURE_PAGE_HEADER
       )
 
     return page_header

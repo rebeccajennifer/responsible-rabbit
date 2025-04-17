@@ -23,27 +23,25 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for daily entry. Populated with DayEntry.
+#   Layout for week . Populated with entry group for week.
 #_______________________________________________________________________
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.future_entry import FutureFreeWrite
-
-from classes.page_entries.day_entry import DayEntry
-from classes.elements.table_rows import TableRows
+from classes.page_entries.blank_entry import BlankWrite
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
 
 
 #_______________________________________________________________________
-class OneDayLayout(TwoPageHalfLetterSize_):
+class FutureLayout(TwoPageHalfLetterSize_):
 
   #_____________________________________________________________________
   def  __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_DAY_LAYOUT_PATH
+  , file_path: str = Strings.DEF_FUTURE_LAYOUT_PATH
   ):
     super().__init__\
       ( is_portrait=is_portrait
@@ -57,14 +55,14 @@ class OneDayLayout(TwoPageHalfLetterSize_):
     super().create_content()
 
     self.content_0_ =\
-      DayEntry\
+      FutureFreeWrite\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
       )
 
     self.content_1_ =\
-      FutureFreeWrite\
+      BlankWrite\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX

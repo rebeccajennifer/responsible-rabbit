@@ -233,7 +233,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     return
 
   #_____________________________________________________________________
-  def add_content(self) -> None:
+  def add_content(self , pad_bet_elements: bool = True) -> None:
     """
     Adds content to group.
 
@@ -256,7 +256,10 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     insert_y: int = self.content_insert_pt_y_
 
     content: VerticalStack =\
-      VerticalStack(obj_list=self.entries_, add_inner_pad=False)
+      VerticalStack\
+      ( obj_list=self.entries_
+      , add_top_pad=pad_bet_elements
+      )
 
     content['transform'] = f'translate({insert_x}, {insert_y})'
 

@@ -95,6 +95,6 @@ class PlannerFontStyle:
 
   # Empirically determined constants
   WDTH_MULTPLIER: dict =\
-  { FONT_FAMILY_NORMAL: 1.8
+  { FONT_FAMILY_NORMAL: 1.75
   , FONT_FAMILY_HEADER: 2.3
   }

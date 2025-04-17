@@ -66,8 +66,8 @@ class PlannerStrings:
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout.svg'
 
-  DEF_GOAL_LAYOUT_PATH: str =\
-    'goal-layout.svg'
+  DEF_FUTURE_LAYOUT_PATH: str =\
+    'future-layout.svg'
 
   DEF_WEEK_LAYOUT_PATH: str =\
     'week-layout.svg'
@@ -262,13 +262,17 @@ class PlannerStrings:
   FUTURE_PAGE_HEADER: str =\
     'An Imagined Future'
 
-  FREE_WRITE_FUTURE: str =\
-    'Write down your ideal future 3-5 years from now—the boldest ' \
-    'version you can imagine, even if it feels unrealistic. Ask ' \
-    'yourself: What do I want from life? What skills do I want to ' \
-    'master? What habits should I break or build? How will my health, ' \
-    'social life, and leisure look? What kind of family life do I ' \
-    'want? Where will I be financially and in my career? What ' \
-    'qualities do I admire and want to develop? What would I do if I ' \
-    'weren’t afraid? Who will I become? Start by freewriting a rough ' \
-    'draft before writing in your response below.'
+  FUTURE_PAGE_HEADER : str =\
+    'Imagine a Future...'
+
+  FREE_WRITE_FUTURE: str = (
+    'Describe your ideal life 3–5 years from now—the boldest vision '
+    'you can imagine, even if it feels far off. Ask yourself: What do '
+    'I truly want from life? What skills will I master? Which habits '
+    'should I drop or build? What will my health and social life look '
+    'like? How will I spend leisure time? What kind of family life do '
+    'I want? Where will I be in my career and financially? What traits '
+    'do I admire and want to grow into? What would I do if I had no '
+    'fear? What kind of person will I grow into? Start by freewriting '
+    'before refining your answer below.'
+  )

@@ -168,40 +168,39 @@ class BaseElement(svgwrite.container.Group):
     return
 
 
+#_______________________________________________________________________
 class VerticalStack(svgwrite.container.Group):
 
   def __init__(self
   , obj_list: list = []
-  , add_inner_pad: bool = False
+  , add_top_pad: bool = False
   ) -> svgwrite.container.Group:
     """
     Creates a new svgwrite container with all objects stacked
     vertically.
 
     Parameters:
-      obj_list      : List of SVG elements to be stacked. Each
-                      element is expected to have a 'total_hght_'
-                      attribute defining its height.
+      obj_list    : List of SVG elements to be stacked. Each
+                    element is expected to have a 'total_hght_'
+                    attribute defining its height.
 
-      add_inner_pad : If True, adds uniform vertical padding
-                      between elements. Padding is not added
-                      above the first or below the last element.
+      add_top_pad : If True, adds uniform vertical padding
+                    between elements. Padding is not added
+                    above the first or below the last element.
     """
 
     super().__init__()
     insert_x: int = 0
-    insert_y: int = 0
+    insert_y: int = Dims.BRD_MARGIN_PX * add_top_pad
 
     for i in range(len(obj_list)):
 
       obj_list[i]['transform'] =\
       f'translate({insert_x},{insert_y})'
 
-      # Keeping the calculation after insert y ensures that top
-      # padding is not added for first element
       insert_y = insert_y\
         + obj_list[i].total_hght_\
-        + Dims.BRD_MARGIN_PX * add_inner_pad
+        + Dims.BRD_MARGIN_PX * add_top_pad
 
       self.add(obj_list[i])
 
