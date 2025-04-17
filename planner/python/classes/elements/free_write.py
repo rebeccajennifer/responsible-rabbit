@@ -34,12 +34,9 @@ from classes.style.style import PlannerFontStyle as Font
 
 from classes.elements.rows import LineRowGroup
 from classes.elements.rows import TextRowGroup
-from classes.elements.table import SimpleTable
-from classes.elements.base_element import BaseElement
-from classes.elements.base_element import VerticalStack
-from classes.style.table_style import LineRowGroupStyle
-from classes.style.table_style import TextBoxStyle
+from classes.elements.rows import DualLineRowGroup
 from classes.style.std_styles import StdTextBoxStyles
+from classes.style.std_styles import StdLineRowGroupStyles
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -92,64 +89,6 @@ class FreeWrite(OnePageHalfLetterLayout):
       , y_offset=20
       , outline_color=Colors.FLUX_BLU
       '''
-    """
-    style =\
-      LineRowGroupStyle\
-      ( total_wdth=self.content_wdth_
-      , row_count=5
-      #, row_hght=
-      , line_wght=5
-      , line_color=Colors.FLUX_GRN
-      , show_outline=True
-      , outline_color=Colors.DEBUG0_COLOR
-      , y_offset=0
-      , inner_pad_top= False
-      , inner_pad_bot= False
-      , inner_pad_lft= False
-      , inner_pad_rgt= False
-      , dash_array='6, 4'
-      )
-
-    row_group=LineRowGroup(style=style)
-
-    line_row_group = LineRowGroup\
-      ( total_wdth=self.content_wdth_
-       , total_hght=self.content_hght_/2
-      , row_count=5
-      , show_outline=True
-      , outline_color=Colors.FLUX_BLU
-      , dash_array='.5,2'
-      , inner_pad_top=0
-      , inner_pad_bot=0
-      )
-
-
-    g2 = line_row_group.svg_group_
-    g3 = BaseElement(hght=self.content_hght_/2, wdth=self.content_wdth_)
-    g3.add(g2)
-
-    t = TextRowGroup\
-      ( text=50 * 'sf '
-      , total_wdth=self.content_wdth_
-      , inner_pad_top=True
-      , inner_pad_bot=True
-      , inner_pad_lft=True
-      , inner_pad_rgt=True
-      , show_outline=True
-      , outline_color=Colors.FLUX_MAG
-      , backgnd_color=Colors.CYAN
-      ).text_row_group_
-
-    group = VerticalStack(add_inner_pad=True, obj_list=[g2,t])
-
-
-    text_style = TextBoxStyle(total_wdth=self.content_wdth_)
-    table =\
-      SimpleTable\
-      ( header_txt='this is header text'
-      , style=text_style
-      )
-      """
 
     txt_box_test_style = StdTextBoxStyles.LTE_BACK_HEADER_FONT
 
@@ -158,9 +97,14 @@ class FreeWrite(OnePageHalfLetterLayout):
       , text='hello'
       , style=txt_box_test_style).text_row_group_
 
+    linegroup=DualLineRowGroup\
+      ( total_wdth=self.content_wdth_
+      , total_hght=self.content_hght_/2
+      , row_count=5
+      )
 
     self.entries_: list =\
-      [txt_box_test]
+      [txt_box_test, linegroup]
       #[table, group, row_group.svg_group_, txt_box_test]
 
     return

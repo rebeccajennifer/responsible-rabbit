@@ -28,11 +28,12 @@
 #   positioning logic.
 #_______________________________________________________________________
 
-import copy
 import svgwrite
 import svgwrite.container
 import svgwrite.shapes
 import svgwrite.text
+
+from copy import deepcopy
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.error_strings import ErrorStrings as Err
@@ -40,6 +41,7 @@ from classes.style.style import PlannerFontStyle as Font
 from classes.style.style import PlannerColors as Colors
 from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
+from classes.style.std_styles import StdLineRowGroupStyles
 from utils.utils import PlannerUtils as Utils
 
 from classes.elements.base_element import BaseElement
@@ -331,7 +333,7 @@ class LineRowGroup():
   , line_wght: int = 1
   , line_color: str = Colors.BORDER_COLOR
   , show_outline: bool = False
-  , outline_color: bool = False
+  , outline_color: str = Colors.BORDER_COLOR
   , y_offset: int = 0
   , inner_pad_top: bool = False
   , inner_pad_bot: bool = False
@@ -355,9 +357,6 @@ class LineRowGroup():
     """
 
     if (style):
-      self.total_wdth_    : int   = style.total_wdth_
-      self.total_hght_    : int   = style.total_hght_
-      self.row_count_     : int   = style.row_count_
       self.y_offset_      : int   = style.y_offset_
       self.line_wght_     : str   = style.line_wght_
       self.line_color_    : str   = style.line_color_
@@ -367,11 +366,9 @@ class LineRowGroup():
       self.inner_pad_rgt_ : bool  = style.inner_pad_rgt_
       self.inner_pad_top_ : bool  = style.inner_pad_top_
       self.inner_pad_bot_ : bool  = style.inner_pad_bot_
+      self.dash_array_    : str   = style.dash_array_
 
     else:
-      self.total_wdth_    : int   = total_wdth
-      self.total_hght_    : int   = total_hght
-      self.row_count_     : int   = row_count
       self.y_offset_      : int   = y_offset
       self.line_wght_     : str   = line_wght
       self.line_color_    : str   = line_color
@@ -381,6 +378,11 @@ class LineRowGroup():
       self.inner_pad_bot_ : bool  = inner_pad_bot
       self.inner_pad_lft_ : bool  = inner_pad_lft
       self.inner_pad_rgt_ : bool  = inner_pad_rgt
+      self.dash_array_    : str   = dash_array
+
+    self.total_wdth_    : int   = total_wdth
+    self.total_hght_    : int   = total_hght
+    self.row_count_     : int   = row_count
 
     line_len: int = self.total_wdth_\
       - Dims.BRD_MARGIN_PX\
@@ -392,11 +394,11 @@ class LineRowGroup():
       , end=(line_len, 0)
       , stroke=self.line_color_
       , stroke_width=self.line_wght_
-      , stroke_dasharray=dash_array
+      , stroke_dasharray=self.dash_array_
       )
 
     line_array: list =\
-      [copy.deepcopy(line) for _ in range(self.row_count_)]
+      [deepcopy(line) for _ in range(self.row_count_)]
 
     self.svg_group_: RowGroup =\
       RowGroup\
@@ -471,8 +473,6 @@ class TextRowGroup(RowGroup):
       self.line_spc_      = style.line_spc_
 
     else:
-
-      self.total_wdth_    : int  = total_wdth
       self.show_outline_  : bool = show_outline
       self.outline_color_ : str  = outline_color
       self.backgnd_color_ : str  = backgnd_color
@@ -484,6 +484,8 @@ class TextRowGroup(RowGroup):
       self.font_family_   : int  = font_family
       self.font_size_     : int  = font_size
       self.line_spc_      : int  = line_spc
+
+    self.total_wdth_    : int  = total_wdth
 
     # Error handling for line space
     if (line_spc < 1):
@@ -546,26 +548,50 @@ class DualLineRowGroup(svgwrite.container.Group):
   'y', 'p', and 'q'.
   """
 
+  #_____________________________________________________________________
   def __init__(self
   , total_wdth: int = 0
   , total_hght: int = 0
   , row_count: int = 0
-  , row_hght: int = Dims.DEF_ROW_HGHT
-  , line_wght: int = 1
-  , line_color: str = Colors.BORDER_COLOR
-  , show_outline: bool = False
-  , outline_color: bool = False
-  , y_offset: int = 0
-  , inner_pad_top: bool = False
-  , inner_pad_bot: bool = False
-  , inner_pad_lft: bool = False
-  , inner_pad_rgt: bool = False
-  , dash_array: str = '1,0'
   ):
     """
-
+    Parameters:
+      total_wdth    : Total width of group
+      total_hght    : Total height of group
+      row_count       : Row count of table
     """
 
+    super().__init__()
+
+    sec_line = LineRowGroup\
+      ( total_wdth=total_wdth
+      , total_hght=total_hght
+      , row_count=row_count
+      , style=StdLineRowGroupStyles.SEC_LINE_FOR_DESCENDER
+      ).svg_group_
+
+    pri_line_style: LineRowGroupStyle =\
+      deepcopy(StdLineRowGroupStyles.PRI_LINE_FOR_DESCENDER)
+
+    # Modify the offset based off the row height
+    pri_line_style.y_offset_ = sec_line.row_hght_/3
+
+    pri_line = LineRowGroup\
+      ( total_wdth=total_wdth
+      , total_hght=total_hght
+      , row_count=row_count
+      , style=pri_line_style
+      ).svg_group_
+
+    self.total_hght_ = pri_line.total_hght_
+
+    self.add(sec_line)
+    self.add(pri_line)
+
+    return
+
+
+#_______________________________________________________________________
 class OverLayGroup(svgwrite.container.Group):
   """
   A group of objects stacked at the same insertion point,

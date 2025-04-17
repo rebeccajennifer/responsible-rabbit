@@ -24,22 +24,14 @@
 #_______________________________________________________________________
 #   DESCRIPTION
 #   Driver for planner creation.
-#
-#   NOTES
-#   All dimensions in planner are in inches.
 #_______________________________________________________________________
 
 import argparse
 
+from classes.constants.dims import PlannerDims as Dims
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
-
-from classes.constants.dims import PlannerDims as Dims
-from classes.style.style import PlannerColors as Colors
-from classes.style.style import PlannerFontStyle as Font
-from classes.elements.table import SimpleTable
-
 from classes.planner_parser import PlannerCreationParser
 
 #_______________________________________________________________________
@@ -80,10 +72,6 @@ if __name__ == '__main__':
     , is_dbl_sided=is_dbl_sided
     )
   week_layout.save()
-
-
-  wdth, hght = Dims.calc_border_size(False)
-
 
   new_line(10)
   print("all done")

@@ -200,7 +200,6 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
     self.total_hght_: int = total_hght
     self.total_wdth_: int = total_wdth
-    self.padding_   : int = padding
 
     self.page_header_insert_pt_x_ : int = padding
     self.page_header_insert_pt_y_ : int = padding
@@ -257,7 +256,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     insert_y: int = self.content_insert_pt_y_
 
     content: VerticalStack =\
-      VerticalStack(obj_list=self.entries_, add_inner_pad=True)
+      VerticalStack(obj_list=self.entries_, add_inner_pad=False)
 
     content['transform'] = f'translate({insert_x}, {insert_y})'
 

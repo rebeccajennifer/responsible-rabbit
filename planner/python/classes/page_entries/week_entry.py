@@ -27,10 +27,8 @@
 #_______________________________________________________________________
 
 import svgwrite.container
-import svgwrite.text
 
 from classes.constants.strings import PlannerStrings as Strings
-from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
 
 from classes.elements.entry_group import EntryRow
@@ -39,6 +37,7 @@ from classes.elements.entry_table import NumberedTable
 from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
 from classes.elements.rows import TextRowGroup
+from classes.style.std_styles import StdTextBoxStyles
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -81,7 +80,13 @@ class WeekEntry0(OnePageHalfLetterLayout):
     super().create_content()
 
     self.entries_: list =\
-    [ PromptTable\
+    [ #TextRowGroup\
+      #( total_wdth=self.content_wdth_
+      #, style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      #, text=Strings.WEEK_ACCOMPLISHMENTS
+      #).text_row_group_
+
+      PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_ACCOMPLISHMENTS
       , row_count=3
