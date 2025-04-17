@@ -30,11 +30,11 @@ from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.goal_entry import GoalEntry
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
+from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
 #_______________________________________________________________________
-class GoalLayout(TwoPageHalfLetterSize_):
+class GoalLayout(TwoPageHalfLetterSize):
 
   #_____________________________________________________________________
   def  __init__(self

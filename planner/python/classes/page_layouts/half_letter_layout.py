@@ -44,7 +44,7 @@ from classes.style.table_style import TextBoxStyle
 
 
 #_______________________________________________________________________
-class TwoPageHalfLetterSize_(svgwrite.Drawing):
+class TwoPageHalfLetterSize(svgwrite.Drawing):
   """
   Layout for half letter size prints. Intended to print two pages on
   one sheet and cut in half.

@@ -33,11 +33,11 @@ from classes.page_entries.future_entry import FutureFreeWrite
 
 from classes.page_entries.day_entry import DayEntry
 from classes.elements.table_rows import TableRows
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
+from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
 #_______________________________________________________________________
-class OneDayLayout(TwoPageHalfLetterSize_):
+class OneDayLayout(TwoPageHalfLetterSize):
 
   #_____________________________________________________________________
   def  __init__(self

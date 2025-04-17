@@ -31,11 +31,11 @@ from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.future_entry import FutureFreeWrite
 from classes.page_entries.blank_entry import BlankWrite
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
+from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
 #_______________________________________________________________________
-class FutureLayout(TwoPageHalfLetterSize_):
+class FutureLayout(TwoPageHalfLetterSize):
 
   #_____________________________________________________________________
   def  __init__(self

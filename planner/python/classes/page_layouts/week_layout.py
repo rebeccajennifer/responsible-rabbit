@@ -31,11 +31,11 @@ from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.week_entry import WeekEntry0
 from classes.page_entries.week_entry import WeekEntry1
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize_
+from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
 #_______________________________________________________________________
-class WeekLayout(TwoPageHalfLetterSize_):
+class WeekLayout(TwoPageHalfLetterSize):
 
   #_____________________________________________________________________
   def  __init__(self
