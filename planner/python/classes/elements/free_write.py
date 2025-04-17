@@ -39,6 +39,7 @@ from classes.elements.base_element import BaseElement
 from classes.elements.base_element import VerticalStack
 from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
+from classes.style.std_styles import StdTextBoxStyles
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -91,6 +92,7 @@ class FreeWrite(OnePageHalfLetterLayout):
       , y_offset=20
       , outline_color=Colors.FLUX_BLU
       '''
+    """
     style =\
       LineRowGroupStyle\
       ( total_wdth=self.content_wdth_
@@ -146,10 +148,20 @@ class FreeWrite(OnePageHalfLetterLayout):
       SimpleTable\
       ( header_txt='this is header text'
       , style=text_style
-    )
+      )
+      """
+
+    txt_box_test_style = StdTextBoxStyles.LTE_BACK_HEADER_FONT
+
+    txt_box_test = TextRowGroup\
+      ( total_wdth=self.content_wdth_
+      , text='hello'
+      , style=txt_box_test_style).text_row_group_
+
 
     self.entries_: list =\
-      [table, group, row_group.svg_group_]
+      [txt_box_test]
+      #[table, group, row_group.svg_group_, txt_box_test]
 
     return
 
@@ -164,14 +176,9 @@ class FreeWrite(OnePageHalfLetterLayout):
     Returns:
 
     """
-    font_size: int = Font.WEEK_PAGE_HEADER_SIZE
-    font_family: str = Font.FONT_FAMILY_HEADER
 
     page_header = super().create_page_header\
       ( header_txt=Strings.FREE_WRITE_FUTURE
-      , font_size=font_size
-      , font=font_family
-      , box_fill_color=Colors.DEF_PAGE_HEADER_COLOR
       )
 
     return page_header

@@ -60,13 +60,12 @@ if __name__ == '__main__':
 
   #_____________________________________________________________________
 
-
-  week_layout =\
-    WeekLayout\
+  goal_layout =\
+    GoalLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
     )
-  week_layout.save()
+  goal_layout.save()
 
   day_layout =\
     OneDayLayout\
@@ -75,12 +74,12 @@ if __name__ == '__main__':
     )
   day_layout.save()
 
-  goal_layout =\
-    GoalLayout\
+  week_layout =\
+    WeekLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
     )
-  goal_layout.save()
+  week_layout.save()
 
 
   wdth, hght = Dims.calc_border_size(False)

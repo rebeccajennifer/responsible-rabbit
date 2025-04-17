@@ -164,17 +164,9 @@ class WeekEntry0(OnePageHalfLetterLayout):
     Returns:
 
     """
-    font_size: int = Font.WEEK_PAGE_HEADER_SIZE
-    font_family: str = Font.FONT_FAMILY_HEADER
 
-    page_header = super().create_page_header\
-      ( header_txt=Strings.WEEK_PAGE_HEADER_0
-      , font_size=font_size
-      , font=font_family
-      , box_fill_color=Colors.DEF_PAGE_HEADER_COLOR
-      )
-
-    return page_header
+    return super().create_page_header\
+      (header_txt=Strings.WEEK_PAGE_HEADER_0)
 
 #_______________________________________________________________________
 class WeekEntry1(OnePageHalfLetterLayout):
@@ -332,20 +324,5 @@ class WeekEntry1(OnePageHalfLetterLayout):
     Returns:
 
     """
-    font_size: int = Font.WEEK_PAGE_HEADER_SIZE
-    font_family: str = Font.FONT_FAMILY_HEADER
-
-    page_header =\
-      TextRowGroup\
-      ( text=Strings.WEEK_PAGE_HEADER_1
-      , total_wdth=self.content_wdth_
-      , font_size=font_size
-      , font_family=font_family
-      , show_outline=True
-      , inner_pad_lft=True
-      , inner_pad_top=True
-      , inner_pad_bot=True
-      ).text_row_group_
-
-    return page_header
-
+    return\
+      super().create_page_header(header_txt=Strings.WEEK_PAGE_HEADER_1)

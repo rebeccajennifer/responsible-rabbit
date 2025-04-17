@@ -45,8 +45,6 @@ from utils.utils import PlannerUtils as Utils
 from classes.elements.base_element import BaseElement
 
 
-
-
 #_______________________________________________________________________
 class Rows(BaseElement):
   """
@@ -261,7 +259,7 @@ class RowGroup(svgwrite.container.Group):
     #___________________________________________________________________
     if (total_hght and (inner_pad_top or inner_pad_bot)):
       self.content_height_ = total_hght -\
-        Dims.BRD_MARGIN_PX * (inner_pad_top + inner_pad_bot)
+        Font.TEXT_PADDING * (inner_pad_top + inner_pad_bot)
 
     self.content_height_, self.row_hght_ =\
       Utils.get_hght_from_rows(total_hght, row_count, row_hght)
@@ -270,7 +268,7 @@ class RowGroup(svgwrite.container.Group):
       self.total_hght_ = self.content_height_
 
     else:
-      self.total_hght_ = self.content_height_ + Dims.BRD_MARGIN_PX * (inner_pad_bot + inner_pad_top)
+      self.total_hght_ = self.content_height_ + Font.TEXT_PADDING * (inner_pad_bot + inner_pad_top)
 
 
     self.add_content()
@@ -293,22 +291,21 @@ class RowGroup(svgwrite.container.Group):
     """
 
     #___________________________________________________________________
-    # Add outline
+    # Add outline and background
     #___________________________________________________________________
-    if (self.show_outline_):
-      Utils.add_outline\
-      ( container=self
-      , hght=self.total_hght_
-      , wdth=self.wdth_
-      , outline_color=self.outline_color_
-      , backgnd_color=self.backgnd_color_
-      )
+    Utils.add_outline\
+    ( container=self
+    , hght=self.total_hght_
+    , wdth=self.wdth_
+    , outline_color=self.outline_color_
+    , backgnd_color=self.backgnd_color_
+    )
 
     #___________________________________________________________________
     # Add rows
     #___________________________________________________________________
-    insert_x: int = Dims.BRD_MARGIN_PX * self.inner_pad_lft_
-    insert_y: int = self.row_hght_ - self.y_offset_ + Dims.BRD_MARGIN_PX * self.inner_pad_top_
+    insert_x: int = Font.TEXT_PADDING * self.inner_pad_lft_
+    insert_y: int = self.row_hght_ - self.y_offset_ + Font.TEXT_PADDING * self.inner_pad_top_
 
     for obj in self.obj_list_:
       obj['transform'] =\
@@ -461,24 +458,31 @@ class TextRowGroup(RowGroup):
     """
 
     if (style):
-      self.total_wdth_    = style.total_wdth_
+      self.show_outline_  = style.show_outline_
+      self.outline_color_ = style.outline_color_
+      self.backgnd_color_ = style.backgnd_color_
       self.inner_pad_top_ = style.inner_pad_top_
       self.inner_pad_bot_ = style.inner_pad_bot_
       self.inner_pad_lft_ = style.inner_pad_lft_
       self.inner_pad_rgt_ = style.inner_pad_rgt_
-      self.font_size_     = style.font_size_
+      self.font_color_    = style.font_color_
       self.font_family_   = style.font_family_
+      self.font_size_     = style.font_size_
       self.line_spc_      = style.line_spc_
 
     else:
 
       self.total_wdth_    : int  = total_wdth
+      self.show_outline_  : bool = show_outline
+      self.outline_color_ : str  = outline_color
+      self.backgnd_color_ : str  = backgnd_color
       self.inner_pad_top_ : bool = inner_pad_top
       self.inner_pad_bot_ : bool = inner_pad_bot
       self.inner_pad_lft_ : bool = inner_pad_lft
       self.inner_pad_rgt_ : bool = inner_pad_rgt
-      self.font_size_     : int  = font_size
+      self.font_color_    : str  = font_color
       self.font_family_   : int  = font_family
+      self.font_size_     : int  = font_size
       self.line_spc_      : int  = line_spc
 
     # Error handling for line space
@@ -488,7 +492,7 @@ class TextRowGroup(RowGroup):
     self.row_hght_ = self.line_spc_ * self.font_size_
 
     content_width: int =\
-      total_wdth - Dims.BRD_MARGIN_PX * (inner_pad_lft + inner_pad_rgt)
+      total_wdth - Font.TEXT_PADDING * (inner_pad_lft + inner_pad_rgt)
 
     split_text: list =\
         Utils.split_txt_by_wdth\
@@ -507,9 +511,9 @@ class TextRowGroup(RowGroup):
         ( text=split_text[i]
         , text_anchor='start'
         , alignment_baseline='text-after-edge'
-        , fill=font_color
-        , font_size=font_size
-        , font_family=font_family
+        , fill=self.font_color_
+        , font_size=self.font_size_
+        , font_family=self.font_family_
         )
 
       text_array[i] = svg_text
@@ -518,15 +522,15 @@ class TextRowGroup(RowGroup):
       RowGroup\
       ( wdth=total_wdth
       , total_hght=total_hght
-      , show_outline=show_outline
-      , outline_color=outline_color
-      , backgnd_color=backgnd_color
+      , show_outline=self.show_outline_
+      , outline_color=self.outline_color_
+      , backgnd_color=self.backgnd_color_
       , row_hght=self.row_hght_
       , y_offset=y_offset
-      , inner_pad_top=inner_pad_top
-      , inner_pad_bot=inner_pad_bot
-      , inner_pad_lft=inner_pad_lft
-      , inner_pad_rgt=inner_pad_rgt
+      , inner_pad_top=self.inner_pad_top_
+      , inner_pad_bot=self.inner_pad_bot_
+      , inner_pad_lft=self.inner_pad_lft_
+      , inner_pad_rgt=self.inner_pad_rgt_
       , obj_list=text_array
       )
 

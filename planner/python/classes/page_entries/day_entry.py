@@ -290,30 +290,6 @@ class DayEntry(OnePageHalfLetterLayout):
     Returns:
 
     """
-    font_size: int = Font.DAY_PAGE_HEADER_SIZE
-    font_family: str = Font.FONT_FAMILY_NORMAL
-    sp: str = Strings.SPACE
 
-    page_header = super().create_page_header\
-      ( header_txt=Strings.DAYS
-      , font_size=font_size
-      , font=font_family
-      )
-
-    insert_date_x: int = self.content_wdth_ - 110
-    insert_date_y: int = font_size + Font.TEXT_PADDING
-
-    date_txt: svgwrite.text.Text =\
-      svgwrite.text.Text\
-      ( text=Strings.DATE_STR
-      , insert=(insert_date_x, insert_date_y)
-      , text_anchor='start'
-      , alignment_baseline='text-after-edge'
-      , fill=Colors.NORMAL_TXT
-      , font_size=font_size
-      , font_family=font_family
-      )
-
-    #page_header.add(date_txt)
-
-    return page_header
+    return super().create_page_header\
+      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_NORMAL)

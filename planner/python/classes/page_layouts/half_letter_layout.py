@@ -31,16 +31,18 @@ import svgwrite
 from typing import Tuple
 
 import svgwrite.container
-import svgwrite.drawing
 import svgwrite.shapes
+
+from copy import deepcopy
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.header_box import HeaderBox
 from classes.elements.rows import RowGroup
 from classes.elements.rows import TextRowGroup
+from classes.style.std_styles import StdTextBoxStyles
+from classes.style.table_style import TextBoxStyle
 
 
 #_______________________________________________________________________
@@ -288,11 +290,11 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   #_____________________________________________________________________
   def create_page_header(self
   , header_txt = Strings.DEF_PAGE_HEADER
-  , font_color: str = Colors.NORMAL_TXT
-  , font_size: int = Font.HEAD_2_SIZE
-  , font: str = Font.FONT_FAMILY_HEADER
-  , box_fill_color: str = Colors.DEF_PAGE_HEADER_COLOR
-  , box_brdr_color: str = Colors.BORDER_COLOR
+  , font_color: str = 0
+  , font_size: int = 0
+  , font_family: str = 0
+  , box_fill_color: str = 0
+  , box_brdr_color: str = 0
   ) -> RowGroup:
     """
     Creates page header and saves it to class variable.
@@ -304,21 +306,24 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       HeaderBox for page header
     """
 
-    page_header =\
+    style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER)
+
+    if (font_color):
+      style.font_color_ = font_color
+    if (font_size):
+      style.font_size_ = font_size
+    if (font_family):
+      style.font_family_ = font_family
+    if (box_fill_color):
+      style.backgnd_color_ = box_fill_color
+    if (box_brdr_color):
+      style.outline_color_ = box_brdr_color
+
+    page_header: TextRowGroup =\
       TextRowGroup\
       ( total_wdth=self.content_wdth_
-      , show_outline=True
-      , outline_color=box_brdr_color
-      , backgnd_color=box_fill_color
-      , inner_pad_top=True
-      , inner_pad_bot=True
-      , inner_pad_lft=True
-      , inner_pad_rgt=True
-      , text= header_txt
-      , font_color=font_color
-      , font_size=font_size
-      , font_family=font
-      , line_spc=Font.DEF_LINE_SPC
+      , text=header_txt
+      , style=style
       )
 
     return page_header.text_row_group_

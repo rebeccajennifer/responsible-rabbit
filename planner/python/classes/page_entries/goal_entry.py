@@ -185,4 +185,7 @@ class GoalEntry(OnePageHalfLetterLayout):
       , inner_pad_lft=True
       ).text_row_group_
 
-    return page_header
+    return super().create_page_header\
+      ( header_txt=Strings.GOAL_PAGE_HEADER
+      , font_size=Font.GOAL_HEADER_SIZE
+      )

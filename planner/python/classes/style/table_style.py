@@ -126,10 +126,8 @@ class TextBoxStyle():
   Contains style elements for text box.
   """
 
-  #
+  #_____________________________________________________________________
   def __init__(self
-  , total_wdth: int = 0
-  , total_hght: int = 0
   , show_outline: bool = False
   , outline_color: str = Colors.BORDER_COLOR
   , backgnd_color: str = 'none'
@@ -145,8 +143,6 @@ class TextBoxStyle():
   ):
     """
     Parameters:
-      total_wdth    : Total width of group
-      total_hght    : Total height of group
       show_outline  : Show outline bool
       outline_color : Outline color
       backgnd_color : Background of box
@@ -161,10 +157,14 @@ class TextBoxStyle():
       line_spc      : Line spacing for multiline text
     """
 
-    self.total_wdth_   : int   = total_wdth
-    self.total_hght_   : int   = total_hght
     self.show_outline_ : bool  = show_outline
-    self.outline_color_: str   = outline_color
+
+    if (self.show_outline_):
+      self.outline_color_: str   = outline_color
+
+    else:
+      self.outline_color_: str   = backgnd_color
+
     self.backgnd_color_: str   = backgnd_color
     self.y_offset_     : int   = y_offset
     self.inner_pad_top_: bool  = inner_pad_top
@@ -176,6 +176,19 @@ class TextBoxStyle():
     self.font_color_   : str   = font_color
     self.line_spc_     : int   = line_spc
 
+    return
+
+
+  def set_font_color(self, x: str):
+    self.font_color_ = x
+    return
+
+  def set_font_size(self, x: int):
+    self.font_size_= x
+    return
+
+  def set_font_family(self, x: str):
+    self.font_family_= x
     return
 
 #_______________________________________________________________________
