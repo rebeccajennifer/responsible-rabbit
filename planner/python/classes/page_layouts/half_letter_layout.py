@@ -29,19 +29,17 @@
 import svgwrite
 
 from typing import Tuple
-
-import svgwrite.container
-import svgwrite.shapes
-
 from copy import deepcopy
 
+import svgwrite.container
+
 from classes.constants.dims import PlannerDims as Dims
-from classes.style.style import PlannerColors as Colors
-from classes.style.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.rows import RowGroup
 from classes.elements.rows import TextRowGroup
+from classes.elements.base_element import VerticalStack
 from classes.style.std_styles import StdTextBoxStyles
+from classes.style.style import PlannerColors as Colors
 from classes.style.table_style import TextBoxStyle
 
 
@@ -258,14 +256,12 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     insert_x: int = self.content_insert_pt_x_
     insert_y: int = self.content_insert_pt_y_
 
-    for entry in self.entries_:
+    content: VerticalStack =\
+      VerticalStack(obj_list=self.entries_, add_inner_pad=True)
 
-      entry['transform'] =\
-      f'translate({insert_x},{insert_y})'
+    content['transform'] = f'translate({insert_x}, {insert_y})'
 
-      insert_y = insert_y + entry.total_hght_
-
-      self.add(entry)
+    self.add(content)
 
     return
 
@@ -308,6 +304,9 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
     style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER)
 
+    #___________________________________________________________________
+    # Modify header style
+    #___________________________________________________________________
     if (font_color):
       style.font_color_ = font_color
     if (font_size):
@@ -318,15 +317,16 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       style.backgnd_color_ = box_fill_color
     if (box_brdr_color):
       style.outline_color_ = box_brdr_color
+    #___________________________________________________________________
 
-    page_header: TextRowGroup =\
+    page_header: RowGroup =\
       TextRowGroup\
       ( total_wdth=self.content_wdth_
       , text=header_txt
       , style=style
-      )
+      ).text_row_group_
 
-    return page_header.text_row_group_
+    return page_header
 
   #_____________________________________________________________________
   def calc_remaining_hght(self) -> int:
