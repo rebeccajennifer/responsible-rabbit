@@ -37,8 +37,8 @@ import svgwrite.text
 
 from classes.elements.entry_table import EntryTable
 from classes.constants.error_strings import ErrorStrings as Err
-from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerFontStyle as Font
+from classes.style.style import PlannerColors as Colors
+from classes.style.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
 
 class DaySchedule(EntryTable):

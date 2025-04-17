@@ -31,8 +31,8 @@ import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerFontStyle as Font
+from classes.style.style import PlannerColors as Colors
+from classes.style.style import PlannerFontStyle as Font
 
 from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import NumberedTable

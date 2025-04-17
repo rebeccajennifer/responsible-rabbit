@@ -29,15 +29,15 @@
 import svgwrite.container
 
 from classes.constants.strings import PlannerStrings as Strings
-from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerFontStyle as Font
+from classes.style.style import PlannerColors as Colors
+from classes.style.style import PlannerFontStyle as Font
 
 from classes.elements.rows import LineRowGroup
-from classes.elements.rows import LineRowGroupStyle
 from classes.elements.rows import TextRowGroup
 from classes.elements.table import SimpleTable
 from classes.elements.base_element import BaseElement
 from classes.elements.base_element import VerticalStack
+from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout

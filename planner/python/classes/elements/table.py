@@ -1,13 +1,13 @@
 import svgwrite
 
 from classes.constants.dims import PlannerDims as Dims
-from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerFontStyle as Font
+from classes.style.style import PlannerColors as Colors
+from classes.style.style import PlannerFontStyle as Font
 
 from classes.elements.base_element import BaseElement
 from classes.elements.rows import RowGroup
 from classes.elements.rows import LineRowGroup
-from classes.elements.rows import LineRowGroupStyle
+from classes.style.table_style import LineRowGroupStyle
 from classes.elements.rows import TextRowGroup
 from classes.style.table_style import TextBoxStyle
 

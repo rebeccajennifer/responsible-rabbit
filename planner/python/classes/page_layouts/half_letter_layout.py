@@ -35,8 +35,8 @@ import svgwrite.drawing
 import svgwrite.shapes
 
 from classes.constants.dims import PlannerDims as Dims
-from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerFontStyle as Font
+from classes.style.style import PlannerColors as Colors
+from classes.style.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.header_box import HeaderBox
 from classes.elements.rows import RowGroup

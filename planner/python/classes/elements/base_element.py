@@ -29,8 +29,8 @@
 import svgwrite.container
 import svgwrite.shapes
 
-from classes.constants.style import PlannerFontStyle as Font
-from classes.constants.style import PlannerColors as Colors
+from classes.style.style import PlannerFontStyle as Font
+from classes.style.style import PlannerColors as Colors
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.error_strings import ErrorStrings as Err
 

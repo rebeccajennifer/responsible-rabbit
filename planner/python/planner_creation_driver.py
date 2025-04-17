@@ -36,8 +36,8 @@ from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
 
 from classes.constants.dims import PlannerDims as Dims
-from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerFontStyle as Font
+from classes.style.style import PlannerColors as Colors
+from classes.style.style import PlannerFontStyle as Font
 from classes.elements.table import SimpleTable
 
 from classes.planner_parser import PlannerCreationParser
