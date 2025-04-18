@@ -28,7 +28,9 @@
 
 import svgwrite.container
 
+from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
+from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerFontStyle as Font
 
 from classes.elements.entry_group import EntryRow
@@ -36,8 +38,9 @@ from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import NumberedTable
 from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
+from classes.elements.rows import LineRowGroup
 from classes.elements.rows import TextRowGroup
-from classes.style.std_styles import StdTextBoxStyles
+from classes.elements.table import WriteTable
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -80,17 +83,17 @@ class WeekEntry0(OnePageHalfLetterLayout):
     super().create_content()
 
     self.entries_: list =\
-    [ #TextRowGroup\
-      #( total_wdth=self.content_wdth_
-      #, style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      #, text=Strings.WEEK_ACCOMPLISHMENTS
-      #).text_row_group_
+    [ WriteTable\
+      ( total_wdth=self.content_wdth_
+      , header_txt=Strings.WEEK_ACCOMPLISHMENTS
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , row_count=5
+      )
 
-      PromptTable\
+    , PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_ACCOMPLISHMENTS
       , row_count=3
-      , pad_top=True
       )
 
     , NumberedTable\
@@ -98,30 +101,26 @@ class WeekEntry0(OnePageHalfLetterLayout):
       , header_txt=Strings.WEEK_LESSONS_LEARNED
       , prepend_txt='[]'
       , row_count=2
-      , pad_top=True
       , show_outline=False
       )
-
 
     , EntryTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_UNFINISHED_BUSINESS
       , row_count=2
-      , pad_top=True
       , show_outline=False
       )
 
-    , HeaderBox\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_VISUALIZATION_HEADER
-      , pad_top=True
-      )
+    , TextRowGroup\
+      ( total_wdth=self.content_wdth_
+      , text=Strings.WEEK_VISUALIZATION_HEADER
+      , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
+      ).text_row_group_
 
     , PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_IMPROVEMENT
       , row_count=2
-      , pad_top=True
       , show_outline=False
       )
 
@@ -129,25 +128,23 @@ class WeekEntry0(OnePageHalfLetterLayout):
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_GRATITUDE
       , row_count=1
-      , pad_top=True
       )
 
     , PromptTable\
       ( wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LOOKING_FORWARD
       , row_count=2
-      , pad_top=True
       , show_outline=False
       )
     ]
 
-    remaining_hght: int = self.calc_remaining_hght()
+    fill_hght: int = self.calc_remaining_hght_per_element()
 
     self.entries_.insert\
     ( 4\
     , EntryTable\
       ( wdth=self.content_wdth_
-      , hght=remaining_hght
+      , hght=fill_hght
       , header_txt=Strings.WEEK_VISUALIZATION_PROMPT
       , font=Font.FONT_FAMILY_NORMAL
       , box_brdr_color='none'
@@ -221,8 +218,6 @@ class WeekEntry1(OnePageHalfLetterLayout):
       ( wdth=half_content_width
       , header_txt='Goal 1'
       , row_count=3
-      , pad_top=True
-      , pad_bot=True
       , pad_rgt=True
       , show_outline=False
       )
@@ -234,8 +229,6 @@ class WeekEntry1(OnePageHalfLetterLayout):
       ( wdth=half_content_width
       , header_txt='Goal 2'
       , row_count=3
-      , pad_top=True
-      , pad_bot=True
       , pad_lft=True
       , show_outline=False
       )
@@ -247,7 +240,6 @@ class WeekEntry1(OnePageHalfLetterLayout):
       ( wdth=half_content_width
       , header_txt='Goal 3'
       , row_count=3
-      , pad_top=True
       , pad_rgt=True
       , show_outline=False
       )
@@ -259,7 +251,6 @@ class WeekEntry1(OnePageHalfLetterLayout):
       ( wdth=half_content_width
       , header_txt='Goal 4'
       , row_count=3
-      , pad_top=True
       , pad_lft=True
       , show_outline=False
       )
@@ -274,7 +265,6 @@ class WeekEntry1(OnePageHalfLetterLayout):
       , col_count=10
       , col_wdths=[-1, 40] + 7 * [25] + [40]
       , row_count=6
-      , pad_top=True
       )
 
     , goal_row_0
@@ -285,7 +275,6 @@ class WeekEntry1(OnePageHalfLetterLayout):
       , header_txt=Strings.WEEK_CHECKLIST
       , box_brdr_color='none'
       , box_fill_color='none'
-      , pad_top=True
       , pad_rgt=True
       )
 
@@ -293,26 +282,23 @@ class WeekEntry1(OnePageHalfLetterLayout):
       ( wdth=self.content_wdth_
       , header_txt=[Strings.WEEK_FULFILLMENT]
       , font=Font.FONT_FAMILY_HEADER
-      , pad_top=True
       )
     ]
 
     # Calculate remaining height to evenly distribute spanning tables
-    remaining_hght: int = self.calc_remaining_hght()
+    fill_hght: int = self.calc_remaining_hght_per_element(2)
 
     self.entries_ = self.entries_ +\
     [ EntryTable\
       ( wdth=self.content_wdth_
-      , hght=remaining_hght / 2
+      , hght=fill_hght
       , header_txt=Strings.WEEK_FULFILLMENT_AREAS_0
-      , pad_top=True
       )
 
     , EntryTable\
       ( wdth=self.content_wdth_
-      , hght=remaining_hght / 2
+      , hght=fill_hght
       , header_txt=Strings.WEEK_FULFILLMENT_AREAS_1
-      , pad_top=True
       )
     ]
 

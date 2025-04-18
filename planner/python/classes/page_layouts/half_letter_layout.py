@@ -331,21 +331,28 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     return page_header
 
   #_____________________________________________________________________
-  def calc_remaining_hght(self) -> int:
+  def calc_remaining_hght_per_element(self
+    , elements_remaining: int = 1
+    ) -> int:
     """
-    Calculates empty space left on page by subtracting the total height
-    of all entries from the content height
+    Compute the available vertical space per remaining element.
 
     Parameters:
-      None
-
+      elements_remaining  : Number of elements yet to be added
+                            to the layout.
     Returns:
-      HeaderBox for page header
+        Height allocated for each remaining element, adjusted
+        for spacing.
     """
 
     remaining_hght: int = self.content_hght_
 
     for entry in self.entries_:
-      remaining_hght = remaining_hght - entry.total_hght_
+      remaining_hght =\
+        remaining_hght - entry.total_hght_ - Dims.BRD_MARGIN_PX
 
-    return remaining_hght
+    fill_hght: int =\
+        (remaining_hght / elements_remaining)\
+      - ((elements_remaining- 1) * Dims.BRD_MARGIN_PX)
+
+    return fill_hght

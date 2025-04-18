@@ -29,10 +29,9 @@
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_entries.future_entry import FutureFreeWrite
+from classes.page_entries.blank_entry import BlankWrite
 
 from classes.page_entries.day_entry import DayEntry
-from classes.elements.table_rows import TableRows
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
@@ -64,7 +63,7 @@ class OneDayLayout(TwoPageHalfLetterSize):
       )
 
     self.content_1_ =\
-      FutureFreeWrite\
+      BlankWrite\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX

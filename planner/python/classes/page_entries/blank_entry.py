@@ -28,7 +28,6 @@
 
 import svgwrite.container
 
-from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.rows import DualLineRowGroup
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
@@ -45,20 +44,19 @@ class BlankWrite(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
-  , page_header: str = ''
-  , prompt: str = ''
+  , header_txt: str = ''
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
+
+    self.header_txt_: str      = header_txt
+
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , padding=padding
     )
-
-    self.page_header_: str = page_header
-    self.prompt_: str      = prompt
 
     return
 
@@ -75,13 +73,6 @@ class BlankWrite(OnePageHalfLetterLayout):
       None
     """
     super().create_content()
-    '''
-      ( wdth=self.content_wdth_
-      , total_hght=self.content_hght_/2
-      , show_outline=True
-      , y_offset=20
-      , outline_color=Colors.FLUX_BLU
-      '''
 
     self.entries_: list =\
       [ DualLineRowGroup\
@@ -114,7 +105,7 @@ class BlankWrite(OnePageHalfLetterLayout):
     """
 
     page_header = super().create_page_header\
-      ( header_txt=Strings.FUTURE_PAGE_HEADER
+      ( header_txt=self.header_txt_
       )
 
     return page_header
