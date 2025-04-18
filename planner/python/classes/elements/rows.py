@@ -134,13 +134,14 @@ class RowGroup(svgwrite.container.Group):
     #___________________________________________________________________
     # Add outline and background
     #___________________________________________________________________
-    Utils.add_outline\
-    ( container=self
-    , hght=self.total_hght_
-    , wdth=self.wdth_
-    , outline_color=self.outline_color_
-    , backgnd_color=self.backgnd_color_
-    )
+    if (self.show_outline_ or (not self.show_outline_ and self.backgnd_color_ != 'none')):
+      Utils.add_outline\
+      ( container=self
+      , hght=self.total_hght_
+      , wdth=self.wdth_
+      , outline_color=self.outline_color_
+      , backgnd_color=self.backgnd_color_
+      )
 
     #___________________________________________________________________
     # Add rows
@@ -252,9 +253,6 @@ class LineRowGroup():
       , inner_pad_rgt=self.inner_pad_rgt_
       , obj_list=line_array
       )
-
-    self.svg_group_['transform'] =\
-        f'translate({0},{self.svg_group_.row_hght_})'
 
     return
 
@@ -433,6 +431,7 @@ class DualLineRowGroup(svgwrite.container.Group):
       , total_hght=total_hght
       , row_count=row_count
       , style=pri_line_style
+      , show_outline=False
       ).svg_group_
 
     self.total_hght_ = pri_line.total_hght_

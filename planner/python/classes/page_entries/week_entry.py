@@ -33,12 +33,10 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerFontStyle as Font
 
+from classes.elements.base_element import VerticalStack
 from classes.elements.entry_group import EntryRow
 from classes.elements.entry_table import EntryTable
-from classes.elements.entry_table import NumberedTable
-from classes.elements.entry_table import PromptTable
 from classes.elements.header_box import HeaderBox
-from classes.elements.rows import LineRowGroup
 from classes.elements.rows import TextRowGroup
 from classes.elements.table import WriteTable
 
@@ -87,70 +85,71 @@ class WeekEntry0(OnePageHalfLetterLayout):
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_ACCOMPLISHMENTS
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , row_count=5
-      )
-
-    , PromptTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_ACCOMPLISHMENTS
+      , show_outline=True
       , row_count=3
       )
 
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_LESSONS_LEARNED
-      , prepend_txt='[]'
-      , row_count=2
-      , show_outline=False
-      )
-
-    , EntryTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_UNFINISHED_BUSINESS
-      , row_count=2
-      , show_outline=False
-      )
-
-    , TextRowGroup\
+    , WriteTable\
       ( total_wdth=self.content_wdth_
-      , text=Strings.WEEK_VISUALIZATION_HEADER
-      , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
-      ).text_row_group_
+      , header_txt=Strings.WEEK_LESSONS_LEARNED
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , row_count=3
+      )
 
-    , PromptTable\
-      ( wdth=self.content_wdth_
+    , WriteTable\
+      ( total_wdth=self.content_wdth_
+      , header_txt=Strings.WEEK_UNFINISHED_BUSINESS
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , row_count=2
+      , show_outline=False
+      )
+
+    , WriteTable\
+      ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_IMPROVEMENT
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=2
       , show_outline=False
       )
 
-    , EntryTable\
-      ( wdth=self.content_wdth_
+    , WriteTable\
+      ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_GRATITUDE
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=1
+      , show_outline=True
       )
 
-    , PromptTable\
-      ( wdth=self.content_wdth_
+    , WriteTable\
+      ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LOOKING_FORWARD
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=2
       , show_outline=False
       )
+
     ]
 
     fill_hght: int = self.calc_remaining_hght_per_element()
 
     self.entries_.insert\
     ( 4\
-    , EntryTable\
-      ( wdth=self.content_wdth_
-      , hght=fill_hght
-      , header_txt=Strings.WEEK_VISUALIZATION_PROMPT
-      , font=Font.FONT_FAMILY_NORMAL
-      , box_brdr_color='none'
-      , box_fill_color='none'
-      , pad_top=False
-      )
+      , VerticalStack(
+      [ TextRowGroup\
+        ( total_wdth=self.content_wdth_
+        , text=Strings.WEEK_VISUALIZATION_HEADER
+        , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
+        ).text_row_group_
+
+      , WriteTable\
+        ( total_wdth=self.content_wdth_
+        , total_hght=fill_hght
+        , header_txt=Strings.WEEK_VISUALIZATION_PROMPT
+        , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+        , show_outline=True
+        )
+      ]
+    )
     )
 
     return

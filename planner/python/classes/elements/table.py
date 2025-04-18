@@ -6,6 +6,7 @@ from classes.elements.rows import LineRowGroup
 from classes.elements.rows import TextRowGroup
 from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
+from classes.elements.base_element import VerticalStack
 
 from utils.utils import PlannerUtils as Utils
 
@@ -21,7 +22,7 @@ class WriteTable(svgwrite.container.Group):
   , header_txt: str = ''
   , text_style: TextBoxStyle = TextBoxStyle()
   , row_count: int = 1
-  , show_outline: bool = True
+  , show_outline: bool = False
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   ):
@@ -51,12 +52,12 @@ class WriteTable(svgwrite.container.Group):
     else:
       line_row_hght = 0
 
-    Utils.get_hght_from_rows\
+    line_row_hght, row_hght = Utils.get_hght_from_rows\
       ( total_hght=line_row_hght
       , row_count=row_count
       )
 
-    self.line_rows: DualLineRowGroup =\
+    self.line_rows_: DualLineRowGroup =\
       DualLineRowGroup\
       ( total_wdth=self.total_wdth_
       , total_hght=line_row_hght
@@ -66,7 +67,7 @@ class WriteTable(svgwrite.container.Group):
       )
 
     self.total_hght_: int=\
-      self.header_.total_hght_ + self.line_rows.total_hght_
+      self.header_.total_hght_ + self.line_rows_.total_hght_
 
     if (show_outline):
       Utils.add_outline\
@@ -75,8 +76,7 @@ class WriteTable(svgwrite.container.Group):
       , wdth=self.total_wdth_
       )
 
-    self.add(self.header_)
-    self.add(self.line_rows)
+    self.add(VerticalStack([self.header_, self.line_rows_]))
 
     return
 

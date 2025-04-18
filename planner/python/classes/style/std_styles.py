@@ -82,7 +82,6 @@ class StdTextBoxStyles():
     , inner_pad_lft=True
     , inner_pad_rgt=True
     , font_family=Font.FONT_FAMILY_NORMAL
-    , font_color=Colors.DEBUG0_COLOR
     )
 
   WHT_BACK_HEADER_FONT_W_OUTLNE: TextBoxStyle =\
@@ -94,7 +93,6 @@ class StdTextBoxStyles():
     , inner_pad_lft=True
     , inner_pad_rgt=True
     , font_family=Font.FONT_FAMILY_HEADER
-    , font_color=Colors.DEBUG0_COLOR
     )
 
   WHT_BACK_NORMAL_FONT_NO_OUTLNE: TextBoxStyle =\
@@ -106,7 +104,6 @@ class StdTextBoxStyles():
     , inner_pad_lft=True
     , inner_pad_rgt=True
     , font_family=Font.FONT_FAMILY_NORMAL
-    , font_color=Colors.DEBUG0_COLOR
     )
 
   WHT_BACK_HEADER_FONT_NO_OUTLNE: TextBoxStyle =\
@@ -118,7 +115,6 @@ class StdTextBoxStyles():
     , inner_pad_lft=True
     , inner_pad_rgt=True
     , font_family=Font.FONT_FAMILY_HEADER
-    , font_color=Colors.DEBUG0_COLOR
     )
 
   DEF_PAGE_HEADER: TextBoxStyle =\
@@ -131,14 +127,13 @@ class StdTextBoxStyles():
     , inner_pad_rgt=True
     , font_family=Font.FONT_FAMILY_HEADER
     , font_size=Font.DEF_PAGE_HEADER_SIZE
-    , font_color=Colors.DEBUG1_COLOR
     )
 
 #_______________________________________________________________________
 class StdLineRowGroupStyles():
 
   PRI_LINE_FOR_DESCENDER: LineRowGroupStyle =\
-    LineRowGroupStyle(y_offset=Dims.DEF_ROW_HGHT/3, line_color=Colors.DEBUG1_COLOR)
+    LineRowGroupStyle(y_offset=Dims.DEF_ROW_HGHT/3)
 
   SEC_LINE_FOR_DESCENDER: LineRowGroupStyle =\
-    LineRowGroupStyle(line_color=Colors.DEBUG0_COLOR, dash_array='1,5')
+    LineRowGroupStyle(dash_array='1,5')
