@@ -46,18 +46,19 @@ class FreeWriteEntry(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
-  , prompt: str = ''
+  , page_header_txt: str = ''
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
+
+    self.page_header_txt_: str = page_header_txt
+
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , padding=padding
     )
-
-    self.prompt_: str      = prompt
 
     return
 
@@ -78,16 +79,9 @@ class FreeWriteEntry(OnePageHalfLetterLayout):
     self.entries_: list =\
       [ DualLineRowGroup\
         ( total_wdth=self.content_wdth_
-        , total_hght=self.content_hght_/2
-        , row_count=10
-        )
-      , LineRowGroup
-        ( total_wdth=self.content_wdth_
         , total_hght=self.content_hght_
-        , row_count=10
-        , inner_pad_lft=True
-        , inner_pad_rgt=True
-        ).svg_group_
+        , row_count=24
+        )
       ]
 
     return
@@ -113,7 +107,7 @@ class FreeWriteEntry(OnePageHalfLetterLayout):
     """
 
     page_header = super().create_page_header\
-      ( header_txt=Strings.FUTURE_PAGE_HEADER
+      ( header_txt=self.page_header_txt_
       )
 
     return page_header

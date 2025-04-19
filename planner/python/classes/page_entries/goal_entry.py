@@ -133,7 +133,7 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     # Calculate remaining height to evenly distribute spanning tables
     fill_hght: int =\
-      self.calc_remaining_hght_per_element(elements_remaining=2)
+      self.calc_remaining_hght_per_element(2) + Dims.BRD_MARGIN_PX
 
     self.entries_ = self.entries_ +\
     [ PromptTable\

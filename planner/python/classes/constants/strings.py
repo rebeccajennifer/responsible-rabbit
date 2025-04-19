@@ -81,14 +81,14 @@ class PlannerStrings:
 
   QUOTE0: str =\
     'It’s not always that we need to do more, but rather that we need '\
-    'to focus on less.'
+    'to focus on less. - Nathan W. Morris'
 
   QUOTE1: str =\
     'Your future is created by what you do today, not tomorrow.'
 
   QUOTES: list =\
-  [ {'quote': QUOTE0, 'author': 'Nathan W. Morris'}
-  , {'quote': QUOTE1, 'author': 'Robert Kiyosaki'}
+  [ {'quote': QUOTE0, 'author': '- Nathan W. Morris'}
+  , {'quote': QUOTE1, 'author': '- Robert Kiyosaki'}
   ]
 
   DAYS: str =\
@@ -122,9 +122,11 @@ class PlannerStrings:
     , 'What am I avoiding and why?'
     , 'What would make today feel meaningful?'
     , 'What can I let go of to move forward?'
-    , 'Where can I invite more joy or ease?'
+    , 'Where can I invite more ease into my life?'
     ]
 
+  DAY_PROMPT_LAST_24: str =\
+    'In the last 24 hours...'
 
   #_____________________________________________________________________
   # Goal layout strings

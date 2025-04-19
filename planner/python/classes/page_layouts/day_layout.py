@@ -67,6 +67,7 @@ class OneDayLayout(TwoPageHalfLetterSize):
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
+      , page_header_txt=Strings.QUOTE0
       )
 
     return

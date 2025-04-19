@@ -70,7 +70,7 @@ class PlannerFontStyle:
   Contains standard font sizes.
   """
 
-  GOAL_HEADER_SIZE      : int = 28
+  GOAL_HEADER_SIZE      : int = 32
   DAY_PAGE_HEADER_SIZE  : int = 12
   WEEK_PAGE_HEADER_SIZE : int = 12
 

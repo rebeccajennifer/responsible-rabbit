@@ -66,7 +66,6 @@ if __name__ == '__main__':
     )
   week_layout.save()
 
-  '''
   goal_layout =\
     GoalLayout\
     ( is_portrait=is_portrait
@@ -74,7 +73,6 @@ if __name__ == '__main__':
     )
   goal_layout.save()
 
-  '''
   day_layout =\
     OneDayLayout\
     ( is_portrait=is_portrait
