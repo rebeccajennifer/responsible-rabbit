@@ -353,6 +353,6 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
     fill_hght: int =\
         (remaining_hght / elements_remaining)\
-      - ((elements_remaining- 1) * Dims.BRD_MARGIN_PX)
+      - ((elements_remaining) * Dims.BRD_MARGIN_PX)
 
     return fill_hght

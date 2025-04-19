@@ -190,8 +190,11 @@ class VerticalStack(svgwrite.container.Group):
     """
 
     super().__init__()
+    padding: int = Dims.BRD_MARGIN_PX * add_top_pad
     insert_x: int = 0
-    insert_y: int = Dims.BRD_MARGIN_PX * add_top_pad
+    insert_y: int = padding
+    self.total_hght_: int = 0
+
 
     for i in range(len(obj_list)):
 
@@ -200,10 +203,12 @@ class VerticalStack(svgwrite.container.Group):
 
       insert_y = insert_y\
         + obj_list[i].total_hght_\
-        + Dims.BRD_MARGIN_PX * add_top_pad
+        + padding
+
+      self.total_hght_ += obj_list[i].total_hght_
 
       self.add(obj_list[i])
 
-    self.total_hght_ = insert_y
+    self.total_hght_ += padding * (len(obj_list))
 
     return
