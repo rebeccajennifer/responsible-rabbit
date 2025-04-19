@@ -80,7 +80,6 @@ class WeekEntry0(OnePageHalfLetterLayout):
     """
     super().create_content()
 
-    #entries_: list =\
     self.entries_: list =\
     [ WriteTable\
       ( total_wdth=self.content_wdth_
@@ -138,8 +137,6 @@ class WeekEntry0(OnePageHalfLetterLayout):
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
       , row_count=1
       , show_outline=True
-      , inner_pad_lft=True
-      , inner_pad_rgt=True
       )
 
     ]
@@ -154,7 +151,6 @@ class WeekEntry0(OnePageHalfLetterLayout):
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=1
       , show_outline=True
-      , inner_pad_rgt=True
       )
     )
 
@@ -293,6 +289,8 @@ class WeekEntry1(OnePageHalfLetterLayout):
     # Calculate remaining height to evenly distribute spanning tables
     fill_hght: int = self.calc_remaining_hght_per_element(2)
 
+    # TODO: fix hght - this is hacked to make it look correct
+    # Shouldn't have to subtract margin
     self.entries_ = self.entries_ +\
     [ EntryTable\
       ( wdth=self.content_wdth_

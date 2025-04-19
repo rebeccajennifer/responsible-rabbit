@@ -74,13 +74,6 @@ class FreeWriteEntry(OnePageHalfLetterLayout):
       None
     """
     super().create_content()
-    '''
-      ( wdth=self.content_wdth_
-      , total_hght=self.content_hght_/2
-      , show_outline=True
-      , y_offset=20
-      , outline_color=Colors.FLUX_BLU
-      '''
 
     self.entries_: list =\
       [ DualLineRowGroup\

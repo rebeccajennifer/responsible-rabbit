@@ -79,13 +79,8 @@ class BlankWrite(OnePageHalfLetterLayout):
       [ DualLineRowGroup\
         ( total_wdth=self.content_wdth_
         , total_hght=self.content_hght_
-        , row_count=10
+        , row_count=30
         )
-      , LineRowGroup
-        ( total_wdth=self.content_wdth_
-        , total_hght=self.content_hght_
-        , row_count=10
-        ).svg_group_
       ]
 
     return

@@ -158,7 +158,7 @@ class RowGroup(svgwrite.container.Group):
 
 
 #_______________________________________________________________________
-class LineRowGroup(svgwrite.container.Group):
+class LineRowGroup():
   """
   Organizes a set of line elements into evenly spaced horizontal rows.
   Ideal for creating multi-line visual groupings.
@@ -196,9 +196,6 @@ class LineRowGroup(svgwrite.container.Group):
       dash_array    : Dash style in form 'dash length, space length'
     """
 
-    #left off here
-    #super().__init__()
-
     if (style):
       self.y_offset_      : int   = style.y_offset_
       self.line_wght_     : str   = style.line_wght_
@@ -228,7 +225,7 @@ class LineRowGroup(svgwrite.container.Group):
     self.row_count_     : int   = row_count
 
     line_len: int = self.total_wdth_\
-      - Dims.BRD_MARGIN_PX\
+      - Font.TEXT_PADDING\
       * (self.inner_pad_lft_ + self.inner_pad_rgt_)
 
     line: svgwrite.shapes.Line =\
