@@ -31,7 +31,7 @@ from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.future_entry import FutureEntry
 from classes.page_entries.day_entry import DayEntry
-from classes.page_entries.free_write_prompt_entry import FreeWriteEntry
+from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
