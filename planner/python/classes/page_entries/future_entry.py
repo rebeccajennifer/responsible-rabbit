@@ -82,7 +82,6 @@ class FutureEntry(OnePageHalfLetterLayout):
 
     txt_box_test_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
 
-
     self.entries_: list =\
       [ TextRowGroup\
           ( total_wdth=self.content_wdth_
@@ -103,6 +102,12 @@ class FutureEntry(OnePageHalfLetterLayout):
 
     return
 
+  #_____________________________________________________________________
+  def add_content(self) -> None:
+    """
+    Call parent, removing padding between elements.
+    """
+    return super().add_content(pad_bet_elements = False)
 
   #_____________________________________________________________________
   def create_page_header(self) -> svgwrite.container.Group:
