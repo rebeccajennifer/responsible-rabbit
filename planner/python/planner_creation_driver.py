@@ -59,7 +59,14 @@ if __name__ == '__main__':
     )
   future_layout.save()
 
+  week_layout =\
+    WeekLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    )
+  week_layout.save()
 
+  '''
   goal_layout =\
     GoalLayout\
     ( is_portrait=is_portrait
@@ -67,6 +74,7 @@ if __name__ == '__main__':
     )
   goal_layout.save()
 
+  '''
   day_layout =\
     OneDayLayout\
     ( is_portrait=is_portrait
@@ -74,12 +82,6 @@ if __name__ == '__main__':
     )
   day_layout.save()
 
-  week_layout =\
-    WeekLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    )
-  week_layout.save()
 
   new_line(10)
   print("all done")

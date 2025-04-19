@@ -35,6 +35,7 @@ from classes.style.style import PlannerFontStyle as Font
 from classes.elements.rows import LineRowGroup
 from classes.elements.rows import TextRowGroup
 from classes.elements.rows import DualLineRowGroup
+from classes.elements.table import WriteTable
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.std_styles import StdLineRowGroupStyles
 
@@ -42,7 +43,7 @@ from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________
-class FutureFreeWrite(OnePageHalfLetterLayout):
+class FutureEntry(OnePageHalfLetterLayout):
   """
   Free write layout.
   """
@@ -52,20 +53,16 @@ class FutureFreeWrite(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
-  , page_header: str = ''
-  , prompt: str = ''
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
+
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , padding=padding
     )
-
-    self.page_header_: str = page_header
-    self.prompt_: str      = prompt
 
     return
 
@@ -82,40 +79,30 @@ class FutureFreeWrite(OnePageHalfLetterLayout):
       None
     """
     super().create_content()
-    '''
-      ( wdth=self.content_wdth_
-      , total_hght=self.content_hght_/2
-      , show_outline=True
-      , y_offset=20
-      , outline_color=Colors.FLUX_BLU
-      '''
 
     txt_box_test_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
 
-    txt_box_test = TextRowGroup\
-      ( total_wdth=self.content_wdth_
-      , text=Strings.FREE_WRITE_FUTURE
-      , font_family=Font.FONT_FAMILY_NORMAL
-      , style=txt_box_test_style).text_row_group_
-
-    linegroup=DualLineRowGroup\
-      ( total_wdth=self.content_wdth_
-      , total_hght=self.content_hght_-txt_box_test.total_hght_
-      , row_count=20
-      )
 
     self.entries_: list =\
-      [txt_box_test, linegroup]
+      [ TextRowGroup\
+          ( total_wdth=self.content_wdth_
+          , text=Strings.FREE_WRITE_FUTURE
+          , font_family=Font.FONT_FAMILY_NORMAL
+          , style=txt_box_test_style).text_row_group_
+      ]
+
+    fill_hght: int = self.calc_remaining_hght_per_element()
+
+    self.entries_.insert(1,
+      DualLineRowGroup\
+        ( total_wdth=self.content_wdth_
+        , total_hght=fill_hght
+        , row_count=20
+        )
+    )
 
     return
 
-  #_____________________________________________________________________
-  def add_content(self) -> None:
-    """
-    Calls parent function, setting pad_bet_elements to True.
-    """
-
-    super().add_content(pad_bet_elements=False)
 
   #_____________________________________________________________________
   def create_page_header(self) -> svgwrite.container.Group:

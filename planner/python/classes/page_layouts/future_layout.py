@@ -29,8 +29,9 @@
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_entries.future_entry import FutureFreeWrite
-from classes.page_entries.blank_entry import BlankWrite
+from classes.page_entries.future_entry import FutureEntry
+from classes.page_entries.day_entry import DayEntry
+from classes.page_entries.free_write_prompt_entry import FreeWriteEntry
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
@@ -55,14 +56,14 @@ class FutureLayout(TwoPageHalfLetterSize):
     super().create_content()
 
     self.content_0_ =\
-      FutureFreeWrite\
+      FutureEntry\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
       )
 
     self.content_1_ =\
-      BlankWrite\
+      FreeWriteEntry\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX

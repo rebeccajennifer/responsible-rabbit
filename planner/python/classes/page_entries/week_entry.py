@@ -69,17 +69,18 @@ class WeekEntry0(OnePageHalfLetterLayout):
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
-    Side Effects:
-      Populates self.entries_ class variable.
-
     Parameters:
       None
+
+    Side Effects:
+      Populates self.entries_ class variable.
 
     Returns:
       None
     """
     super().create_content()
 
+    #entries_: list =\
     self.entries_: list =\
     [ WriteTable\
       ( total_wdth=self.content_wdth_
@@ -87,8 +88,6 @@ class WeekEntry0(OnePageHalfLetterLayout):
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , show_outline=False
       , row_count=2
-      , inner_pad_lft=True
-      , inner_pad_rgt=True
       )
 
     , WriteTable\
@@ -136,9 +135,11 @@ class WeekEntry0(OnePageHalfLetterLayout):
     , WriteTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LOOKING_FORWARD
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
       , row_count=1
-      , show_outline=False
+      , show_outline=True
+      , inner_pad_lft=True
+      , inner_pad_rgt=True
       )
 
     ]
@@ -153,6 +154,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=1
       , show_outline=True
+      , inner_pad_rgt=True
       )
     )
 
@@ -294,13 +296,13 @@ class WeekEntry1(OnePageHalfLetterLayout):
     self.entries_ = self.entries_ +\
     [ EntryTable\
       ( wdth=self.content_wdth_
-      , hght=fill_hght
+      , hght=fill_hght + Dims.BRD_MARGIN_PX
       , header_txt=Strings.WEEK_FULFILLMENT_AREAS_0
       )
 
     , EntryTable\
       ( wdth=self.content_wdth_
-      , hght=fill_hght
+      , hght=fill_hght + Dims.BRD_MARGIN_PX
       , header_txt=Strings.WEEK_FULFILLMENT_AREAS_1
       )
     ]

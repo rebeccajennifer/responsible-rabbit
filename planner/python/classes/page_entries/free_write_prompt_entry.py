@@ -30,12 +30,13 @@ import svgwrite.container
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.rows import DualLineRowGroup
+from classes.elements.rows import LineRowGroup
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________
-class BlankWrite(OnePageHalfLetterLayout):
+class FreeWriteEntry(OnePageHalfLetterLayout):
   """
   Free write layout.
   """
@@ -45,7 +46,6 @@ class BlankWrite(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
-  , page_header: str = ''
   , prompt: str = ''
   ):
     """
@@ -57,7 +57,6 @@ class BlankWrite(OnePageHalfLetterLayout):
     , padding=padding
     )
 
-    self.page_header_: str = page_header
     self.prompt_: str      = prompt
 
     return
@@ -86,9 +85,16 @@ class BlankWrite(OnePageHalfLetterLayout):
     self.entries_: list =\
       [ DualLineRowGroup\
         ( total_wdth=self.content_wdth_
-        , total_hght=self.content_hght_
-        , row_count=30
+        , total_hght=self.content_hght_/2
+        , row_count=10
         )
+      , LineRowGroup
+        ( total_wdth=self.content_wdth_
+        , total_hght=self.content_hght_
+        , row_count=10
+        , inner_pad_lft=True
+        , inner_pad_rgt=True
+        ).svg_group_
       ]
 
     return
