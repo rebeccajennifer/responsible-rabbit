@@ -49,6 +49,8 @@ class PlannerDims:
 
   BRD_MARGIN_PX: int = 8
 
+  DEF_ROW_HGHT: int = 30
+
   #_____________________________________________________________________
   def to_in_str(dim: int) -> str:
     """

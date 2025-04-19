@@ -29,5 +29,15 @@
 class ErrorStrings:
 
   BAD_INPUT: str = 'BAD INPUT'
+
   INVALID_TIME: str =\
     "\nInvalid time format input. Using default values."
+
+  INSUFFICIENT_ARGS: str =\
+    '\nInsufficient arguments provided.'
+
+  INVALID_CONDITION: str =\
+    '\nThis condition should not be possible.'
+
+  ABSTRACT_INIT: str =\
+    '\nCannot instantiate abstract base class.'

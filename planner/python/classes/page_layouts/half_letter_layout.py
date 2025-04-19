@@ -29,20 +29,22 @@
 import svgwrite
 
 from typing import Tuple
+from copy import deepcopy
 
 import svgwrite.container
-import svgwrite.drawing
-import svgwrite.shapes
 
 from classes.constants.dims import PlannerDims as Dims
-from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.header_box import HeaderBox
+from classes.elements.rows import RowGroup
+from classes.elements.rows import TextRowGroup
+from classes.elements.base_element import VerticalStack
+from classes.style.std_styles import StdTextBoxStyles
+from classes.style.style import PlannerColors as Colors
+from classes.style.table_style import TextBoxStyle
 
 
 #_______________________________________________________________________
-class TwoPageHalfLetterSize_(svgwrite.Drawing):
+class TwoPageHalfLetterSize(svgwrite.Drawing):
   """
   Layout for half letter size prints. Intended to print two pages on
   one sheet and cut in half.
@@ -198,14 +200,14 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
     self.total_hght_: int = total_hght
     self.total_wdth_: int = total_wdth
-    self.padding_   : int = padding
 
     self.page_header_insert_pt_x_ : int = padding
     self.page_header_insert_pt_y_ : int = padding
 
     self.content_wdth_: int = self.total_wdth_ - 2 * padding
 
-    self.page_header_: HeaderBox = self.create_page_header()
+    self.page_header_: svgwrite.container.Group =\
+      self.create_page_header()
 
     # Content height is affected by generation of page header
     self.content_hght_: int =\
@@ -231,7 +233,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     return
 
   #_____________________________________________________________________
-  def add_content(self) -> None:
+  def add_content(self , pad_bet_elements: bool = True) -> None:
     """
     Adds content to group.
 
@@ -253,14 +255,15 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     insert_x: int = self.content_insert_pt_x_
     insert_y: int = self.content_insert_pt_y_
 
-    for entry in self.entries_:
+    content: VerticalStack =\
+      VerticalStack\
+      ( obj_list=self.entries_
+      , add_top_pad=pad_bet_elements
+      )
 
-      entry['transform'] =\
-      f'translate({insert_x},{insert_y})'
+    content['transform'] = f'translate({insert_x}, {insert_y})'
 
-      insert_y = insert_y + entry.total_hght_
-
-      self.add(entry)
+    self.add(content)
 
     return
 
@@ -285,12 +288,12 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   #_____________________________________________________________________
   def create_page_header(self
   , header_txt = Strings.DEF_PAGE_HEADER
-  , font_color: str = Colors.NORMAL
-  , font_size: int = Font.HEAD_2_SIZE
-  , font: str = Font.FONT_FAMILY_HEADER
-  , box_fill_color: str = Colors.DEF_PAGE_HEADER_COLOR
-  , box_brdr_color: str = Colors.BORDER_COLOR
-  ) -> HeaderBox:
+  , font_color: str = 0
+  , font_size: int = 0
+  , font_family: str = 0
+  , box_fill_color: str = 0
+  , box_brdr_color: str = 0
+  ) -> RowGroup:
     """
     Creates page header and saves it to class variable.
 
@@ -301,35 +304,55 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       HeaderBox for page header
     """
 
-    page_header: HeaderBox =\
-      HeaderBox\
-      ( wdth=self.content_wdth_
-      , header_txt=[header_txt]
-      , font_color=font_color
-      , font_size=font_size
-      , font=font
-      , box_fill_color=box_fill_color
-      , box_brdr_color=box_brdr_color
-      )
+    style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER)
+
+    #___________________________________________________________________
+    # Modify header style
+    #___________________________________________________________________
+    if (font_color):
+      style.font_color_ = font_color
+    if (font_size):
+      style.font_size_ = font_size
+    if (font_family):
+      style.font_family_ = font_family
+    if (box_fill_color):
+      style.backgnd_color_ = box_fill_color
+    if (box_brdr_color):
+      style.outline_color_ = box_brdr_color
+    #___________________________________________________________________
+
+    page_header: RowGroup =\
+      TextRowGroup\
+      ( total_wdth=self.content_wdth_
+      , text=header_txt
+      , style=style
+      ).text_row_group_
 
     return page_header
 
   #_____________________________________________________________________
-  def calc_remaining_hght(self) -> int:
+  def calc_remaining_hght_per_element(self
+    , elements_remaining: int = 1
+    ) -> int:
     """
-    Calculates empty space left on page by subtracting the total height
-    of all entries from the content height
+    Compute the available vertical space per remaining element.
 
     Parameters:
-      None
-
+      elements_remaining  : Number of elements yet to be added
+                            to the layout.
     Returns:
-      HeaderBox for page header
+        Height allocated for each remaining element, adjusted
+        for spacing.
     """
 
     remaining_hght: int = self.content_hght_
 
     for entry in self.entries_:
-      remaining_hght = remaining_hght - entry.total_hght_
+      remaining_hght =\
+        remaining_hght - entry.total_hght_ - Dims.BRD_MARGIN_PX
 
-    return remaining_hght
+    fill_hght: int =\
+        (remaining_hght / elements_remaining)\
+      - ((elements_remaining) * Dims.BRD_MARGIN_PX)
+
+    return fill_hght

@@ -24,13 +24,11 @@
 #_______________________________________________________________________
 #   DESCRIPTION
 #   Driver for planner creation.
-#
-#   NOTES
-#   All dimensions in planner are in inches.
 #_______________________________________________________________________
 
 import argparse
 
+from classes.page_layouts.future_layout import FutureLayout
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
@@ -53,19 +51,20 @@ if __name__ == '__main__':
   is_dbl_sided: bool  = False
 
   #_____________________________________________________________________
+
+  future_layout =\
+    FutureLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    )
+  future_layout.save()
+
   week_layout =\
     WeekLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
     )
   week_layout.save()
-
-  day_layout =\
-    OneDayLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    )
-  day_layout .save()
 
   goal_layout =\
     GoalLayout\
@@ -74,6 +73,14 @@ if __name__ == '__main__':
     )
   goal_layout.save()
 
+  day_layout =\
+    OneDayLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    )
+  day_layout.save()
 
+
+  new_line(10)
   print("all done")
-
+  new_line(10)

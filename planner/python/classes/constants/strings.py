@@ -66,8 +66,8 @@ class PlannerStrings:
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout.svg'
 
-  DEF_GOAL_LAYOUT_PATH: str =\
-    'goal-layout.svg'
+  DEF_FUTURE_LAYOUT_PATH: str =\
+    'future-layout.svg'
 
   DEF_WEEK_LAYOUT_PATH: str =\
     'week-layout.svg'
@@ -75,17 +75,30 @@ class PlannerStrings:
   #_____________________________________________________________________
   # Day layout strings
   #_____________________________________________________________________
+  SHORT_QUOTE_0: str =\
+    'Start where you are. Use what you have. Do what you can. '
+    #'-Arthur Ashe'
+
   QUOTE0: str =\
     'It’s not always that we need to do more, but rather that we need '\
-    'to focus on less.'
+    'to focus on less. - Nathan W. Morris'
 
   QUOTE1: str =\
     'Your future is created by what you do today, not tomorrow.'
 
   QUOTES: list =\
-  [ {'quote': QUOTE0, 'author': 'Nathan W. Morris'}
-  , {'quote': QUOTE1, 'author': 'Robert Kiyosaki'}
+  [ {'quote': QUOTE0, 'author': '- Nathan W. Morris'}
+  , {'quote': QUOTE1, 'author': '- Robert Kiyosaki'}
   ]
+
+  DAYS: str =\
+    'Mon' + SPACE +\
+    'Tue' + SPACE +\
+    'Wed' + SPACE +\
+    'Thu' + SPACE +\
+    'Fri' + SPACE +\
+    'Sat' + SPACE +\
+    'Sun' + SPACE + DATE_STR
 
   DAY_PRIMARY_EFFORTS: list =\
     ['Primary Efforts', 'Alignment']
@@ -106,7 +119,14 @@ class PlannerStrings:
     [ 'How can I embrace discomfort and grow today?'
     , 'One achievement I take pride in:'
     , 'How can I move towards my ideal self?'
+    , 'What am I avoiding and why?'
+    , 'What would make today feel meaningful?'
+    , 'What can I let go of to move forward?'
+    , 'Where can I invite more ease into my life?'
     ]
+
+  DAY_PROMPT_LAST_24: str =\
+    'In the last 24 hours...'
 
   #_____________________________________________________________________
   # Goal layout strings
@@ -153,9 +173,16 @@ class PlannerStrings:
   # Week layout strings
   #_____________________________________________________________________
   WEEK_PAGE_HEADER_0: str =\
-    "Last Week's Primary Effort Completion:"\
-    + 10 * SPACE\
-    + "%"
+    'Last week I built momentum:'\
+    + SPACE\
+    + SPACE + 'disagree'\
+    + SPACE + '-2'\
+    + SPACE + '-1'\
+    + SPACE + ' 0'\
+    + SPACE + '+1'\
+    + SPACE + '+2'\
+    + SPACE + 'agree'
+
 
   WEEK_PAGE_HEADER_1: str =\
     'Goals for Week: '\
@@ -229,3 +256,25 @@ class PlannerStrings:
 
   MONTH_FOOTER_1: str =\
     "This month's kaizen"
+
+  #_____________________________________________________________________
+  # Free write strings
+  #_____________________________________________________________________
+
+  FUTURE_PAGE_HEADER: str =\
+    'An Imagined Future'
+
+  FUTURE_PAGE_HEADER : str =\
+    'Imagine a Future...'
+
+  FREE_WRITE_FUTURE: str = (
+    'Describe your ideal life 3–5 years from now—the boldest vision '
+    'you can imagine, even if it feels far off. Ask yourself: What do '
+    'I truly want from life? What skills will I master? Which habits '
+    'should I drop or build? What will my health and social life look '
+    'like? How will I spend leisure time? What kind of family life do '
+    'I want? Where will I be in my career and financially? What traits '
+    'do I admire and want to grow into? What would I do if I had no '
+    'fear? What kind of person will I grow into? Start by freewriting '
+    'before refining your answer below.'
+  )

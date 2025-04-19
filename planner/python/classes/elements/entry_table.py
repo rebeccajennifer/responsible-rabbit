@@ -31,17 +31,19 @@ import svgwrite.shapes
 import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
-from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerFontStyle as Font
+from classes.style.style import PlannerColors as Colors
+from classes.style.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
+from classes.constants.error_strings import ErrorStrings as Err
 
 from classes.elements.header_box import HeaderBox
+from classes.elements.base_element import BaseElement
 
 from utils.utils import PlannerUtils as Utils
 
 class EntryTable(svgwrite.container.Group):
 
-  DEF_ROW_HGHT: int = 20
+  DEF_ROW_HGHT: int = 30
 
   #_____________________________________________________________________
   def __init__(self
@@ -103,7 +105,7 @@ class EntryTable(svgwrite.container.Group):
     self.box_fill_color_  : str   = box_fill_color
 
     if (box_fill_color == 'none'):
-      self.font_color_ = Colors.NORMAL
+      self.font_color_ = Colors.NORMAL_TXT
 
 
     self.box_brdr_color_  : str   = box_brdr_color
@@ -154,7 +156,8 @@ class EntryTable(svgwrite.container.Group):
     # width list does not match the number of columns, make all columns
     # equal.
     #___________________________________________________________________
-    self.col_wdths_: list = Utils.calc_col_wdths(self.content_wdth_, col_count, col_wdths)
+    self.col_wdths_: list = Utils.calc_col_wdths\
+      (self.content_wdth_, col_count, col_wdths)
     #___________________________________________________________________
 
     #___________________________________________________________________
@@ -281,7 +284,7 @@ class PromptTable(EntryTable):
     ( wdth=wdth
     , hght=hght
     , header_txt=header_txt
-    , font_color=Colors.NORMAL
+    , font_color=Colors.NORMAL_TXT
     , font_size=Font.NORMAL_SIZE
     , font=Font.FONT_FAMILY_NORMAL
     , box_fill_color='none'
@@ -428,7 +431,7 @@ class NumberedTable(EntryTable):
       , insert=(text_x, text_y)
       , text_anchor='start'
       , alignment_baseline='text-after-edge'
-      , fill=Colors.NORMAL
+      , fill=Colors.NORMAL_TXT
       , font_size=Font.LITTLE_SIZE
       , font_family=Font.FONT_FAMILY_NORMAL
       )
@@ -436,5 +439,3 @@ class NumberedTable(EntryTable):
       row_group.add(txt)
 
     return row_group
-
-

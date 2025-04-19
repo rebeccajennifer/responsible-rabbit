@@ -23,55 +23,90 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for daily entry. Populated with DayEntry.
+#   Entry for future vision. Fills content for one half sheet.
 #_______________________________________________________________________
 
-from classes.constants.dims import PlannerDims as Dims
-from classes.constants.strings import PlannerStrings as Strings
+import svgwrite.container
 
-from classes.page_entries.free_write_entry import FreeWriteEntry
+from classes.elements.rows import DualLineRowGroup
+from classes.elements.rows import LineRowGroup
 
-from classes.page_entries.day_entry import DayEntry
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
+from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________
-class OneDayLayout(TwoPageHalfLetterSize):
+class BlankWrite(OnePageHalfLetterLayout):
+  """
+  Free write layout.
+  """
 
   #_____________________________________________________________________
-  def  __init__(self
-  , is_portrait: bool = False
-  , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_DAY_LAYOUT_PATH
+  def __init__(self
+  , total_hght: int = 0
+  , total_wdth: int = 0
+  , padding: int = 0
+  , header_txt: str = ''
   ):
+    """
+    Constructor for class. Assumes landscape orientation.
+    """
+
+    self.header_txt_: str      = header_txt
+
     super().__init__\
-      ( is_portrait=is_portrait
-      , is_dbl_sided=is_dbl_sided
-      , file_path=file_path
-      )
+    ( total_hght=total_hght
+    , total_wdth=total_wdth
+    , padding=padding
+    )
+
     return
 
   #_____________________________________________________________________
-  def create_content(self):
+  def create_content(self) -> None:
+    """
+    Parameters:
+      None
+
+    Side Effects:
+      Populates self.entries_ class variable.
+
+    Returns:
+      None
+    """
     super().create_content()
 
-    self.content_0_ =\
-      DayEntry\
-      ( total_hght=self.content_hght_
-      , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
-      )
-
-    self.content_1_ =\
-      FreeWriteEntry\
-      ( total_hght=self.content_hght_
-      , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
-      , page_header_txt=Strings.QUOTE0
-      )
+    self.entries_: list =\
+      [ DualLineRowGroup\
+        ( total_wdth=self.content_wdth_
+        , total_hght=self.content_hght_
+        , row_count=30
+        )
+      ]
 
     return
 
   #_____________________________________________________________________
-  def add_content(self):
-    super().add_content()
+  def add_content(self) -> None:
+    """
+    Calls parent function, setting pad_bet_elements to True.
+    """
+
+    super().add_content(pad_bet_elements=False)
+
+  #_____________________________________________________________________
+  def create_page_header(self) -> svgwrite.container.Group:
+    """
+    Creates page header and saves it to class variable.
+
+    Parameters:
+      None
+
+    Returns:
+
+    """
+
+    page_header = super().create_page_header\
+      ( header_txt=self.header_txt_
+      )
+
+    return page_header

@@ -23,30 +23,29 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for goal. Fills content for one half sheet.
+#   Entry for week. Fills content for one half sheet.
 #_______________________________________________________________________
 
 import svgwrite.container
 
-from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-
-from classes.elements.entry_table import EntryTable
-from classes.elements.entry_table import NumberedTable
-from classes.elements.entry_table import PromptTable
-from classes.elements.header_box import HeaderBox
-
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
-
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
 
+from classes.elements.rows import LineRowGroup
+from classes.elements.rows import TextRowGroup
+from classes.elements.rows import DualLineRowGroup
+from classes.elements.table import WriteTable
+from classes.style.std_styles import StdTextBoxStyles
+from classes.style.std_styles import StdLineRowGroupStyles
+
+from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________
-class GoalEntry(OnePageHalfLetterLayout):
+class FutureEntry(OnePageHalfLetterLayout):
   """
-  Daily entry layout.
+  Free write layout.
   """
 
   #_____________________________________________________________________
@@ -58,98 +57,57 @@ class GoalEntry(OnePageHalfLetterLayout):
     """
     Constructor for class. Assumes landscape orientation.
     """
+
     super().__init__\
-      ( total_hght=total_hght
-      , total_wdth=total_wdth
-      , padding=padding
-      )
+    ( total_hght=total_hght
+    , total_wdth=total_wdth
+    , padding=padding
+    )
 
     return
 
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
-    Side Effects:
-      Populates self.entries_ class variable.
-
     Parameters:
       None
+
+    Side Effects:
+      Populates self.entries_ class variable.
 
     Returns:
       None
     """
-
     super().create_content()
 
+    txt_box_test_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
+
     self.entries_: list =\
-    [ HeaderBox\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_CHECKLIST
-      , font_size=9
-      , box_brdr_color='none'
-      , box_fill_color='none'
-      )
+      [ TextRowGroup\
+          ( total_wdth=self.content_wdth_
+          , text=Strings.FREE_WRITE_FUTURE
+          , font_family=Font.FONT_FAMILY_NORMAL
+          , style=txt_box_test_style).text_row_group_
+      ]
 
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_ACTIONS
-      , prepend_txt='[]'
-      , row_count=4
-      , show_outline=True
-      )
+    fill_hght: int = self.calc_remaining_hght_per_element()
 
-    , EntryTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_MEASUREMENT
-      , row_count=2
-      , show_outline=False
-      )
-
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_COST
-      , row_count=2
-      , font_color=Colors.NORMAL_TXT
-      , box_brdr_color='none'
-      , box_fill_color='none'
-      , show_outline=True
-      )
-
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_BENCHMARKS
-      , prepend_txt=Strings.GOAL_MONTHS
-      , row_count=3
-      , show_outline=True
-      )
-
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_LIFE_IMPROVEMENT
-      , row_count=2
-      , show_outline=False
-      )
-    ]
-
-    # Calculate remaining height to evenly distribute spanning tables
-    fill_hght: int =\
-      self.calc_remaining_hght_per_element(2) + Dims.BRD_MARGIN_PX
-
-    self.entries_ = self.entries_ +\
-    [ PromptTable\
-      ( wdth=self.content_wdth_
-      , hght=fill_hght
-      , header_txt=Strings.GOAL_PLAN
-      )
-
-    , PromptTable\
-      ( wdth=self.content_wdth_
-      , hght=fill_hght
-      , header_txt=Strings.GOAL_REWARD
-      )
-    ]
+    self.entries_.insert(1,
+      DualLineRowGroup\
+        ( total_wdth=self.content_wdth_
+        , total_hght=fill_hght
+        , row_count=20
+        )
+    )
 
     return
+
+  #_____________________________________________________________________
+  def add_content(self) -> None:
+    """
+    Call parent, removing padding between elements.
+    """
+    return super().add_content(pad_bet_elements = False)
 
   #_____________________________________________________________________
   def create_page_header(self) -> svgwrite.container.Group:
@@ -163,7 +121,8 @@ class GoalEntry(OnePageHalfLetterLayout):
 
     """
 
-    return super().create_page_header\
-      ( header_txt=Strings.GOAL_PAGE_HEADER
-      , font_size=Font.GOAL_HEADER_SIZE
+    page_header = super().create_page_header\
+      ( header_txt=Strings.FUTURE_PAGE_HEADER
       )
+
+    return page_header

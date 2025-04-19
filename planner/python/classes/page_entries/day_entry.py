@@ -31,13 +31,13 @@ import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerFontStyle as Font
+from classes.style.style import PlannerFontStyle as Font
 
 from classes.elements.daily_schedule import DaySchedule as DaySched
 from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import PromptTable
 from classes.elements.entry_table import NumberedTable
+from classes.elements.table import WriteTable
 from classes.elements.header_box import HeaderBox
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
@@ -191,7 +191,7 @@ class DayEntry(OnePageHalfLetterLayout):
       EntryTable\
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PRIMARY_EFFORTS
-      , row_count=4
+      , row_count=3
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -212,7 +212,7 @@ class DayEntry(OnePageHalfLetterLayout):
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_TODO
       , prepend_txt='[]'
-      , row_count=8
+      , row_count=4
       , pad_top=True
       , pad_rgt=True
       , show_outline=True
@@ -221,8 +221,8 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt0_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PROMPTS[0]
-      , row_count=4
+      , header_txt=Strings.DAY_PROMPTS[6]
+      , row_count=3
       , pad_top=True
       , pad_rgt=True
       )
@@ -231,7 +231,7 @@ class DayEntry(OnePageHalfLetterLayout):
       PromptTable\
       ( wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[1]
-      , row_count=3
+      , row_count=2
       , pad_top=True
       , pad_rgt=True
       )
@@ -239,11 +239,45 @@ class DayEntry(OnePageHalfLetterLayout):
     self.prompt2_: PromptTable =\
       PromptTable\
       ( wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PROMPTS[2]
-      , row_count=4
+      , header_txt=Strings.DAY_PROMPT_LAST_24
+      , row_count=3
       , pad_top=True
       , pad_rgt=True
       )
+
+    # TODO replace all tables with new style
+    '''
+    self.prompt2_: WriteTable =\
+      WriteTable\
+      ( total_wdth=self.main_content_wdth_ - Dims.BRD_MARGIN_PX
+      , header_txt=Strings.DAY_PROMPT_LAST_24
+      , row_count=3
+      , show_outline=True
+      )
+
+    self.prompt0_: WriteTable =\
+      WriteTable\
+      ( total_wdth=self.write_table_wdth_
+      , header_txt=Strings.DAY_PROMPTS[6]
+      , row_count=3
+      , show_outline=True
+      )
+
+    self.prompt1_: WriteTable =\
+      WriteTable\
+      ( total_wdth=self.write_table_wdth_
+      , header_txt=Strings.DAY_PROMPTS[1]
+      , row_count=2
+      )
+
+    self.prompt2_: WriteTable =\
+      WriteTable\
+      ( total_wdth=self.write_table_wdth_
+      , header_txt=Strings.DAY_PROMPT_LAST_24
+      , row_count=3
+      , show_outline=True
+      )
+      '''
 
     # Calculate remaining height to evenly distribute spanning tables
     remaining_hght: int = self.content_hght_\
@@ -290,39 +324,6 @@ class DayEntry(OnePageHalfLetterLayout):
     Returns:
 
     """
-    font_size: int = Font.DAY_PAGE_HEADER_SIZE
-    font_family: str = Font.FONT_FAMILY_NORMAL
-    sp: str = Strings.SPACE
 
-    days: str =\
-      'Mon' + sp +\
-      'Tue' + sp +\
-      'Wed' + sp +\
-      'Thu' + sp +\
-      'Fri' + sp +\
-      'Sat' + sp +\
-      'Sun'
-
-    page_header = super().create_page_header\
-      ( header_txt=days
-      , font_size=font_size
-      , font=font_family
-      )
-
-    insert_date_x: int = self.content_wdth_ - 110
-    insert_date_y: int = font_size + Font.TEXT_PADDING
-
-    date_txt: svgwrite.text.Text =\
-      svgwrite.text.Text\
-      ( text=Strings.DATE_STR
-      , insert=(insert_date_x, insert_date_y)
-      , text_anchor='start'
-      , alignment_baseline='text-after-edge'
-      , fill=Colors.NORMAL
-      , font_size=font_size
-      , font_family=font_family
-      )
-
-    page_header.add(date_txt)
-
-    return page_header
+    return super().create_page_header\
+      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_NORMAL)

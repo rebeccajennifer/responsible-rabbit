@@ -32,8 +32,8 @@ import svgwrite.shapes
 import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
-from classes.constants.style import PlannerColors as Colors
-from classes.constants.style import PlannerFontStyle as Font
+from classes.style.style import PlannerColors as Colors
+from classes.style.style import PlannerFontStyle as Font
 
 from utils.utils import PlannerUtils as Utils
 
@@ -49,7 +49,7 @@ class HeaderBox(svgwrite.container.Group):
   , wdth: int = 0
   , header_txt: str = ''
   , col_wdths: list = []
-  , font_color: str = Colors.NORMAL
+  , font_color: str = Colors.NORMAL_TXT
   , font_size: int = Font.NORMAL_SIZE
   , font: str = Font.FONT_FAMILY_NORMAL
   , box_fill_color: str = Colors.LIGHT_GREY
