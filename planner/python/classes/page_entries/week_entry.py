@@ -38,7 +38,7 @@ from classes.elements.entry_group import EntryRow
 from classes.elements.entry_table import EntryTable
 from classes.elements.header_box import HeaderBox
 from classes.elements.rows import TextRowGroup
-from classes.elements.table import WriteTable
+from classes.elements.table import DualLineTable
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -81,7 +81,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
     super().create_content()
 
     self.entries_: list =\
-    [ WriteTable\
+    [ DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_ACCOMPLISHMENTS
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
@@ -89,7 +89,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
       , row_count=2
       )
 
-    , WriteTable\
+    , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LESSONS_LEARNED
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
@@ -97,7 +97,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
       , show_outline=True
       )
 
-    , WriteTable\
+    , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_UNFINISHED_BUSINESS
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
@@ -114,7 +114,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
             , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
             ).text_row_group_
 
-          , WriteTable\
+          , DualLineTable\
             ( total_wdth=self.content_wdth_
             , total_hght=150
             , header_txt=Strings.WEEK_VISUALIZATION_PROMPT
@@ -124,14 +124,14 @@ class WeekEntry0(OnePageHalfLetterLayout):
           ]
         )
 
-    , WriteTable\
+    , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_IMPROVEMENT
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=2
       , show_outline=False
       )
-    , WriteTable\
+    , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LOOKING_FORWARD
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
@@ -144,7 +144,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
     fill_hght: int = self.calc_remaining_hght_per_element()
 
     self.entries_.insert(4,
-      WriteTable\
+      DualLineTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
       , header_txt=Strings.WEEK_GRATITUDE
@@ -286,12 +286,9 @@ class WeekEntry1(OnePageHalfLetterLayout):
       )
     ]
 
-    # Calculate remaining height to evenly distribute spanning tables
     fill_hght: int =\
-      self.calc_remaining_hght_per_element(2) + Dims.BRD_MARGIN_PX
+      self.calc_remaining_hght_per_element(2)
 
-    # TODO: fix hght - this is hacked to make it look correct
-    # Shouldn't have to subtract margin
     self.entries_ = self.entries_ +\
     [ EntryTable\
       ( wdth=self.content_wdth_

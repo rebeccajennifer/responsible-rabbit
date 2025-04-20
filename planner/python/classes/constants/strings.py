@@ -106,8 +106,11 @@ class PlannerStrings:
   DAY_TODO: str =\
     'To Do'
 
-  DAY_CHECKLIST: list =\
-  ['[] Vision ', '[] Goals', '[] Calendar', '[] Habit']
+  DAY_CHECKLIST_STR: list =\
+    '[] Vision ' + SPACE +\
+    '[] Goals'   + SPACE +\
+    '[] Calendar'+ SPACE +\
+    '[] Habit'
 
   DAY_FOCUS: str =\
     'Today I will pay most attention to:'

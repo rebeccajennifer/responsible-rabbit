@@ -23,7 +23,7 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for future vision. Fills content for one half sheet.
+#   Entry for a blank page with page header.
 #_______________________________________________________________________
 
 import svgwrite.container
