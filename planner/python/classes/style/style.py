@@ -91,7 +91,7 @@ class PlannerFontStyle:
   STYLE_PROMPT: str = 'italics'
 
   DEF_LINE_SPC: int =\
-    1.2
+    1
 
   # Empirically determined constants
   WDTH_MULTPLIER: dict =\

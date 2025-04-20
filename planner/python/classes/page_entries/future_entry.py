@@ -62,6 +62,7 @@ class FutureEntry(OnePageHalfLetterLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , padding=padding
+    , pad_bet_elements=False
     )
 
     return
@@ -81,6 +82,7 @@ class FutureEntry(OnePageHalfLetterLayout):
     super().create_content()
 
     txt_box_test_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
+    txt_box_test_style.line_spc_ = 1.2
 
     self.entries_: list =\
       [ TextRowGroup\
@@ -101,13 +103,6 @@ class FutureEntry(OnePageHalfLetterLayout):
     )
 
     return
-
-  #_____________________________________________________________________
-  def add_content(self) -> None:
-    """
-    Call parent, removing padding between elements.
-    """
-    return super().add_content(pad_bet_elements = False)
 
   #_____________________________________________________________________
   def create_page_header(self) -> svgwrite.container.Group:

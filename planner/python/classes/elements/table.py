@@ -36,6 +36,7 @@ from classes.elements.rows import LineRowGroup
 from classes.elements.rows import TextRowGroup
 from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
+from classes.style.style import PlannerColors as Colors
 
 from utils.utils import PlannerUtils as Utils
 
@@ -165,6 +166,7 @@ class SingleLineTable(svgwrite.container.Group):
       ( total_wdth=self.total_wdth_
       , total_hght=line_row_hght
       , row_count=row_count
+      , line_color=Colors.DEBUG0_COLOR
       , inner_pad_lft=inner_pad_lft
       , inner_pad_rgt=inner_pad_rgt
       ).svg_group_
@@ -184,7 +186,7 @@ class SingleLineTable(svgwrite.container.Group):
     return
 
 #_______________________________________________________________________
-class ColumnTableDualLine(svgwrite.container.Group):
+class ColumnTable(svgwrite.container.Group):
 
   def __init__(self
   , total_wdth: int = 0

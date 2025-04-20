@@ -32,7 +32,7 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.base_element import VerticalStack
 from classes.elements.header_box import HeaderBox
 from classes.elements.rows import TextRowGroup
-from classes.elements.table import ColumnTableDualLine
+from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
@@ -50,6 +50,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
+  , pad_bet_elements: bool = True
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -58,6 +59,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , padding=padding
+    , pad_bet_elements=pad_bet_elements
     )
 
     return
@@ -205,18 +207,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
     super().create_content()
 
     self.entries_: list =\
-    [ ColumnTableDualLine\
-      ( total_wdth=self.content_wdth_
-      , header_txt_lst=Strings.WEEK_HABIT_TRACKER_HEADINGS
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=6
-      , col_wdths=[-1, 40] + 7 * [25] + [40]
-      , inner_pad_lft=True
-      , inner_pad_rgt=True
-      , show_outline=True
-      )
-
-    , ColumnTableDualLine\
+    [ ColumnTable\
       ( total_wdth=self.content_wdth_
       , TableType=DualLineTable
       , header_txt_lst=['Goal 1', 'Goal 2']
@@ -226,7 +217,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
       , inner_pad_rgt=True
       )
 
-    , ColumnTableDualLine\
+    , ColumnTable\
       ( total_wdth=self.content_wdth_
       , TableType=DualLineTable
       , header_txt_lst=['Goal 3', 'Goal 4']
@@ -237,29 +228,26 @@ class WeekEntry1(OnePageHalfLetterLayout):
       )
    ]
 
-    fill_hght: int =\
-      self.calc_remaining_hght_per_element(2)
-
     fullfillment: VerticalStack =\
       VerticalStack\
-      ( obj_list=
+      (
         [ TextRowGroup\
           ( total_wdth=self.content_wdth_
           , text=Strings.WEEK_FULFILLMENT
           , style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
           ).text_row_group_
 
-        ,  ColumnTableDualLine\
+        ,  ColumnTable\
           ( total_wdth=self.content_wdth_
-          , total_hght=fill_hght
+          , total_hght=100
           , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_0
           , text_style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
           , row_count=1
           , show_outline=True
           )
-        , ColumnTableDualLine\
+        , ColumnTable\
           ( total_wdth=self.content_wdth_
-          , total_hght=fill_hght
+          , total_hght=100
           , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_1
           , text_style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
           , row_count=1
@@ -269,6 +257,26 @@ class WeekEntry1(OnePageHalfLetterLayout):
       )
 
     self.entries_.append(fullfillment)
+
+    fill_hght: int =\
+      self.calc_remaining_hght_per_element()
+
+    self.entries_.insert(0,
+      ( ColumnTable\
+        ( total_wdth=self.content_wdth_
+        , header_txt_lst=Strings.WEEK_HABIT_TRACKER_HEADINGS
+        , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+        , total_hght=fill_hght
+        , row_count=6
+        , col_wdths=[-1, 40] + 7 * [25] + [40]
+        , inner_pad_lft=True
+        , inner_pad_rgt=True
+        , show_outline=True
+        )
+      )
+    )
+
+
 
     return
 

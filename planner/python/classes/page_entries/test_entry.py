@@ -28,6 +28,8 @@
 
 import svgwrite.container
 
+from copy import deepcopy
+
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.style.std_styles import StdTextBoxStyles
@@ -38,7 +40,7 @@ from classes.elements.base_element import HorizontalStack
 from classes.elements.rows import TextRowGroup
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
-from classes.elements.table import ColumnTableDualLine
+from classes.elements.table import ColumnTable
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -62,6 +64,7 @@ class TestEntry(OnePageHalfLetterLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , padding=padding
+    , pad_bet_elements=False
     )
 
     return
@@ -80,40 +83,51 @@ class TestEntry(OnePageHalfLetterLayout):
     """
     super().create_content()
 
-    test0 = SingleLineTable\
-      ( total_wdth=self.content_wdth_/2 - Dims.BRD_MARGIN_PX/2
-      , header_txt=Strings.WEEK_ACCOMPLISHMENTS
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , show_outline=False
-      , row_count=2
+    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
+    style.line_spc_=1
+
+    fill_hght: int = self.calc_remaining_hght_per_element(1)
+    fill_hght: int = self.calc_remaining_hght_per_element(2)
+    fill_hght: int = self.calc_remaining_hght_per_element(3)
+
+    test0=ColumnTable\
+          ( total_wdth=self.content_wdth_
+          , total_hght=fill_hght
+          , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_0
+          , text_style=style
+          , row_count=2
+          , show_outline=True
+          )
+
+    test1= deepcopy(test0)
+    test2= deepcopy(test0)
+
+    obj_list=[test0]
+    obj_list=[test0, test1]
+    obj_list=[test0, test1, test2]
+
+    x: VerticalStack =\
+      VerticalStack\
+      ( add_top_pad=False
+      , obj_list=obj_list
       )
 
-    test1 = DualLineTable\
-      ( total_wdth=self.content_wdth_/2 - Dims.BRD_MARGIN_PX/2
-      , header_txt=Strings.WEEK_LESSONS_LEARNED
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=3
-      , show_outline=True
-      )
+    #fill_hght: int = self.calc_remaining_hght_per_element(1)
+    #test1=ColumnTable\
+    #      ( total_wdth=self.content_wdth_
+    #      , total_hght=fill_hght
+    #      , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_0
+    #      , text_style=style
+    #      , row_count=2
+    #      , show_outline=True
+    #      )
 
-    horizontal_stack: HorizontalStack =\
-      HorizontalStack\
-      ( obj_list=[test0, test1]
-      , add_inner_pad=True
-      )
 
-    self.entries_ =\
-    [ ColumnTableDualLine\
-      ( total_wdth=self.content_wdth_
-      , header_txt_lst=['test0','test1']
-      , col_wdths=[50, -1]
-      , row_count=3
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , show_outline=True
-      , inner_pad_lft=True
-      , inner_pad_rgt=True
-      )
-    ]
+
+    self.entries_.append(x)
+    #self.entries_.append(test0)
+    #self.entries_.append(test1)
+    #self.entries_.append(test2)
 
     return
 
