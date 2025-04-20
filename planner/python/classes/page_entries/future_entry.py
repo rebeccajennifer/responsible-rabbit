@@ -35,7 +35,7 @@ from classes.style.style import PlannerFontStyle as Font
 from classes.elements.rows import LineRowGroup
 from classes.elements.rows import TextRowGroup
 from classes.elements.rows import DualLineRowGroup
-from classes.elements.table import WriteTable
+from classes.elements.table import DualLineTable
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.std_styles import StdLineRowGroupStyles
 

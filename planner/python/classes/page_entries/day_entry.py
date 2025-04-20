@@ -37,7 +37,7 @@ from classes.elements.daily_schedule import DaySchedule as DaySched
 from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import PromptTable
 from classes.elements.entry_table import NumberedTable
-from classes.elements.table import WriteTable
+from classes.elements.table import DualLineTable
 from classes.elements.header_box import HeaderBox
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
@@ -247,31 +247,31 @@ class DayEntry(OnePageHalfLetterLayout):
 
     # TODO replace all tables with new style
     '''
-    self.prompt2_: WriteTable =\
-      WriteTable\
+    self.prompt2_: DualLineTable =\
+      DualLineTable\
       ( total_wdth=self.main_content_wdth_ - Dims.BRD_MARGIN_PX
       , header_txt=Strings.DAY_PROMPT_LAST_24
       , row_count=3
       , show_outline=True
       )
 
-    self.prompt0_: WriteTable =\
-      WriteTable\
+    self.prompt0_: DualLineTable =\
+      DualLineTable\
       ( total_wdth=self.write_table_wdth_
       , header_txt=Strings.DAY_PROMPTS[6]
       , row_count=3
       , show_outline=True
       )
 
-    self.prompt1_: WriteTable =\
-      WriteTable\
+    self.prompt1_: DualLineTable =\
+      DualLineTable\
       ( total_wdth=self.write_table_wdth_
       , header_txt=Strings.DAY_PROMPTS[1]
       , row_count=2
       )
 
-    self.prompt2_: WriteTable =\
-      WriteTable\
+    self.prompt2_: DualLineTable =\
+      DualLineTable\
       ( total_wdth=self.write_table_wdth_
       , header_txt=Strings.DAY_PROMPT_LAST_24
       , row_count=3

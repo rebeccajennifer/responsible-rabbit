@@ -12,8 +12,9 @@ from utils.utils import PlannerUtils as Utils
 
 
 #_______________________________________________________________________
-class WriteTable(svgwrite.container.Group):
+class DualLineTable(svgwrite.container.Group):
   """
+  Table element with dual lines intended for writing.
   """
 
   def __init__(self
