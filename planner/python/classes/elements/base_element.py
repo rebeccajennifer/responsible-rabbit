@@ -212,3 +212,52 @@ class VerticalStack(svgwrite.container.Group):
     self.total_hght_ += padding * (len(obj_list))
 
     return
+
+#_______________________________________________________________________
+class HorizontalStack(svgwrite.container.Group):
+
+  def __init__(self
+  , obj_list: list = []
+  , add_inner_pad: bool = False
+  , total_hght: int = 0
+  ) -> svgwrite.container.Group:
+    """
+    Creates a new svgwrite container with all objects stacked
+    vertically.
+
+    Parameters:
+      obj_list    : List of SVG elements to be stacked. Each
+                    element is expected to have a 'total_hght_'
+                    attribute defining its height.
+
+      add_top_pad : If True, adds uniform vertical padding
+                    between elements. Padding is not added
+                    above the first or below the last element.
+    """
+
+    super().__init__()
+    padding: int = Dims.BRD_MARGIN_PX * add_inner_pad
+    insert_x: int = 0
+    insert_y: int = 0
+    self.total_wdth_: int = 0
+    self.total_hght_: int = 0
+
+    for i in range(len(obj_list)):
+
+      obj_list[i]['transform'] =\
+      f'translate({insert_x},{insert_y})'
+
+      insert_x = insert_x\
+        + obj_list[i].total_wdth_\
+        + padding
+
+      self.total_wdth_ += obj_list[i].total_wdth_
+
+      if ((obj_list[i].total_hght_) > (self.total_hght_)):
+        self.total_hght_ = obj_list[i].total_hght_
+
+      self.add(obj_list[i])
+
+    self.total_wdth_ += padding * (len(obj_list) - 1)
+
+    return

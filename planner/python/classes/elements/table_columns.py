@@ -23,9 +23,9 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Defines classes used to manage and render row-based layout elements.
-#   This includes both visual styling properties and row group
-#   positioning logic.
+#   Defines classes used to manage and render column-based layout
+#   elements. This includes both visual styling properties and column
+#   group positioning logic.
 #_______________________________________________________________________
 
 import svgwrite
@@ -45,19 +45,18 @@ from utils.utils import PlannerUtils as Utils
 
 
 #_______________________________________________________________________
-class RowGroup(svgwrite.container.Group):
+class ColGroup(svgwrite.container.Group):
   """
   Creates a group of objects, positioned in rows.
   """
 
   def __init__(self
-  , wdth: int = 0
+  , total_wdth: int = 0
   , total_hght: int = 0
   , show_outline: bool = True
   , outline_color: str = Colors.BORDER_COLOR
   , backgnd_color: str = 'none'
   , row_hght: int = Dims.DEF_ROW_HGHT
-  , y_offset: int = 0
   , inner_pad_top: bool = False
   , inner_pad_bot: bool = False
   , inner_pad_lft: bool = False
@@ -72,14 +71,13 @@ class RowGroup(svgwrite.container.Group):
       outline_color   : Color of outline
       backgnd_color   : Background color of group
       row_hght        : Height of row, optional
-      y_offset        : Offset positioning of objects
       inner_pad_lft   : Pad left side of row inside border
       inner_pad_rgt   : Pad right side of row inside border
     """
 
     super().__init__()
 
-    self.total_width_          : int  = wdth
+    self.total_wdth_    : int  = total_wdth
     self.inner_pad_top_ : bool = inner_pad_top
     self.inner_pad_bot_ : bool = inner_pad_bot
     self.inner_pad_lft_ : bool = inner_pad_lft
@@ -88,10 +86,8 @@ class RowGroup(svgwrite.container.Group):
     self.show_outline_  : bool = show_outline
     self.outline_color_ : bool = outline_color
     self.backgnd_color_ : bool = backgnd_color
-    self.y_offset_      : int  = y_offset
 
     row_count     : int  = len(obj_list)
-
 
     #___________________________________________________________________
     # Determine heights based on given information
@@ -134,7 +130,9 @@ class RowGroup(svgwrite.container.Group):
     #___________________________________________________________________
     # Add outline and background
     #___________________________________________________________________
-    if (self.show_outline_ or (not self.show_outline_ and self.backgnd_color_ != 'none')):
+    if (self.show_outline_ or
+        ( not self.show_outline_ and
+          self.backgnd_color_ != 'none')):
       Utils.add_outline\
       ( container=self
       , hght=self.total_hght_
@@ -144,7 +142,7 @@ class RowGroup(svgwrite.container.Group):
       )
 
     #___________________________________________________________________
-    # Add rows
+    # Add columns
     #___________________________________________________________________
     insert_x: int = Font.TEXT_PADDING * self.inner_pad_lft_
     insert_y: int = self.row_hght_ - self.y_offset_ + Font.TEXT_PADDING * self.inner_pad_top_

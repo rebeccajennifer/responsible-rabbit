@@ -32,6 +32,7 @@ from classes.page_layouts.future_layout import FutureLayout
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
+from classes.page_layouts.test_layout import TestLayout
 from classes.planner_parser import PlannerCreationParser
 
 #_______________________________________________________________________
@@ -51,6 +52,14 @@ if __name__ == '__main__':
   is_dbl_sided: bool  = False
 
   #_____________________________________________________________________
+
+  test_layout =\
+    TestLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    )
+  test_layout.save()
+
 
   future_layout =\
     FutureLayout\

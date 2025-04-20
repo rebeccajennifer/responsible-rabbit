@@ -60,6 +60,9 @@ class PlannerStrings:
   DEF_LAYOUT_PATH: str =\
     'layout.svg'
 
+  DEF_TEST_LAYOUT_PATH: str =\
+    'test-layout.svg'
+
   DEF_DAY_LAYOUT_PATH: str =\
     'day-layout.svg'
 
@@ -188,7 +191,7 @@ class PlannerStrings:
 
 
   WEEK_PAGE_HEADER_1: str =\
-    'Goals for Week: '\
+    'Goals for Week # '\
     + 6 * SPACE\
     + DATE_STR\
     + 3 * SPACE\
