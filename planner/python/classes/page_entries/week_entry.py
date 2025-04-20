@@ -286,12 +286,9 @@ class WeekEntry1(OnePageHalfLetterLayout):
       )
     ]
 
-    # Calculate remaining height to evenly distribute spanning tables
     fill_hght: int =\
-      self.calc_remaining_hght_per_element(2) + Dims.BRD_MARGIN_PX
+      self.calc_remaining_hght_per_element(2)
 
-    # TODO: fix hght - this is hacked to make it look correct
-    # Shouldn't have to subtract margin
     self.entries_ = self.entries_ +\
     [ EntryTable\
       ( wdth=self.content_wdth_

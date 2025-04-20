@@ -32,12 +32,15 @@ import svgwrite.text
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.style.style import PlannerFontStyle as Font
+from classes.style.std_styles import StdTextBoxStyles
 
 from classes.elements.daily_schedule import DaySchedule as DaySched
 from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import PromptTable
 from classes.elements.entry_table import NumberedTable
 from classes.elements.table import DualLineTable
+from classes.elements.table import SingleLineTable
+from classes.elements.table import TextRowGroup
 from classes.elements.header_box import HeaderBox
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
@@ -90,71 +93,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.sched_['transform'] =\
       f'translate({sched_insert_x},{sched_insert_y})'
 
-    #___________________________________________________________________
-    # Entry insert calculations
-    #___________________________________________________________________
-    insert_x: int = self.content_insert_pt_x_
-    insert_y: int = self.content_insert_pt_y_
-    #___________________________________________________________________
-    self.pri_efforts_['transform'] =\
-      f'translate({insert_x},{insert_y})'
-
-    insert_y: int = insert_y\
-      + self.pri_efforts_.total_hght_
-    #___________________________________________________________________
-    self.checklist_['transform'] =\
-      f'translate({insert_x},{insert_y})'
-
-    insert_y: int = insert_y\
-      + self.checklist_.total_hght_
-    #___________________________________________________________________
-    self.focus_['transform'] =\
-      f'translate({insert_x},{insert_y})'
-
-    insert_y: int = insert_y\
-      + self.focus_.total_hght_
-    #___________________________________________________________________
-    self.todo_['transform'] =\
-      f'translate({insert_x},{insert_y})'
-
-    insert_y: int = insert_y\
-      + self.todo_.total_hght_
-    #___________________________________________________________________
-    self.gratitude_['transform'] =\
-      f'translate({insert_x},{insert_y})'
-
-    insert_y: int = insert_y\
-      + self.gratitude_.total_hght_
-    #___________________________________________________________________
-    self.prompt0_['transform'] =\
-      f'translate({insert_x},{insert_y})'
-
-    insert_y: int = insert_y\
-      + self.prompt0_.total_hght_
-    #___________________________________________________________________
-    self.prompt1_['transform'] =\
-      f'translate({insert_x},{insert_y})'
-
-    insert_y: int = insert_y\
-      + self.prompt1_.total_hght_
-    #___________________________________________________________________
-    self.prompt2_['transform'] =\
-      f'translate({insert_x},{insert_y})'
-
-    insert_y: int = insert_y\
-      + self.prompt2_.total_hght_
-    #___________________________________________________________________
-
-
     self.add(self.sched_)
-    self.add(self.pri_efforts_)
-    self.add(self.checklist_)
-    self.add(self.focus_)
-    self.add(self.todo_)
-    self.add(self.gratitude_)
-    self.add(self.prompt0_)
-    self.add(self.prompt1_)
-    self.add(self.prompt2_)
 
     return
 
@@ -177,7 +116,7 @@ class DayEntry(OnePageHalfLetterLayout):
     # Width of daily schedule content group
     self.schedule_wdth_: int = self.content_wdth_ * 0.25
     self.main_content_wdth_: int =\
-      self.content_wdth_ - self.schedule_wdth_
+      self.content_wdth_ - self.schedule_wdth_ - Dims.BRD_MARGIN_PX
 
     self.sched_: DaySched =\
       DaySched\
@@ -187,129 +126,76 @@ class DayEntry(OnePageHalfLetterLayout):
       , use_24=True
       )
 
-    self.pri_efforts_: EntryTable =\
-      EntryTable\
-      ( wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PRIMARY_EFFORTS
+    self.entries_: list =\
+    [
+      DualLineTable
+      ( total_wdth=self.main_content_wdth_
+      , header_txt=Strings.DAY_PRIMARY_EFFORTS[0]
       , row_count=3
-      , pad_top=True
-      , pad_rgt=True
-      , show_outline=True
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , show_outline=False
       )
 
-    self.checklist_: HeaderBox=\
-      HeaderBox\
-      ( wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_CHECKLIST
-      , box_brdr_color='none'
-      , box_fill_color='none'
-      , pad_top=True
-      , pad_rgt=True
-      )
+    , TextRowGroup
+      ( total_wdth=self.main_content_wdth_
+      , text=Strings.DAY_CHECKLIST_STR
+      , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      ).text_row_group_
 
-    self.todo_: NumberedTable =\
-      NumberedTable\
-      ( wdth=self.main_content_wdth_
+    , DualLineTable
+      ( total_wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_TODO
-      , prepend_txt='[]'
-      , row_count=4
-      , pad_top=True
-      , pad_rgt=True
-      , show_outline=True
+      , row_count=6
+      , text_style=StdTextBoxStyles.MED_BACK_NORMAL_FONT
       )
 
-    self.prompt0_: PromptTable =\
-      PromptTable\
-      ( wdth=self.main_content_wdth_
+    , DualLineTable
+      ( total_wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[6]
-      , row_count=3
-      , pad_top=True
-      , pad_rgt=True
-      )
-
-    self.prompt1_: PromptTable =\
-      PromptTable\
-      ( wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PROMPTS[1]
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=2
-      , pad_top=True
-      , pad_rgt=True
-      )
-
-    self.prompt2_: PromptTable =\
-      PromptTable\
-      ( wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PROMPT_LAST_24
-      , row_count=3
-      , pad_top=True
-      , pad_rgt=True
-      )
-
-    # TODO replace all tables with new style
-    '''
-    self.prompt2_: DualLineTable =\
-      DualLineTable\
-      ( total_wdth=self.main_content_wdth_ - Dims.BRD_MARGIN_PX
-      , header_txt=Strings.DAY_PROMPT_LAST_24
-      , row_count=3
       , show_outline=True
       )
 
-    self.prompt0_: DualLineTable =\
-      DualLineTable\
-      ( total_wdth=self.write_table_wdth_
-      , header_txt=Strings.DAY_PROMPTS[6]
-      , row_count=3
-      , show_outline=True
-      )
-
-    self.prompt1_: DualLineTable =\
-      DualLineTable\
-      ( total_wdth=self.write_table_wdth_
+    , SingleLineTable
+      ( total_wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[1]
-      , row_count=2
-      )
-
-    self.prompt2_: DualLineTable =\
-      DualLineTable\
-      ( total_wdth=self.write_table_wdth_
-      , header_txt=Strings.DAY_PROMPT_LAST_24
-      , row_count=3
-      , show_outline=True
-      )
-      '''
-
-    # Calculate remaining height to evenly distribute spanning tables
-    remaining_hght: int = self.content_hght_\
-      - self.pri_efforts_.total_hght_\
-      - self.checklist_.total_hght_\
-      - self.todo_.total_hght_\
-      - self.prompt0_.total_hght_\
-      - self.prompt1_.total_hght_\
-      - self.prompt2_.total_hght_\
-
-    # Fill half of remaining space
-    self.focus_: EntryTable =\
-      EntryTable\
-      ( wdth=self.main_content_wdth_
-      , hght=remaining_hght/2
-      , header_txt=[Strings.DAY_FOCUS]
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=1
-      , pad_top=True
-      , pad_rgt=True
       , show_outline=True
       )
 
-    # Fill half of remaining space
-    self.gratitude_: EntryTable =\
-      EntryTable\
-      ( wdth=self.main_content_wdth_
-      , hght=remaining_hght/2
-      , header_txt=[Strings.DAY_GRATITUDE]
-      , pad_top=True
-      , pad_rgt=True
+    , DualLineTable
+      ( total_wdth=self.main_content_wdth_
+      , header_txt=Strings.DAY_PROMPT_LAST_24
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , row_count=2
       , show_outline=True
       )
+    ]
+
+    fill_hght: int = self.calc_remaining_hght_per_element(2)
+
+    self.entries_.insert(2,
+      SingleLineTable\
+      ( total_wdth=self.main_content_wdth_
+      , total_hght=fill_hght
+      , header_txt=Strings.DAY_FOCUS
+      , row_count=1
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , show_outline=True
+      )
+    )
+
+    self.entries_.insert(4,
+      SingleLineTable\
+      ( total_wdth=self.main_content_wdth_
+      , total_hght=fill_hght
+      , header_txt=Strings.DAY_GRATITUDE
+      , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
+      , show_outline=True
+      )
+    )
 
     return
 
