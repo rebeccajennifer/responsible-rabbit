@@ -29,6 +29,7 @@
 import argparse
 
 from classes.page_layouts.future_layout import FutureLayout
+from classes.page_layouts.future_12wk_layout import Future12WkLayout
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
@@ -60,6 +61,12 @@ if __name__ == '__main__':
     )
   test_layout.save()
 
+  future_12wk_layout =\
+    Future12WkLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    )
+  future_12wk_layout.save()
 
   future_layout =\
     FutureLayout\

@@ -72,6 +72,9 @@ class PlannerStrings:
   DEF_FUTURE_LAYOUT_PATH: str =\
     'future-layout.svg'
 
+  DEF_FUTURE_LAYOUT_PATH: str =\
+    'future-12-wk-layout.svg'
+
   DEF_WEEK_LAYOUT_PATH: str =\
     'week-layout.svg'
 
@@ -283,4 +286,18 @@ class PlannerStrings:
     'do I admire and want to grow into? What would I do if I had no '
     'fear? What kind of person will I grow into? Start by freewriting '
     'before refining your answer below.'
+  )
+
+  FUTURE_12WK_PAGE_HEADER: str =\
+    'In 12 Weeks...'
+
+  FREE_WRITE_12_WK: str = (
+    'Imagine how your life will change over the next twelve weeks. '
+    'Aim for progress that feels bold but within your reach. What '
+    'fears will you face head-on? What talents will you grow? What '
+    'knowledge will you seek out? What routines will help—or hold you '
+    'back? Who will you spend time with? How will you relax or have '
+    'fun? What kind of home life do you want? What will change at work '
+    'or with money? How will you evolve as a person? Who are you '
+    'choosing to become?'
   )

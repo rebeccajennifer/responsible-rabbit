@@ -23,32 +23,24 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for testing. Will not be used in final product.
+#   Entry for week. Fills content for one half sheet.
 #_______________________________________________________________________
 
 import svgwrite.container
 
-from copy import deepcopy
-
-from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
+from classes.elements.rows import TextRowGroup
+from classes.elements.rows import DualLineRowGroup
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerFontStyle as Font
-
-from classes.elements.base_element import VerticalStack
-from classes.elements.base_element import HorizontalStack
-from classes.elements.rows import TextRowGroup
-from classes.elements.table import DualLineTable
-from classes.elements.table import SingleLineTable
-from classes.elements.table import ColumnTable
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________
-class TestEntry(OnePageHalfLetterLayout):
+class Future12WkEntry(OnePageHalfLetterLayout):
   """
-  Daily entry layout.
+  Free write layout.
   """
 
   #_____________________________________________________________________
@@ -60,11 +52,12 @@ class TestEntry(OnePageHalfLetterLayout):
     """
     Constructor for class. Assumes landscape orientation.
     """
+
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , padding=padding
-    , pad_bet_elements=True
+    , pad_bet_elements=False
     )
 
     return
@@ -83,51 +76,26 @@ class TestEntry(OnePageHalfLetterLayout):
     """
     super().create_content()
 
-    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
-    style.line_spc_=1
+    txt_box_test_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
+    txt_box_test_style.line_spc_ = 1.2
 
-    fill_hght: int = self.calc_remaining_hght_per_element(1)
-    fill_hght: int = self.calc_remaining_hght_per_element(2)
-    fill_hght: int = self.calc_remaining_hght_per_element(3)
-
-    test0=ColumnTable\
+    self.entries_: list =\
+      [ TextRowGroup\
           ( total_wdth=self.content_wdth_
-          , total_hght=fill_hght
-          , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_0
-          , text_style=style
-          , row_count=2
-          , show_outline=True
-          )
+          , text=Strings.FREE_WRITE_FUTURE
+          , font_family=Font.FONT_FAMILY_NORMAL
+          , style=txt_box_test_style).text_row_group_
+      ]
 
-    test1= deepcopy(test0)
-    test2= deepcopy(test0)
+    fill_hght: int = self.calc_remaining_hght_per_element()
 
-    obj_list=[test0]
-    obj_list=[test0, test1]
-    obj_list=[test0, test1, test2]
-
-    x: VerticalStack =\
-      VerticalStack\
-      ( add_top_pad=False
-      , obj_list=obj_list
-      )
-
-    #fill_hght: int = self.calc_remaining_hght_per_element(1)
-    #test1=ColumnTable\
-    #      ( total_wdth=self.content_wdth_
-    #      , total_hght=fill_hght
-    #      , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_0
-    #      , text_style=style
-    #      , row_count=2
-    #      , show_outline=True
-    #      )
-
-
-
-    self.entries_.append(x)
-    #self.entries_.append(test0)
-    #self.entries_.append(test1)
-    #self.entries_.append(test2)
+    self.entries_.insert(1,
+      DualLineRowGroup\
+        ( total_wdth=self.content_wdth_
+        , total_hght=fill_hght
+        , row_count=20
+        )
+    )
 
     return
 
@@ -143,5 +111,8 @@ class TestEntry(OnePageHalfLetterLayout):
 
     """
 
-    return super().create_page_header\
-      (header_txt=Strings.DEF_PAGE_HEADER)
+    page_header = super().create_page_header\
+      ( header_txt=Strings.FUTURE_12WK_PAGE_HEADER
+      )
+
+    return page_header

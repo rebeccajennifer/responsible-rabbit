@@ -87,7 +87,7 @@ class FutureEntry(OnePageHalfLetterLayout):
     self.entries_: list =\
       [ TextRowGroup\
           ( total_wdth=self.content_wdth_
-          , text=Strings.FREE_WRITE_FUTURE
+          , text=Strings.FREE_WRITE_12_WK
           , font_family=Font.FONT_FAMILY_NORMAL
           , style=txt_box_test_style).text_row_group_
       ]

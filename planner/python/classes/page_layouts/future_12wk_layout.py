@@ -23,83 +23,54 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for a blank page with page header.
+#   Layout for week . Populated with entry group for week.
 #_______________________________________________________________________
 
-import svgwrite.container
+from classes.constants.dims import PlannerDims as Dims
+from classes.constants.strings import PlannerStrings as Strings
 
-from classes.elements.rows import DualLineRowGroup
-
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_entries.future_12wk_entry import Future12WkEntry
+from classes.page_entries.free_write_entry import FreeWriteEntry
+from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
 #_______________________________________________________________________
-class FreeWriteEntry(OnePageHalfLetterLayout):
-  """
-  Free write layout.
-  """
+class Future12WkLayout(TwoPageHalfLetterSize):
 
   #_____________________________________________________________________
-  def __init__(self
-  , total_hght: int = 0
-  , total_wdth: int = 0
-  , padding: int = 0
-  , page_header_txt: str = ''
+  def  __init__(self
+  , is_portrait: bool = False
+  , is_dbl_sided: bool = False
+  , file_path: str = Strings.DEF_FUTURE_LAYOUT_PATH
   ):
-    """
-    Constructor for class. Assumes landscape orientation.
-    """
-
-    self.page_header_txt_: str = page_header_txt
-
     super().__init__\
-    ( total_hght=total_hght
-    , total_wdth=total_wdth
-    , padding=padding
-    , pad_bet_elements=False
-    )
-
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=file_path
+      )
     return
 
   #_____________________________________________________________________
-  def create_content(self) -> None:
-    """
-    Parameters:
-      None
-
-    Side Effects:
-      Populates self.entries_ class variable.
-
-    Returns:
-      None
-    """
+  def create_content(self):
     super().create_content()
 
-    self.entries_: list =\
-      [ DualLineRowGroup\
-        ( total_wdth=self.content_wdth_
-        , total_hght=self.content_hght_
-        , row_count=24
-        )
-      ]
+    self.content_0_ =\
+      Future12WkEntry\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      )
+
+    self.content_1_ =\
+      FreeWriteEntry\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      , page_header_txt=Strings.FUTURE_12WK_PAGE_HEADER
+      )
 
     return
 
-
   #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    page_header = super().create_page_header\
-      ( header_txt=self.page_header_txt_
-      )
-
-    return page_header
+  def add_content(self):
+    super().add_content()
