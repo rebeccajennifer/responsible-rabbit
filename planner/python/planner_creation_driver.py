@@ -34,7 +34,7 @@ from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
 from classes.page_layouts.test_layout import TestLayout
-from classes.planner_parser import PlannerCreationParser
+from utils.planner_parser import PlannerCreationParser
 
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:
@@ -50,16 +50,42 @@ if __name__ == '__main__':
   args: argparse.Namespace = parser.parse_args()
 
   is_portrait: bool   = False
-  is_dbl_sided: bool  = False
+  is_dbl_sided: bool  = args.dbl_sided
 
   #_____________________________________________________________________
 
-  free_write_layout =\
-    FreeWriteLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    )
-  free_write_layout.save()
+  #_____________________________________________________________________
+  # Free-write layout generation
+  #_____________________________________________________________________
+
+  free_write_prompts: list =\
+  [ Strings.FREE_WRITE_FUTURE
+  , Strings.FREE_WRITE_12WK
+  , Strings.FREE_WRITE_INACTION
+  ]
+
+  free_write_page_headers: list =\
+  [ Strings.FUTURE_PAGE_HEADER
+  , Strings.FUTURE_12WK_PAGE_HEADER
+  , Strings.INACTION_PAGE_HEADER
+  ]
+
+  free_write_file_paths: list =\
+  [ Strings.DEF_FUTURE_LAYOUT_PATH
+  , Strings.DEF_FUTURE_12WK_LAYOUT_PATH
+  , Strings.DEF_INACTION_LAYOUT_PATH
+  ]
+
+  for i in range(len(free_write_prompts)):
+    free_write_layout =\
+      FreeWriteLayout\
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=free_write_file_paths[i]
+      , header_txt=free_write_page_headers[i]
+      , prompt=free_write_prompts[i]
+      )
+    free_write_layout.save()
 
   test_layout =\
     TestLayout\
@@ -67,26 +93,6 @@ if __name__ == '__main__':
     , is_dbl_sided=is_dbl_sided
     )
   test_layout.save()
-
-  future_12wk_layout =\
-    FreeWriteLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , file_path=Strings.DEF_FUTURE_12WK_LAYOUT_PATH
-    , header_txt=Strings.FUTURE_12WK_PAGE_HEADER
-    , prompt=Strings.FREE_WRITE_12WK
-    )
-  future_12wk_layout.save()
-
-  future_layout =\
-    FreeWriteLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , file_path=Strings.DEF_FUTURE_LAYOUT_PATH
-    , header_txt=Strings.FUTURE_PAGE_HEADER
-    , prompt=Strings.FREE_WRITE_FUTURE
-    )
-  future_layout.save()
 
   week_layout =\
     WeekLayout\

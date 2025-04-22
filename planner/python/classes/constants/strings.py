@@ -75,6 +75,9 @@ class PlannerStrings:
   DEF_FUTURE_12WK_LAYOUT_PATH: str =\
     'future-12-wk-layout.svg'
 
+  DEF_INACTION_LAYOUT_PATH: str =\
+    'inaction-layout.svg'
+
   DEF_WEEK_LAYOUT_PATH: str =\
     'week-layout.svg'
 
@@ -297,4 +300,15 @@ class PlannerStrings:
     'fun? What kind of home life do you want? What will change at work '
     'or with money? How will you evolve as a person? Who are you '
     'choosing to become?'
+  )
+
+  INACTION_PAGE_HEADER: str =\
+    'The Consequences of Inaction'
+
+  FREE_WRITE_INACTION: str = (
+    'Though it may feel unsettling, envision the genuine consequences '
+    'of not honoring your commitments. Picture the most serious yet '
+    'believable outcome. What does that scenario look like? Who do you '
+    'become, and how are your health, finances, and relationships '
+    'affected?'
   )

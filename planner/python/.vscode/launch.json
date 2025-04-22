@@ -41,11 +41,11 @@
       , "request": "launch"
       , "program": "${workspaceFolder}/planner_creation_driver.py"
       , "console": "integratedTerminal"
-      //, "args":
-      //  [ "--help"
-      //  , ""
-      //  , ""
-      //  ]
+      , "args":
+        [ "--out_dir"
+        , "../layouts/page_layouts"
+        //, "--dbl_sided"
+        ]
       }
     ]
 }
