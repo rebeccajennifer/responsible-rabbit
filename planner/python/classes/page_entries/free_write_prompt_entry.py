@@ -38,7 +38,7 @@ from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________
-class Future12WkEntry(OnePageHalfLetterLayout):
+class FreeWritePromptEntry(OnePageHalfLetterLayout):
   """
   Free write layout.
   """
@@ -48,10 +48,15 @@ class Future12WkEntry(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
+  , header_txt: str = Strings.DEF_PAGE_HEADER
+  , prompt: int = ''
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
+
+    self.prompt_: str = prompt
+    self.header_txt_: str = header_txt
 
     super().__init__\
     ( total_hght=total_hght
@@ -82,7 +87,7 @@ class Future12WkEntry(OnePageHalfLetterLayout):
     self.entries_: list =\
       [ TextRowGroup\
           ( total_wdth=self.content_wdth_
-          , text=Strings.FREE_WRITE_FUTURE
+          , text=self.prompt_
           , font_family=Font.FONT_FAMILY_NORMAL
           , style=txt_box_test_style).text_row_group_
       ]
@@ -112,7 +117,6 @@ class Future12WkEntry(OnePageHalfLetterLayout):
     """
 
     page_header = super().create_page_header\
-      ( header_txt=Strings.FUTURE_12WK_PAGE_HEADER
-      )
+      (header_txt=self.header_txt_)
 
     return page_header

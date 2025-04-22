@@ -29,21 +29,26 @@
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_entries.future_entry import FutureEntry
-from classes.page_entries.day_entry import DayEntry
+from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
 #_______________________________________________________________________
-class FutureLayout(TwoPageHalfLetterSize):
+class FreeWriteLayout(TwoPageHalfLetterSize):
 
   #_____________________________________________________________________
   def  __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_FUTURE_LAYOUT_PATH
+  , file_path: str = Strings.DEF_LAYOUT_PATH
+  , header_txt: str = Strings.DEF_PAGE_HEADER
+  , prompt: str = 'test'
   ):
+
+    self.header_txt_: str = header_txt
+    self.prompt_: str = prompt
+
     super().__init__\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
@@ -56,10 +61,12 @@ class FutureLayout(TwoPageHalfLetterSize):
     super().create_content()
 
     self.content_0_ =\
-      FutureEntry\
+      FreeWritePromptEntry\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
+      , header_txt=self.header_txt_
+      , prompt=self.prompt_
       )
 
     self.content_1_ =\
@@ -67,7 +74,7 @@ class FutureLayout(TwoPageHalfLetterSize):
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
-      , page_header_txt=Strings.FUTURE_PAGE_HEADER
+      , page_header_txt=self.header_txt_
       )
 
     return

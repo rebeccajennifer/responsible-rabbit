@@ -72,7 +72,7 @@ class PlannerStrings:
   DEF_FUTURE_LAYOUT_PATH: str =\
     'future-layout.svg'
 
-  DEF_FUTURE_LAYOUT_PATH: str =\
+  DEF_FUTURE_12WK_LAYOUT_PATH: str =\
     'future-12-wk-layout.svg'
 
   DEF_WEEK_LAYOUT_PATH: str =\
@@ -271,9 +271,6 @@ class PlannerStrings:
   #_____________________________________________________________________
 
   FUTURE_PAGE_HEADER: str =\
-    'An Imagined Future'
-
-  FUTURE_PAGE_HEADER : str =\
     'Imagine a Future...'
 
   FREE_WRITE_FUTURE: str = (
@@ -289,9 +286,9 @@ class PlannerStrings:
   )
 
   FUTURE_12WK_PAGE_HEADER: str =\
-    'In 12 Weeks...'
+    '12 Week Potential'
 
-  FREE_WRITE_12_WK: str = (
+  FREE_WRITE_12WK: str = (
     'Imagine how your life will change over the next twelve weeks. '
     'Aim for progress that feels bold but within your reach. What '
     'fears will you face head-on? What talents will you grow? What '

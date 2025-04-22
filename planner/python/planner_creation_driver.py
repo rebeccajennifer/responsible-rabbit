@@ -28,8 +28,8 @@
 
 import argparse
 
-from classes.page_layouts.future_layout import FutureLayout
-from classes.page_layouts.future_12wk_layout import Future12WkLayout
+from classes.constants.strings import PlannerStrings as Strings
+from classes.page_layouts.free_write_layout import FreeWriteLayout
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
@@ -54,6 +54,13 @@ if __name__ == '__main__':
 
   #_____________________________________________________________________
 
+  free_write_layout =\
+    FreeWriteLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    )
+  free_write_layout.save()
+
   test_layout =\
     TestLayout\
     ( is_portrait=is_portrait
@@ -62,16 +69,22 @@ if __name__ == '__main__':
   test_layout.save()
 
   future_12wk_layout =\
-    Future12WkLayout\
+    FreeWriteLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
+    , file_path=Strings.DEF_FUTURE_12WK_LAYOUT_PATH
+    , header_txt=Strings.FUTURE_12WK_PAGE_HEADER
+    , prompt=Strings.FREE_WRITE_12WK
     )
   future_12wk_layout.save()
 
   future_layout =\
-    FutureLayout\
+    FreeWriteLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
+    , file_path=Strings.DEF_FUTURE_LAYOUT_PATH
+    , header_txt=Strings.FUTURE_PAGE_HEADER
+    , prompt=Strings.FREE_WRITE_FUTURE
     )
   future_layout.save()
 
