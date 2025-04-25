@@ -28,19 +28,16 @@
 
 import svgwrite.container
 
-from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.elements.entry_table import EntryTable
 from classes.elements.entry_table import NumberedTable
-from classes.elements.entry_table import PromptTable
-from classes.elements.header_box import HeaderBox
+from classes.elements.table import DualLineTable
+from classes.elements.table import SingleLineTable
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
-from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
-
+from classes.style.std_styles import StdTextBoxStyles
 
 
 #_______________________________________________________________________
@@ -82,36 +79,27 @@ class GoalEntry(OnePageHalfLetterLayout):
     super().create_content()
 
     self.entries_: list =\
-    [ HeaderBox\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_CHECKLIST
-      , font_size=9
-      , box_brdr_color='none'
-      , box_fill_color='none'
-      )
-
-    , NumberedTable\
-      ( wdth=self.content_wdth_
+    [ DualLineTable\
+      ( total_wdth=self.content_wdth_
       , header_txt=Strings.GOAL_ACTIONS
-      , prepend_txt='[]'
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=4
       , show_outline=True
       )
 
-    , EntryTable\
-      ( wdth=self.content_wdth_
+    , SingleLineTable\
+      ( total_wdth=self.content_wdth_
       , header_txt=Strings.GOAL_MEASUREMENT
-      , row_count=2
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , row_count=1
       , show_outline=False
       )
 
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_COST
-      , row_count=2
-      , font_color=Colors.NORMAL_TXT
-      , box_brdr_color='none'
-      , box_fill_color='none'
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , header_txt=Strings.GOAL_OBSTACLES
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , row_count=3
       , show_outline=True
       )
 
@@ -123,29 +111,35 @@ class GoalEntry(OnePageHalfLetterLayout):
       , show_outline=True
       )
 
-    , NumberedTable\
-      ( wdth=self.content_wdth_
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
       , header_txt=Strings.GOAL_LIFE_IMPROVEMENT
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=2
       , show_outline=False
       )
-    ]
+
+   ]
 
     # Calculate remaining height to evenly distribute spanning tables
     fill_hght: int =\
       self.calc_remaining_hght_per_element(2)
 
     self.entries_ = self.entries_ +\
-    [ PromptTable\
-      ( wdth=self.content_wdth_
-      , hght=fill_hght
+    [ SingleLineTable\
+      ( total_wdth=self.content_wdth_
+      , total_hght=fill_hght
       , header_txt=Strings.GOAL_PLAN
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , show_outline=True
       )
 
-    , PromptTable\
-      ( wdth=self.content_wdth_
-      , hght=fill_hght
+    , SingleLineTable\
+      ( total_wdth=self.content_wdth_
+      , total_hght=fill_hght
       , header_txt=Strings.GOAL_REWARD
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , show_outline=True
       )
     ]
 

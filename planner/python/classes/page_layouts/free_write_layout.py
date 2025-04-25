@@ -42,12 +42,17 @@ class FreeWriteLayout(TwoPageHalfLetterSize):
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
   , file_path: str = Strings.DEF_LAYOUT_PATH
-  , header_txt: str = Strings.DEF_PAGE_HEADER
-  , prompt: str = 'test'
+  , header_txt_0: str = ''
+  , prompt_0: str = ''
+  , header_txt_1: str = ''
+  , prompt_1: str = ''
   ):
 
-    self.header_txt_: str = header_txt
-    self.prompt_: str = prompt
+    self.header_txt_0_: str = header_txt_0
+    self.prompt_0_: str = prompt_0
+
+    self.header_txt_1_: str = header_txt_1
+    self.prompt_1_: str = prompt_1
 
     super().__init__\
       ( is_portrait=is_portrait
@@ -65,17 +70,29 @@ class FreeWriteLayout(TwoPageHalfLetterSize):
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
-      , header_txt=self.header_txt_
-      , prompt=self.prompt_
+      , header_txt=self.header_txt_0_
+      , prompt=self.prompt_0_
       )
 
-    self.content_1_ =\
-      FreeWriteEntry\
-      ( total_hght=self.content_hght_
-      , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
-      , page_header_txt=self.header_txt_
-      )
+    if (not self.header_txt_1_):
+      self.content_1_ =\
+        FreeWriteEntry\
+        ( total_hght=self.content_hght_
+        , total_wdth=self.content_wdth_
+        , padding=Dims.BRD_MARGIN_PX
+        , page_header_txt=self.header_txt_0_
+        )
+
+    else:
+      self.content_1_ =\
+        FreeWritePromptEntry\
+        ( total_hght=self.content_hght_
+        , total_wdth=self.content_wdth_
+        , padding=Dims.BRD_MARGIN_PX
+        , header_txt=self.header_txt_1_
+        , prompt=self.prompt_1_
+        )
+
 
     return
 

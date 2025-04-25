@@ -103,14 +103,15 @@ class DualLineTable(svgwrite.container.Group):
     self.total_hght_: int=\
       self.header_.total_hght_ + self.line_rows_.total_hght_
 
+    self.add(VerticalStack([self.header_, self.line_rows_]))
+
     if (show_outline):
       Utils.add_outline\
       ( container=self
       , hght=self.total_hght_
       , wdth=self.total_wdth_
+      , outline_color=Colors.DEBUG0_COLOR
       )
-
-    self.add(VerticalStack([self.header_, self.line_rows_]))
 
     return
 
@@ -166,7 +167,7 @@ class SingleLineTable(svgwrite.container.Group):
       ( total_wdth=self.total_wdth_
       , total_hght=line_row_hght
       , row_count=row_count
-      , line_color=Colors.DEBUG0_COLOR
+      , line_color=Colors.BORDER_COLOR
       , inner_pad_lft=inner_pad_lft
       , inner_pad_rgt=inner_pad_rgt
       ).svg_group_
@@ -174,14 +175,15 @@ class SingleLineTable(svgwrite.container.Group):
     self.total_hght_: int=\
       self.header_.total_hght_ + self.line_rows_.total_hght_
 
+    self.add(VerticalStack([self.header_, self.line_rows_]))
+
     if (show_outline):
       Utils.add_outline\
       ( container=self
       , hght=self.total_hght_
       , wdth=self.total_wdth_
+      , outline_color=Colors.DEBUG0_COLOR
       )
-
-    self.add(VerticalStack([self.header_, self.line_rows_]))
 
     return
 
@@ -222,8 +224,7 @@ class ColumnTable(svgwrite.container.Group):
 
     columns: list = []
 
-    col_wdths: list = Utils.calc_col_wdths\
-      ( total_wdth=total_wdth
+    col_wdths: list = Utils.calc_col_wdths(total_wdth=total_wdth
       , col_count=len(header_txt_lst)
       , col_wdths=col_wdths
       )

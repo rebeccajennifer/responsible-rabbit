@@ -72,6 +72,9 @@ class PlannerStrings:
   DEF_FUTURE_LAYOUT_PATH: str =\
     'future-layout.svg'
 
+  DEF_FUTURE_YR_LAYOUT_PATH: str =\
+    'future-yr-layout.svg'
+
   DEF_FUTURE_12WK_LAYOUT_PATH: str =\
     'future-12-wk-layout.svg'
 
@@ -160,8 +163,8 @@ class PlannerStrings:
   GOAL_MEASUREMENT: str =\
     'Evaluation Metrics'
 
-  GOAL_COST: str =\
-    'Costs & Challenges'
+  GOAL_OBSTACLES: str =\
+    'Obstacles'
 
   GOAL_LIFE_IMPROVEMENT: str =\
     'Impacts of Success'
@@ -286,6 +289,18 @@ class PlannerStrings:
     'do I admire and want to grow into? What would I do if I had no '
     'fear? What kind of person will I grow into? Start by freewriting '
     'before refining your answer below.'
+  )
+
+  FUTURE_YR_PAGE_HEADER: str =\
+    'A Year of Growth'
+
+  FREE_WRITE_YR: str = (
+    'Imagine your life 12 months from now. Where do you want to be, '
+    'and what do you hope to have accomplished? Be specific and aim '
+    'for goals that excite you, even if they feel slightly out of '
+    'reach. Think about how you want to grow personally, '
+    'professionally, and emotionally. What changes do you want to see '
+    'in your work, your relationships, and your overall well-being? '
   )
 
   FUTURE_12WK_PAGE_HEADER: str =\
