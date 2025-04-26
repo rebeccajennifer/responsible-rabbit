@@ -60,32 +60,48 @@ if __name__ == '__main__':
 
   free_write_prompts: list =\
   [ Strings.FREE_WRITE_FUTURE
+  , Strings.FREE_WRITE_YR
   , Strings.FREE_WRITE_12WK
   , Strings.FREE_WRITE_INACTION
   ]
 
   free_write_page_headers: list =\
   [ Strings.FUTURE_PAGE_HEADER
+  , Strings.FUTURE_YR_PAGE_HEADER
   , Strings.FUTURE_12WK_PAGE_HEADER
   , Strings.INACTION_PAGE_HEADER
   ]
 
   free_write_file_paths: list =\
   [ Strings.DEF_FUTURE_LAYOUT_PATH
+  , Strings.DEF_FUTURE_YR_LAYOUT_PATH
   , Strings.DEF_FUTURE_12WK_LAYOUT_PATH
   , Strings.DEF_INACTION_LAYOUT_PATH
   ]
 
-  for i in range(len(free_write_prompts)):
+  for i in range(len(free_write_prompts)-2):
     free_write_layout =\
       FreeWriteLayout\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
       , file_path=free_write_file_paths[i]
-      , header_txt=free_write_page_headers[i]
-      , prompt=free_write_prompts[i]
+      , header_txt_0=free_write_page_headers[i]
+      , prompt_0=free_write_prompts[i]
       )
     free_write_layout.save()
+
+  free_write_layout =\
+      FreeWriteLayout\
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=free_write_file_paths[2]
+      , header_txt_0=free_write_page_headers[2]
+      , prompt_0=free_write_prompts[2]
+      , header_txt_1=free_write_page_headers[3]
+      , prompt_1=free_write_prompts[3]
+      )
+  free_write_layout.save()
+
 
   test_layout =\
     TestLayout\

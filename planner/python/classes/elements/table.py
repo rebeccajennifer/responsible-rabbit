@@ -245,9 +245,9 @@ class ColumnTable(svgwrite.container.Group):
     self.total_hght_ = columns[0].total_hght_
     self.total_wdth_ = total_wdth
 
+    self.add(HorizontalStack(obj_list=columns))
+
     if (show_outline):
       Utils.add_outline(self, hght=self.total_hght_, wdth=self.total_wdth_)
-
-    self.add(HorizontalStack(obj_list=columns))
 
 

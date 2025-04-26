@@ -37,7 +37,6 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.error_strings import ErrorStrings as Err
 
 from classes.elements.header_box import HeaderBox
-from classes.elements.base_element import BaseElement
 
 from utils.utils import PlannerUtils as Utils
 
