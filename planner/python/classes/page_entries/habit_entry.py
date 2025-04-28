@@ -23,25 +23,24 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for goal. Fills content for one half sheet.
+#   Entry for week. Fills content for one half sheet.
 #_______________________________________________________________________
 
 import svgwrite.container
+from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
-
-from classes.elements.entry_table import NumberedTable
+from classes.elements.base_element import VerticalStack
+from classes.elements.row_group import TextRowGroup
+from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
+from classes.style.std_styles import StdTextBoxStyles
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
-from classes.style.style import PlannerFontStyle as Font
-from classes.style.std_styles import StdTextBoxStyles
-
-
 #_______________________________________________________________________
-class GoalEntry(OnePageHalfLetterLayout):
+class HabitTracker(OnePageHalfLetterLayout):
   """
   Daily entry layout.
   """
@@ -51,96 +50,54 @@ class GoalEntry(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
+  , pad_bet_elements: bool = True
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
     super().__init__\
-      ( total_hght=total_hght
-      , total_wdth=total_wdth
-      , padding=padding
-      )
+    ( total_hght=total_hght
+    , total_wdth=total_wdth
+    , padding=padding
+    , pad_bet_elements=pad_bet_elements
+    )
 
     return
 
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
-    Side Effects:
-      Populates self.entries_ class variable.
-
     Parameters:
       None
+
+    Side Effects:
+      Populates self.entries_ class variable.
 
     Returns:
       None
     """
-
     super().create_content()
 
+    fill_hght: int = self.calc_remaining_hght_per_element(4)
+
+    habit_tracker_table: ColumnTable =\
+      ColumnTable\
+      ( total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , header_txt_lst=Strings.WEEK_HABIT_TRACKER_HEADINGS
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , row_count=6
+      , col_wdths=[-1, 40] + 7 * [25] + [40]
+      , inner_pad_lft=True
+      , inner_pad_rgt=True
+      , show_outline=True
+      )
+
     self.entries_: list =\
-    [ DualLineTable\
-      ( total_wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_ACTIONS
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=4
-      , show_outline=True
-      )
-
-    , SingleLineTable\
-      ( total_wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_MEASUREMENT
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=1
-      , show_outline=False
-      )
-
-    , DualLineTable\
-      ( total_wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_OBSTACLES
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , row_count=3
-      , show_outline=True
-      )
-
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_BENCHMARKS
-      , prepend_txt=Strings.GOAL_MONTHS
-      , row_count=3
-      , show_outline=True
-      )
-
-    , DualLineTable\
-      ( total_wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_LIFE_IMPROVEMENT
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=2
-      , show_outline=False
-      )
-
-   ]
-
-    # Calculate remaining height to evenly distribute spanning tables
-    fill_hght: int =\
-      self.calc_remaining_hght_per_element(2)
-
-    self.entries_ = self.entries_ +\
-    [ SingleLineTable\
-      ( total_wdth=self.content_wdth_
-      , total_hght=fill_hght
-      , header_txt=Strings.GOAL_PLAN
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , show_outline=True
-      )
-
-    , SingleLineTable\
-      ( total_wdth=self.content_wdth_
-      , total_hght=fill_hght
-      , header_txt=Strings.GOAL_REWARD
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , show_outline=True
-      )
+    [ deepcopy(habit_tracker_table)
+    , deepcopy(habit_tracker_table)
+    , deepcopy(habit_tracker_table)
+    , deepcopy(habit_tracker_table)
     ]
 
     return
@@ -158,6 +115,4 @@ class GoalEntry(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      ( header_txt=Strings.GOAL_PAGE_HEADER
-      , font_size=Font.GOAL_HEADER_SIZE
-      )
+      (header_txt=Strings.HABIT_PAGE_HEADER)

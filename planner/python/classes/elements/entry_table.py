@@ -37,7 +37,6 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.constants.error_strings import ErrorStrings as Err
 
 from classes.elements.header_box import HeaderBox
-from classes.elements.base_element import BaseElement
 
 from utils.utils import PlannerUtils as Utils
 
@@ -182,7 +181,7 @@ class EntryTable(svgwrite.container.Group):
       svgwrite.shapes.Rect\
       ( size=(self.content_wdth_, self.content_hght_)
       , insert=(self.insert_x_, self.insert_y_)
-      , stroke=Colors.DEBUG0_COLOR
+      , stroke=Colors.BORDER_COLOR
       , fill='none'
       )
 

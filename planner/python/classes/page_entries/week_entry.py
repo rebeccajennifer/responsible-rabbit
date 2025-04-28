@@ -28,20 +28,16 @@
 
 import svgwrite.container
 
-from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.style.std_styles import StdTextBoxStyles
-from classes.style.style import PlannerFontStyle as Font
-
 from classes.elements.base_element import VerticalStack
-from classes.elements.entry_group import EntryRow
-from classes.elements.entry_table import EntryTable
 from classes.elements.header_box import HeaderBox
-from classes.elements.rows import TextRowGroup
+from classes.elements.row_group import TextRowGroup
+from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
+from classes.elements.table import SingleLineTable
+from classes.style.std_styles import StdTextBoxStyles
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
-
 
 #_______________________________________________________________________
 class WeekEntry0(OnePageHalfLetterLayout):
@@ -54,6 +50,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
+  , pad_bet_elements: bool = True
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -62,6 +59,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , padding=padding
+    , pad_bet_elements=pad_bet_elements
     )
 
     return
@@ -101,7 +99,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_UNFINISHED_BUSINESS
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=2
+      , row_count=3
       , show_outline=False
       )
 
@@ -114,14 +112,15 @@ class WeekEntry0(OnePageHalfLetterLayout):
             , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
             ).text_row_group_
 
-          , DualLineTable\
+          , SingleLineTable\
             ( total_wdth=self.content_wdth_
             , total_hght=150
             , header_txt=Strings.WEEK_VISUALIZATION_PROMPT
             , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-            , show_outline=True
+            , show_outline=False
             )
           ]
+          , show_outline=True
         )
 
     , DualLineTable\
@@ -131,7 +130,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
       , row_count=2
       , show_outline=False
       )
-    , DualLineTable\
+    , SingleLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LOOKING_FORWARD
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
@@ -144,7 +143,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
     fill_hght: int = self.calc_remaining_hght_per_element()
 
     self.entries_.insert(4,
-      DualLineTable\
+      SingleLineTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
       , header_txt=Strings.WEEK_GRATITUDE
@@ -208,100 +207,77 @@ class WeekEntry1(OnePageHalfLetterLayout):
     """
     super().create_content()
 
-    half_content_width: int = self.content_wdth_ / 2
-
-    goal_row_0: EntryRow = EntryRow()
-    goal_row_1: EntryRow = EntryRow()
-
-    goal_row_0.add_entry\
-    (
-      EntryTable\
-      ( wdth=half_content_width
-      , header_txt='Goal 1'
-      , row_count=3
-      , pad_rgt=True
-      , show_outline=False
-      )
-    )
-
-    goal_row_0.add_entry\
-    (
-      EntryTable\
-      ( wdth=half_content_width
-      , header_txt='Goal 2'
-      , row_count=3
-      , pad_lft=True
-      , show_outline=False
-      )
-    )
-
-    goal_row_1.add_entry\
-    (
-      EntryTable\
-      ( wdth=half_content_width
-      , header_txt='Goal 3'
-      , row_count=3
-      , pad_rgt=True
-      , show_outline=False
-      )
-    )
-
-    goal_row_1.add_entry\
-    (
-      EntryTable\
-      ( wdth=half_content_width
-      , header_txt='Goal 4'
-      , row_count=3
-      , pad_lft=True
-      , show_outline=False
-      )
-    )
-
     self.entries_: list =\
-    [ EntryTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_HABIT_TRACKER_HEADINGS
-      , box_fill_color='none'
-      , font=Font.FONT_FAMILY_NORMAL
-      , col_count=10
-      , col_wdths=[-1, 40] + 7 * [25] + [40]
-      , row_count=6
+    [ ColumnTable\
+      ( total_wdth=self.content_wdth_
+      , TableType=DualLineTable
+      , header_txt_lst=['Goal 1', 'Goal 2']
+      , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_NO_OUTLNE
+      , row_count=3
+      , inner_pad_lft=True
+      , inner_pad_rgt=True
       )
 
-    , goal_row_0
-    , goal_row_1
+    , ColumnTable\
+      ( total_wdth=self.content_wdth_
+      , TableType=DualLineTable
+      , header_txt_lst=['Goal 3', 'Goal 4']
+      , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_NO_OUTLNE
+      , row_count=3
+      , inner_pad_lft=True
+      , inner_pad_rgt=True
+      )
+   ]
 
-    , HeaderBox\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_CHECKLIST
-      , box_brdr_color='none'
-      , box_fill_color='none'
-      , pad_rgt=True
+    fullfillment: VerticalStack =\
+      VerticalStack\
+      (
+        [ TextRowGroup\
+          ( total_wdth=self.content_wdth_
+          , text=Strings.WEEK_FULFILLMENT
+          , style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
+          ).text_row_group_
+
+        ,  ColumnTable\
+          ( total_wdth=self.content_wdth_
+          , total_hght=100
+          , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_0
+          , text_style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
+          , row_count=1
+          , show_outline=True
+          )
+        , ColumnTable\
+          ( total_wdth=self.content_wdth_
+          , total_hght=100
+          , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_1
+          , text_style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
+          , row_count=1
+          , show_outline=True
+          )
+        ]
       )
 
-    , HeaderBox\
-      ( wdth=self.content_wdth_
-      , header_txt=[Strings.WEEK_FULFILLMENT]
-      , font=Font.FONT_FAMILY_HEADER
-      )
-    ]
+    self.entries_.append(fullfillment)
 
     fill_hght: int =\
-      self.calc_remaining_hght_per_element(2)
+      self.calc_remaining_hght_per_element()
 
-    self.entries_ = self.entries_ +\
-    [ EntryTable\
-      ( wdth=self.content_wdth_
-      , hght=fill_hght
-      , header_txt=Strings.WEEK_FULFILLMENT_AREAS_0
+    self.entries_.insert(0,
+      ( ColumnTable\
+        ( total_wdth=self.content_wdth_
+        , header_txt_lst=Strings.WEEK_HABIT_TRACKER_HEADINGS
+        , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+        , total_hght=fill_hght
+        , row_count=6
+        , col_wdths=[-1, 40] + 7 * [25] + [40]
+        , inner_pad_lft=True
+        , inner_pad_rgt=True
+        , show_outline=True
+        )
       )
+    )
 
-    , EntryTable\
-      ( wdth=self.content_wdth_
-      , hght=fill_hght
-      , header_txt=Strings.WEEK_FULFILLMENT_AREAS_1
-      )
-    ]
+
 
     return
 

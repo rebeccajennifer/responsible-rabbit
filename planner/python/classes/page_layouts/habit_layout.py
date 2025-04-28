@@ -29,25 +29,26 @@
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_entries.future_entry import FutureEntry
-from classes.page_entries.day_entry import DayEntry
-from classes.page_entries.free_write_entry import FreeWriteEntry
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
+from classes.page_entries.habit_entry import HabitTracker
+from classes.page_layouts.half_letter_divider import DividerPage
 
 
 #_______________________________________________________________________
-class FutureLayout(TwoPageHalfLetterSize):
+class HabitLayout(DividerPage):
 
   #_____________________________________________________________________
   def  __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_FUTURE_LAYOUT_PATH
+  , file_path: str = 'habit-layout.svg'
+  , divider_pos: int = 0
   ):
     super().__init__\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
       , file_path=file_path
+      , divider_pos=divider_pos
+      , divider_str='Today'
       )
     return
 
@@ -56,18 +57,17 @@ class FutureLayout(TwoPageHalfLetterSize):
     super().create_content()
 
     self.content_0_ =\
-      FutureEntry\
+      HabitTracker\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
       )
 
     self.content_1_ =\
-      FreeWriteEntry\
+      HabitTracker\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
-      , page_header_txt=Strings.FUTURE_PAGE_HEADER
       )
 
     return

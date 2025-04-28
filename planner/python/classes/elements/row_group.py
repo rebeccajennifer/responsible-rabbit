@@ -51,7 +51,7 @@ class RowGroup(svgwrite.container.Group):
   """
 
   def __init__(self
-  , wdth: int = 0
+  , total_wdth: int = 0
   , total_hght: int = 0
   , show_outline: bool = True
   , outline_color: str = Colors.BORDER_COLOR
@@ -79,7 +79,7 @@ class RowGroup(svgwrite.container.Group):
 
     super().__init__()
 
-    self.wdth_          : int  = wdth
+    self.total_wdth_    : int  = total_wdth
     self.inner_pad_top_ : bool = inner_pad_top
     self.inner_pad_bot_ : bool = inner_pad_bot
     self.inner_pad_lft_ : bool = inner_pad_lft
@@ -138,7 +138,7 @@ class RowGroup(svgwrite.container.Group):
       Utils.add_outline\
       ( container=self
       , hght=self.total_hght_
-      , wdth=self.wdth_
+      , wdth=self.total_wdth_
       , outline_color=self.outline_color_
       , backgnd_color=self.backgnd_color_
       )
@@ -147,7 +147,9 @@ class RowGroup(svgwrite.container.Group):
     # Add rows
     #___________________________________________________________________
     insert_x: int = Font.TEXT_PADDING * self.inner_pad_lft_
-    insert_y: int = self.row_hght_ - self.y_offset_ + Font.TEXT_PADDING * self.inner_pad_top_
+    insert_y: int = self.row_hght_\
+      - self.y_offset_\
+      + Font.TEXT_PADDING * self.inner_pad_top_
 
     for obj in self.obj_list_:
       obj['transform'] =\
@@ -171,7 +173,7 @@ class LineRowGroup():
   , row_count: int = 0
   , row_hght: int = Dims.DEF_ROW_HGHT
   , line_wght: int = 1
-  , line_color: str = Colors.BORDER_COLOR
+  , line_color: str = Colors.DEF_ROW_COLOR
   , show_outline: bool = False
   , outline_color: str = Colors.BORDER_COLOR
   , y_offset: int = 0
@@ -242,7 +244,7 @@ class LineRowGroup():
 
     self.svg_group_: RowGroup =\
       RowGroup\
-      ( wdth=self.total_wdth_
+      ( total_wdth=self.total_wdth_
       , total_hght=self.total_hght_
       , show_outline=self.show_outline_
       , outline_color=self.outline_color_
@@ -362,7 +364,7 @@ class TextRowGroup(RowGroup):
 
     self.text_row_group_: RowGroup =\
       RowGroup\
-      ( wdth=total_wdth
+      ( total_wdth=total_wdth
       , total_hght=total_hght
       , show_outline=self.show_outline_
       , outline_color=self.outline_color_
@@ -400,7 +402,7 @@ class DualLineRowGroup(svgwrite.container.Group):
     Parameters:
       total_wdth    : Total width of group
       total_hght    : Total height of group
-      row_count       : Row count of table
+      row_count     : Row count of table
     """
 
     super().__init__()
@@ -435,6 +437,7 @@ class DualLineRowGroup(svgwrite.container.Group):
       ).svg_group_
 
     self.total_hght_ = pri_line.total_hght_
+    self.total_wdth_ = total_wdth
 
     self.add(sec_line)
     self.add(pri_line)

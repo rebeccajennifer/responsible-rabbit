@@ -47,9 +47,12 @@ class PlannerDims:
   BND_MARGIN_PX: int = DPI * BND_MARGIN_IN
   STD_MARGIN_PX: int = DPI * STD_MARGIN_IN
 
-  BRD_MARGIN_PX: int = 8
+  BRD_MARGIN_PX: int = 10
 
   DEF_ROW_HGHT: int = 30
+
+  DIVIDER_LGTH: int = 0.5 * DPI
+  DIVIDER_WDTH: int = 0.25  * DPI
 
   #_____________________________________________________________________
   def to_in_str(dim: int) -> str:

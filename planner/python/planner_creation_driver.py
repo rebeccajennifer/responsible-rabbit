@@ -28,11 +28,15 @@
 
 import argparse
 
-from classes.page_layouts.future_layout import FutureLayout
+from classes.constants.strings import PlannerStrings as Strings
+from classes.page_layouts.free_write_layout import FreeWriteLayout
 from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
-from classes.planner_parser import PlannerCreationParser
+from classes.page_layouts.test_layout import TestLayout
+from classes.page_layouts.habit_layout import HabitLayout
+from classes.page_layouts.half_letter_divider import DividerPage
+from utils.planner_parser import PlannerCreationParser
 
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:
@@ -48,16 +52,65 @@ if __name__ == '__main__':
   args: argparse.Namespace = parser.parse_args()
 
   is_portrait: bool   = False
-  is_dbl_sided: bool  = False
+  is_dbl_sided: bool  = args.dbl_sided
 
   #_____________________________________________________________________
 
-  future_layout =\
-    FutureLayout\
+  #_____________________________________________________________________
+  # Free-write layout generation
+  #_____________________________________________________________________
+
+  free_write_prompts: list =\
+  [ Strings.FREE_WRITE_FUTURE
+  , Strings.FREE_WRITE_YR
+  , Strings.FREE_WRITE_12WK
+  , Strings.FREE_WRITE_INACTION
+  ]
+
+  free_write_page_headers: list =\
+  [ Strings.FUTURE_PAGE_HEADER
+  , Strings.FUTURE_YR_PAGE_HEADER
+  , Strings.FUTURE_12WK_PAGE_HEADER
+  , Strings.INACTION_PAGE_HEADER
+  ]
+
+  free_write_file_paths: list =\
+  [ Strings.DEF_FUTURE_LAYOUT_PATH
+  , Strings.DEF_FUTURE_YR_LAYOUT_PATH
+  , Strings.DEF_FUTURE_12WK_LAYOUT_PATH
+  , Strings.DEF_INACTION_LAYOUT_PATH
+  ]
+
+  for i in range(len(free_write_prompts)-2):
+    free_write_layout =\
+      FreeWriteLayout\
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=free_write_file_paths[i]
+      , header_txt_0=free_write_page_headers[i]
+      , prompt_0=free_write_prompts[i]
+      )
+    free_write_layout.save()
+
+  free_write_layout =\
+      FreeWriteLayout\
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=free_write_file_paths[2]
+      , header_txt_0=free_write_page_headers[2]
+      , prompt_0=free_write_prompts[2]
+      , header_txt_1=free_write_page_headers[3]
+      , prompt_1=free_write_prompts[3]
+      )
+  free_write_layout.save()
+
+
+  test_layout =\
+    TestLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
     )
-  future_layout.save()
+  test_layout.save()
 
   week_layout =\
     WeekLayout\
@@ -80,6 +133,33 @@ if __name__ == '__main__':
     )
   day_layout.save()
 
+  habit_tracker =\
+    HabitLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , divider_pos=0
+    )
+  habit_tracker.save()
+
+  #_____________________________________________________________________
+  # Create dividers
+  #_____________________________________________________________________
+  divider_labels: list =\
+  [ 'Vision'
+  , 'Goals'
+  , 'Calendar'
+  ]
+
+  for i in range(1, 13):
+    divider_labels.append(f'Week {i}')
+
+
+  for i in range(len(divider_labels)):
+    DividerPage\
+    ( is_portrait=is_portrait
+    , divider_pos=i+1
+    , divider_str=divider_labels[i]
+    ).save()
 
   new_line(10)
   print("all done")

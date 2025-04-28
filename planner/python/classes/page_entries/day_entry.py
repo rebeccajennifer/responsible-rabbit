@@ -35,13 +35,10 @@ from classes.style.style import PlannerFontStyle as Font
 from classes.style.std_styles import StdTextBoxStyles
 
 from classes.elements.daily_schedule import DaySchedule as DaySched
-from classes.elements.entry_table import EntryTable
-from classes.elements.entry_table import PromptTable
-from classes.elements.entry_table import NumberedTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
-from classes.elements.table import TextRowGroup
-from classes.elements.header_box import HeaderBox
+from classes.elements.table import ColumnTable
+from classes.elements.row_group import TextRowGroup
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -114,7 +111,7 @@ class DayEntry(OnePageHalfLetterLayout):
     super().create_content()
 
     # Width of daily schedule content group
-    self.schedule_wdth_: int = self.content_wdth_ * 0.25
+    self.schedule_wdth_: int = self.content_wdth_ * 0.30
     self.main_content_wdth_: int =\
       self.content_wdth_ - self.schedule_wdth_ - Dims.BRD_MARGIN_PX
 
@@ -127,20 +124,25 @@ class DayEntry(OnePageHalfLetterLayout):
       )
 
     self.entries_: list =\
-    [
-      DualLineTable
+    [ ColumnTable\
       ( total_wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PRIMARY_EFFORTS[0]
-      , row_count=3
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , header_txt_lst=['Values', '', '']
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , row_count=1
       , show_outline=False
+      , inner_pad_lft=True
+      , inner_pad_rgt=True
+      , TableType=SingleLineTable
       )
 
-    , TextRowGroup
+    , ColumnTable
       ( total_wdth=self.main_content_wdth_
-      , text=Strings.DAY_CHECKLIST_STR
-      , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      ).text_row_group_
+      , header_txt_lst=Strings.DAY_PRIMARY_EFFORTS
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , row_count=3
+      , show_outline=False
+      , TableType=DualLineTable
+      )
 
     , DualLineTable
       ( total_wdth=self.main_content_wdth_
@@ -149,11 +151,11 @@ class DayEntry(OnePageHalfLetterLayout):
       , text_style=StdTextBoxStyles.MED_BACK_NORMAL_FONT
       )
 
-    , DualLineTable
+    , SingleLineTable
       ( total_wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[6]
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , row_count=2
+      , row_count=1
       , show_outline=True
       )
 

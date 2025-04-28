@@ -33,11 +33,18 @@ class PlannerCreationParser:
 
     parser.add_argument( '--dbl_sided'
       , help=ParserStrings.DBL_SIDED_DESC
-      , action='store'
-      , type=bool
+      , action='store_true'
       , required=False
       , default=False
     )
+
+    parser.add_argument( '--out_dir'
+      , help='TODO'
+      , action='store'
+      , required=False
+      , default='./'
+    )
+
 
     return
 

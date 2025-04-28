@@ -35,8 +35,8 @@ import svgwrite.container
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.rows import RowGroup
-from classes.elements.rows import TextRowGroup
+from classes.elements.row_group import RowGroup
+from classes.elements.row_group import TextRowGroup
 from classes.elements.base_element import VerticalStack
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerColors as Colors
@@ -192,6 +192,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
+  , pad_bet_elements: bool = True
   ):
 
     super().__init__()
@@ -200,6 +201,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
     self.total_hght_: int = total_hght
     self.total_wdth_: int = total_wdth
+    self.pad_bet_elements_: bool = pad_bet_elements
 
     self.page_header_insert_pt_x_ : int = padding
     self.page_header_insert_pt_y_ : int = padding
@@ -210,8 +212,10 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       self.create_page_header()
 
     # Content height is affected by generation of page header
-    self.content_hght_: int =\
-      self.total_hght_ - 2 * padding - self.page_header_.total_hght_
+    self.content_hght_: int = self.total_hght_\
+      - 2 * padding\
+      - self.page_header_.total_hght_\
+      - pad_bet_elements * Dims.BRD_MARGIN_PX
 
     self.content_insert_pt_x_ : int = self.page_header_insert_pt_x_
     self.content_insert_pt_y_ : int =\
@@ -233,7 +237,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     return
 
   #_____________________________________________________________________
-  def add_content(self , pad_bet_elements: bool = True) -> None:
+  def add_content(self) -> None:
     """
     Adds content to group.
 
@@ -258,7 +262,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     content: VerticalStack =\
       VerticalStack\
       ( obj_list=self.entries_
-      , add_top_pad=pad_bet_elements
+      , add_top_pad=self.pad_bet_elements_
       )
 
     content['transform'] = f'translate({insert_x}, {insert_y})'
@@ -280,7 +284,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     border_box: svgwrite.shapes.Rect =\
       svgwrite.shapes.Rect(size=(self.total_wdth_, self.total_hght_)
       , insert=(0,0)
-      , stroke=Colors.DEBUG0_COLOR
+      , stroke=Colors.BORDER_COLOR
       , fill='none')
 
     return border_box
@@ -293,7 +297,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   , font_family: str = 0
   , box_fill_color: str = 0
   , box_brdr_color: str = 0
-  ) -> RowGroup:
+  ) -> TextRowGroup:
     """
     Creates page header and saves it to class variable.
 
@@ -321,7 +325,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       style.outline_color_ = box_brdr_color
     #___________________________________________________________________
 
-    page_header: RowGroup =\
+    page_header: TextRowGroup =\
       TextRowGroup\
       ( total_wdth=self.content_wdth_
       , text=header_txt
@@ -345,14 +349,15 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
         for spacing.
     """
 
-    remaining_hght: int = self.content_hght_
+    padding: int = self.pad_bet_elements_ * Dims.BRD_MARGIN_PX
+
+    remaining_hght: int = self.content_hght_\
+      - padding * (elements_remaining - 1)
 
     for entry in self.entries_:
       remaining_hght =\
-        remaining_hght - entry.total_hght_ - Dims.BRD_MARGIN_PX
+        remaining_hght - entry.total_hght_ - padding
 
-    fill_hght: int =\
-        (remaining_hght / elements_remaining)\
-      - (Dims.BRD_MARGIN_PX)
+    fill_hght: int = remaining_hght / elements_remaining\
 
     return fill_hght

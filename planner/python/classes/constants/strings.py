@@ -60,6 +60,9 @@ class PlannerStrings:
   DEF_LAYOUT_PATH: str =\
     'layout.svg'
 
+  DEF_TEST_LAYOUT_PATH: str =\
+    'test-layout.svg'
+
   DEF_DAY_LAYOUT_PATH: str =\
     'day-layout.svg'
 
@@ -68,6 +71,15 @@ class PlannerStrings:
 
   DEF_FUTURE_LAYOUT_PATH: str =\
     'future-layout.svg'
+
+  DEF_FUTURE_YR_LAYOUT_PATH: str =\
+    'future-yr-layout.svg'
+
+  DEF_FUTURE_12WK_LAYOUT_PATH: str =\
+    'future-12-wk-layout.svg'
+
+  DEF_INACTION_LAYOUT_PATH: str =\
+    'inaction-layout.svg'
 
   DEF_WEEK_LAYOUT_PATH: str =\
     'week-layout.svg'
@@ -151,8 +163,8 @@ class PlannerStrings:
   GOAL_MEASUREMENT: str =\
     'Evaluation Metrics'
 
-  GOAL_COST: str =\
-    'Costs & Challenges'
+  GOAL_OBSTACLES: str =\
+    'Obstacles'
 
   GOAL_LIFE_IMPROVEMENT: str =\
     'Impacts of Success'
@@ -188,7 +200,7 @@ class PlannerStrings:
 
 
   WEEK_PAGE_HEADER_1: str =\
-    'Goals for Week: '\
+    'Goals for Week # '\
     + 6 * SPACE\
     + DATE_STR\
     + 3 * SPACE\
@@ -245,6 +257,9 @@ class PlannerStrings:
     , 'Tally'
     ]
 
+  HABIT_PAGE_HEADER: str =\
+    'Habit Tracking'
+
   #_____________________________________________________________________
   # Month layout strings
   #_____________________________________________________________________
@@ -265,9 +280,6 @@ class PlannerStrings:
   #_____________________________________________________________________
 
   FUTURE_PAGE_HEADER: str =\
-    'An Imagined Future'
-
-  FUTURE_PAGE_HEADER : str =\
     'Imagine a Future...'
 
   FREE_WRITE_FUTURE: str = (
@@ -280,4 +292,41 @@ class PlannerStrings:
     'do I admire and want to grow into? What would I do if I had no '
     'fear? What kind of person will I grow into? Start by freewriting '
     'before refining your answer below.'
+  )
+
+  FUTURE_YR_PAGE_HEADER: str =\
+    'A Year of Growth'
+
+  FREE_WRITE_YR: str = (
+    'Imagine your life 12 months from now. Where do you want to be, '
+    'and what do you hope to have accomplished? Be specific and aim '
+    'for goals that excite you, even if they feel slightly out of '
+    'reach. Think about how you want to grow personally, '
+    'professionally, and emotionally. What changes do you want to see '
+    'in your work, your relationships, and your overall well-being? '
+  )
+
+  FUTURE_12WK_PAGE_HEADER: str =\
+    '12 Week Potential'
+
+  FREE_WRITE_12WK: str = (
+    'Imagine how your life will change over the next twelve weeks. '
+    'Aim for progress that feels bold but within your reach. What '
+    'fears will you face head-on? What talents will you grow? What '
+    'knowledge will you seek out? What routines will help—or hold you '
+    'back? Who will you spend time with? How will you relax or have '
+    'fun? What kind of home life do you want? What will change at work '
+    'or with money? How will you evolve as a person? Who are you '
+    'choosing to become?'
+  )
+
+  INACTION_PAGE_HEADER: str =\
+    'The Consequences of Inaction'
+
+  FREE_WRITE_INACTION: str = (
+    'Though it may feel unsettling, envision the genuine consequences '
+    'of not honoring your commitments. Picture the most serious yet '
+    'believable outcome. What does that scenario look like? Who do you '
+    'become, and how are your health, finances, and relationships '
+    'affected?'
   )

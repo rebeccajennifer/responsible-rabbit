@@ -28,9 +28,7 @@
 
 import svgwrite.container
 
-from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.rows import DualLineRowGroup
-from classes.elements.rows import LineRowGroup
+from classes.elements.row_group import DualLineRowGroup
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -58,6 +56,7 @@ class FreeWriteEntry(OnePageHalfLetterLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , padding=padding
+    , pad_bet_elements=False
     )
 
     return
@@ -86,13 +85,6 @@ class FreeWriteEntry(OnePageHalfLetterLayout):
 
     return
 
-  #_____________________________________________________________________
-  def add_content(self) -> None:
-    """
-    Calls parent function, setting pad_bet_elements to True.
-    """
-
-    super().add_content(pad_bet_elements=False)
 
   #_____________________________________________________________________
   def create_page_header(self) -> svgwrite.container.Group:
