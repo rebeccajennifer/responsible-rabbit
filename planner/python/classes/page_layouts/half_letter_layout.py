@@ -309,7 +309,6 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     """
 
     style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER)
-    style.line_spc_=1
 
     #___________________________________________________________________
     # Modify header style

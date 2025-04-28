@@ -60,7 +60,6 @@ if __name__ == '__main__':
   # Free-write layout generation
   #_____________________________________________________________________
 
-  '''
   free_write_prompts: list =\
   [ Strings.FREE_WRITE_FUTURE
   , Strings.FREE_WRITE_YR
@@ -133,7 +132,6 @@ if __name__ == '__main__':
     , is_dbl_sided=is_dbl_sided
     )
   day_layout.save()
-  '''
 
   habit_tracker =\
     HabitLayout\

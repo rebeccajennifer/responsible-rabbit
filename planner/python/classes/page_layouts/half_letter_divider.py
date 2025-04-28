@@ -62,7 +62,8 @@ class DividerPage(svgwrite.Drawing):
   ):
 
     if (not file_path):
-      self.file_path_     : str   = 'divider_' + divider_str.lower() + '.svg'
+      self.file_path_     : str   =\
+        'divider-' + divider_str.lower().replace(' ', '-') + '.svg'
 
     else:
       self.file_path_ = file_path
@@ -172,9 +173,7 @@ class DividerPage(svgwrite.Drawing):
       , stroke_dasharray='2,6'
       )
 
-
     #___________________________________________________________________
-
     self.content_0_: OnePageHalfLetterLayout =\
       OnePageHalfLetterLayout\
       ( total_wdth=self.content_wdth_
