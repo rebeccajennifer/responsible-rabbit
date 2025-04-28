@@ -51,6 +51,9 @@ class PlannerDims:
 
   DEF_ROW_HGHT: int = 30
 
+  DIVIDER_LGTH: int = 0.5 * DPI
+  DIVIDER_WDTH: int = 0.25  * DPI
+
   #_____________________________________________________________________
   def to_in_str(dim: int) -> str:
     """

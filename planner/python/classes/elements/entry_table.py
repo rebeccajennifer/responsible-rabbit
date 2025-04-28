@@ -181,7 +181,7 @@ class EntryTable(svgwrite.container.Group):
       svgwrite.shapes.Rect\
       ( size=(self.content_wdth_, self.content_hght_)
       , insert=(self.insert_x_, self.insert_y_)
-      , stroke=Colors.DEBUG0_COLOR
+      , stroke=Colors.BORDER_COLOR
       , fill='none'
       )
 

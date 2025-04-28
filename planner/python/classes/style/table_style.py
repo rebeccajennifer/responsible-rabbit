@@ -17,7 +17,7 @@ class LineRowGroupStyle:
   , total_hght: int = 0
   , row_hght: int = Dims.DEF_ROW_HGHT
   , line_wght: int = 1
-  , line_color: str = Colors.BORDER_COLOR
+  , line_color: str = Colors.DEF_ROW_COLOR
   , show_outline: bool = False
   , outline_color: str = Colors.BORDER_COLOR
   , y_offset: int = 0

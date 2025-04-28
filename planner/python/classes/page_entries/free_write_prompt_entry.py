@@ -29,8 +29,8 @@
 import svgwrite.container
 
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.rows import TextRowGroup
-from classes.elements.rows import DualLineRowGroup
+from classes.elements.row_group import TextRowGroup
+from classes.elements.row_group import DualLineRowGroup
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerFontStyle as Font
 

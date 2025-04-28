@@ -23,91 +23,55 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for future vision. Fills content for one half sheet.
+#   Layout for week . Populated with entry group for week.
 #_______________________________________________________________________
 
-import svgwrite.container
+from classes.constants.dims import PlannerDims as Dims
+from classes.constants.strings import PlannerStrings as Strings
 
-from classes.elements.row_group import DualLineRowGroup
-from classes.elements.row_group import LineRowGroup
-
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_entries.habit_entry import HabitTracker
+from classes.page_layouts.half_letter_divider import DividerPage
 
 
 #_______________________________________________________________________
-class BlankWrite(OnePageHalfLetterLayout):
-  """
-  Free write layout.
-  """
+class HabitLayout(DividerPage):
 
   #_____________________________________________________________________
-  def __init__(self
-  , total_hght: int = 0
-  , total_wdth: int = 0
-  , padding: int = 0
-  , header_txt: str = ''
+  def  __init__(self
+  , is_portrait: bool = False
+  , is_dbl_sided: bool = False
+  , file_path: str = 'habit-layout.svg'
+  , divider_pos: int = 0
   ):
-    """
-    Constructor for class. Assumes landscape orientation.
-    """
-
-    self.header_txt_: str      = header_txt
-
     super().__init__\
-    ( total_hght=total_hght
-    , total_wdth=total_wdth
-    , padding=padding
-    , pad_bet_elements=False
-    )
-
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=file_path
+      , divider_pos=divider_pos
+      , divider_str='Today'
+      )
     return
 
   #_____________________________________________________________________
-  def create_content(self) -> None:
-    """
-    Parameters:
-      None
-
-    Side Effects:
-      Populates self.entries_ class variable.
-
-    Returns:
-      None
-    """
+  def create_content(self):
     super().create_content()
 
-    self.entries_: list =\
-      [ DualLineRowGroup\
-        ( total_wdth=self.content_wdth_
-        , total_hght=self.content_hght_
-        , row_count=30
-        )
-      ]
+    self.content_0_ =\
+      HabitTracker\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      )
+
+    self.content_1_ =\
+      HabitTracker\
+      ( total_hght=self.content_hght_
+      , total_wdth=self.content_wdth_
+      , padding=Dims.BRD_MARGIN_PX
+      )
 
     return
 
   #_____________________________________________________________________
-  def add_content(self) -> None:
-    """
-    Calls parent function, setting pad_bet_elements to True.
-    """
-
+  def add_content(self):
     super().add_content()
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    page_header = super().create_page_header\
-      ( header_txt=self.header_txt_
-      )
-
-    return page_header

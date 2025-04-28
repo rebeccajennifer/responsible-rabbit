@@ -23,30 +23,24 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for testing. Will not be used in final product.
+#   Entry for week. Fills content for one half sheet.
 #_______________________________________________________________________
 
 import svgwrite.container
-
 from copy import deepcopy
 
-from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.style.std_styles import StdTextBoxStyles
-from classes.style.style import PlannerFontStyle as Font
-
 from classes.elements.base_element import VerticalStack
-from classes.elements.base_element import HorizontalStack
 from classes.elements.row_group import TextRowGroup
+from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
-from classes.elements.table import ColumnTable
+from classes.style.std_styles import StdTextBoxStyles
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
-
 #_______________________________________________________________________
-class TestEntry(OnePageHalfLetterLayout):
+class HabitTracker(OnePageHalfLetterLayout):
   """
   Daily entry layout.
   """
@@ -56,6 +50,7 @@ class TestEntry(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
+  , pad_bet_elements: bool = True
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -64,7 +59,7 @@ class TestEntry(OnePageHalfLetterLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , padding=padding
-    , pad_bet_elements=True
+    , pad_bet_elements=pad_bet_elements
     )
 
     return
@@ -83,51 +78,27 @@ class TestEntry(OnePageHalfLetterLayout):
     """
     super().create_content()
 
-    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
-    style.line_spc_=1
+    fill_hght: int = self.calc_remaining_hght_per_element(4)
 
-    fill_hght: int = self.calc_remaining_hght_per_element(1)
-    fill_hght: int = self.calc_remaining_hght_per_element(2)
-    fill_hght: int = self.calc_remaining_hght_per_element(3)
-
-    test0=ColumnTable\
-          ( total_wdth=self.content_wdth_
-          , total_hght=fill_hght
-          , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_0
-          , text_style=style
-          , row_count=2
-          , show_outline=True
-          )
-
-    test1= deepcopy(test0)
-    test2= deepcopy(test0)
-
-    obj_list=[test0]
-    obj_list=[test0, test1]
-    obj_list=[test0, test1, test2]
-
-    x: VerticalStack =\
-      VerticalStack\
-      ( add_top_pad=False
-      , obj_list=obj_list
+    habit_tracker_table: ColumnTable =\
+      ColumnTable\
+      ( total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , header_txt_lst=Strings.WEEK_HABIT_TRACKER_HEADINGS
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , row_count=6
+      , col_wdths=[-1, 40] + 7 * [25] + [40]
+      , inner_pad_lft=True
+      , inner_pad_rgt=True
+      , show_outline=True
       )
 
-    #fill_hght: int = self.calc_remaining_hght_per_element(1)
-    #test1=ColumnTable\
-    #      ( total_wdth=self.content_wdth_
-    #      , total_hght=fill_hght
-    #      , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_0
-    #      , text_style=style
-    #      , row_count=2
-    #      , show_outline=True
-    #      )
-
-
-
-    self.entries_.append(x)
-    #self.entries_.append(test0)
-    #self.entries_.append(test1)
-    #self.entries_.append(test2)
+    self.entries_: list =\
+    [ deepcopy(habit_tracker_table)
+    , deepcopy(habit_tracker_table)
+    , deepcopy(habit_tracker_table)
+    , deepcopy(habit_tracker_table)
+    ]
 
     return
 
@@ -144,4 +115,4 @@ class TestEntry(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.DEF_PAGE_HEADER)
+      (header_txt=Strings.HABIT_PAGE_HEADER)

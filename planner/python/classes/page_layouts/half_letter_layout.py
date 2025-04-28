@@ -35,8 +35,8 @@ import svgwrite.container
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.rows import RowGroup
-from classes.elements.rows import TextRowGroup
+from classes.elements.row_group import RowGroup
+from classes.elements.row_group import TextRowGroup
 from classes.elements.base_element import VerticalStack
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerColors as Colors
@@ -284,7 +284,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     border_box: svgwrite.shapes.Rect =\
       svgwrite.shapes.Rect(size=(self.total_wdth_, self.total_hght_)
       , insert=(0,0)
-      , stroke=Colors.DEBUG0_COLOR
+      , stroke=Colors.BORDER_COLOR
       , fill='none')
 
     return border_box

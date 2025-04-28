@@ -57,8 +57,8 @@ class PlannerColors:
   DEF_TBLE_HEADER_FILL  : str = MEDIUM_GREY
   DEF_TBLE_HEADER_TEXT  : str = WHITE
 
-  BORDER_COLOR          : str = MEDIUM_GREY
-  DEF_ROW_COLOR         : str = LIGHT_GREY
+  BORDER_COLOR          : str = CYAN
+  DEF_ROW_COLOR         : str = MEDIUM_GREY
 
   DEBUG0_COLOR          : str = CYAN
   DEBUG1_COLOR          : str = VIOLET

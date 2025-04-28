@@ -29,6 +29,8 @@
 import svgwrite.container
 
 from classes.constants.dims import PlannerDims as Dims
+from classes.style.style import PlannerColors as Colors
+from utils.utils import PlannerUtils as Utils
 
 
 #_______________________________________________________________________
@@ -37,6 +39,8 @@ class VerticalStack(svgwrite.container.Group):
   def __init__(self
   , obj_list: list = []
   , add_top_pad: bool = False
+  , show_outline: bool = False
+  , outline_color: bool = Colors.BORDER_COLOR
   ) -> svgwrite.container.Group:
     """
     Creates a new svgwrite container with all objects stacked
@@ -57,6 +61,7 @@ class VerticalStack(svgwrite.container.Group):
     insert_x: int = 0
     insert_y: int = padding
     self.total_hght_: int = 0
+    self.total_wdth_: int = 0
 
 
     for i in range(len(obj_list)):
@@ -70,9 +75,20 @@ class VerticalStack(svgwrite.container.Group):
 
       self.total_hght_ += obj_list[i].total_hght_
 
+      if (self.total_wdth_ < obj_list[i].total_wdth_):
+        self.total_wdth_ = obj_list[i].total_wdth_
+
       self.add(obj_list[i])
 
     self.total_hght_ += padding * (len(obj_list))
+
+    if (show_outline):
+      Utils.add_outline\
+      ( container=self
+      , hght=self.total_hght_
+      , wdth=self.total_wdth_
+      , outline_color=outline_color
+      )
 
     return
 

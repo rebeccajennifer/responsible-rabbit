@@ -34,6 +34,8 @@ from classes.page_layouts.day_layout import OneDayLayout
 from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
 from classes.page_layouts.test_layout import TestLayout
+from classes.page_layouts.habit_layout import HabitLayout
+from classes.page_layouts.half_letter_divider import DividerPage
 from utils.planner_parser import PlannerCreationParser
 
 #_______________________________________________________________________
@@ -58,6 +60,7 @@ if __name__ == '__main__':
   # Free-write layout generation
   #_____________________________________________________________________
 
+  '''
   free_write_prompts: list =\
   [ Strings.FREE_WRITE_FUTURE
   , Strings.FREE_WRITE_YR
@@ -130,7 +133,35 @@ if __name__ == '__main__':
     , is_dbl_sided=is_dbl_sided
     )
   day_layout.save()
+  '''
 
+  habit_tracker =\
+    HabitLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , divider_pos=0
+    )
+  habit_tracker.save()
+
+  #_____________________________________________________________________
+  # Create dividers
+  #_____________________________________________________________________
+  divider_labels: list =\
+  [ 'Vision'
+  , 'Goals'
+  , 'Calendar'
+  ]
+
+  for i in range(1, 13):
+    divider_labels.append(f'Week {i}')
+
+
+  for i in range(len(divider_labels)):
+    DividerPage\
+    ( is_portrait=is_portrait
+    , divider_pos=i+1
+    , divider_str=divider_labels[i]
+    ).save()
 
   new_line(10)
   print("all done")

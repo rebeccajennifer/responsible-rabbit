@@ -28,7 +28,7 @@
 
 import svgwrite.container
 
-from classes.elements.rows import DualLineRowGroup
+from classes.elements.row_group import DualLineRowGroup
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 

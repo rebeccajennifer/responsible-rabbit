@@ -38,7 +38,7 @@ from classes.elements.daily_schedule import DaySchedule as DaySched
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 from classes.elements.table import ColumnTable
-from classes.elements.rows import TextRowGroup
+from classes.elements.row_group import TextRowGroup
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 

@@ -31,9 +31,9 @@ import svgwrite.container
 
 from classes.elements.base_element import HorizontalStack
 from classes.elements.base_element import VerticalStack
-from classes.elements.rows import DualLineRowGroup
-from classes.elements.rows import LineRowGroup
-from classes.elements.rows import TextRowGroup
+from classes.elements.row_group import DualLineRowGroup
+from classes.elements.row_group import LineRowGroup
+from classes.elements.row_group import TextRowGroup
 from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
 from classes.style.style import PlannerColors as Colors
@@ -110,7 +110,7 @@ class DualLineTable(svgwrite.container.Group):
       ( container=self
       , hght=self.total_hght_
       , wdth=self.total_wdth_
-      , outline_color=Colors.DEBUG0_COLOR
+      , outline_color=Colors.BORDER_COLOR
       )
 
     return
@@ -167,7 +167,7 @@ class SingleLineTable(svgwrite.container.Group):
       ( total_wdth=self.total_wdth_
       , total_hght=line_row_hght
       , row_count=row_count
-      , line_color=Colors.BORDER_COLOR
+      , line_color=Colors.DEF_ROW_COLOR
       , inner_pad_lft=inner_pad_lft
       , inner_pad_rgt=inner_pad_rgt
       ).svg_group_
@@ -182,7 +182,7 @@ class SingleLineTable(svgwrite.container.Group):
       ( container=self
       , hght=self.total_hght_
       , wdth=self.total_wdth_
-      , outline_color=Colors.DEBUG0_COLOR
+      , outline_color=Colors.BORDER_COLOR
       )
 
     return
