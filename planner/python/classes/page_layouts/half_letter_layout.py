@@ -330,7 +330,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       ( total_wdth=self.content_wdth_
       , text=header_txt
       , style=style
-      ).text_row_group_
+      )
 
     return page_header
 

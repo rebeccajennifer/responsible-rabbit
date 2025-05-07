@@ -82,7 +82,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
       ( total_wdth=self.content_wdth_
       , text=Strings.WEEK_MOMENTUM
       , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
-      ).text_row_group_
+      )
 
     , DualLineTable\
       ( total_wdth=self.content_wdth_
@@ -115,7 +115,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
             ( total_wdth=self.content_wdth_
             , text=Strings.WEEK_VISUALIZATION_HEADER
             , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
-            ).text_row_group_
+            )
 
           , SingleLineTable\
             ( total_wdth=self.content_wdth_
@@ -241,7 +241,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
           ( total_wdth=self.content_wdth_
           , text=Strings.WEEK_FULFILLMENT
           , style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
-          ).text_row_group_
+          )
 
         ,  ColumnTable\
           ( total_wdth=self.content_wdth_

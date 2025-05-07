@@ -160,7 +160,7 @@ class RowGroup(svgwrite.container.Group):
 
 
 #_______________________________________________________________________
-class LineRowGroup():
+class LineRowGroup(RowGroup):
   """
   Organizes a set of line elements into evenly spaced horizontal rows.
   Ideal for creating multi-line visual groupings.
@@ -242,8 +242,8 @@ class LineRowGroup():
     line_array: list =\
       [deepcopy(line) for _ in range(self.row_count_)]
 
-    self.svg_group_: RowGroup =\
-      RowGroup\
+    return\
+      super().__init__\
       ( total_wdth=self.total_wdth_
       , total_hght=self.total_hght_
       , show_outline=self.show_outline_
@@ -255,8 +255,6 @@ class LineRowGroup():
       , inner_pad_rgt=self.inner_pad_rgt_
       , obj_list=line_array
       )
-
-    return
 
 #_______________________________________________________________________
 class TextRowGroup(RowGroup):
@@ -363,8 +361,8 @@ class TextRowGroup(RowGroup):
 
       text_array[i] = svg_text
 
-    self.text_row_group_: RowGroup =\
-      RowGroup\
+    return\
+      super().__init__\
       ( total_wdth=total_wdth
       , total_hght=total_hght
       , show_outline=self.show_outline_
@@ -378,8 +376,6 @@ class TextRowGroup(RowGroup):
       , inner_pad_rgt=self.inner_pad_rgt_
       , obj_list=text_array
       )
-
-    return
 
 
 #_______________________________________________________________________
@@ -423,7 +419,7 @@ class DualLineRowGroup(svgwrite.container.Group):
       , total_hght=total_hght
       , row_count=row_count
       , style=self.sec_line_style_
-      ).svg_group_
+      )
 
     self.pri_line_style_: LineRowGroupStyle =\
       deepcopy(pri_line_style)
@@ -439,7 +435,7 @@ class DualLineRowGroup(svgwrite.container.Group):
       , row_count=row_count
       , style=self.pri_line_style_
       , show_outline=False
-      ).svg_group_
+      )
 
     self.total_hght_ = pri_line.total_hght_
     self.total_wdth_ = total_wdth

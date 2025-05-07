@@ -84,7 +84,7 @@ class DualLineTable(svgwrite.container.Group):
       ( text=header_txt
       , total_wdth=total_wdth
       , style=text_style
-      ).text_row_group_
+      )
 
     if (total_hght):
       line_row_hght = total_hght - self.header_.total_hght_
@@ -157,7 +157,7 @@ class SingleLineTable(svgwrite.container.Group):
       ( text=header_txt
       , total_wdth=total_wdth
       , style=text_style
-      ).text_row_group_
+      )
 
     if (total_hght):
       line_row_hght = total_hght - self.header_.total_hght_
@@ -178,7 +178,7 @@ class SingleLineTable(svgwrite.container.Group):
       , line_color=Colors.DEF_ROW_COLOR
       , inner_pad_lft=inner_pad_lft
       , inner_pad_rgt=inner_pad_rgt
-      ).svg_group_
+      )
 
     self.total_hght_: int=\
       self.header_.total_hght_ + self.line_rows_.total_hght_
