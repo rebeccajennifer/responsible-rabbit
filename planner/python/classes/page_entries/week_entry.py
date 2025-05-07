@@ -30,7 +30,6 @@ import svgwrite.container
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.base_element import VerticalStack
-from classes.elements.header_box import HeaderBox
 from classes.elements.row_group import TextRowGroup
 from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
@@ -79,7 +78,13 @@ class WeekEntry0(OnePageHalfLetterLayout):
     super().create_content()
 
     self.entries_: list =\
-    [ DualLineTable\
+    [ TextRowGroup\
+      ( total_wdth=self.content_wdth_
+      , text=Strings.WEEK_MOMENTUM
+      , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
+      ).text_row_group_
+
+    , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_ACCOMPLISHMENTS
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
@@ -99,7 +104,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_UNFINISHED_BUSINESS
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=3
+      , row_count=2
       , show_outline=False
       )
 

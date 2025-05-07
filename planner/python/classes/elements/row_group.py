@@ -327,6 +327,7 @@ class TextRowGroup(RowGroup):
       self.font_size_     : int  = font_size
       self.line_spc_      : int  = line_spc
 
+    #self.total_hght_    : int  = total_hght
     self.total_wdth_    : int  = total_wdth
 
     # Error handling for line space
@@ -397,6 +398,10 @@ class DualLineRowGroup(svgwrite.container.Group):
   , row_count: int = 0
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
+  , pri_line_style: LineRowGroupStyle =\
+      StdLineRowGroupStyles.PRI_LINE_FOR_DESCENDER
+  , sec_line_style: LineRowGroupStyle =\
+      StdLineRowGroupStyles.SEC_LINE_FOR_DESCENDER
   ):
     """
     Parameters:
@@ -407,32 +412,32 @@ class DualLineRowGroup(svgwrite.container.Group):
 
     super().__init__()
 
-    sec_line_style: LineRowGroupStyle =\
-      deepcopy(StdLineRowGroupStyles.SEC_LINE_FOR_DESCENDER)
+    self.sec_line_style_: LineRowGroupStyle =\
+      deepcopy(sec_line_style)
 
-    sec_line_style.inner_pad_lft_ = inner_pad_lft
-    sec_line_style.inner_pad_rgt_ = inner_pad_rgt
+    self.sec_line_style_.inner_pad_lft_ = inner_pad_lft
+    self.sec_line_style_.inner_pad_rgt_ = inner_pad_rgt
 
     sec_line = LineRowGroup\
       ( total_wdth=total_wdth
       , total_hght=total_hght
       , row_count=row_count
-      , style=sec_line_style
+      , style=self.sec_line_style_
       ).svg_group_
 
-    pri_line_style: LineRowGroupStyle =\
-      deepcopy(StdLineRowGroupStyles.PRI_LINE_FOR_DESCENDER)
+    self.pri_line_style_: LineRowGroupStyle =\
+      deepcopy(pri_line_style)
 
     # Modify the offset based off the row height
-    pri_line_style.y_offset_ = sec_line.row_hght_/3
-    pri_line_style.inner_pad_lft_ = inner_pad_lft
-    pri_line_style.inner_pad_rgt_ = inner_pad_rgt
+    self.pri_line_style_.y_offset_ = sec_line.row_hght_/3
+    self.pri_line_style_.inner_pad_lft_ = inner_pad_lft
+    self.pri_line_style_.inner_pad_rgt_ = inner_pad_rgt
 
     pri_line = LineRowGroup\
       ( total_wdth=total_wdth
       , total_hght=total_hght
       , row_count=row_count
-      , style=pri_line_style
+      , style=self.pri_line_style_
       , show_outline=False
       ).svg_group_
 

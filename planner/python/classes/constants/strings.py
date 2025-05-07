@@ -188,6 +188,9 @@ class PlannerStrings:
   # Week layout strings
   #_____________________________________________________________________
   WEEK_PAGE_HEADER_0: str =\
+    'Week ____ Reflection'
+
+  WEEK_MOMENTUM: str =\
     'Last week I built momentum:'\
     + SPACE\
     + SPACE + 'disagree'\

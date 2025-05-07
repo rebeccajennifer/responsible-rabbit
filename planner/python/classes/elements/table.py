@@ -37,6 +37,7 @@ from classes.elements.row_group import TextRowGroup
 from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
 from classes.style.style import PlannerColors as Colors
+from classes.style.std_styles import StdLineRowGroupStyles
 
 from utils.utils import PlannerUtils as Utils
 
@@ -56,6 +57,11 @@ class DualLineTable(svgwrite.container.Group):
   , show_outline: bool = False
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
+  , pri_line_style: LineRowGroupStyle =\
+      StdLineRowGroupStyles.PRI_LINE_FOR_DESCENDER
+  , sec_line_style: LineRowGroupStyle =\
+      StdLineRowGroupStyles.SEC_LINE_FOR_DESCENDER
+
   ):
     """
     Parameters:
@@ -98,6 +104,8 @@ class DualLineTable(svgwrite.container.Group):
       , row_count=row_count
       , inner_pad_lft=inner_pad_lft
       , inner_pad_rgt=inner_pad_rgt
+      , pri_line_style=pri_line_style
+      , sec_line_style=sec_line_style
       )
 
     self.total_hght_: int=\
