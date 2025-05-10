@@ -207,4 +207,4 @@ class DayEntry(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_NORMAL)
+      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_HEADER)
