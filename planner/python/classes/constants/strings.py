@@ -188,7 +188,7 @@ class PlannerStrings:
   # Week layout strings
   #_____________________________________________________________________
   WEEK_PAGE_HEADER_0: str =\
-    'Week #' + 6 * SPACE + 'Reflection'
+    'Week #' + 6 * SPACE + 'Reflections and Insights'
 
   WEEK_MOMENTUM: str =\
     'Last week I built momentum:'\
@@ -212,7 +212,7 @@ class PlannerStrings:
     + DATE_STR
 
   WEEK_ACCOMPLISHMENTS: str =\
-    'Notable achievements from last week include:'
+    'Notable achievements from last week:'
 
   WEEK_UNFINISHED_BUSINESS: str =\
     'Unfinished Business'
@@ -232,6 +232,9 @@ class PlannerStrings:
   WEEK_LESSONS_LEARNED: str =\
     'Lessons Learned From Last Week'
 
+  WEEK_THOUGHTS: str =\
+    'Thoughts and Reflections'
+
   WEEK_FULFILLMENT: str =\
     'How can I find the most fulfillment in these areas?'
 
@@ -248,7 +251,7 @@ class PlannerStrings:
     "In the coming week, I’m eager to experience:"
 
   WEEK_HABIT_TRACKER_HEADINGS: list =\
-    [ 'Habit'
+    [ 'Habits' + SPACE + 'Week #'
     , 'Target'
     , 'Mon'
     , 'Tue'
@@ -261,7 +264,7 @@ class PlannerStrings:
     ]
 
   HABIT_PAGE_HEADER: str =\
-    'Habit Tracking'
+    'Habit Tracking' + 3 * SPACE + 'Month #'
 
   #_____________________________________________________________________
   # Month layout strings
