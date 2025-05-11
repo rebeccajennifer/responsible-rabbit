@@ -160,7 +160,7 @@ class RowGroup(svgwrite.container.Group):
 
 
 #_______________________________________________________________________
-class LineRowGroup():
+class LineRowGroup(RowGroup):
   """
   Organizes a set of line elements into evenly spaced horizontal rows.
   Ideal for creating multi-line visual groupings.
@@ -242,8 +242,8 @@ class LineRowGroup():
     line_array: list =\
       [deepcopy(line) for _ in range(self.row_count_)]
 
-    self.svg_group_: RowGroup =\
-      RowGroup\
+    return\
+      super().__init__\
       ( total_wdth=self.total_wdth_
       , total_hght=self.total_hght_
       , show_outline=self.show_outline_
@@ -255,8 +255,6 @@ class LineRowGroup():
       , inner_pad_rgt=self.inner_pad_rgt_
       , obj_list=line_array
       )
-
-    return
 
 #_______________________________________________________________________
 class TextRowGroup(RowGroup):
@@ -327,6 +325,7 @@ class TextRowGroup(RowGroup):
       self.font_size_     : int  = font_size
       self.line_spc_      : int  = line_spc
 
+    #self.total_hght_    : int  = total_hght
     self.total_wdth_    : int  = total_wdth
 
     # Error handling for line space
@@ -362,8 +361,8 @@ class TextRowGroup(RowGroup):
 
       text_array[i] = svg_text
 
-    self.text_row_group_: RowGroup =\
-      RowGroup\
+    return\
+      super().__init__\
       ( total_wdth=total_wdth
       , total_hght=total_hght
       , show_outline=self.show_outline_
@@ -377,8 +376,6 @@ class TextRowGroup(RowGroup):
       , inner_pad_rgt=self.inner_pad_rgt_
       , obj_list=text_array
       )
-
-    return
 
 
 #_______________________________________________________________________
@@ -397,6 +394,10 @@ class DualLineRowGroup(svgwrite.container.Group):
   , row_count: int = 0
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
+  , pri_line_style: LineRowGroupStyle =\
+      StdLineRowGroupStyles.ONE_THIRD_OFFSET
+  , sec_line_style: LineRowGroupStyle =\
+      StdLineRowGroupStyles.DOTTED
   ):
     """
     Parameters:
@@ -407,34 +408,34 @@ class DualLineRowGroup(svgwrite.container.Group):
 
     super().__init__()
 
-    sec_line_style: LineRowGroupStyle =\
-      deepcopy(StdLineRowGroupStyles.SEC_LINE_FOR_DESCENDER)
+    self.sec_line_style_: LineRowGroupStyle =\
+      deepcopy(sec_line_style)
 
-    sec_line_style.inner_pad_lft_ = inner_pad_lft
-    sec_line_style.inner_pad_rgt_ = inner_pad_rgt
+    self.sec_line_style_.inner_pad_lft_ = inner_pad_lft
+    self.sec_line_style_.inner_pad_rgt_ = inner_pad_rgt
 
     sec_line = LineRowGroup\
       ( total_wdth=total_wdth
       , total_hght=total_hght
       , row_count=row_count
-      , style=sec_line_style
-      ).svg_group_
+      , style=self.sec_line_style_
+      )
 
-    pri_line_style: LineRowGroupStyle =\
-      deepcopy(StdLineRowGroupStyles.PRI_LINE_FOR_DESCENDER)
+    self.pri_line_style_: LineRowGroupStyle =\
+      deepcopy(pri_line_style)
 
     # Modify the offset based off the row height
-    pri_line_style.y_offset_ = sec_line.row_hght_/3
-    pri_line_style.inner_pad_lft_ = inner_pad_lft
-    pri_line_style.inner_pad_rgt_ = inner_pad_rgt
+    self.pri_line_style_.y_offset_ = sec_line.row_hght_/3
+    self.pri_line_style_.inner_pad_lft_ = inner_pad_lft
+    self.pri_line_style_.inner_pad_rgt_ = inner_pad_rgt
 
     pri_line = LineRowGroup\
       ( total_wdth=total_wdth
       , total_hght=total_hght
       , row_count=row_count
-      , style=pri_line_style
+      , style=self.pri_line_style_
       , show_outline=False
-      ).svg_group_
+      )
 
     self.total_hght_ = pri_line.total_hght_
     self.total_wdth_ = total_wdth

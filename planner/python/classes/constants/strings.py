@@ -37,13 +37,13 @@ class PlannerStrings:
     '\u2192'
 
   DATE_STR: str =\
-    3 * SPACE\
+    5 * SPACE\
     + '/'\
-    + 3 * SPACE\
+    + 5 * SPACE\
     + '/'\
     + SPACE\
     + '20'\
-    + 2 * SPACE
+    + 5 * SPACE
 
   DEF_TABLE_HEADER: str =\
     'Table Header'
@@ -104,13 +104,13 @@ class PlannerStrings:
   ]
 
   DAYS: str =\
-    'Mon' + SPACE +\
-    'Tue' + SPACE +\
-    'Wed' + SPACE +\
-    'Thu' + SPACE +\
-    'Fri' + SPACE +\
-    'Sat' + SPACE +\
-    'Sun' + SPACE + DATE_STR
+    'Mon' + 2 * SPACE +\
+    'Tue' + 2 * SPACE +\
+    'Wed' + 2 * SPACE +\
+    'Thu' + 2 * SPACE +\
+    'Fri' + 2 * SPACE +\
+    'Sat' + 2 * SPACE +\
+    'Sun' + 2 * SPACE + DATE_STR
 
   DAY_PRIMARY_EFFORTS: list =\
     ['Primary Efforts', 'Alignment']
@@ -188,6 +188,9 @@ class PlannerStrings:
   # Week layout strings
   #_____________________________________________________________________
   WEEK_PAGE_HEADER_0: str =\
+    'Week #' + 6 * SPACE + 'Reflections and Insights'
+
+  WEEK_MOMENTUM: str =\
     'Last week I built momentum:'\
     + SPACE\
     + SPACE + 'disagree'\
@@ -201,15 +204,15 @@ class PlannerStrings:
 
   WEEK_PAGE_HEADER_1: str =\
     'Goals for Week # '\
-    + 6 * SPACE\
+    + 3 * SPACE\
     + DATE_STR\
-    + 3 * SPACE\
+    + 2 * SPACE\
     + RIGHT_ARROW\
-    + 3 * SPACE\
+    + 2 * SPACE\
     + DATE_STR
 
   WEEK_ACCOMPLISHMENTS: str =\
-    'Notable achievements from last week include:'
+    'Notable achievements from last week:'
 
   WEEK_UNFINISHED_BUSINESS: str =\
     'Unfinished Business'
@@ -229,6 +232,9 @@ class PlannerStrings:
   WEEK_LESSONS_LEARNED: str =\
     'Lessons Learned From Last Week'
 
+  WEEK_THOUGHTS: str =\
+    'Thoughts and Reflections'
+
   WEEK_FULFILLMENT: str =\
     'How can I find the most fulfillment in these areas?'
 
@@ -245,7 +251,7 @@ class PlannerStrings:
     "In the coming week, I’m eager to experience:"
 
   WEEK_HABIT_TRACKER_HEADINGS: list =\
-    [ 'Habit'
+    [ 'Habits' + SPACE + 'Week #'
     , 'Target'
     , 'Mon'
     , 'Tue'
@@ -258,7 +264,7 @@ class PlannerStrings:
     ]
 
   HABIT_PAGE_HEADER: str =\
-    'Habit Tracking'
+    'Habit Tracking' + 3 * SPACE + 'Month #'
 
   #_____________________________________________________________________
   # Month layout strings

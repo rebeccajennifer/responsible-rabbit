@@ -27,18 +27,17 @@
 #_______________________________________________________________________
 
 import svgwrite.container
-import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.style.style import PlannerFontStyle as Font
+from classes.style.std_styles import StdLineRowGroupStyles
 from classes.style.std_styles import StdTextBoxStyles
 
 from classes.elements.daily_schedule import DaySchedule as DaySched
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 from classes.elements.table import ColumnTable
-from classes.elements.row_group import TextRowGroup
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -54,10 +53,14 @@ class DayEntry(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , padding: int = 0
+  , cycling_prompt_idx: int = 6
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
+
+    self.cycling_prompt_idx_: int = cycling_prompt_idx
+
     super().__init__\
       ( total_hght=total_hght
       , total_wdth=total_wdth
@@ -124,15 +127,14 @@ class DayEntry(OnePageHalfLetterLayout):
       )
 
     self.entries_: list =\
-    [ ColumnTable\
+    [ DualLineTable\
       ( total_wdth=self.main_content_wdth_
-      , header_txt_lst=['Values', '', '']
+      , header_txt='Values'
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , row_count=1
+      , row_count=3
       , show_outline=False
       , inner_pad_lft=True
       , inner_pad_rgt=True
-      , TableType=SingleLineTable
       )
 
     , ColumnTable
@@ -151,20 +153,22 @@ class DayEntry(OnePageHalfLetterLayout):
       , text_style=StdTextBoxStyles.MED_BACK_NORMAL_FONT
       )
 
-    , SingleLineTable
+    , DualLineTable
       ( total_wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PROMPTS[6]
+      , header_txt=Strings.DAY_PROMPTS[self.cycling_prompt_idx_]
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=1
       , show_outline=True
+      , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
 
-    , SingleLineTable
+    , DualLineTable
       ( total_wdth=self.main_content_wdth_
       , header_txt=Strings.DAY_PROMPTS[1]
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=1
       , show_outline=True
+      , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
 
     , DualLineTable
@@ -176,20 +180,9 @@ class DayEntry(OnePageHalfLetterLayout):
       )
     ]
 
-    fill_hght: int = self.calc_remaining_hght_per_element(2)
+    fill_hght: int = self.calc_remaining_hght_per_element(1)
 
-    self.entries_.insert(2,
-      SingleLineTable\
-      ( total_wdth=self.main_content_wdth_
-      , total_hght=fill_hght
-      , header_txt=Strings.DAY_FOCUS
-      , row_count=1
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , show_outline=True
-      )
-    )
-
-    self.entries_.insert(4,
+    self.entries_.insert(3,
       SingleLineTable\
       ( total_wdth=self.main_content_wdth_
       , total_hght=fill_hght
@@ -214,4 +207,4 @@ class DayEntry(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_NORMAL)
+      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_HEADER)

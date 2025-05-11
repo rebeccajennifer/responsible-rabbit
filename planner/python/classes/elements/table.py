@@ -37,6 +37,7 @@ from classes.elements.row_group import TextRowGroup
 from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
 from classes.style.style import PlannerColors as Colors
+from classes.style.std_styles import StdLineRowGroupStyles
 
 from utils.utils import PlannerUtils as Utils
 
@@ -56,6 +57,11 @@ class DualLineTable(svgwrite.container.Group):
   , show_outline: bool = False
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
+  , pri_line_style: LineRowGroupStyle =\
+      StdLineRowGroupStyles.ONE_THIRD_OFFSET
+  , sec_line_style: LineRowGroupStyle =\
+      StdLineRowGroupStyles.DOTTED
+
   ):
     """
     Parameters:
@@ -78,7 +84,7 @@ class DualLineTable(svgwrite.container.Group):
       ( text=header_txt
       , total_wdth=total_wdth
       , style=text_style
-      ).text_row_group_
+      )
 
     if (total_hght):
       line_row_hght = total_hght - self.header_.total_hght_
@@ -98,6 +104,8 @@ class DualLineTable(svgwrite.container.Group):
       , row_count=row_count
       , inner_pad_lft=inner_pad_lft
       , inner_pad_rgt=inner_pad_rgt
+      , pri_line_style=pri_line_style
+      , sec_line_style=sec_line_style
       )
 
     self.total_hght_: int=\
@@ -149,7 +157,7 @@ class SingleLineTable(svgwrite.container.Group):
       ( text=header_txt
       , total_wdth=total_wdth
       , style=text_style
-      ).text_row_group_
+      )
 
     if (total_hght):
       line_row_hght = total_hght - self.header_.total_hght_
@@ -170,7 +178,7 @@ class SingleLineTable(svgwrite.container.Group):
       , line_color=Colors.DEF_ROW_COLOR
       , inner_pad_lft=inner_pad_lft
       , inner_pad_rgt=inner_pad_rgt
-      ).svg_group_
+      )
 
     self.total_hght_: int=\
       self.header_.total_hght_ + self.line_rows_.total_hght_

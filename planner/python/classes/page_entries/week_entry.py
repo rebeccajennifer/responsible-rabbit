@@ -30,12 +30,12 @@ import svgwrite.container
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.base_element import VerticalStack
-from classes.elements.header_box import HeaderBox
 from classes.elements.row_group import TextRowGroup
 from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
+from classes.style.std_styles import StdLineRowGroupStyles
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -79,50 +79,32 @@ class WeekEntry0(OnePageHalfLetterLayout):
     super().create_content()
 
     self.entries_: list =\
-    [ DualLineTable\
+    [ TextRowGroup\
+      ( total_wdth=self.content_wdth_
+      , text=Strings.WEEK_MOMENTUM
+      , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      )
+    , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_ACCOMPLISHMENTS
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , show_outline=False
       , row_count=2
       )
-
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_LESSONS_LEARNED
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=3
+      , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_NO_OUTLNE
+      , row_count=2
       , show_outline=True
       )
-
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_UNFINISHED_BUSINESS
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=3
+      , row_count=2
       , show_outline=False
       )
-
-      , VerticalStack\
-        (
-          [
-             TextRowGroup\
-            ( total_wdth=self.content_wdth_
-            , text=Strings.WEEK_VISUALIZATION_HEADER
-            , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
-            ).text_row_group_
-
-          , SingleLineTable\
-            ( total_wdth=self.content_wdth_
-            , total_hght=150
-            , header_txt=Strings.WEEK_VISUALIZATION_PROMPT
-            , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-            , show_outline=False
-            )
-          ]
-          , show_outline=True
-        )
-
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_IMPROVEMENT
@@ -130,26 +112,26 @@ class WeekEntry0(OnePageHalfLetterLayout):
       , row_count=2
       , show_outline=False
       )
-    , SingleLineTable\
+    , DualLineTable\
       ( total_wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_LOOKING_FORWARD
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
-      , row_count=1
+      , header_txt=Strings.WEEK_THOUGHTS
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , row_count=8
       , show_outline=True
       )
-
-    ]
+   ]
 
     fill_hght: int = self.calc_remaining_hght_per_element()
 
     self.entries_.insert(4,
-      SingleLineTable\
+      DualLineTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
       , header_txt=Strings.WEEK_GRATITUDE
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=1
       , show_outline=True
+      , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
     )
 
@@ -227,6 +209,26 @@ class WeekEntry1(OnePageHalfLetterLayout):
       , inner_pad_lft=True
       , inner_pad_rgt=True
       )
+
+    , VerticalStack\
+      (
+        [
+           TextRowGroup\
+          ( total_wdth=self.content_wdth_
+          , text=Strings.WEEK_VISUALIZATION_HEADER
+          , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
+          )
+
+        , SingleLineTable\
+          ( total_wdth=self.content_wdth_
+          , total_hght=150
+          , header_txt=Strings.WEEK_VISUALIZATION_PROMPT
+          , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+          , show_outline=False
+          )
+        ]
+        , show_outline=True
+      )
    ]
 
     fullfillment: VerticalStack =\
@@ -236,7 +238,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
           ( total_wdth=self.content_wdth_
           , text=Strings.WEEK_FULFILLMENT
           , style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
-          ).text_row_group_
+          )
 
         ,  ColumnTable\
           ( total_wdth=self.content_wdth_
@@ -262,22 +264,16 @@ class WeekEntry1(OnePageHalfLetterLayout):
     fill_hght: int =\
       self.calc_remaining_hght_per_element()
 
-    self.entries_.insert(0,
-      ( ColumnTable\
-        ( total_wdth=self.content_wdth_
-        , header_txt_lst=Strings.WEEK_HABIT_TRACKER_HEADINGS
-        , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-        , total_hght=fill_hght
-        , row_count=6
-        , col_wdths=[-1, 40] + 7 * [25] + [40]
-        , inner_pad_lft=True
-        , inner_pad_rgt=True
-        , show_outline=True
-        )
+    self.entries_.insert(4,
+      SingleLineTable\
+      ( total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , header_txt=Strings.WEEK_LOOKING_FORWARD
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
+      , row_count=1
+      , show_outline=True
       )
     )
-
-
 
     return
 

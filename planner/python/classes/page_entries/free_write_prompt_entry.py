@@ -89,7 +89,7 @@ class FreeWritePromptEntry(OnePageHalfLetterLayout):
           ( total_wdth=self.content_wdth_
           , text=self.prompt_
           , font_family=Font.FONT_FAMILY_NORMAL
-          , style=txt_box_test_style).text_row_group_
+          , style=txt_box_test_style)
       ]
 
     fill_hght: int = self.calc_remaining_hght_per_element()

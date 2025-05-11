@@ -41,6 +41,7 @@ from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
 from classes.constants.strings import PlannerStrings as Strings
 
+#_______________________________________________________________________
 class DaySchedule(EntryTable):
   """
   Lists hours in daily schedule.
@@ -89,7 +90,7 @@ class DaySchedule(EntryTable):
       , header_txt=[Strings.DAILY_SCHEDULE_HEADER]
       , font_color=Colors.NORMAL_TXT
       , font_size=Font.NORMAL_SIZE
-      , font=Font.FONT_FAMILY_HEADER
+      , font=Font.FONT_FAMILY_NORMAL
       , box_fill_color='none'
       , box_brdr_color='none'
       , row_count=row_count
