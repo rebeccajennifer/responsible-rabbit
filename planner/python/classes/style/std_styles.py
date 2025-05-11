@@ -132,8 +132,8 @@ class StdTextBoxStyles():
 #_______________________________________________________________________
 class StdLineRowGroupStyles():
 
-  PRI_LINE_FOR_DESCENDER: LineRowGroupStyle =\
+  ONE_THIRD_OFFSET: LineRowGroupStyle =\
     LineRowGroupStyle(y_offset=Dims.DEF_ROW_HGHT/3)
 
-  SEC_LINE_FOR_DESCENDER: LineRowGroupStyle =\
+  DOTTED: LineRowGroupStyle =\
     LineRowGroupStyle(dash_array='1,5')

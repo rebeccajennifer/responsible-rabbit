@@ -35,6 +35,7 @@ from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
+from classes.style.std_styles import StdLineRowGroupStyles
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
@@ -123,13 +124,14 @@ class WeekEntry0(OnePageHalfLetterLayout):
     fill_hght: int = self.calc_remaining_hght_per_element()
 
     self.entries_.insert(4,
-      SingleLineTable\
+      DualLineTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
       , header_txt=Strings.WEEK_GRATITUDE
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=1
       , show_outline=True
+      , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
     )
 
@@ -265,6 +267,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
     self.entries_.insert(4,
       SingleLineTable\
       ( total_wdth=self.content_wdth_
+      , total_hght=fill_hght
       , header_txt=Strings.WEEK_LOOKING_FORWARD
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
       , row_count=1

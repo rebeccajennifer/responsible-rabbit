@@ -159,7 +159,7 @@ class DayEntry(OnePageHalfLetterLayout):
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=1
       , show_outline=True
-      , pri_line_style=StdLineRowGroupStyles.SEC_LINE_FOR_DESCENDER
+      , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
 
     , DualLineTable
@@ -168,7 +168,7 @@ class DayEntry(OnePageHalfLetterLayout):
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=1
       , show_outline=True
-      , pri_line_style=StdLineRowGroupStyles.SEC_LINE_FOR_DESCENDER
+      , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
 
     , DualLineTable

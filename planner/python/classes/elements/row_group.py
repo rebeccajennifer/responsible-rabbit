@@ -395,9 +395,9 @@ class DualLineRowGroup(svgwrite.container.Group):
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , pri_line_style: LineRowGroupStyle =\
-      StdLineRowGroupStyles.PRI_LINE_FOR_DESCENDER
+      StdLineRowGroupStyles.ONE_THIRD_OFFSET
   , sec_line_style: LineRowGroupStyle =\
-      StdLineRowGroupStyles.SEC_LINE_FOR_DESCENDER
+      StdLineRowGroupStyles.DOTTED
   ):
     """
     Parameters:
