@@ -46,7 +46,7 @@ from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________
-class TestEntry(OnePageHalfLetterLayout):
+class TestEntry0(OnePageHalfLetterLayout):
   """
   Daily entry layout.
   """

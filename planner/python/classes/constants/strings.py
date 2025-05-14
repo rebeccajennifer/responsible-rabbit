@@ -84,6 +84,9 @@ class PlannerStrings:
   DEF_WEEK_LAYOUT_PATH: str =\
     'week-layout.svg'
 
+  DEF_HABIT_LAYOUT_PATH: str =\
+    'habit-layout.svg'
+
   #_____________________________________________________________________
   # Day layout strings
   #_____________________________________________________________________
@@ -130,11 +133,13 @@ class PlannerStrings:
   DAY_GRATITUDE: str =\
     'Gratitude'
 
+  DAY_ACHIEVEMENT: str =\
+    'One achievement I take pride in:'
+
   DAY_PROMPTS: str =\
     [ 'How can I embrace discomfort and grow today?'
-    , 'One achievement I take pride in:'
     , 'How can I move towards my ideal self?'
-    , 'What am I avoiding and why?'
+    , 'What am I avoiding?'
     , 'What would make today feel meaningful?'
     , 'What can I let go of to move forward?'
     , 'Where can I invite more ease into my life?'
@@ -204,11 +209,9 @@ class PlannerStrings:
 
   WEEK_PAGE_HEADER_1: str =\
     'Goals for Week # '\
-    + 3 * SPACE\
+    + SPACE\
     + DATE_STR\
-    + 2 * SPACE\
     + RIGHT_ARROW\
-    + 2 * SPACE\
     + DATE_STR
 
   WEEK_ACCOMPLISHMENTS: str =\

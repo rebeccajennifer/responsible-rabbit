@@ -43,7 +43,7 @@
       , "console": "integratedTerminal"
       , "args":
         [ "--out_dir"
-        , "../layouts/page_layouts"
+        , "planner/layouts/planner-layouts/single-sided/svg"
         //, "--dbl_sided"
         ]
       }

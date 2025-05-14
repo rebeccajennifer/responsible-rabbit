@@ -55,11 +55,32 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
   , file_path: str = Strings.DEF_LAYOUT_PATH
+  # TODO refactor type
+  , entry_0_type: type = None
+  , entry_0_args: dict = {}
+  , entry_1_type: type = None
+  , entry_1_args: dict = {}
   ):
 
     self.is_portrait_   : bool  = is_portrait
     self.is_dbl_sided_  : bool  = is_dbl_sided
     self.file_path_     : str   = file_path
+
+    #___________________________________________________________________
+    # entry_type is type of page, e.g. day_entry, week_entry, etc
+    #___________________________________________________________________
+    if (not entry_0_type):
+      self.entry_0_type_: type = OnePageHalfLetterLayout
+    else:
+      self.entry_0_type_: type = entry_0_type
+
+    if (not entry_1_type):
+      self.entry_1_type_: type = OnePageHalfLetterLayout
+    else:
+      self.entry_1_type_: type = entry_1_type
+
+    self.entry_0_args_ = entry_0_args
+    self.entry_1_args_ = entry_1_args
 
     #___________________________________________________________________
     hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
@@ -89,7 +110,7 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
-    Creates page borders, page header,
+    Creates page borders, page header, content.
 
     Parameters:
       None
@@ -98,16 +119,21 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
       None
     """
 
-    self.content_0_: OnePageHalfLetterLayout =\
-      OnePageHalfLetterLayout\
+    EntryType0: type = self.entry_0_type_
+    EntryType1: type = self.entry_1_type_
+
+    self.content_0_ =\
+      EntryType0\
       ( total_wdth=self.content_wdth_
       , total_hght=self.content_hght_
+      , kwargs=self.entry_0_args_
       )
 
-    self.content_1_: OnePageHalfLetterLayout =\
-      OnePageHalfLetterLayout\
+    self.content_1_ =\
+      EntryType1\
       ( total_wdth=self.content_wdth_
       , total_hght=self.content_hght_
+      , kwargs=self.entry_1_args_
       )
 
     return
@@ -193,9 +219,12 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   , total_wdth: int = 0
   , padding: int = 0
   , pad_bet_elements: bool = True
+  , **kwargs
   ):
 
     super().__init__()
+
+    self.extra_args_ = kwargs.items()
 
     self.entries_ = []
 
