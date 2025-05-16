@@ -23,8 +23,10 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for week . Populated with entry group for week.
+#   Layout for habit tracker. Habit tracker is divider.
 #_______________________________________________________________________
+
+from os import path
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
@@ -40,13 +42,18 @@ class HabitLayout(DividerPage):
   def  __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
-  , file_path: str = 'habit-layout.svg'
+  , out_dir: str = ''
+  , file_name: str = Strings.DEF_HABIT_LAYOUT_PATH
   , divider_pos: int = 0
   ):
+
+    file_path: str = path.join(out_dir, file_name)
+
     super().__init__\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
-      , file_path=file_path
+      , file_name=file_name
+      , out_dir=out_dir
       , divider_pos=divider_pos
       , divider_str='Today'
       )

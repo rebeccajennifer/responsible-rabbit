@@ -28,6 +28,8 @@
 
 import svgwrite
 
+from os import path
+
 from typing import Tuple
 
 import svgwrite.container
@@ -56,17 +58,19 @@ class DividerPage(svgwrite.Drawing):
   def __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
+  , out_dir: str = ''
+  , file_name: str = ''
   , file_path: str = ''
   , divider_pos: int = 0
   , divider_str: str = ''
   ):
 
     if (not file_path):
-      self.file_path_     : str   =\
-        'divider-' + divider_str.lower().replace(' ', '-') + '.svg'
+      if (not file_name):
+        file_name: str =\
+          'divider-' + divider_str.lower().replace(' ', '-') + '.svg'
 
-    else:
-      self.file_path_ = file_path
+    self.file_path_ = path.join(out_dir, file_name)
 
     self.is_portrait_   : bool  = is_portrait
     self.is_dbl_sided_  : bool  = is_dbl_sided

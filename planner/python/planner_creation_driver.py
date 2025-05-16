@@ -99,7 +99,7 @@ if __name__ == '__main__':
       FreeWriteLayout\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
-      , file_path=free_write_file_paths[2]
+      , file_path=path.join(args.out_dir, free_write_file_paths[2])
       , header_txt_0=free_write_page_headers[2]
       , prompt_0=free_write_prompts[2]
       , header_txt_1=free_write_page_headers[3]
@@ -153,7 +153,7 @@ if __name__ == '__main__':
     HabitLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
-    , file_path=path.join(args.out_dir, Strings.DEF_HABIT_LAYOUT_PATH)
+    , out_dir=args.out_dir
     , divider_pos=0
     )
   habit_tracker.save()
@@ -176,6 +176,7 @@ if __name__ == '__main__':
     ( is_portrait=is_portrait
     , divider_pos=i+1
     , divider_str=divider_labels[i]
+    , out_dir=args.out_dir
     ).save()
 
   new_line(10)
