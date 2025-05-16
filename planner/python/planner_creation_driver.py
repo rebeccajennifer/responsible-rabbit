@@ -37,6 +37,9 @@ from classes.page_layouts.week_layout import WeekLayout
 from classes.page_layouts.test_layout import TestLayout
 from classes.page_layouts.habit_layout import HabitLayout
 from classes.page_layouts.half_letter_divider import DividerPage
+
+from classes.page_layouts.ace_ref_layout import AceRefLayout
+
 from utils.planner_parser import PlannerCreationParser
 
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
@@ -106,6 +109,15 @@ if __name__ == '__main__':
       , prompt_1=free_write_prompts[3]
       )
   free_write_layout.save()
+
+  ace_ref_layout =\
+    AceRefLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , file_path=path.join(args.out_dir, 'ace-reference.svg')
+    )
+  ace_ref_layout.save()
+
 
   '''
   test_layout0 =\
