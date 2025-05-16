@@ -60,16 +60,23 @@ class OneDayLayout(TwoPageHalfLetterSize):
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
+      , cycling_prompt_idx=2
       )
 
     self.content_1_ =\
-      FreeWriteEntry\
+      DayEntry\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
-      , page_header_txt=Strings.QUOTE0
+      , cycling_prompt_idx=3
       )
-
+#      FreeWriteEntry\
+#      ( total_hght=self.content_hght_
+#      , total_wdth=self.content_wdth_
+#      , padding=Dims.BRD_MARGIN_PX
+#      , page_header_txt=Strings.QUOTE0
+#      )
+#
     return
 
   #_____________________________________________________________________

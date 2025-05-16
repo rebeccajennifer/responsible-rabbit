@@ -27,6 +27,7 @@
 #_______________________________________________________________________
 
 import argparse
+from os import path
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.page_layouts.free_write_layout import FreeWriteLayout
@@ -37,6 +38,8 @@ from classes.page_layouts.test_layout import TestLayout
 from classes.page_layouts.habit_layout import HabitLayout
 from classes.page_layouts.half_letter_divider import DividerPage
 from utils.planner_parser import PlannerCreationParser
+
+from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:
@@ -86,7 +89,7 @@ if __name__ == '__main__':
       FreeWriteLayout\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
-      , file_path=free_write_file_paths[i]
+      , file_path=path.join(args.out_dir, free_write_file_paths[i])
       , header_txt_0=free_write_page_headers[i]
       , prompt_0=free_write_prompts[i]
       )
@@ -96,7 +99,7 @@ if __name__ == '__main__':
       FreeWriteLayout\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
-      , file_path=free_write_file_paths[2]
+      , file_path=path.join(args.out_dir, free_write_file_paths[2])
       , header_txt_0=free_write_page_headers[2]
       , prompt_0=free_write_prompts[2]
       , header_txt_1=free_write_page_headers[3]
@@ -104,11 +107,21 @@ if __name__ == '__main__':
       )
   free_write_layout.save()
 
+  '''
+  test_layout0 =\
+    TwoPageHalfLetterSize\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , file_path='00.svg'
+    )
+  test_layout0.save()
+  '''
 
   test_layout =\
     TestLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
+    , file_path=path.join(args.out_dir, Strings.DEF_TEST_LAYOUT_PATH)
     )
   test_layout.save()
 
@@ -116,6 +129,7 @@ if __name__ == '__main__':
     WeekLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
+    , file_path=path.join(args.out_dir, Strings.DEF_WEEK_LAYOUT_PATH)
     )
   week_layout.save()
 
@@ -123,6 +137,7 @@ if __name__ == '__main__':
     GoalLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
+    , file_path=path.join(args.out_dir, Strings.DEF_GOAL_LAYOUT_PATH)
     )
   goal_layout.save()
 
@@ -130,6 +145,7 @@ if __name__ == '__main__':
     OneDayLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
+    , file_path=path.join(args.out_dir, Strings.DEF_DAY_LAYOUT_PATH)
     )
   day_layout.save()
 
@@ -137,6 +153,7 @@ if __name__ == '__main__':
     HabitLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
+    , out_dir=args.out_dir
     , divider_pos=0
     )
   habit_tracker.save()
@@ -159,6 +176,7 @@ if __name__ == '__main__':
     ( is_portrait=is_portrait
     , divider_pos=i+1
     , divider_str=divider_labels[i]
+    , out_dir=args.out_dir
     ).save()
 
   new_line(10)

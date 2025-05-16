@@ -265,13 +265,14 @@ class WeekEntry1(OnePageHalfLetterLayout):
       self.calc_remaining_hght_per_element()
 
     self.entries_.insert(4,
-      SingleLineTable\
+      DualLineTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
       , header_txt=Strings.WEEK_LOOKING_FORWARD
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
       , row_count=1
       , show_outline=True
+      , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
     )
 

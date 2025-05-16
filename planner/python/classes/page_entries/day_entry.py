@@ -164,7 +164,7 @@ class DayEntry(OnePageHalfLetterLayout):
 
     , DualLineTable
       ( total_wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PROMPTS[1]
+      , header_txt=Strings.DAY_ACHIEVEMENT
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=1
       , show_outline=True
