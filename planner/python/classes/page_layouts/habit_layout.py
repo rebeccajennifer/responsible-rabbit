@@ -42,8 +42,8 @@ class HabitLayout(DividerPage):
   def  __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
-  , out_dir: str = ''
   , file_name: str = Strings.DEF_HABIT_LAYOUT_PATH
+  , out_dir: str = ''
   , divider_pos: int = 0
   ):
 

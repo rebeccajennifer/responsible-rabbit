@@ -120,7 +120,7 @@ class DividerPage(svgwrite.Drawing):
     + self.divider_pos_ * Dims.DIVIDER_LGTH
 
     tab_y_stop: int = tab_y_strt + Dims.DIVIDER_LGTH
-    tab_x_strt: int = self.total_wdth_/2
+    tab_x_strt: int = self.total_wdth_/2 + Dims.DIVIDER_WDTH
     tab_x_stop: int = tab_x_strt + Dims.DIVIDER_WDTH
 
     self.divider_tab_: svgwrite.container.Group =\
