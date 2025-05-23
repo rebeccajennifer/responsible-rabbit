@@ -91,6 +91,7 @@ class HabitTracker(OnePageHalfLetterLayout):
       , inner_pad_lft=True
       , inner_pad_rgt=True
       , show_outline=True
+      , TableType=DualLineTable
       )
 
     self.entries_: list =\
