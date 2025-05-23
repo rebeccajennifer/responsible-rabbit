@@ -171,56 +171,26 @@ class LineRowGroup(RowGroup):
   , total_wdth: int = 0
   , total_hght: int = 0
   , row_count: int = 0
-  , row_hght: int = Dims.DEF_ROW_HGHT
-  , line_wght: int = 1
-  , line_color: str = Colors.DEF_ROW_COLOR
-  , show_outline: bool = False
-  , outline_color: str = Colors.BORDER_COLOR
-  , y_offset: int = 0
-  , inner_pad_top: bool = False
-  , inner_pad_bot: bool = False
-  , inner_pad_lft: bool = False
-  , inner_pad_rgt: bool = False
-  , dash_array: str = '1,0'
-  , style: LineRowGroupStyle = 0
+  , style: LineRowGroupStyle = LineRowGroupStyle()
   ):
     """
     Parameters:
       total_wdth    : Total width of group
       total_hght    : Total height of group
-      line_wght     : Line weight
-      line_color    : Row color
-      show_outline  : Show outline bool
-      outline_color : Outline color
-      y_offset      : Offset positioning of objects
-      inner_pad_lft : Left padding, impacts length and insertion
-      inner_pad_rgt : Right padding, impacts length
-      dash_array    : Dash style in form 'dash length, space length'
+      row_count     : Number of rows
+      style         : Style of rows including color, padding, y offset
     """
 
-    if (style):
-      self.y_offset_      : int   = style.y_offset_
-      self.line_wght_     : str   = style.line_wght_
-      self.line_color_    : str   = style.line_color_
-      self.outline_color_ : str   = style.outline_color_
-      self.show_outline_  : bool  = style.show_outline_
-      self.inner_pad_lft_ : bool  = style.inner_pad_lft_
-      self.inner_pad_rgt_ : bool  = style.inner_pad_rgt_
-      self.inner_pad_top_ : bool  = style.inner_pad_top_
-      self.inner_pad_bot_ : bool  = style.inner_pad_bot_
-      self.dash_array_    : str   = style.dash_array_
-
-    else:
-      self.y_offset_      : int   = y_offset
-      self.line_wght_     : str   = line_wght
-      self.line_color_    : str   = line_color
-      self.show_outline_  : bool  = show_outline
-      self.outline_color_ : bool  = outline_color
-      self.inner_pad_top_ : bool  = inner_pad_top
-      self.inner_pad_bot_ : bool  = inner_pad_bot
-      self.inner_pad_lft_ : bool  = inner_pad_lft
-      self.inner_pad_rgt_ : bool  = inner_pad_rgt
-      self.dash_array_    : str   = dash_array
+    self.y_offset_      : int   = style.y_offset_
+    self.line_wght_     : str   = style.line_wght_
+    self.line_color_    : str   = style.line_color_
+    self.outline_color_ : str   = style.outline_color_
+    self.show_outline_  : bool  = style.show_outline_
+    self.inner_pad_lft_ : bool  = style.inner_pad_lft_
+    self.inner_pad_rgt_ : bool  = style.inner_pad_rgt_
+    self.inner_pad_top_ : bool  = style.inner_pad_top_
+    self.inner_pad_bot_ : bool  = style.inner_pad_bot_
+    self.dash_array_    : str   = style.dash_array_
 
     self.total_wdth_    : int   = total_wdth
     self.total_hght_    : int   = total_hght
@@ -434,7 +404,7 @@ class DualLineRowGroup(svgwrite.container.Group):
       , total_hght=total_hght
       , row_count=row_count
       , style=self.pri_line_style_
-      , show_outline=False
+      #, show_outline=False
       )
 
     self.total_hght_ = pri_line.total_hght_

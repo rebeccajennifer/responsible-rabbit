@@ -170,14 +170,16 @@ class SingleLineTable(svgwrite.container.Group):
       , row_count=row_count
       )
 
+    style: LineRowGroupStyle = LineRowGroupStyle()
+    style.inner_pad_lft_ = inner_pad_lft
+    style.inner_pad_rgt_ = inner_pad_rgt
+
     self.line_rows_: LineRowGroup=\
       LineRowGroup\
       ( total_wdth=self.total_wdth_
       , total_hght=line_row_hght
       , row_count=row_count
-      , line_color=Colors.DEF_ROW_COLOR
-      , inner_pad_lft=inner_pad_lft
-      , inner_pad_rgt=inner_pad_rgt
+      , style=style
       )
 
     self.total_hght_: int=\
