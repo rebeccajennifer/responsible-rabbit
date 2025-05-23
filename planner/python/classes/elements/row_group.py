@@ -371,9 +371,13 @@ class DualLineRowGroup(svgwrite.container.Group):
   ):
     """
     Parameters:
-      total_wdth    : Total width of group
-      total_hght    : Total height of group
-      row_count     : Row count of table
+      total_wdth      : Total width of group
+      total_hght      : Total height of group
+      row_count       : Row count of table
+      inner_pad_lft   : Pad line on left
+      inner_pad_rgt   : Pad line on right
+      pri_line_style  : Line style of primary line
+      sec_line_style  : Line style of secondary line
     """
 
     super().__init__()
@@ -404,7 +408,6 @@ class DualLineRowGroup(svgwrite.container.Group):
       , total_hght=total_hght
       , row_count=row_count
       , style=self.pri_line_style_
-      #, show_outline=False
       )
 
     self.total_hght_ = pri_line.total_hght_
