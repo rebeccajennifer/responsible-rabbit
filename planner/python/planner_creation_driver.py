@@ -122,16 +122,15 @@ if __name__ == '__main__':
     )
   ace_ref_layout.save()
   '''
-
-  test_layout0 =\
+  goal_layout =\
     TwoPageHalfLetterSize\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
-    , file_path='00.svg'
+    , file_path=path.join(args.out_dir, Strings.DEF_GOAL_LAYOUT_PATH)
     , entry_0_type=GoalEntry
+    , entry_1_type=GoalEntry
     )
-  test_layout0.save()
-  '''
+  goal_layout.save()
 
   test_layout =\
     TestLayout\
@@ -149,16 +148,6 @@ if __name__ == '__main__':
     )
   week_layout.save()
 
-  '''
-  goal_layout =\
-    GoalLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , file_path=path.join(args.out_dir, Strings.DEF_GOAL_LAYOUT_PATH)
-    )
-  goal_layout.save()
-  '''
-
   day_layout =\
     OneDayLayout\
     ( is_portrait=is_portrait
@@ -167,6 +156,7 @@ if __name__ == '__main__':
     )
   day_layout.save()
 
+  '''
   habit_tracker =\
     HabitLayout\
     ( is_portrait=is_portrait

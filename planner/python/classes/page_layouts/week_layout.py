@@ -58,14 +58,12 @@ class WeekLayout(TwoPageHalfLetterSize):
       WeekEntry0\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
       )
 
     self.content_1_ =\
       WeekEntry1\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
       )
 
     return

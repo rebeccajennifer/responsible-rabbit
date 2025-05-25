@@ -28,6 +28,7 @@
 
 import svgwrite.container
 
+from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.style.style import PlannerFontStyle as Font
@@ -52,20 +53,20 @@ class DayEntry(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
+  , addl_args: dict = {}
   , cycling_prompt_idx: int = 6
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
 
-    self.cycling_prompt_idx_: int = cycling_prompt_idx
+    self.cycling_prompt_idx_: int =\
+      addl_args[Key.CYCLING_PROMPT_IDX]
 
     super().__init__\
-      ( total_hght=total_hght
-      , total_wdth=total_wdth
-      , padding=padding
-      )
+    ( total_hght=total_hght
+    , total_wdth=total_wdth
+    )
 
     return
 

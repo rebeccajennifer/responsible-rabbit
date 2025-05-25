@@ -55,7 +55,6 @@ class TestEntry0(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
   , addl_args: dict = {}
   ):
     """
@@ -65,7 +64,6 @@ class TestEntry0(OnePageHalfLetterLayout):
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
-    , padding=padding
     , pad_bet_elements=True
     , addl_args=addl_args
     )

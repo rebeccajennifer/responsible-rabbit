@@ -49,8 +49,6 @@ class WeekEntry0(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
-  , pad_bet_elements: bool = True
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -58,8 +56,6 @@ class WeekEntry0(OnePageHalfLetterLayout):
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
-    , padding=padding
-    , pad_bet_elements=pad_bet_elements
     )
 
     return
@@ -162,16 +158,14 @@ class WeekEntry1(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
     super().__init__\
-      ( total_hght=total_hght
-      , total_wdth=total_wdth
-      , padding=padding
-      )
+    ( total_hght=total_hght
+    , total_wdth=total_wdth
+    )
 
     return
 

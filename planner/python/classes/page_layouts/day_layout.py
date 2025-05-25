@@ -26,6 +26,7 @@
 #   Layout for daily entry. Populated with DayEntry.
 #_______________________________________________________________________
 
+from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 
@@ -45,10 +46,10 @@ class OneDayLayout(TwoPageHalfLetterSize):
   , file_path: str = Strings.DEF_DAY_LAYOUT_PATH
   ):
     super().__init__\
-      ( is_portrait=is_portrait
-      , is_dbl_sided=is_dbl_sided
-      , file_path=file_path
-      )
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , file_path=file_path
+    )
     return
 
   #_____________________________________________________________________
@@ -59,16 +60,14 @@ class OneDayLayout(TwoPageHalfLetterSize):
       DayEntry\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
-      , cycling_prompt_idx=2
+      , addl_args={Key.CYCLING_PROMPT_IDX: 2}
       )
 
     self.content_1_ =\
       DayEntry\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
-      , cycling_prompt_idx=3
+      , addl_args={Key.CYCLING_PROMPT_IDX: 3}
       )
 #      FreeWriteEntry\
 #      ( total_hght=self.content_hght_

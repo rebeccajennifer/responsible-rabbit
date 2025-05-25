@@ -43,10 +43,10 @@ class GoalLayout(TwoPageHalfLetterSize):
   , file_path: str = Strings.DEF_GOAL_LAYOUT_PATH
   ):
     super().__init__\
-      ( is_portrait=is_portrait
-      , is_dbl_sided=is_dbl_sided
-      , file_path=file_path
-      )
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , file_path=file_path
+    )
     return
 
   #_____________________________________________________________________
