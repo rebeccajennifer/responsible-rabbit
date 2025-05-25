@@ -156,7 +156,7 @@ if __name__ == '__main__':
   day_layout =\
     OneDayLayout\
     ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
+    , is_dbl_sided=True#is_dbl_sided
     , file_path=path.join(args.out_dir, Strings.DEF_DAY_LAYOUT_PATH)
     )
   day_layout.save()
