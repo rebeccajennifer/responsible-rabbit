@@ -33,7 +33,7 @@ from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.free_write_entry import FreeWriteEntry
 
-from classes.page_entries.test_entry import TestEntry
+from classes.page_entries.test_entry0 import TestEntry0
 from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
 
 
@@ -58,19 +58,18 @@ class TestLayout(TwoPageHalfLetterSize):
     super().create_content()
 
     self.content_0_ =\
-      TestEntry\
+      TestEntry0\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
       )
 
     self.content_1_ =\
-      TestEntry\
+      TestEntry0\
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
       )
-
 
     return
 

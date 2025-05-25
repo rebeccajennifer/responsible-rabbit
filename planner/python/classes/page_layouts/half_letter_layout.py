@@ -55,7 +55,6 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
   , file_path: str = Strings.DEF_LAYOUT_PATH
-  # TODO refactor type
   , entry_0_type: type = None
   , entry_0_args: dict = {}
   , entry_1_type: type = None
@@ -126,14 +125,14 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
       EntryType0\
       ( total_wdth=self.content_wdth_
       , total_hght=self.content_hght_
-      , kwargs=self.entry_0_args_
+      , addl_args=self.entry_0_args_
       )
 
     self.content_1_ =\
       EntryType1\
       ( total_wdth=self.content_wdth_
       , total_hght=self.content_hght_
-      , kwargs=self.entry_1_args_
+      , addl_args=self.entry_1_args_
       )
 
     return
@@ -217,14 +216,14 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
+  , padding: int = Dims.BRD_MARGIN_PX
   , pad_bet_elements: bool = True
-  , **kwargs
+  , addl_args: dict = {}
   ):
 
     super().__init__()
 
-    self.extra_args_ = kwargs.items()
+    self.addl_args_ = addl_args
 
     self.entries_ = []
 

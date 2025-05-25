@@ -38,6 +38,9 @@ from classes.page_layouts.test_layout import TestLayout
 from classes.page_layouts.habit_layout import HabitLayout
 from classes.page_layouts.half_letter_divider import DividerPage
 
+from classes.page_entries.test_entry0 import TestEntry0
+from classes.page_entries.goal_entry import GoalEntry
+
 from classes.page_layouts.ace_ref_layout import AceRefLayout
 
 from utils.planner_parser import PlannerCreationParser
@@ -66,6 +69,7 @@ if __name__ == '__main__':
   # Free-write layout generation
   #_____________________________________________________________________
 
+  '''
   free_write_prompts: list =\
   [ Strings.FREE_WRITE_FUTURE
   , Strings.FREE_WRITE_YR
@@ -117,14 +121,14 @@ if __name__ == '__main__':
     , file_path=path.join(args.out_dir, 'ace-reference.svg')
     )
   ace_ref_layout.save()
-
-
   '''
+
   test_layout0 =\
     TwoPageHalfLetterSize\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
     , file_path='00.svg'
+    , entry_0_type=GoalEntry
     )
   test_layout0.save()
   '''
@@ -145,6 +149,7 @@ if __name__ == '__main__':
     )
   week_layout.save()
 
+  '''
   goal_layout =\
     GoalLayout\
     ( is_portrait=is_portrait
@@ -152,6 +157,7 @@ if __name__ == '__main__':
     , file_path=path.join(args.out_dir, Strings.DEF_GOAL_LAYOUT_PATH)
     )
   goal_layout.save()
+  '''
 
   day_layout =\
     OneDayLayout\
@@ -190,6 +196,7 @@ if __name__ == '__main__':
     , divider_str=divider_labels[i]
     , out_dir=args.out_dir
     ).save()
+  '''
 
   new_line(10)
   print("all done")
