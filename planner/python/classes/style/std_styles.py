@@ -137,3 +137,4 @@ class StdLineRowGroupStyles():
 
   DOTTED: LineRowGroupStyle =\
     LineRowGroupStyle(dash_array='1,5')
+

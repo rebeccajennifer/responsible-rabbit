@@ -36,6 +36,9 @@ class PlannerStrings:
   RIGHT_ARROW: str =\
     '\u2192'
 
+  BULLET_PT: str =\
+    '\u2022'
+
   DATE_STR: str =\
     5 * SPACE\
     + '/'\
@@ -166,7 +169,7 @@ class PlannerStrings:
     'Critical Steps'
 
   GOAL_MEASUREMENT: str =\
-    'Evaluation Metrics'
+    'Tangible Results'
 
   GOAL_OBSTACLES: str =\
     'Obstacles'

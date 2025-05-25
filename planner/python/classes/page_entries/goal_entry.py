@@ -81,9 +81,16 @@ class GoalEntry(OnePageHalfLetterLayout):
     self.entries_: list =\
     [ DualLineTable\
       ( total_wdth=self.content_wdth_
+      , header_txt='How does this goal support your values?'
+      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , row_count=3
+      , show_outline=True
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
       , header_txt=Strings.GOAL_ACTIONS
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=4
+      , row_count=3
       , show_outline=True
       )
 
@@ -99,7 +106,7 @@ class GoalEntry(OnePageHalfLetterLayout):
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.GOAL_OBSTACLES
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , row_count=3
+      , row_count=2
       , show_outline=True
       )
 

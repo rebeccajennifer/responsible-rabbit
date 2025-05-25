@@ -141,11 +141,14 @@ class SingleLineTable(svgwrite.container.Group):
   ):
     """
     Parameters:
-      total_wdth  : Total width of table
-      total_hght  : Total height of table
-      header_txt  : Text contained in header
-      text_style  : Style used for text header
-      row_count   : Number of table rows
+      total_wdth    : Total width of table
+      total_hght    : Total height of table
+      header_txt    : Text contained in header
+      text_style    : Style used for text header
+      row_count     : Number of table rows
+      show_outline  : Show outline around table
+      inner_pad_lft : Add padding to lines on left
+      inner_pad_rgt : Add padding to lines on right
     """
 
     super().__init__()
@@ -170,14 +173,16 @@ class SingleLineTable(svgwrite.container.Group):
       , row_count=row_count
       )
 
+    style: LineRowGroupStyle = LineRowGroupStyle()
+    style.inner_pad_lft_ = inner_pad_lft
+    style.inner_pad_rgt_ = inner_pad_rgt
+
     self.line_rows_: LineRowGroup=\
       LineRowGroup\
       ( total_wdth=self.total_wdth_
       , total_hght=line_row_hght
       , row_count=row_count
-      , line_color=Colors.DEF_ROW_COLOR
-      , inner_pad_lft=inner_pad_lft
-      , inner_pad_rgt=inner_pad_rgt
+      , style=style
       )
 
     self.total_hght_: int=\
