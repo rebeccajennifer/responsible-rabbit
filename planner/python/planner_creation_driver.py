@@ -31,10 +31,6 @@ from os import path
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
-from classes.page_layouts.free_write_layout import FreeWriteLayout
-from classes.page_layouts.day_layout import OneDayLayout
-from classes.page_layouts.week_layout import WeekLayout
-from classes.page_layouts.test_layout import TestLayout
 from classes.page_layouts.habit_layout import HabitLayout
 from classes.page_layouts.half_letter_divider import DividerPage
 
@@ -46,9 +42,6 @@ from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.goal_entry import GoalEntry
 from classes.page_entries.blank_entry import BlankWrite
 from classes.reference_pages.ace_reference import AceReference
-
-
-from classes.page_layouts.ace_ref_layout import AceRefLayout
 
 from utils.planner_parser import PlannerCreationParser
 
@@ -236,7 +229,6 @@ if __name__ == '__main__':
     )
   test_layout.save()
 
-  '''
   habit_tracker =\
     HabitLayout\
     ( is_portrait=is_portrait
@@ -266,7 +258,6 @@ if __name__ == '__main__':
     , divider_str=divider_labels[i]
     , out_dir=args.out_dir
     ).save()
-  '''
 
   new_line(10)
   print("all done")
