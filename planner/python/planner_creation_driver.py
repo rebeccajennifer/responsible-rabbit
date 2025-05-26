@@ -61,16 +61,88 @@ def new_line (new_line_count: int = 1) -> None:
 
 #_______________________________________________________________________
 class PageOrder:
-  SGL_SIDE_VISION_PAGE_ORDER: list =\
-  [
+  """
+  Defines and organizes configuration data for various journal page
+  entries.
 
+  Each page entry specifies a type (e.g., FreeWriteEntry, DayEntry)
+  and a corresponding set of arguments specific to that type. Entry
+  types may represent unstructured pages (like free writes with optional
+  prompts) or structured formats (like daily or weekly tables for
+  planning or reflection).
+
+  The class also defines page ordering for both single-sided and
+  double-sided journal layouts.
+
+  Attributes:
+    SGL_SIDE_PAGE_ORDER: A list of layout configurations for
+                         single-sided printing.
+
+    DBL_SIDE_PAGE_ORDER: Same as above, but for double-sided printing
+                         layouts.
+  """
+
+  FUTURE_5YR_ENTRY0: dict =\
+  { Key.ENTRY_TYPE: FreeWritePromptEntry
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_5YR
+    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUTURE_5YR
+    }
+  }
+
+  FUTURE_5YR_ENTRY1: dict =\
+  { Key.ENTRY_TYPE: FreeWriteEntry
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_5YR
+    }
+  }
+
+  FUTURE_1YR_ENTRY0: dict =\
+  { Key.ENTRY_TYPE: FreeWritePromptEntry
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_1YR
+    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUTURE_1YR
+    }
+  }
+
+  FUTURE_1YR_ENTRY1: dict =\
+  { Key.ENTRY_TYPE: FreeWriteEntry
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_1YR
+    }
+  }
+
+  FUTURE_12W_ENTRY: dict =\
+  { Key.ENTRY_TYPE: FreeWritePromptEntry
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_12W
+    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUTURE_12W
+    }
+  }
+
+  FUTURE_BAD_ENTRY: dict =\
+  { Key.ENTRY_TYPE: FreeWritePromptEntry
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_BAD
+    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUTURE_BAD
+    }
+  }
+
+  SGL_SIDE_PAGE_ORDER: list =\
+  [ [ Strings.DEF_FUTURE_5YR_LAYOUT_PATH
+    , FUTURE_5YR_ENTRY0
+    , FUTURE_5YR_ENTRY1
+    ]
+  , [ Strings.DEF_FUTURE_1YR_LAYOUT_PATH
+    , FUTURE_1YR_ENTRY0
+    , FUTURE_1YR_ENTRY1
+    ]
+  , [ Strings.DEF_FUTURE_12W_LAYOUT_PATH
+    , FUTURE_12W_ENTRY
+    , FUTURE_BAD_ENTRY
+    ]
   ]
 
-  FREE_WRITE_PROMPT_MAP: dict =\
-  { Key.PAGE_ENTRY: Key.FUTURE_5YR
-  , Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_5YR
-  , Key.PROMPT_TXT: Strings.PAGE_HEADER_TXT_FUTURE_5YR
-  }
 
 if __name__ == '__main__':
   new_line(2)
@@ -89,56 +161,25 @@ if __name__ == '__main__':
   # Free-write layout generation
   #_____________________________________________________________________
 
-  '''
-  free_write_prompts: list =\
-  [ Strings.FREE_WRITE_FUTURE_5YR
-  , Strings.FREE_WRITE_FUTURE_1YR
-  , Strings.FREE_WRITE_FUTURE_12W
-  , Strings.FREE_WRITE_FUTURE_BAD
-  ]
+  page_order: list = []
 
-  free_write_page_headers: list =\
-  [ Strings.PAGE_HEADER_TXT_FUTURE_5YR
-  , Strings.PAGE_HEADER_TXT_FUTURE_1YR
-  , Strings.PAGE_HEADER_TXT_FUTURE_12W
-  , Strings.PAGE_HEADER_TXT_FUTURE_BAD
-  ]
+  if (is_dbl_sided):
+    page_order = PageOrder.SGL_SIDE_PAGE_ORDER
+  else:
+    page_order = PageOrder.SGL_SIDE_PAGE_ORDER
 
-  free_write_file_paths: list =\
-  [ Strings.DEF_FUTURE_LAYOUT_PATH
-  , Strings.DEF_FUTURE_YR_LAYOUT_PATH
-  , Strings.DEF_FUTURE_12WK_LAYOUT_PATH
-  , Strings.DEF_INACTION_LAYOUT_PATH
-  ]
-
-  for i in range(len(free_write_prompts)-2):
+  for i in range (len(page_order)):
     free_write_layout =\
-      FreeWriteLayout\
+      TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
-      , file_path=path.join(args.out_dir, free_write_file_paths[i])
-      , header_txt_0=free_write_page_headers[i]
-      , prompt_0=free_write_prompts[i]
+      , file_path=path.join(args.out_dir, PageOrder.SGL_SIDE_PAGE_ORDER[i][0])
+      , entry_0_type=page_order[i][1][Key.ENTRY_TYPE]
+      , entry_0_args=page_order[i][1][Key.ENTRY_ARGS]
+      , entry_1_type=page_order[i][2][Key.ENTRY_TYPE]
+      , entry_1_args=page_order[i][2][Key.ENTRY_ARGS]
       )
     free_write_layout.save()
-  '''
-
-  free_write_layout =\
-    TwoPageHalfLetterSize\
-      ( is_portrait=is_portrait
-      , is_dbl_sided=is_dbl_sided
-      , file_path=path.join(args.out_dir, '01.svg')
-      , entry_0_type=FreeWritePromptEntry
-      , entry_0_args=\
-        { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_12W
-        , Key.PROMPT_TXT: Strings.FREE_WRITE_FUTURE_12W
-        }
-      , entry_1_type=FreeWriteEntry
-      , entry_1_args=\
-        { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_12W
-        }
-      )
-  free_write_layout.save()
 
   ace_ref_layout =\
     TwoPageHalfLetterSize\
@@ -160,6 +201,7 @@ if __name__ == '__main__':
     , entry_1_type=DayEntry
     , entry_1_args={Key.CYCLING_PROMPT_IDX: 2}
     )
+
   day_layout.save()
 
   week_layout =\

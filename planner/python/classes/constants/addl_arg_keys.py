@@ -9,11 +9,13 @@ class AddlArgKeys:
 
   CYCLING_PROMPT_IDX: str = 'cycling_prompt_idx'
   HEADER_TXT        : str = 'header_txt'
-  PROMPT_TXT            : str = 'prompt'
+  PROMPT_TXT        : str = 'prompt'
+  FILE_PATH         : str = 'file_path'
 
-  PAGE_ENTRY         : str = 'page_type'
+  FUTURE_5YR  : str = 'future_5yr'
+  FUTURE_12W  : str = 'future_12w'
+  FUTURE_1YR  : str = 'future_1yr'
+  FUTURE_BAD  : str = 'future_bad'
 
-  FUTURE_5YR : str = 'future_5yr'
-  FUTURE_12W : str = 'future_12w'
-  FUTURE_1YR : str = 'future_1yr'
-  FUTURE_BAD : str = 'future_bad'
+  ENTRY_TYPE  : str = 'entry_type'
+  ENTRY_ARGS  : str = 'entry_args'

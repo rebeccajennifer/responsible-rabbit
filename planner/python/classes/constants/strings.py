@@ -72,17 +72,17 @@ class PlannerStrings:
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout.svg'
 
-  DEF_FUTURE_LAYOUT_PATH: str =\
-    'future-layout.svg'
+  DEF_FUTURE_5YR_LAYOUT_PATH: str =\
+    'future-5yr-layout.svg'
 
-  DEF_FUTURE_YR_LAYOUT_PATH: str =\
-    'future-yr-layout.svg'
+  DEF_FUTURE_1YR_LAYOUT_PATH: str =\
+    'future-1yr-layout.svg'
 
-  DEF_FUTURE_12WK_LAYOUT_PATH: str =\
-    'future-12-wk-layout.svg'
+  DEF_FUTURE_12W_LAYOUT_PATH: str =\
+    'future-12w-layout.svg'
 
-  DEF_INACTION_LAYOUT_PATH: str =\
-    'inaction-layout.svg'
+  DEF_FUTURE_BAD_LAYOUT_PATH: str =\
+    'future-bad-layout.svg'
 
   DEF_WEEK_LAYOUT_PATH: str =\
     'week-layout.svg'
