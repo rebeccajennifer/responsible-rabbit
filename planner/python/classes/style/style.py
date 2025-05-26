@@ -52,7 +52,7 @@ class PlannerColors:
   NORMAL_TXT: str = FLUX_GRY
   HEADING: str = FLUX_RED
 
-  DEF_PAGE_HEADER_COLOR : str = 'none'
+  DEF_PAGE_HEADER_TXT_COLOR : str = 'none'
 
   DEF_TBLE_HEADER_FILL  : str = MEDIUM_GREY
   DEF_TBLE_HEADER_TEXT  : str = WHITE
@@ -70,11 +70,11 @@ class PlannerFontStyle:
   Contains standard font sizes.
   """
 
-  GOAL_HEADER_SIZE      : int = 32
-  DAY_PAGE_HEADER_SIZE  : int = 12
-  WEEK_PAGE_HEADER_SIZE : int = 12
+  GOAL_HEADER_TXT_SIZE      : int = 32
+  DAY_PAGE_HEADER_TXT_SIZE  : int = 12
+  WEEK_PAGE_HEADER_TXT_SIZE : int = 12
 
-  DEF_PAGE_HEADER_SIZE: int = 12
+  DEF_PAGE_HEADER_TXT_SIZE: int = 12
 
   HEAD_1_SIZE: int = 12
   HEAD_2_SIZE: int = 24

@@ -147,7 +147,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.WEEK_PAGE_HEADER_0)
+      (header_txt=Strings.WEEK_PAGE_HEADER_TXT_0)
 
 #_______________________________________________________________________
 class WeekEntry1(OnePageHalfLetterLayout):
@@ -211,14 +211,14 @@ class WeekEntry1(OnePageHalfLetterLayout):
         [
            TextRowGroup\
           ( total_wdth=self.content_wdth_
-          , text=Strings.WEEK_VISUALIZATION_HEADER
+          , text=Strings.WEEK_VISUALIZATION_HEADER_TXT
           , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
           )
 
         , SingleLineTable\
           ( total_wdth=self.content_wdth_
           , total_hght=150
-          , header_txt=Strings.WEEK_VISUALIZATION_PROMPT
+          , header_txt=Strings.WEEK_VISUALIZATION_PROMPT_TXT
           , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
           , show_outline=False
           )
@@ -286,4 +286,4 @@ class WeekEntry1(OnePageHalfLetterLayout):
 
     """
     return\
-      super().create_page_header(header_txt=Strings.WEEK_PAGE_HEADER_1)
+      super().create_page_header(header_txt=Strings.WEEK_PAGE_HEADER_TXT_1)

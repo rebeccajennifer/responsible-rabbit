@@ -49,13 +49,13 @@ class FreeWritePromptEntry(OnePageHalfLetterLayout):
   , total_hght: int = 0
   , total_wdth: int = 0
   , addl_args: dict =\
-    {Key.HEADER_TXT: Strings.DEF_PAGE_HEADER, Key.PROMPT: ''}
+    {Key.HEADER_TXT: Strings.DEF_PAGE_HEADER_TXT, Key.PROMPT_TXT: ''}
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
 
-    self.prompt_: str = addl_args[Key.PROMPT]
+    self.prompt_: str = addl_args[Key.PROMPT_TXT]
     self.header_txt_: str = addl_args[Key.HEADER_TXT]
 
     super().__init__\

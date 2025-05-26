@@ -145,4 +145,4 @@ class TestEntry0(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.DEF_PAGE_HEADER)
+      (header_txt=Strings.DEF_PAGE_HEADER_TXT)

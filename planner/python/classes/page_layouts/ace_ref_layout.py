@@ -69,7 +69,7 @@ class AceRefLayout(TwoPageHalfLetterSize):
       ( total_hght=self.content_hght_
       , total_wdth=self.content_wdth_
       , padding=Dims.BRD_MARGIN_PX
-      , page_header_txt=AceStrings.PAGE_HEADER
+      , page_header_txt=AceStrings.PAGE_HEADER_TXT
       )
 
     return

@@ -41,12 +41,12 @@ class AceStrings:
   Strings used in the ACE Reference page.
   """
 
-  PAGE_HEADER: str =\
+  PAGE_HEADER_TXT: str =\
     'Acknowlege ' + Strings.BULLET_PT\
   + ' Connect ' + Strings.BULLET_PT\
   + ' Engage'
 
-  ABOUT_HEADER: str =\
+  ABOUT_HEADER_TXT: str =\
     'About the ACE Method'
 
   ABOUT: str = (
@@ -56,7 +56,7 @@ class AceStrings:
     'patterns that moves a person away from their ideal self.'
   )
 
-  USING_HEADER: str =\
+  USING_HEADER_TXT: str =\
     'How it works'
 
   USING_DESC: str = (
@@ -64,7 +64,7 @@ class AceStrings:
     'fill out the worksheet as described below.'
   )
 
-  ACKNOWLEDGE_HEADER: str =\
+  ACKNOWLEDGE_HEADER_TXT: str =\
     'Acknowlege'
   ACKNOWLEGE_DESC: str = (
     'Reference the list of Brene Brown\'s 87 Emotions and Experiences '
@@ -72,14 +72,14 @@ class AceStrings:
     'state.'
   )
 
-  CONNECT_HEADER: str =\
+  CONNECT_HEADER_TXT: str =\
     'Connect'
   CONNECT_DESC: str = (
     'Connect with your physical body. Engage in one of the exercises '
     'described on the following page.'
   )
 
-  REENGAGE_HEADER: str =\
+  REENGAGE_HEADER_TXT: str =\
     '(Re-)Engage'
 
   REENGAGE_DESC: str = (
@@ -137,7 +137,7 @@ class AceReference(OnePageHalfLetterLayout):
       [ TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
-        , text=AceStrings.ABOUT_HEADER
+        , text=AceStrings.ABOUT_HEADER_TXT
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
@@ -147,7 +147,7 @@ class AceReference(OnePageHalfLetterLayout):
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
-        , text=AceStrings.USING_HEADER
+        , text=AceStrings.USING_HEADER_TXT
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
@@ -157,7 +157,7 @@ class AceReference(OnePageHalfLetterLayout):
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
-        , text=AceStrings.ACKNOWLEDGE_HEADER
+        , text=AceStrings.ACKNOWLEDGE_HEADER_TXT
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
@@ -167,7 +167,7 @@ class AceReference(OnePageHalfLetterLayout):
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
-        , text=AceStrings.CONNECT_HEADER
+        , text=AceStrings.CONNECT_HEADER_TXT
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
@@ -177,7 +177,7 @@ class AceReference(OnePageHalfLetterLayout):
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
-        , text=AceStrings.REENGAGE_HEADER
+        , text=AceStrings.REENGAGE_HEADER_TXT
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
@@ -202,7 +202,7 @@ class AceReference(OnePageHalfLetterLayout):
     """
 
     page_header = super().create_page_header\
-      ( header_txt=AceStrings.PAGE_HEADER
+      ( header_txt=AceStrings.PAGE_HEADER_TXT
       )
 
     return page_header

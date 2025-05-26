@@ -165,6 +165,6 @@ class GoalEntry(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      ( header_txt=Strings.GOAL_PAGE_HEADER
-      , font_size=Font.GOAL_HEADER_SIZE
+      ( header_txt=Strings.GOAL_PAGE_HEADER_TXT
+      , font_size=Font.GOAL_HEADER_TXT_SIZE
       )

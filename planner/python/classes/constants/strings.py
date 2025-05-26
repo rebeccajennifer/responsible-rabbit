@@ -48,10 +48,10 @@ class PlannerStrings:
     + '20'\
     + 5 * SPACE
 
-  DEF_TABLE_HEADER: str =\
+  DEF_TABLE_HEADER_TXT: str =\
     'Table Header'
 
-  DEF_PAGE_HEADER: str =\
+  DEF_PAGE_HEADER_TXT: str =\
     'Page Header'
 
   DAILY_SCHEDULE_HEADER: str =\
@@ -154,7 +154,7 @@ class PlannerStrings:
   #_____________________________________________________________________
   # Goal layout strings
   #_____________________________________________________________________
-  GOAL_PAGE_HEADER: str =\
+  GOAL_PAGE_HEADER_TXT: str =\
     'Goal #'
 
   GOAL_CHECKLIST: str =\
@@ -195,7 +195,7 @@ class PlannerStrings:
   #_____________________________________________________________________
   # Week layout strings
   #_____________________________________________________________________
-  WEEK_PAGE_HEADER_0: str =\
+  WEEK_PAGE_HEADER_TXT_0: str =\
     'Week #' + 6 * SPACE + 'Reflections and Insights'
 
   WEEK_MOMENTUM: str =\
@@ -210,7 +210,7 @@ class PlannerStrings:
     + SPACE + 'agree'
 
 
-  WEEK_PAGE_HEADER_1: str =\
+  WEEK_PAGE_HEADER_TXT_1: str =\
     'Goals for Week # '\
     + SPACE\
     + DATE_STR\
@@ -223,10 +223,10 @@ class PlannerStrings:
   WEEK_UNFINISHED_BUSINESS: str =\
     'Unfinished Business'
 
-  WEEK_VISUALIZATION_HEADER: str =\
+  WEEK_VISUALIZATION_HEADER_TXT: str =\
     'Visualize Your Week'
 
-  WEEK_VISUALIZATION_PROMPT: str =\
+  WEEK_VISUALIZATION_PROMPT_TXT: str =\
     'Sketch a visual of your expectations for the week.'
 
   WEEK_IMPROVEMENT: str =\
@@ -269,16 +269,16 @@ class PlannerStrings:
     , 'Tally'
     ]
 
-  HABIT_PAGE_HEADER: str =\
+  HABIT_PAGE_HEADER_TXT: str =\
     'Habit Tracking' + 3 * SPACE + 'Month #'
 
   #_____________________________________________________________________
   # Month layout strings
   #_____________________________________________________________________
-  MONTH_PAGE_HEADER_0: str =\
+  MONTH_PAGE_HEADER_TXT_0: str =\
     'Goal #'
 
-  MONTH_PAGE_HEADER_1: str =\
+  MONTH_PAGE_HEADER_TXT_1: str =\
     'Goal #'
 
   MONTH_FOOTER_0: str =\
@@ -291,10 +291,10 @@ class PlannerStrings:
   # Free write strings
   #_____________________________________________________________________
 
-  PAGE_HEADER_FUTURE_5YR: str = 'Imagine a Future...'
-  PAGE_HEADER_FUTURE_1YR: str = 'A Year of Growth'
-  PAGE_HEADER_FUTURE_12W: str = '12 Week Potential'
-  PAGE_HEADER_FUTURE_BAD: str = 'The Consequences of Inaction'
+  PAGE_HEADER_TXT_FUTURE_5YR: str = 'Imagine a Future...'
+  PAGE_HEADER_TXT_FUTURE_1YR: str = 'A Year of Growth'
+  PAGE_HEADER_TXT_FUTURE_12W: str = '12 Week Potential'
+  PAGE_HEADER_TXT_FUTURE_BAD: str = 'The Consequences of Inaction'
 
   FREE_WRITE_FUTURE_5YR: str = (
     'Describe your ideal life 3–5 years from now—the boldest vision '

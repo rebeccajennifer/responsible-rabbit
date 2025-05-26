@@ -319,7 +319,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
   #_____________________________________________________________________
   def create_page_header(self
-  , header_txt = Strings.DEF_PAGE_HEADER
+  , header_txt = Strings.DEF_PAGE_HEADER_TXT
   , font_color: str = 0
   , font_size: int = 0
   , font_family: str = 0
@@ -336,7 +336,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       HeaderBox for page header
     """
 
-    style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER)
+    style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
 
     #___________________________________________________________________
     # Modify header style

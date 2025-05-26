@@ -117,7 +117,7 @@ class StdTextBoxStyles():
     , font_family=Font.FONT_FAMILY_HEADER
     )
 
-  DEF_PAGE_HEADER: TextBoxStyle =\
+  DEF_PAGE_HEADER_TXT: TextBoxStyle =\
     TextBoxStyle\
     ( backgnd_color='none'
     , show_outline=True
@@ -126,7 +126,7 @@ class StdTextBoxStyles():
     , inner_pad_lft=True
     , inner_pad_rgt=True
     , font_family=Font.FONT_FAMILY_HEADER
-    , font_size=Font.DEF_PAGE_HEADER_SIZE
+    , font_size=Font.DEF_PAGE_HEADER_TXT_SIZE
     )
 
 #_______________________________________________________________________
