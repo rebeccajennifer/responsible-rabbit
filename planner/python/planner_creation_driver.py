@@ -59,6 +59,16 @@ def new_line (new_line_count: int = 1) -> None:
   for i in range(new_line_count):
     print()
 
+#_______________________________________________________________________
+class PageOrder:
+  SGL_SIDE_VISION_PAGE_ORDER: list =\
+  [
+
+  ]
+
+  FREE_WRITE_PROMPT_MAP: dict =\
+  { Key.PROMPT}
+
 if __name__ == '__main__':
   new_line(2)
 
@@ -78,17 +88,17 @@ if __name__ == '__main__':
 
   '''
   free_write_prompts: list =\
-  [ Strings.FREE_WRITE_FUTURE
-  , Strings.FREE_WRITE_YR
-  , Strings.FREE_WRITE_12WK
-  , Strings.FREE_WRITE_INACTION
+  [ Strings.FREE_WRITE_FUTURE_5YR
+  , Strings.FREE_WRITE_FUTURE_1YR
+  , Strings.FREE_WRITE_FUTURE_12W
+  , Strings.FREE_WRITE_FUTURE_BAD
   ]
 
   free_write_page_headers: list =\
-  [ Strings.FUTURE_PAGE_HEADER
-  , Strings.FUTURE_YR_PAGE_HEADER
-  , Strings.FUTURE_12WK_PAGE_HEADER
-  , Strings.INACTION_PAGE_HEADER
+  [ Strings.PAGE_HEADER_FUTURE_5YR
+  , Strings.PAGE_HEADER_FUTURE_1YR
+  , Strings.PAGE_HEADER_FUTURE_12W
+  , Strings.PAGE_HEADER_FUTURE_BAD
   ]
 
   free_write_file_paths: list =\
@@ -117,12 +127,12 @@ if __name__ == '__main__':
       , file_path=path.join(args.out_dir, '01.svg')
       , entry_0_type=FreeWritePromptEntry
       , entry_0_args=\
-        { Key.HEADER_TXT: Strings.FUTURE_12WK_PAGE_HEADER
-        , Key.PROMPT: Strings.FREE_WRITE_12WK
+        { Key.HEADER_TXT: Strings.PAGE_HEADER_FUTURE_12W
+        , Key.PROMPT: Strings.FREE_WRITE_FUTURE_12W
         }
       , entry_1_type=FreeWriteEntry
       , entry_1_args=\
-        { Key.HEADER_TXT: Strings.FUTURE_12WK_PAGE_HEADER
+        { Key.HEADER_TXT: Strings.PAGE_HEADER_FUTURE_12W
         }
       )
   free_write_layout.save()
