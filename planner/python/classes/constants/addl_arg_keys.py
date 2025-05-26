@@ -7,4 +7,6 @@ class AddlArgKeys:
   to support custom behavior.
   """
 
-  CYCLING_PROMPT_IDX = 'cycling_prompt_idx'
+  CYCLING_PROMPT_IDX: str = 'cycling_prompt_idx'
+  HEADER_TXT        : str = 'header_txt'
+  PROMPT            : str = 'prompt'

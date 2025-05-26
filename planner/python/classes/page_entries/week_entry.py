@@ -49,6 +49,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
+  , addl_args: dict = {}
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -158,6 +159,7 @@ class WeekEntry1(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
+  , addl_args: dict = {}
   ):
     """
     Constructor for class. Assumes landscape orientation.

@@ -29,17 +29,24 @@
 import argparse
 from os import path
 
+from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 from classes.page_layouts.free_write_layout import FreeWriteLayout
 from classes.page_layouts.day_layout import OneDayLayout
-from classes.page_layouts.goal_layout import GoalLayout
 from classes.page_layouts.week_layout import WeekLayout
 from classes.page_layouts.test_layout import TestLayout
 from classes.page_layouts.habit_layout import HabitLayout
 from classes.page_layouts.half_letter_divider import DividerPage
 
-from classes.page_entries.test_entry0 import TestEntry0
+from classes.page_entries.day_entry import DayEntry
+from classes.page_entries.week_entry import WeekEntry0
+from classes.page_entries.week_entry import WeekEntry1
+from classes.page_entries.free_write_entry import FreeWriteEntry
+from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.goal_entry import GoalEntry
+from classes.page_entries.blank_entry import BlankWrite
+from classes.reference_pages.ace_reference import AceReference
+
 
 from classes.page_layouts.ace_ref_layout import AceRefLayout
 
@@ -101,27 +108,57 @@ if __name__ == '__main__':
       , prompt_0=free_write_prompts[i]
       )
     free_write_layout.save()
+  '''
 
   free_write_layout =\
-      FreeWriteLayout\
+    TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
-      , file_path=path.join(args.out_dir, free_write_file_paths[2])
-      , header_txt_0=free_write_page_headers[2]
-      , prompt_0=free_write_prompts[2]
-      , header_txt_1=free_write_page_headers[3]
-      , prompt_1=free_write_prompts[3]
+      , file_path=path.join(args.out_dir, '01.svg')
+      , entry_0_type=FreeWritePromptEntry
+      , entry_0_args=\
+        { Key.HEADER_TXT: Strings.FUTURE_12WK_PAGE_HEADER
+        , Key.PROMPT: Strings.FREE_WRITE_12WK
+        }
+      , entry_1_type=FreeWriteEntry
+      , entry_1_args=\
+        { Key.HEADER_TXT: Strings.FUTURE_12WK_PAGE_HEADER
+        }
       )
   free_write_layout.save()
 
   ace_ref_layout =\
-    AceRefLayout\
+    TwoPageHalfLetterSize\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
     , file_path=path.join(args.out_dir, 'ace-reference.svg')
+    , entry_0_type=AceReference
+    , entry_0_args={Key.HEADER_TXT: 'test'}
     )
   ace_ref_layout.save()
-  '''
+
+  day_layout =\
+    TwoPageHalfLetterSize\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , file_path=path.join(args.out_dir, Strings.DEF_DAY_LAYOUT_PATH)
+    , entry_0_type=DayEntry
+    , entry_0_args={Key.CYCLING_PROMPT_IDX: 3}
+    , entry_1_type=DayEntry
+    , entry_1_args={Key.CYCLING_PROMPT_IDX: 2}
+    )
+  day_layout.save()
+
+  week_layout =\
+    TwoPageHalfLetterSize\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , file_path=path.join(args.out_dir, Strings.DEF_WEEK_LAYOUT_PATH)
+    , entry_1_type=WeekEntry0
+    , entry_0_type=WeekEntry1
+    )
+  week_layout.save()
+
   goal_layout =\
     TwoPageHalfLetterSize\
     ( is_portrait=is_portrait
@@ -133,28 +170,16 @@ if __name__ == '__main__':
   goal_layout.save()
 
   test_layout =\
-    TestLayout\
+    TwoPageHalfLetterSize\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
     , file_path=path.join(args.out_dir, Strings.DEF_TEST_LAYOUT_PATH)
+    , entry_0_type=BlankWrite
+    , entry_0_args={Key.HEADER_TXT: 'page 0'}
+    , entry_1_type=BlankWrite
+    , entry_1_args={Key.HEADER_TXT: 'page 1'}
     )
   test_layout.save()
-
-  week_layout =\
-    WeekLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , file_path=path.join(args.out_dir, Strings.DEF_WEEK_LAYOUT_PATH)
-    )
-  week_layout.save()
-
-  day_layout =\
-    OneDayLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=True#is_dbl_sided
-    , file_path=path.join(args.out_dir, Strings.DEF_DAY_LAYOUT_PATH)
-    )
-  day_layout.save()
 
   '''
   habit_tracker =\
