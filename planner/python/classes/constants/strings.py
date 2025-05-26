@@ -48,10 +48,10 @@ class PlannerStrings:
     + '20'\
     + 5 * SPACE
 
-  DEF_TABLE_HEADER: str =\
+  DEF_TABLE_HEADER_TXT: str =\
     'Table Header'
 
-  DEF_PAGE_HEADER: str =\
+  DEF_PAGE_HEADER_TXT: str =\
     'Page Header'
 
   DAILY_SCHEDULE_HEADER: str =\
@@ -72,17 +72,17 @@ class PlannerStrings:
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout.svg'
 
-  DEF_FUTURE_LAYOUT_PATH: str =\
-    'future-layout.svg'
+  DEF_FUTURE_5YR_LAYOUT_PATH: str =\
+    'future-5yr-layout.svg'
 
-  DEF_FUTURE_YR_LAYOUT_PATH: str =\
-    'future-yr-layout.svg'
+  DEF_FUTURE_1YR_LAYOUT_PATH: str =\
+    'future-1yr-layout.svg'
 
-  DEF_FUTURE_12WK_LAYOUT_PATH: str =\
-    'future-12-wk-layout.svg'
+  DEF_FUTURE_12W_LAYOUT_PATH: str =\
+    'future-12w-layout.svg'
 
-  DEF_INACTION_LAYOUT_PATH: str =\
-    'inaction-layout.svg'
+  DEF_FUTURE_BAD_LAYOUT_PATH: str =\
+    'future-bad-layout.svg'
 
   DEF_WEEK_LAYOUT_PATH: str =\
     'week-layout.svg'
@@ -154,7 +154,7 @@ class PlannerStrings:
   #_____________________________________________________________________
   # Goal layout strings
   #_____________________________________________________________________
-  GOAL_PAGE_HEADER: str =\
+  GOAL_PAGE_HEADER_TXT: str =\
     'Goal #'
 
   GOAL_CHECKLIST: str =\
@@ -195,7 +195,7 @@ class PlannerStrings:
   #_____________________________________________________________________
   # Week layout strings
   #_____________________________________________________________________
-  WEEK_PAGE_HEADER_0: str =\
+  WEEK_PAGE_HEADER_TXT_0: str =\
     'Week #' + 6 * SPACE + 'Reflections and Insights'
 
   WEEK_MOMENTUM: str =\
@@ -210,7 +210,7 @@ class PlannerStrings:
     + SPACE + 'agree'
 
 
-  WEEK_PAGE_HEADER_1: str =\
+  WEEK_PAGE_HEADER_TXT_1: str =\
     'Goals for Week # '\
     + SPACE\
     + DATE_STR\
@@ -223,10 +223,10 @@ class PlannerStrings:
   WEEK_UNFINISHED_BUSINESS: str =\
     'Unfinished Business'
 
-  WEEK_VISUALIZATION_HEADER: str =\
+  WEEK_VISUALIZATION_HEADER_TXT: str =\
     'Visualize Your Week'
 
-  WEEK_VISUALIZATION_PROMPT: str =\
+  WEEK_VISUALIZATION_PROMPT_TXT: str =\
     'Sketch a visual of your expectations for the week.'
 
   WEEK_IMPROVEMENT: str =\
@@ -269,16 +269,16 @@ class PlannerStrings:
     , 'Tally'
     ]
 
-  HABIT_PAGE_HEADER: str =\
+  HABIT_PAGE_HEADER_TXT: str =\
     'Habit Tracking' + 3 * SPACE + 'Month #'
 
   #_____________________________________________________________________
   # Month layout strings
   #_____________________________________________________________________
-  MONTH_PAGE_HEADER_0: str =\
+  MONTH_PAGE_HEADER_TXT_0: str =\
     'Goal #'
 
-  MONTH_PAGE_HEADER_1: str =\
+  MONTH_PAGE_HEADER_TXT_1: str =\
     'Goal #'
 
   MONTH_FOOTER_0: str =\
@@ -291,10 +291,12 @@ class PlannerStrings:
   # Free write strings
   #_____________________________________________________________________
 
-  FUTURE_PAGE_HEADER: str =\
-    'Imagine a Future...'
+  PAGE_HEADER_TXT_FUTURE_5YR: str = 'Imagine a Future...'
+  PAGE_HEADER_TXT_FUTURE_1YR: str = 'A Year of Growth'
+  PAGE_HEADER_TXT_FUTURE_12W: str = '12 Week Potential'
+  PAGE_HEADER_TXT_FUTURE_BAD: str = 'The Consequences of Inaction'
 
-  FREE_WRITE_FUTURE: str = (
+  FREE_WRITE_FUTURE_5YR: str = (
     'Describe your ideal life 3–5 years from now—the boldest vision '
     'you can imagine, even if it feels far off. Ask yourself: What do '
     'I truly want from life? What skills will I master? Which habits '
@@ -306,10 +308,7 @@ class PlannerStrings:
     'before refining your answer below.'
   )
 
-  FUTURE_YR_PAGE_HEADER: str =\
-    'A Year of Growth'
-
-  FREE_WRITE_YR: str = (
+  FREE_WRITE_FUTURE_1YR: str = (
     'Imagine your life 12 months from now. Where do you want to be, '
     'and what do you hope to have accomplished? Be specific and aim '
     'for goals that excite you, even if they feel slightly out of '
@@ -318,10 +317,7 @@ class PlannerStrings:
     'in your work, your relationships, and your overall well-being? '
   )
 
-  FUTURE_12WK_PAGE_HEADER: str =\
-    '12 Week Potential'
-
-  FREE_WRITE_12WK: str = (
+  FREE_WRITE_FUTURE_12W: str = (
     'Imagine how your life will change over the next twelve weeks. '
     'Aim for progress that feels bold but within your reach. What '
     'fears will you face head-on? What talents will you grow? What '
@@ -332,10 +328,7 @@ class PlannerStrings:
     'choosing to become?'
   )
 
-  INACTION_PAGE_HEADER: str =\
-    'The Consequences of Inaction'
-
-  FREE_WRITE_INACTION: str = (
+  FREE_WRITE_FUTURE_BAD: str = (
     'Though it may feel unsettling, envision the genuine consequences '
     'of not honoring your commitments. Picture the most serious yet '
     'believable outcome. What does that scenario look like? Who do you '

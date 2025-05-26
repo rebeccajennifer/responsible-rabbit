@@ -50,7 +50,7 @@ class GoalEntry(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
+  , addl_args: dict = {}
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -58,7 +58,7 @@ class GoalEntry(OnePageHalfLetterLayout):
     super().__init__\
       ( total_hght=total_hght
       , total_wdth=total_wdth
-      , padding=padding
+      , addl_args=addl_args
       )
 
     return
@@ -165,6 +165,6 @@ class GoalEntry(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      ( header_txt=Strings.GOAL_PAGE_HEADER
-      , font_size=Font.GOAL_HEADER_SIZE
+      ( header_txt=Strings.GOAL_PAGE_HEADER_TXT
+      , font_size=Font.GOAL_HEADER_TXT_SIZE
       )

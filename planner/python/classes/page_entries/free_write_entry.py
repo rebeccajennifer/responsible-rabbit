@@ -28,6 +28,7 @@
 
 import svgwrite.container
 
+from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.elements.row_group import DualLineRowGroup
 
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
@@ -43,19 +44,17 @@ class FreeWriteEntry(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
-  , page_header_txt: str = ''
+  , addl_args: dict = {Key.HEADER_TXT: ''}
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
 
-    self.page_header_txt_: str = page_header_txt
+    self.page_header_txt_: str = addl_args[Key.HEADER_TXT]
 
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
-    , padding=padding
     , pad_bet_elements=False
     )
 

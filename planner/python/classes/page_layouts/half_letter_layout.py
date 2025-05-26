@@ -55,7 +55,6 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
   , file_path: str = Strings.DEF_LAYOUT_PATH
-  # TODO refactor type
   , entry_0_type: type = None
   , entry_0_args: dict = {}
   , entry_1_type: type = None
@@ -126,14 +125,14 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
       EntryType0\
       ( total_wdth=self.content_wdth_
       , total_hght=self.content_hght_
-      , kwargs=self.entry_0_args_
+      , addl_args=self.entry_0_args_
       )
 
     self.content_1_ =\
       EntryType1\
       ( total_wdth=self.content_wdth_
       , total_hght=self.content_hght_
-      , kwargs=self.entry_1_args_
+      , addl_args=self.entry_1_args_
       )
 
     return
@@ -217,14 +216,14 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
+  , padding: int = Dims.BRD_MARGIN_PX
   , pad_bet_elements: bool = True
-  , **kwargs
+  , addl_args: dict = {}
   ):
 
     super().__init__()
 
-    self.extra_args_ = kwargs.items()
+    self.addl_args_ = addl_args
 
     self.entries_ = []
 
@@ -320,7 +319,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
   #_____________________________________________________________________
   def create_page_header(self
-  , header_txt = Strings.DEF_PAGE_HEADER
+  , header_txt = Strings.DEF_PAGE_HEADER_TXT
   , font_color: str = 0
   , font_size: int = 0
   , font_family: str = 0
@@ -337,7 +336,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       HeaderBox for page header
     """
 
-    style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER)
+    style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
 
     #___________________________________________________________________
     # Modify header style

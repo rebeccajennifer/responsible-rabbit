@@ -28,6 +28,7 @@
 
 import svgwrite.container
 
+from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.row_group import TextRowGroup
 from classes.elements.row_group import DualLineRowGroup
@@ -47,21 +48,19 @@ class FreeWritePromptEntry(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
-  , header_txt: str = Strings.DEF_PAGE_HEADER
-  , prompt: int = ''
+  , addl_args: dict =\
+    {Key.HEADER_TXT: Strings.DEF_PAGE_HEADER_TXT, Key.PROMPT_TXT: ''}
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
 
-    self.prompt_: str = prompt
-    self.header_txt_: str = header_txt
+    self.prompt_: str = addl_args[Key.PROMPT_TXT]
+    self.header_txt_: str = addl_args[Key.HEADER_TXT]
 
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
-    , padding=padding
     , pad_bet_elements=False
     )
 

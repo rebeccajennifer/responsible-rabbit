@@ -55,8 +55,7 @@ class TestEntry0(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
-  , **kwargs
+  , addl_args: dict = {}
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -65,9 +64,8 @@ class TestEntry0(OnePageHalfLetterLayout):
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
-    , padding=padding
     , pad_bet_elements=True
-    , kwargs=kwargs
+    , addl_args=addl_args
     )
 
     return
@@ -147,4 +145,4 @@ class TestEntry0(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.DEF_PAGE_HEADER)
+      (header_txt=Strings.DEF_PAGE_HEADER_TXT)

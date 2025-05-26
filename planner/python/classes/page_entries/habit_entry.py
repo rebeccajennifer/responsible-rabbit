@@ -116,4 +116,4 @@ class HabitTracker(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.HABIT_PAGE_HEADER)
+      (header_txt=Strings.HABIT_PAGE_HEADER_TXT)

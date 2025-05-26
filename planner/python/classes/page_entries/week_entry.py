@@ -49,8 +49,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
-  , pad_bet_elements: bool = True
+  , addl_args: dict = {}
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -58,8 +57,6 @@ class WeekEntry0(OnePageHalfLetterLayout):
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
-    , padding=padding
-    , pad_bet_elements=pad_bet_elements
     )
 
     return
@@ -150,7 +147,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.WEEK_PAGE_HEADER_0)
+      (header_txt=Strings.WEEK_PAGE_HEADER_TXT_0)
 
 #_______________________________________________________________________
 class WeekEntry1(OnePageHalfLetterLayout):
@@ -162,16 +159,15 @@ class WeekEntry1(OnePageHalfLetterLayout):
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
+  , addl_args: dict = {}
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
     super().__init__\
-      ( total_hght=total_hght
-      , total_wdth=total_wdth
-      , padding=padding
-      )
+    ( total_hght=total_hght
+    , total_wdth=total_wdth
+    )
 
     return
 
@@ -215,14 +211,14 @@ class WeekEntry1(OnePageHalfLetterLayout):
         [
            TextRowGroup\
           ( total_wdth=self.content_wdth_
-          , text=Strings.WEEK_VISUALIZATION_HEADER
+          , text=Strings.WEEK_VISUALIZATION_HEADER_TXT
           , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
           )
 
         , SingleLineTable\
           ( total_wdth=self.content_wdth_
           , total_hght=150
-          , header_txt=Strings.WEEK_VISUALIZATION_PROMPT
+          , header_txt=Strings.WEEK_VISUALIZATION_PROMPT_TXT
           , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
           , show_outline=False
           )
@@ -290,4 +286,4 @@ class WeekEntry1(OnePageHalfLetterLayout):
 
     """
     return\
-      super().create_page_header(header_txt=Strings.WEEK_PAGE_HEADER_1)
+      super().create_page_header(header_txt=Strings.WEEK_PAGE_HEADER_TXT_1)

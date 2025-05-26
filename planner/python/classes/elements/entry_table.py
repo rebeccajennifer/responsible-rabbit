@@ -267,7 +267,7 @@ class PromptTable(EntryTable):
   def __init__(self
   , wdth: int = 0
   , hght: int = 0
-  , header_txt: str = Strings.DEF_TABLE_HEADER
+  , header_txt: str = Strings.DEF_TABLE_HEADER_TXT
   , row_count: int = 1
   , row_hght: int = EntryTable.DEF_ROW_HGHT
   , col_count: int = 1
@@ -312,7 +312,7 @@ class NumberedTable(EntryTable):
   def __init__(self
   , wdth: int = 0
   , hght: int = 0
-  , header_txt: str = [Strings.DEF_TABLE_HEADER]
+  , header_txt: str = [Strings.DEF_TABLE_HEADER_TXT]
   , prepend_txt: str = ''
   , font_color: str = Colors.DEF_TBLE_HEADER_TEXT
   , font_size: int = Font.NORMAL_SIZE
