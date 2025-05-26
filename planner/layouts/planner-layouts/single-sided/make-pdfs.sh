@@ -1,8 +1,8 @@
 rsvg-convert -f pdf -o pdf/day-layout.pdf           svg/day-layout.svg
 rsvg-convert -f pdf -o pdf/week-layout.pdf          svg/week-layout.svg
-rsvg-convert -f pdf -o pdf/future-layout.pdf        svg/future-layout.svg
-rsvg-convert -f pdf -o pdf/future-yr-layout.pdf     svg/future-yr-layout.svg
-rsvg-convert -f pdf -o pdf/future-12-wk-layout.pdf  svg/future-12-wk-layout.svg
+rsvg-convert -f pdf -o pdf/future-5yr-layout.pdf    svg/future-5yr-layout.svg
+rsvg-convert -f pdf -o pdf/future-1yr-layout.pdf    svg/future-1yr-layout.svg
+rsvg-convert -f pdf -o pdf/future-12w-layout.pdf    svg/future-12w-layout.svg
 rsvg-convert -f pdf -o pdf/goal-layout.pdf          svg/goal-layout.svg
 rsvg-convert -f pdf -o pdf/habit-layout.pdf         svg/habit-layout.svg
 rsvg-convert -f pdf -o pdf/divider-calendar.pdf     svg/divider-calendar.svg
