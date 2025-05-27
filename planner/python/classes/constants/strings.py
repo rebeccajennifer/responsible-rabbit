@@ -67,7 +67,7 @@ class PlannerStrings:
     'test-layout.svg'
 
   DEF_DAY_LAYOUT_PATH: str =\
-    'day-layout.svg'
+    'day#-layout.svg'
 
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout.svg'
@@ -141,11 +141,12 @@ class PlannerStrings:
 
   DAY_PROMPTS: str =\
     [ 'How can I embrace discomfort and grow today?'
-    , 'How can I move towards my ideal self?'
     , 'What am I avoiding?'
     , 'What would make today feel meaningful?'
-    , 'What can I let go of to move forward?'
-    , 'Where can I invite more ease into my life?'
+    , 'What can I let go of?'
+    , 'Where can I invite more ease?'
+    , 'What emotion is most present right now?'
+    , 'What am I learning about myself right now?'
     ]
 
   DAY_PROMPT_LAST_24: str =\
