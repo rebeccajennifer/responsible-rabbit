@@ -32,6 +32,7 @@ from os import path
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
 from classes.constants.strings import PlannerStrings as Strings
+
 from classes.page_layouts.habit_layout import HabitLayout
 from classes.page_layouts.half_letter_divider import DividerPage
 
@@ -62,7 +63,7 @@ if __name__ == '__main__':
   page_order: list = []
 
   if (is_dbl_sided):
-    page_order = PageOrder.SGL_SIDE_PAGE_ORDER
+    page_order = PageOrder.DBL_SIDE_PAGE_ORDER
   else:
     page_order = PageOrder.SGL_SIDE_PAGE_ORDER
 
@@ -71,7 +72,7 @@ if __name__ == '__main__':
       TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
-      , file_path=path.join(args.out_dir, PageOrder.SGL_SIDE_PAGE_ORDER[i][0])
+      , file_path=path.join(args.out_dir, page_order[i][0])
       , entry_0_type=page_order[i][1][Key.ENTRY_TYPE]
       , entry_0_args=page_order[i][1][Key.ENTRY_ARGS]
       , entry_1_type=page_order[i][2][Key.ENTRY_TYPE]
@@ -119,8 +120,8 @@ if __name__ == '__main__':
   , 'Calendar'
   ]
 
-  for i in range(1, 13):
-    divider_labels.append(f'Week {i}')
+  for i in range(1, 4):
+    divider_labels.append(f'Month {i}')
 
 
   for i in range(len(divider_labels)):

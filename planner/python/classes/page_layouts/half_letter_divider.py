@@ -73,7 +73,6 @@ class DividerPage(svgwrite.Drawing):
     self.file_path_ = path.join(out_dir, file_name)
 
     self.is_portrait_   : bool  = is_portrait
-    self.is_dbl_sided_  : bool  = is_dbl_sided
     self.divider_pos_   : int   = divider_pos
     self.divider_str_   : int   = divider_str
 
@@ -152,8 +151,9 @@ class DividerPage(svgwrite.Drawing):
     #___________________________________________________________________
     # Text for divider tab
     #___________________________________________________________________
+    font_size = Font.HEAD_2_SIZE
 
-    txt_x_insert: int = tab_x_strt + Font.TEXT_PADDING
+    txt_x_insert: int = tab_x_strt + Dims.DIVIDER_WDTH / 2 - font_size / 2
     txt_y_insert: int = tab_y_strt + Font.TEXT_PADDING
 
     self.divider_txt_: svgwrite.text.Text =\
@@ -163,7 +163,7 @@ class DividerPage(svgwrite.Drawing):
       , text_anchor='start'
       , alignment_baseline='text-after-edge'
       , fill=Colors.NORMAL_TXT
-      , font_size=Font.NORMAL_SIZE
+      , font_size = font_size
       , font_family=Font.FONT_FAMILY_HEADER
       )
 
@@ -241,9 +241,6 @@ class DividerPage(svgwrite.Drawing):
       insert_pos10 = content_wdth\
         + Dims.STD_MARGIN_PX\
         + 2 * Dims.BND_MARGIN_PX
-
-      if (self.is_dbl_sided_):
-        insert_pos00 = Dims.STD_MARGIN_PX
 
     insert_pos0: Tuple = (insert_pos00, insert_pos01)
     insert_pos1: Tuple = (insert_pos10, insert_pos11)

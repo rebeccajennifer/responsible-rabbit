@@ -50,6 +50,9 @@ class FreeWriteEntry(OnePageHalfLetterLayout):
     Constructor for class. Assumes landscape orientation.
     """
 
+    if (Key.HEADER_TXT not in addl_args.keys()):
+      addl_args[Key.HEADER_TXT] = ''
+
     self.page_header_txt_: str = addl_args[Key.HEADER_TXT]
 
     super().__init__\

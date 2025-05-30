@@ -77,6 +77,14 @@ class PageOrder:
     }
   }
 
+  VOW_ENTRY: dict =\
+  { Key.ENTRY_TYPE: FreeWritePromptEntry
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
+    , Key.PROMPT_TXT: Strings.VOW
+    }
+  }
+
   DAY_ENTRY0 : dict =\
     { Key.ENTRY_TYPE: DayEntry
     , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: 0}
@@ -120,8 +128,82 @@ class PageOrder:
     , Key.ENTRY_ARGS: {}
     }
 
+  BLNK_ENTRY: dict =\
+    { Key.ENTRY_TYPE: FreeWriteEntry
+    , Key.ENTRY_ARGS: {}
+    }
+
+  TITLE_PAGE: dict =\
+    { Key.ENTRY_TYPE: FreeWriteEntry
+    , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Book of Plans'}
+    }
+
+  DBL_SIDE_PAGE_ORDER: list =\
+  [ [ 'page-00.svg'
+    , FUTURE_1YR_ENTRY0
+    , FUTURE_1YR_ENTRY1
+    ]
+  , [ 'page-01.svg'
+    , FUTURE_12W_ENTRY
+    , FUTURE_5YR_ENTRY1
+    ]
+  , [ 'page-02.svg'
+    , FUTURE_5YR_ENTRY0
+    , FUTURE_BAD_ENTRY
+    ]
+  , [ 'page-03.svg'
+    , VOW_ENTRY
+    , TITLE_PAGE
+    ]
+  , [ Strings.DEF_GOAL_LAYOUT_PATH
+    , GOAL_ENTRY
+    , GOAL_ENTRY
+    ]
+  , [ Strings.DEF_GOAL_LAYOUT_PATH
+    , GOAL_ENTRY
+    , GOAL_ENTRY
+    ]
+  , [ 'page-04.svg'
+    , DAY_ENTRY2
+    , BLNK_ENTRY      # Replace with free write 0
+    ]
+  , [ 'page-05.svg'
+    , DAY_ENTRY3
+    , BLNK_ENTRY
+    ]
+  , [ 'page-06.svg'
+    , DAY_ENTRY1
+    , BLNK_ENTRY
+    ]
+  , [ 'page-07.svg'
+    , DAY_ENTRY4
+    , BLNK_ENTRY
+    ]
+  , [ 'page-08.svg'
+    , DAY_ENTRY0
+    , BLNK_ENTRY
+    ]
+  , [ 'page-09.svg'
+    , DAY_ENTRY5
+    , WEEK_ENTRY1
+    ]
+  , [ 'page-10.svg'
+    , WEEK_ENTRY0
+    , BLNK_ENTRY
+    ]
+  , [ 'page-11.svg'
+    , DAY_ENTRY6
+    , BLNK_ENTRY
+    ]
+  ]
+
+
   SGL_SIDE_PAGE_ORDER: list =\
-  [ [ Strings.DEF_FUTURE_5YR_LAYOUT_PATH
+  [ [ 'page-0.svg'
+    , BLNK_ENTRY
+    , VOW_ENTRY
+    ]
+  , [ Strings.DEF_FUTURE_5YR_LAYOUT_PATH
     , FUTURE_5YR_ENTRY0
     , FUTURE_5YR_ENTRY1
     ]
