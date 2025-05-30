@@ -199,21 +199,45 @@ class PageOrder:
 
 
   SGL_SIDE_PAGE_ORDER: list =\
-  [ [ 'page-0.svg'
-    , BLNK_ENTRY
-    , VOW_ENTRY
-    ]
-  , [ Strings.DEF_FUTURE_5YR_LAYOUT_PATH
-    , FUTURE_5YR_ENTRY0
-    , FUTURE_5YR_ENTRY1
-    ]
-  , [ Strings.DEF_FUTURE_1YR_LAYOUT_PATH
-    , FUTURE_1YR_ENTRY0
+  [ [ 'page-00.svg'
+    , TITLE_PAGE
     , FUTURE_1YR_ENTRY1
     ]
-  , [ Strings.DEF_FUTURE_12W_LAYOUT_PATH
+  , [ 'page-01.svg'
+    , FUTURE_5YR_ENTRY0
     , FUTURE_12W_ENTRY
+    ]
+  , [ 'page-02.svg'
+    , FUTURE_5YR_ENTRY1
     , FUTURE_BAD_ENTRY
+    ]
+  , [ 'page-03.svg'
+    , FUTURE_1YR_ENTRY0
+    , VOW_ENTRY
+    ]
+  , [ 'page-04.svg'
+    , GOAL_ENTRY
+    , GOAL_ENTRY
+    ]
+  , [ 'page-05.svg'
+    , GOAL_ENTRY
+    , GOAL_ENTRY
+    ]
+  , [ 'page-06.svg'
+    , WEEK_ENTRY0
+    , WEEK_ENTRY0
+    ]
+  , [ 'page-07.svg'
+    , WEEK_ENTRY1
+    , WEEK_ENTRY1
+    ]
+  , [ 'page-08.svg'
+    , WEEK_ENTRY0
+    , WEEK_ENTRY0
+    ]
+  , [ 'page-09.svg'
+    , WEEK_ENTRY1
+    , WEEK_ENTRY1
     ]
   , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-0')
     , DAY_ENTRY0
@@ -242,14 +266,6 @@ class PageOrder:
   , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-6')
     , DAY_ENTRY6
     , DAY_ENTRY6
-    ]
-  , [ Strings.DEF_WEEK_LAYOUT_PATH
-    , WEEK_ENTRY0
-    , WEEK_ENTRY1
-    ]
-  , [ Strings.DEF_GOAL_LAYOUT_PATH
-    , GOAL_ENTRY
-    , GOAL_ENTRY
     ]
   ]
 
