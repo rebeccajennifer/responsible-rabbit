@@ -47,8 +47,6 @@ class HabitLayout(DividerPage):
   , divider_pos: int = 0
   ):
 
-    file_path: str = path.join(out_dir, file_name)
-
     super().__init__\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided

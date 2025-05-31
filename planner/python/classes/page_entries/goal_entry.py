@@ -30,7 +30,7 @@ import svgwrite.container
 
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.elements.entry_table import NumberedTable
+from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 
@@ -81,16 +81,18 @@ class GoalEntry(OnePageHalfLetterLayout):
     self.entries_: list =\
     [ DualLineTable\
       ( total_wdth=self.content_wdth_
-      , header_txt='How does this goal support your values?'
+      , header_txt=Strings.GOAL_VALUES
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=3
-      , show_outline=True
+      , show_outline=False
       )
-    , DualLineTable\
+    , ColumnTable\
       ( total_wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_ACTIONS
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=3
+      , header_txt_lst=Strings.GOAL_MILESTONES
+      , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_NO_OUTLNE
+      , row_count=7
+      , col_wdths=[275, -1]
+      , TableType=DualLineTable
       , show_outline=True
       )
 
@@ -110,14 +112,6 @@ class GoalEntry(OnePageHalfLetterLayout):
       , show_outline=True
       )
 
-    , NumberedTable\
-      ( wdth=self.content_wdth_
-      , header_txt=Strings.GOAL_BENCHMARKS
-      , prepend_txt=Strings.GOAL_MONTHS
-      , row_count=3
-      , show_outline=True
-      )
-
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.GOAL_LIFE_IMPROVEMENT
@@ -125,7 +119,6 @@ class GoalEntry(OnePageHalfLetterLayout):
       , row_count=2
       , show_outline=False
       )
-
    ]
 
     # Calculate remaining height to evenly distribute spanning tables

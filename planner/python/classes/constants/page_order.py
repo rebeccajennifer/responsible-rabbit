@@ -284,31 +284,31 @@ class PageOrder:
     , WEEK_ENTRY1
     , WEEK_ENTRY1
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-0')
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-0')
     , DAY_ENTRY0
     , DAY_ENTRY0
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-1')
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-1')
     , DAY_ENTRY1
     , DAY_ENTRY1
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-2')
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-2')
     , DAY_ENTRY2
     , DAY_ENTRY2
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-3')
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-3')
     , DAY_ENTRY3
     , DAY_ENTRY3
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-4')
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-4')
     , DAY_ENTRY4
     , DAY_ENTRY4
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-5')
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-5')
     , DAY_ENTRY5
     , DAY_ENTRY5
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-6')
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-6')
     , DAY_ENTRY6
     , DAY_ENTRY6
     ]
