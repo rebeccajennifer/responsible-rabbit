@@ -67,7 +67,7 @@ class PlannerStrings:
     'test-layout.svg'
 
   DEF_DAY_LAYOUT_PATH: str =\
-    'day-layout.svg'
+    'day#-layout.svg'
 
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout.svg'
@@ -141,11 +141,12 @@ class PlannerStrings:
 
   DAY_PROMPTS: str =\
     [ 'How can I embrace discomfort and grow today?'
-    , 'How can I move towards my ideal self?'
     , 'What am I avoiding?'
     , 'What would make today feel meaningful?'
-    , 'What can I let go of to move forward?'
-    , 'Where can I invite more ease into my life?'
+    , 'What can I let go of?'
+    , 'Where can I invite more ease?'
+    , 'What emotion is most present right now?'
+    , 'What am I learning about myself?'
     ]
 
   DAY_PROMPT_LAST_24: str =\
@@ -334,4 +335,17 @@ class PlannerStrings:
     'believable outcome. What does that scenario look like? Who do you '
     'become, and how are your health, finances, and relationships '
     'affected?'
+  )
+
+  VOW_HEADER_TXT: str =\
+    'A Commitment to Growth'
+
+  VOW: str = (
+    'I, (your name), vow to be true to my word and to live with '
+    'intention. I will no longer treat my time as something to be '
+    'taken for granted. From this moment on, I commit to striving for '
+    'my fullest potential—for myself, for those I care about, and for '
+    'the greater good. I promise to dedicate time to this journal each '
+    'day until it is complete, and through this practice, to bring '
+    'my dreams, my purpose, and my highest self into being.'
   )

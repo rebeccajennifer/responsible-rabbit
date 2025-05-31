@@ -94,7 +94,7 @@ class GoalEntry(OnePageHalfLetterLayout):
       , show_outline=True
       )
 
-    , SingleLineTable\
+    , DualLineTable\
       ( total_wdth=self.content_wdth_
       , header_txt=Strings.GOAL_MEASUREMENT
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
