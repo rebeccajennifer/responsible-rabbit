@@ -31,13 +31,12 @@ from os import path
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
-from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_entries.habit_entry import HabitTracker
+from classes.page_entries.week_habit_entry import HabitTracker
+from classes.page_entries.week_checklist_entry import WeekCheckList
 
 from classes.page_layouts.half_letter_divider import DividerPage
 
-from classes.page_entries.blank_entry import BlankWrite
 from classes.reference_pages.ace_reference import AceReference
 
 from utils.planner_parser import PlannerCreationParser
@@ -81,27 +80,15 @@ if __name__ == '__main__':
       )
     layout.save()
 
-  ace_ref_layout =\
+  weekly_checklist =\
     TwoPageHalfLetterSize\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , file_path=path.join(args.out_dir, 'ace-reference.svg')
-    , entry_0_type=AceReference
-    , entry_0_args={Key.HEADER_TXT: 'test'}
-    )
-  ace_ref_layout.save()
-
-  test_layout =\
-    TwoPageHalfLetterSize\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , file_path=path.join(args.out_dir, Strings.DEF_TEST_LAYOUT_PATH)
-    , entry_0_type=BlankWrite
-    , entry_0_args={Key.HEADER_TXT: 'page 0'}
-    , entry_1_type=BlankWrite
-    , entry_1_args={Key.HEADER_TXT: 'page 1'}
-    )
-  test_layout.save()
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=path.join(args.out_dir, 'weekly-checklist.svg')
+      , entry_1_type=WeekCheckList
+      , entry_1_args={}
+      )
+  weekly_checklist.save()
 
   habit_tracker =\
     DividerPage\
@@ -113,6 +100,19 @@ if __name__ == '__main__':
     , entry_args={}
     )
   habit_tracker.save()
+
+
+
+
+  ace_ref_layout =\
+    TwoPageHalfLetterSize\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , file_path=path.join(args.out_dir, 'ace-reference.svg')
+    , entry_0_type=AceReference
+    , entry_0_args={Key.HEADER_TXT: 'test'}
+    )
+  ace_ref_layout.save()
 
   #_____________________________________________________________________
   # Create dividers
