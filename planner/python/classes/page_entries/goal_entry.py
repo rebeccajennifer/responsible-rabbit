@@ -34,7 +34,7 @@ from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetterLayout
 
 from classes.style.style import PlannerFontStyle as Font
 from classes.style.std_styles import StdTextBoxStyles

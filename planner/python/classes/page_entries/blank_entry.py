@@ -32,7 +32,7 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.elements.row_group import DualLineRowGroup
 from classes.elements.row_group import LineRowGroup
 
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________

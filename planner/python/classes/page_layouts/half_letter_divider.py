@@ -39,7 +39,7 @@ import svgwrite.text
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetterLayout
 
 
 #_______________________________________________________________________

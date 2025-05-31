@@ -41,7 +41,7 @@ from classes.reference_pages.ace_reference import AceReference
 
 from utils.planner_parser import PlannerCreationParser
 
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
+from classes.page_layouts.half_letter_two_page_layout import TwoPageHalfLetterSize
 
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:
