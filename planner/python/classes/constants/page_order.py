@@ -1,3 +1,41 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+#   DESCRIPTION
+#
+#   Configuration file for defining the layout and content of planner
+#   pages.
+#
+#   This module specifies the types of planner entries and how
+#   they are arranged in single- and double-sided printing formats.
+#
+#   Each entry is represented by a dictionary containing the entry
+#   type and any additional arguments it requires. These configurations
+#   enable automated generation of printable journal pages with
+#   consistent formatting and content.
+#_______________________________________________________________________
+
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 
@@ -31,6 +69,7 @@ class PageOrder:
                          layouts.
   """
 
+  #_____________________________________________________________________
   FUTURE_5YR_ENTRY0: dict =\
   { Key.ENTRY_TYPE: FreeWritePromptEntry
   , Key.ENTRY_ARGS:
@@ -77,6 +116,7 @@ class PageOrder:
     }
   }
 
+  #_____________________________________________________________________
   VOW_ENTRY: dict =\
   { Key.ENTRY_TYPE: FreeWritePromptEntry
   , Key.ENTRY_ARGS:
@@ -85,6 +125,7 @@ class PageOrder:
     }
   }
 
+  #_____________________________________________________________________
   DAY_ENTRY0 : dict =\
     { Key.ENTRY_TYPE: DayEntry
     , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: 0}
@@ -114,6 +155,7 @@ class PageOrder:
     , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: 6}
     }
 
+  #_____________________________________________________________________
   WEEK_ENTRY0: dict =\
     { Key.ENTRY_TYPE: WeekEntry0
     , Key.ENTRY_ARGS: {}
@@ -123,11 +165,13 @@ class PageOrder:
     , Key.ENTRY_ARGS: {}
     }
 
+  #_____________________________________________________________________
   GOAL_ENTRY: dict =\
     { Key.ENTRY_TYPE: GoalEntry
     , Key.ENTRY_ARGS: {}
     }
 
+  #_____________________________________________________________________
   BLNK_ENTRY: dict =\
     { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS: {}
@@ -138,6 +182,7 @@ class PageOrder:
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Book of Plans'}
     }
 
+  #_____________________________________________________________________
   DBL_SIDE_PAGE_ORDER: list =\
   [ [ 'page-00.svg'
     , FUTURE_1YR_ENTRY0
@@ -165,7 +210,7 @@ class PageOrder:
     ]
   , [ 'page-04.svg'
     , DAY_ENTRY2
-    , BLNK_ENTRY      # Replace with free write 0
+    , BLNK_ENTRY
     ]
   , [ 'page-05.svg'
     , DAY_ENTRY3
@@ -197,7 +242,7 @@ class PageOrder:
     ]
   ]
 
-
+  #_____________________________________________________________________
   SGL_SIDE_PAGE_ORDER: list =\
   [ [ 'page-00.svg'
     , TITLE_PAGE
@@ -268,5 +313,3 @@ class PageOrder:
     , DAY_ENTRY6
     ]
   ]
-
-

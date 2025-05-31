@@ -1,3 +1,34 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+#   DESCRIPTION
+#
+#   Defines standardized string keys for optional argument dictionaries
+#   used across planner page entries. These keys ensure consistency
+#   while enabling flexible, entry-specific behavior.
+#_______________________________________________________________________
+
 class AddlArgKeys:
   """
   Specifies valid keys for optional argument dictionaries used by page
@@ -10,12 +41,6 @@ class AddlArgKeys:
   CYCLING_PROMPT_IDX: str = 'cycling_prompt_idx'
   HEADER_TXT        : str = 'header_txt'
   PROMPT_TXT        : str = 'prompt'
-  FILE_PATH         : str = 'file_path'
-
-  FUTURE_5YR  : str = 'future_5yr'
-  FUTURE_12W  : str = 'future_12w'
-  FUTURE_1YR  : str = 'future_1yr'
-  FUTURE_BAD  : str = 'future_bad'
 
   ENTRY_TYPE  : str = 'entry_type'
   ENTRY_ARGS  : str = 'entry_args'

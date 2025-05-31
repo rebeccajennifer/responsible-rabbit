@@ -36,7 +36,7 @@
       , "args":
         [ "--help"]
       }
-    , { "name": "command-line-input"
+    , { "name": "single-sided"
       , "type": "debugpy"
       , "request": "launch"
       , "program": "${workspaceFolder}/planner/python/planner_creation_driver.py"
@@ -46,7 +46,7 @@
         , "planner/layouts/planner-layouts/single-sided/svg"
         ]
       }
-    , { "name": "dbl-side"
+    , { "name": "double-sided"
       , "type": "debugpy"
       , "request": "launch"
       , "program": "${workspaceFolder}/planner/python/planner_creation_driver.py"
