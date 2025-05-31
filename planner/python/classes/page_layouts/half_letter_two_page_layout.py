@@ -35,7 +35,7 @@ import svgwrite.container
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 
 #_______________________________________________________________________
@@ -64,12 +64,12 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
     # entry_type is type of page, e.g. day_entry, week_entry, etc
     #___________________________________________________________________
     if (not entry_0_type):
-      self.entry_0_type_: type = OnePageHalfLetterLayout
+      self.entry_0_type_: type = OnePageHalfLetter
     else:
       self.entry_0_type_: type = entry_0_type
 
     if (not entry_1_type):
-      self.entry_1_type_: type = OnePageHalfLetterLayout
+      self.entry_1_type_: type = OnePageHalfLetter
     else:
       self.entry_1_type_: type = entry_1_type
 

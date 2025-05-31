@@ -39,7 +39,7 @@ import svgwrite.text
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 
 #_______________________________________________________________________
@@ -62,7 +62,7 @@ class DividerPage(svgwrite.Drawing):
   ):
 
     if (not entry_type):
-      self.entry_type_: type = OnePageHalfLetterLayout
+      self.entry_type_: type = OnePageHalfLetter
     else:
       self.entry_type_: type = entry_type
 

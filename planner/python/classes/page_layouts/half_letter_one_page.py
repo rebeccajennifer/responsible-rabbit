@@ -42,7 +42,7 @@ from classes.style.table_style import TextBoxStyle
 
 
 #_______________________________________________________________________
-class OnePageHalfLetterLayout(svgwrite.container.Group):
+class OnePageHalfLetter(svgwrite.container.Group):
   """
   """
 
@@ -53,11 +53,15 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   , padding: int = Dims.BRD_MARGIN_PX
   , pad_bet_elements: bool = True
   , addl_args: dict = {}
+  , show_page_border: bool = True
+  , show_page_header: bool = True
   ):
 
     super().__init__()
 
     self.addl_args_ = addl_args
+    self.show_page_border_ = show_page_border
+    self.show_page_header_ = show_page_header
 
     self.entries_ = []
 
@@ -115,8 +119,10 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
     self.page_header_['transform'] = f'translate({x}, {y})'
 
-    self.add(self.border_)
-    self.add(self.page_header_)
+    if (self.show_page_border_):
+      self.add(self.border_)
+    if (self.show_page_header_):
+      self.add(self.page_header_)
 
     insert_x: int = self.content_insert_pt_x_
     insert_y: int = self.content_insert_pt_y_
@@ -207,8 +213,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       elements_remaining  : Number of elements yet to be added
                             to the layout.
     Returns:
-        Height allocated for each remaining element, adjusted
-        for spacing.
+      Height allocated for each remaining element, adjusted for spacing.
     """
 
     padding: int = self.pad_bet_elements_ * Dims.BRD_MARGIN_PX
