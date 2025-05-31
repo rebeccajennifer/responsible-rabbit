@@ -93,13 +93,15 @@ class PlannerStrings:
   #_____________________________________________________________________
   # Day layout strings
   #_____________________________________________________________________
-  SHORT_QUOTE_0: str =\
+  SHORT_QUOTE_0: str = (
     'Start where you are. Use what you have. Do what you can. '
-    #'-Arthur Ashe'
+    '-Arthur Ashe'
+  )
 
-  QUOTE0: str =\
-    'It’s not always that we need to do more, but rather that we need '\
+  QUOTE0: str = (
+    'It’s not always that we need to do more, but rather that we need '
     'to focus on less. - Nathan W. Morris'
+  )
 
   QUOTE1: str =\
     'Your future is created by what you do today, not tomorrow.'
@@ -124,12 +126,6 @@ class PlannerStrings:
   DAY_TODO: str =\
     'To Do'
 
-  DAY_CHECKLIST_STR: list =\
-    '[] Vision ' + SPACE +\
-    '[] Goals'   + SPACE +\
-    '[] Calendar'+ SPACE +\
-    '[] Habit'
-
   DAY_FOCUS: str =\
     'Today I will pay most attention to:'
 
@@ -137,20 +133,20 @@ class PlannerStrings:
     'Gratitude'
 
   DAY_ACHIEVEMENT: str =\
-    'One achievement I take pride in:'
+    'A Tiny Triumph or Epic Win'
 
   DAY_PROMPTS: str =\
-    [ 'How can I embrace discomfort and grow today?'
+    [ 'Where can I invite more ease?'
+    , 'What roadblock do I need to address?'
+    , 'How can I embrace discomfort?'
     , 'What am I avoiding?'
-    , 'What would make today feel meaningful?'
     , 'What can I let go of?'
-    , 'Where can I invite more ease?'
-    , 'What emotion is most present right now?'
     , 'What am I learning about myself?'
+    , 'How can I care for myself today?'
     ]
 
-  DAY_PROMPT_LAST_24: str =\
-    'In the last 24 hours...'
+  DAY_CHECK_IN: str =\
+    'Emotional and Values Check-In'
 
   #_____________________________________________________________________
   # Goal layout strings

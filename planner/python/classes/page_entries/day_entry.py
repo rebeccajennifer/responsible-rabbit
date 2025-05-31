@@ -49,12 +49,13 @@ class DayEntry(OnePageHalfLetterLayout):
   Daily entry layout.
   """
 
+
+
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
   , addl_args: dict = {}
-  , cycling_prompt_idx: int = 6
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -174,7 +175,7 @@ class DayEntry(OnePageHalfLetterLayout):
 
     , DualLineTable
       ( total_wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PROMPT_LAST_24
+      , header_txt=Strings.DAY_CHECK_IN
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=2
       , show_outline=True
