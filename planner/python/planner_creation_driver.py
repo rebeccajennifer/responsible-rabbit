@@ -33,7 +33,8 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_layouts.habit_layout import HabitLayout
+from classes.page_entries.habit_entry import HabitTracker
+
 from classes.page_layouts.half_letter_divider import DividerPage
 
 from classes.page_entries.blank_entry import BlankWrite
@@ -103,11 +104,13 @@ if __name__ == '__main__':
   test_layout.save()
 
   habit_tracker =\
-    HabitLayout\
+    DividerPage\
     ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
     , out_dir=args.out_dir
     , divider_pos=0
+    , divider_str='Today'
+    , entry_type=HabitTracker
+    , entry_args={}
     )
   habit_tracker.save()
 

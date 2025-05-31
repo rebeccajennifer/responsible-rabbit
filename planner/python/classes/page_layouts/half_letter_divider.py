@@ -37,13 +37,8 @@ import svgwrite.shapes
 import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
-from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.row_group import TextRowGroup
-from classes.elements.base_element import VerticalStack
-from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
-from classes.style.table_style import TextBoxStyle
 from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
 
 
@@ -57,13 +52,21 @@ class DividerPage(svgwrite.Drawing):
   #_____________________________________________________________________
   def __init__(self
   , is_portrait: bool = False
-  , is_dbl_sided: bool = False
   , out_dir: str = ''
   , file_name: str = ''
   , file_path: str = ''
   , divider_pos: int = 0
   , divider_str: str = ''
+  , entry_type: type = None
+  , entry_args: dict = {}
   ):
+
+    if (not entry_type):
+      self.entry_type_: type = OnePageHalfLetterLayout
+    else:
+      self.entry_type_: type = entry_type
+
+    self.entry_args_ = entry_args
 
     if (not file_path):
       if (not file_name):
@@ -177,11 +180,14 @@ class DividerPage(svgwrite.Drawing):
       , stroke_dasharray='2,6'
       )
 
+    EntryType: type = self.entry_type_
+
     #___________________________________________________________________
-    self.content_0_: OnePageHalfLetterLayout =\
-      OnePageHalfLetterLayout\
+    self.content_0_ =\
+      EntryType\
       ( total_wdth=self.content_wdth_
       , total_hght=self.content_hght_
+      , addl_args=self.entry_args_
       )
 
     return
