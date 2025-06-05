@@ -43,6 +43,7 @@ from classes.page_entries.day_entry import DayEntry
 from classes.page_entries.week_entry import WeekEntry0
 from classes.page_entries.week_entry import WeekEntry1
 from classes.page_entries.free_write_entry import FreeWriteEntry
+from classes.page_entries.title_page import TitlePage
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.goal_entry import GoalEntry
 
@@ -68,6 +69,13 @@ class PageOrder:
     DBL_SIDE_PAGE_ORDER: Same as above, but for double-sided printing
                          layouts.
   """
+
+  TITLE_PAGE: dict =\
+  { Key.ENTRY_TYPE: TitlePage
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: 'Book of Plans'
+    }
+  }
 
   #_____________________________________________________________________
   FUTURE_5YR_ENTRY0: dict =\
@@ -175,11 +183,6 @@ class PageOrder:
   BLNK_ENTRY: dict =\
     { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS: {}
-    }
-
-  TITLE_PAGE: dict =\
-    { Key.ENTRY_TYPE: FreeWriteEntry
-    , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Book of Plans'}
     }
 
   #_____________________________________________________________________

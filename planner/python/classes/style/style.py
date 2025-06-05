@@ -76,25 +76,23 @@ class PlannerFontStyle:
 
   DEF_PAGE_HEADER_TXT_SIZE: int = 12
 
-  HEAD_1_SIZE: int = 12
-  HEAD_2_SIZE: int = 24
-  PROMPT_SIZE: int = 14
   NORMAL_SIZE: int = 10
   LITTLE_SIZE: int = 8
+
+  TITLE_SIZE: int   = 36
 
   TEXT_PADDING: int = 5
 
   FONT_FAMILY_NORMAL: str = 'Ubuntu Mono'
   FONT_FAMILY_HEADER: str = 'Trebuchet MS'
-  FONT_FAMILY_PROMPT: str = 'Trebuchet MS'
 
-  STYLE_PROMPT: str = 'italics'
+  TREBUCHET_MS: str = 'Trebuchet MS'
+  UBUNTU_MONO:  str = 'Ubuntu Mono'
 
-  DEF_LINE_SPC: int =\
-    1
+  DEF_LINE_SPC: int = 1
 
   # Empirically determined constants
   WDTH_MULTPLIER: dict =\
-  { FONT_FAMILY_NORMAL: 1.75
-  , FONT_FAMILY_HEADER: 2.3
+  { UBUNTU_MONO   : 1.75
+  , TREBUCHET_MS  : 2.3
   }

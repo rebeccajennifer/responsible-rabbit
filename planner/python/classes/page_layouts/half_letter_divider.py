@@ -154,7 +154,7 @@ class DividerPage(svgwrite.Drawing):
     #___________________________________________________________________
     # Text for divider tab
     #___________________________________________________________________
-    font_size = Font.HEAD_2_SIZE
+    font_size = Font.TITLE_SIZE
 
     txt_x_insert: int = tab_x_strt + Dims.DIVIDER_WDTH / 2 - font_size / 2
     txt_y_insert: int = tab_y_strt + Font.TEXT_PADDING

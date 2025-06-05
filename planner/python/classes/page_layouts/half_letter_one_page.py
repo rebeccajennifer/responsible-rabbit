@@ -84,8 +84,13 @@ class OnePageHalfLetter(svgwrite.container.Group):
       - pad_bet_elements * Dims.BRD_MARGIN_PX
 
     self.content_insert_pt_x_ : int = self.page_header_insert_pt_x_
-    self.content_insert_pt_y_ : int =\
-      self.page_header_insert_pt_y_ + self.page_header_.total_hght_
+
+    # TODO: fix hack
+    if (self.show_page_header_):
+      self.content_insert_pt_y_ : int =\
+        self.page_header_insert_pt_y_ + self.page_header_.total_hght_
+    else:
+      self.content_insert_pt_y_ : int = self.page_header_insert_pt_y_
 
     self.create_content()
     self.add_content()

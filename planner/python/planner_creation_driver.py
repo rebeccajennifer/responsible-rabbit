@@ -33,6 +33,7 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
 
 from classes.page_entries.week_habit_entry import HabitTracker
+from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
 
 from classes.page_layouts.half_letter_divider import DividerPage
@@ -101,9 +102,6 @@ if __name__ == '__main__':
     )
   habit_tracker.save()
 
-
-
-
   ace_ref_layout =\
     TwoPageHalfLetterSize\
     ( is_portrait=is_portrait
@@ -126,13 +124,14 @@ if __name__ == '__main__':
   for i in range(1, 4):
     divider_labels.append(f'Month {i}')
 
-
   for i in range(len(divider_labels)):
     DividerPage\
     ( is_portrait=is_portrait
     , divider_pos=i+1
     , divider_str=divider_labels[i]
     , out_dir=args.out_dir
+    , entry_type=TitlePage
+    , entry_args={Key.HEADER_TXT: divider_labels[i]}
     ).save()
 
   new_line(10)
