@@ -133,6 +133,14 @@ class PageOrder:
     }
   }
 
+  ACTION_ITEMS_ENTRY: dict =\
+  { Key.ENTRY_TYPE: FreeWriteEntry
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: 'Action Items: '
+    }
+  }
+
+
   #_____________________________________________________________________
   DAY_ENTRY0 : dict =\
     { Key.ENTRY_TYPE: DayEntry
@@ -247,7 +255,11 @@ class PageOrder:
 
   #_____________________________________________________________________
   SGL_SIDE_PAGE_ORDER: list =\
-  [ [ 'page-00.svg'
+  [ [ 'action-items.svg'
+    , ACTION_ITEMS_ENTRY
+    , ACTION_ITEMS_ENTRY
+    ]
+  , [ 'page-00.svg'
     , TITLE_PAGE
     , FUTURE_1YR_ENTRY1
     ]
