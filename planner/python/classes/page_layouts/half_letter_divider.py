@@ -73,7 +73,9 @@ class DividerPage(svgwrite.Drawing):
         file_name: str =\
           'divider-' + divider_str.lower().replace(' ', '-') + '.svg'
 
-    self.file_path_ = path.join(out_dir, file_name)
+      self.file_path_ = path.join(out_dir, file_name)
+    else:
+      self.file_path_ = file_path
 
     self.is_portrait_   : bool  = is_portrait
     self.divider_pos_   : int   = divider_pos

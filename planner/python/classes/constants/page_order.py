@@ -46,6 +46,7 @@ from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.goal_entry import GoalEntry
+from classes.page_entries.week_checklist_entry import WeekCheckList
 
 #_______________________________________________________________________
 class PageOrder:
@@ -69,6 +70,11 @@ class PageOrder:
     DBL_SIDE_PAGE_ORDER: Same as above, but for double-sided printing
                          layouts.
   """
+
+  WEEK_CHECKLIST: dict =\
+  { Key.ENTRY_TYPE: WeekCheckList
+
+  }
 
   TITLE_PAGE: dict =\
   { Key.ENTRY_TYPE: TitlePage

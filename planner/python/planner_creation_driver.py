@@ -68,6 +68,8 @@ if __name__ == '__main__':
   else:
     page_order = PageOrder.SGL_SIDE_PAGE_ORDER
 
+  # Iterate through list containing layout arguments and create
+  # svg for each layout
   for i in range (len(page_order)):
     layout =\
       TwoPageHalfLetterSize\
@@ -84,8 +86,8 @@ if __name__ == '__main__':
   weekly_checklist =\
     TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
-      , is_dbl_sided=is_dbl_sided
-      , file_path=path.join(args.out_dir, 'weekly-checklist.svg')
+      , is_dbl_sided=True
+      , file_path=path.join(args.out_dir, 'weekly-checklist-back.svg')
       , entry_1_type=WeekCheckList
       , entry_1_args={}
       )
@@ -97,6 +99,7 @@ if __name__ == '__main__':
     , out_dir=args.out_dir
     , divider_pos=0
     , divider_str='Today'
+    , file_path=path.join(args.out_dir, 'weekly-checklist-frnt.svg')
     , entry_type=HabitTracker
     , entry_args={}
     )

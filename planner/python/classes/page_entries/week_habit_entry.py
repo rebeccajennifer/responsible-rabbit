@@ -30,11 +30,8 @@ import svgwrite.container
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.base_element import VerticalStack
-from classes.elements.row_group import TextRowGroup
 from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
-from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
 
 from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
@@ -82,7 +79,7 @@ class HabitTracker(OnePageHalfLetter):
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
       , header_txt_lst=Strings.WEEK_HABIT_TRACKER_HEADINGS
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , text_style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
       , row_count=6
       , col_wdths=[-1, 40] + 7 * [25] + [40]
       , inner_pad_lft=True
