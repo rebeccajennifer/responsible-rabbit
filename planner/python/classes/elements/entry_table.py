@@ -26,15 +26,15 @@
 #   Creates hourly entry for daily schedule.
 #_______________________________________________________________________
 
+#_______________________________________________________________________
+# TODO - refactor daily schedule to remove
+#_______________________________________________________________________
 import svgwrite.container
 import svgwrite.shapes
-import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
-from classes.constants.strings import PlannerStrings as Strings
-from classes.constants.error_strings import ErrorStrings as Err
 
 from classes.elements.header_box import HeaderBox
 
@@ -105,7 +105,6 @@ class EntryTable(svgwrite.container.Group):
 
     if (box_fill_color == 'none'):
       self.font_color_ = Colors.NORMAL_TXT
-
 
     self.box_brdr_color_  : str   = box_brdr_color
     self.col_count_ : int   = col_count

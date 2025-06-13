@@ -63,13 +63,18 @@ if __name__ == '__main__':
 
   page_order: list = []
 
+  #_____________________________________________________________________
+  # Determine page ordering
+  #_____________________________________________________________________
   if (is_dbl_sided):
     page_order = PageOrder.DBL_SIDE_PAGE_ORDER
   else:
     page_order = PageOrder.SGL_SIDE_PAGE_ORDER
 
+  #_____________________________________________________________________
   # Iterate through list containing layout arguments and create
   # svg for each layout
+  #_____________________________________________________________________
   for i in range (len(page_order)):
     layout =\
       TwoPageHalfLetterSize\
@@ -83,6 +88,9 @@ if __name__ == '__main__':
       )
     layout.save()
 
+  #_____________________________________________________________________
+  # Create weekly habit bookmark
+  #_____________________________________________________________________
   weekly_checklist =\
     TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
@@ -104,6 +112,7 @@ if __name__ == '__main__':
     , entry_args={}
     )
   habit_tracker.save()
+  #_____________________________________________________________________
 
   ace_ref_layout =\
     TwoPageHalfLetterSize\

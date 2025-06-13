@@ -95,18 +95,26 @@ class PlannerUtils:
       floor(px_wdth / (font_size / Font.WDTH_MULTPLIER[font_family]))
 
     lines: list = []
-    words: list = txt.split()
+    paragraphs: list = txt.split('\n')
 
-    current_line: str = ''
+    # Iterate through paragraphs
+    for i in range(len(paragraphs)):
 
-    for word in words:
-        if len(current_line) + len(word) + 1 <= max_chars_per_line:
-            current_line += (' ' if current_line else '') + word
-        else:
-            lines.append(current_line)
-            current_line = word
+      para_words: list = paragraphs[i].split()
+      current_line: str = ''
 
-    lines.append(current_line)
+      for word in para_words:
+          if len(current_line) + len(word) + 1 <= max_chars_per_line:
+              current_line += (' ' if current_line else '') + word
+          else:
+              lines.append(current_line)
+              current_line = word
+
+      lines.append(current_line)
+
+      # Don't add an extra line at the end of the text string list
+      if (i != len(paragraphs) - 1):
+        lines.append('')
 
     #___________________________________________________________________
     # TODO refactor logic - this feels hacky

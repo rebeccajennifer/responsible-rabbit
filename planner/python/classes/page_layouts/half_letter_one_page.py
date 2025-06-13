@@ -178,7 +178,7 @@ class OnePageHalfLetter(svgwrite.container.Group):
       None
 
     Returns:
-      HeaderBox for page header
+      Text box for page header
     """
 
     style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
