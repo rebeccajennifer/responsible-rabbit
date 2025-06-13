@@ -96,8 +96,11 @@ if __name__ == '__main__':
       ( is_portrait=is_portrait
       , is_dbl_sided=True
       , file_path=path.join(args.out_dir, 'weekly-checklist-back.svg')
+      , entry_0_type=TitlePage
+      , entry_0_args={}
       , entry_1_type=WeekCheckList
       , entry_1_args={}
+      , rgt_bndr_mrgn=True
       )
   weekly_checklist.save()
 

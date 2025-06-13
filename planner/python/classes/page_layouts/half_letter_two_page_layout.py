@@ -54,11 +54,18 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
   , entry_0_args: dict = {}
   , entry_1_type: type = None
   , entry_1_args: dict = {}
+  , rgt_bndr_mrgn: bool = False
   ):
+
+
+    """
+    rgt_bndr_mrgn: Use the binder margin on the the right side
+    """
 
     self.is_portrait_   : bool  = is_portrait
     self.is_dbl_sided_  : bool  = is_dbl_sided
     self.file_path_     : str   = file_path
+    self.rgt_bndr_mrgn_ : bool  = rgt_bndr_mrgn
 
     #___________________________________________________________________
     # entry_type is type of page, e.g. day_entry, week_entry, etc
@@ -192,6 +199,13 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
 
       if (self.is_dbl_sided_):
         insert_pos00 = Dims.STD_MARGIN_PX
+
+    # Modify insertion point of right content to allow for binder
+    # margin on right side
+    if (self.rgt_bndr_mrgn_):
+      insert_pos10 = content_wdth\
+        + 2 * Dims.STD_MARGIN_PX\
+        + Dims.BND_MARGIN_PX
 
     insert_pos0: Tuple = (insert_pos00, insert_pos01)
     insert_pos1: Tuple = (insert_pos10, insert_pos11)
