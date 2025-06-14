@@ -116,21 +116,15 @@ class WeekEntry0(OnePageHalfLetter):
       , row_count=8
       , show_outline=True
       )
-   ]
-
-    fill_hght: int = self.calc_remaining_hght_per_element()
-
-    self.entries_.insert(4,
-      DualLineTable\
+    , DualLineTable\
       ( total_wdth=self.content_wdth_
-      , total_hght=fill_hght
       , header_txt=Strings.WEEK_GRATITUDE
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=1
       , show_outline=True
       , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
-    )
+    ]
 
     return
 

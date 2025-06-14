@@ -89,6 +89,9 @@ class DayEntry(OnePageHalfLetter):
     , 'How can I care for myself today?'
     ]
 
+  VALUES_HEADER: str =\
+    'Values'
+
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0
@@ -169,7 +172,7 @@ class DayEntry(OnePageHalfLetter):
     self.entries_: list =\
     [ DualLineTable\
       ( total_wdth=self.main_content_wdth_
-      , header_txt='Values'
+      , header_txt=self.VALUES_HEADER
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=3
       , show_outline=False
@@ -191,6 +194,13 @@ class DayEntry(OnePageHalfLetter):
       , header_txt=self.DAY_TODO
       , row_count=6
       , text_style=StdTextBoxStyles.MED_BACK_NORMAL_FONT
+      )
+
+    , SingleLineTable\
+      ( total_wdth=self.main_content_wdth_
+      , header_txt=self.DAY_GRATITUDE
+      , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
+      , show_outline=True
       )
 
     , DualLineTable
@@ -219,18 +229,6 @@ class DayEntry(OnePageHalfLetter):
       , show_outline=True
       )
     ]
-
-    fill_hght: int = self.calc_remaining_hght_per_element(1)
-
-    self.entries_.insert(3,
-      SingleLineTable\
-      ( total_wdth=self.main_content_wdth_
-      , total_hght=fill_hght
-      , header_txt=self.DAY_GRATITUDE
-      , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
-      , show_outline=True
-      )
-    )
 
     return
 

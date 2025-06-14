@@ -55,6 +55,7 @@ class OnePageHalfLetter(svgwrite.container.Group):
   , addl_args: dict = {}
   , show_page_border: bool = True
   , show_page_header: bool = True
+  , pad_under_page_header: bool = True
   ):
 
     super().__init__()
@@ -77,11 +78,16 @@ class OnePageHalfLetter(svgwrite.container.Group):
     self.page_header_: svgwrite.container.Group =\
       self.create_page_header()
 
+    #___________________________________________________________________
     # Content height is affected by generation of page header
+    #___________________________________________________________________
+    # 2 * padding is for top and bottom padding - before page header
+    # and below content
+    #___________________________________________________________________
     self.content_hght_: int = self.total_hght_\
       - 2 * padding\
       - self.page_header_.total_hght_\
-      - pad_bet_elements * Dims.BRD_MARGIN_PX
+      - pad_under_page_header * Dims.BRD_MARGIN_PX
 
     self.content_insert_pt_x_ : int = self.page_header_insert_pt_x_
 
@@ -136,6 +142,9 @@ class OnePageHalfLetter(svgwrite.container.Group):
       VerticalStack\
       ( obj_list=self.entries_
       , add_top_pad=self.pad_bet_elements_
+      , total_hght=self.content_hght_
+      , show_outline=False
+      , outline_color=Colors.FLUX_GRN
       )
 
     content['transform'] = f'translate({insert_x}, {insert_y})'
@@ -226,10 +235,13 @@ class OnePageHalfLetter(svgwrite.container.Group):
     remaining_hght: int = self.content_hght_\
       - padding * (elements_remaining - 1)
 
+    # Debugging
+    remaining_hght: int = self.content_hght_
+
     for entry in self.entries_:
       remaining_hght =\
-        remaining_hght - entry.total_hght_ - padding
+        remaining_hght - entry.total_hght_ - padding * self.pad_bet_elements_
 
-    fill_hght: int = remaining_hght / elements_remaining\
+    fill_hght: int = remaining_hght / elements_remaining
 
     return fill_hght

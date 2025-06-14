@@ -73,12 +73,12 @@ class VerticalStack(svgwrite.container.Group):
       if (self.total_wdth_ < obj_list[i].total_wdth_):
         self.total_wdth_ = obj_list[i].total_wdth_
 
-    if (total_hght > 0):
+    if (total_hght > 0 and len(obj_list) > 1):
       padding =\
         ( total_hght\
-        - Dims.BRD_MARGIN_PX * add_top_pad\
+        #- Dims.BRD_MARGIN_PX * add_top_pad\
         - content_hght
-        ) / (len(obj_list) - 1)
+        ) / (len(obj_list)-1)
 
       self.total_hght_ = total_hght
 
@@ -95,8 +95,6 @@ class VerticalStack(svgwrite.container.Group):
         + padding
 
       self.add(obj_list[i])
-
-
 
     if (show_outline):
       Utils.add_outline\
