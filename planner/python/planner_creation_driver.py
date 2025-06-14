@@ -35,6 +35,7 @@ from classes.constants.page_order import PageOrder
 from classes.page_entries.week_habit_entry import HabitTracker
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
+from classes.page_entries.test_entry import TestEntry
 
 from classes.page_layouts.half_letter_divider import DividerPage
 
@@ -48,6 +49,30 @@ from classes.page_layouts.half_letter_two_page_layout import TwoPageHalfLetterSi
 def new_line (new_line_count: int = 1) -> None:
   for i in range(new_line_count):
     print()
+
+def generate_pages\
+( page_order: list
+, is_portrait: bool
+, is_dbl_sided: bool
+, out_dir: str
+) -> None:
+  #_____________________________________________________________________
+  # Iterate through list containing layout arguments and create
+  # svg for each layout
+  #_____________________________________________________________________
+  for i in range (len(page_order)):
+    layout =\
+      TwoPageHalfLetterSize\
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=path.join(out_dir, page_order[i][0])
+      , entry_0_type=page_order[i][1][Key.ENTRY_TYPE]
+      , entry_0_args=page_order[i][1][Key.ENTRY_ARGS]
+      , entry_1_type=page_order[i][2][Key.ENTRY_TYPE]
+      , entry_1_args=page_order[i][2][Key.ENTRY_ARGS]
+      )
+    layout.save()
+
 
 #_______________________________________________________________________
 if __name__ == '__main__':
@@ -72,6 +97,8 @@ if __name__ == '__main__':
     page_order = PageOrder.SGL_SIDE_PAGE_ORDER
   #_____________________________________________________________________
 
+  generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
+
   ace_ref_layout =\
     TwoPageHalfLetterSize\
     ( is_portrait=is_portrait
@@ -79,26 +106,10 @@ if __name__ == '__main__':
     , file_path=path.join(args.out_dir, 'ace-reference.svg')
     , entry_0_type=AceReference
     , entry_0_args={Key.HEADER_TXT: 'test'}
+    , entry_1_type=TestEntry
+    , entry_1_args={}
     )
   ace_ref_layout.save()
-
-
-  #_____________________________________________________________________
-  # Iterate through list containing layout arguments and create
-  # svg for each layout
-  #_____________________________________________________________________
-  for i in range (len(page_order)):
-    layout =\
-      TwoPageHalfLetterSize\
-      ( is_portrait=is_portrait
-      , is_dbl_sided=is_dbl_sided
-      , file_path=path.join(args.out_dir, page_order[i][0])
-      , entry_0_type=page_order[i][1][Key.ENTRY_TYPE]
-      , entry_0_args=page_order[i][1][Key.ENTRY_ARGS]
-      , entry_1_type=page_order[i][2][Key.ENTRY_TYPE]
-      , entry_1_args=page_order[i][2][Key.ENTRY_ARGS]
-      )
-    layout.save()
 
   #_____________________________________________________________________
   # Create weekly habit bookmark
