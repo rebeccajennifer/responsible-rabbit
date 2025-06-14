@@ -70,6 +70,18 @@ if __name__ == '__main__':
     page_order = PageOrder.DBL_SIDE_PAGE_ORDER
   else:
     page_order = PageOrder.SGL_SIDE_PAGE_ORDER
+  #_____________________________________________________________________
+
+  ace_ref_layout =\
+    TwoPageHalfLetterSize\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , file_path=path.join(args.out_dir, 'ace-reference.svg')
+    , entry_0_type=AceReference
+    , entry_0_args={Key.HEADER_TXT: 'test'}
+    )
+  ace_ref_layout.save()
+
 
   #_____________________________________________________________________
   # Iterate through list containing layout arguments and create
@@ -115,18 +127,6 @@ if __name__ == '__main__':
     , entry_args={}
     )
   habit_tracker.save()
-  #_____________________________________________________________________
-
-  ace_ref_layout =\
-    TwoPageHalfLetterSize\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , file_path=path.join(args.out_dir, 'ace-reference.svg')
-    , entry_0_type=AceReference
-    , entry_0_args={Key.HEADER_TXT: 'test'}
-    )
-  ace_ref_layout.save()
-
   #_____________________________________________________________________
   # Create dividers
   #_____________________________________________________________________
