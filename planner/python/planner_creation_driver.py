@@ -32,6 +32,7 @@ from os import path
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
 
+from classes.page_entries.month_entry import MonthEntry
 from classes.page_entries.week_habit_entry import HabitTracker
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
@@ -111,7 +112,7 @@ def generate_habit_tracker\
     TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
       , is_dbl_sided=True
-      , file_path=path.join(out_dir, 'week-chcklst-back.svg')
+      , file_path=path.join(out_dir, 'weekly-checklist-back.svg')
       , entry_0_type=TitlePage
       , entry_0_args={}
       , entry_1_type=WeekCheckList
@@ -126,11 +127,15 @@ def generate_habit_tracker\
     , out_dir=args.out_dir
     , divider_pos=0
     , divider_str='Today'
-    , file_path=path.join(args.out_dir, 'week-chcklst-frnt.svg')
+    , file_path=path.join(args.out_dir, 'weekly-checklist-frnt.svg')
     , entry_type=HabitTracker
     , entry_args={}
     )
   habit_tracker.save()
+
+
+
+
 
 
 #_______________________________________________________________________
@@ -145,6 +150,8 @@ if __name__ == '__main__':
   is_portrait: bool   = False
   is_dbl_sided: bool  = args.dbl_sided
 
+  page_order: list = []
+
   #_____________________________________________________________________
   # Determine page ordering
   #_____________________________________________________________________
@@ -155,21 +162,22 @@ if __name__ == '__main__':
   #_____________________________________________________________________
 
   generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
-  generate_dividers(is_portrait, args.out_dir)
+  #generate_dividers(is_portrait, args.out_dir)
   generate_habit_tracker(is_portrait, args.out_dir)
 
   ace_ref_layout =\
     TwoPageHalfLetterSize\
-    ( is_portrait=is_portrait
+    ( is_portrait=False
     , is_dbl_sided=is_dbl_sided
     , file_path=path.join(args.out_dir, 'test.svg')
-    , entry_0_type=page_order[5][1][Key.ENTRY_TYPE]
-    , entry_0_args=page_order[5][1][Key.ENTRY_ARGS]
+    , entry_0_type=MonthEntry
+    , entry_0_args={}
     , entry_1_type=TestEntry
     , entry_1_args={}
     )
   ace_ref_layout.save()
 
+  """
   ace_ref_layout =\
     TwoPageHalfLetterSize\
     ( is_portrait=is_portrait
@@ -181,7 +189,8 @@ if __name__ == '__main__':
     , entry_1_args={}
     )
   ace_ref_layout.save()
+  """
 
   new_line(10)
-  print('all done')
+  print("all done")
   new_line(10)

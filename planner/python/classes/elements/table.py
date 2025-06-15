@@ -252,6 +252,7 @@ class ColumnTable(svgwrite.container.Group):
         , row_count=row_count
         , inner_pad_lft=inner_pad_lft
         , inner_pad_rgt=inner_pad_rgt
+        , show_outline=True
         )
       )
 

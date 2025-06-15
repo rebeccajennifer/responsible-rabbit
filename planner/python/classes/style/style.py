@@ -79,7 +79,7 @@ class PlannerFontStyle:
   NORMAL_SIZE: int = 10
   LITTLE_SIZE: int = 8
 
-  TITLE_SIZE: int   = 36
+  TITLE_SIZE: int   = 24
 
   TEXT_PADDING: int = 5
 

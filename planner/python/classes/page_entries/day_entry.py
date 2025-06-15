@@ -196,13 +196,6 @@ class DayEntry(OnePageHalfLetter):
       , text_style=StdTextBoxStyles.MED_BACK_NORMAL_FONT
       )
 
-    , SingleLineTable\
-      ( total_wdth=self.main_content_wdth_
-      , header_txt=self.DAY_GRATITUDE
-      , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
-      , show_outline=True
-      )
-
     , DualLineTable
       ( total_wdth=self.main_content_wdth_
       , header_txt=self.DAY_PROMPTS[self.cycling_prompt_idx_]
@@ -229,6 +222,18 @@ class DayEntry(OnePageHalfLetter):
       , show_outline=True
       )
     ]
+
+    fill_hght: int = self.calc_remaining_hght_per_element(1)
+
+    self.entries_.insert(3
+    , SingleLineTable\
+      ( total_wdth=self.main_content_wdth_
+      , total_hght=fill_hght
+      , header_txt=self.DAY_GRATITUDE
+      , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
+      , show_outline=True
+      )
+    )
 
     return
 

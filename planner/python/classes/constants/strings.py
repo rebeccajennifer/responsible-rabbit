@@ -40,13 +40,13 @@ class PlannerStrings:
     '\u2022'
 
   DATE_STR: str =\
-    5 * SPACE\
+    4 * SPACE\
     + '/'\
-    + 5 * SPACE\
+    + 4 * SPACE\
     + '/'\
     + SPACE\
     + '20'\
-    + 5 * SPACE
+    + 4 * SPACE
 
   DEF_TABLE_HEADER_TXT: str =\
     'Table Header'
@@ -90,22 +90,37 @@ class PlannerStrings:
   #_____________________________________________________________________
   # Day layout strings
   #_____________________________________________________________________
-  SHORT_QUOTE_0: str = (
+  QUOTE0: str = (
     'Start where you are. Use what you have. Do what you can. '
     '-Arthur Ashe'
   )
 
-  QUOTE0: str = (
+  QUOTE1: str = (
     'It’s not always that we need to do more, but rather that we need '
-    'to focus on less. - Nathan W. Morris'
+    'to focus on less. -Nathan W. Morris'
   )
 
-  QUOTE1: str =\
-    'Your future is created by what you do today, not tomorrow.'
+  QUOTE2: str = str(
+    'Your future is created by what you do today, not tomorrow. '
+    '-Robert Kiyosaki'
+  )
+
+  QUOTE0 = 'Quote0'
+  QUOTE1 = 'Quote1'
+  QUOTE2 = 'Quote2'
+  QUOTE3 = 'Quote3'
+  QUOTE4 = 'Quote4'
+  QUOTE5 = 'Quote5'
+  QUOTE6 = 'Quote6'
 
   QUOTES: list =\
-  [ {'quote': QUOTE0, 'author': '- Nathan W. Morris'}
-  , {'quote': QUOTE1, 'author': '- Robert Kiyosaki'}
+  [ QUOTE0
+  , QUOTE1
+  , QUOTE2
+  , QUOTE3
+  , QUOTE4
+  , QUOTE5
+  , QUOTE6
   ]
 
 
