@@ -40,12 +40,15 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.day_entry import DayEntry
+from classes.page_entries.month_entry import MonthEntry
+
+from classes.page_entries.goal_entry import GoalEntry
+from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_entries.week_entry import WeekEntry0
 from classes.page_entries.week_entry import WeekEntry1
-from classes.page_entries.free_write_entry import FreeWriteEntry
+
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
-from classes.page_entries.goal_entry import GoalEntry
 from classes.page_entries.week_checklist_entry import WeekCheckList
 
 #_______________________________________________________________________
@@ -172,6 +175,11 @@ class PageOrder:
   DAY_ENTRY5 = DAY_ENTRY[5]
   DAY_ENTRY6 = DAY_ENTRY[6]
 
+  MONTH_ENTRY: dict =\
+    { Key.ENTRY_TYPE: MonthEntry
+    , Key.ENTRY_ARGS: {}
+    }
+
   #_____________________________________________________________________
   FREE_WRITE_DAY0: dict =\
     { Key.ENTRY_TYPE: FreeWriteEntry
@@ -262,39 +270,43 @@ class PageOrder:
 
   #_____________________________________________________________________
   SGL_SIDE_PAGE_ORDER: list =\
-  [ [ 'action-items.svg'
+  [ [ '00-action-items.svg'
     , ACTION_ITEMS_ENTRY
     , ACTION_ITEMS_ENTRY
     ]
-  , [ 'page-00.svg'
+  , [ '00-title-future-1yr.svg'
     , TITLE_PAGE
     , FUTURE_1YR_ENTRY1
     ]
-  , [ 'page-01.svg'
+  , [ '01-future-5yr-future-12w.svg'
     , FUTURE_5YR_ENTRY0
     , FUTURE_12W_ENTRY
     ]
-  , [ 'page-02.svg'
+  , [ '02-future-5yr-future-bad.svg'
     , FUTURE_5YR_ENTRY1
     , FUTURE_BAD_ENTRY
     ]
-  , [ 'page-03.svg'
+  , [ '03-future-1yr-vow.svg'
     , FUTURE_1YR_ENTRY0
     , VOW_ENTRY
     ]
-  , [ 'page-04.svg'
+  , [ '04-goal.svg'
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ 'page-05.svg'
+  , [ '05-goal.svg'
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ 'page-06.svg'
+  , [ '06-month.svg'
+    , MONTH_ENTRY
+    , MONTH_ENTRY
+    ]
+  , [ '07-week0.svg'
     , WEEK_ENTRY0
     , WEEK_ENTRY0
     ]
-  , [ 'page-07.svg'
+  , [ '08-week1.svg'
     , WEEK_ENTRY1
     , WEEK_ENTRY1
     ]
