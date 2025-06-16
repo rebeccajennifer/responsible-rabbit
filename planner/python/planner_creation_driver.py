@@ -162,10 +162,10 @@ if __name__ == '__main__':
   #_____________________________________________________________________
 
   generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
-  #generate_dividers(is_portrait, args.out_dir)
+  generate_dividers(is_portrait, args.out_dir)
   generate_habit_tracker(is_portrait, args.out_dir)
 
-  ace_ref_layout =\
+  test_layout=\
     TwoPageHalfLetterSize\
     ( is_portrait=False
     , is_dbl_sided=is_dbl_sided
@@ -175,21 +175,7 @@ if __name__ == '__main__':
     , entry_1_type=TestEntry
     , entry_1_args={}
     )
-  ace_ref_layout.save()
-
-  """
-  ace_ref_layout =\
-    TwoPageHalfLetterSize\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , file_path=path.join(args.out_dir, 'ace-reference.svg')
-    , entry_0_type=AceReference
-    , entry_0_args={Key.HEADER_TXT: 'test'}
-    , entry_1_type=TestEntry
-    , entry_1_args={}
-    )
-  ace_ref_layout.save()
-  """
+  test_layout.save()
 
   new_line(10)
   print("all done")
