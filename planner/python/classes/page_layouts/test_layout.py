@@ -34,7 +34,7 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.page_entries.free_write_entry import FreeWriteEntry
 
 from classes.page_entries.test_entry0 import TestEntry0
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
+from classes.page_layouts.half_letter_two_page_layout import TwoPageHalfLetterSize
 
 
 #_______________________________________________________________________

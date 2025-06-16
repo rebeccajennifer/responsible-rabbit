@@ -28,14 +28,12 @@
 
 import svgwrite
 
-from typing import Tuple
 from copy import deepcopy
 
 import svgwrite.container
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.row_group import RowGroup
 from classes.elements.row_group import TextRowGroup
 from classes.elements.base_element import VerticalStack
 from classes.style.std_styles import StdTextBoxStyles
@@ -44,171 +42,7 @@ from classes.style.table_style import TextBoxStyle
 
 
 #_______________________________________________________________________
-class TwoPageHalfLetterSize(svgwrite.Drawing):
-  """
-  Layout for half letter size prints. Intended to print two pages on
-  one sheet and cut in half.
-  """
-
-  #_____________________________________________________________________
-  def __init__(self
-  , is_portrait: bool = False
-  , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_LAYOUT_PATH
-  , entry_0_type: type = None
-  , entry_0_args: dict = {}
-  , entry_1_type: type = None
-  , entry_1_args: dict = {}
-  ):
-
-    self.is_portrait_   : bool  = is_portrait
-    self.is_dbl_sided_  : bool  = is_dbl_sided
-    self.file_path_     : str   = file_path
-
-    #___________________________________________________________________
-    # entry_type is type of page, e.g. day_entry, week_entry, etc
-    #___________________________________________________________________
-    if (not entry_0_type):
-      self.entry_0_type_: type = OnePageHalfLetterLayout
-    else:
-      self.entry_0_type_: type = entry_0_type
-
-    if (not entry_1_type):
-      self.entry_1_type_: type = OnePageHalfLetterLayout
-    else:
-      self.entry_1_type_: type = entry_1_type
-
-    self.entry_0_args_ = entry_0_args
-    self.entry_1_args_ = entry_1_args
-
-    #___________________________________________________________________
-    hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
-    wdth: int = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
-
-    if (self.is_portrait_):
-      hght = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
-      wdth = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
-
-    super().__init__\
-      ( self.file_path_
-      , profile='tiny'
-      , size=(wdth, hght)
-      )
-    #___________________________________________________________________
-
-    self.content_wdth_, self.content_hght_ =\
-       Dims.calc_border_size(self.is_portrait_)
-
-    # Content insertion points for top left
-    self.calc_border_insert_pts()
-    self.create_content()
-    self.add_content()
-
-    return
-
-  #_____________________________________________________________________
-  def create_content(self) -> None:
-    """
-    Creates page borders, page header, content.
-
-    Parameters:
-      None
-
-    Returns:
-      None
-    """
-
-    EntryType0: type = self.entry_0_type_
-    EntryType1: type = self.entry_1_type_
-
-    self.content_0_ =\
-      EntryType0\
-      ( total_wdth=self.content_wdth_
-      , total_hght=self.content_hght_
-      , addl_args=self.entry_0_args_
-      )
-
-    self.content_1_ =\
-      EntryType1\
-      ( total_wdth=self.content_wdth_
-      , total_hght=self.content_hght_
-      , addl_args=self.entry_1_args_
-      )
-
-    return
-
-  #_____________________________________________________________________
-  def add_content(self):
-    """
-    Adds content as class variables to page.
-
-    Parameters:
-      None
-
-    Returns:
-      None
-    """
-
-    x: int = self.insert_pt_border_0_[0]
-    y: int = self.insert_pt_border_0_[1]
-    self.content_0_['transform'] = f'translate({x}, {y})'
-
-    x: int = self.insert_pt_border_1_[0]
-    y: int = self.insert_pt_border_1_[1]
-    self.content_1_['transform'] = f'translate({x}, {y})'
-
-    self.add(self.content_0_)
-    self.add(self.content_1_)
-
-    return
-
-  #_____________________________________________________________________
-  def calc_border_insert_pts(self) -> None:
-    """
-    Determines top left insertion points for content boxes and borders.
-
-    Side Effects:
-      Adds class variables for insertion points.
-    """
-
-    content_wdth: int = self.content_wdth_
-    content_hght: int = self.content_hght_
-
-    if (self.is_portrait_):
-      insert_pos00 = Dims.STD_MARGIN_PX
-      insert_pos01 = Dims.BND_MARGIN_PX
-
-      insert_pos10 = Dims.STD_MARGIN_PX
-      insert_pos11 = content_hght\
-        + Dims.STD_MARGIN_PX\
-        + 2 * Dims.BND_MARGIN_PX
-
-      if (self.is_dbl_sided_):
-        insert_pos01 = Dims.STD_MARGIN_PX
-
-    else:
-      insert_pos00 = Dims.BND_MARGIN_PX
-      insert_pos01 = Dims.STD_MARGIN_PX
-      insert_pos11 = Dims.STD_MARGIN_PX
-
-      insert_pos10 = content_wdth\
-        + Dims.STD_MARGIN_PX\
-        + 2 * Dims.BND_MARGIN_PX
-
-      if (self.is_dbl_sided_):
-        insert_pos00 = Dims.STD_MARGIN_PX
-
-    insert_pos0: Tuple = (insert_pos00, insert_pos01)
-    insert_pos1: Tuple = (insert_pos10, insert_pos11)
-
-    self.insert_pt_border_0_: int =  insert_pos0
-    self.insert_pt_border_1_: int =  insert_pos1
-
-    return
-
-
-##_______________________________________________________________________
-class OnePageHalfLetterLayout(svgwrite.container.Group):
+class OnePageHalfLetter(svgwrite.container.Group):
   """
   """
 
@@ -219,11 +53,16 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
   , padding: int = Dims.BRD_MARGIN_PX
   , pad_bet_elements: bool = True
   , addl_args: dict = {}
+  , show_page_border: bool = True
+  , show_page_header: bool = True
+  , pad_under_page_header: bool = True
   ):
 
     super().__init__()
 
     self.addl_args_ = addl_args
+    self.show_page_border_ = show_page_border
+    self.show_page_header_ = show_page_header
 
     self.entries_ = []
 
@@ -239,15 +78,25 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     self.page_header_: svgwrite.container.Group =\
       self.create_page_header()
 
+    #___________________________________________________________________
     # Content height is affected by generation of page header
+    #___________________________________________________________________
+    # 2 * padding is for top and bottom padding - before page header
+    # and below content
+    #___________________________________________________________________
     self.content_hght_: int = self.total_hght_\
       - 2 * padding\
       - self.page_header_.total_hght_\
-      - pad_bet_elements * Dims.BRD_MARGIN_PX
+      - pad_under_page_header * Dims.BRD_MARGIN_PX
 
     self.content_insert_pt_x_ : int = self.page_header_insert_pt_x_
-    self.content_insert_pt_y_ : int =\
-      self.page_header_insert_pt_y_ + self.page_header_.total_hght_
+
+    # TODO: fix hack
+    if (self.show_page_header_):
+      self.content_insert_pt_y_ : int =\
+        self.page_header_insert_pt_y_ + self.page_header_.total_hght_
+    else:
+      self.content_insert_pt_y_ : int = self.page_header_insert_pt_y_
 
     self.create_content()
     self.add_content()
@@ -281,8 +130,10 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
 
     self.page_header_['transform'] = f'translate({x}, {y})'
 
-    self.add(self.border_)
-    self.add(self.page_header_)
+    if (self.show_page_border_):
+      self.add(self.border_)
+    if (self.show_page_header_):
+      self.add(self.page_header_)
 
     insert_x: int = self.content_insert_pt_x_
     insert_y: int = self.content_insert_pt_y_
@@ -291,6 +142,9 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       VerticalStack\
       ( obj_list=self.entries_
       , add_top_pad=self.pad_bet_elements_
+      , total_hght=self.content_hght_
+      , show_outline=False
+      , outline_color=Colors.FLUX_GRN
       )
 
     content['transform'] = f'translate({insert_x}, {insert_y})'
@@ -333,7 +187,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       None
 
     Returns:
-      HeaderBox for page header
+      Text box for page header
     """
 
     style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
@@ -373,8 +227,7 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
       elements_remaining  : Number of elements yet to be added
                             to the layout.
     Returns:
-        Height allocated for each remaining element, adjusted
-        for spacing.
+      Height allocated for each remaining element, adjusted for spacing.
     """
 
     padding: int = self.pad_bet_elements_ * Dims.BRD_MARGIN_PX
@@ -382,10 +235,13 @@ class OnePageHalfLetterLayout(svgwrite.container.Group):
     remaining_hght: int = self.content_hght_\
       - padding * (elements_remaining - 1)
 
+    # Debugging
+    remaining_hght: int = self.content_hght_
+
     for entry in self.entries_:
       remaining_hght =\
-        remaining_hght - entry.total_hght_ - padding
+        remaining_hght - entry.total_hght_ - padding * self.pad_bet_elements_
 
-    fill_hght: int = remaining_hght / elements_remaining\
+    fill_hght: int = remaining_hght / elements_remaining
 
     return fill_hght

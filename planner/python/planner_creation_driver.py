@@ -31,22 +31,112 @@ from os import path
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
-from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_layouts.habit_layout import HabitLayout
+from classes.page_entries.month_entry import MonthEntry
+from classes.page_entries.week_habit_entry import HabitTracker
+from classes.page_entries.title_page import TitlePage
+from classes.page_entries.week_checklist_entry import WeekCheckList
+from classes.page_entries.test_entry import TestEntry
+from classes.page_entries.test_entry0 import TestEntry0
+
 from classes.page_layouts.half_letter_divider import DividerPage
 
-from classes.page_entries.blank_entry import BlankWrite
 from classes.reference_pages.ace_reference import AceReference
 
 from utils.planner_parser import PlannerCreationParser
 
-from classes.page_layouts.half_letter_layout import TwoPageHalfLetterSize
+from classes.page_layouts.half_letter_two_page_layout import TwoPageHalfLetterSize
 
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:
   for i in range(new_line_count):
     print()
+
+def generate_pages\
+( page_order: list
+, is_portrait: bool
+, is_dbl_sided: bool
+, out_dir: str
+) -> None:
+  #_____________________________________________________________________
+  # Iterate through list containing layout arguments and create
+  # svg for each layout
+  #_____________________________________________________________________
+  for i in range (len(page_order)):
+    layout =\
+      TwoPageHalfLetterSize\
+      ( is_portrait=is_portrait
+      , is_dbl_sided=is_dbl_sided
+      , file_path=path.join(out_dir, page_order[i][0])
+      , entry_0_type=page_order[i][1][Key.ENTRY_TYPE]
+      , entry_0_args=page_order[i][1][Key.ENTRY_ARGS]
+      , entry_1_type=page_order[i][2][Key.ENTRY_TYPE]
+      , entry_1_args=page_order[i][2][Key.ENTRY_ARGS]
+      )
+    layout.save()
+
+def generate_dividers\
+( is_portrait
+, out_dir: str
+):
+  #_____________________________________________________________________
+  # Create dividers
+  #_____________________________________________________________________
+  divider_labels: list =\
+  [ 'Vision'
+  , 'Goals'
+  , 'Calendar'
+  ]
+
+  for i in range(1, 4):
+    divider_labels.append(f'Month {i}')
+
+  for i in range(len(divider_labels)):
+    DividerPage\
+    ( is_portrait=is_portrait
+    , divider_pos=i+1
+    , divider_str=divider_labels[i]
+    , out_dir=out_dir
+    , entry_type=TitlePage
+    , entry_args={Key.HEADER_TXT: divider_labels[i]}
+    ).save()
+
+def generate_habit_tracker\
+( is_portrait: bool
+, out_dir: str
+):
+  #_____________________________________________________________________
+  # Create weekly habit bookmark
+  #_____________________________________________________________________
+  weekly_checklist =\
+    TwoPageHalfLetterSize\
+      ( is_portrait=is_portrait
+      , is_dbl_sided=True
+      , file_path=path.join(out_dir, 'weekly-checklist-back.svg')
+      , entry_0_type=TitlePage
+      , entry_0_args={}
+      , entry_1_type=WeekCheckList
+      , entry_1_args={}
+      , rgt_bndr_mrgn=True
+      )
+  weekly_checklist.save()
+
+  habit_tracker =\
+    DividerPage\
+    ( is_portrait=is_portrait
+    , out_dir=args.out_dir
+    , divider_pos=0
+    , divider_str='Today'
+    , file_path=path.join(args.out_dir, 'weekly-checklist-frnt.svg')
+    , entry_type=HabitTracker
+    , entry_args={}
+    )
+  habit_tracker.save()
+
+
+
+
+
 
 #_______________________________________________________________________
 if __name__ == '__main__':
@@ -62,75 +152,30 @@ if __name__ == '__main__':
 
   page_order: list = []
 
+  #_____________________________________________________________________
+  # Determine page ordering
+  #_____________________________________________________________________
   if (is_dbl_sided):
     page_order = PageOrder.DBL_SIDE_PAGE_ORDER
   else:
     page_order = PageOrder.SGL_SIDE_PAGE_ORDER
+  #_____________________________________________________________________
 
-  for i in range (len(page_order)):
-    layout =\
-      TwoPageHalfLetterSize\
-      ( is_portrait=is_portrait
-      , is_dbl_sided=is_dbl_sided
-      , file_path=path.join(args.out_dir, page_order[i][0])
-      , entry_0_type=page_order[i][1][Key.ENTRY_TYPE]
-      , entry_0_args=page_order[i][1][Key.ENTRY_ARGS]
-      , entry_1_type=page_order[i][2][Key.ENTRY_TYPE]
-      , entry_1_args=page_order[i][2][Key.ENTRY_ARGS]
-      )
-    layout.save()
+  generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
+  generate_dividers(is_portrait, args.out_dir)
+  generate_habit_tracker(is_portrait, args.out_dir)
 
-  ace_ref_layout =\
+  test_layout=\
     TwoPageHalfLetterSize\
-    ( is_portrait=is_portrait
+    ( is_portrait=False
     , is_dbl_sided=is_dbl_sided
-    , file_path=path.join(args.out_dir, 'ace-reference.svg')
-    , entry_0_type=AceReference
-    , entry_0_args={Key.HEADER_TXT: 'test'}
-    )
-  ace_ref_layout.save()
-
-  test_layout =\
-    TwoPageHalfLetterSize\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , file_path=path.join(args.out_dir, Strings.DEF_TEST_LAYOUT_PATH)
-    , entry_0_type=BlankWrite
-    , entry_0_args={Key.HEADER_TXT: 'page 0'}
-    , entry_1_type=BlankWrite
-    , entry_1_args={Key.HEADER_TXT: 'page 1'}
+    , file_path=path.join(args.out_dir, 'test.svg')
+    , entry_0_type=MonthEntry
+    , entry_0_args={}
+    , entry_1_type=TestEntry
+    , entry_1_args={}
     )
   test_layout.save()
-
-  habit_tracker =\
-    HabitLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , out_dir=args.out_dir
-    , divider_pos=0
-    )
-  habit_tracker.save()
-
-  #_____________________________________________________________________
-  # Create dividers
-  #_____________________________________________________________________
-  divider_labels: list =\
-  [ 'Vision'
-  , 'Goals'
-  , 'Calendar'
-  ]
-
-  for i in range(1, 4):
-    divider_labels.append(f'Month {i}')
-
-
-  for i in range(len(divider_labels)):
-    DividerPage\
-    ( is_portrait=is_portrait
-    , divider_pos=i+1
-    , divider_str=divider_labels[i]
-    , out_dir=args.out_dir
-    ).save()
 
   new_line(10)
   print("all done")

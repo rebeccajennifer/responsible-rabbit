@@ -40,11 +40,16 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.day_entry import DayEntry
+from classes.page_entries.month_entry import MonthEntry
+
+from classes.page_entries.goal_entry import GoalEntry
+from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_entries.week_entry import WeekEntry0
 from classes.page_entries.week_entry import WeekEntry1
-from classes.page_entries.free_write_entry import FreeWriteEntry
+
+from classes.page_entries.title_page import TitlePage
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
-from classes.page_entries.goal_entry import GoalEntry
+from classes.page_entries.week_checklist_entry import WeekCheckList
 
 #_______________________________________________________________________
 class PageOrder:
@@ -68,6 +73,18 @@ class PageOrder:
     DBL_SIDE_PAGE_ORDER: Same as above, but for double-sided printing
                          layouts.
   """
+
+  WEEK_CHECKLIST: dict =\
+  { Key.ENTRY_TYPE: WeekCheckList
+
+  }
+
+  TITLE_PAGE: dict =\
+  { Key.ENTRY_TYPE: TitlePage
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: 'Book of Plans'
+    }
+  }
 
   #_____________________________________________________________________
   FUTURE_5YR_ENTRY0: dict =\
@@ -125,34 +142,48 @@ class PageOrder:
     }
   }
 
+  ACTION_ITEMS_ENTRY: dict =\
+  { Key.ENTRY_TYPE: FreeWriteEntry
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: 'Action Items: '
+    }
+  }
+
   #_____________________________________________________________________
-  DAY_ENTRY0 : dict =\
-    { Key.ENTRY_TYPE: DayEntry
-    , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: 0}
+
+  DAY_ENTRY: list = []
+  DAY_FREE_WRITE_ENTRY: list = []
+
+  for i in range(7):
+    DAY_ENTRY.append\
+    ( { Key.ENTRY_TYPE: DayEntry
+      , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: i}
+      }
+    )
+
+    DAY_FREE_WRITE_ENTRY.append\
+    ( { Key.ENTRY_TYPE: FreeWriteEntry
+      , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[i]}
+      }
+    )
+
+  DAY_ENTRY0 = DAY_ENTRY[0]
+  DAY_ENTRY1 = DAY_ENTRY[1]
+  DAY_ENTRY2 = DAY_ENTRY[2]
+  DAY_ENTRY3 = DAY_ENTRY[3]
+  DAY_ENTRY4 = DAY_ENTRY[4]
+  DAY_ENTRY5 = DAY_ENTRY[5]
+  DAY_ENTRY6 = DAY_ENTRY[6]
+
+  MONTH_ENTRY: dict =\
+    { Key.ENTRY_TYPE: MonthEntry
+    , Key.ENTRY_ARGS: {}
     }
-  DAY_ENTRY1 : dict =\
-    { Key.ENTRY_TYPE: DayEntry
-    , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: 1}
-    }
-  DAY_ENTRY2 : dict =\
-    { Key.ENTRY_TYPE: DayEntry
-    , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: 2}
-    }
-  DAY_ENTRY3 : dict =\
-    { Key.ENTRY_TYPE: DayEntry
-    , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: 3}
-    }
-  DAY_ENTRY4 : dict =\
-    { Key.ENTRY_TYPE: DayEntry
-    , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: 4}
-    }
-  DAY_ENTRY5 : dict =\
-    { Key.ENTRY_TYPE: DayEntry
-    , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: 5}
-    }
-  DAY_ENTRY6 : dict =\
-    { Key.ENTRY_TYPE: DayEntry
-    , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: 6}
+
+  #_____________________________________________________________________
+  FREE_WRITE_DAY0: dict =\
+    { Key.ENTRY_TYPE: FreeWriteEntry
+    , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[0]}
     }
 
   #_____________________________________________________________________
@@ -175,11 +206,6 @@ class PageOrder:
   BLNK_ENTRY: dict =\
     { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS: {}
-    }
-
-  TITLE_PAGE: dict =\
-    { Key.ENTRY_TYPE: FreeWriteEntry
-    , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Book of Plans'}
     }
 
   #_____________________________________________________________________
@@ -210,23 +236,23 @@ class PageOrder:
     ]
   , [ 'page-04.svg'
     , DAY_ENTRY2
-    , BLNK_ENTRY
+    , DAY_FREE_WRITE_ENTRY[2]
     ]
   , [ 'page-05.svg'
     , DAY_ENTRY3
-    , BLNK_ENTRY
+    , DAY_FREE_WRITE_ENTRY[3]
     ]
   , [ 'page-06.svg'
     , DAY_ENTRY1
-    , BLNK_ENTRY
+    , DAY_FREE_WRITE_ENTRY[1]
     ]
   , [ 'page-07.svg'
     , DAY_ENTRY4
-    , BLNK_ENTRY
+    , DAY_FREE_WRITE_ENTRY[4]
     ]
   , [ 'page-08.svg'
     , DAY_ENTRY0
-    , BLNK_ENTRY
+    , DAY_FREE_WRITE_ENTRY[0]
     ]
   , [ 'page-09.svg'
     , DAY_ENTRY5
@@ -238,78 +264,106 @@ class PageOrder:
     ]
   , [ 'page-11.svg'
     , DAY_ENTRY6
-    , BLNK_ENTRY
+    , DAY_FREE_WRITE_ENTRY[6]
     ]
   ]
 
   #_____________________________________________________________________
   SGL_SIDE_PAGE_ORDER: list =\
-  [ [ 'page-00.svg'
+  [ [ '00-action-items.svg'
+    , ACTION_ITEMS_ENTRY
+    , ACTION_ITEMS_ENTRY
+    ]
+  , [ '00-title-future-1yr.svg'
     , TITLE_PAGE
     , FUTURE_1YR_ENTRY1
     ]
-  , [ 'page-01.svg'
+  , [ '01-future-5yr-future-12w.svg'
     , FUTURE_5YR_ENTRY0
     , FUTURE_12W_ENTRY
     ]
-  , [ 'page-02.svg'
+  , [ '02-future-5yr-future-bad.svg'
     , FUTURE_5YR_ENTRY1
     , FUTURE_BAD_ENTRY
     ]
-  , [ 'page-03.svg'
+  , [ '03-future-1yr-vow.svg'
     , FUTURE_1YR_ENTRY0
     , VOW_ENTRY
     ]
-  , [ 'page-04.svg'
+  , [ '04-goal.svg'
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ 'page-05.svg'
+  , [ '05-goal.svg'
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ 'page-06.svg'
+  , [ '06-month.svg'
+    , MONTH_ENTRY
+    , MONTH_ENTRY
+    ]
+  , [ '07-week0.svg'
     , WEEK_ENTRY0
     , WEEK_ENTRY0
     ]
-  , [ 'page-07.svg'
+  , [ '08-week1.svg'
     , WEEK_ENTRY1
     , WEEK_ENTRY1
     ]
-  , [ 'page-08.svg'
-    , WEEK_ENTRY0
-    , WEEK_ENTRY0
-    ]
-  , [ 'page-09.svg'
-    , WEEK_ENTRY1
-    , WEEK_ENTRY1
-    ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-0')
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-0')
     , DAY_ENTRY0
     , DAY_ENTRY0
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-1')
+  , [ 'day-0-quote.svg'
+    , DAY_FREE_WRITE_ENTRY[0]
+    , DAY_FREE_WRITE_ENTRY[0]
+    ]
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-1')
     , DAY_ENTRY1
     , DAY_ENTRY1
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-2')
+  , [ 'day-1-quote.svg'
+    , DAY_FREE_WRITE_ENTRY[1]
+    , DAY_FREE_WRITE_ENTRY[1]
+    ]
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-2')
     , DAY_ENTRY2
     , DAY_ENTRY2
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-3')
+  , [ 'day-2-quote.svg'
+    , DAY_FREE_WRITE_ENTRY[2]
+    , DAY_FREE_WRITE_ENTRY[2]
+    ]
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-3')
     , DAY_ENTRY3
     , DAY_ENTRY3
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-4')
+  , [ 'day-3-quote.svg'
+    , DAY_FREE_WRITE_ENTRY[3]
+    , DAY_FREE_WRITE_ENTRY[3]
+    ]
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-4')
     , DAY_ENTRY4
     , DAY_ENTRY4
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-5')
+  , [ 'day-4-quote.svg'
+    , DAY_FREE_WRITE_ENTRY[4]
+    , DAY_FREE_WRITE_ENTRY[4]
+    ]
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-5')
     , DAY_ENTRY5
     , DAY_ENTRY5
     ]
-  , [ Strings.DEF_DAY_LAYOUT_PATH.replace('#', '-6')
+  , [ 'day-5-quote.svg'
+    , DAY_FREE_WRITE_ENTRY[5]
+    , DAY_FREE_WRITE_ENTRY[5]
+    ]
+  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-6')
     , DAY_ENTRY6
     , DAY_ENTRY6
+    ]
+  , [ 'day-6-quote.svg'
+    , DAY_FREE_WRITE_ENTRY[6]
+    , DAY_FREE_WRITE_ENTRY[6]
     ]
   ]

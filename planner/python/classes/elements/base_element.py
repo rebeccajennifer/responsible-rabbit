@@ -27,6 +27,7 @@
 #_______________________________________________________________________
 
 import svgwrite.container
+import svgwrite.shapes
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.style import PlannerColors as Colors
@@ -41,6 +42,7 @@ class VerticalStack(svgwrite.container.Group):
   , add_top_pad: bool = False
   , show_outline: bool = False
   , outline_color: bool = Colors.BORDER_COLOR
+  , total_hght: int = 0
   ) -> svgwrite.container.Group:
     """
     Creates a new svgwrite container with all objects stacked
@@ -59,10 +61,29 @@ class VerticalStack(svgwrite.container.Group):
     super().__init__()
     padding: int = Dims.BRD_MARGIN_PX * add_top_pad
     insert_x: int = 0
-    insert_y: int = padding
+    insert_y: int = Dims.BRD_MARGIN_PX * add_top_pad
     self.total_hght_: int = 0
     self.total_wdth_: int = 0
 
+    content_hght: int = 0
+
+    for i in range(len(obj_list)):
+      content_hght += obj_list[i].total_hght_
+
+      if (self.total_wdth_ < obj_list[i].total_wdth_):
+        self.total_wdth_ = obj_list[i].total_wdth_
+
+    if (total_hght > 0 and len(obj_list) > 1):
+      padding =\
+        ( total_hght\
+        #- Dims.BRD_MARGIN_PX * add_top_pad\
+        - content_hght
+        ) / (len(obj_list)-1)
+
+      self.total_hght_ = total_hght
+
+    else:
+      self.total_hght_ = content_hght + padding * (len(obj_list))
 
     for i in range(len(obj_list)):
 
@@ -73,14 +94,7 @@ class VerticalStack(svgwrite.container.Group):
         + obj_list[i].total_hght_\
         + padding
 
-      self.total_hght_ += obj_list[i].total_hght_
-
-      if (self.total_wdth_ < obj_list[i].total_wdth_):
-        self.total_wdth_ = obj_list[i].total_wdth_
-
       self.add(obj_list[i])
-
-    self.total_hght_ += padding * (len(obj_list))
 
     if (show_outline):
       Utils.add_outline\

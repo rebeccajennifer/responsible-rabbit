@@ -40,21 +40,63 @@ from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 from classes.elements.table import ColumnTable
 
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 
 #_______________________________________________________________________
-class DayEntry(OnePageHalfLetterLayout):
+class DayEntry(OnePageHalfLetter):
   """
   Daily entry layout.
   """
+
+  DEF_DAY_LAYOUT_PATH: str =\
+    'day#-layout.svg'
+
+  DAYS: str =\
+    'Mon' + 2 * Strings.SPACE +\
+    'Tue' + 2 * Strings.SPACE +\
+    'Wed' + 2 * Strings.SPACE +\
+    'Thu' + 2 * Strings.SPACE +\
+    'Fri' + 2 * Strings.SPACE +\
+    'Sat' + 2 * Strings.SPACE +\
+    'Sun' + 2 * Strings.SPACE + Strings.DATE_STR
+
+  DAY_PRIMARY_EFFORTS: list =\
+    ['Primary Efforts', 'Alignment']
+
+  DAY_TODO: str =\
+    'To Do'
+
+  DAY_FOCUS: str =\
+    'Today I will pay most attention to:'
+
+  DAY_GRATITUDE: str =\
+    'Gratitude'
+
+  DAY_ACHIEVEMENT: str =\
+    'A tiny triumph or epic win...'
+
+  DAY_CHECK_IN: str =\
+    'Emotional and values check-in:'
+
+  DAY_PROMPTS: str =\
+    [ 'Where can I invite more ease?'
+    , 'What roadblock do I need to address?'
+    , 'How can I embrace discomfort?'
+    , 'What am I avoiding?'
+    , 'What can I let go of?'
+    , 'What am I learning about myself?'
+    , 'How can I care for myself today?'
+    ]
+
+  VALUES_HEADER: str =\
+    'Values'
 
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
   , addl_args: dict = {}
-  , cycling_prompt_idx: int = 6
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -130,7 +172,7 @@ class DayEntry(OnePageHalfLetterLayout):
     self.entries_: list =\
     [ DualLineTable\
       ( total_wdth=self.main_content_wdth_
-      , header_txt='Values'
+      , header_txt=self.VALUES_HEADER
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=3
       , show_outline=False
@@ -140,7 +182,7 @@ class DayEntry(OnePageHalfLetterLayout):
 
     , ColumnTable
       ( total_wdth=self.main_content_wdth_
-      , header_txt_lst=Strings.DAY_PRIMARY_EFFORTS
+      , header_txt_lst=self.DAY_PRIMARY_EFFORTS
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=3
       , show_outline=False
@@ -149,14 +191,14 @@ class DayEntry(OnePageHalfLetterLayout):
 
     , DualLineTable
       ( total_wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_TODO
+      , header_txt=self.DAY_TODO
       , row_count=6
       , text_style=StdTextBoxStyles.MED_BACK_NORMAL_FONT
       )
 
     , DualLineTable
       ( total_wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PROMPTS[self.cycling_prompt_idx_]
+      , header_txt=self.DAY_PROMPTS[self.cycling_prompt_idx_]
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=1
       , show_outline=True
@@ -165,7 +207,7 @@ class DayEntry(OnePageHalfLetterLayout):
 
     , DualLineTable
       ( total_wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_ACHIEVEMENT
+      , header_txt=self.DAY_ACHIEVEMENT
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=1
       , show_outline=True
@@ -174,7 +216,7 @@ class DayEntry(OnePageHalfLetterLayout):
 
     , DualLineTable
       ( total_wdth=self.main_content_wdth_
-      , header_txt=Strings.DAY_PROMPT_LAST_24
+      , header_txt=self.DAY_CHECK_IN
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=2
       , show_outline=True
@@ -183,11 +225,11 @@ class DayEntry(OnePageHalfLetterLayout):
 
     fill_hght: int = self.calc_remaining_hght_per_element(1)
 
-    self.entries_.insert(3,
-      SingleLineTable\
+    self.entries_.insert(3
+    , SingleLineTable\
       ( total_wdth=self.main_content_wdth_
       , total_hght=fill_hght
-      , header_txt=Strings.DAY_GRATITUDE
+      , header_txt=self.DAY_GRATITUDE
       , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
       , show_outline=True
       )
@@ -208,4 +250,4 @@ class DayEntry(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_HEADER)
+      (header_txt=self.DAYS, font_family=Font.FONT_FAMILY_HEADER)

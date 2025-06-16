@@ -23,62 +23,106 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Layout for habit tracker. Habit tracker is divider.
+#   Entry for month calendar.
 #_______________________________________________________________________
 
-from os import path
+import svgwrite.container
+from copy import deepcopy
 
-from classes.constants.dims import PlannerDims as Dims
+
 from classes.constants.strings import PlannerStrings as Strings
+from classes.elements.table import SingleLineTable
+from classes.style.std_styles import StdTextBoxStyles
 
-from classes.page_entries.habit_entry import HabitTracker
-from classes.page_layouts.half_letter_divider import DividerPage
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 
 #_______________________________________________________________________
-class HabitLayout(DividerPage):
+class MonthEntry(OnePageHalfLetter):
+  """
+  Daily entry layout.
+  """
+
+  HEADER_TXT: str =\
+    'Month #'\
+    + Strings.SPACE\
+    + Strings.DATE_STR\
+    + Strings.RIGHT_ARROW\
+    + Strings.DATE_STR
+
+  WEEK_HEADER_TXT: str =\
+    'Week #'\
+    + Strings.DATE_STR\
+    + Strings.RIGHT_ARROW\
+    + Strings.DATE_STR
+
 
   #_____________________________________________________________________
-  def  __init__(self
-  , is_portrait: bool = False
-  , is_dbl_sided: bool = False
-  , file_name: str = Strings.DEF_HABIT_LAYOUT_PATH
-  , out_dir: str = ''
-  , divider_pos: int = 0
+  def __init__(self
+  , total_hght: int = 0
+  , total_wdth: int = 0
+  , addl_args: dict = {}
   ):
-
-    file_path: str = path.join(out_dir, file_name)
+    """
+    Constructor for class. Assumes landscape orientation.
+    """
 
     super().__init__\
-      ( is_portrait=is_portrait
-      , is_dbl_sided=is_dbl_sided
-      , file_name=file_name
-      , out_dir=out_dir
-      , divider_pos=divider_pos
-      , divider_str='Today'
-      )
+    ( total_hght=total_hght
+    , total_wdth=total_wdth
+    , addl_args=addl_args
+    )
+
     return
 
   #_____________________________________________________________________
-  def create_content(self):
+  def create_content(self) -> None:
+    """
+    Parameters:
+      None
+
+    Side Effects:
+      Populates self.entries_ class variable.
+
+    Returns:
+      None
+    """
     super().create_content()
 
-    self.content_0_ =\
-      HabitTracker\
-      ( total_hght=self.content_hght_
-      , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
+    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
+    style.line_spc_=1
+
+    fill_hght: int = self.calc_remaining_hght_per_element(4)
+
+    week_table = SingleLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=1
+      , total_hght=175
+      , header_txt=self.WEEK_HEADER_TXT
+      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , show_outline=True
       )
 
-    self.content_1_ =\
-      HabitTracker\
-      ( total_hght=self.content_hght_
-      , total_wdth=self.content_wdth_
-      , padding=Dims.BRD_MARGIN_PX
-      )
+    self.entries_: list =\
+    [ week_table
+    , deepcopy(week_table)
+    , deepcopy(week_table)
+    , deepcopy(week_table)
+    ]
 
     return
 
   #_____________________________________________________________________
-  def add_content(self):
-    super().add_content()
+  def create_page_header(self) -> svgwrite.container.Group:
+    """
+    Creates page header and saves it to class variable.
+
+    Parameters:
+      None
+
+    Returns:
+
+    """
+
+    return super().create_page_header\
+      (header_txt=self.HEADER_TXT)

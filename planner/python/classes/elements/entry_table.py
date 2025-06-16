@@ -26,15 +26,15 @@
 #   Creates hourly entry for daily schedule.
 #_______________________________________________________________________
 
+#_______________________________________________________________________
+# TODO - refactor daily schedule to remove
+#_______________________________________________________________________
 import svgwrite.container
 import svgwrite.shapes
-import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
-from classes.constants.strings import PlannerStrings as Strings
-from classes.constants.error_strings import ErrorStrings as Err
 
 from classes.elements.header_box import HeaderBox
 
@@ -105,7 +105,6 @@ class EntryTable(svgwrite.container.Group):
 
     if (box_fill_color == 'none'):
       self.font_color_ = Colors.NORMAL_TXT
-
 
     self.box_brdr_color_  : str   = box_brdr_color
     self.col_count_ : int   = col_count
@@ -258,183 +257,3 @@ class EntryTable(svgwrite.container.Group):
 
     if (self.show_outline_):
       self.add(self.outline_)
-
-
-#_______________________________________________________________________
-class PromptTable(EntryTable):
-
-  #_____________________________________________________________________
-  def __init__(self
-  , wdth: int = 0
-  , hght: int = 0
-  , header_txt: str = Strings.DEF_TABLE_HEADER_TXT
-  , row_count: int = 1
-  , row_hght: int = EntryTable.DEF_ROW_HGHT
-  , col_count: int = 1
-  , col_wdths: list = []
-  , pad_top: bool = False
-  , pad_bot: bool = False
-  , pad_rgt: bool = False
-  , pad_lft: bool = False
-  , show_outline: bool = True
-  ):
-
-    super().__init__\
-    ( wdth=wdth
-    , hght=hght
-    , header_txt=header_txt
-    , font_color=Colors.NORMAL_TXT
-    , font_size=Font.NORMAL_SIZE
-    , font=Font.FONT_FAMILY_NORMAL
-    , box_fill_color='none'
-    , box_brdr_color='none'
-    , row_count=row_count
-    , row_hght=row_hght
-    , col_count=col_count
-    , col_wdths=col_wdths
-    , pad_top=pad_top
-    , pad_bot=pad_bot
-    , pad_rgt=pad_rgt
-    , pad_lft=pad_lft
-    , show_outline=show_outline
-    )
-
-    return
-
-
-#_______________________________________________________________________
-class NumberedTable(EntryTable):
-  """
-  EntryTable with numbered rows.
-  """
-
-  #_____________________________________________________________________
-  def __init__(self
-  , wdth: int = 0
-  , hght: int = 0
-  , header_txt: str = [Strings.DEF_TABLE_HEADER_TXT]
-  , prepend_txt: str = ''
-  , font_color: str = Colors.DEF_TBLE_HEADER_TEXT
-  , font_size: int = Font.NORMAL_SIZE
-  , font: str = Font.FONT_FAMILY_HEADER
-  , box_fill_color: str = Colors.DEF_TBLE_HEADER_FILL
-  , box_brdr_color: str = Colors.BORDER_COLOR
-  , row_count: int = 1
-  , row_hght: int = EntryTable.DEF_ROW_HGHT
-  , col_count: int = 1
-  , col_wdths: list = []
-  , pad_top: bool = False
-  , pad_bot: bool = False
-  , pad_rgt: bool = False
-  , pad_lft: bool = False
-  , show_outline: bool = True
-  ):
-    """
-      Parameters:
-        wdth            : width of table
-        hght            : height of table
-        header_txt      : list of headers
-        prepend_txt     : list of text to include in rows
-        font_color      : color of header text
-        font_size       : size of header text
-        font            : font of header text
-        box_fill_color  : header fill color
-        box_brdr_color  : border color
-        col_count : column count of table
-        row_count : row count of table
-        row_hght  : height of row, optional
-        pad_top         : add padding to top
-        pad_bot         : add padding to bottom
-        pad_rgt         : add padding to right
-        pad_lft         : add padding to left
-        show_outline    : show table outline
-    """
-
-    self.prepend_txt_ = [''] * row_count
-    #___________________________________________________________________
-    # If prepend_txt is not provided, default to numbered.
-    #___________________________________________________________________
-    if (not prepend_txt):
-      for i in range(row_count):
-        self.prepend_txt_ = self.prepend_txt_ + [i+1]
-    #___________________________________________________________________
-    # If prepend_txt is a string, prepend it to each row.
-    #___________________________________________________________________
-    elif (isinstance(prepend_txt, str)):
-      self.prepend_txt_ = [prepend_txt] * row_count
-    #___________________________________________________________________
-    # Otherwise, assign prepend_txt to class variable
-    #___________________________________________________________________
-    else:
-      for i in range(row_count):
-        try:
-          self.prepend_txt_[i] = prepend_txt[i]
-
-        except IndexError:
-          self.prepend_txt_[i] = ''
-    #___________________________________________________________________
-
-
-    super().__init__\
-    ( wdth            =wdth
-    , hght            =hght
-    , header_txt      =header_txt
-    , font_color      =font_color
-    , font_size       =font_size
-    , font            =font
-    , box_fill_color  =box_fill_color
-    , box_brdr_color  =box_brdr_color
-    , row_count       =row_count
-    , row_hght        =row_hght
-    , col_count       =col_count
-    , col_wdths       =col_wdths
-    , pad_top         =pad_top
-    , pad_bot         =pad_bot
-    , pad_rgt         =pad_rgt
-    , pad_lft         =pad_lft
-    , show_outline    =show_outline
-    )
-
-  #_____________________________________________________________________
-  def create_rows(self) -> svgwrite.container.Group:
-    """
-    Creates group containing all rows of content entry.
-
-    Parameters:
-      None
-
-    Returns:
-      Group containing all rows.
-    """
-
-    row_group: svgwrite.container.Group =\
-      super().create_rows()
-
-    row_height: int = self.row_hght_
-
-    text_x: int = 0
-
-    if (self.show_outline_):
-      text_x = Font.TEXT_PADDING + self.insert_x_
-
-    for i in range(self.row_count_):
-
-      line_y: int = self.header_box_.total_hght_\
-        + row_height\
-        + i * row_height\
-
-      text_y: int = line_y - Font.TEXT_PADDING
-
-      txt: svgwrite.txt.Text = svgwrite.text.Text\
-      ( self.prepend_txt_[i]
-      , insert=(text_x, text_y)
-      , text_anchor='start'
-      , alignment_baseline='text-after-edge'
-      , fill=Colors.NORMAL_TXT
-      , font_size=Font.LITTLE_SIZE
-      , font_family=Font.FONT_FAMILY_NORMAL
-      )
-
-      row_group.add(txt)
-
-    return row_group

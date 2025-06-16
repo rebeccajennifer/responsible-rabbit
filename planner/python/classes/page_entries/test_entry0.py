@@ -42,11 +42,11 @@ from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 from classes.elements.table import ColumnTable
 
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 
 #_______________________________________________________________________
-class TestEntry0(OnePageHalfLetterLayout):
+class TestEntry0(OnePageHalfLetter):
   """
   Daily entry layout.
   """
@@ -87,9 +87,9 @@ class TestEntry0(OnePageHalfLetterLayout):
     style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
     style.line_spc_=1
 
-    fill_hght: int = self.calc_remaining_hght_per_element(1)
+    #fill_hght: int = self.calc_remaining_hght_per_element(1)
+    #fill_hght: int = self.calc_remaining_hght_per_element(3)
     fill_hght: int = self.calc_remaining_hght_per_element(2)
-    fill_hght: int = self.calc_remaining_hght_per_element(3)
 
     test0=ColumnTable\
           ( total_wdth=self.content_wdth_
@@ -103,9 +103,9 @@ class TestEntry0(OnePageHalfLetterLayout):
     test1= deepcopy(test0)
     test2= deepcopy(test0)
 
+    obj_list=[test0, test1, test2]
     obj_list=[test0]
     obj_list=[test0, test1]
-    obj_list=[test0, test1, test2]
 
     x: VerticalStack =\
       VerticalStack\
@@ -125,7 +125,8 @@ class TestEntry0(OnePageHalfLetterLayout):
 
 
 
-    self.entries_.append(x)
+    self.entries_ = obj_list
+    #self.entries_.append(x)
     #self.entries_.append(test0)
     #self.entries_.append(test1)
     #self.entries_.append(test2)

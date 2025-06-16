@@ -42,11 +42,11 @@ from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 from classes.elements.table import ColumnTable
 
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 
 #_______________________________________________________________________
-class TestEntry(OnePageHalfLetterLayout):
+class TestEntry(OnePageHalfLetter):
   """
   Daily entry layout.
   """
@@ -86,13 +86,15 @@ class TestEntry(OnePageHalfLetterLayout):
     style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
     style.line_spc_=1
 
-    fill_hght: int = self.calc_remaining_hght_per_element(1)
-    fill_hght: int = self.calc_remaining_hght_per_element(2)
     fill_hght: int = self.calc_remaining_hght_per_element(3)
+    fill_hght: int = self.calc_remaining_hght_per_element(2)
+    fill_hght: int = self.calc_remaining_hght_per_element(1)
 
     test0=ColumnTable\
           ( total_wdth=self.content_wdth_
-          , total_hght=fill_hght
+          #, total_hght=fill_hght
+          , total_hght=100
+          #, total_hght=self.content_hght_
           , header_txt_lst=['','','']
           , text_style=style
           , row_count=2
@@ -102,15 +104,11 @@ class TestEntry(OnePageHalfLetterLayout):
     test1= deepcopy(test0)
     test2= deepcopy(test0)
 
+    obj_list=[test0, test1, test2]
     obj_list=[test0]
     obj_list=[test0, test1]
-    obj_list=[test0, test1, test2]
 
-    x: VerticalStack =\
-      VerticalStack\
-      ( add_top_pad=False
-      , obj_list=obj_list
-      )
+    #x: VerticalStack = VerticalStack( add_top_pad=False, obj_list=obj_list)
 
     #fill_hght: int = self.calc_remaining_hght_per_element(1)
     #test1=ColumnTable\
@@ -124,7 +122,8 @@ class TestEntry(OnePageHalfLetterLayout):
 
 
 
-    self.entries_.append(x)
+    #self.entries_.append(x)
+    self.entries_ = obj_list
     #self.entries_.append(test0)
     #self.entries_.append(test1)
     #self.entries_.append(test2)

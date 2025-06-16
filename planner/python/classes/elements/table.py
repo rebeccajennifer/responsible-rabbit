@@ -211,6 +211,7 @@ class ColumnTable(svgwrite.container.Group):
   , row_count: int = 1
   , col_wdths: list = []
   , show_outline: bool = False
+  , col_lines: bool = False
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , TableType = 0
@@ -252,6 +253,7 @@ class ColumnTable(svgwrite.container.Group):
         , row_count=row_count
         , inner_pad_lft=inner_pad_lft
         , inner_pad_rgt=inner_pad_rgt
+        , show_outline=col_lines
         )
       )
 

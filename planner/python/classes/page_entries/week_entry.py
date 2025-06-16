@@ -37,10 +37,10 @@ from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.std_styles import StdLineRowGroupStyles
 
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 #_______________________________________________________________________
-class WeekEntry0(OnePageHalfLetterLayout):
+class WeekEntry0(OnePageHalfLetter):
   """
   Daily entry layout.
   """
@@ -116,21 +116,15 @@ class WeekEntry0(OnePageHalfLetterLayout):
       , row_count=8
       , show_outline=True
       )
-   ]
-
-    fill_hght: int = self.calc_remaining_hght_per_element()
-
-    self.entries_.insert(4,
-      DualLineTable\
+    , DualLineTable\
       ( total_wdth=self.content_wdth_
-      , total_hght=fill_hght
       , header_txt=Strings.WEEK_GRATITUDE
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=1
       , show_outline=True
       , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
-    )
+    ]
 
     return
 
@@ -150,7 +144,7 @@ class WeekEntry0(OnePageHalfLetterLayout):
       (header_txt=Strings.WEEK_PAGE_HEADER_TXT_0)
 
 #_______________________________________________________________________
-class WeekEntry1(OnePageHalfLetterLayout):
+class WeekEntry1(OnePageHalfLetter):
   """
   Daily entry layout.
   """

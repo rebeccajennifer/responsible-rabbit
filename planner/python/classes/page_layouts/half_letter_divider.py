@@ -37,14 +37,9 @@ import svgwrite.shapes
 import svgwrite.text
 
 from classes.constants.dims import PlannerDims as Dims
-from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.row_group import TextRowGroup
-from classes.elements.base_element import VerticalStack
-from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
-from classes.style.table_style import TextBoxStyle
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 
 #_______________________________________________________________________
@@ -57,20 +52,30 @@ class DividerPage(svgwrite.Drawing):
   #_____________________________________________________________________
   def __init__(self
   , is_portrait: bool = False
-  , is_dbl_sided: bool = False
   , out_dir: str = ''
   , file_name: str = ''
   , file_path: str = ''
   , divider_pos: int = 0
   , divider_str: str = ''
+  , entry_type: type = None
+  , entry_args: dict = {}
   ):
+
+    if (not entry_type):
+      self.entry_type_: type = OnePageHalfLetter
+    else:
+      self.entry_type_: type = entry_type
+
+    self.entry_args_ = entry_args
 
     if (not file_path):
       if (not file_name):
         file_name: str =\
           'divider-' + divider_str.lower().replace(' ', '-') + '.svg'
 
-    self.file_path_ = path.join(out_dir, file_name)
+      self.file_path_ = path.join(out_dir, file_name)
+    else:
+      self.file_path_ = file_path
 
     self.is_portrait_   : bool  = is_portrait
     self.divider_pos_   : int   = divider_pos
@@ -151,7 +156,7 @@ class DividerPage(svgwrite.Drawing):
     #___________________________________________________________________
     # Text for divider tab
     #___________________________________________________________________
-    font_size = Font.HEAD_2_SIZE
+    font_size = Font.TITLE_SIZE
 
     txt_x_insert: int = tab_x_strt + Dims.DIVIDER_WDTH / 2 - font_size / 2
     txt_y_insert: int = tab_y_strt + Font.TEXT_PADDING
@@ -177,11 +182,14 @@ class DividerPage(svgwrite.Drawing):
       , stroke_dasharray='2,6'
       )
 
+    EntryType: type = self.entry_type_
+
     #___________________________________________________________________
-    self.content_0_: OnePageHalfLetterLayout =\
-      OnePageHalfLetterLayout\
+    self.content_0_ =\
+      EntryType\
       ( total_wdth=self.content_wdth_
       , total_hght=self.content_hght_
+      , addl_args=self.entry_args_
       )
 
     return

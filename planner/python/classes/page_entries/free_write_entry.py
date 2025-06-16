@@ -31,11 +31,11 @@ import svgwrite.container
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.elements.row_group import DualLineRowGroup
 
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 
 #_______________________________________________________________________
-class FreeWriteEntry(OnePageHalfLetterLayout):
+class FreeWriteEntry(OnePageHalfLetter):
   """
   Free write layout.
   """

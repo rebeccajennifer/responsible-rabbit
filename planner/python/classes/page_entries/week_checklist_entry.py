@@ -27,30 +27,35 @@
 #_______________________________________________________________________
 
 import svgwrite.container
-from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.base_element import VerticalStack
-from classes.elements.row_group import TextRowGroup
 from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
-from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
 
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 #_______________________________________________________________________
-class HabitTracker(OnePageHalfLetterLayout):
+class WeekCheckList(OnePageHalfLetter):
   """
   Daily entry layout.
   """
+
+  PAGE_HEADER_TXT : str = 'Weekly Checklist'
+  ACTION_ITEM     : str = 'Action Item'
+
+  WEEKS: list =\
+  [ 'Week 1'
+  , 'Week 2'
+  , 'Week 3'
+  , 'Week 4'
+  ]
 
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , padding: int = 0
-  , pad_bet_elements: bool = True
+  , addl_args: dict = {}
   ):
     """
     Constructor for class. Assumes landscape orientation.
@@ -58,8 +63,6 @@ class HabitTracker(OnePageHalfLetterLayout):
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
-    , padding=padding
-    , pad_bet_elements=pad_bet_elements
     )
 
     return
@@ -78,27 +81,21 @@ class HabitTracker(OnePageHalfLetterLayout):
     """
     super().create_content()
 
-    fill_hght: int = self.calc_remaining_hght_per_element(4)
+    fill_hght: int = self.calc_remaining_hght_per_element(1)
 
-    habit_tracker_table: ColumnTable =\
-      ColumnTable\
+    self.entries_: list =\
+    [ ColumnTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
-      , header_txt_lst=Strings.WEEK_HABIT_TRACKER_HEADINGS
+      , header_txt_lst=[self.ACTION_ITEM] + self.WEEKS
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-      , row_count=6
-      , col_wdths=[-1, 40] + 7 * [25] + [40]
+      , row_count=20
+      , col_wdths=[-1] + 4 * [50]
       , inner_pad_lft=True
       , inner_pad_rgt=True
       , show_outline=True
       , TableType=DualLineTable
       )
-
-    self.entries_: list =\
-    [ deepcopy(habit_tracker_table)
-    , deepcopy(habit_tracker_table)
-    , deepcopy(habit_tracker_table)
-    , deepcopy(habit_tracker_table)
     ]
 
     return
@@ -116,4 +113,4 @@ class HabitTracker(OnePageHalfLetterLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.HABIT_PAGE_HEADER_TXT)
+      (header_txt=self.PAGE_HEADER_TXT)

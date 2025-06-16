@@ -30,9 +30,10 @@ import svgwrite.container
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
+from classes.elements.base_element import VerticalStack
 from classes.elements.row_group import DualLineRowGroup
 
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 from classes.elements.row_group import TextRowGroup
 from classes.style.std_styles import StdTextBoxStyles
 
@@ -76,7 +77,12 @@ class AceStrings:
     'Connect'
   CONNECT_DESC: str = (
     'Connect with your physical body. Engage in one of the exercises '
-    'described on the following page.'
+    'described below:'
+    '\n5-4-3-2-1'
+    '\nIdentify 5 things you can see, 4 things you can touch,'
+    '3 distinct sounds, 2 scents, 1 thing you can taste.'
+    '\nLay on your back. Systematically tense and release muscles '
+    'starting from your toes and ending with the top of your head.'
   )
 
   REENGAGE_HEADER_TXT: str =\
@@ -94,7 +100,7 @@ class AceStrings:
 
 
 #_______________________________________________________________________
-class AceReference(OnePageHalfLetterLayout):
+class AceReference(OnePageHalfLetter):
   """
   Free write layout.
   """
@@ -133,7 +139,7 @@ class AceReference(OnePageHalfLetterLayout):
     """
     super().create_content()
 
-    self.entries_: list =\
+    about_stack: list =\
       [ TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
@@ -144,7 +150,10 @@ class AceReference(OnePageHalfLetterLayout):
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
         , text=AceStrings.ABOUT
         )
-      , TextRowGroup\
+      ]
+
+    using_stack: list =\
+      [ TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
         , text=AceStrings.USING_HEADER_TXT
@@ -154,7 +163,10 @@ class AceReference(OnePageHalfLetterLayout):
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
         , text=AceStrings.USING_DESC
         )
-      , TextRowGroup\
+      ]
+
+    acknowlege_stack: list =\
+      [ TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
         , text=AceStrings.ACKNOWLEDGE_HEADER_TXT
@@ -164,7 +176,10 @@ class AceReference(OnePageHalfLetterLayout):
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
         , text=AceStrings.ACKNOWLEGE_DESC
         )
-      , TextRowGroup\
+      ]
+
+    connect_stack: list =\
+     [ TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
         , text=AceStrings.CONNECT_HEADER_TXT
@@ -174,7 +189,10 @@ class AceReference(OnePageHalfLetterLayout):
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
         , text=AceStrings.CONNECT_DESC
         )
-      , TextRowGroup\
+     ]
+
+    reengage_stack: list =\
+      [ TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
         , text=AceStrings.REENGAGE_HEADER_TXT
@@ -186,6 +204,38 @@ class AceReference(OnePageHalfLetterLayout):
         )
       ]
 
+    fill_hght = self.calc_remaining_hght_per_element(5)
+
+    stack_entries: list =\
+      [ VerticalStack\
+        ( obj_list=about_stack
+        , show_outline=True
+        )
+      , VerticalStack\
+        ( obj_list=using_stack
+        , show_outline=True
+        )
+      , VerticalStack\
+        ( obj_list=acknowlege_stack
+        , show_outline=True
+        )
+      , VerticalStack\
+        ( obj_list=connect_stack
+        , show_outline=True
+        )
+      , VerticalStack\
+        ( obj_list=reengage_stack
+        , show_outline=True
+        )
+     ]
+
+    self.entries_: list =\
+      [ VerticalStack\
+        ( obj_list=stack_entries
+        , show_outline=True
+        , total_hght=self.content_hght_
+        )
+      ]
     return
 
 

@@ -40,13 +40,13 @@ class PlannerStrings:
     '\u2022'
 
   DATE_STR: str =\
-    5 * SPACE\
+    4 * SPACE\
     + '/'\
-    + 5 * SPACE\
+    + 4 * SPACE\
     + '/'\
     + SPACE\
     + '20'\
-    + 5 * SPACE
+    + 4 * SPACE
 
   DEF_TABLE_HEADER_TXT: str =\
     'Table Header'
@@ -65,9 +65,6 @@ class PlannerStrings:
 
   DEF_TEST_LAYOUT_PATH: str =\
     'test-layout.svg'
-
-  DEF_DAY_LAYOUT_PATH: str =\
-    'day#-layout.svg'
 
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout.svg'
@@ -93,64 +90,39 @@ class PlannerStrings:
   #_____________________________________________________________________
   # Day layout strings
   #_____________________________________________________________________
-  SHORT_QUOTE_0: str =\
+  QUOTE0: str = (
     'Start where you are. Use what you have. Do what you can. '
-    #'-Arthur Ashe'
+    '-Arthur Ashe'
+  )
 
-  QUOTE0: str =\
-    'It’s not always that we need to do more, but rather that we need '\
-    'to focus on less. - Nathan W. Morris'
+  QUOTE1: str = (
+    'It’s not always that we need to do more, but rather that we need '
+    'to focus on less. -Nathan W. Morris'
+  )
 
-  QUOTE1: str =\
-    'Your future is created by what you do today, not tomorrow.'
+  QUOTE2: str = str(
+    'Your future is created by what you do today, not tomorrow. '
+    '-Robert Kiyosaki'
+  )
+
+  QUOTE0 = 'Quote0'
+  QUOTE1 = 'Quote1'
+  QUOTE2 = 'Quote2'
+  QUOTE3 = 'Quote3'
+  QUOTE4 = 'Quote4'
+  QUOTE5 = 'Quote5'
+  QUOTE6 = 'Quote6'
 
   QUOTES: list =\
-  [ {'quote': QUOTE0, 'author': '- Nathan W. Morris'}
-  , {'quote': QUOTE1, 'author': '- Robert Kiyosaki'}
+  [ QUOTE0
+  , QUOTE1
+  , QUOTE2
+  , QUOTE3
+  , QUOTE4
+  , QUOTE5
+  , QUOTE6
   ]
 
-  DAYS: str =\
-    'Mon' + 2 * SPACE +\
-    'Tue' + 2 * SPACE +\
-    'Wed' + 2 * SPACE +\
-    'Thu' + 2 * SPACE +\
-    'Fri' + 2 * SPACE +\
-    'Sat' + 2 * SPACE +\
-    'Sun' + 2 * SPACE + DATE_STR
-
-  DAY_PRIMARY_EFFORTS: list =\
-    ['Primary Efforts', 'Alignment']
-
-  DAY_TODO: str =\
-    'To Do'
-
-  DAY_CHECKLIST_STR: list =\
-    '[] Vision ' + SPACE +\
-    '[] Goals'   + SPACE +\
-    '[] Calendar'+ SPACE +\
-    '[] Habit'
-
-  DAY_FOCUS: str =\
-    'Today I will pay most attention to:'
-
-  DAY_GRATITUDE: str =\
-    'Gratitude'
-
-  DAY_ACHIEVEMENT: str =\
-    'One achievement I take pride in:'
-
-  DAY_PROMPTS: str =\
-    [ 'How can I embrace discomfort and grow today?'
-    , 'What am I avoiding?'
-    , 'What would make today feel meaningful?'
-    , 'What can I let go of?'
-    , 'Where can I invite more ease?'
-    , 'What emotion is most present right now?'
-    , 'What am I learning about myself?'
-    ]
-
-  DAY_PROMPT_LAST_24: str =\
-    'In the last 24 hours...'
 
   #_____________________________________________________________________
   # Goal layout strings
@@ -169,6 +141,11 @@ class PlannerStrings:
   GOAL_ACTIONS: str =\
     'Critical Steps'
 
+  GOAL_MILESTONES: list =\
+  [ 'Advancement'
+  , 'Date'
+  ]
+
   GOAL_MEASUREMENT: str =\
     'Tangible Results'
 
@@ -178,11 +155,8 @@ class PlannerStrings:
   GOAL_LIFE_IMPROVEMENT: str =\
     'Impacts of Success'
 
-  GOAL_BENCHMARKS: str =\
-    'Monthly Benchmarks'
-
   GOAL_PLAN: str =\
-    'Execution Plan'
+    'Commitment Cadence'
 
   GOAL_REWARD: str =\
     'Celebration Plan'
@@ -193,6 +167,8 @@ class PlannerStrings:
   , 'Month 3:'
   ]
 
+  GOAL_VALUES: str =\
+    'How does this goal support your values?'
   #_____________________________________________________________________
   # Week layout strings
   #_____________________________________________________________________

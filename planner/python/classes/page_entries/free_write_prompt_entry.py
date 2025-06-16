@@ -35,11 +35,11 @@ from classes.elements.row_group import DualLineRowGroup
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerFontStyle as Font
 
-from classes.page_layouts.half_letter_layout import OnePageHalfLetterLayout
+from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 
 
 #_______________________________________________________________________
-class FreeWritePromptEntry(OnePageHalfLetterLayout):
+class FreeWritePromptEntry(OnePageHalfLetter):
   """
   Free write layout.
   """
