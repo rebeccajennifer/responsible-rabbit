@@ -112,7 +112,7 @@ def generate_habit_tracker\
     TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
       , is_dbl_sided=True
-      , file_path=path.join(out_dir, 'weekly-checklist-back.svg')
+      , file_path=path.join(out_dir, 'week-chcklst-back.svg')
       , entry_0_type=TitlePage
       , entry_0_args={}
       , entry_1_type=WeekCheckList
@@ -127,7 +127,7 @@ def generate_habit_tracker\
     , out_dir=args.out_dir
     , divider_pos=0
     , divider_str='Today'
-    , file_path=path.join(args.out_dir, 'weekly-checklist-frnt.svg')
+    , file_path=path.join(args.out_dir, 'week-chcklst-frnt.svg')
     , entry_type=HabitTracker
     , entry_args={}
     )
