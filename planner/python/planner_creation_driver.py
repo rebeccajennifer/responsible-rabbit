@@ -27,7 +27,7 @@
 #_______________________________________________________________________
 
 import argparse
-from os import path
+from os import path, system, chdir
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
@@ -134,10 +134,6 @@ def generate_habit_tracker\
   habit_tracker.save()
 
 
-
-
-
-
 #_______________________________________________________________________
 if __name__ == '__main__':
   new_line(2)
@@ -176,6 +172,10 @@ if __name__ == '__main__':
     , entry_1_args={}
     )
   test_layout.save()
+
+  chdir(f'{args.out_dir}/..')
+  system(f'echo $PWD')
+  system('./make-pdfs.sh')
 
   new_line(10)
   print("all done")
