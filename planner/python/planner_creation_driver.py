@@ -27,7 +27,7 @@
 #_______________________________________________________________________
 
 import argparse
-from os import path
+from os import path, system, chdir
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
@@ -112,7 +112,7 @@ def generate_habit_tracker\
     TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
       , is_dbl_sided=True
-      , file_path=path.join(out_dir, 'weekly-checklist-back.svg')
+      , file_path=path.join(out_dir, 'week-chcklst-back.svg')
       , entry_0_type=TitlePage
       , entry_0_args={}
       , entry_1_type=WeekCheckList
@@ -127,15 +127,11 @@ def generate_habit_tracker\
     , out_dir=args.out_dir
     , divider_pos=0
     , divider_str='Today'
-    , file_path=path.join(args.out_dir, 'weekly-checklist-frnt.svg')
+    , file_path=path.join(args.out_dir, 'week-chcklst-frnt.svg')
     , entry_type=HabitTracker
     , entry_args={}
     )
   habit_tracker.save()
-
-
-
-
 
 
 #_______________________________________________________________________
@@ -176,6 +172,10 @@ if __name__ == '__main__':
     , entry_1_args={}
     )
   test_layout.save()
+
+  chdir(f'{args.out_dir}/..')
+  system(f'echo $PWD')
+  system('./make-pdfs.sh')
 
   new_line(10)
   print("all done")

@@ -212,6 +212,7 @@ class OnePageHalfLetter(svgwrite.container.Group):
       ( total_wdth=self.content_wdth_
       , text=header_txt
       , style=style
+      , wrap_txt=False
       )
 
     return page_header

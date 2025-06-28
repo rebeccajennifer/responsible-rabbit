@@ -45,17 +45,11 @@ class MonthEntry(OnePageHalfLetter):
 
   HEADER_TXT: str =\
     'Month #'\
-    + Strings.SPACE\
     + Strings.DATE_STR\
     + Strings.RIGHT_ARROW\
     + Strings.DATE_STR
 
-  WEEK_HEADER_TXT: str =\
-    'Week #'\
-    + Strings.DATE_STR\
-    + Strings.RIGHT_ARROW\
-    + Strings.DATE_STR
-
+  WEEK_HEADER_TXT: str = 'Week #' + 24 * Strings.SPACE + '/'
 
   #_____________________________________________________________________
   def __init__(self

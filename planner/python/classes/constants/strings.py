@@ -40,13 +40,13 @@ class PlannerStrings:
     '\u2022'
 
   DATE_STR: str =\
-    4 * SPACE\
+    7 * SPACE\
     + '/'\
-    + 4 * SPACE\
+    + 7 * SPACE\
     + '/'\
     + SPACE\
     + '20'\
-    + 4 * SPACE
+    + 5 * SPACE
 
   DEF_TABLE_HEADER_TXT: str =\
     'Table Header'

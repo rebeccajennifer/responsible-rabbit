@@ -40,12 +40,13 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.day_entry import DayEntry
+from classes.page_entries.week_entry import WeekEntry0
+from classes.page_entries.week_entry import WeekEntry1
 from classes.page_entries.month_entry import MonthEntry
 
 from classes.page_entries.goal_entry import GoalEntry
+
 from classes.page_entries.free_write_entry import FreeWriteEntry
-from classes.page_entries.week_entry import WeekEntry0
-from classes.page_entries.week_entry import WeekEntry1
 
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
@@ -204,8 +205,13 @@ class PageOrder:
 
   #_____________________________________________________________________
   BLNK_ENTRY: dict =\
+    { Key.ENTRY_TYPE: TITLE_PAGE
+    , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
+    }
+
+  DATES_ENTRY: dict =\
     { Key.ENTRY_TYPE: FreeWriteEntry
-    , Key.ENTRY_ARGS: {}
+    , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
     }
 
   #_____________________________________________________________________
@@ -234,6 +240,14 @@ class PageOrder:
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
+  , [ 'month-0.svg'
+    , MONTH_ENTRY
+    , MONTH_ENTRY
+    ]
+  , [ 'month-1.svg'
+    , DATES_ENTRY
+    , MONTH_ENTRY
+    ]
   , [ 'page-04.svg'
     , DAY_ENTRY2
     , DAY_FREE_WRITE_ENTRY[2]
@@ -260,7 +274,7 @@ class PageOrder:
     ]
   , [ 'page-10.svg'
     , WEEK_ENTRY0
-    , BLNK_ENTRY
+    , TITLE_PAGE
     ]
   , [ 'page-11.svg'
     , DAY_ENTRY6

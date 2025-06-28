@@ -1,41 +1,33 @@
-rsvg-convert -f pdf -o pdf/ace-reference.pdf        svg/ace-reference.svg
-rsvg-convert -f pdf -o pdf/action-items.pdf         svg/action-items.svg
-rsvg-convert -f pdf -o pdf/day-0-layout.pdf         svg/day-0-layout.svg
-rsvg-convert -f pdf -o pdf/day-1-layout.pdf         svg/day-1-layout.svg
-rsvg-convert -f pdf -o pdf/day-2-layout.pdf         svg/day-2-layout.svg
-rsvg-convert -f pdf -o pdf/day-3-layout.pdf         svg/day-3-layout.svg
-rsvg-convert -f pdf -o pdf/day-4-layout.pdf         svg/day-4-layout.svg
-rsvg-convert -f pdf -o pdf/day-5-layout.pdf         svg/day-5-layout.svg
-rsvg-convert -f pdf -o pdf/day-6-layout.pdf         svg/day-6-layout.svg
-rsvg-convert -f pdf -o pdf/day-6-layout.pdf         svg/day-6-layout.svg
-
-rsvg-convert -f pdf -o pdf/divider-calendar.pdf     svg/divider-calendar.svg
-rsvg-convert -f pdf -o pdf/divider-goals.pdf        svg/divider-goals.svg
-rsvg-convert -f pdf -o pdf/divider-month-1.pdf      svg/divider-month-1.svg
-rsvg-convert -f pdf -o pdf/divider-month-1.pdf      svg/divider-month-1.svg
-rsvg-convert -f pdf -o pdf/divider-month-2.pdf      svg/divider-month-2.svg
-rsvg-convert -f pdf -o pdf/divider-month-3.pdf      svg/divider-month-3.svg
-rsvg-convert -f pdf -o pdf/divider-vision.pdf       svg/divider-vision.svg
-
-#rsvg-convert -f pdf -o pdf/habit-layout.pdf         svg/habit-layout.svg
-rsvg-convert -f pdf -o pdf/week-chcklst-back.pdf    svg/week-chcklst-back.svg
-rsvg-convert -f pdf -o pdf/week-chcklst-frnt.pdf    svg/week-chcklst-frnt.svg
-
-rsvg-convert -f pdf -o pdf/test.pdf  svg/test.svg
-
-rsvg-convert -f pdf -o pdf/page-00.pdf  svg/page-00.svg
-rsvg-convert -f pdf -o pdf/page-01.pdf  svg/page-01.svg
-rsvg-convert -f pdf -o pdf/page-02.pdf  svg/page-02.svg
-rsvg-convert -f pdf -o pdf/page-03.pdf  svg/page-03.svg
-rsvg-convert -f pdf -o pdf/page-04.pdf  svg/page-04.svg
-rsvg-convert -f pdf -o pdf/page-05.pdf  svg/page-05.svg
-rsvg-convert -f pdf -o pdf/page-06.pdf  svg/page-06.svg
-rsvg-convert -f pdf -o pdf/page-07.pdf  svg/page-07.svg
-rsvg-convert -f pdf -o pdf/page-08.pdf  svg/page-08.svg
-rsvg-convert -f pdf -o pdf/page-09.pdf  svg/page-09.svg
-
-
-
-#rsvg-convert -f pdf -o pdf/test.pdf  svg/test.svg
-
-
+rsvg-convert -f pdf -o pdf/00-action-items.pdf          svg/00-action-items.svg
+rsvg-convert -f pdf -o pdf/00-title-future-1yr.pdf      svg/00-title-future-1yr.svg
+rsvg-convert -f pdf -o pdf/01-future-5yr-future-12w.pdf svg/01-future-5yr-future-12w.svg
+rsvg-convert -f pdf -o pdf/02-future-5yr-future-bad.pdf svg/02-future-5yr-future-bad.svg
+rsvg-convert -f pdf -o pdf/03-future-1yr-vow.pdf        svg/03-future-1yr-vow.svg
+rsvg-convert -f pdf -o pdf/04-goal.pdf                  svg/04-goal.svg
+rsvg-convert -f pdf -o pdf/05-goal.pdf                  svg/05-goal.svg
+rsvg-convert -f pdf -o pdf/06-month.pdf                 svg/06-month.svg
+rsvg-convert -f pdf -o pdf/07-week0.pdf                 svg/07-week0.svg
+rsvg-convert -f pdf -o pdf/08-week1.pdf                 svg/08-week1.svg
+rsvg-convert -f pdf -o pdf/day-0-layout.pdf             svg/day-0-layout.svg
+rsvg-convert -f pdf -o pdf/day-0-quote.pdf              svg/day-0-quote.svg
+rsvg-convert -f pdf -o pdf/day-1-layout.pdf             svg/day-1-layout.svg
+rsvg-convert -f pdf -o pdf/day-1-quote.pdf              svg/day-1-quote.svg
+rsvg-convert -f pdf -o pdf/day-2-layout.pdf             svg/day-2-layout.svg
+rsvg-convert -f pdf -o pdf/day-2-quote.pdf              svg/day-2-quote.svg
+rsvg-convert -f pdf -o pdf/day-3-layout.pdf             svg/day-3-layout.svg
+rsvg-convert -f pdf -o pdf/day-3-quote.pdf              svg/day-3-quote.svg
+rsvg-convert -f pdf -o pdf/day-4-layout.pdf             svg/day-4-layout.svg
+rsvg-convert -f pdf -o pdf/day-4-quote.pdf              svg/day-4-quote.svg
+rsvg-convert -f pdf -o pdf/day-5-layout.pdf             svg/day-5-layout.svg
+rsvg-convert -f pdf -o pdf/day-5-quote.pdf              svg/day-5-quote.svg
+rsvg-convert -f pdf -o pdf/day-6-layout.pdf             svg/day-6-layout.svg
+rsvg-convert -f pdf -o pdf/day-6-quote.pdf              svg/day-6-quote.svg
+rsvg-convert -f pdf -o pdf/divider-calendar.pdf         svg/divider-calendar.svg
+rsvg-convert -f pdf -o pdf/divider-goals.pdf            svg/divider-goals.svg
+rsvg-convert -f pdf -o pdf/divider-month-1.pdf          svg/divider-month-1.svg
+rsvg-convert -f pdf -o pdf/divider-month-2.pdf          svg/divider-month-2.svg
+rsvg-convert -f pdf -o pdf/divider-month-3.pdf          svg/divider-month-3.svg
+rsvg-convert -f pdf -o pdf/divider-vision.pdf           svg/divider-vision.svg
+rsvg-convert -f pdf -o pdf/test.pdf                     svg/test.svg
+rsvg-convert -f pdf -o pdf/week-chcklst-back.pdf        svg/week-chcklst-back.svg
+rsvg-convert -f pdf -o pdf/week-chcklst-frnt.pdf        svg/week-chcklst-frnt.svg

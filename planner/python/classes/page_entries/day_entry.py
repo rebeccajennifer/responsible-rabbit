@@ -59,7 +59,7 @@ class DayEntry(OnePageHalfLetter):
     'Thu' + 2 * Strings.SPACE +\
     'Fri' + 2 * Strings.SPACE +\
     'Sat' + 2 * Strings.SPACE +\
-    'Sun' + 2 * Strings.SPACE + Strings.DATE_STR
+    'Sun' + Strings.DATE_STR
 
   DAY_PRIMARY_EFFORTS: list =\
     ['Primary Efforts', 'Alignment']

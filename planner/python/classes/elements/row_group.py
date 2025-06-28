@@ -247,6 +247,7 @@ class TextRowGroup(RowGroup):
   , font_color: str = Colors.NORMAL_TXT
   , line_spc: int = 1
   , style: TextBoxStyle = TextBoxStyle()
+  , wrap_txt: bool = True
   ):
     """
     Parameters:
@@ -281,13 +282,16 @@ class TextRowGroup(RowGroup):
     content_width: int =\
       total_wdth - Font.TEXT_PADDING * (inner_pad_lft + inner_pad_rgt)
 
-    split_text: list =\
-        Utils.split_txt_by_wdth\
-        ( txt=text
-        , px_wdth=content_width
-        , font_size=font_size
-        , font_family=font_family
-        )
+    if (wrap_txt):
+      split_text: list =\
+          Utils.split_txt_by_wdth\
+          ( txt=text
+          , px_wdth=content_width
+          , font_size=font_size
+          , font_family=font_family
+          )
+    else:
+      split_text = [text]
 
     text_array: list = len(split_text) * ['']
 
