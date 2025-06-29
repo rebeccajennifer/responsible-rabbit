@@ -92,22 +92,22 @@ class PlannerStrings:
   #_____________________________________________________________________
   QUOTE0: str = (
     'Start where you are. Use what you have. Do what you can. '
-    '-Arthur Ashe'
+    '- Arthur Ashe'
   )
 
   QUOTE1: str = (
     'It’s not always that we need to do more, but rather that we need '
-    'to focus on less. -Nathan W. Morris'
+    'to focus on less. - Nathan W. Morris'
   )
 
   QUOTE2: str = str(
     'Your future is created by what you do today, not tomorrow. '
-    '-Robert Kiyosaki'
+    '- Robert Kiyosaki'
   )
 
-  QUOTE0 = 'Quote0'
-  QUOTE1 = 'Quote1'
-  QUOTE2 = 'Quote2'
+  #QUOTE0 = 'Quote0'
+  #QUOTE1 = 'Quote1'
+  #QUOTE2 = 'Quote2'
   QUOTE3 = 'Quote3'
   QUOTE4 = 'Quote4'
   QUOTE5 = 'Quote5'
