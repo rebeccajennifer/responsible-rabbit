@@ -92,26 +92,37 @@ class PlannerStrings:
   #_____________________________________________________________________
   QUOTE0: str = (
     'Start where you are. Use what you have. Do what you can. '
-    '- Arthur Ashe'
+    '— Arthur Ashe'
   )
 
   QUOTE1: str = (
-    'It’s not always that we need to do more, but rather that we need '
-    'to focus on less. - Nathan W. Morris'
+    'It\'s not always that we need to do more, but rather that we need '
+    'to focus on less. — Nathan W. Morris'
   )
 
   QUOTE2: str = str(
     'Your future is created by what you do today, not tomorrow. '
-    '- Robert Kiyosaki'
+    '— Robert Kiyosaki'
   )
 
-  #QUOTE0 = 'Quote0'
-  #QUOTE1 = 'Quote1'
-  #QUOTE2 = 'Quote2'
-  QUOTE3 = 'Quote3'
-  QUOTE4 = 'Quote4'
-  QUOTE5 = 'Quote5'
-  QUOTE6 = 'Quote6'
+  QUOTE3: str = str(
+    'Discipline is the bridge between goals and accomplishment. '
+    '— Jim Rohn'
+  )
+
+  QUOTE4: str = str(
+    'Done is better than perfect. — Sheryl Sandberg'
+  )
+
+  QUOTE5: str = str(
+    'Don\'t watch the clock; do what it does. Keep going. '
+    '— Sam Levenson'
+  )
+
+  QUOTE6: str = str(
+    'You don\'t have to see the whole staircase, just take the first '
+    'step. — Martin Luther King Jr.'
+    )
 
   QUOTES: list =\
   [ QUOTE0
@@ -122,7 +133,6 @@ class PlannerStrings:
   , QUOTE5
   , QUOTE6
   ]
-
 
   #_____________________________________________________________________
   # Goal layout strings
@@ -187,11 +197,10 @@ class PlannerStrings:
     + SPACE + 'agree'
 
 
-  WEEK_PAGE_HEADER_TXT_1: str =\
-    'Goals for Week # '\
-    + SPACE\
-    + DATE_STR\
-    + RIGHT_ARROW\
+  WEEK_PAGE_HEADER_TXT_1: str = 'Week #'\
+    + 6 * SPACE + 'Prep'\
+    + 4 * SPACE + '|'\
+    + 4 * SPACE + 'Start:'\
     + DATE_STR
 
   WEEK_ACCOMPLISHMENTS: str =\
@@ -231,7 +240,7 @@ class PlannerStrings:
     ['[] Specific', '[] Measurable', '[] Achieveable']
 
   WEEK_LOOKING_FORWARD: str =\
-    "In the coming week, I’m eager to experience:"
+    'In the coming week, I\'m eager to experience:'
 
   WEEK_HABIT_TRACKER_HEADINGS: list =\
     [ 'Habits' + SPACE + 'Week #'

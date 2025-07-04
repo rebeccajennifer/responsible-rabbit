@@ -41,7 +41,9 @@ class WeekCheckList(OnePageHalfLetter):
   Daily entry layout.
   """
 
-  PAGE_HEADER_TXT : str = 'Weekly Checklist'
+  PAGE_HEADER_TXT : str =\
+    'Weekly Checklist' + 6 * Strings.SPACE + 'Month #'
+
   ACTION_ITEM     : str = 'Action Item'
 
   WEEKS: list =\
@@ -112,5 +114,4 @@ class WeekCheckList(OnePageHalfLetter):
 
     """
 
-    return super().create_page_header\
-      (header_txt=self.PAGE_HEADER_TXT)
+    return super().create_page_header(header_txt=self.PAGE_HEADER_TXT)
