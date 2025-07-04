@@ -102,6 +102,7 @@ class FreeWriteEntry(OnePageHalfLetter):
 
     page_header = super().create_page_header\
       ( header_txt=self.page_header_txt_
+      , wrap_txt=True
       )
 
     return page_header

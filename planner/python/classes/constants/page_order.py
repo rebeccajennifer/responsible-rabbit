@@ -80,6 +80,12 @@ class PageOrder:
 
   }
 
+  #_____________________________________________________________________
+  BLNK_ENTRY: dict =\
+    { Key.ENTRY_TYPE: TitlePage
+    , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
+    }
+
   TITLE_PAGE: dict =\
   { Key.ENTRY_TYPE: TitlePage
   , Key.ENTRY_ARGS:
@@ -203,11 +209,6 @@ class PageOrder:
     , Key.ENTRY_ARGS: {}
     }
 
-  #_____________________________________________________________________
-  BLNK_ENTRY: dict =\
-    { Key.ENTRY_TYPE: TITLE_PAGE
-    , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
-    }
 
   DATES_ENTRY: dict =\
     { Key.ENTRY_TYPE: FreeWriteEntry
@@ -216,21 +217,25 @@ class PageOrder:
 
   #_____________________________________________________________________
   DBL_SIDE_PAGE_ORDER: list =\
-  [ [ 'page-00.svg'
+  [ [ '0__title-page.svg'
+    , TITLE_PAGE
+    , BLNK_ENTRY
+    ]
+  , [ '1__vision-0.svg'
     , FUTURE_1YR_ENTRY0
     , FUTURE_1YR_ENTRY1
     ]
-  , [ 'page-01.svg'
+  , [ '1__vision-1.svg'
     , FUTURE_12W_ENTRY
     , FUTURE_5YR_ENTRY1
     ]
-  , [ 'page-02.svg'
+  , [ '1__vision-2.svg'
     , FUTURE_5YR_ENTRY0
     , FUTURE_BAD_ENTRY
     ]
-  , [ 'page-03.svg'
+  , [ '1__vision-3.svg'
     , VOW_ENTRY
-    , TITLE_PAGE
+    , BLNK_ENTRY
     ]
   , [ Strings.DEF_GOAL_LAYOUT_PATH
     , GOAL_ENTRY
@@ -240,45 +245,46 @@ class PageOrder:
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ 'month-0.svg'
+  , [ '3__month-0.svg'
     , MONTH_ENTRY
     , MONTH_ENTRY
     ]
-  , [ 'month-1.svg'
+  , [ '3__month-1.svg'
     , DATES_ENTRY
     , MONTH_ENTRY
     ]
-  , [ 'page-04.svg'
-    , DAY_ENTRY2
-    , DAY_FREE_WRITE_ENTRY[2]
-    ]
-  , [ 'page-05.svg'
+  , [ '4__week-0.svg'
     , DAY_ENTRY3
     , DAY_FREE_WRITE_ENTRY[3]
     ]
-  , [ 'page-06.svg'
-    , DAY_ENTRY1
-    , DAY_FREE_WRITE_ENTRY[1]
-    ]
-  , [ 'page-07.svg'
+  , [ '4__week-1.svg'
     , DAY_ENTRY4
+    , DAY_FREE_WRITE_ENTRY[2]
+    ]
+  , [ '4__week-2.svg'
+    , DAY_ENTRY2
     , DAY_FREE_WRITE_ENTRY[4]
     ]
-  , [ 'page-08.svg'
-    , DAY_ENTRY0
+  , [ '4__week-3.svg'
+    , DAY_ENTRY5
+    , DAY_FREE_WRITE_ENTRY[1]
+    ]
+  , [ '4__week-4.svg'
+    , DAY_ENTRY1
+    , DAY_FREE_WRITE_ENTRY[5]
+    ]
+  , [ '4__week-5.svg'
+    , DAY_ENTRY6
     , DAY_FREE_WRITE_ENTRY[0]
     ]
-  , [ 'page-09.svg'
-    , DAY_ENTRY5
-    , WEEK_ENTRY1
-    ]
-  , [ 'page-10.svg'
-    , WEEK_ENTRY0
+  , [ '4__week-6.svg'
+    , DAY_ENTRY0
+    , DAY_FREE_WRITE_ENTRY[6]
     , TITLE_PAGE
     ]
-  , [ 'page-11.svg'
-    , DAY_ENTRY6
-    , DAY_FREE_WRITE_ENTRY[6]
+  , [ '4__week-7.svg'
+    , WEEK_ENTRY0
+    , WEEK_ENTRY1
     ]
   ]
 

@@ -179,6 +179,7 @@ class OnePageHalfLetter(svgwrite.container.Group):
   , font_family: str = 0
   , box_fill_color: str = 0
   , box_brdr_color: str = 0
+  , wrap_txt: bool = False
   ) -> TextRowGroup:
     """
     Creates page header and saves it to class variable.
@@ -212,7 +213,7 @@ class OnePageHalfLetter(svgwrite.container.Group):
       ( total_wdth=self.content_wdth_
       , text=header_txt
       , style=style
-      , wrap_txt=False
+      , wrap_txt=wrap_txt
       )
 
     return page_header
