@@ -1,3 +1,38 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+#   DESCRIPTION
+#   Utility functions.
+#_______________________________________________________________________
+
+from os.path import exists
+from os.path import isdir
+from os.path import isfile
+from os.path import join
+from os.path import dirname
+from os import mkdir
+
 import svgwrite.container
 from classes.style.style import PlannerFontStyle as Font
 from classes.style.style import PlannerColors as Colors
@@ -11,6 +46,32 @@ import svgwrite
 from svgwrite.text import Text
 from svgwrite.container import Group
 
+#_____________________________________________________________________
+class UtilErrors:
+  """
+  Strings used in error messages
+  """
+
+  LINE: str =\
+    '\n________________________________________________________________'
+
+  ERROR: str =\
+    f'{LINE}'\
+    '\nUH OH! The program has encountered an error!'\
+    f'{LINE}'
+
+  ERROR_TYPE: str =\
+    f'{ERROR}'\
+    '\nERROR TYPE:  '
+
+  DESC_LABEL: str =\
+    '\nDESCRIPTION: '
+
+  MK_DIR_NO_PARENT_ERR: str =\
+    'Parent directory not found: '
+
+  FILE_WITH_DIR_NAME_ERR: str =\
+    'File exists with the same name: '
 
 
 #_____________________________________________________________________
@@ -85,7 +146,8 @@ class PlannerUtils:
       font_family : Font of text
 
     Returns:
-        List[str]: A list of strings, each representing a line of wrapped text.
+        List[str]: A list of strings, each representing a line of
+        wrapped text.
     """
 
     if (font_size <= 0):
@@ -189,6 +251,46 @@ class PlannerUtils:
 
     return container
 
+  #_____________________________________________________________________
+  def verify_dir(dir_path: str) -> bool:
+    """
+    Creates a directory if it doesn't exist.
 
+    Parameters:
+      dir_path: Path to directory
 
+    Side Effects:
+      Creates directory.
 
+    Returns:
+      None
+    """
+
+    if (not isdir(dir_path)):
+      try:
+        mkdir(dir_path)
+
+      except Exception as error:
+
+        err_type: Exception = type(error)
+
+        desc: str = ''
+
+        if (err_type == FileNotFoundError):
+          desc: str =\
+            f'{UtilErrors.MK_DIR_NO_PARENT_ERR}{dirname(dir_path)}'
+
+        if (err_type == FileExistsError):
+          desc: str = UtilErrors.FILE_WITH_DIR_NAME_ERR
+
+        err_msg: str = str(
+          f'{UtilErrors.ERROR_TYPE}'
+          f'{type(error).__name__}'
+          f'{UtilErrors.DESC_LABEL}'
+          f'{desc}'
+          f'{UtilErrors.LINE}'
+        )
+
+        raise err_type(err_msg)
+
+    return True
