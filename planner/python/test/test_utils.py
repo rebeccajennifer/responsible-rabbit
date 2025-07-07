@@ -34,6 +34,7 @@ from os.path import isfile
 from os.path import join
 from os import mkdir
 from os import makedirs
+from os import remove
 
 from shutil import rmtree
 
@@ -95,3 +96,13 @@ class Helper:
 def test_mkdir_no_parent() -> None:
   with pytest.raises(Exception):
     Utils.verify_dir(TestConst.TEST_DIR_FULL_PATH)
+
+def test_mkdir_file_exists() -> None:
+  open(TestConst.TEST_DIR_NAME, 'a').close()
+
+  with pytest.raises(Exception):
+    Utils.verify_dir(TestConst.TEST_DIR_NAME)
+
+def test_mkdir_file_exist() -> None:
+  remove(TestConst.TEST_DIR_NAME)
+  assert Utils.verify_dir(TestConst.TEST_DIR_NAME) == True

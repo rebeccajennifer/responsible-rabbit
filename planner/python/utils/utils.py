@@ -281,7 +281,8 @@ class PlannerUtils:
             f'{UtilErrors.MK_DIR_NO_PARENT_ERR}{dirname(dir_path)}'
 
         if (err_type == FileExistsError):
-          desc: str = UtilErrors.FILE_WITH_DIR_NAME_ERR
+          desc: str =\
+            f'{UtilErrors.FILE_WITH_DIR_NAME_ERR}{dir_path}'
 
         err_msg: str = str(
           f'{UtilErrors.ERROR_TYPE}'
