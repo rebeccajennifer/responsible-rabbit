@@ -58,23 +58,6 @@ class Helper:
   """
 
   #_____________________________________________________________________
-  def make_test_dir(dir_path: str) -> None:
-    """
-    Removes test directory.
-
-    Parameters:
-      None
-
-    Side Effects:
-      Makes test directory
-
-    Returns:
-      None
-    """
-    makedirs(dir_path)
-    return
-
-  #_____________________________________________________________________
   def rm_test_dir(dir_path: str) -> None:
     """
     Removes test directory.
@@ -88,21 +71,68 @@ class Helper:
     Returns:
       None
     """
-    rmtree(dir_path)
+
+    if isdir(dir_path):
+      rmtree(dir_path)
+    if isfile(dir_path):
+      remove(dir_path)
+
     return
 
 
 #_______________________________________________________________________
 def test_mkdir_no_parent() -> None:
+
+  parent: str = TestConst.TEST_DIR_PARENT
+
+  # Prep
+  Helper.rm_test_dir(parent)
+
   with pytest.raises(Exception):
     Utils.verify_dir(TestConst.TEST_DIR_FULL_PATH)
 
+#_______________________________________________________________________
 def test_mkdir_file_exists() -> None:
-  open(TestConst.TEST_DIR_NAME, 'a').close()
+
+  test_path: str = TestConst.TEST_DIR_NAME
+
+  # Prep
+  Helper.rm_test_dir(test_path)
+
+  # Create file with same name
+  open(test_path, 'a').close()
 
   with pytest.raises(Exception):
-    Utils.verify_dir(TestConst.TEST_DIR_NAME)
+    Utils.verify_dir(test_path)
 
-def test_mkdir_file_exist() -> None:
-  remove(TestConst.TEST_DIR_NAME)
+  # Clean up
+  remove(test_path)
+
+#_______________________________________________________________________
+def test_mkdir_no_error() -> None:
+
+  test_path: str = TestConst.TEST_DIR_NAME
+
+  # Prep
+  Helper.rm_test_dir(test_path)
+
   assert Utils.verify_dir(TestConst.TEST_DIR_NAME) == True
+
+  # Clean up
+  Helper.rm_test_dir(test_path)
+
+#_______________________________________________________________________
+def test_mkdir_long_path() -> None:
+
+  test_path : str = TestConst.TEST_DIR_FULL_PATH
+  parent    : str = TestConst.TEST_DIR_PARENT
+
+  # Prep
+  Helper.rm_test_dir(test_path)
+  Helper.rm_test_dir(parent)
+  makedirs(parent)
+
+  assert Utils.verify_dir(test_path) == True
+
+  # Clean up
+  Helper.rm_test_dir(parent)
