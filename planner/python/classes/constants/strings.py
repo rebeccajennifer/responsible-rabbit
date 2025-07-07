@@ -124,6 +124,36 @@ class PlannerStrings:
     'step. — Martin Luther King Jr.'
     )
 
+  QUOTE0: str = str(
+    'It always seems impossible until it\'s done. — Nelson Mandela'
+  )
+  QUOTE1: str = str(
+    'Owning our story and loving ourselves through that process is the '
+    'bravest thing that we\'ll ever do. — Brené Brown'
+  )
+  QUOTE1: str = str(
+    'Be yourself; everyone else is already taken. — Oscar Wilde'
+  )
+  QUOTE2: str = str(
+    'Although the world is full of suffering, it is also full of the '
+    'overcoming of it. — Helen Keller'
+  )
+  QUOTE3: str = str(
+    'Every morning we are born again. What we do today is what matters '
+    'most. — Buddha'
+  )
+  QUOTE4: str = str(
+    'You cannot escape the responsibility of tomorrow by evading it '
+    'today. — Abraham Lincoln'
+  )
+  QUOTE5: str = str(
+    'The most important thing in life is to learn how to give out '
+    'love, and to let it come in. — Morrie Schwartz'
+  )
+  QUOTE6: str = str(
+    'Your body hears everything your mind says. — Naomi Judd'
+  )
+
   QUOTES: list =\
   [ QUOTE0
   , QUOTE1
