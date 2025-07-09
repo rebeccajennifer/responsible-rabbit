@@ -36,6 +36,9 @@
 #   consistent formatting and content.
 #_______________________________________________________________________
 
+from enum import auto
+from enum import IntEnum
+
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 
@@ -217,23 +220,23 @@ class PageOrder:
 
   #_____________________________________________________________________
   DBL_SIDE_PAGE_ORDER: list =\
-  [ [ '0__title-page.svg'
+  [ [ '0__title-page'
     , TITLE_PAGE
     , BLNK_ENTRY
     ]
-  , [ '1__vision-0.svg'
+  , [ '1__vision-0'
     , FUTURE_1YR_ENTRY0
     , FUTURE_1YR_ENTRY1
     ]
-  , [ '1__vision-1.svg'
+  , [ '1__vision-1'
     , FUTURE_12W_ENTRY
     , FUTURE_5YR_ENTRY1
     ]
-  , [ '1__vision-2.svg'
+  , [ '1__vision-2'
     , FUTURE_5YR_ENTRY0
     , FUTURE_BAD_ENTRY
     ]
-  , [ '1__vision-3.svg'
+  , [ '1__vision-3'
     , VOW_ENTRY
     , BLNK_ENTRY
     ]
@@ -245,88 +248,108 @@ class PageOrder:
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ '3__month-0.svg'
+  , [ '3__month-0'
     , MONTH_ENTRY
     , MONTH_ENTRY
     ]
-  , [ '3__month-1.svg'
+  , [ '3__month-1'
     , DATES_ENTRY
     , MONTH_ENTRY
     ]
-  , [ '4__week-0.svg'
+  , [ '4__week-0'
     , DAY_ENTRY3
     , DAY_FREE_WRITE_ENTRY[3]
     ]
-  , [ '4__week-1.svg'
+  , [ '4__week-1'
     , DAY_ENTRY4
     , DAY_FREE_WRITE_ENTRY[2]
     ]
-  , [ '4__week-2.svg'
+  , [ '4__week-2'
     , DAY_ENTRY2
     , DAY_FREE_WRITE_ENTRY[4]
     ]
-  , [ '4__week-3.svg'
+  , [ '4__week-3'
     , DAY_ENTRY5
     , DAY_FREE_WRITE_ENTRY[1]
     ]
-  , [ '4__week-4.svg'
+  , [ '4__week-4'
     , DAY_ENTRY1
     , DAY_FREE_WRITE_ENTRY[5]
     ]
-  , [ '4__week-5.svg'
+  , [ '4__week-5'
     , DAY_ENTRY6
     , DAY_FREE_WRITE_ENTRY[0]
     ]
-  , [ '4__week-6.svg'
+  , [ '4__week-6'
     , DAY_ENTRY0
     , DAY_FREE_WRITE_ENTRY[6]
     , TITLE_PAGE
     ]
-  , [ '4__week-7.svg'
+  , [ '4__week-7'
     , WEEK_ENTRY0
     , WEEK_ENTRY1
     ]
   ]
 
   #_____________________________________________________________________
+  # Enum used so page numbers can be automated
+  #_____________________________________________________________________
+  class SglPagesIntro(IntEnum):
+    TTL_F_1YR = auto()
+    F_5YR_12W = auto()
+    F_5YR_BAD = auto()
+    F_1YR_VOW = auto()
+    GOALS_0_1 = auto()
+    GOALS_2_3 = auto()
+
+  SGL_SIDE_FILE_NAMES: dict =\
+  { SglPagesIntro.TTL_F_1YR: f'0-{SglPagesIntro.TTL_F_1YR:02}-ttl_f_1yr'
+  , SglPagesIntro.F_5YR_12W: f'0-{SglPagesIntro.F_5YR_12W:02}-f_5yr_12w'
+  , SglPagesIntro.F_5YR_BAD: f'0-{SglPagesIntro.F_5YR_BAD:02}-f_5yr_bad'
+  , SglPagesIntro.F_1YR_VOW: f'0-{SglPagesIntro.F_1YR_VOW:02}-f_1yr_vow'
+  , SglPagesIntro.GOALS_0_1: f'0-{SglPagesIntro.GOALS_0_1:02}-goals_0_1'
+  , SglPagesIntro.GOALS_2_3: f'0-{SglPagesIntro.GOALS_2_3:02}-goals_2_3'
+  }
+
+  #_____________________________________________________________________
   SGL_SIDE_PAGE_ORDER: list =\
-  [ [ '00-action-items.svg'
+  [ [ '00-action-items'
     , ACTION_ITEMS_ENTRY
     , ACTION_ITEMS_ENTRY
     ]
-  , [ '00-title-future-1yr.svg'
+  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.TTL_F_1YR]
     , TITLE_PAGE
     , FUTURE_1YR_ENTRY1
     ]
-  , [ '01-future-5yr-future-12w.svg'
+  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.F_5YR_12W]
     , FUTURE_5YR_ENTRY0
     , FUTURE_12W_ENTRY
     ]
-  , [ '02-future-5yr-future-bad.svg'
+  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.F_5YR_BAD]
     , FUTURE_5YR_ENTRY1
     , FUTURE_BAD_ENTRY
     ]
-  , [ '03-future-1yr-vow.svg'
+  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.F_1YR_VOW]
     , FUTURE_1YR_ENTRY0
     , VOW_ENTRY
     ]
-  , [ '04-goal.svg'
+  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.GOALS_0_1]
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ '05-goal.svg'
+  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.GOALS_2_3]
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ '06-month.svg'
+  , [ '06-month'
     , MONTH_ENTRY
     , MONTH_ENTRY
     ]
-  , [ '07-week0.svg'
+  , [ '07-week0'
     , WEEK_ENTRY0
     , WEEK_ENTRY0
     ]
-  , [ '08-week1.svg'
+  , [ '08-week1'
     , WEEK_ENTRY1
     , WEEK_ENTRY1
     ]
@@ -334,7 +357,7 @@ class PageOrder:
     , DAY_ENTRY0
     , DAY_ENTRY0
     ]
-  , [ 'day-0-quote.svg'
+  , [ 'day-0-quote'
     , DAY_FREE_WRITE_ENTRY[0]
     , DAY_FREE_WRITE_ENTRY[0]
     ]
@@ -342,7 +365,7 @@ class PageOrder:
     , DAY_ENTRY1
     , DAY_ENTRY1
     ]
-  , [ 'day-1-quote.svg'
+  , [ 'day-1-quote'
     , DAY_FREE_WRITE_ENTRY[1]
     , DAY_FREE_WRITE_ENTRY[1]
     ]
@@ -350,7 +373,7 @@ class PageOrder:
     , DAY_ENTRY2
     , DAY_ENTRY2
     ]
-  , [ 'day-2-quote.svg'
+  , [ 'day-2-quote'
     , DAY_FREE_WRITE_ENTRY[2]
     , DAY_FREE_WRITE_ENTRY[2]
     ]
@@ -358,7 +381,7 @@ class PageOrder:
     , DAY_ENTRY3
     , DAY_ENTRY3
     ]
-  , [ 'day-3-quote.svg'
+  , [ 'day-3-quote'
     , DAY_FREE_WRITE_ENTRY[3]
     , DAY_FREE_WRITE_ENTRY[3]
     ]
@@ -366,7 +389,7 @@ class PageOrder:
     , DAY_ENTRY4
     , DAY_ENTRY4
     ]
-  , [ 'day-4-quote.svg'
+  , [ 'day-4-quote'
     , DAY_FREE_WRITE_ENTRY[4]
     , DAY_FREE_WRITE_ENTRY[4]
     ]
@@ -374,7 +397,7 @@ class PageOrder:
     , DAY_ENTRY5
     , DAY_ENTRY5
     ]
-  , [ 'day-5-quote.svg'
+  , [ 'day-5-quote'
     , DAY_FREE_WRITE_ENTRY[5]
     , DAY_FREE_WRITE_ENTRY[5]
     ]
@@ -382,7 +405,7 @@ class PageOrder:
     , DAY_ENTRY6
     , DAY_ENTRY6
     ]
-  , [ 'day-6-quote.svg'
+  , [ 'day-6-quote'
     , DAY_FREE_WRITE_ENTRY[6]
     , DAY_FREE_WRITE_ENTRY[6]
     ]

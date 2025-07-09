@@ -67,13 +67,15 @@ def generate_pages\
       TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
-      , file_path=path.join(out_dir, page_order[i][0])
+      , file_name_no_ext=page_order[i][0]
+      , out_dir=out_dir
       , entry_0_type=page_order[i][1][Key.ENTRY_TYPE]
       , entry_0_args=page_order[i][1][Key.ENTRY_ARGS]
       , entry_1_type=page_order[i][2][Key.ENTRY_TYPE]
       , entry_1_args=page_order[i][2][Key.ENTRY_ARGS]
       )
-    layout.save()
+    layout.save_pdf()
+    #layout.save()
 
 def generate_dividers\
 ( is_portrait
@@ -112,7 +114,8 @@ def generate_habit_tracker\
     TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
       , is_dbl_sided=True
-      , file_path=path.join(out_dir, 'week-chcklst-back.svg')
+      , file_name_no_ext='week-chcklst-back.svg'
+      , out_dir=out_dir
       , entry_0_type=TitlePage
       , entry_0_args={}
       , entry_1_type=WeekCheckList
@@ -165,7 +168,8 @@ if __name__ == '__main__':
     TwoPageHalfLetterSize\
     ( is_portrait=False
     , is_dbl_sided=is_dbl_sided
-    , file_path=path.join(args.out_dir, 'test.svg')
+    , file_name_no_ext='test'
+    , out_dir=args.out_dir
     , entry_0_type=MonthEntry
     , entry_0_args={}
     , entry_1_type=TestEntry
