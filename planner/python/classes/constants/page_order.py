@@ -306,7 +306,7 @@ class PageOrder:
     GOALS_2_3 = auto()
 
   # File names for single sided PDFs
-  SGL_SIDE_FILE_NAMES: dict =\
+  SGL_SIDE_INTR_FILES: dict =\
   { SglPagesIntro.TTL_F_1YR: f'0-{SglPagesIntro.TTL_F_1YR:02}-ttl_f_1yr'
   , SglPagesIntro.F_5YR_12W: f'0-{SglPagesIntro.F_5YR_12W:02}-f_5yr_12w'
   , SglPagesIntro.F_5YR_BAD: f'0-{SglPagesIntro.F_5YR_BAD:02}-f_5yr_bad'
@@ -315,8 +315,18 @@ class PageOrder:
   , SglPagesIntro.GOALS_2_3: f'0-{SglPagesIntro.GOALS_2_3:02}-goals_2_3'
   }
 
-  SGL_SIDE_FILE_NAME_LIST: list =\
-    list(SGL_SIDE_FILE_NAMES.values())
+  SGL_SIDE_INTR_FILES: dict =\
+  { SglPagesIntro.TTL_F_1YR: f'0-{SglPagesIntro.TTL_F_1YR:02}-ttl_f_1yr'
+  , SglPagesIntro.F_5YR_12W: f'0-{SglPagesIntro.F_5YR_12W:02}-f_5yr_12w'
+  , SglPagesIntro.F_5YR_BAD: f'0-{SglPagesIntro.F_5YR_BAD:02}-f_5yr_bad'
+  , SglPagesIntro.F_1YR_VOW: f'0-{SglPagesIntro.F_1YR_VOW:02}-f_1yr_vow'
+  , SglPagesIntro.GOALS_0_1: f'0-{SglPagesIntro.GOALS_0_1:02}-goals_0_1'
+  , SglPagesIntro.GOALS_2_3: f'0-{SglPagesIntro.GOALS_2_3:02}-goals_2_3'
+  }
+
+
+  SGL_SIDE_INTR_FILE_NAMES: list =\
+    list(SGL_SIDE_INTR_FILES.values())
 
 
   #_____________________________________________________________________
@@ -325,27 +335,27 @@ class PageOrder:
     , ACTION_ITEMS_ENTRY
     , ACTION_ITEMS_ENTRY
     ]
-  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.TTL_F_1YR]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.TTL_F_1YR]
     , TITLE_PAGE
     , FUTURE_1YR_ENTRY1
     ]
-  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.F_5YR_12W]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.F_5YR_12W]
     , FUTURE_5YR_ENTRY0
     , FUTURE_12W_ENTRY
     ]
-  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.F_5YR_BAD]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.F_5YR_BAD]
     , FUTURE_5YR_ENTRY1
     , FUTURE_BAD_ENTRY
     ]
-  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.F_1YR_VOW]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.F_1YR_VOW]
     , FUTURE_1YR_ENTRY0
     , VOW_ENTRY
     ]
-  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.GOALS_0_1]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.GOALS_0_1]
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ SGL_SIDE_FILE_NAMES[SglPagesIntro.GOALS_2_3]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.GOALS_2_3]
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]

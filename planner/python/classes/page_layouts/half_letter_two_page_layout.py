@@ -54,6 +54,9 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
   one sheet and cut in half.
   """
 
+  PDF_SUB_DIR: str = 'pdf'
+  SVG_SUB_DIR: str = 'svg'
+
   #_____________________________________________________________________
   def __init__(self
   , is_portrait: bool = False
@@ -92,11 +95,14 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
     Utils.verify_dir(out_dir)
     self.out_dir_       : str   = out_dir
 
-    Utils.verify_dir(join(out_dir, 'svg'))
-    Utils.verify_dir(join(out_dir, 'pdf'))
+    self.pdf_dir_ : str = join(out_dir, self.PDF_SUB_DIR)
+    svg_dir       : str = join(out_dir, self.SVG_SUB_DIR)
+
+    Utils.verify_dir(svg_dir)
+    Utils.verify_dir(self.pdf_dir_)
 
     self.svg_file_path_: str =\
-      join(self.out_dir_, 'svg', file_name_no_ext + '.svg')
+      join(svg_dir, file_name_no_ext + '.svg')
 
     #___________________________________________________________________
     if (not entry_0_type):
@@ -266,8 +272,7 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
     cairosvg.svg2pdf\
     ( url=self.svg_file_path_
     , write_to=join\
-      ( self.out_dir_
-      , 'pdf'
+      ( self.pdf_dir_
       , f'{self.file_name_no_ext_}.pdf'
       )
     )

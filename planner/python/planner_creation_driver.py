@@ -138,6 +138,28 @@ def generate_habit_tracker\
     )
   habit_tracker.save()
 
+#_______________________________________________________________________
+def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
+  """
+  Combines pdfs in groups.
+
+  Parameters:
+    None
+
+  Side Effects:
+    Creates several combined pdfs.
+
+  Returns:
+    None
+  """
+
+  intr_pdf_group: list = PageOrder.SGL_SIDE_INTR_FILE_NAMES
+
+  pdf_paths: list =\
+    [path.join(pdf_out_dir, n + '.pdf') for n in intr_pdf_group]
+
+  Utils.combine_pdfs(pdf_paths, path.join(out_dir, '__0__intro.pdf'))
+
 
 #_______________________________________________________________________
 if __name__ == '__main__':
@@ -153,11 +175,11 @@ if __name__ == '__main__':
 
   page_order: list = []
 
-  pdf_out_dir: str = path.join(args.out_dir,  'pdf')
-  svg_out_dir: str = path.join(args.out_dir,  'svg')
+  pdf_out_dir: str =\
+    path.join(args.out_dir, TwoPageHalfLetterSize.PDF_SUB_DIR)
 
-  pdf_file_paths: list = [path.join(pdf_out_dir, n + '.pdf') for n in PageOrder.SGL_SIDE_FILE_NAME_LIST]
-
+  svg_out_dir: str =\
+    path.join(args.out_dir, TwoPageHalfLetterSize.SVG_SUB_DIR)
 
 
   #_____________________________________________________________________
@@ -170,8 +192,8 @@ if __name__ == '__main__':
   #_____________________________________________________________________
 
   generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
-  generate_dividers(is_portrait, args.out_dir)
-  generate_habit_tracker(is_portrait, args.out_dir)
+  #generate_dividers(is_portrait, args.out_dir)
+  #generate_habit_tracker(is_portrait, args.out_dir)
 
   test_layout=\
     TwoPageHalfLetterSize\
@@ -187,7 +209,7 @@ if __name__ == '__main__':
   test_layout.save_pdf()
 
 
-  Utils.combine_pdfs(pdf_file_paths, 'combined_pdf')
+  group_pdfs(is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
 
   new_line(10)
   print("all done")
