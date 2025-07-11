@@ -71,6 +71,39 @@ class UtilErrors:
   FILE_WITH_DIR_NAME_ERR: str =\
     'File exists with the same name: '
 
+  WRONG_FILE_TYPE: str =\
+    'Wrong file type.'
+
+  FILE_DNE: str =\
+    'File does not exist: '
+
+
+  #_____________________________________________________________________
+  def raise_exception_with_desc(err: Exception, desc: str) -> None:
+    """
+    Raiese exception with descriptive message.
+
+    Parameters:
+      err   : Exception type.
+      desc  : Error message.
+
+    Side Effects:
+      Raises exception
+
+    Returns:
+      None
+    """
+
+    err_type = type(err)
+
+    err_msg: str = str(
+      f'{UtilErrors.ERROR_TYPE}{err_type.__name__}'
+      f'{UtilErrors.DESC_LABEL}{desc}'
+      f'{UtilErrors.LINE}'
+    )
+
+    raise err_type(err_msg)
+
 
 #_____________________________________________________________________
 class PlannerUtils:
@@ -271,7 +304,6 @@ class PlannerUtils:
       except Exception as error:
 
         err_type: Exception = type(error)
-
         desc: str = ''
 
         if (err_type == FileNotFoundError):
@@ -282,15 +314,7 @@ class PlannerUtils:
           desc: str =\
             f'{UtilErrors.FILE_WITH_DIR_NAME_ERR}{dir_path}'
 
-        err_msg: str = str(
-          f'{UtilErrors.ERROR_TYPE}'
-          f'{type(error).__name__}'
-          f'{UtilErrors.DESC_LABEL}'
-          f'{desc}'
-          f'{UtilErrors.LINE}'
-        )
-
-        raise err_type(err_msg)
+        UtilErrors.raise_exception_with_desc(error, desc)
 
     return True
 
@@ -314,9 +338,16 @@ class PlannerUtils:
         header = f.read(4)
         return header == b'%PDF'
 
-    except Exception as e:
-      print(f'Error reading file: {e}')
-      return False
+    except Exception as error:
+
+      err_type: Exception = type(error)
+      desc: str = ''
+
+      if (err_type == FileNotFoundError):
+        desc: str =\
+          f'{UtilErrors.FILE_DNE}{file_path}'
+
+      UtilErrors.raise_exception_with_desc(error, desc)
 
     return True
 

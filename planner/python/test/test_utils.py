@@ -150,8 +150,9 @@ def test_mkdir_long_path() -> None:
 #_______________________________________________________________________
 def test_is_pdf() -> None:
 
+  #_____________________________________________________________________
   # Prep
-
+  #_____________________________________________________________________
   test_svg_name: str = TestConst.TEST_SVG_NAME
   test_pdf_name: str = TestConst.TEST_PDF_NAME
 
@@ -167,11 +168,16 @@ def test_is_pdf() -> None:
   cairosvg.svg2pdf\
     ( url=test_svg_name
     , write_to=test_pdf_name)
+  #_____________________________________________________________________
 
-  Utils.is_pdf(test_pdf_name)
+  # Run function under test
+  assert Utils.is_pdf(test_pdf_name) == True
 
   # Clean up
   remove(test_pdf_name)
   remove(test_svg_name)
+
+  with pytest.raises(Exception):
+    Utils.is_pdf(test_pdf_name)
 
   return
