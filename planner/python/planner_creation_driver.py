@@ -47,6 +47,8 @@ from utils.planner_parser import PlannerCreationParser
 
 from classes.page_layouts.half_letter_two_page_layout import TwoPageHalfLetterSize
 
+from utils.utils import PlannerUtils as Utils
+
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:
   for i in range(new_line_count):
@@ -151,6 +153,13 @@ if __name__ == '__main__':
 
   page_order: list = []
 
+  pdf_out_dir: str = path.join(args.out_dir,  'pdf')
+  svg_out_dir: str = path.join(args.out_dir,  'svg')
+
+  pdf_file_paths: list = [path.join(pdf_out_dir, n + '.pdf') for n in PageOrder.SGL_SIDE_FILE_NAME_LIST]
+
+
+
   #_____________________________________________________________________
   # Determine page ordering
   #_____________________________________________________________________
@@ -176,6 +185,9 @@ if __name__ == '__main__':
     , entry_1_args={}
     )
   test_layout.save_pdf()
+
+
+  Utils.combine_pdfs(pdf_file_paths, 'combined_pdf')
 
   new_line(10)
   print("all done")

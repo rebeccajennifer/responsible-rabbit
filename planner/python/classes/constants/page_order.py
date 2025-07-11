@@ -295,6 +295,9 @@ class PageOrder:
   # Enum used so page numbers can be automated
   #_____________________________________________________________________
   class SglPagesIntro(IntEnum):
+    """
+    Page numbers for intro section.
+    """
     TTL_F_1YR = auto()
     F_5YR_12W = auto()
     F_5YR_BAD = auto()
@@ -302,6 +305,7 @@ class PageOrder:
     GOALS_0_1 = auto()
     GOALS_2_3 = auto()
 
+  # File names for single sided PDFs
   SGL_SIDE_FILE_NAMES: dict =\
   { SglPagesIntro.TTL_F_1YR: f'0-{SglPagesIntro.TTL_F_1YR:02}-ttl_f_1yr'
   , SglPagesIntro.F_5YR_12W: f'0-{SglPagesIntro.F_5YR_12W:02}-f_5yr_12w'
@@ -310,6 +314,10 @@ class PageOrder:
   , SglPagesIntro.GOALS_0_1: f'0-{SglPagesIntro.GOALS_0_1:02}-goals_0_1'
   , SglPagesIntro.GOALS_2_3: f'0-{SglPagesIntro.GOALS_2_3:02}-goals_2_3'
   }
+
+  SGL_SIDE_FILE_NAME_LIST: list =\
+    list(SGL_SIDE_FILE_NAMES.values())
+
 
   #_____________________________________________________________________
   SGL_SIDE_PAGE_ORDER: list =\
