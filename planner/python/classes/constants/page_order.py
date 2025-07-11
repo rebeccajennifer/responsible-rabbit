@@ -304,6 +304,8 @@ class PageOrder:
     F_1YR_VOW = auto()
     GOALS_0_1 = auto()
     GOALS_2_3 = auto()
+    MONTH_0_1 = auto()
+    MONTH_2__ = auto()
 
   # File names for single sided PDFs
   SGL_SIDE_INTR_FILES: dict =\
@@ -313,21 +315,12 @@ class PageOrder:
   , SglPagesIntro.F_1YR_VOW: f'0-{SglPagesIntro.F_1YR_VOW:02}-f_1yr_vow'
   , SglPagesIntro.GOALS_0_1: f'0-{SglPagesIntro.GOALS_0_1:02}-goals_0_1'
   , SglPagesIntro.GOALS_2_3: f'0-{SglPagesIntro.GOALS_2_3:02}-goals_2_3'
+  , SglPagesIntro.MONTH_0_1: f'0-{SglPagesIntro.MONTH_0_1:02}-month_0_1'
+  , SglPagesIntro.MONTH_2__: f'0-{SglPagesIntro.MONTH_2__:02}-month_3__'
   }
-
-  SGL_SIDE_INTR_FILES: dict =\
-  { SglPagesIntro.TTL_F_1YR: f'0-{SglPagesIntro.TTL_F_1YR:02}-ttl_f_1yr'
-  , SglPagesIntro.F_5YR_12W: f'0-{SglPagesIntro.F_5YR_12W:02}-f_5yr_12w'
-  , SglPagesIntro.F_5YR_BAD: f'0-{SglPagesIntro.F_5YR_BAD:02}-f_5yr_bad'
-  , SglPagesIntro.F_1YR_VOW: f'0-{SglPagesIntro.F_1YR_VOW:02}-f_1yr_vow'
-  , SglPagesIntro.GOALS_0_1: f'0-{SglPagesIntro.GOALS_0_1:02}-goals_0_1'
-  , SglPagesIntro.GOALS_2_3: f'0-{SglPagesIntro.GOALS_2_3:02}-goals_2_3'
-  }
-
 
   SGL_SIDE_INTR_FILE_NAMES: list =\
     list(SGL_SIDE_INTR_FILES.values())
-
 
   #_____________________________________________________________________
   SGL_SIDE_PAGE_ORDER: list =\
@@ -359,9 +352,13 @@ class PageOrder:
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ '06-month'
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.MONTH_0_1]
     , MONTH_ENTRY
     , MONTH_ENTRY
+    ]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.MONTH_2__]
+    , MONTH_ENTRY
+    , DATES_ENTRY
     ]
   , [ '07-week0'
     , WEEK_ENTRY0

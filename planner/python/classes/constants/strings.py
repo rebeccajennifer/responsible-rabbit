@@ -36,6 +36,9 @@ class PlannerStrings:
   RIGHT_ARROW: str =\
     '\u2192'
 
+  RIGHT_ARROW: str =\
+    '->'
+
   BULLET_PT: str =\
     '\u2022'
 
