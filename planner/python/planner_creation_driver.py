@@ -60,7 +60,7 @@ def generate_pages\
 ) -> None:
   #_____________________________________________________________________
   # Iterate through list containing layout arguments and create
-  # svg for each layout
+  # for each layout
   #_____________________________________________________________________
   for i in range (len(page_order)):
     layout =\
@@ -114,7 +114,7 @@ def generate_habit_tracker\
     TwoPageHalfLetterSize\
       ( is_portrait=is_portrait
       , is_dbl_sided=True
-      , file_name_no_ext='week-chcklst-back.svg'
+      , file_name_no_ext='week-chcklst-back'
       , out_dir=out_dir
       , entry_0_type=TitlePage
       , entry_0_args={}
@@ -175,11 +175,7 @@ if __name__ == '__main__':
     , entry_1_type=TestEntry
     , entry_1_args={}
     )
-  test_layout.save()
-
-  chdir(f'{args.out_dir}/..')
-  system(f'echo $PWD')
-  system('./make-pdfs.sh')
+  test_layout.save_pdf()
 
   new_line(10)
   print("all done")

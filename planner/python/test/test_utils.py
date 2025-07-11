@@ -28,17 +28,17 @@
 
 import pytest
 
-from os.path import exists
 from os.path import isdir
 from os.path import isfile
 from os.path import join
-from os import mkdir
 from os import makedirs
 from os import remove
 
+import cairosvg
+import svgwrite
+
 from shutil import rmtree
 
-import datetime as dt
 
 from utils.utils import PlannerUtils as Utils
 
@@ -50,6 +50,8 @@ class TestConst:
   TEST_DIR_NAME         : str = 'test_name'
   TEST_DIR_PARENT       : str = join('flux', 'bunny')
   TEST_DIR_FULL_PATH    : str = join(TEST_DIR_PARENT, TEST_DIR_NAME)
+  TEST_PDF_NAME         : str = 'test.pdf'
+  TEST_SVG_NAME         : str = 'test.svg'
 
 #_______________________________________________________________________
 class Helper:
@@ -91,6 +93,8 @@ def test_mkdir_no_parent() -> None:
   with pytest.raises(Exception):
     Utils.verify_dir(TestConst.TEST_DIR_FULL_PATH)
 
+  return
+
 #_______________________________________________________________________
 def test_mkdir_file_exists() -> None:
 
@@ -108,6 +112,8 @@ def test_mkdir_file_exists() -> None:
   # Clean up
   remove(test_path)
 
+  return
+
 #_______________________________________________________________________
 def test_mkdir_no_error() -> None:
 
@@ -120,6 +126,8 @@ def test_mkdir_no_error() -> None:
 
   # Clean up
   Helper.rm_test_dir(test_path)
+
+  return
 
 #_______________________________________________________________________
 def test_mkdir_long_path() -> None:
@@ -136,3 +144,34 @@ def test_mkdir_long_path() -> None:
 
   # Clean up
   Helper.rm_test_dir(parent)
+
+  return
+
+#_______________________________________________________________________
+def test_is_pdf() -> None:
+
+  # Prep
+
+  test_svg_name: str = TestConst.TEST_SVG_NAME
+  test_pdf_name: str = TestConst.TEST_PDF_NAME
+
+  # Create svg
+  test_dwg = svgwrite.Drawing\
+    ( TestConst.TEST_SVG_NAME
+    , profile='tiny'
+    , size=(100,100)
+    )
+  test_dwg.save()
+
+  # Create pdf
+  cairosvg.svg2pdf\
+    ( url=test_svg_name
+    , write_to=test_pdf_name)
+
+  Utils.is_pdf(test_pdf_name)
+
+  # Clean up
+  remove(test_pdf_name)
+  remove(test_svg_name)
+
+  return

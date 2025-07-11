@@ -26,14 +26,12 @@
 #   Utility functions.
 #_______________________________________________________________________
 
-from os.path import exists
 from os.path import isdir
-from os.path import isfile
-from os.path import join
 from os.path import dirname
 from os import mkdir
+from pypdf import PdfReader
+from pypdf import PdfWriter
 
-import svgwrite.container
 from classes.style.style import PlannerFontStyle as Font
 from classes.style.style import PlannerColors as Colors
 from classes.constants.error_strings import ErrorStrings as Err
@@ -140,10 +138,10 @@ class PlannerUtils:
     within the specified width.
 
     Parameters:
-      txt         : The input text to wrap.
-      px_wdth     : The maximum width (in pixels) allowed for each line.
-      font_size   : Size of text font
-      font_family : Font of text
+      txt         : Input text to wrap.
+      px_wdth     : Maximum width (in pixels) allowed for each line.
+      font_size   : Size of text font.
+      font_family : Font of text.
 
     Returns:
         List[str]: A list of strings, each representing a line of
@@ -295,3 +293,69 @@ class PlannerUtils:
         raise err_type(err_msg)
 
     return True
+
+  #_____________________________________________________________________
+  def is_pdf(file_path: str) -> bool:
+    """
+    Determines if file is a pdf.
+
+    Parameters:
+      file_path: path to file
+
+    Side Effects:
+      None
+
+    Returns:
+      bool indicating if file is pdf
+    """
+
+    try:
+      with open(file_path, 'rb') as f:
+        header = f.read(4)
+        return header == b'%PDF'
+
+    except Exception as e:
+      print(f'Error reading file: {e}')
+      return False
+
+    return True
+
+
+  #_____________________________________________________________________
+  def combine_pdfs(pdf_paths: list, combined_pdf_path: str) -> None:
+    """
+    Combines pdfs into one pdf. Order of pages in combined pdf
+    determined by order of pdf_paths.
+
+    Parameters:
+    pdf_paths         : List of paths of pdfs to combine.
+    combined_pdf_path : Path of combined pdf.
+
+    Side Effects:
+    Creates a new pdf.
+
+    Returns:
+    True  : No errors.
+    False : Errors during creation.
+    """
+
+
+    pdf_writer = PdfWriter()
+
+    for pdf in pdf_paths:
+
+      with open (pdf, 'rb') as file:
+        pdf_writer.append(file)
+
+    with open\
+      ( combined_pdf_path, 'wb') as out:
+
+      pdf_writer.write(out)
+
+    print(str(
+      f'Combined pdf successfully created! '
+      f'\nOutput path: {combined_pdf_path}'
+      )
+    )
+
+    return
