@@ -61,31 +61,31 @@ class PlannerStrings:
   # Default file names
   #_____________________________________________________________________
   DEF_LAYOUT_PATH: str =\
-    'layout.svg'
+    'layout'
 
   DEF_TEST_LAYOUT_PATH: str =\
-    'test-layout.svg'
+    'test-layout'
 
   DEF_GOAL_LAYOUT_PATH: str =\
-    'goal-layout.svg'
+    'goal-layout'
 
   DEF_FUTURE_5YR_LAYOUT_PATH: str =\
-    'future-5yr-layout.svg'
+    'future-5yr-layout'
 
   DEF_FUTURE_1YR_LAYOUT_PATH: str =\
-    'future-1yr-layout.svg'
+    'future-1yr-layout'
 
   DEF_FUTURE_12W_LAYOUT_PATH: str =\
-    'future-12w-layout.svg'
+    'future-12w-layout'
 
   DEF_FUTURE_BAD_LAYOUT_PATH: str =\
-    'future-bad-layout.svg'
+    'future-bad-layout'
 
   DEF_WEEK_LAYOUT_PATH: str =\
-    'week-layout.svg'
+    'week-layout'
 
   DEF_HABIT_LAYOUT_PATH: str =\
-    'habit-layout.svg'
+    'habit-layout'
 
   #_____________________________________________________________________
   # Day layout strings

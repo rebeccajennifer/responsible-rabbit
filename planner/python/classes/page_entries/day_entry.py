@@ -50,7 +50,7 @@ class DayEntry(OnePageHalfLetter):
   """
 
   DEF_DAY_LAYOUT_PATH: str =\
-    'day#-layout.svg'
+    'day#-layout'
 
   DAYS: str =\
     'Mon' + 2 * Strings.SPACE +\

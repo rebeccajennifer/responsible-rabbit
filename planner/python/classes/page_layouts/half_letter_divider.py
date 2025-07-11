@@ -26,6 +26,7 @@
 #   Half-letter sheet layout
 #_______________________________________________________________________
 
+import cairosvg
 import svgwrite
 
 from os import path
@@ -52,8 +53,9 @@ class DividerPage(svgwrite.Drawing):
   #_____________________________________________________________________
   def __init__(self
   , is_portrait: bool = False
-  , out_dir: str = ''
   , file_name: str = ''
+  , file_name_no_ext: str = ''
+  , out_dir: str = ''
   , file_path: str = ''
   , divider_pos: int = 0
   , divider_str: str = ''
@@ -257,3 +259,29 @@ class DividerPage(svgwrite.Drawing):
     self.insert_pt_border_1_: int =  insert_pos1
 
     return
+
+  #_____________________________________________________________________
+  def save_pdf(self):
+    """
+    Saves layout as pdf.
+
+    Parameters:
+      out_dir: Path to output directory
+
+    Side Effects:
+      Saves layout to pdf in output directory.
+
+    Returns:
+      None
+    """
+
+
+    self.save()
+    cairosvg.svg2pdf\
+    ( url=self.svg_file_path_
+    , write_to=path.join\
+      ( self.out_dir_
+      , 'pdf'
+      , f'{self.file_name_no_ext_}.pdf'
+      )
+    )

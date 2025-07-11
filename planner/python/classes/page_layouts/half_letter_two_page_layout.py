@@ -92,8 +92,11 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
     Utils.verify_dir(out_dir)
     self.out_dir_       : str   = out_dir
 
+    Utils.verify_dir(join(out_dir, 'svg'))
+    Utils.verify_dir(join(out_dir, 'pdf'))
+
     self.svg_file_path_: str =\
-      join(self.out_dir_, file_name_no_ext + '.svg')
+      join(self.out_dir_, 'svg', file_name_no_ext + '.svg')
 
     #___________________________________________________________________
     if (not entry_0_type):
@@ -262,4 +265,9 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
     self.save()
     cairosvg.svg2pdf\
     ( url=self.svg_file_path_
-    , write_to=join(self.out_dir_, f'{self.file_name_no_ext_}.pdf'))
+    , write_to=join\
+      ( self.out_dir_
+      , 'pdf'
+      , f'{self.file_name_no_ext_}.pdf'
+      )
+    )
