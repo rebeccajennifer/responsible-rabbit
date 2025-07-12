@@ -72,16 +72,16 @@ class PlannerStrings:
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout'
 
-  DEF_FUTURE_5YR_LAYOUT_PATH: str =\
+  DEF_FUT_5YR_LAYOUT_PATH: str =\
     'future-5yr-layout'
 
-  DEF_FUTURE_1YR_LAYOUT_PATH: str =\
+  DEF_FUT_1YR_LAYOUT_PATH: str =\
     'future-1yr-layout'
 
-  DEF_FUTURE_12W_LAYOUT_PATH: str =\
+  DEF_FUT_12W_LAYOUT_PATH: str =\
     'future-12w-layout'
 
-  DEF_FUTURE_BAD_LAYOUT_PATH: str =\
+  DEF_FUT_BAD_LAYOUT_PATH: str =\
     'future-bad-layout'
 
   DEF_WEEK_LAYOUT_PATH: str =\
@@ -310,12 +310,12 @@ class PlannerStrings:
   # Free write strings
   #_____________________________________________________________________
 
-  PAGE_HEADER_TXT_FUTURE_5YR: str = 'Imagine a Future...'
-  PAGE_HEADER_TXT_FUTURE_1YR: str = 'A Year of Growth'
-  PAGE_HEADER_TXT_FUTURE_12W: str = '12 Week Potential'
-  PAGE_HEADER_TXT_FUTURE_BAD: str = 'The Consequences of Inaction'
+  PAGE_HEADER_TXT_FUT_5YR: str = 'Imagine a Future...'
+  PAGE_HEADER_TXT_FUT_1YR: str = 'A Year of Growth'
+  PAGE_HEADER_TXT_FUT_12W: str = '12 Week Potential'
+  PAGE_HEADER_TXT_FUT_BAD: str = 'The Consequences of Inaction'
 
-  FREE_WRITE_FUTURE_5YR: str = (
+  FREE_WRITE_FUT_5YR: str = (
     'Describe your ideal life 3–5 years from now—the boldest vision '
     'you can imagine, even if it feels far off. Ask yourself: What do '
     'I truly want from life? What skills will I master? Which habits '
@@ -327,7 +327,7 @@ class PlannerStrings:
     'before refining your answer below.'
   )
 
-  FREE_WRITE_FUTURE_1YR: str = (
+  FREE_WRITE_FUT_1YR: str = (
     'Imagine your life 12 months from now. Where do you want to be, '
     'and what do you hope to have accomplished? Be specific and aim '
     'for goals that excite you, even if they feel slightly out of '
@@ -336,7 +336,7 @@ class PlannerStrings:
     'in your work, your relationships, and your overall well-being? '
   )
 
-  FREE_WRITE_FUTURE_12W: str = (
+  FREE_WRITE_FUT_12W: str = (
     'Imagine how your life will change over the next twelve weeks. '
     'Aim for progress that feels bold but within your reach. What '
     'fears will you face head-on? What talents will you grow? What '
@@ -347,7 +347,7 @@ class PlannerStrings:
     'choosing to become?'
   )
 
-  FREE_WRITE_FUTURE_BAD: str = (
+  FREE_WRITE_FUT_BAD: str = (
     'Though it may feel unsettling, envision the genuine consequences '
     'of not honoring your commitments. Picture the most serious yet '
     'believable outcome. What does that scenario look like? Who do you '

@@ -55,6 +55,147 @@ from classes.page_entries.title_page import TitlePage
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.week_checklist_entry import WeekCheckList
 
+
+
+WEEK_CHECKLIST: dict =\
+{ Key.ENTRY_TYPE: WeekCheckList
+
+}
+
+#_____________________________________________________________________
+BLNK_ENTRY: dict =\
+  { Key.ENTRY_TYPE: TitlePage
+  , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
+  }
+
+TITLE: dict =\
+{ Key.ENTRY_TYPE: TitlePage
+, Key.ENTRY_ARGS:
+  { Key.HEADER_TXT: 'Book of Plans'
+  }
+}
+
+#_____________________________________________________________________
+YR5_0: dict =\
+{ Key.ENTRY_TYPE: FreeWritePromptEntry
+, Key.ENTRY_ARGS:
+  { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
+  , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_5YR
+  }
+}
+
+YR5_1: dict =\
+{ Key.ENTRY_TYPE: FreeWriteEntry
+, Key.ENTRY_ARGS:
+  { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
+  }
+}
+
+YR1_0: dict =\
+{ Key.ENTRY_TYPE: FreeWritePromptEntry
+, Key.ENTRY_ARGS:
+  { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
+  , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_1YR
+  }
+}
+
+YR1_1: dict =\
+{ Key.ENTRY_TYPE: FreeWriteEntry
+, Key.ENTRY_ARGS:
+  { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
+  }
+}
+
+FUT_12W_ENTRY: dict =\
+{ Key.ENTRY_TYPE: FreeWritePromptEntry
+, Key.ENTRY_ARGS:
+  { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_12W
+  , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_12W
+  }
+}
+
+FUT_BAD_ENTRY: dict =\
+{ Key.ENTRY_TYPE: FreeWritePromptEntry
+, Key.ENTRY_ARGS:
+  { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_BAD
+  , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_BAD
+  }
+}
+
+#_____________________________________________________________________
+VOW: dict =\
+{ Key.ENTRY_TYPE: FreeWritePromptEntry
+, Key.ENTRY_ARGS:
+  { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
+  , Key.PROMPT_TXT: Strings.VOW
+  }
+}
+
+ACTION_ITEMS: dict =\
+{ Key.ENTRY_TYPE: FreeWriteEntry
+, Key.ENTRY_ARGS:
+  { Key.HEADER_TXT: 'Action Items: '
+  }
+}
+
+#_____________________________________________________________________
+
+DAY: list = []
+QUOT: list = []
+
+for i in range(7):
+  DAY.append\
+  ( { Key.ENTRY_TYPE: DayEntry
+    , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: i}
+    }
+  )
+
+  QUOT.append\
+  ( { Key.ENTRY_TYPE: FreeWriteEntry
+    , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[i]}
+    }
+  )
+
+DAY0 = DAY[0]
+DAY1 = DAY[1]
+DAY2 = DAY[2]
+DAY3 = DAY[3]
+DAY4 = DAY[4]
+DAY5 = DAY[5]
+DAY6 = DAY[6]
+
+MNTH: dict =\
+  { Key.ENTRY_TYPE: MonthEntry
+  , Key.ENTRY_ARGS: {}
+  }
+
+#_____________________________________________________________________
+FREE_WRITE_DAY0: dict =\
+  { Key.ENTRY_TYPE: FreeWriteEntry
+  , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[0]}
+  }
+
+#_____________________________________________________________________
+WEEK0: dict =\
+  { Key.ENTRY_TYPE: WeekEntry0
+  , Key.ENTRY_ARGS: {}
+  }
+WEEK1: dict =\
+  { Key.ENTRY_TYPE: WeekEntry1
+  , Key.ENTRY_ARGS: {}
+  }
+
+#_____________________________________________________________________
+GOAL: dict =\
+  { Key.ENTRY_TYPE: GoalEntry
+  , Key.ENTRY_ARGS: {}
+  }
+
+
+DATES: dict =\
+  { Key.ENTRY_TYPE: FreeWriteEntry
+  , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
+  }
 #_______________________________________________________________________
 class PageOrder:
   """
@@ -71,230 +212,96 @@ class PageOrder:
   double-sided journal layouts.
 
   Attributes:
-    SGL_SIDE_PAGE_ORDER: A list of layout configurations for
+    PAGE_ORDER: A list of layout configurations for
                          single-sided printing.
 
     DBL_SIDE_PAGE_ORDER: Same as above, but for double-sided printing
                          layouts.
   """
 
-  WEEK_CHECKLIST: dict =\
-  { Key.ENTRY_TYPE: WeekCheckList
-
-  }
-
-  #_____________________________________________________________________
-  BLNK_ENTRY: dict =\
-    { Key.ENTRY_TYPE: TitlePage
-    , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
-    }
-
-  TITLE_PAGE: dict =\
-  { Key.ENTRY_TYPE: TitlePage
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'Book of Plans'
-    }
-  }
-
-  #_____________________________________________________________________
-  FUTURE_5YR_ENTRY0: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_5YR
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUTURE_5YR
-    }
-  }
-
-  FUTURE_5YR_ENTRY1: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_5YR
-    }
-  }
-
-  FUTURE_1YR_ENTRY0: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_1YR
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUTURE_1YR
-    }
-  }
-
-  FUTURE_1YR_ENTRY1: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_1YR
-    }
-  }
-
-  FUTURE_12W_ENTRY: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_12W
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUTURE_12W
-    }
-  }
-
-  FUTURE_BAD_ENTRY: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUTURE_BAD
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUTURE_BAD
-    }
-  }
-
-  #_____________________________________________________________________
-  VOW_ENTRY: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
-    , Key.PROMPT_TXT: Strings.VOW
-    }
-  }
-
-  ACTION_ITEMS_ENTRY: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'Action Items: '
-    }
-  }
-
-  #_____________________________________________________________________
-
-  DAY_ENTRY: list = []
-  DAY_FREE_WRITE_ENTRY: list = []
-
-  for i in range(7):
-    DAY_ENTRY.append\
-    ( { Key.ENTRY_TYPE: DayEntry
-      , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: i}
-      }
-    )
-
-    DAY_FREE_WRITE_ENTRY.append\
-    ( { Key.ENTRY_TYPE: FreeWriteEntry
-      , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[i]}
-      }
-    )
-
-  DAY_ENTRY0 = DAY_ENTRY[0]
-  DAY_ENTRY1 = DAY_ENTRY[1]
-  DAY_ENTRY2 = DAY_ENTRY[2]
-  DAY_ENTRY3 = DAY_ENTRY[3]
-  DAY_ENTRY4 = DAY_ENTRY[4]
-  DAY_ENTRY5 = DAY_ENTRY[5]
-  DAY_ENTRY6 = DAY_ENTRY[6]
-
-  MONTH_ENTRY: dict =\
-    { Key.ENTRY_TYPE: MonthEntry
-    , Key.ENTRY_ARGS: {}
-    }
-
-  #_____________________________________________________________________
-  FREE_WRITE_DAY0: dict =\
-    { Key.ENTRY_TYPE: FreeWriteEntry
-    , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[0]}
-    }
-
-  #_____________________________________________________________________
-  WEEK_ENTRY0: dict =\
-    { Key.ENTRY_TYPE: WeekEntry0
-    , Key.ENTRY_ARGS: {}
-    }
-  WEEK_ENTRY1: dict =\
-    { Key.ENTRY_TYPE: WeekEntry1
-    , Key.ENTRY_ARGS: {}
-    }
-
-  #_____________________________________________________________________
-  GOAL_ENTRY: dict =\
-    { Key.ENTRY_TYPE: GoalEntry
-    , Key.ENTRY_ARGS: {}
-    }
-
-
-  DATES_ENTRY: dict =\
-    { Key.ENTRY_TYPE: FreeWriteEntry
-    , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
-    }
 
   #_____________________________________________________________________
   DBL_SIDE_PAGE_ORDER: list =\
   [ [ '0__title-page'
-    , TITLE_PAGE
+    , TITLE
     , BLNK_ENTRY
     ]
   , [ '1__vision-0'
-    , FUTURE_1YR_ENTRY0
-    , FUTURE_1YR_ENTRY1
+    , YR1_0
+    , YR1_1
     ]
   , [ '1__vision-1'
-    , FUTURE_12W_ENTRY
-    , FUTURE_5YR_ENTRY1
+    , FUT_12W_ENTRY
+    , YR5_1
     ]
   , [ '1__vision-2'
-    , FUTURE_5YR_ENTRY0
-    , FUTURE_BAD_ENTRY
+    , YR5_0
+    , FUT_BAD_ENTRY
     ]
   , [ '1__vision-3'
-    , VOW_ENTRY
+    , VOW
     , BLNK_ENTRY
     ]
   , [ Strings.DEF_GOAL_LAYOUT_PATH
-    , GOAL_ENTRY
-    , GOAL_ENTRY
+    , GOAL
+    , GOAL
     ]
   , [ Strings.DEF_GOAL_LAYOUT_PATH
-    , GOAL_ENTRY
-    , GOAL_ENTRY
+    , GOAL
+    , GOAL
     ]
   , [ '3__month-0'
-    , MONTH_ENTRY
-    , MONTH_ENTRY
+    , MNTH
+    , MNTH
     ]
   , [ '3__month-1'
-    , DATES_ENTRY
-    , MONTH_ENTRY
+    , DATES
+    , MNTH
     ]
   , [ '4__week-0'
-    , DAY_ENTRY3
-    , DAY_FREE_WRITE_ENTRY[3]
+    , DAY3
+    , QUOT[3]
     ]
   , [ '4__week-1'
-    , DAY_ENTRY4
-    , DAY_FREE_WRITE_ENTRY[2]
+    , DAY4
+    , QUOT[2]
     ]
   , [ '4__week-2'
-    , DAY_ENTRY2
-    , DAY_FREE_WRITE_ENTRY[4]
+    , DAY2
+    , QUOT[4]
     ]
   , [ '4__week-3'
-    , DAY_ENTRY5
-    , DAY_FREE_WRITE_ENTRY[1]
+    , DAY5
+    , QUOT[1]
     ]
   , [ '4__week-4'
-    , DAY_ENTRY1
-    , DAY_FREE_WRITE_ENTRY[5]
+    , DAY1
+    , QUOT[5]
     ]
   , [ '4__week-5'
-    , DAY_ENTRY6
-    , DAY_FREE_WRITE_ENTRY[0]
+    , DAY6
+    , QUOT[0]
     ]
   , [ '4__week-6'
-    , DAY_ENTRY0
-    , DAY_FREE_WRITE_ENTRY[6]
-    , TITLE_PAGE
+    , DAY0
+    , QUOT[6]
+    , TITLE
     ]
   , [ '4__week-7'
-    , WEEK_ENTRY0
-    , WEEK_ENTRY1
+    , WEEK0
+    , WEEK1
     ]
   ]
 
+#_______________________________________________________________________
+class OneSidePages:
+  """
+  Constants used in single sided pages.
+  """
   #_____________________________________________________________________
   # Enums used so page numbers can be automated
   #_____________________________________________________________________
-  class SglPagesIntr(IntEnum):
+  class IntrPgNo(IntEnum):
     """
     Page numbers for intro section.
     """
@@ -307,25 +314,25 @@ class PageOrder:
     MONTH_0_1 = auto()
     MONTH_2__ = auto()
 
-  # File names for single sided PDFs
-  SGL_SIDE_INTR_FILES: dict =\
-  { SglPagesIntr.TTL_F_1YR: f'0-{SglPagesIntr.TTL_F_1YR:02}-ttl_f_1yr'
-  , SglPagesIntr.F_5YR_12W: f'0-{SglPagesIntr.F_5YR_12W:02}-f_5yr_12w'
-  , SglPagesIntr.F_5YR_BAD: f'0-{SglPagesIntr.F_5YR_BAD:02}-f_5yr_bad'
-  , SglPagesIntr.F_1YR_VOW: f'0-{SglPagesIntr.F_1YR_VOW:02}-f_1yr_vow'
-  , SglPagesIntr.GOALS_0_1: f'0-{SglPagesIntr.GOALS_0_1:02}-goals_0_1'
-  , SglPagesIntr.GOALS_2_3: f'0-{SglPagesIntr.GOALS_2_3:02}-goals_2_3'
-  , SglPagesIntr.MONTH_0_1: f'0-{SglPagesIntr.MONTH_0_1:02}-month_0_1'
-  , SglPagesIntr.MONTH_2__: f'0-{SglPagesIntr.MONTH_2__:02}-month_3__'
+  # File names for intro pages
+  INTR_FILES: dict =\
+  { IntrPgNo.TTL_F_1YR: f'0-{IntrPgNo.TTL_F_1YR:02}-ttl_f_1yr'
+  , IntrPgNo.F_5YR_12W: f'0-{IntrPgNo.F_5YR_12W:02}-f_5yr_12w'
+  , IntrPgNo.F_5YR_BAD: f'0-{IntrPgNo.F_5YR_BAD:02}-f_5yr_bad'
+  , IntrPgNo.F_1YR_VOW: f'0-{IntrPgNo.F_1YR_VOW:02}-f_1yr_vow'
+  , IntrPgNo.GOALS_0_1: f'0-{IntrPgNo.GOALS_0_1:02}-goals_0_1'
+  , IntrPgNo.GOALS_2_3: f'0-{IntrPgNo.GOALS_2_3:02}-goals_2_3'
+  , IntrPgNo.MONTH_0_1: f'0-{IntrPgNo.MONTH_0_1:02}-month_0_1'
+  , IntrPgNo.MONTH_2__: f'0-{IntrPgNo.MONTH_2__:02}-month_3__'
   }
 
-  SGL_SIDE_INTR_FILE_NAMES: list =\
-    list(SGL_SIDE_INTR_FILES.values())
+  INTR_FILE_NAMES: list =\
+    list(INTR_FILES.values())
 
   #_____________________________________________________________________
-  class SglPagesWeek(IntEnum):
+  class WeekPgNo(IntEnum):
     """
-    Page numbers for intro section.
+    Page numbers for week section.
     """
     WK_0 = auto()
     WK_1 = auto()
@@ -345,129 +352,55 @@ class PageOrder:
     QUT6 = auto()
 
   # File names for single sided PDFs
-  SGL_SIDE_WEEK_FILES: dict =\
-  { SglPagesWeek.WK_0: f'0-{SglPagesWeek.WK_0:02}-wk_0'
-  , SglPagesWeek.WK_1: f'0-{SglPagesWeek.WK_1:02}-wk_1'
-  , SglPagesWeek.DAY0: f'0-{SglPagesWeek.DAY0:02}-day0'
-  , SglPagesWeek.QUT0: f'0-{SglPagesWeek.QUT0:02}-qut0'
-  , SglPagesWeek.DAY1: f'0-{SglPagesWeek.DAY1:02}-day1'
-  , SglPagesWeek.QUT1: f'0-{SglPagesWeek.QUT1:02}-qut1'
-  , SglPagesWeek.DAY2: f'0-{SglPagesWeek.DAY2:02}-day2'
-  , SglPagesWeek.QUT2: f'0-{SglPagesWeek.QUT2:02}-qut2'
-  , SglPagesWeek.DAY3: f'0-{SglPagesWeek.DAY3:02}-day3'
-  , SglPagesWeek.QUT3: f'0-{SglPagesWeek.QUT3:02}-qut3'
-  , SglPagesWeek.DAY4: f'0-{SglPagesWeek.DAY4:02}-day4'
-  , SglPagesWeek.QUT4: f'0-{SglPagesWeek.QUT4:02}-qut4'
-  , SglPagesWeek.DAY5: f'0-{SglPagesWeek.DAY5:02}-day5'
-  , SglPagesWeek.QUT5: f'0-{SglPagesWeek.QUT5:02}-qut5'
-  , SglPagesWeek.DAY6: f'0-{SglPagesWeek.DAY6:02}-day6'
-  , SglPagesWeek.QUT6: f'0-{SglPagesWeek.QUT6:02}-qut6'
+  WEEK_FILES: dict =\
+  { WeekPgNo.WK_0: f'0-{WeekPgNo.WK_0:02}-wk_0'
+  , WeekPgNo.WK_1: f'0-{WeekPgNo.WK_1:02}-wk_1'
+  , WeekPgNo.DAY0: f'0-{WeekPgNo.DAY0:02}-day0'
+  , WeekPgNo.QUT0: f'0-{WeekPgNo.QUT0:02}-qut0'
+  , WeekPgNo.DAY1: f'0-{WeekPgNo.DAY1:02}-day1'
+  , WeekPgNo.QUT1: f'0-{WeekPgNo.QUT1:02}-qut1'
+  , WeekPgNo.DAY2: f'0-{WeekPgNo.DAY2:02}-day2'
+  , WeekPgNo.QUT2: f'0-{WeekPgNo.QUT2:02}-qut2'
+  , WeekPgNo.DAY3: f'0-{WeekPgNo.DAY3:02}-day3'
+  , WeekPgNo.QUT3: f'0-{WeekPgNo.QUT3:02}-qut3'
+  , WeekPgNo.DAY4: f'0-{WeekPgNo.DAY4:02}-day4'
+  , WeekPgNo.QUT4: f'0-{WeekPgNo.QUT4:02}-qut4'
+  , WeekPgNo.DAY5: f'0-{WeekPgNo.DAY5:02}-day5'
+  , WeekPgNo.QUT5: f'0-{WeekPgNo.QUT5:02}-qut5'
+  , WeekPgNo.DAY6: f'0-{WeekPgNo.DAY6:02}-day6'
+  , WeekPgNo.QUT6: f'0-{WeekPgNo.QUT6:02}-qut6'
   }
 
-  SGL_SIDE_WEEK_FILE_NAMES: list =\
-    list(SGL_SIDE_WEEK_FILES.values())
+  WEEK_FILE_NAMES: list =\
+    list(WEEK_FILES.values())
 
 
   #_____________________________________________________________________
-  SGL_SIDE_PAGE_ORDER: list =\
-  [ [ '00-action-items'
-    , ACTION_ITEMS_ENTRY
-    , ACTION_ITEMS_ENTRY
-    ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.TTL_F_1YR]
-    , TITLE_PAGE
-    , FUTURE_1YR_ENTRY1
-    ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.F_5YR_12W]
-    , FUTURE_5YR_ENTRY0
-    , FUTURE_12W_ENTRY
-    ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.F_5YR_BAD]
-    , FUTURE_5YR_ENTRY1
-    , FUTURE_BAD_ENTRY
-    ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.F_1YR_VOW]
-    , FUTURE_1YR_ENTRY0
-    , VOW_ENTRY
-    ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.GOALS_0_1]
-    , GOAL_ENTRY
-    , GOAL_ENTRY
-    ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.GOALS_2_3]
-    , GOAL_ENTRY
-    , GOAL_ENTRY
-    ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.MONTH_0_1]
-    , MONTH_ENTRY
-    , MONTH_ENTRY
-    ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.MONTH_2__]
-    , MONTH_ENTRY
-    , DATES_ENTRY
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.WK_0]
-    , WEEK_ENTRY0
-    , WEEK_ENTRY0
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.WK_1]
-    , WEEK_ENTRY1
-    , WEEK_ENTRY1
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY0]
-    , DAY_ENTRY0
-    , DAY_ENTRY0
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT0]
-    , DAY_FREE_WRITE_ENTRY[0]
-    , DAY_FREE_WRITE_ENTRY[0]
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY1]
-    , DAY_ENTRY1
-    , DAY_ENTRY1
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT1]
-    , DAY_FREE_WRITE_ENTRY[1]
-    , DAY_FREE_WRITE_ENTRY[1]
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY2]
-    , DAY_ENTRY2
-    , DAY_ENTRY2
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT2]
-    , DAY_FREE_WRITE_ENTRY[2]
-    , DAY_FREE_WRITE_ENTRY[2]
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY3]
-    , DAY_ENTRY3
-    , DAY_ENTRY3
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT3]
-    , DAY_FREE_WRITE_ENTRY[3]
-    , DAY_FREE_WRITE_ENTRY[3]
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY4]
-    , DAY_ENTRY4
-    , DAY_ENTRY4
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT4]
-    , DAY_FREE_WRITE_ENTRY[4]
-    , DAY_FREE_WRITE_ENTRY[4]
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY5]
-    , DAY_ENTRY5
-    , DAY_ENTRY5
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT5]
-    , DAY_FREE_WRITE_ENTRY[5]
-    , DAY_FREE_WRITE_ENTRY[5]
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY6]
-    , DAY_ENTRY6
-    , DAY_ENTRY6
-    ]
-  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT6]
-    , DAY_FREE_WRITE_ENTRY[6]
-    , DAY_FREE_WRITE_ENTRY[6]
-    ]
+  PAGE_ORDER: list =\
+  [ [ '00-action-items'             , ACTION_ITEMS    , ACTION_ITEMS  ]
+  , [ INTR_FILES[IntrPgNo.TTL_F_1YR], TITLE           , YR1_1         ]
+  , [ INTR_FILES[IntrPgNo.F_5YR_12W], YR5_0           , FUT_12W_ENTRY ]
+  , [ INTR_FILES[IntrPgNo.F_5YR_BAD], YR5_1           , FUT_BAD_ENTRY ]
+  , [ INTR_FILES[IntrPgNo.F_1YR_VOW], YR1_0           , VOW           ]
+  , [ INTR_FILES[IntrPgNo.GOALS_0_1], GOAL            , GOAL          ]
+  , [ INTR_FILES[IntrPgNo.GOALS_2_3], GOAL            , GOAL          ]
+  , [ INTR_FILES[IntrPgNo.MONTH_0_1], MNTH            , MNTH          ]
+  , [ INTR_FILES[IntrPgNo.MONTH_2__], MNTH            , DATES         ]
+
+  , [ WEEK_FILES[WeekPgNo.WK_0], WEEK0    , WEEK0   ]
+  , [ WEEK_FILES[WeekPgNo.WK_1], WEEK1    , WEEK1   ]
+  , [ WEEK_FILES[WeekPgNo.DAY0], DAY0     , DAY0    ]
+  , [ WEEK_FILES[WeekPgNo.QUT0], QUOT[0]  , QUOT[0] ]
+  , [ WEEK_FILES[WeekPgNo.DAY1], DAY1     , DAY1    ]
+  , [ WEEK_FILES[WeekPgNo.QUT1], QUOT[1]  , QUOT[1] ]
+  , [ WEEK_FILES[WeekPgNo.DAY2], DAY2     , DAY2    ]
+  , [ WEEK_FILES[WeekPgNo.QUT2], QUOT[2]  , QUOT[2] ]
+  , [ WEEK_FILES[WeekPgNo.DAY3], DAY3     , DAY3    ]
+  , [ WEEK_FILES[WeekPgNo.QUT3], QUOT[3]  , QUOT[3] ]
+  , [ WEEK_FILES[WeekPgNo.DAY4], DAY4     , DAY4    ]
+  , [ WEEK_FILES[WeekPgNo.QUT4], QUOT[4]  , QUOT[4] ]
+  , [ WEEK_FILES[WeekPgNo.DAY5], DAY5     , DAY5    ]
+  , [ WEEK_FILES[WeekPgNo.QUT5], QUOT[5]  , QUOT[5] ]
+  , [ WEEK_FILES[WeekPgNo.DAY6], DAY6     , DAY6    ]
+  , [ WEEK_FILES[WeekPgNo.QUT6], QUOT[6]  , QUOT[6] ]
   ]

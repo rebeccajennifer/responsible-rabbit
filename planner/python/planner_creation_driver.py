@@ -34,6 +34,7 @@ from os import remove
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
+from classes.constants.page_order import OneSidePages
 
 from classes.page_entries.month_entry import MonthEntry
 from classes.page_entries.week_habit_entry import HabitTracker
@@ -154,8 +155,8 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
     None
   """
 
-  intr_pdf_group: list = PageOrder.SGL_SIDE_INTR_FILE_NAMES
-  week_pdf_group: list = PageOrder.SGL_SIDE_WEEK_FILE_NAMES
+  intr_pdf_group: list = OneSidePages.INTR_FILE_NAMES
+  week_pdf_group: list = OneSidePages.WEEK_FILE_NAMES
 
   intr_combo_pdf: list = '__0__intr.pdf '
   week_combo_pdf: list = '__1__week.pdf '
@@ -217,7 +218,7 @@ if __name__ == '__main__':
   if (is_dbl_sided):
     page_order = PageOrder.DBL_SIDE_PAGE_ORDER
   else:
-    page_order = PageOrder.SGL_SIDE_PAGE_ORDER
+    page_order = OneSidePages.PAGE_ORDER
   #_____________________________________________________________________
 
   generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
