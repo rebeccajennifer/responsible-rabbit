@@ -292,9 +292,9 @@ class PageOrder:
   ]
 
   #_____________________________________________________________________
-  # Enum used so page numbers can be automated
+  # Enums used so page numbers can be automated
   #_____________________________________________________________________
-  class SglPagesIntro(IntEnum):
+  class SglPagesIntr(IntEnum):
     """
     Page numbers for intro section.
     """
@@ -309,18 +309,64 @@ class PageOrder:
 
   # File names for single sided PDFs
   SGL_SIDE_INTR_FILES: dict =\
-  { SglPagesIntro.TTL_F_1YR: f'0-{SglPagesIntro.TTL_F_1YR:02}-ttl_f_1yr'
-  , SglPagesIntro.F_5YR_12W: f'0-{SglPagesIntro.F_5YR_12W:02}-f_5yr_12w'
-  , SglPagesIntro.F_5YR_BAD: f'0-{SglPagesIntro.F_5YR_BAD:02}-f_5yr_bad'
-  , SglPagesIntro.F_1YR_VOW: f'0-{SglPagesIntro.F_1YR_VOW:02}-f_1yr_vow'
-  , SglPagesIntro.GOALS_0_1: f'0-{SglPagesIntro.GOALS_0_1:02}-goals_0_1'
-  , SglPagesIntro.GOALS_2_3: f'0-{SglPagesIntro.GOALS_2_3:02}-goals_2_3'
-  , SglPagesIntro.MONTH_0_1: f'0-{SglPagesIntro.MONTH_0_1:02}-month_0_1'
-  , SglPagesIntro.MONTH_2__: f'0-{SglPagesIntro.MONTH_2__:02}-month_3__'
+  { SglPagesIntr.TTL_F_1YR: f'0-{SglPagesIntr.TTL_F_1YR:02}-ttl_f_1yr'
+  , SglPagesIntr.F_5YR_12W: f'0-{SglPagesIntr.F_5YR_12W:02}-f_5yr_12w'
+  , SglPagesIntr.F_5YR_BAD: f'0-{SglPagesIntr.F_5YR_BAD:02}-f_5yr_bad'
+  , SglPagesIntr.F_1YR_VOW: f'0-{SglPagesIntr.F_1YR_VOW:02}-f_1yr_vow'
+  , SglPagesIntr.GOALS_0_1: f'0-{SglPagesIntr.GOALS_0_1:02}-goals_0_1'
+  , SglPagesIntr.GOALS_2_3: f'0-{SglPagesIntr.GOALS_2_3:02}-goals_2_3'
+  , SglPagesIntr.MONTH_0_1: f'0-{SglPagesIntr.MONTH_0_1:02}-month_0_1'
+  , SglPagesIntr.MONTH_2__: f'0-{SglPagesIntr.MONTH_2__:02}-month_3__'
   }
 
   SGL_SIDE_INTR_FILE_NAMES: list =\
     list(SGL_SIDE_INTR_FILES.values())
+
+  #_____________________________________________________________________
+  class SglPagesWeek(IntEnum):
+    """
+    Page numbers for intro section.
+    """
+    WK_0 = auto()
+    WK_1 = auto()
+    DAY0 = auto()
+    QUT0 = auto()
+    DAY1 = auto()
+    QUT1 = auto()
+    DAY2 = auto()
+    QUT2 = auto()
+    DAY3 = auto()
+    QUT3 = auto()
+    DAY4 = auto()
+    QUT4 = auto()
+    DAY5 = auto()
+    QUT5 = auto()
+    DAY6 = auto()
+    QUT6 = auto()
+
+  # File names for single sided PDFs
+  SGL_SIDE_WEEK_FILES: dict =\
+  { SglPagesWeek.WK_0: f'0-{SglPagesWeek.WK_0:02}-wk_0'
+  , SglPagesWeek.WK_1: f'0-{SglPagesWeek.WK_1:02}-wk_1'
+  , SglPagesWeek.DAY0: f'0-{SglPagesWeek.DAY0:02}-day0'
+  , SglPagesWeek.QUT0: f'0-{SglPagesWeek.QUT0:02}-qut0'
+  , SglPagesWeek.DAY1: f'0-{SglPagesWeek.DAY1:02}-day1'
+  , SglPagesWeek.QUT1: f'0-{SglPagesWeek.QUT1:02}-qut1'
+  , SglPagesWeek.DAY2: f'0-{SglPagesWeek.DAY2:02}-day2'
+  , SglPagesWeek.QUT2: f'0-{SglPagesWeek.QUT2:02}-qut2'
+  , SglPagesWeek.DAY3: f'0-{SglPagesWeek.DAY3:02}-day3'
+  , SglPagesWeek.QUT3: f'0-{SglPagesWeek.QUT3:02}-qut3'
+  , SglPagesWeek.DAY4: f'0-{SglPagesWeek.DAY4:02}-day4'
+  , SglPagesWeek.QUT4: f'0-{SglPagesWeek.QUT4:02}-qut4'
+  , SglPagesWeek.DAY5: f'0-{SglPagesWeek.DAY5:02}-day5'
+  , SglPagesWeek.QUT5: f'0-{SglPagesWeek.QUT5:02}-qut5'
+  , SglPagesWeek.DAY6: f'0-{SglPagesWeek.DAY6:02}-day6'
+  , SglPagesWeek.QUT6: f'0-{SglPagesWeek.QUT6:02}-qut6'
+  }
+
+  SGL_SIDE_WEEK_FILE_NAMES: list =\
+    list(SGL_SIDE_WEEK_FILES.values())
+
 
   #_____________________________________________________________________
   SGL_SIDE_PAGE_ORDER: list =\
@@ -328,99 +374,99 @@ class PageOrder:
     , ACTION_ITEMS_ENTRY
     , ACTION_ITEMS_ENTRY
     ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.TTL_F_1YR]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.TTL_F_1YR]
     , TITLE_PAGE
     , FUTURE_1YR_ENTRY1
     ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.F_5YR_12W]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.F_5YR_12W]
     , FUTURE_5YR_ENTRY0
     , FUTURE_12W_ENTRY
     ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.F_5YR_BAD]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.F_5YR_BAD]
     , FUTURE_5YR_ENTRY1
     , FUTURE_BAD_ENTRY
     ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.F_1YR_VOW]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.F_1YR_VOW]
     , FUTURE_1YR_ENTRY0
     , VOW_ENTRY
     ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.GOALS_0_1]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.GOALS_0_1]
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.GOALS_2_3]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.GOALS_2_3]
     , GOAL_ENTRY
     , GOAL_ENTRY
     ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.MONTH_0_1]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.MONTH_0_1]
     , MONTH_ENTRY
     , MONTH_ENTRY
     ]
-  , [ SGL_SIDE_INTR_FILES[SglPagesIntro.MONTH_2__]
+  , [ SGL_SIDE_INTR_FILES[SglPagesIntr.MONTH_2__]
     , MONTH_ENTRY
     , DATES_ENTRY
     ]
-  , [ '07-week0'
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.WK_0]
     , WEEK_ENTRY0
     , WEEK_ENTRY0
     ]
-  , [ '08-week1'
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.WK_1]
     , WEEK_ENTRY1
     , WEEK_ENTRY1
     ]
-  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-0')
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY0]
     , DAY_ENTRY0
     , DAY_ENTRY0
     ]
-  , [ 'day-0-quote'
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT0]
     , DAY_FREE_WRITE_ENTRY[0]
     , DAY_FREE_WRITE_ENTRY[0]
     ]
-  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-1')
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY1]
     , DAY_ENTRY1
     , DAY_ENTRY1
     ]
-  , [ 'day-1-quote'
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT1]
     , DAY_FREE_WRITE_ENTRY[1]
     , DAY_FREE_WRITE_ENTRY[1]
     ]
-  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-2')
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY2]
     , DAY_ENTRY2
     , DAY_ENTRY2
     ]
-  , [ 'day-2-quote'
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT2]
     , DAY_FREE_WRITE_ENTRY[2]
     , DAY_FREE_WRITE_ENTRY[2]
     ]
-  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-3')
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY3]
     , DAY_ENTRY3
     , DAY_ENTRY3
     ]
-  , [ 'day-3-quote'
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT3]
     , DAY_FREE_WRITE_ENTRY[3]
     , DAY_FREE_WRITE_ENTRY[3]
     ]
-  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-4')
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY4]
     , DAY_ENTRY4
     , DAY_ENTRY4
     ]
-  , [ 'day-4-quote'
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT4]
     , DAY_FREE_WRITE_ENTRY[4]
     , DAY_FREE_WRITE_ENTRY[4]
     ]
-  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-5')
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY5]
     , DAY_ENTRY5
     , DAY_ENTRY5
     ]
-  , [ 'day-5-quote'
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT5]
     , DAY_FREE_WRITE_ENTRY[5]
     , DAY_FREE_WRITE_ENTRY[5]
     ]
-  , [ DayEntry.DEF_DAY_LAYOUT_PATH.replace('#', '-6')
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.DAY6]
     , DAY_ENTRY6
     , DAY_ENTRY6
     ]
-  , [ 'day-6-quote'
+  , [ SGL_SIDE_WEEK_FILES[SglPagesWeek.QUT6]
     , DAY_FREE_WRITE_ENTRY[6]
     , DAY_FREE_WRITE_ENTRY[6]
     ]

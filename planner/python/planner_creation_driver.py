@@ -37,7 +37,6 @@ from classes.page_entries.week_habit_entry import HabitTracker
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
 from classes.page_entries.test_entry import TestEntry
-from classes.page_entries.test_entry0 import TestEntry0
 
 from classes.page_layouts.half_letter_divider import DividerPage
 
@@ -77,7 +76,6 @@ def generate_pages\
       , entry_1_args=page_order[i][2][Key.ENTRY_ARGS]
       )
     layout.save_pdf()
-    #layout.save()
 
 def generate_dividers\
 ( is_portrait
@@ -154,12 +152,19 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
   """
 
   intr_pdf_group: list = PageOrder.SGL_SIDE_INTR_FILE_NAMES
+  week_pdf_group: list = PageOrder.SGL_SIDE_WEEK_FILE_NAMES
+
+  if(is_dbl_sided):
+    intr_pdf_group: list = PageOrder.DBL_SIDE_INTR_FILE_NAMES
+    week_pdf_group: list = PageOrder.DBL_SIDE_WEEK_FILE_NAMES
 
   pdf_paths: list =\
     [path.join(pdf_out_dir, n + '.pdf') for n in intr_pdf_group]
+  Utils.combine_pdfs(pdf_paths, path.join(out_dir, '__0__intr.pdf'))
 
-  Utils.combine_pdfs(pdf_paths, path.join(out_dir, '__0__intro.pdf'))
-
+  pdf_paths: list =\
+    [path.join(pdf_out_dir, n + '.pdf') for n in week_pdf_group]
+  Utils.combine_pdfs(pdf_paths, path.join(out_dir, '__1__week.pdf'))
 
 #_______________________________________________________________________
 if __name__ == '__main__':
