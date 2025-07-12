@@ -27,7 +27,10 @@
 #_______________________________________________________________________
 
 import argparse
-from os import path, system, chdir
+from os import path
+from os import listdir
+from os import remove
+
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
@@ -154,17 +157,38 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
   intr_pdf_group: list = PageOrder.SGL_SIDE_INTR_FILE_NAMES
   week_pdf_group: list = PageOrder.SGL_SIDE_WEEK_FILE_NAMES
 
+  intr_combo_pdf: list = '__0__intr.pdf '
+  week_combo_pdf: list = '__1__week.pdf '
+
   if(is_dbl_sided):
     intr_pdf_group: list = PageOrder.DBL_SIDE_INTR_FILE_NAMES
     week_pdf_group: list = PageOrder.DBL_SIDE_WEEK_FILE_NAMES
 
   pdf_paths: list =\
     [path.join(pdf_out_dir, n + '.pdf') for n in intr_pdf_group]
-  Utils.combine_pdfs(pdf_paths, path.join(out_dir, '__0__intr.pdf'))
+  Utils.combine_pdfs(pdf_paths, path.join(out_dir, intr_combo_pdf))
 
   pdf_paths: list =\
     [path.join(pdf_out_dir, n + '.pdf') for n in week_pdf_group]
-  Utils.combine_pdfs(pdf_paths, path.join(out_dir, '__1__week.pdf'))
+  Utils.combine_pdfs(pdf_paths, path.join(out_dir, week_combo_pdf))
+
+
+  #_____________________________________________________________________
+  # Clean up pdfs
+  #_____________________________________________________________________
+  # Files to keep (relative names only, not full paths)
+  keep_files = {intr_combo_pdf, week_combo_pdf}
+
+  # Loop through all files in the directory
+  for filename in listdir(out_dir):
+      file_path = path.join(out_dir, filename)
+
+      # Remove if it's a file and not in the keep list
+      if path.isfile(file_path) and filename not in keep_files:
+          remove(file_path)
+  #_____________________________________________________________________
+
+  return
 
 #_______________________________________________________________________
 if __name__ == '__main__':
