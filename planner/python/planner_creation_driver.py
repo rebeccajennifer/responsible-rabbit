@@ -99,15 +99,16 @@ def generate_dividers\
     divider_labels.append(f'Month {i}')
 
   for i in range(len(divider_labels)):
-    DividerPage\
+    HalfPageDivider\
     ( is_portrait=is_portrait
     , divider_pos=i+1
     , divider_str=divider_labels[i]
     , out_dir=out_dir
     , entry_type=TitlePage
     , entry_args={Key.HEADER_TXT: divider_labels[i]}
-    ).save()
+    ).save_pdf()
 
+#_______________________________________________________________________
 def generate_habit_tracker\
 ( is_portrait: bool
 , out_dir: str
