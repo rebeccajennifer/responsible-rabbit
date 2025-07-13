@@ -43,7 +43,7 @@
       , "console": "integratedTerminal"
       , "args":
         [ "--out_dir"
-        , "planner/layouts/planner-layouts/single-sided/svg"
+        , "planner/layouts/single-sided"
         ]
       }
     , { "name": "double-sided"
@@ -53,7 +53,7 @@
       , "console": "integratedTerminal"
       , "args":
         [ "--out_dir"
-        , "planner/layouts/planner-layouts/double-sided/svg"
+        , "planner/layouts/double-sided"
         , "--dbl_sided"
         ]
       }

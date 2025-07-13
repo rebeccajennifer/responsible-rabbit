@@ -27,15 +27,24 @@
 #_______________________________________________________________________
 
 import svgwrite
+import cairosvg
+import datetime as dt
+
+from os.path import exists
+from os.path import isdir
+from os.path import isfile
+from os.path import join
+from os import mkdir
+from os import remove
+from os import rmdir
+from shutil import rmtree
 
 from typing import Tuple
-from copy import deepcopy
-
-import svgwrite.container
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from utils.utils import PlannerUtils as Utils
 
 
 #_______________________________________________________________________
@@ -45,30 +54,56 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
   one sheet and cut in half.
   """
 
+  PDF_SUB_DIR: str = 'pdf'
+  SVG_SUB_DIR: str = 'svg'
+
   #_____________________________________________________________________
   def __init__(self
   , is_portrait: bool = False
   , is_dbl_sided: bool = False
-  , file_path: str = Strings.DEF_LAYOUT_PATH
+  , file_name_no_ext: str = Strings.DEF_LAYOUT_PATH
+  , out_dir: str = '.'
   , entry_0_type: type = None
   , entry_0_args: dict = {}
   , entry_1_type: type = None
   , entry_1_args: dict = {}
   , rgt_bndr_mrgn: bool = False
   ):
-
-
     """
-    rgt_bndr_mrgn: Use the binder margin on the the right side
+    Parameters
+      is_portrait       : Is full page portrait orientation.
+      is_dbl_sided      : Is page to be printed double-sided
+      file_path         : This should go away
+      file_name_no_ext  : Name of file without extension
+      out_dir           : Path to output directory
+      entry_0_type      : Type of entry on left or top of page
+                          e.g. day_entry, month_entry
+      entry_0_args      : Arguments for left or top entry
+      entry_1_type      : Type of entry on right or bottom of page
+                          e.g. day_entry, month_entry
+      entry_1_args      : Arguments for right or bottom entry
+      rgt_bndr_mrgn     :  Use the binder margin on the right side
     """
 
     self.is_portrait_   : bool  = is_portrait
     self.is_dbl_sided_  : bool  = is_dbl_sided
-    self.file_path_     : str   = file_path
     self.rgt_bndr_mrgn_ : bool  = rgt_bndr_mrgn
+    self.file_name_no_ext_ : str = file_name_no_ext
 
     #___________________________________________________________________
-    # entry_type is type of page, e.g. day_entry, week_entry, etc
+    # Verify directory
+    Utils.verify_dir(out_dir)
+    self.out_dir_       : str   = out_dir
+
+    self.pdf_dir_ : str = join(out_dir, self.PDF_SUB_DIR)
+    svg_dir       : str = join(out_dir, self.SVG_SUB_DIR)
+
+    Utils.verify_dir(svg_dir)
+    Utils.verify_dir(self.pdf_dir_)
+
+    self.svg_file_path_: str =\
+      join(svg_dir, file_name_no_ext + '.svg')
+
     #___________________________________________________________________
     if (not entry_0_type):
       self.entry_0_type_: type = OnePageHalfLetter
@@ -91,8 +126,9 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
       hght = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
       wdth = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
 
+
     super().__init__\
-      ( self.file_path_
+      ( self.svg_file_path_
       , profile='tiny'
       , size=(wdth, hght)
       )
@@ -214,3 +250,29 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
     self.insert_pt_border_1_: int =  insert_pos1
 
     return
+
+
+  #_____________________________________________________________________
+  def save_pdf(self):
+    """
+    Saves layout as pdf.
+
+    Parameters:
+      out_dir: Path to output directory
+
+    Side Effects:
+      Saves layout to pdf in output directory.
+
+    Returns:
+      None
+    """
+
+
+    self.save()
+    cairosvg.svg2pdf\
+    ( url=self.svg_file_path_
+    , write_to=join\
+      ( self.pdf_dir_
+      , f'{self.file_name_no_ext_}.pdf'
+      )
+    )

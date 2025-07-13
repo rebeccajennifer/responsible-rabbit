@@ -84,10 +84,12 @@ class PlannerFontStyle:
   TEXT_PADDING: int = 5
 
   FONT_FAMILY_NORMAL: str = 'Ubuntu Mono'
+  FONT_FAMILY_HEADER: str = 'Arial'
   FONT_FAMILY_HEADER: str = 'Trebuchet MS'
 
-  TREBUCHET_MS: str = 'Trebuchet MS'
-  UBUNTU_MONO:  str = 'Ubuntu Mono'
+  TREBUCHET_MS  : str = 'Trebuchet MS'
+  UBUNTU_MONO   : str = 'Ubuntu Mono'
+  ARIAL         : str = 'Arial'
 
   DEF_LINE_SPC: int = 1
 
@@ -95,4 +97,5 @@ class PlannerFontStyle:
   WDTH_MULTPLIER: dict =\
   { UBUNTU_MONO   : 1.75
   , TREBUCHET_MS  : 2.3
+  , ARIAL         : 2.3
   }

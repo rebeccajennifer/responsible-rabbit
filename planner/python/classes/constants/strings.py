@@ -36,6 +36,9 @@ class PlannerStrings:
   RIGHT_ARROW: str =\
     '\u2192'
 
+  RIGHT_ARROW: str =\
+    '->'
+
   BULLET_PT: str =\
     '\u2022'
 
@@ -61,31 +64,13 @@ class PlannerStrings:
   # Default file names
   #_____________________________________________________________________
   DEF_LAYOUT_PATH: str =\
-    'layout.svg'
+    'layout'
 
   DEF_TEST_LAYOUT_PATH: str =\
-    'test-layout.svg'
+    'test-layout'
 
   DEF_GOAL_LAYOUT_PATH: str =\
-    'goal-layout.svg'
-
-  DEF_FUTURE_5YR_LAYOUT_PATH: str =\
-    'future-5yr-layout.svg'
-
-  DEF_FUTURE_1YR_LAYOUT_PATH: str =\
-    'future-1yr-layout.svg'
-
-  DEF_FUTURE_12W_LAYOUT_PATH: str =\
-    'future-12w-layout.svg'
-
-  DEF_FUTURE_BAD_LAYOUT_PATH: str =\
-    'future-bad-layout.svg'
-
-  DEF_WEEK_LAYOUT_PATH: str =\
-    'week-layout.svg'
-
-  DEF_HABIT_LAYOUT_PATH: str =\
-    'habit-layout.svg'
+    'goal-layout'
 
   #_____________________________________________________________________
   # Day layout strings
@@ -124,6 +109,36 @@ class PlannerStrings:
     'step. — Martin Luther King Jr.'
     )
 
+  QUOTE0: str = str(
+    'It always seems impossible until it\'s done. — Nelson Mandela'
+  )
+  QUOTE1: str = str(
+    'Owning our story and loving ourselves through that process is the '
+    'bravest thing that we\'ll ever do. — Brené Brown'
+  )
+  QUOTE1: str = str(
+    'Be yourself; everyone else is already taken. — Oscar Wilde'
+  )
+  QUOTE2: str = str(
+    'Although the world is full of suffering, it is also full of the '
+    'overcoming of it. — Helen Keller'
+  )
+  QUOTE3: str = str(
+    'Every morning we are born again. What we do today is what matters '
+    'most. — Buddha'
+  )
+  QUOTE4: str = str(
+    'You cannot escape the responsibility of tomorrow by evading it '
+    'today. — Abraham Lincoln'
+  )
+  QUOTE5: str = str(
+    'The most important thing in life is to learn how to give out '
+    'love, and to let it come in. — Morrie Schwartz'
+  )
+  QUOTE6: str = str(
+    'Your body hears everything your mind says. — Naomi Judd'
+  )
+
   QUOTES: list =\
   [ QUOTE0
   , QUOTE1
@@ -134,51 +149,6 @@ class PlannerStrings:
   , QUOTE6
   ]
 
-  #_____________________________________________________________________
-  # Goal layout strings
-  #_____________________________________________________________________
-  GOAL_PAGE_HEADER_TXT: str =\
-    'Goal #'
-
-  GOAL_CHECKLIST: str =\
-     '[] Specific'    + SPACE\
-   + '[] Measureable' + SPACE\
-   + '[] Achievable'  + SPACE\
-   + '[] Relevant'    + SPACE\
-   + '[] Challenging'
-
-
-  GOAL_ACTIONS: str =\
-    'Critical Steps'
-
-  GOAL_MILESTONES: list =\
-  [ 'Advancement'
-  , 'Date'
-  ]
-
-  GOAL_MEASUREMENT: str =\
-    'Tangible Results'
-
-  GOAL_OBSTACLES: str =\
-    'Obstacles'
-
-  GOAL_LIFE_IMPROVEMENT: str =\
-    'Impacts of Success'
-
-  GOAL_PLAN: str =\
-    'Commitment Cadence'
-
-  GOAL_REWARD: str =\
-    'Celebration Plan'
-
-  GOAL_MONTHS: list =\
-  [ 'Month 1:'
-  , 'Month 2:'
-  , 'Month 3:'
-  ]
-
-  GOAL_VALUES: str =\
-    'How does this goal support your values?'
   #_____________________________________________________________________
   # Week layout strings
   #_____________________________________________________________________
@@ -277,12 +247,12 @@ class PlannerStrings:
   # Free write strings
   #_____________________________________________________________________
 
-  PAGE_HEADER_TXT_FUTURE_5YR: str = 'Imagine a Future...'
-  PAGE_HEADER_TXT_FUTURE_1YR: str = 'A Year of Growth'
-  PAGE_HEADER_TXT_FUTURE_12W: str = '12 Week Potential'
-  PAGE_HEADER_TXT_FUTURE_BAD: str = 'The Consequences of Inaction'
+  PAGE_HEADER_TXT_FUT_5YR: str = 'Imagine a Future...'
+  PAGE_HEADER_TXT_FUT_1YR: str = 'A Year of Growth'
+  PAGE_HEADER_TXT_FUT_12W: str = '12 Week Potential'
+  PAGE_HEADER_TXT_FUT_BAD: str = 'The Consequences of Inaction'
 
-  FREE_WRITE_FUTURE_5YR: str = (
+  FREE_WRITE_FUT_5YR: str = (
     'Describe your ideal life 3–5 years from now—the boldest vision '
     'you can imagine, even if it feels far off. Ask yourself: What do '
     'I truly want from life? What skills will I master? Which habits '
@@ -294,7 +264,7 @@ class PlannerStrings:
     'before refining your answer below.'
   )
 
-  FREE_WRITE_FUTURE_1YR: str = (
+  FREE_WRITE_FUT_1YR: str = (
     'Imagine your life 12 months from now. Where do you want to be, '
     'and what do you hope to have accomplished? Be specific and aim '
     'for goals that excite you, even if they feel slightly out of '
@@ -303,7 +273,7 @@ class PlannerStrings:
     'in your work, your relationships, and your overall well-being? '
   )
 
-  FREE_WRITE_FUTURE_12W: str = (
+  FREE_WRITE_FUT_12W: str = (
     'Imagine how your life will change over the next twelve weeks. '
     'Aim for progress that feels bold but within your reach. What '
     'fears will you face head-on? What talents will you grow? What '
@@ -314,7 +284,7 @@ class PlannerStrings:
     'choosing to become?'
   )
 
-  FREE_WRITE_FUTURE_BAD: str = (
+  FREE_WRITE_FUT_BAD: str = (
     'Though it may feel unsettling, envision the genuine consequences '
     'of not honoring your commitments. Picture the most serious yet '
     'believable outcome. What does that scenario look like? Who do you '
@@ -325,7 +295,7 @@ class PlannerStrings:
   VOW_HEADER_TXT: str =\
     'A Commitment to Growth'
 
-  VOW: str = (
+  A_VOW: str = (
     'I, (your name), vow to be true to my word and to live with '
     'intention. I will no longer treat my time as something to be '
     'taken for granted. From this moment on, I commit to striving for '

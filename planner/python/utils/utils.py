@@ -1,4 +1,37 @@
-import svgwrite.container
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+#   DESCRIPTION
+#   Utility functions.
+#_______________________________________________________________________
+
+from os.path import isdir
+from os.path import dirname
+from os import mkdir
+from pypdf import PdfReader
+from pypdf import PdfWriter
+
 from classes.style.style import PlannerFontStyle as Font
 from classes.style.style import PlannerColors as Colors
 from classes.constants.error_strings import ErrorStrings as Err
@@ -11,6 +44,65 @@ import svgwrite
 from svgwrite.text import Text
 from svgwrite.container import Group
 
+#_____________________________________________________________________
+class UtilErrors:
+  """
+  Strings used in error messages
+  """
+
+  LINE: str =\
+    '\n________________________________________________________________'
+
+  ERROR: str =\
+    f'{LINE}'\
+    '\nUH OH! The program has encountered an error!'\
+    f'{LINE}'
+
+  ERROR_TYPE: str =\
+    f'{ERROR}'\
+    '\nERROR TYPE:  '
+
+  DESC_LABEL: str =\
+    '\nDESCRIPTION: '
+
+  MK_DIR_NO_PARENT_ERR: str =\
+    'Parent directory not found: '
+
+  FILE_WITH_DIR_NAME_ERR: str =\
+    'File exists with the same name: '
+
+  WRONG_FILE_TYPE: str =\
+    'Wrong file type.'
+
+  FILE_DNE: str =\
+    'File does not exist: '
+
+
+  #_____________________________________________________________________
+  def raise_exception_with_desc(err: Exception, desc: str) -> None:
+    """
+    Raiese exception with descriptive message.
+
+    Parameters:
+      err   : Exception type.
+      desc  : Error message.
+
+    Side Effects:
+      Raises exception
+
+    Returns:
+      None
+    """
+
+    err_type = type(err)
+
+    err_msg: str = str(
+      f'{UtilErrors.ERROR_TYPE}{err_type.__name__}'
+      f'{UtilErrors.DESC_LABEL}{desc}'
+      f'{UtilErrors.LINE}'
+    )
+
+    raise err_type(err_msg)
 
 
 #_____________________________________________________________________
@@ -79,13 +171,14 @@ class PlannerUtils:
     within the specified width.
 
     Parameters:
-      txt         : The input text to wrap.
-      px_wdth     : The maximum width (in pixels) allowed for each line.
-      font_size   : Size of text font
-      font_family : Font of text
+      txt         : Input text to wrap.
+      px_wdth     : Maximum width (in pixels) allowed for each line.
+      font_size   : Size of text font.
+      font_family : Font of text.
 
     Returns:
-        List[str]: A list of strings, each representing a line of wrapped text.
+        List[str]: A list of strings, each representing a line of
+        wrapped text.
     """
 
     if (font_size <= 0):
@@ -189,6 +282,111 @@ class PlannerUtils:
 
     return container
 
+  #_____________________________________________________________________
+  def verify_dir(dir_path: str) -> bool:
+    """
+    Creates a directory if it doesn't exist.
+
+    Parameters:
+      dir_path: Path to directory
+
+    Side Effects:
+      Creates directory.
+
+    Returns:
+      None
+    """
+
+    if (not isdir(dir_path)):
+      try:
+        mkdir(dir_path)
+
+      except Exception as error:
+
+        err_type: Exception = type(error)
+        desc: str = ''
+
+        if (err_type == FileNotFoundError):
+          desc: str =\
+            f'{UtilErrors.MK_DIR_NO_PARENT_ERR}{dirname(dir_path)}'
+
+        if (err_type == FileExistsError):
+          desc: str =\
+            f'{UtilErrors.FILE_WITH_DIR_NAME_ERR}{dir_path}'
+
+        UtilErrors.raise_exception_with_desc(error, desc)
+
+    return True
+
+  #_____________________________________________________________________
+  def is_pdf(file_path: str) -> bool:
+    """
+    Determines if file is a pdf.
+
+    Parameters:
+      file_path: path to file
+
+    Side Effects:
+      None
+
+    Returns:
+      bool indicating if file is pdf
+    """
+
+    try:
+      with open(file_path, 'rb') as f:
+        header = f.read(4)
+        return header == b'%PDF'
+
+    except Exception as error:
+
+      err_type: Exception = type(error)
+      desc: str = ''
+
+      if (err_type == FileNotFoundError):
+        desc: str =\
+          f'{UtilErrors.FILE_DNE}{file_path}'
+
+      UtilErrors.raise_exception_with_desc(error, desc)
+
+    return True
 
 
+  #_____________________________________________________________________
+  def combine_pdfs(pdf_paths: list, combined_pdf_path: str) -> None:
+    """
+    Combines pdfs into one pdf. Order of pages in combined pdf
+    determined by order of pdf_paths.
 
+    Parameters:
+    pdf_paths         : List of paths of pdfs to combine.
+    combined_pdf_path : Path of combined pdf.
+
+    Side Effects:
+    Creates a new pdf.
+
+    Returns:
+    True  : No errors.
+    False : Errors during creation.
+    """
+
+
+    pdf_writer = PdfWriter()
+
+    for pdf in pdf_paths:
+
+      with open (pdf, 'rb') as file:
+        pdf_writer.append(file)
+
+    with open\
+      ( combined_pdf_path, 'wb') as out:
+
+      pdf_writer.write(out)
+
+    print(str(
+      f'Combined pdf successfully created! '
+      f'\nOutput path: {combined_pdf_path}'
+      )
+    )
+
+    return
