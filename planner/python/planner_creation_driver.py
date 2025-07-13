@@ -44,6 +44,7 @@ from classes.page_entries.test_entry import TestEntry
 
 from classes.page_layouts.page_layout import PageLayout
 from classes.page_layouts.half_letter_divider import DividerPage
+from classes.page_layouts.half_page_divider import HalfPageDivider
 
 from classes.reference_pages.ace_reference import AceReference
 
@@ -220,6 +221,23 @@ if __name__ == '__main__':
   else:
     page_order = OneSidePages.PAGE_ORDER
   #_____________________________________________________________________
+
+  test=\
+    HalfPageDivider\
+      ( is_portrait=is_portrait
+      , file_name_no_ext='test'
+      , out_dir='.'
+      , entry_type=WeekCheckList
+      , entry_args={}
+      )
+  test.save_pdf()
+
+
+
+
+
+
+
 
   generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
   generate_dividers(is_portrait, path.join(args.out_dir ,'..', 'dividers'))

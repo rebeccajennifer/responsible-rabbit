@@ -109,6 +109,9 @@ class PageLayout(svgwrite.Drawing):
     self.entry_0_args_ = entry_0_args
     self.entry_1_args_ = entry_1_args
 
+    self.total_hght_ = Dims.LETTER_SIZE_WIDTH_PX
+    self.total_wdth_ = Dims.LETTER_SIZE_LNGTH_PX
+
     #___________________________________________________________________
     hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
     wdth: int = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
@@ -116,7 +119,6 @@ class PageLayout(svgwrite.Drawing):
     if (self.is_portrait_):
       hght = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
       wdth = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
-
 
     super().__init__\
       ( self.svg_file_path_
