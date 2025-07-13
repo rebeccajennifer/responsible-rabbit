@@ -59,11 +59,10 @@ from classes.page_entries.week_checklist_entry import WeekCheckList
 
 WEEK_CHECKLIST: dict =\
 { Key.ENTRY_TYPE: WeekCheckList
-
 }
 
 #_____________________________________________________________________
-BLNK_ENTRY: dict =\
+BLANK: dict =\
   { Key.ENTRY_TYPE: TitlePage
   , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
   }
@@ -106,7 +105,7 @@ YR1_1: dict =\
   }
 }
 
-FUT_12W_ENTRY: dict =\
+WK_12: dict =\
 { Key.ENTRY_TYPE: FreeWritePromptEntry
 , Key.ENTRY_ARGS:
   { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_12W
@@ -114,7 +113,7 @@ FUT_12W_ENTRY: dict =\
   }
 }
 
-FUT_BAD_ENTRY: dict =\
+NOACT: dict =\
 { Key.ENTRY_TYPE: FreeWritePromptEntry
 , Key.ENTRY_ARGS:
   { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_BAD
@@ -123,11 +122,11 @@ FUT_BAD_ENTRY: dict =\
 }
 
 #_____________________________________________________________________
-VOW: dict =\
+A_VOW: dict =\
 { Key.ENTRY_TYPE: FreeWritePromptEntry
 , Key.ENTRY_ARGS:
   { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
-  , Key.PROMPT_TXT: Strings.VOW
+  , Key.PROMPT_TXT: Strings.A_VOW
   }
 }
 
@@ -139,9 +138,10 @@ ACTION_ITEMS: dict =\
 }
 
 #_____________________________________________________________________
-
-DAY: list = []
-QUOT: list = []
+# Populate day and quote pages with variable string
+#_____________________________________________________________________
+DAY : list = []
+QUT : list = []
 
 for i in range(7):
   DAY.append\
@@ -150,43 +150,30 @@ for i in range(7):
     }
   )
 
-  QUOT.append\
+  QUT.append\
   ( { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[i]}
     }
   )
+#_____________________________________________________________________
 
-DAY0 = DAY[0]
-DAY1 = DAY[1]
-DAY2 = DAY[2]
-DAY3 = DAY[3]
-DAY4 = DAY[4]
-DAY5 = DAY[5]
-DAY6 = DAY[6]
-
-MNTH: dict =\
+MONTH: dict =\
   { Key.ENTRY_TYPE: MonthEntry
   , Key.ENTRY_ARGS: {}
   }
 
 #_____________________________________________________________________
-FREE_WRITE_DAY0: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[0]}
-  }
-
-#_____________________________________________________________________
-WEEK0: dict =\
+WEEK_0: dict =\
   { Key.ENTRY_TYPE: WeekEntry0
   , Key.ENTRY_ARGS: {}
   }
-WEEK1: dict =\
+WEEK_1: dict =\
   { Key.ENTRY_TYPE: WeekEntry1
   , Key.ENTRY_ARGS: {}
   }
 
 #_____________________________________________________________________
-GOAL: dict =\
+GOALS: dict =\
   { Key.ENTRY_TYPE: GoalEntry
   , Key.ENTRY_ARGS: {}
   }
@@ -196,8 +183,9 @@ DATES: dict =\
   { Key.ENTRY_TYPE: FreeWriteEntry
   , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
   }
+
 #_______________________________________________________________________
-class PageOrder:
+class DblSidePages:
   """
   Defines and organizes configuration data for various journal page
   entries.
@@ -224,72 +212,72 @@ class PageOrder:
   DBL_SIDE_PAGE_ORDER: list =\
   [ [ '0__title-page'
     , TITLE
-    , BLNK_ENTRY
+    , BLANK
     ]
   , [ '1__vision-0'
     , YR1_0
     , YR1_1
     ]
   , [ '1__vision-1'
-    , FUT_12W_ENTRY
+    , WK_12
     , YR5_1
     ]
   , [ '1__vision-2'
     , YR5_0
-    , FUT_BAD_ENTRY
+    , NOACT
     ]
   , [ '1__vision-3'
-    , VOW
-    , BLNK_ENTRY
+    , A_VOW
+    , BLANK
     ]
   , [ Strings.DEF_GOAL_LAYOUT_PATH
-    , GOAL
-    , GOAL
+    , GOALS
+    , GOALS
     ]
   , [ Strings.DEF_GOAL_LAYOUT_PATH
-    , GOAL
-    , GOAL
+    , GOALS
+    , GOALS
     ]
   , [ '3__month-0'
-    , MNTH
-    , MNTH
+    , MONTH
+    , MONTH
     ]
   , [ '3__month-1'
     , DATES
-    , MNTH
+    , MONTH
     ]
   , [ '4__week-0'
-    , DAY3
-    , QUOT[3]
+    , DAY[3]
+    , QUT[3]
     ]
   , [ '4__week-1'
-    , DAY4
-    , QUOT[2]
+    , DAY[4]
+    , QUT[2]
     ]
   , [ '4__week-2'
-    , DAY2
-    , QUOT[4]
+    , DAY[2]
+    , QUT[4]
     ]
   , [ '4__week-3'
-    , DAY5
-    , QUOT[1]
+    , DAY[5]
+    , QUT[1]
     ]
   , [ '4__week-4'
-    , DAY1
-    , QUOT[5]
+    , DAY[1]
+    , QUT[5]
     ]
   , [ '4__week-5'
-    , DAY6
-    , QUOT[0]
+    , DAY[6]
+    , QUT[0]
     ]
   , [ '4__week-6'
-    , DAY0
-    , QUOT[6]
+    , DAY[0]
+    , QUT[6]
     , TITLE
     ]
   , [ '4__week-7'
-    , WEEK0
-    , WEEK1
+    , WEEK_0
+    , WEEK_1
     ]
   ]
 
@@ -377,30 +365,31 @@ class OneSidePages:
 
   #_____________________________________________________________________
   PAGE_ORDER: list =\
-  [ [ '00-action-items'             , ACTION_ITEMS    , ACTION_ITEMS  ]
-  , [ INTR_FILES[IntrPgNo.TTL_F_1YR], TITLE           , YR1_1         ]
-  , [ INTR_FILES[IntrPgNo.F_5YR_12W], YR5_0           , FUT_12W_ENTRY ]
-  , [ INTR_FILES[IntrPgNo.F_5YR_BAD], YR5_1           , FUT_BAD_ENTRY ]
-  , [ INTR_FILES[IntrPgNo.F_1YR_VOW], YR1_0           , VOW           ]
-  , [ INTR_FILES[IntrPgNo.GOALS_0_1], GOAL            , GOAL          ]
-  , [ INTR_FILES[IntrPgNo.GOALS_2_3], GOAL            , GOAL          ]
-  , [ INTR_FILES[IntrPgNo.MONTH_0_1], MNTH            , MNTH          ]
-  , [ INTR_FILES[IntrPgNo.MONTH_2__], MNTH            , DATES         ]
+  [ [ '00-action-items'             , ACTION_ITEMS     , ACTION_ITEMS  ]
 
-  , [ WEEK_FILES[WeekPgNo.WK_0], WEEK0    , WEEK0   ]
-  , [ WEEK_FILES[WeekPgNo.WK_1], WEEK1    , WEEK1   ]
-  , [ WEEK_FILES[WeekPgNo.DAY0], DAY0     , DAY0    ]
-  , [ WEEK_FILES[WeekPgNo.QUT0], QUOT[0]  , QUOT[0] ]
-  , [ WEEK_FILES[WeekPgNo.DAY1], DAY1     , DAY1    ]
-  , [ WEEK_FILES[WeekPgNo.QUT1], QUOT[1]  , QUOT[1] ]
-  , [ WEEK_FILES[WeekPgNo.DAY2], DAY2     , DAY2    ]
-  , [ WEEK_FILES[WeekPgNo.QUT2], QUOT[2]  , QUOT[2] ]
-  , [ WEEK_FILES[WeekPgNo.DAY3], DAY3     , DAY3    ]
-  , [ WEEK_FILES[WeekPgNo.QUT3], QUOT[3]  , QUOT[3] ]
-  , [ WEEK_FILES[WeekPgNo.DAY4], DAY4     , DAY4    ]
-  , [ WEEK_FILES[WeekPgNo.QUT4], QUOT[4]  , QUOT[4] ]
-  , [ WEEK_FILES[WeekPgNo.DAY5], DAY5     , DAY5    ]
-  , [ WEEK_FILES[WeekPgNo.QUT5], QUOT[5]  , QUOT[5] ]
-  , [ WEEK_FILES[WeekPgNo.DAY6], DAY6     , DAY6    ]
-  , [ WEEK_FILES[WeekPgNo.QUT6], QUOT[6]  , QUOT[6] ]
+  , [ INTR_FILES[IntrPgNo.TTL_F_1YR], TITLE, YR1_1 ]
+  , [ INTR_FILES[IntrPgNo.F_5YR_12W], YR5_0, WK_12 ]
+  , [ INTR_FILES[IntrPgNo.F_5YR_BAD], YR5_1, NOACT ]
+  , [ INTR_FILES[IntrPgNo.F_1YR_VOW], YR1_0, A_VOW ]
+  , [ INTR_FILES[IntrPgNo.GOALS_0_1], GOALS, GOALS ]
+  , [ INTR_FILES[IntrPgNo.GOALS_2_3], GOALS, GOALS ]
+  , [ INTR_FILES[IntrPgNo.MONTH_0_1], MONTH, MONTH ]
+  , [ INTR_FILES[IntrPgNo.MONTH_2__], MONTH, DATES ]
+
+  , [ WEEK_FILES[WeekPgNo.WK_0], WEEK_0, WEEK_0 ]
+  , [ WEEK_FILES[WeekPgNo.WK_1], WEEK_1, WEEK_1 ]
+  , [ WEEK_FILES[WeekPgNo.DAY0], DAY[0], DAY[0] ]
+  , [ WEEK_FILES[WeekPgNo.QUT0], QUT[0], QUT[0] ]
+  , [ WEEK_FILES[WeekPgNo.DAY1], DAY[1], DAY[1] ]
+  , [ WEEK_FILES[WeekPgNo.QUT1], QUT[1], QUT[1] ]
+  , [ WEEK_FILES[WeekPgNo.DAY2], DAY[2], DAY[2] ]
+  , [ WEEK_FILES[WeekPgNo.QUT2], QUT[2], QUT[2] ]
+  , [ WEEK_FILES[WeekPgNo.DAY3], DAY[3], DAY[3] ]
+  , [ WEEK_FILES[WeekPgNo.QUT3], QUT[3], QUT[3] ]
+  , [ WEEK_FILES[WeekPgNo.DAY4], DAY[4], DAY[4] ]
+  , [ WEEK_FILES[WeekPgNo.QUT4], QUT[4], QUT[4] ]
+  , [ WEEK_FILES[WeekPgNo.DAY5], DAY[5], DAY[5] ]
+  , [ WEEK_FILES[WeekPgNo.QUT5], QUT[5], QUT[5] ]
+  , [ WEEK_FILES[WeekPgNo.DAY6], DAY[6], DAY[6] ]
+  , [ WEEK_FILES[WeekPgNo.QUT6], QUT[6], QUT[6] ]
   ]

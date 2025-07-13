@@ -72,24 +72,6 @@ class PlannerStrings:
   DEF_GOAL_LAYOUT_PATH: str =\
     'goal-layout'
 
-  DEF_FUT_5YR_LAYOUT_PATH: str =\
-    'future-5yr-layout'
-
-  DEF_FUT_1YR_LAYOUT_PATH: str =\
-    'future-1yr-layout'
-
-  DEF_FUT_12W_LAYOUT_PATH: str =\
-    'future-12w-layout'
-
-  DEF_FUT_BAD_LAYOUT_PATH: str =\
-    'future-bad-layout'
-
-  DEF_WEEK_LAYOUT_PATH: str =\
-    'week-layout'
-
-  DEF_HABIT_LAYOUT_PATH: str =\
-    'habit-layout'
-
   #_____________________________________________________________________
   # Day layout strings
   #_____________________________________________________________________
@@ -167,51 +149,6 @@ class PlannerStrings:
   , QUOTE6
   ]
 
-  #_____________________________________________________________________
-  # Goal layout strings
-  #_____________________________________________________________________
-  GOAL_PAGE_HEADER_TXT: str =\
-    'Goal #'
-
-  GOAL_CHECKLIST: str =\
-     '[] Specific'    + SPACE\
-   + '[] Measureable' + SPACE\
-   + '[] Achievable'  + SPACE\
-   + '[] Relevant'    + SPACE\
-   + '[] Challenging'
-
-
-  GOAL_ACTIONS: str =\
-    'Critical Steps'
-
-  GOAL_MILESTONES: list =\
-  [ 'Advancement'
-  , 'Date'
-  ]
-
-  GOAL_MEASUREMENT: str =\
-    'Tangible Results'
-
-  GOAL_OBSTACLES: str =\
-    'Obstacles'
-
-  GOAL_LIFE_IMPROVEMENT: str =\
-    'Impacts of Success'
-
-  GOAL_PLAN: str =\
-    'Commitment Cadence'
-
-  GOAL_REWARD: str =\
-    'Celebration Plan'
-
-  GOAL_MONTHS: list =\
-  [ 'Month 1:'
-  , 'Month 2:'
-  , 'Month 3:'
-  ]
-
-  GOAL_VALUES: str =\
-    'How does this goal support your values?'
   #_____________________________________________________________________
   # Week layout strings
   #_____________________________________________________________________
@@ -358,7 +295,7 @@ class PlannerStrings:
   VOW_HEADER_TXT: str =\
     'A Commitment to Growth'
 
-  VOW: str = (
+  A_VOW: str = (
     'I, (your name), vow to be true to my word and to live with '
     'intention. I will no longer treat my time as something to be '
     'taken for granted. From this moment on, I commit to striving for '
