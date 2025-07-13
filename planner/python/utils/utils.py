@@ -390,3 +390,25 @@ class PlannerUtils:
     )
 
     return
+
+  #_____________________________________________________________________
+  def inc(i: int = 0):
+    """
+    Generator that yields incrementing integers, similar to `i++` in C.
+
+    Parameters:
+      i (int): Starting value (default is 0).
+
+    Yields:
+      int: The current counter value, starting from `i` and incrementing
+      by 1.
+    """
+    while True:
+      #_________________________________________________________________
+      # Keyword yield pauses the function and returns a value to
+      # caller, but keeps function’s state alive
+      # so it can resume where it left off.
+      #_________________________________________________________________
+      yield i
+      #_________________________________________________________________
+      i += 1

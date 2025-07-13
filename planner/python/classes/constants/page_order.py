@@ -39,24 +39,24 @@
 from enum import auto
 from enum import IntEnum
 
+from utils.utils import PlannerUtils as Utils
+
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.day_entry import DayEntry
+from classes.page_entries.free_write_entry import FreeWriteEntry
+from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
+from classes.page_entries.goal_entry import GoalEntry
+from classes.page_entries.month_entry import MonthEntry
+from classes.page_entries.title_page import TitlePage
+from classes.page_entries.week_checklist_entry import WeekCheckList
 from classes.page_entries.week_entry import WeekEntry0
 from classes.page_entries.week_entry import WeekEntry1
-from classes.page_entries.month_entry import MonthEntry
-
-from classes.page_entries.goal_entry import GoalEntry
-
-from classes.page_entries.free_write_entry import FreeWriteEntry
-
-from classes.page_entries.title_page import TitlePage
-from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
-from classes.page_entries.week_checklist_entry import WeekCheckList
 
 
-
+#_____________________________________________________________________
+#_____________________________________________________________________
 WEEK_CHECKLIST: dict =\
 { Key.ENTRY_TYPE: WeekCheckList
 }
@@ -184,64 +184,12 @@ DATES: dict =\
   , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
   }
 
+
 #_______________________________________________________________________
 class DblSidePages:
   """
-  Defines and organizes configuration data for various journal page
-  entries.
-
-  Each page entry specifies a type (e.g., FreeWriteEntry, DayEntry)
-  and a corresponding set of arguments specific to that type. Entry
-  types may represent unstructured pages (like free writes with optional
-  prompts) or structured formats (like daily or weekly tables for
-  planning or reflection).
-
-  The class also defines page ordering for both single-sided and
-  double-sided journal layouts.
-
-  Attributes:
-    PAGE_ORDER: A list of layout configurations for
-                         single-sided printing.
-
-    PAGE_ORDER: Same as above, but for double-sided printing
-                         layouts.
+  Defines and organizes configuration data for double sided pages.
   """
-
-  class IntrPgNo(IntEnum):
-    """
-    Page numbers for intro section.
-    """
-    INTRO_0 = auto()
-    INTRO_1 = auto()
-    INTRO_2 = auto()
-    INTRO_3 = auto()
-    INTRO_4 = auto()
-    INTRO_5 = auto()
-    INTRO_6 = auto()
-    INTRO_7 = auto()
-
-  #_____________________________________________________________________
-  def inc(i: int = 0):
-    """
-    Generator that yields incrementing integers, similar to `i++` in C.
-
-    Parameters:
-      i (int): Starting value (default is 0).
-
-    Yields:
-      int: The current counter value, starting from `i` and incrementing
-      by 1.
-    """
-    while True:
-      #_________________________________________________________________
-      # Keyword yield pauses the function and returns a value to
-      # caller, but keeps function’s state alive
-      # so it can resume where it left off.
-      #_________________________________________________________________
-      yield i
-      #_________________________________________________________________
-      i += 1
-
   #_____________________________________________________________________
   # List of layouts
   #_____________________________________________________________________
@@ -259,15 +207,6 @@ class DblSidePages:
   ]
 
   #_____________________________________________________________________
-  # Create list of file names
-  #_____________________________________________________________________
-  INTR_FILE_NAMES: list = []
-  counter = inc()
-
-  for i in range(len(INTR_LAYOUTS)):
-    INTR_FILE_NAMES.append('0__' + str(next(counter)))
-
-  #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
   [ [DAY[3] , QUT[3]]
   , [DAY[4] , QUT[2]]
@@ -279,20 +218,36 @@ class DblSidePages:
   , [WEEK_0 , WEEK_1]
   ]
 
+  #_____________________________________________________________________
+  # Create list of file names
+  #_____________________________________________________________________
+  # Intro entry file names
+  #---------------------------------------------------------------------
+  INTR_FILE_NAMES: list = []
+  counter = Utils.inc()
+
+  for i in range(len(INTR_LAYOUTS)):
+    INTR_FILE_NAMES.append('0__intr__' + str(next(counter)))
+
+  #---------------------------------------------------------------------
+  # Week entry file names
+  #---------------------------------------------------------------------
   WEEK_FILE_NAMES: list = []
-  counter = inc()
+  counter = Utils.inc()
 
   for i in range(len(WEEK_LAYOUTS)):
-    WEEK_FILE_NAMES.append('1__' + str(next(counter)))
+    WEEK_FILE_NAMES.append('1__week__' + str(next(counter)))
 
   #_____________________________________________________________________
   # Generate list of layouts with file names
   #_____________________________________________________________________
+  # Intro entry files
   PAGE_ORDER: list = []
   for i in range(len(INTR_LAYOUTS)):
     page: list = [INTR_FILE_NAMES[i]] + INTR_LAYOUTS[i]
     PAGE_ORDER.append(page)
 
+  # Week entry files
   for i in range(len(WEEK_LAYOUTS)):
     page: list = [WEEK_FILE_NAMES[i]] + WEEK_LAYOUTS[i]
     PAGE_ORDER.append(page)
