@@ -26,19 +26,10 @@
 #   Half-letter sheet layout
 #_______________________________________________________________________
 
-import svgwrite
 import cairosvg
-import datetime as dt
+import svgwrite
 
-from os.path import exists
-from os.path import isdir
-from os.path import isfile
 from os.path import join
-from os import mkdir
-from os import remove
-from os import rmdir
-from shutil import rmtree
-
 from typing import Tuple
 
 from classes.constants.dims import PlannerDims as Dims
@@ -48,7 +39,7 @@ from utils.utils import PlannerUtils as Utils
 
 
 #_______________________________________________________________________
-class TwoPageHalfLetterSize(svgwrite.Drawing):
+class PageLayout(svgwrite.Drawing):
   """
   Layout for half letter size prints. Intended to print two pages on
   one sheet and cut in half.

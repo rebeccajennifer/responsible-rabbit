@@ -42,13 +42,13 @@ from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
 from classes.page_entries.test_entry import TestEntry
 
+from classes.page_layouts.page_layout import PageLayout
 from classes.page_layouts.half_letter_divider import DividerPage
 
 from classes.reference_pages.ace_reference import AceReference
 
 from utils.planner_parser import PlannerCreationParser
 
-from classes.page_layouts.half_letter_two_page_layout import TwoPageHalfLetterSize
 
 from utils.utils import PlannerUtils as Utils
 
@@ -69,7 +69,7 @@ def generate_pages\
   #_____________________________________________________________________
   for i in range (len(page_order)):
     layout =\
-      TwoPageHalfLetterSize\
+      PageLayout\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
       , file_name_no_ext=page_order[i][0]
@@ -115,7 +115,7 @@ def generate_habit_tracker\
   # Create weekly habit bookmark
   #_____________________________________________________________________
   weekly_checklist =\
-    TwoPageHalfLetterSize\
+    PageLayout\
       ( is_portrait=is_portrait
       , is_dbl_sided=True
       , file_name_no_ext='week-chcklst-back'
@@ -206,10 +206,10 @@ if __name__ == '__main__':
   page_order: list = []
 
   pdf_out_dir: str =\
-    path.join(args.out_dir, TwoPageHalfLetterSize.PDF_SUB_DIR)
+    path.join(args.out_dir, PageLayout.PDF_SUB_DIR)
 
   svg_out_dir: str =\
-    path.join(args.out_dir, TwoPageHalfLetterSize.SVG_SUB_DIR)
+    path.join(args.out_dir, PageLayout.SVG_SUB_DIR)
 
 
   #_____________________________________________________________________
@@ -222,11 +222,11 @@ if __name__ == '__main__':
   #_____________________________________________________________________
 
   generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
-  #generate_dividers(is_portrait, args.out_dir)
-  #generate_habit_tracker(is_portrait, args.out_dir)
+  generate_dividers(is_portrait, path.join(args.out_dir ,'..', 'dividers'))
+  generate_habit_tracker(is_portrait, path.join(args.out_dir, '..', 'dividers'))
 
   test_layout=\
-    TwoPageHalfLetterSize\
+    PageLayout\
     ( is_portrait=False
     , is_dbl_sided=is_dbl_sided
     , file_name_no_ext='test'

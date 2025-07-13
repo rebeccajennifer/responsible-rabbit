@@ -36,9 +36,6 @@
 #   consistent formatting and content.
 #_______________________________________________________________________
 
-from enum import auto
-from enum import IntEnum
-
 from utils.utils import PlannerUtils as Utils
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
@@ -50,7 +47,6 @@ from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.goal_entry import GoalEntry
 from classes.page_entries.month_entry import MonthEntry
 from classes.page_entries.title_page import TitlePage
-from classes.page_entries.week_checklist_entry import WeekCheckList
 from classes.page_entries.week_entry import WeekEntry0
 from classes.page_entries.week_entry import WeekEntry1
 
