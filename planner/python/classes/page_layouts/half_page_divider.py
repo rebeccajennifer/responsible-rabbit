@@ -45,6 +45,8 @@ from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
 from classes.page_layouts.page_layout import PageLayout
 from classes.page_entries.title_page import TitlePage
 
+from utils.utils import PlannerUtils as Utils
+
 
 #_______________________________________________________________________
 class HalfPageDivider(PageLayout):
@@ -52,6 +54,8 @@ class HalfPageDivider(PageLayout):
   Layout for half letter size prints. Intended to print two pages on
   one sheet and cut in half.
   """
+
+  counter = Utils.inc()
 
   #_____________________________________________________________________
   def __init__(self
@@ -76,7 +80,7 @@ class HalfPageDivider(PageLayout):
 
     if (not file_name_no_ext):
         file_name_no_ext: str =\
-          'divider-' + divider_str.lower().replace(' ', '-') + '.svg'
+          f'dvdr-{divider_pos}-{divider_str.lower().replace(' ', '-')}'
 
     self.divider_pos_   : int   = divider_pos
     self.divider_str_   : int   = divider_str
