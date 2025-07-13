@@ -203,83 +203,99 @@ class DblSidePages:
     PAGE_ORDER: A list of layout configurations for
                          single-sided printing.
 
-    DBL_SIDE_PAGE_ORDER: Same as above, but for double-sided printing
+    PAGE_ORDER: Same as above, but for double-sided printing
                          layouts.
   """
 
+  class IntrPgNo(IntEnum):
+    """
+    Page numbers for intro section.
+    """
+    INTRO_0 = auto()
+    INTRO_1 = auto()
+    INTRO_2 = auto()
+    INTRO_3 = auto()
+    INTRO_4 = auto()
+    INTRO_5 = auto()
+    INTRO_6 = auto()
+    INTRO_7 = auto()
 
   #_____________________________________________________________________
-  DBL_SIDE_PAGE_ORDER: list =\
-  [ [ '0__title-page'
-    , TITLE
-    , BLANK
-    ]
-  , [ '1__vision-0'
-    , YR1_0
-    , YR1_1
-    ]
-  , [ '1__vision-1'
-    , WK_12
-    , YR5_1
-    ]
-  , [ '1__vision-2'
-    , YR5_0
-    , NOACT
-    ]
-  , [ '1__vision-3'
-    , A_VOW
-    , BLANK
-    ]
-  , [ Strings.DEF_GOAL_LAYOUT_PATH
-    , GOALS
-    , GOALS
-    ]
-  , [ Strings.DEF_GOAL_LAYOUT_PATH
-    , GOALS
-    , GOALS
-    ]
-  , [ '3__month-0'
-    , MONTH
-    , MONTH
-    ]
-  , [ '3__month-1'
-    , DATES
-    , MONTH
-    ]
-  , [ '4__week-0'
-    , DAY[3]
-    , QUT[3]
-    ]
-  , [ '4__week-1'
-    , DAY[4]
-    , QUT[2]
-    ]
-  , [ '4__week-2'
-    , DAY[2]
-    , QUT[4]
-    ]
-  , [ '4__week-3'
-    , DAY[5]
-    , QUT[1]
-    ]
-  , [ '4__week-4'
-    , DAY[1]
-    , QUT[5]
-    ]
-  , [ '4__week-5'
-    , DAY[6]
-    , QUT[0]
-    ]
-  , [ '4__week-6'
-    , DAY[0]
-    , QUT[6]
-    , TITLE
-    ]
-  , [ '4__week-7'
-    , WEEK_0
-    , WEEK_1
-    ]
+  def inc(i: int = 0):
+    """
+    Generator that yields incrementing integers, similar to `i++` in C.
+
+    Parameters:
+      i (int): Starting value (default is 0).
+
+    Yields:
+      int: The current counter value, starting from `i` and incrementing
+      by 1.
+    """
+    while True:
+      #_________________________________________________________________
+      # Keyword yield pauses the function and returns a value to
+      # caller, but keeps function’s state alive
+      # so it can resume where it left off.
+      #_________________________________________________________________
+      yield i
+      #_________________________________________________________________
+      i += 1
+
+  #_____________________________________________________________________
+  # List of layouts
+  #_____________________________________________________________________
+  INTR_LAYOUTS: list =\
+  [ [TITLE, BLANK]
+  , [BLANK, BLANK]
+  , [YR1_0, YR1_1]
+  , [WK_12, YR5_1]
+  , [YR5_0, NOACT]
+  , [A_VOW, BLANK]
+  , [GOALS, GOALS]
+  , [GOALS, GOALS]
+  , [MONTH, MONTH]
+  , [DATES, MONTH]
   ]
+
+  #_____________________________________________________________________
+  # Create list of file names
+  #_____________________________________________________________________
+  INTR_FILE_NAMES: list = []
+  counter = inc()
+
+  for i in range(len(INTR_LAYOUTS)):
+    INTR_FILE_NAMES.append('0__' + str(next(counter)))
+
+  #_____________________________________________________________________
+  WEEK_LAYOUTS: list =\
+  [ [DAY[3] , QUT[3]]
+  , [DAY[4] , QUT[2]]
+  , [DAY[2] , QUT[4]]
+  , [DAY[5] , QUT[1]]
+  , [DAY[1] , QUT[5]]
+  , [DAY[6] , QUT[0]]
+  , [DAY[0] , QUT[6]]
+  , [WEEK_0 , WEEK_1]
+  ]
+
+  WEEK_FILE_NAMES: list = []
+  counter = inc()
+
+  for i in range(len(WEEK_LAYOUTS)):
+    WEEK_FILE_NAMES.append('1__' + str(next(counter)))
+
+  #_____________________________________________________________________
+  # Generate list of layouts with file names
+  #_____________________________________________________________________
+  PAGE_ORDER: list = []
+  for i in range(len(INTR_LAYOUTS)):
+    page: list = [INTR_FILE_NAMES[i]] + INTR_LAYOUTS[i]
+    PAGE_ORDER.append(page)
+
+  for i in range(len(WEEK_LAYOUTS)):
+    page: list = [WEEK_FILE_NAMES[i]] + WEEK_LAYOUTS[i]
+    PAGE_ORDER.append(page)
 
 #_______________________________________________________________________
 class OneSidePages:

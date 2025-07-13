@@ -158,12 +158,12 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
   intr_pdf_group: list = OneSidePages.INTR_FILE_NAMES
   week_pdf_group: list = OneSidePages.WEEK_FILE_NAMES
 
+  if(is_dbl_sided):
+    intr_pdf_group: list = DblSidePages.INTR_FILE_NAMES
+    week_pdf_group: list = DblSidePages.WEEK_FILE_NAMES
+
   intr_combo_pdf: list = '__0__intr.pdf '
   week_combo_pdf: list = '__1__week.pdf '
-
-  if(is_dbl_sided):
-    intr_pdf_group: list = DblSidePages.DBL_SIDE_INTR_FILE_NAMES
-    week_pdf_group: list = DblSidePages.DBL_SIDE_WEEK_FILE_NAMES
 
   pdf_paths: list =\
     [path.join(pdf_out_dir, n + '.pdf') for n in intr_pdf_group]
@@ -216,7 +216,7 @@ if __name__ == '__main__':
   # Determine page ordering
   #_____________________________________________________________________
   if (is_dbl_sided):
-    page_order = DblSidePages.DBL_SIDE_PAGE_ORDER
+    page_order = DblSidePages.PAGE_ORDER
   else:
     page_order = OneSidePages.PAGE_ORDER
   #_____________________________________________________________________
