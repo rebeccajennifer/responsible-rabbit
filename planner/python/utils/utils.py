@@ -384,7 +384,7 @@ class PlannerUtils:
       pdf_writer.write(out)
 
     print(str(
-      f'Combined pdf successfully created! '
+      f'\nCombined pdf successfully created! '
       f'\nOutput path: {combined_pdf_path}'
       )
     )
