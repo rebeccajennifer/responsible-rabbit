@@ -113,14 +113,29 @@ def generate_habit_tracker\
 ( is_portrait: bool
 , out_dir: str
 ):
-  #_____________________________________________________________________
-  # Create weekly habit bookmark
-  #_____________________________________________________________________
+  """
+  Create weekly habit bookmark.
+
+  Parameters:
+    is_portrait : True indicates the half page is in portrait
+                  orientation
+    out_dir     : Output directory
+
+  Side Effects:
+    Creates svgs and pdfs for habit tracker bookmark.
+
+  Returns:
+    None
+  """
+
+  mnth_tracker_file_name : str = 'mnth-tracker'
+  week_tracker_file_name : str = 'week-tracker'
+
   weekly_checklist =\
     PageLayout\
       ( is_portrait=is_portrait
       , is_dbl_sided=True
-      , file_name_no_ext='week-chcklst-back'
+      , file_name_no_ext=mnth_tracker_file_name
       , out_dir=out_dir
       , entry_0_type=TitlePage
       , entry_0_args={}
@@ -128,19 +143,20 @@ def generate_habit_tracker\
       , entry_1_args={}
       , rgt_bndr_mrgn=True
       )
-  weekly_checklist.save()
+  weekly_checklist.save_pdf()
 
   habit_tracker =\
-    DividerPage\
+    HalfPageDivider\
     ( is_portrait=is_portrait
-    , out_dir=args.out_dir
+    , out_dir=out_dir
+    , file_name_no_ext=week_tracker_file_name
     , divider_pos=0
     , divider_str='Today'
-    , file_path=path.join(args.out_dir, 'week-chcklst-frnt.svg')
     , entry_type=HabitTracker
     , entry_args={}
     )
-  habit_tracker.save()
+  habit_tracker.save_pdf()
+
 
 #_______________________________________________________________________
 def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
@@ -223,26 +239,10 @@ if __name__ == '__main__':
     page_order = OneSidePages.PAGE_ORDER
   #_____________________________________________________________________
 
-  test=\
-    HalfPageDivider\
-      ( is_portrait=is_portrait
-      , file_name_no_ext='test'
-      , out_dir='.'
-      , entry_type=WeekCheckList
-      , entry_args={}
-      )
-  test.save_pdf()
-
-
-
-
-
-
-
-
+  div_dir: str = path.join(args.out_dir ,'..', 'dividers')
   generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
-  generate_dividers(is_portrait, path.join(args.out_dir ,'..', 'dividers'))
-  generate_habit_tracker(is_portrait, path.join(args.out_dir, '..', 'dividers'))
+  generate_habit_tracker(is_portrait, div_dir)
+  generate_dividers(is_portrait, div_dir)
 
   test_layout=\
     PageLayout\
