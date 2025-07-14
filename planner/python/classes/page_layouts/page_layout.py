@@ -26,19 +26,10 @@
 #   Half-letter sheet layout
 #_______________________________________________________________________
 
-import svgwrite
 import cairosvg
-import datetime as dt
+import svgwrite
 
-from os.path import exists
-from os.path import isdir
-from os.path import isfile
 from os.path import join
-from os import mkdir
-from os import remove
-from os import rmdir
-from shutil import rmtree
-
 from typing import Tuple
 
 from classes.constants.dims import PlannerDims as Dims
@@ -48,7 +39,7 @@ from utils.utils import PlannerUtils as Utils
 
 
 #_______________________________________________________________________
-class TwoPageHalfLetterSize(svgwrite.Drawing):
+class PageLayout(svgwrite.Drawing):
   """
   Layout for half letter size prints. Intended to print two pages on
   one sheet and cut in half.
@@ -118,6 +109,9 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
     self.entry_0_args_ = entry_0_args
     self.entry_1_args_ = entry_1_args
 
+    self.total_hght_ = Dims.LETTER_SIZE_WIDTH_PX
+    self.total_wdth_ = Dims.LETTER_SIZE_LNGTH_PX
+
     #___________________________________________________________________
     hght: int = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
     wdth: int = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
@@ -125,7 +119,6 @@ class TwoPageHalfLetterSize(svgwrite.Drawing):
     if (self.is_portrait_):
       hght = Dims.to_in_str(Dims.LETTER_SIZE_LNGTH_IN)
       wdth = Dims.to_in_str(Dims.LETTER_SIZE_WIDTH_IN)
-
 
     super().__init__\
       ( self.svg_file_path_

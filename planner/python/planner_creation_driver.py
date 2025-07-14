@@ -27,7 +27,8 @@
 #_______________________________________________________________________
 
 import argparse
-from os import path
+from os.path import join
+from os.path import isfile
 from os import listdir
 from os import remove
 
@@ -42,13 +43,13 @@ from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
 from classes.page_entries.test_entry import TestEntry
 
-from classes.page_layouts.half_letter_divider import DividerPage
+from classes.page_layouts.page_layout import PageLayout
+from classes.page_layouts.half_page_divider import HalfPageDivider
 
 from classes.reference_pages.ace_reference import AceReference
 
 from utils.planner_parser import PlannerCreationParser
 
-from classes.page_layouts.half_letter_two_page_layout import TwoPageHalfLetterSize
 
 from utils.utils import PlannerUtils as Utils
 
@@ -69,7 +70,7 @@ def generate_pages\
   #_____________________________________________________________________
   for i in range (len(page_order)):
     layout =\
-      TwoPageHalfLetterSize\
+      PageLayout\
       ( is_portrait=is_portrait
       , is_dbl_sided=is_dbl_sided
       , file_name_no_ext=page_order[i][0]
@@ -98,27 +99,43 @@ def generate_dividers\
     divider_labels.append(f'Month {i}')
 
   for i in range(len(divider_labels)):
-    DividerPage\
+    HalfPageDivider\
     ( is_portrait=is_portrait
     , divider_pos=i+1
     , divider_str=divider_labels[i]
     , out_dir=out_dir
     , entry_type=TitlePage
     , entry_args={Key.HEADER_TXT: divider_labels[i]}
-    ).save()
+    ).save_pdf()
 
+#_______________________________________________________________________
 def generate_habit_tracker\
 ( is_portrait: bool
 , out_dir: str
 ):
-  #_____________________________________________________________________
-  # Create weekly habit bookmark
-  #_____________________________________________________________________
-  weekly_checklist =\
-    TwoPageHalfLetterSize\
+  """
+  Create weekly habit bookmark.
+
+  Parameters:
+    is_portrait : True indicates the half page is in portrait
+                  orientation
+    out_dir     : Output directory
+
+  Side Effects:
+    Creates svgs and pdfs for habit tracker bookmark.
+
+  Returns:
+    None
+  """
+
+  week_cklst_fname : str = 'week-cklst'
+  habt_track_fname : str = 'habt-track'
+
+  week_cklst =\
+    PageLayout\
       ( is_portrait=is_portrait
       , is_dbl_sided=True
-      , file_name_no_ext='week-chcklst-back'
+      , file_name_no_ext=week_cklst_fname
       , out_dir=out_dir
       , entry_0_type=TitlePage
       , entry_0_args={}
@@ -126,19 +143,31 @@ def generate_habit_tracker\
       , entry_1_args={}
       , rgt_bndr_mrgn=True
       )
-  weekly_checklist.save()
+  week_cklst.save_pdf()
 
-  habit_tracker =\
-    DividerPage\
+  habt_track =\
+    HalfPageDivider\
     ( is_portrait=is_portrait
-    , out_dir=args.out_dir
+    , out_dir=out_dir
+    , file_name_no_ext=habt_track_fname
     , divider_pos=0
     , divider_str='Today'
-    , file_path=path.join(args.out_dir, 'week-chcklst-frnt.svg')
     , entry_type=HabitTracker
     , entry_args={}
     )
-  habit_tracker.save()
+  habt_track.save_pdf()
+
+  pdf_out_dir: str = join(out_dir, 'pdf')
+
+  pdf_paths: list =\
+    [ join(pdf_out_dir, habt_track.file_name_no_ext_ + '.pdf')
+    , join(pdf_out_dir, week_cklst.file_name_no_ext_ + '.pdf')
+    ]
+
+  Utils.combine_pdfs(pdf_paths, join(pdf_out_dir, 'dvdr-0-today.pdf'))
+
+  return
+
 
 #_______________________________________________________________________
 def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
@@ -166,12 +195,12 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
   week_combo_pdf: list = '__1__week.pdf '
 
   pdf_paths: list =\
-    [path.join(pdf_out_dir, n + '.pdf') for n in intr_pdf_group]
-  Utils.combine_pdfs(pdf_paths, path.join(out_dir, intr_combo_pdf))
+    [join(pdf_out_dir, n + '.pdf') for n in intr_pdf_group]
+  Utils.combine_pdfs(pdf_paths, join(out_dir, intr_combo_pdf))
 
   pdf_paths: list =\
-    [path.join(pdf_out_dir, n + '.pdf') for n in week_pdf_group]
-  Utils.combine_pdfs(pdf_paths, path.join(out_dir, week_combo_pdf))
+    [join(pdf_out_dir, n + '.pdf') for n in week_pdf_group]
+  Utils.combine_pdfs(pdf_paths, join(out_dir, week_combo_pdf))
 
 
   #_____________________________________________________________________
@@ -182,10 +211,10 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
 
   # Loop through all files in the directory
   for filename in listdir(out_dir):
-      file_path = path.join(out_dir, filename)
+      file_path = join(out_dir, filename)
 
       # Remove if it's a file and not in the keep list
-      if path.isfile(file_path) and filename not in keep_files:
+      if isfile(file_path) and filename not in keep_files:
           remove(file_path)
   #_____________________________________________________________________
 
@@ -206,10 +235,10 @@ if __name__ == '__main__':
   page_order: list = []
 
   pdf_out_dir: str =\
-    path.join(args.out_dir, TwoPageHalfLetterSize.PDF_SUB_DIR)
+    join(args.out_dir, PageLayout.PDF_SUB_DIR)
 
   svg_out_dir: str =\
-    path.join(args.out_dir, TwoPageHalfLetterSize.SVG_SUB_DIR)
+    join(args.out_dir, PageLayout.SVG_SUB_DIR)
 
 
   #_____________________________________________________________________
@@ -221,12 +250,13 @@ if __name__ == '__main__':
     page_order = OneSidePages.PAGE_ORDER
   #_____________________________________________________________________
 
+  div_dir: str = join(args.out_dir ,'..', 'dividers')
   generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
-  #generate_dividers(is_portrait, args.out_dir)
-  #generate_habit_tracker(is_portrait, args.out_dir)
+  generate_habit_tracker(is_portrait, div_dir)
+  generate_dividers(is_portrait, div_dir)
 
   test_layout=\
-    TwoPageHalfLetterSize\
+    PageLayout\
     ( is_portrait=False
     , is_dbl_sided=is_dbl_sided
     , file_name_no_ext='test'
