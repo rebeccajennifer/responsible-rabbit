@@ -24,9 +24,6 @@
 #_______________________________________________________________________
 #   DESCRIPTION
 #
-#   Configuration file for defining the layout and content of planner
-#   pages.
-#
 #   This module specifies the types of planner entries and how
 #   they are arranged in single- and double-sided printing formats.
 #
@@ -64,6 +61,13 @@ class Entries:
   { Key.ENTRY_TYPE: TitlePage
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: 'Book of Plans'
+    }
+  }
+
+  BEST_: dict =\
+  { Key.ENTRY_TYPE: TitlePage
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: 'The Best Version of Me'
     }
   }
 
@@ -187,16 +191,16 @@ class DblSidePages:
   # List of layouts
   #_____________________________________________________________________
   INTR_LAYOUTS: list =\
-  [ [Entries.TITLE, Entries.BLANK]
-  , [Entries.BLANK, Entries.BLANK]
-  , [Entries.YR1_0, Entries.YR1_1]
-  , [Entries.WK_12, Entries.YR5_1]
-  , [Entries.YR5_0, Entries.NOACT]
-  , [Entries.A_VOW, Entries.BLANK]
-  , [Entries.GOALS, Entries.GOALS]
-  , [Entries.GOALS, Entries.GOALS]
-  , [Entries.MONTH, Entries.MONTH]
-  , [Entries.DATES, Entries.MONTH]
+  [ [Entries.A_VOW, Entries.GOALS]
+  , [Entries.GOALS, Entries.NOACT]
+  , [Entries.WK_12, Entries.GOALS]
+  , [Entries.GOALS, Entries.YR1_1]
+  , [Entries.YR1_0, Entries.MONTH]
+  , [Entries.MONTH, Entries.YR5_1]
+  , [Entries.YR5_0, Entries.MONTH]
+  , [Entries.DATES, Entries.BEST_]
+  , [Entries.BLANK, Entries.ACTION_ITEMS]
+  , [Entries.ACTION_ITEMS, Entries.TITLE]
   ]
 
   #_____________________________________________________________________
