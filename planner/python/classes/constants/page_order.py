@@ -33,159 +33,29 @@
 #   consistent formatting and content.
 #_______________________________________________________________________
 
+from classes.constants.entries import Entries
 from utils.utils import PlannerUtils as Utils
 
-from classes.constants.addl_arg_keys import AddlArgKeys as Key
-from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_entries.day_entry import DayEntry
-from classes.page_entries.free_write_entry import FreeWriteEntry
-from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
-from classes.page_entries.goal_entry import GoalEntry
-from classes.page_entries.month_entry import MonthEntry
-from classes.page_entries.night_entry import NightEntry
-from classes.page_entries.title_page import TitlePage
-from classes.page_entries.week_entry import WeekEntry0
-from classes.page_entries.week_entry import WeekEntry1
+#_______________________________________________________________________
+class OptionlPages:
+  """
+  Defines and organizes configuration data for additional optional
+  pages that can be inserted.
+  """
 
+  XTRA_LAYOUTS: list =\
+  [ [Entries.NITE, Entries.NITE]
+  ]
 
-#_____________________________________________________________________
-class Entries:
+  #---------------------------------------------------------------------
+  # Extra entry file names
+  #---------------------------------------------------------------------
+  XTRA_FILE_NAMES: list = []
+  counter = Utils.inc()
 
-  # Blank page
-  BLANK: dict =\
-    { Key.ENTRY_TYPE: TitlePage
-    , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
-    }
-
-  TITLE: dict =\
-  { Key.ENTRY_TYPE: TitlePage
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'Book of Plans'
-    }
-  }
-
-  BEST_: dict =\
-  { Key.ENTRY_TYPE: TitlePage
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'The Best Version of Me'
-    }
-  }
-
-  #_____________________________________________________________________
-  YR5_0: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_5YR
-    }
-  }
-
-  YR5_1: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
-    }
-  }
-
-  YR1_0: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_1YR
-    }
-  }
-
-  YR1_1: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
-    }
-  }
-
-  WK_12: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_12W
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_12W
-    }
-  }
-
-  NOACT: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_BAD
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_BAD
-    }
-  }
-
-  #_____________________________________________________________________
-  A_VOW: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
-    , Key.PROMPT_TXT: Strings.A_VOW
-    }
-  }
-
-  ACTION_ITEMS: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'Action Items: '
-    }
-  }
-
-  #_____________________________________________________________________
-  # Populate day and quote pages with variable string
-  #_____________________________________________________________________
-  DAY : list = []
-  QUT : list = []
-
-  for i in range(7):
-    DAY.append\
-    ( { Key.ENTRY_TYPE: DayEntry
-      , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: i}
-      }
-    )
-
-    QUT.append\
-    ( { Key.ENTRY_TYPE: FreeWriteEntry
-      , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[i]}
-      }
-    )
-  #_____________________________________________________________________
-
-  NITE: dict =\
-    { Key.ENTRY_TYPE: NightEntry
-    , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Daily Reflection'}
-    }
-
-  MONTH: dict =\
-    { Key.ENTRY_TYPE: MonthEntry
-    , Key.ENTRY_ARGS: {}
-    }
-
-  #_____________________________________________________________________
-  WEEK_0: dict =\
-    { Key.ENTRY_TYPE: WeekEntry0
-    , Key.ENTRY_ARGS: {}
-    }
-  WEEK_1: dict =\
-    { Key.ENTRY_TYPE: WeekEntry1
-    , Key.ENTRY_ARGS: {}
-    }
-
-  #_____________________________________________________________________
-  GOALS: dict =\
-    { Key.ENTRY_TYPE: GoalEntry
-    , Key.ENTRY_ARGS: {}
-    }
-
-
-  DATES: dict =\
-    { Key.ENTRY_TYPE: FreeWriteEntry
-    , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
-    }
+  for i in range(len(XTRA_LAYOUTS)):
+    XTRA_FILE_NAMES.append('2__xtra__' + str(next(counter)))
 
 
 #_______________________________________________________________________
@@ -221,10 +91,6 @@ class DblSidePages:
   , [Entries.WEEK_0 , Entries.WEEK_1]
   ]
 
-  XTRA_LAYOUTS: list =\
-  [ [Entries.NITE, Entries.NITE]
-  ]
-
   #_____________________________________________________________________
   # Create list of file names
   #_____________________________________________________________________
@@ -244,35 +110,6 @@ class DblSidePages:
 
   for i in range(len(WEEK_LAYOUTS)):
     WEEK_FILE_NAMES.append('1__week__' + str(next(counter)))
-
-  #---------------------------------------------------------------------
-  # Extra entry file names
-  #---------------------------------------------------------------------
-  XTRA_FILE_NAMES: list = []
-  counter = Utils.inc()
-
-  for i in range(len(XTRA_LAYOUTS)):
-    XTRA_FILE_NAMES.append('2__xtra__' + str(next(counter)))
-
-
-  #_____________________________________________________________________
-  # Generate list of layouts with file names
-  #_____________________________________________________________________
-  # Intro entry files
-  PAGE_ORDER: list = []
-  for i in range(len(INTR_LAYOUTS)):
-    page: list = [INTR_FILE_NAMES[i]] + INTR_LAYOUTS[i]
-    PAGE_ORDER.append(page)
-
-  # Week entry files
-  for i in range(len(WEEK_LAYOUTS)):
-    page: list = [WEEK_FILE_NAMES[i]] + WEEK_LAYOUTS[i]
-    PAGE_ORDER.append(page)
-
-  # Extra entry files
-  for i in range(len(XTRA_LAYOUTS)):
-    page: list = [XTRA_FILE_NAMES[i]] + XTRA_LAYOUTS[i]
-    PAGE_ORDER.append(page)
 
 
 #_______________________________________________________________________
@@ -314,10 +151,6 @@ class OneSidePages:
   , [Entries.QUT[6] , Entries.QUT[6]]
   ]
 
-  XTRA_LAYOUTS: list =\
-  [ [Entries.NITE, Entries.NITE]
-  ]
-
   #_____________________________________________________________________
   # Create list of file names
   #_____________________________________________________________________
@@ -338,30 +171,50 @@ class OneSidePages:
   for i in range(len(WEEK_LAYOUTS)):
     WEEK_FILE_NAMES.append('1__week__' + str(next(counter)))
 
-  #---------------------------------------------------------------------
-  # Week entry file names
-  #---------------------------------------------------------------------
-  XTRA_FILE_NAMES: list = []
-  counter = Utils.inc()
 
-  for i in range(len(XTRA_LAYOUTS)):
-    XTRA_FILE_NAMES.append('2__xtra__' + str(next(counter)))
+#_______________________________________________________________________
+class PageOrder(list):
+  """
+  List of files names and associated layouts.
+  """
 
   #_____________________________________________________________________
-  # Generate list of layouts with file names
-  #_____________________________________________________________________
-  # Intro entry files
-  PAGE_ORDER: list = []
-  for i in range(len(INTR_LAYOUTS)):
-    page: list = [INTR_FILE_NAMES[i]] + INTR_LAYOUTS[i]
-    PAGE_ORDER.append(page)
+  def __init__(self, is_dbl_sided: bool = False):
+    """
+    Parameters:
+      is_dbl_sided: True if planner is intended to be printed double-
+                    sided. Affects page ordering.
+    """
 
-  # Week entry files
-  for i in range(len(WEEK_LAYOUTS)):
-    page: list = [WEEK_FILE_NAMES[i]] + WEEK_LAYOUTS[i]
-    PAGE_ORDER.append(page)
+    intr_layouts: list = OneSidePages.INTR_LAYOUTS
+    week_layouts: list = OneSidePages.WEEK_LAYOUTS
+    xtra_layouts: list = OptionlPages.XTRA_LAYOUTS
 
-  # Extra entry files
-  for i in range(len(XTRA_LAYOUTS)):
-    page: list = [XTRA_FILE_NAMES[i]] + WEEK_LAYOUTS[i]
-    PAGE_ORDER.append(page)
+    intr_file_names: list = OneSidePages.INTR_FILE_NAMES
+    week_file_names: list = OneSidePages.WEEK_FILE_NAMES
+    xtra_file_names: list = OptionlPages.XTRA_FILE_NAMES
+
+    if (is_dbl_sided):
+      intr_layouts    = DblSidePages.INTR_LAYOUTS
+      week_layouts    = DblSidePages.WEEK_LAYOUTS
+      intr_file_names = DblSidePages.INTR_FILE_NAMES
+      week_file_names = DblSidePages.WEEK_FILE_NAMES
+
+    #_____________________________________________________________________
+    # Generate list of layouts with file names
+    #_____________________________________________________________________
+    for i in range(len(intr_layouts)):
+      page: list = [intr_file_names[i]] + intr_layouts[i]
+      self.append(page)
+
+    # Week entry files
+    for i in range(len(week_layouts)):
+      page: list = [week_file_names[i]] + week_layouts[i]
+      self.append(page)
+
+    # Extra entry files
+    for i in range(len(xtra_layouts)):
+      page: list = [xtra_file_names[i]] + xtra_layouts[i]
+      self.append(page)
+
+    return

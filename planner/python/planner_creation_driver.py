@@ -36,6 +36,8 @@ from os import remove
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import DblSidePages
 from classes.constants.page_order import OneSidePages
+from classes.constants.page_order import OptionlPages
+from classes.constants.page_order import PageOrder
 
 from classes.page_entries.month_entry import MonthEntry
 from classes.page_entries.night_entry import NightEntry
@@ -47,7 +49,6 @@ from classes.page_entries.test_entry import TestEntry
 from classes.page_layouts.page_layout import PageLayout
 from classes.page_layouts.half_page_divider import HalfPageDivider
 
-from classes.reference_pages.ace_reference import AceReference
 
 from utils.planner_parser import PlannerCreationParser
 
@@ -59,6 +60,8 @@ def new_line (new_line_count: int = 1) -> None:
   for i in range(new_line_count):
     print()
 
+
+#_______________________________________________________________________
 def generate_pages\
 ( page_order: list
 , is_portrait: bool
@@ -83,6 +86,8 @@ def generate_pages\
       )
     layout.save_pdf()
 
+
+#_______________________________________________________________________
 def generate_dividers\
 ( is_portrait
 , out_dir: str
@@ -187,7 +192,7 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
 
   intr_pdf_group: list = OneSidePages.INTR_FILE_NAMES
   week_pdf_group: list = OneSidePages.WEEK_FILE_NAMES
-  xtra_pdf_group: list = OneSidePages.XTRA_FILE_NAMES
+  xtra_pdf_group: list = OptionlPages.XTRA_FILE_NAMES
 
   if(is_dbl_sided):
     intr_pdf_group: list = DblSidePages.INTR_FILE_NAMES
@@ -208,7 +213,6 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
   pdf_paths: list =\
     [join(pdf_out_dir, n + '.pdf') for n in xtra_pdf_group]
   Utils.combine_pdfs(pdf_paths, join(out_dir, xtra_combo_pdf))
-
 
   #_____________________________________________________________________
   # Clean up pdfs
@@ -239,23 +243,13 @@ if __name__ == '__main__':
   is_portrait: bool   = False
   is_dbl_sided: bool  = args.dbl_sided
 
-  page_order: list = []
+  page_order: list = PageOrder(is_dbl_sided=is_dbl_sided)
 
   pdf_out_dir: str =\
     join(args.out_dir, PageLayout.PDF_SUB_DIR)
 
   svg_out_dir: str =\
     join(args.out_dir, PageLayout.SVG_SUB_DIR)
-
-
-  #_____________________________________________________________________
-  # Determine page ordering
-  #_____________________________________________________________________
-  if (is_dbl_sided):
-    page_order = DblSidePages.PAGE_ORDER
-  else:
-    page_order = OneSidePages.PAGE_ORDER
-  #_____________________________________________________________________
 
   generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
 
@@ -274,7 +268,7 @@ if __name__ == '__main__':
     , entry_1_type=NightEntry
     , entry_1_args={}
     )
-  test_layout.save_pdf()
+  #test_layout.save_pdf()
 
 
   group_pdfs(is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
