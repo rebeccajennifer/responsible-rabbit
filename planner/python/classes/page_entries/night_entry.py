@@ -23,40 +23,45 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for future vision. Fills content for one half sheet.
+#   Entry for month calendar.
 #_______________________________________________________________________
 
 import svgwrite.container
+from copy import deepcopy
 
-from classes.constants.addl_arg_keys import AddlArgKeys as Key
-from classes.elements.row_group import DualLineRowGroup
-from classes.elements.row_group import LineRowGroup
 
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.constants.strings import PlannerStrings as Strings
+from classes.elements.table import DualLineTable
+from classes.style.std_styles import StdTextBoxStyles
+
+from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
-class BlankWrite(OnePageHalfLetter):
+class NightEntry(HalfPageLayout):
   """
-  Free write layout.
+  Daily entry layout.
   """
+
+  HEADER_TXT: str =\
+    'Nightly Reflection'
+
+  DAY_HEADER_TXT: str = Strings.DAYS_MONO
 
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , addl_args: dict = {Key.HEADER_TXT: ''}
+  , addl_args: dict = {}
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
 
-    self.header_txt_: str      = addl_args[Key.HEADER_TXT]
-
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
-    , pad_bet_elements=False
+    , addl_args=addl_args
     )
 
     return
@@ -75,23 +80,29 @@ class BlankWrite(OnePageHalfLetter):
     """
     super().create_content()
 
+    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
+    style.line_spc_=1
+
+    fill_hght: int = self.calc_remaining_hght_per_element(4)
+
+    day_reflection = DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=4
+      #, total_hght=175
+      , header_txt=self.DAY_HEADER_TXT
+      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , show_outline=True
+      )
+
     self.entries_: list =\
-      [ DualLineRowGroup\
-        ( total_wdth=self.content_wdth_
-        , total_hght=self.content_hght_
-        , row_count=30
-        )
-      ]
+    [ day_reflection
+    , deepcopy(day_reflection)
+    , deepcopy(day_reflection)
+    , deepcopy(day_reflection)
+    , deepcopy(day_reflection)
+    ]
 
     return
-
-  #_____________________________________________________________________
-  def add_content(self) -> None:
-    """
-    Calls parent function, setting pad_bet_elements to True.
-    """
-
-    super().add_content()
 
   #_____________________________________________________________________
   def create_page_header(self) -> svgwrite.container.Group:
@@ -105,8 +116,5 @@ class BlankWrite(OnePageHalfLetter):
 
     """
 
-    page_header = super().create_page_header\
-      ( header_txt=self.header_txt_
-      )
-
-    return page_header
+    return super().create_page_header\
+      (header_txt=self.HEADER_TXT)

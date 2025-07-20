@@ -43,6 +43,7 @@ from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.goal_entry import GoalEntry
 from classes.page_entries.month_entry import MonthEntry
+from classes.page_entries.night_entry import NightEntry
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_entry import WeekEntry0
 from classes.page_entries.week_entry import WeekEntry1
@@ -154,6 +155,11 @@ class Entries:
     )
   #_____________________________________________________________________
 
+  NITE: dict =\
+    { Key.ENTRY_TYPE: NightEntry
+    , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Daily Reflection'}
+    }
+
   MONTH: dict =\
     { Key.ENTRY_TYPE: MonthEntry
     , Key.ENTRY_ARGS: {}
@@ -215,6 +221,10 @@ class DblSidePages:
   , [Entries.WEEK_0 , Entries.WEEK_1]
   ]
 
+  XTRA_LAYOUTS: list =\
+  [ [Entries.NITE, Entries.NITE]
+  ]
+
   #_____________________________________________________________________
   # Create list of file names
   #_____________________________________________________________________
@@ -235,6 +245,16 @@ class DblSidePages:
   for i in range(len(WEEK_LAYOUTS)):
     WEEK_FILE_NAMES.append('1__week__' + str(next(counter)))
 
+  #---------------------------------------------------------------------
+  # Extra entry file names
+  #---------------------------------------------------------------------
+  XTRA_FILE_NAMES: list = []
+  counter = Utils.inc()
+
+  for i in range(len(XTRA_LAYOUTS)):
+    XTRA_FILE_NAMES.append('2__xtra__' + str(next(counter)))
+
+
   #_____________________________________________________________________
   # Generate list of layouts with file names
   #_____________________________________________________________________
@@ -247,6 +267,11 @@ class DblSidePages:
   # Week entry files
   for i in range(len(WEEK_LAYOUTS)):
     page: list = [WEEK_FILE_NAMES[i]] + WEEK_LAYOUTS[i]
+    PAGE_ORDER.append(page)
+
+  # Extra entry files
+  for i in range(len(XTRA_LAYOUTS)):
+    page: list = [XTRA_FILE_NAMES[i]] + WEEK_LAYOUTS[i]
     PAGE_ORDER.append(page)
 
 
@@ -289,6 +314,10 @@ class OneSidePages:
   , [Entries.QUT[6] , Entries.QUT[6]]
   ]
 
+  XTRA_LAYOUTS: list =\
+  [ [Entries.NITE, Entries.NITE]
+  ]
+
   #_____________________________________________________________________
   # Create list of file names
   #_____________________________________________________________________
@@ -309,6 +338,15 @@ class OneSidePages:
   for i in range(len(WEEK_LAYOUTS)):
     WEEK_FILE_NAMES.append('1__week__' + str(next(counter)))
 
+  #---------------------------------------------------------------------
+  # Week entry file names
+  #---------------------------------------------------------------------
+  XTRA_FILE_NAMES: list = []
+  counter = Utils.inc()
+
+  for i in range(len(XTRA_LAYOUTS)):
+    XTRA_FILE_NAMES.append('2__xtra__' + str(next(counter)))
+
   #_____________________________________________________________________
   # Generate list of layouts with file names
   #_____________________________________________________________________
@@ -321,4 +359,9 @@ class OneSidePages:
   # Week entry files
   for i in range(len(WEEK_LAYOUTS)):
     page: list = [WEEK_FILE_NAMES[i]] + WEEK_LAYOUTS[i]
+    PAGE_ORDER.append(page)
+
+  # Extra entry files
+  for i in range(len(XTRA_LAYOUTS)):
+    page: list = [XTRA_FILE_NAMES[i]] + WEEK_LAYOUTS[i]
     PAGE_ORDER.append(page)

@@ -52,15 +52,6 @@ class DayEntry(HalfPageLayout):
   DEF_DAY_LAYOUT_PATH: str =\
     'day#-layout'
 
-  DAYS: str =\
-    'Mon' + 2 * Strings.SPACE +\
-    'Tue' + 2 * Strings.SPACE +\
-    'Wed' + 2 * Strings.SPACE +\
-    'Thu' + 2 * Strings.SPACE +\
-    'Fri' + 2 * Strings.SPACE +\
-    'Sat' + 2 * Strings.SPACE +\
-    'Sun' + Strings.DATE_STR
-
   DAY_PRIMARY_EFFORTS: list =\
     ['Primary Efforts', 'Alignment']
 
@@ -91,6 +82,9 @@ class DayEntry(HalfPageLayout):
 
   VALUES_HEADER: str =\
     'Values'
+
+  DAILY_SCHEDULE_HEADER: str =\
+    'Time Well Spent'
 
   #_____________________________________________________________________
   def __init__(self
@@ -250,4 +244,4 @@ class DayEntry(HalfPageLayout):
     """
 
     return super().create_page_header\
-      (header_txt=self.DAYS, font_family=Font.FONT_FAMILY_HEADER)
+      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_HEADER)

@@ -38,6 +38,7 @@ from classes.constants.page_order import DblSidePages
 from classes.constants.page_order import OneSidePages
 
 from classes.page_entries.month_entry import MonthEntry
+from classes.page_entries.night_entry import NightEntry
 from classes.page_entries.week_habit_entry import HabitTracker
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
@@ -186,6 +187,7 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
 
   intr_pdf_group: list = OneSidePages.INTR_FILE_NAMES
   week_pdf_group: list = OneSidePages.WEEK_FILE_NAMES
+  xtra_pdf_group: list = OneSidePages.WEEK_FILE_NAMES
 
   if(is_dbl_sided):
     intr_pdf_group: list = DblSidePages.INTR_FILE_NAMES
@@ -193,6 +195,7 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
 
   intr_combo_pdf: list = '__0__intr.pdf '
   week_combo_pdf: list = '__1__week.pdf '
+  xtra_combo_pdf: list = '__2__xtra.pdf '
 
   pdf_paths: list =\
     [join(pdf_out_dir, n + '.pdf') for n in intr_pdf_group]
@@ -201,6 +204,10 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
   pdf_paths: list =\
     [join(pdf_out_dir, n + '.pdf') for n in week_pdf_group]
   Utils.combine_pdfs(pdf_paths, join(out_dir, week_combo_pdf))
+
+  pdf_paths: list =\
+    [join(pdf_out_dir, n + '.pdf') for n in xtra_pdf_group]
+  Utils.combine_pdfs(pdf_paths, join(out_dir, xtra_combo_pdf))
 
 
   #_____________________________________________________________________
@@ -251,9 +258,9 @@ if __name__ == '__main__':
   #_____________________________________________________________________
 
   div_dir: str = join(args.out_dir ,'..', 'dividers')
-  generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
-  generate_habit_tracker(is_portrait, div_dir)
-  generate_dividers(is_portrait, div_dir)
+  #generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
+  #generate_habit_tracker(is_portrait, div_dir)
+  #generate_dividers(is_portrait, div_dir)
 
   test_layout=\
     PageLayout\
@@ -261,15 +268,15 @@ if __name__ == '__main__':
     , is_dbl_sided=is_dbl_sided
     , file_name_no_ext='test'
     , out_dir=args.out_dir
-    , entry_0_type=MonthEntry
-    , entry_0_args={}
-    , entry_1_type=TestEntry
+    , entry_0_type=NightEntry
+    , entry_0_args={Key.HEADER_TXT: 'Nighty Night'}
+    , entry_1_type=NightEntry
     , entry_1_args={}
     )
   test_layout.save_pdf()
 
 
-  group_pdfs(is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
+  #group_pdfs(is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
 
   new_line(10)
   print("all done")
