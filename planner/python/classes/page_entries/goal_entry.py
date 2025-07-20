@@ -34,7 +34,7 @@ from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
 
 from classes.style.style import PlannerFontStyle as Font
 from classes.style.std_styles import StdTextBoxStyles
@@ -88,7 +88,7 @@ class GoalStrings:
 
 
 #_______________________________________________________________________
-class GoalEntry(OnePageHalfLetter):
+class GoalEntry(HalfPageLayout):
   """
   Daily entry layout.
   """

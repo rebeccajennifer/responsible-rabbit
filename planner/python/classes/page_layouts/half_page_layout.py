@@ -42,7 +42,7 @@ from classes.style.table_style import TextBoxStyle
 
 
 #_______________________________________________________________________
-class OnePageHalfLetter(svgwrite.container.Group):
+class HalfPageLayout(svgwrite.container.Group):
   """
   """
 

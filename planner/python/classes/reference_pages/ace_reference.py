@@ -33,7 +33,7 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.base_element import VerticalStack
 from classes.elements.row_group import DualLineRowGroup
 
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
 from classes.elements.row_group import TextRowGroup
 from classes.style.std_styles import StdTextBoxStyles
 
@@ -100,7 +100,7 @@ class AceStrings:
 
 
 #_______________________________________________________________________
-class AceReference(OnePageHalfLetter):
+class AceReference(HalfPageLayout):
   """
   Free write layout.
   """

@@ -40,11 +40,11 @@ from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 from classes.elements.table import ColumnTable
 
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
-class DayEntry(OnePageHalfLetter):
+class DayEntry(HalfPageLayout):
   """
   Daily entry layout.
   """

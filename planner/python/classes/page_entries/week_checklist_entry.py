@@ -33,10 +33,10 @@ from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.style.std_styles import StdTextBoxStyles
 
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
 
 #_______________________________________________________________________
-class WeekCheckList(OnePageHalfLetter):
+class WeekCheckList(HalfPageLayout):
   """
   Daily entry layout.
   """

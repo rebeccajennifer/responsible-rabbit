@@ -37,10 +37,10 @@ from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.std_styles import StdLineRowGroupStyles
 
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
 
 #_______________________________________________________________________
-class WeekEntry0(OnePageHalfLetter):
+class WeekEntry0(HalfPageLayout):
   """
   Daily entry layout.
   """
@@ -144,7 +144,7 @@ class WeekEntry0(OnePageHalfLetter):
       (header_txt=Strings.WEEK_PAGE_HEADER_TXT_0)
 
 #_______________________________________________________________________
-class WeekEntry1(OnePageHalfLetter):
+class WeekEntry1(HalfPageLayout):
   """
   Daily entry layout.
   """
