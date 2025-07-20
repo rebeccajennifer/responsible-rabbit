@@ -260,15 +260,15 @@ if __name__ == '__main__':
   generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
 
   div_dir: str = join(args.out_dir ,'..', 'dividers')
-  #generate_habit_tracker(is_portrait, div_dir)
-  #generate_dividers(is_portrait, div_dir)
+  generate_habit_tracker(is_portrait, div_dir)
+  generate_dividers(is_portrait, div_dir)
 
   test_layout=\
     PageLayout\
     ( is_portrait=False
     , is_dbl_sided=is_dbl_sided
     , file_name_no_ext='test'
-    , out_dir=args.out_dir
+    #, out_dir='.'
     , entry_0_type=NightEntry
     , entry_0_args={Key.HEADER_TXT: 'Nighty Night'}
     , entry_1_type=NightEntry
