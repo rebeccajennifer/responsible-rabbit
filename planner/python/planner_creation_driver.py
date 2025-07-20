@@ -187,7 +187,7 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
 
   intr_pdf_group: list = OneSidePages.INTR_FILE_NAMES
   week_pdf_group: list = OneSidePages.WEEK_FILE_NAMES
-  xtra_pdf_group: list = OneSidePages.WEEK_FILE_NAMES
+  xtra_pdf_group: list = OneSidePages.XTRA_FILE_NAMES
 
   if(is_dbl_sided):
     intr_pdf_group: list = DblSidePages.INTR_FILE_NAMES
@@ -214,7 +214,7 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
   # Clean up pdfs
   #_____________________________________________________________________
   # Files to keep (relative names only, not full paths)
-  keep_files = {intr_combo_pdf, week_combo_pdf}
+  keep_files = {intr_combo_pdf, week_combo_pdf, xtra_combo_pdf}
 
   # Loop through all files in the directory
   for filename in listdir(out_dir):
@@ -257,8 +257,9 @@ if __name__ == '__main__':
     page_order = OneSidePages.PAGE_ORDER
   #_____________________________________________________________________
 
+  generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
+
   div_dir: str = join(args.out_dir ,'..', 'dividers')
-  #generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
   #generate_habit_tracker(is_portrait, div_dir)
   #generate_dividers(is_portrait, div_dir)
 
@@ -276,7 +277,7 @@ if __name__ == '__main__':
   test_layout.save_pdf()
 
 
-  #group_pdfs(is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
+  group_pdfs(is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
 
   new_line(10)
   print("all done")

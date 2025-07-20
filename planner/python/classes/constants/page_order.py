@@ -271,7 +271,7 @@ class DblSidePages:
 
   # Extra entry files
   for i in range(len(XTRA_LAYOUTS)):
-    page: list = [XTRA_FILE_NAMES[i]] + WEEK_LAYOUTS[i]
+    page: list = [XTRA_FILE_NAMES[i]] + XTRA_LAYOUTS[i]
     PAGE_ORDER.append(page)
 
 
