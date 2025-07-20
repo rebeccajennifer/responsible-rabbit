@@ -51,9 +51,10 @@ class AceStrings:
     'About the ACE Method'
 
   ABOUT: str = (
-    'ACE is a method used in Acceptance and Commitment Therapy as tool '
-    'to "unhook" oneself when experiencing unpleasant emotions. These '
-    'feelings can trigger one to engage in behaviors and thought '
+    'ACE is a method used as tool to "unhook" oneself when '
+    'experiencing unpleasant emotions. These '
+    'feelings can cause our nervous system to dysregulate and '
+    'can trigger one to engage in behaviors and thought '
     'patterns that moves a person away from their ideal self.'
   )
 
@@ -74,15 +75,31 @@ class AceStrings:
   )
 
   CONNECT_HEADER_TXT: str =\
-    'Connect'
+    'Connect to Re-Regulate'
   CONNECT_DESC: str = (
-    'Connect with your physical body. Engage in one of the exercises '
-    'described below:'
-    '\n5-4-3-2-1'
-    '\nIdentify 5 things you can see, 4 things you can touch,'
-    '3 distinct sounds, 2 scents, 1 thing you can taste.'
-    '\nLay on your back. Systematically tense and release muscles '
-    'starting from your toes and ending with the top of your head.'
+    'Connect with your physical body to re-regulate your nervous '
+    'system. Engage in one of the exercises described below.'
+    '\n'
+    '5-4-3-2-1 GROUNDING TECHNIQUE: Identify 5 things you can see, '
+    '4 things you can touch, 3 distinct sounds, 2 scents, 1 thing you '
+    'can taste.'
+    '\n'
+    'PROGRESSIVE MUSCLE RELAXATION: Lay on your back and close your '
+    'eyes. Systematically tense and release muscles starting from your '
+    'toes and ending with the top of your head.'
+    '\n'
+    'BOX BREATHING: Sit comfortably and close your eyes. Inhale for '
+    'four seconds, pause for four seconds, exhale for four seconds, '
+    'hold for four seconds. Practice for at least ten breath cycles '
+    ' or two to five minutes.'
+    '\n'
+    'SHAKE: Stand with your feet hip-width apart and gently bounce '
+    'your heels while keeping the balls of your feet grounded. Allow '
+    'the movement to naturally travel up through your body. Let your '
+    'shoulders bounce, your arms and hands shake out, and your head '
+    'move gently side to side or in small circles. Keep your body '
+    'relaxed and loose. Continue for 1-2 minutes, letting tension '
+    'release with each shake.'
   )
 
   REENGAGE_HEADER_TXT: str =\

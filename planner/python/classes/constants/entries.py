@@ -46,6 +46,7 @@ from classes.page_entries.night_entry import NightEntry
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_entry import WeekEntry0
 from classes.page_entries.week_entry import WeekEntry1
+from classes.reference_pages.ace_reference import AceReference
 
 
 #_____________________________________________________________________
@@ -154,7 +155,7 @@ class Entries:
     )
   #_____________________________________________________________________
 
-  NITE: dict =\
+  NIGHT: dict =\
     { Key.ENTRY_TYPE: NightEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Daily Reflection'}
     }
@@ -184,4 +185,9 @@ class Entries:
   DATES: dict =\
     { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
+    }
+
+  ACERF: dict =\
+    { Key.ENTRY_TYPE: AceReference
+    , Key.ENTRY_ARGS: {Key.HEADER_TXT: ''}
     }

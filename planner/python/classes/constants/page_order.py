@@ -45,7 +45,8 @@ class OptionlPages:
   """
 
   XTRA_LAYOUTS: list =\
-  [ [Entries.NITE, Entries.NITE]
+  [ [Entries.NIGHT, Entries.NIGHT]
+  , [Entries.ACERF, Entries.ACERF]
   ]
 
   #---------------------------------------------------------------------
