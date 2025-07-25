@@ -201,6 +201,7 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
   intr_combo_pdf: list = '__0__intr.pdf '
   week_combo_pdf: list = '__1__week.pdf '
   xtra_combo_pdf: list = '__2__xtra.pdf '
+  habt_combo_pdf: list = '__3__habt.pdf '
 
   pdf_paths: list =\
     [join(pdf_out_dir, n + '.pdf') for n in intr_pdf_group]
@@ -240,8 +241,12 @@ if __name__ == '__main__':
 
   args: argparse.Namespace = parser.parse_args()
 
-  is_portrait: bool   = False
+  is_portrait:  bool  = False
   is_dbl_sided: bool  = args.dbl_sided
+
+  # If generating a PDF preview, set to double sided
+  if (args.preview):
+    is_dbl_sided = True
 
   page_order: list = PageOrder(is_dbl_sided=is_dbl_sided)
 

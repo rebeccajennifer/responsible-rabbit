@@ -58,6 +58,13 @@ class Entries:
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
     }
 
+  PREVW: dict =\
+  { Key.ENTRY_TYPE: TitlePage
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: 'Preview Only - Do Not Print'
+    }
+  }
+
   TITLE: dict =\
   { Key.ENTRY_TYPE: TitlePage
   , Key.ENTRY_ARGS:
