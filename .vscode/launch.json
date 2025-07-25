@@ -27,36 +27,48 @@
 //______________________________________________________________________
 
 {   "version":        "0.2.0"
-  , "configurations":
-    [ { "name": "help"
-      , "type": "debugpy"
-      , "request": "launch"
-      , "program": "${workspaceFolder}/planner/python/planner_creation_driver.py"
-      , "console": "integratedTerminal"
-      , "args":
-        [ "--help"]
-      }
-    , { "name": "single-sided"
-      , "type": "debugpy"
-      , "request": "launch"
-      , "program": "${workspaceFolder}/planner/python/planner_creation_driver.py"
-      , "console": "integratedTerminal"
-      , "args":
-        [ "--out_dir"
-        , "planner/layouts/single-sided"
-        ]
-      }
-    , { "name": "double-sided"
-      , "type": "debugpy"
-      , "request": "launch"
-      , "program": "${workspaceFolder}/planner/python/planner_creation_driver.py"
-      , "console": "integratedTerminal"
-      , "args":
-        [ "--out_dir"
-        , "planner/layouts/double-sided"
-        , "--dbl_sided"
-        ]
-      }
+, "configurations":
+  [ { "name": "help"
+    , "type": "debugpy"
+    , "request": "launch"
+    , "program": "${workspaceFolder}/planner/python/planner_creation_driver.py"
+    , "console": "integratedTerminal"
+    , "args":
+      [ "--help"]
+    }
+  , { "name": "preview"
+    , "type": "debugpy"
+    , "request": "launch"
+    , "program": "${workspaceFolder}/planner/python/planner_creation_driver.py"
+    , "console": "integratedTerminal"
+    , "args":
+      [ "--out_dir"
+      , "planner/layouts/preview"
+      , "--preview"
+      ]
+    }
 
-    ]
+  , { "name": "single-sided"
+    , "type": "debugpy"
+    , "request": "launch"
+    , "program": "${workspaceFolder}/planner/python/planner_creation_driver.py"
+    , "console": "integratedTerminal"
+    , "args":
+      [ "--out_dir"
+      , "planner/layouts/single-sided"
+      ]
+    }
+  , { "name": "double-sided"
+    , "type": "debugpy"
+    , "request": "launch"
+    , "program": "${workspaceFolder}/planner/python/planner_creation_driver.py"
+    , "console": "integratedTerminal"
+    , "args":
+      [ "--out_dir"
+      , "planner/layouts/double-sided"
+      , "--dbl_sided"
+      ]
+    }
+
+  ]
 }
