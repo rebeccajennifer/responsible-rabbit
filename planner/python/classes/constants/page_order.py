@@ -38,6 +38,16 @@ from utils.utils import PlannerUtils as Utils
 
 
 #_______________________________________________________________________
+class PdfPrefix:
+  """
+  File prefixes for grouped PDFs.
+  """
+
+  INTR: str = '0__intr__'
+  WEEK: str = '1__week__'
+  XTRA: str = '2__xtra__'
+
+#_______________________________________________________________________
 class OptionlPages:
   """
   Defines and organizes configuration data for additional optional
@@ -48,15 +58,6 @@ class OptionlPages:
   [ [Entries.NIGHT, Entries.NIGHT]
   , [Entries.ACERF, Entries.ACERF]
   ]
-
-  #---------------------------------------------------------------------
-  # Extra entry file names
-  #---------------------------------------------------------------------
-  XTRA_FILE_NAMES: list = []
-  counter = Utils.inc()
-
-  for i in range(len(XTRA_LAYOUTS)):
-    XTRA_FILE_NAMES.append('2__xtra__' + str(next(counter)))
 
 #_______________________________________________________________________
 class PreviewPages:
@@ -92,28 +93,6 @@ class PreviewPages:
   , [Entries.DAY[6] , Entries.QUT[6]]
   ]
 
-  #_____________________________________________________________________
-  # Create list of file names
-  #_____________________________________________________________________
-  # Intro entry file names
-  #---------------------------------------------------------------------
-  INTR_FILE_NAMES: list = []
-  counter = Utils.inc()
-
-  for i in range(len(INTR_LAYOUTS)):
-    INTR_FILE_NAMES.append('0__intr__' + str(next(counter)))
-
-  #---------------------------------------------------------------------
-  # Week entry file names
-  #---------------------------------------------------------------------
-  WEEK_FILE_NAMES: list = []
-  counter = Utils.inc()
-
-  for i in range(len(WEEK_LAYOUTS)):
-    WEEK_FILE_NAMES.append('1__week__' + str(next(counter)))
-
-
-
 #_______________________________________________________________________
 class DblSidePages:
   """
@@ -146,49 +125,6 @@ class DblSidePages:
   , [Entries.DAY[0] , Entries.QUT[6]]
   , [Entries.WEEK_0 , Entries.WEEK_1]
   ]
-
-  #_____________________________________________________________________
-  # Create list of file names
-  #_____________________________________________________________________
-  # Intro entry file names
-  #---------------------------------------------------------------------
-  INTR_FILE_NAMES: list = []
-  counter = Utils.inc()
-
-  for i in range(len(INTR_LAYOUTS)):
-    INTR_FILE_NAMES.append('0__intr__' + str(next(counter)))
-
-  #---------------------------------------------------------------------
-  # Week entry file names
-  #---------------------------------------------------------------------
-  WEEK_FILE_NAMES: list = []
-  counter = Utils.inc()
-
-  for i in range(len(WEEK_LAYOUTS)):
-    WEEK_FILE_NAMES.append('1__week__' + str(next(counter)))
-
-
-  #_____________________________________________________________________
-  # Create list of file names
-  #_____________________________________________________________________
-  # Intro entry file names
-  #---------------------------------------------------------------------
-  INTR_FILE_NAMES: list = []
-  counter = Utils.inc()
-
-  for i in range(len(INTR_LAYOUTS)):
-    INTR_FILE_NAMES.append('0__intr__' + str(next(counter)))
-
-  #---------------------------------------------------------------------
-  # Week entry file names
-  #---------------------------------------------------------------------
-  WEEK_FILE_NAMES: list = []
-  counter = Utils.inc()
-
-  for i in range(len(WEEK_LAYOUTS)):
-    WEEK_FILE_NAMES.append('1__week__' + str(next(counter)))
-
-
 
 
 #_______________________________________________________________________
@@ -230,26 +166,6 @@ class OneSidePages:
   , [Entries.QUT[6] , Entries.QUT[6]]
   ]
 
-  #_____________________________________________________________________
-  # Create list of file names
-  #_____________________________________________________________________
-  # Intro entry file names
-  #---------------------------------------------------------------------
-  INTR_FILE_NAMES: list = []
-  counter = Utils.inc()
-
-  for i in range(len(INTR_LAYOUTS)):
-    INTR_FILE_NAMES.append('0__intr__' + str(next(counter)))
-
-  #---------------------------------------------------------------------
-  # Week entry file names
-  #---------------------------------------------------------------------
-  WEEK_FILE_NAMES: list = []
-  counter = Utils.inc()
-
-  for i in range(len(WEEK_LAYOUTS)):
-    WEEK_FILE_NAMES.append('1__week__' + str(next(counter)))
-
 
 #_______________________________________________________________________
 class PageOrder(list):
@@ -272,55 +188,59 @@ class PageOrder(list):
                     printed.
     """
 
-    xtra_layouts: list = OptionlPages.XTRA_LAYOUTS
-    xtra_file_names: list = OptionlPages.XTRA_FILE_NAMES
-
-    intr_layouts: list = OneSidePages.INTR_LAYOUTS
-    week_layouts: list = OneSidePages.WEEK_LAYOUTS
+    self.xtra_layouts   : list = OptionlPages.XTRA_LAYOUTS
+    self.intr_layouts   : list = OneSidePages.INTR_LAYOUTS
+    self.week_layouts   : list = OneSidePages.WEEK_LAYOUTS
 
     if (is_preview):
-      intr_layouts    : list = PreviewPages.INTR_LAYOUTS
-      week_layouts    : list = PreviewPages.WEEK_LAYOUTS
+      self.intr_layouts : list = PreviewPages.INTR_LAYOUTS
+      self.week_layouts : list = PreviewPages.WEEK_LAYOUTS
 
     elif (is_dbl_sided):
-      intr_layouts    = DblSidePages.INTR_LAYOUTS
-      week_layouts    = DblSidePages.WEEK_LAYOUTS
+      self.intr_layouts    = DblSidePages.INTR_LAYOUTS
+      self.week_layouts    = DblSidePages.WEEK_LAYOUTS
 
-    #_____________________________________________________________________
+    #___________________________________________________________________
     # Create list of file names
-    #_____________________________________________________________________
+    #___________________________________________________________________
     # Intro entry file names
-    #---------------------------------------------------------------------
-    intr_file_names: list = []
+    #-------------------------------------------------------------------
+    self.intr_file_names: list = []
     counter = Utils.inc()
+    for i in range(len(self.intr_layouts)):
+      self.intr_file_names.append(PdfPrefix.INTR + str(next(counter)))
 
-    for i in range(len(intr_layouts)):
-      intr_file_names.append('0__intr__' + str(next(counter)))
-
-    #---------------------------------------------------------------------
+    #-------------------------------------------------------------------
     # Week entry file names
-    #---------------------------------------------------------------------
-    week_file_names: list = []
+    #-------------------------------------------------------------------
+    self.week_file_names: list = []
     counter = Utils.inc()
+    for i in range(len(self.week_layouts)):
+      self.week_file_names.append(PdfPrefix.WEEK + str(next(counter)))
 
-    for i in range(len(week_layouts)):
-      week_file_names.append('1__week__' + str(next(counter)))
+    #-------------------------------------------------------------------
+    # Extra entry file names
+    #-------------------------------------------------------------------
+    self.xtra_file_names: list = []
+    counter = Utils.inc()
+    for i in range(len(self.xtra_layouts)):
+      self.xtra_file_names.append(PdfPrefix.XTRA + str(next(counter)))
 
-    #_____________________________________________________________________
+    #___________________________________________________________________
     # Generate list of layouts with file names
-    #_____________________________________________________________________
-    for i in range(len(intr_layouts)):
-      page: list = [intr_file_names[i]] + intr_layouts[i]
+    #___________________________________________________________________
+    for i in range(len(self.intr_layouts)):
+      page: list = [self.intr_file_names[i]] + self.intr_layouts[i]
       self.append(page)
 
     # Week entry files
-    for i in range(len(week_layouts)):
-      page: list = [week_file_names[i]] + week_layouts[i]
+    for i in range(len(self.week_layouts)):
+      page: list = [self.week_file_names[i]] + self.week_layouts[i]
       self.append(page)
 
     # Extra entry files
-    for i in range(len(xtra_layouts)):
-      page: list = [xtra_file_names[i]] + xtra_layouts[i]
+    for i in range(len(self.xtra_layouts)):
+      page: list = [self.xtra_file_names[i]] + self.xtra_layouts[i]
       self.append(page)
 
     return

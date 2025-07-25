@@ -176,7 +176,7 @@ def generate_habit_tracker\
 
 
 #_______________________________________________________________________
-def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
+def group_pdfs(page_order: PageOrder, is_dbl_sided: bool, out_dir: str) -> None:
   """
   Combines pdfs in groups.
 
@@ -190,13 +190,9 @@ def group_pdfs(is_dbl_sided: bool, out_dir: str) -> None:
     None
   """
 
-  intr_pdf_group: list = OneSidePages.INTR_FILE_NAMES
-  week_pdf_group: list = OneSidePages.WEEK_FILE_NAMES
-  xtra_pdf_group: list = OptionlPages.XTRA_FILE_NAMES
-
-  if(is_dbl_sided):
-    intr_pdf_group: list = DblSidePages.INTR_FILE_NAMES
-    week_pdf_group: list = DblSidePages.WEEK_FILE_NAMES
+  intr_pdf_group: list = page_order.intr_file_names
+  week_pdf_group: list = page_order.week_file_names
+  xtra_pdf_group: list = page_order.xtra_file_names
 
   intr_combo_pdf: list = '__0__intr.pdf '
   week_combo_pdf: list = '__1__week.pdf '
@@ -248,7 +244,11 @@ if __name__ == '__main__':
   if (args.preview):
     is_dbl_sided = True
 
-  page_order: list = PageOrder(is_dbl_sided=is_dbl_sided)
+  page_order: list =\
+    PageOrder\
+    ( is_dbl_sided=is_dbl_sided
+    , is_preview=args.preview
+    )
 
   pdf_out_dir: str =\
     join(args.out_dir, PageLayout.PDF_SUB_DIR)
@@ -256,7 +256,7 @@ if __name__ == '__main__':
   svg_out_dir: str =\
     join(args.out_dir, PageLayout.SVG_SUB_DIR)
 
-  generate_pages(page_order,is_portrait, is_dbl_sided, args.out_dir)
+  generate_pages(page_order, is_portrait, is_dbl_sided, args.out_dir)
 
   div_dir: str = join(args.out_dir ,'..', 'dividers')
   generate_habit_tracker(is_portrait, div_dir)
@@ -276,7 +276,7 @@ if __name__ == '__main__':
   #test_layout.save_pdf()
 
 
-  group_pdfs(is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
+  group_pdfs(page_order=page_order, is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
 
   new_line(10)
   print("all done")

@@ -39,7 +39,7 @@ from classes.elements.entry_table import EntryTable
 from classes.constants.error_strings import ErrorStrings as Err
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
-from classes.constants.strings import PlannerStrings as Strings
+
 
 #_______________________________________________________________________
 class DaySchedule(EntryTable):

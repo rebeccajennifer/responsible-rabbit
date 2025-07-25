@@ -54,7 +54,7 @@ class PlannerCreationParser:
     )
 
     parser.add_argument( '--out_dir'
-      , help='TODO'
+      , help=ParserStrings.OUT_DIR_DESC
       , action='store'
       , required=False
       , default='./'
