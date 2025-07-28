@@ -53,7 +53,6 @@ class GoalStrings:
    + '[] Relevant'    + Strings.SPACE\
    + '[] Challenging'
 
-
   ACTIONS: str =\
     'Critical Steps'
 

@@ -23,12 +23,11 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for month calendar.
+#   Nightly reflection
 #_______________________________________________________________________
 
 import svgwrite.container
 from copy import deepcopy
-
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.table import DualLineTable
@@ -83,12 +82,10 @@ class NightEntry(HalfPageLayout):
     style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
     style.line_spc_=1
 
-    fill_hght: int = self.calc_remaining_hght_per_element(4)
-
     day_reflection = DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=4
-      #, total_hght=175
+      , total_hght=136
       , header_txt=self.DAY_HEADER_TXT
       , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
       , show_outline=True

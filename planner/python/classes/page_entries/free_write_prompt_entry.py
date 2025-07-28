@@ -87,7 +87,6 @@ class FreeWritePromptEntry(HalfPageLayout):
       [ TextRowGroup\
           ( total_wdth=self.content_wdth_
           , text=self.prompt_
-          , font_family=Font.FONT_FAMILY_NORMAL
           , style=txt_box_test_style)
       ]
 

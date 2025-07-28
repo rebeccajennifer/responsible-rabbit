@@ -23,27 +23,40 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for week. Fills content for one half sheet.
+#   Nightly reflection
 #_______________________________________________________________________
 
 import svgwrite.container
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.base_element import VerticalStack
-from classes.elements.row_group import TextRowGroup
-from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
-from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
+from classes.elements.row_group import TextRowGroup
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
+
 #_______________________________________________________________________
-class HabitTracker(HalfPageLayout):
+class AceEntry(HalfPageLayout):
   """
-  Daily entry layout.
+  Layout for ACE exercise
   """
+
+  HEADER_TXT: str =\
+    'Acknowlege - Connect - Engage'
+
+  ACKNOWLEDGE_HEADER  : str = 'Acknowledge'
+  CONNECT_HEADER      : str = 'Connect'
+  ENGAGE_HEADER       : str = '(Re-)Engage'
+
+  ACKN_PROMPT_MANFST: str = 'How is the dysregulation manifesting?'
+  ACKN_PROMPT_EMOTNS: str = 'What emotions are you experiencing?'
+  ACKN_PROMPT_BEFORE: str = 'What was happening before the trigger?'
+
+  CNCT_PROMPT_TECHNQU: str = 'Re-regulation technique to practice'
+  CNCT_PROMPT_REFLECT: str = 'Reflections after practice'
+  ENGA_PROMPT_ACTIVTY: str = 'What activity will you (re-)engage with?'
 
   #_____________________________________________________________________
   def __init__(self
@@ -54,9 +67,11 @@ class HabitTracker(HalfPageLayout):
     """
     Constructor for class. Assumes landscape orientation.
     """
+
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
+    , addl_args=addl_args
     )
 
     return
@@ -75,17 +90,64 @@ class HabitTracker(HalfPageLayout):
     """
     super().create_content()
 
-    fill_hght: int = self.calc_remaining_hght_per_element(4)
+    header_style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
+    header_style.font_size_ = 14
 
-    self.entries_: list = [
-      action_items_list: DualLineTable=\
-        DualLineTable\
-        ( total_wdth=self.content_wdth_
-        , total_hght=fill_hght
-        , header_txt='Action Items:'
-        , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-        , show_outline=True
-        )
+    self.entries_: list =\
+    [ TextRowGroup\
+      ( text=self.ACKNOWLEDGE_HEADER
+      , style=header_style
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=3
+      , header_txt=self.ACKN_PROMPT_MANFST
+      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , show_outline=False
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=3
+      , header_txt=self.ACKN_PROMPT_EMOTNS
+      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , show_outline=False
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=3
+      , header_txt=self.ACKN_PROMPT_BEFORE
+      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , show_outline=False
+      )
+    , TextRowGroup\
+      ( text=self.CONNECT_HEADER
+      , style=header_style
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=1
+      , header_txt=self.CNCT_PROMPT_TECHNQU
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , show_outline=False
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=3
+      , header_txt=self.CNCT_PROMPT_REFLECT
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , show_outline=False
+      )
+    , TextRowGroup\
+      ( text=self.ENGAGE_HEADER
+      , style=header_style
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=2
+      , header_txt=self.ENGA_PROMPT_ACTIVTY
+      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , show_outline=True
+      )
     ]
 
     return
@@ -103,4 +165,4 @@ class HabitTracker(HalfPageLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.HABIT_PAGE_HEADER_TXT)
+      (header_txt=self.HEADER_TXT)
