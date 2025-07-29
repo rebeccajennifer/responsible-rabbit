@@ -43,8 +43,11 @@ class AceEntry(HalfPageLayout):
   Layout for ACE exercise
   """
 
-  HEADER_TXT: str =\
-    'Acknowlege - Connect - Engage'
+  HEADER_TXT: str = str(
+    'Acknowlege - Connect - Engage : '
+    + 3 * Strings.SPACE
+    + 'Re-Regulation Practice'
+  )
 
   ACKNOWLEDGE_HEADER  : str = 'Acknowledge'
   CONNECT_HEADER      : str = 'Connect'
@@ -90,63 +93,67 @@ class AceEntry(HalfPageLayout):
     """
     super().create_content()
 
-    header_style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
-    header_style.font_size_ = 14
+    header_style = deepcopy(StdTextBoxStyles.MED_BACK_HEADER_FONT)
+    header_style.font_size_ = 16
+    prompt_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
 
     self.entries_: list =\
     [ TextRowGroup\
       ( text=self.ACKNOWLEDGE_HEADER
+      , total_wdth=self.content_wdth_
       , style=header_style
       )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=3
       , header_txt=self.ACKN_PROMPT_MANFST
-      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , text_style=prompt_style
       , show_outline=False
       )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=3
       , header_txt=self.ACKN_PROMPT_EMOTNS
-      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , text_style=prompt_style
       , show_outline=False
       )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=3
       , header_txt=self.ACKN_PROMPT_BEFORE
-      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , text_style=prompt_style
       , show_outline=False
       )
     , TextRowGroup\
       ( text=self.CONNECT_HEADER
+      , total_wdth=self.content_wdth_
       , style=header_style
       )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=1
       , header_txt=self.CNCT_PROMPT_TECHNQU
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , text_style=prompt_style
       , show_outline=False
       )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=3
       , header_txt=self.CNCT_PROMPT_REFLECT
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , text_style=prompt_style
       , show_outline=False
       )
     , TextRowGroup\
       ( text=self.ENGAGE_HEADER
+      , total_wdth=self.content_wdth_
       , style=header_style
       )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=2
       , header_txt=self.ENGA_PROMPT_ACTIVTY
-      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
-      , show_outline=True
+      , text_style=prompt_style
+      , show_outline=False
       )
     ]
 
