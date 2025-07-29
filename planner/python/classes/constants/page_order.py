@@ -232,49 +232,56 @@ class PageOrder(list):
       week_layouts    = DblSidePages.WEEK_LAYOUTS
 
     #___________________________________________________________________
-    # Create list of file names
-    #___________________________________________________________________
-    # Intro entry file names
-    #-------------------------------------------------------------------
-    self.intr_file_names: list = []
-    counter = Utils.inc()
-    for i in range(len(intr_layouts)):
-      self.intr_file_names.append(PdfPrefix.INTR + str(next(counter)))
+    # Generate file names and add page groups
 
-    #-------------------------------------------------------------------
-    # Week entry file names
-    #-------------------------------------------------------------------
-    self.week_file_names: list = []
-    counter = Utils.inc()
-    for i in range(len(week_layouts)):
-      self.week_file_names.append(PdfPrefix.WEEK + str(next(counter)))
+    self.intr_file_names: list =\
+      self.add_page_group(intr_layouts, PdfPrefix.INTR)
 
-    #-------------------------------------------------------------------
-    # Extra entry file names
-    #-------------------------------------------------------------------
-    self.xtra_file_names: list = []
-    counter = Utils.inc()
-    for i in range(len(xtra_layouts)):
-      self.xtra_file_names.append(PdfPrefix.XTRA + str(next(counter)))
+    self.week_file_names: list =\
+      self.add_page_group(week_layouts, PdfPrefix.WEEK)
 
-    self.add_page_group(intr_layouts, PdfPrefix.INTR)
-    self.add_page_group(week_layouts, PdfPrefix.WEEK)
-    self.add_page_group(xtra_layouts, PdfPrefix.XTRA)
+    self.xtra_file_names: list =\
+      self.add_page_group(xtra_layouts, PdfPrefix.XTRA)
 
     return
 
   #_____________________________________________________________________
-  def add_page_group(self, layouts: list, name_prefix: str) -> None:
+  def add_page_group(self, layouts: list, name_prefix: str) -> list:
     """
-    Adds groups of pdfs. Each element of
+    Adds groups of pdfs to page order. Each element in self takes
+    the following format:
+
+      [ 'group_0_pdf_0'
+      , {'entry_type': LeftEntry, 'entry_args: {}'}
+      , {'entry_type': RghtEntry, 'entry_args: {}'}
+      ]
+
+    Parameters:
+      layouts     : List of layouts in the following form:
+                    [ [ {'entry_type': LeftEntry, 'entry_args: {}'}
+                      , {'entry_type': RghtEntry, 'entry_args: {}'}
+                      ]
+                    , [ {'entry_type': LeftEntry, 'entry_args: {}'}
+                      , {'entry_type': RghtEntry, 'entry_args: {}'}
+                      ]
+                    ]
+
+      name_prefix : Prefix given to all pdf file names in the group
+
+    Returns:
+      list of file names for group
     """
+
+    file_name_list: list = []
 
     counter = Utils.inc()
 
     # Extra entry files
     for i in range(len(layouts)):
       file_name: str = name_prefix + str(next(counter))
+      file_name_list.append(file_name)
+
       page: list = [file_name] + layouts[i]
       self.append(page)
 
-    return
+    return file_name_list
