@@ -46,6 +46,8 @@ class PdfPrefix:
   INTR: str = '0__intr__'
   WEEK: str = '1__week__'
   XTRA: str = '2__xtra__'
+  NITE: str = '3__nite__'
+  ACE_: str = '3__ace___'
 
 #_______________________________________________________________________
 class OptionlPages:
@@ -56,6 +58,7 @@ class OptionlPages:
 
   XTRA_LAYOUTS: list =\
   [ [Entries.ACEPG, Entries.ACEPG]
+  , [Entries.ACEPG, Entries.ACEPG]
   , [Entries.NIGHT, Entries.NIGHT]
   , [Entries.ACERF, Entries.ACERF]
   , [Entries.ACEPG, Entries.ACEPG]
@@ -172,7 +175,33 @@ class OneSidePages:
 #_______________________________________________________________________
 class PageOrder(list):
   """
-  List of files names and associated layouts.
+  List of files names and associated layouts. Takes the following form:
+
+    [ [ 'group_0_pdf_0'
+      , {'entry_type': LeftEntry, 'entry_args: {}'}
+      , {'entry_type': RghtEntry, 'entry_args: {}'}
+      ]
+    , [ 'group_0_pdf_1'
+      , {'entry_type': LeftEntry, 'entry_args: {}'}
+      , {'entry_type': RghtEntry, 'entry_args: {}'}
+      ]
+    , [ 'group_1_pdf_0'
+      , {'entry_type': LeftEntry, 'entry_args: {}'}
+      , {'entry_type': RghtEntry, 'entry_args: {}'}
+      ]
+    , [ 'group_1_pdf_1'
+      , {'entry_type': LeftEntry, 'entry_args: {}'}
+      , {'entry_type': RghtEntry, 'entry_args: {}'}
+      ]
+    , [ 'group_2_pdf_0'
+      , {'entry_type': LeftEntry, 'entry_args: {}'}
+      , {'entry_type': RghtEntry, 'entry_args: {}'}
+      ]
+    , [ 'group_2_pdf_1'
+      , {'entry_type': LeftEntry, 'entry_args: {}'}
+      , {'entry_type': RghtEntry, 'entry_args: {}'}
+      ]
+    ]
   """
 
   #_____________________________________________________________________
@@ -188,19 +217,19 @@ class PageOrder(list):
       is_preview:   True if preview pdfs are intended to be generated.
                     Note this page ordering is not intended to be
                     printed.
-    """
 
-    self.xtra_layouts   : list = OptionlPages.XTRA_LAYOUTS
-    self.intr_layouts   : list = OneSidePages.INTR_LAYOUTS
-    self.week_layouts   : list = OneSidePages.WEEK_LAYOUTS
+   """
+    xtra_layouts   : list = OptionlPages.XTRA_LAYOUTS
+    intr_layouts   : list = OneSidePages.INTR_LAYOUTS
+    week_layouts   : list = OneSidePages.WEEK_LAYOUTS
 
     if (is_preview):
-      self.intr_layouts : list = PreviewPages.INTR_LAYOUTS
-      self.week_layouts : list = PreviewPages.WEEK_LAYOUTS
+      intr_layouts : list = PreviewPages.INTR_LAYOUTS
+      week_layouts : list = PreviewPages.WEEK_LAYOUTS
 
     elif (is_dbl_sided):
-      self.intr_layouts    = DblSidePages.INTR_LAYOUTS
-      self.week_layouts    = DblSidePages.WEEK_LAYOUTS
+      intr_layouts    = DblSidePages.INTR_LAYOUTS
+      week_layouts    = DblSidePages.WEEK_LAYOUTS
 
     #___________________________________________________________________
     # Create list of file names
@@ -209,7 +238,7 @@ class PageOrder(list):
     #-------------------------------------------------------------------
     self.intr_file_names: list = []
     counter = Utils.inc()
-    for i in range(len(self.intr_layouts)):
+    for i in range(len(intr_layouts)):
       self.intr_file_names.append(PdfPrefix.INTR + str(next(counter)))
 
     #-------------------------------------------------------------------
@@ -217,7 +246,7 @@ class PageOrder(list):
     #-------------------------------------------------------------------
     self.week_file_names: list = []
     counter = Utils.inc()
-    for i in range(len(self.week_layouts)):
+    for i in range(len(week_layouts)):
       self.week_file_names.append(PdfPrefix.WEEK + str(next(counter)))
 
     #-------------------------------------------------------------------
@@ -225,24 +254,27 @@ class PageOrder(list):
     #-------------------------------------------------------------------
     self.xtra_file_names: list = []
     counter = Utils.inc()
-    for i in range(len(self.xtra_layouts)):
+    for i in range(len(xtra_layouts)):
       self.xtra_file_names.append(PdfPrefix.XTRA + str(next(counter)))
 
-    #___________________________________________________________________
-    # Generate list of layouts with file names
-    #___________________________________________________________________
-    for i in range(len(self.intr_layouts)):
-      page: list = [self.intr_file_names[i]] + self.intr_layouts[i]
-      self.append(page)
+    self.add_page_group(intr_layouts, PdfPrefix.INTR)
+    self.add_page_group(week_layouts, PdfPrefix.WEEK)
+    self.add_page_group(xtra_layouts, PdfPrefix.XTRA)
 
-    # Week entry files
-    for i in range(len(self.week_layouts)):
-      page: list = [self.week_file_names[i]] + self.week_layouts[i]
-      self.append(page)
+    return
+
+  #_____________________________________________________________________
+  def add_page_group(self, layouts: list, name_prefix: str) -> None:
+    """
+    Adds groups of pdfs. Each element of
+    """
+
+    counter = Utils.inc()
 
     # Extra entry files
-    for i in range(len(self.xtra_layouts)):
-      page: list = [self.xtra_file_names[i]] + self.xtra_layouts[i]
+    for i in range(len(layouts)):
+      file_name: str = name_prefix + str(next(counter))
+      page: list = [file_name] + layouts[i]
       self.append(page)
 
     return
