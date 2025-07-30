@@ -171,6 +171,86 @@ class OneSidePages:
   , [Entries.QUT[6] , Entries.QUT[6]]
   ]
 
+#_______________________________________________________________________
+class PageGroup():
+  """
+  Represents a pdf page group.
+
+  Attributes:
+    group_pdf_name  : Name of combined pdf.
+
+    file_names      : List of file names for individual pdfs
+
+    pages           : List of page information containing individual
+                      file name - used in pdf and svg naming,
+                      entry type and entry arguments.
+
+                      Takes the form:
+
+                      [ [ 'group_0_pg_0'
+                        , {'entry_type': LeftEntry, 'entry_args: {}'}
+                        , {'entry_type': RghtEntry, 'entry_args: {}'}
+                        ]
+                      , [ 'group_0_pg_1'
+                        , {'entry_type': LeftEntry, 'entry_args: {}'}
+                        , {'entry_type': RghtEntry, 'entry_args: {}'}
+                        ]
+                      , [ 'group_1_pg_0'
+                        , {'entry_type': LeftEntry, 'entry_args: {}'}
+                        , {'entry_type': RghtEntry, 'entry_args: {}'}
+                        ]
+                      , [ 'group_1_pg_1'
+                        , {'entry_type': LeftEntry, 'entry_args: {}'}
+                        , {'entry_type': RghtEntry, 'entry_args: {}'}
+                        ]
+                      , [ 'group_2_pg_0'
+                        , {'entry_type': LeftEntry, 'entry_args: {}'}
+                        , {'entry_type': RghtEntry, 'entry_args: {}'}
+                        ]
+                      , [ 'group_2_pg_1'
+                        , {'entry_type': LeftEntry, 'entry_args: {}'}
+                        , {'entry_type': RghtEntry, 'entry_args: {}'}
+                        ]
+                      ]
+  """
+
+  group_counter = Utils.inc()
+
+  def __init__\
+  ( self
+  , group_name: str
+  , layouts: list
+  ):
+    """
+    Parameters:
+      group_name  : Used in naming individual and grouped pdf.
+      layouts     : List of layouts in the following form:
+                    [ [ {'entry_type': LeftEntry, 'entry_args: {}'}
+                      , {'entry_type': RghtEntry, 'entry_args: {}'}
+                      ]
+                    , [ {'entry_type': LeftEntry, 'entry_args: {}'}
+                      , {'entry_type': RghtEntry, 'entry_args: {}'}
+                      ]
+                    ]
+    """
+
+    self.group_pdf_name: str =\
+      f'__{str(next(self.group_counter))}__{group_name}.pdf'
+
+    self.pages      : list = []
+    self.file_names : list = []
+
+    counter = Utils.inc()
+
+    # Extra entry files
+    for i in range(len(layouts)):
+      file_name: str = f'{group_name}{next(counter):02}'
+      self.file_names.append(file_name)
+
+      page: list = [file_name] + layouts[i]
+      self.pages.append(page)
+
+    return
 
 #_______________________________________________________________________
 class PageOrder(list):
@@ -243,6 +323,13 @@ class PageOrder(list):
     self.xtra_file_names: list =\
       self.add_page_group(xtra_layouts, PdfPrefix.XTRA)
 
+
+    self.page_groups: list =\
+      [ PageGroup(PdfPrefix.INTR, intr_layouts)
+      , PageGroup(PdfPrefix.WEEK, week_layouts)
+      , PageGroup(PdfPrefix.XTRA, xtra_layouts)
+      ]
+
     return
 
   #_____________________________________________________________________
@@ -285,3 +372,4 @@ class PageOrder(list):
       self.append(page)
 
     return file_name_list
+
