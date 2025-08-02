@@ -28,13 +28,9 @@
 
 import argparse
 from os.path import join
-from os.path import isfile
-from os import listdir
-from os import remove
 
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
-from classes.constants.page_order import PageOrder
 
 from classes.page_entries.week_habit_entry import HabitTracker
 from classes.page_entries.title_page import TitlePage
@@ -54,32 +50,6 @@ from utils.utils import PlannerUtils as Utils
 def new_line (new_line_count: int = 1) -> None:
   for i in range(new_line_count):
     print()
-
-
-#_______________________________________________________________________
-def generate_pages\
-( page_order: list
-, is_portrait: bool
-, is_dbl_sided: bool
-, out_dir: str
-) -> None:
-  #_____________________________________________________________________
-  # Iterate through list containing layout arguments and create
-  # for each layout
-  #_____________________________________________________________________
-  for i in range (len(page_order)):
-    layout =\
-      PageLayout\
-      ( is_portrait=is_portrait
-      , is_dbl_sided=is_dbl_sided
-      , file_name_no_ext=page_order[i][0]
-      , out_dir=out_dir
-      , entry_0_type=page_order[i][1][Key.ENTRY_TYPE]
-      , entry_0_args=page_order[i][1][Key.ENTRY_ARGS]
-      , entry_1_type=page_order[i][2][Key.ENTRY_TYPE]
-      , entry_1_args=page_order[i][2][Key.ENTRY_ARGS]
-      )
-    layout.save_pdf()
 
 
 #_______________________________________________________________________
@@ -171,59 +141,6 @@ def generate_habit_tracker\
 
 
 #_______________________________________________________________________
-def group_pdfs(page_order: PageOrder, is_dbl_sided: bool, out_dir: str) -> None:
-  """
-  Combines pdfs in groups.
-
-  Parameters:
-    None
-
-  Side Effects:
-    Creates several combined pdfs.
-
-  Returns:
-    None
-  """
-
-  intr_pdf_group: list = page_order.intr_file_names
-  week_pdf_group: list = page_order.week_file_names
-  xtra_pdf_group: list = page_order.xtra_file_names
-
-  intr_combo_pdf: list = '__0__intr.pdf '
-  week_combo_pdf: list = '__1__week.pdf '
-  xtra_combo_pdf: list = '__2__xtra.pdf '
-  habt_combo_pdf: list = '__3__habt.pdf '
-
-  pdf_paths: list =\
-    [join(pdf_out_dir, n + '.pdf') for n in intr_pdf_group]
-  Utils.combine_pdfs(pdf_paths, join(out_dir, intr_combo_pdf))
-
-  pdf_paths: list =\
-    [join(pdf_out_dir, n + '.pdf') for n in week_pdf_group]
-  Utils.combine_pdfs(pdf_paths, join(out_dir, week_combo_pdf))
-
-  pdf_paths: list =\
-    [join(pdf_out_dir, n + '.pdf') for n in xtra_pdf_group]
-  Utils.combine_pdfs(pdf_paths, join(out_dir, xtra_combo_pdf))
-
-  #_____________________________________________________________________
-  # Clean up pdfs
-  #_____________________________________________________________________
-  # Files to keep (relative names only, not full paths)
-  keep_files = {intr_combo_pdf, week_combo_pdf, xtra_combo_pdf}
-
-  # Loop through all files in the directory
-  for filename in listdir(out_dir):
-      file_path = join(out_dir, filename)
-
-      # Remove if it's a file and not in the keep list
-      if isfile(file_path) and filename not in keep_files:
-          remove(file_path)
-  #_____________________________________________________________________
-
-  return
-
-#_______________________________________________________________________
 if __name__ == '__main__':
   new_line(2)
 
@@ -232,6 +149,8 @@ if __name__ == '__main__':
 
   args: argparse.Namespace = parser.parse_args()
 
+  # These page layouts are intended to be constructed in landscape
+  # orientation
   is_portrait:  bool  = False
   is_dbl_sided: bool  = args.dbl_sided
 
@@ -239,23 +158,15 @@ if __name__ == '__main__':
   if (args.preview):
     is_dbl_sided = True
 
-  #page_order: list =\
-  #  PageOrder\
-  #  ( is_dbl_sided=is_dbl_sided
-  #  , is_preview=args.preview
-  #  )
+  #pdf_out_dir: str =\
+  #  join(args.out_dir, PageLayout.PDF_SUB_DIR)
 
-  pdf_out_dir: str =\
-    join(args.out_dir, PageLayout.PDF_SUB_DIR)
-
-  svg_out_dir: str =\
-    join(args.out_dir, PageLayout.SVG_SUB_DIR)
+  #svg_out_dir: str =\
+  #  join(args.out_dir, PageLayout.SVG_SUB_DIR)
 
   div_dir: str = join(args.out_dir ,'..', 'dividers')
-  #generate_habit_tracker(is_portrait, div_dir)
-  #generate_dividers(is_portrait, div_dir)
-  #generate_pages(page_order, is_portrait, is_dbl_sided, args.out_dir)
-  #group_pdfs(page_order=page_order, is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
+  generate_habit_tracker(is_portrait, div_dir)
+  generate_dividers(is_portrait, div_dir)
 
   #test_layout=\
   #  PageLayout\
