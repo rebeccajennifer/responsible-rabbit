@@ -211,28 +211,37 @@ class OneSidePages:
   , [Entries.A_VOW, Entries.DATES]
   ]
 
-  #_____________________________________________________________________
-  WEEK_LAYOUTS: list =\
-  [ [Entries.WEEK_0 , Entries.WEEK_0]
-  , [Entries.WEEK_1 , Entries.WEEK_1]
-  , [Entries.DAY[0] , Entries.DAY[0]]
-  , [Entries.QUT[0] , Entries.QUT[0]]
-  , [Entries.DAY[1] , Entries.DAY[1]]
-  , [Entries.QUT[1] , Entries.QUT[1]]
-  , [Entries.DAY[2] , Entries.DAY[2]]
-  , [Entries.QUT[2] , Entries.QUT[2]]
-  , [Entries.DAY[3] , Entries.DAY[3]]
-  , [Entries.QUT[3] , Entries.QUT[3]]
-  , [Entries.DAY[4] , Entries.DAY[4]]
-  , [Entries.QUT[4] , Entries.QUT[4]]
-  , [Entries.DAY[5] , Entries.DAY[5]]
-  , [Entries.QUT[5] , Entries.QUT[5]]
-  , [Entries.DAY[6] , Entries.DAY[6]]
-  , [Entries.QUT[6] , Entries.QUT[6]]
+  INTR_LAYOUTS_DICT: list =\
+  [ {Keys.LEFT: Entries.TITLE, Keys.RGHT: Entries.GOALS}
+  , {Keys.LEFT: Entries.YR5_0, Keys.RGHT: Entries.GOALS}
+  , {Keys.LEFT: Entries.YR5_1, Keys.RGHT: Entries.GOALS}
+  , {Keys.LEFT: Entries.YR1_0, Keys.RGHT: Entries.GOALS}
+  , {Keys.LEFT: Entries.YR1_1, Keys.RGHT: Entries.MONTH}
+  , {Keys.LEFT: Entries.WK_12, Keys.RGHT: Entries.MONTH}
+  , {Keys.LEFT: Entries.NOACT, Keys.RGHT: Entries.MONTH}
+  , {Keys.LEFT: Entries.A_VOW, Keys.RGHT: Entries.DATES}
   ]
 
-  #_____________________________________________________________________
 
+  #_____________________________________________________________________
+  WEEK_LAYOUTS_DICT: list =\
+  [ {Keys.LEFT: Entries.WEEK_0 , Keys.RGHT: Entries.WEEK_0}
+  , {Keys.LEFT: Entries.WEEK_1 , Keys.RGHT: Entries.WEEK_1}
+  , {Keys.LEFT: Entries.DAY[0] , Keys.RGHT: Entries.DAY[0]}
+  , {Keys.LEFT: Entries.QUT[0] , Keys.RGHT: Entries.QUT[0]}
+  , {Keys.LEFT: Entries.DAY[1] , Keys.RGHT: Entries.DAY[1]}
+  , {Keys.LEFT: Entries.QUT[1] , Keys.RGHT: Entries.QUT[1]}
+  , {Keys.LEFT: Entries.DAY[2] , Keys.RGHT: Entries.DAY[2]}
+  , {Keys.LEFT: Entries.QUT[2] , Keys.RGHT: Entries.QUT[2]}
+  , {Keys.LEFT: Entries.DAY[3] , Keys.RGHT: Entries.DAY[3]}
+  , {Keys.LEFT: Entries.QUT[3] , Keys.RGHT: Entries.QUT[3]}
+  , {Keys.LEFT: Entries.DAY[4] , Keys.RGHT: Entries.DAY[4]}
+  , {Keys.LEFT: Entries.QUT[4] , Keys.RGHT: Entries.QUT[4]}
+  , {Keys.LEFT: Entries.DAY[5] , Keys.RGHT: Entries.DAY[5]}
+  , {Keys.LEFT: Entries.QUT[5] , Keys.RGHT: Entries.QUT[5]}
+  , {Keys.LEFT: Entries.DAY[6] , Keys.RGHT: Entries.DAY[6]}
+  , {Keys.LEFT: Entries.QUT[6] , Keys.RGHT: Entries.QUT[6]}
+  ]
   #_____________________________________________________________________
 
 #_______________________________________________________________________

@@ -239,11 +239,11 @@ if __name__ == '__main__':
   if (args.preview):
     is_dbl_sided = True
 
-  page_order: list =\
-    PageOrder\
-    ( is_dbl_sided=is_dbl_sided
-    , is_preview=args.preview
-    )
+  #page_order: list =\
+  #  PageOrder\
+  #  ( is_dbl_sided=is_dbl_sided
+  #  , is_preview=args.preview
+  #  )
 
   pdf_out_dir: str =\
     join(args.out_dir, PageLayout.PDF_SUB_DIR)
