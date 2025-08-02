@@ -76,8 +76,7 @@ class PreviewPages:
 
   #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.WEEK_0 , Keys.RGHT: Entries.WEEK_0}
-  , {Keys.LEFT: Entries.WEEK_1 , Keys.RGHT: Entries.WEEK_1}
+  [ {Keys.LEFT: Entries.WEEK_0 , Keys.RGHT: Entries.WEEK_1}
   , {Keys.LEFT: Entries.DAY[0] , Keys.RGHT: Entries.QUT[0]}
   , {Keys.LEFT: Entries.DAY[1] , Keys.RGHT: Entries.QUT[1]}
   , {Keys.LEFT: Entries.DAY[2] , Keys.RGHT: Entries.QUT[2]}
@@ -161,4 +160,3 @@ class OneSidePages:
   , {Keys.LEFT: Entries.DAY[6] , Keys.RGHT: Entries.DAY[6]}
   , {Keys.LEFT: Entries.QUT[6] , Keys.RGHT: Entries.QUT[6]}
   ]
-  #_____________________________________________________________________
