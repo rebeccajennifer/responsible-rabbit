@@ -32,20 +32,10 @@ from os.path import isfile
 from os import listdir
 from os import remove
 
-from classes.planner_assembler import PageGroup
-from classes.planner_assembler import PlannerAssembler
-from classes.constants.page_order import DblSidePages
-from classes.constants.page_order import OneSidePages
-from classes.constants.page_order import OptionlPages
-from classes.constants.page_order import PreviewPages
-
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
 
-from classes.page_entries.ace_entry import AceEntry
-from classes.page_entries.month_entry import MonthEntry
-from classes.page_entries.night_entry import NightEntry
 from classes.page_entries.week_habit_entry import HabitTracker
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
@@ -54,9 +44,9 @@ from classes.page_entries.test_entry import TestEntry
 from classes.page_layouts.page_layout import PageLayout
 from classes.page_layouts.half_page_divider import HalfPageDivider
 
+from classes.planner_assembler import PlannerAssembler
 
 from utils.planner_parser import PlannerCreationParser
-
 
 from utils.utils import PlannerUtils as Utils
 
@@ -277,21 +267,13 @@ if __name__ == '__main__':
   #  )
   #test_layout.save_pdf()
 
-  group0 = PageGroup(group_name='intr', layouts=PreviewPages.INTR_LAYOUTS_DICT)
-  group1 = PageGroup(group_name='xtra', layouts=OptionlPages.XTRA_LAYOUTS_DICT)
 
-  page_groups: list = [group0, group1]
-
-  PlannerAssembler.assemble\
-  ( page_groups=page_groups
-  , is_portrait=is_portrait
+  PlannerAssembler\
+  ( is_portrait=is_portrait
   , is_dbl_sided=is_dbl_sided
+  , is_preview=args.preview
   , out_dir=args.out_dir
   )
-
-  PlannerAssembler.group_pdfs(group0, args.out_dir)
-  PlannerAssembler.group_pdfs(group1, args.out_dir)
-
 
   new_line(10)
   print("all done")

@@ -348,4 +348,3 @@ class PageOrder(list):
       self.append(page)
 
     return file_name_list
-

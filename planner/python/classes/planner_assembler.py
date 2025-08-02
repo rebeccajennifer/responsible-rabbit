@@ -7,6 +7,7 @@ from utils.utils import PlannerUtils as Utils
 from classes.constants.addl_arg_keys import AddlArgKeys as Keys
 from classes.constants.page_order import DblSidePages
 from classes.constants.page_order import OneSidePages
+from classes.constants.page_order import PreviewPages
 from classes.constants.page_order import OptionlPages
 from classes.page_layouts.page_layout import PageLayout
 
@@ -94,20 +95,14 @@ class PlannerAssembler:
   Functions used to assemble planner.
   """
 
-  def assemble\
-  ( page_groups: list
-  , keep_indvdl_pgs: bool = False
+  def __init__(self
   , is_portrait: bool = True
   , is_dbl_sided: bool = False
+  , is_preview: bool = False
   , out_dir: str = '.'
   ):
     """
     Parameters:
-      page_groups: List of PageGroups
-
-      keep_indvdl_pgs: False - Remove individual pdfs after combining.
-                       True  - Keep individual pdfs in a page group.
-
       is_portrait  : True - Full page to be printed in portrait
                      orientation.
 
@@ -116,11 +111,15 @@ class PlannerAssembler:
       out_dir      : Output directory for files
     """
 
+    self.make_page_groups\
+    ( is_dbl_sided=is_dbl_sided
+    , is_preview=is_preview)
+
     #_____________________________________________________________________
     # Iterate through list containing layout arguments and create
     # for each layout
     #_____________________________________________________________________
-    for group in page_groups:
+    for group in self.page_groups:
 
       for pg in group.pages:
 
@@ -137,9 +136,11 @@ class PlannerAssembler:
           )
         layout.save_pdf()
 
+      self.group_pdfs(group, out_dir)
+
   #_______________________________________________________________________
-  def group_pdfs\
-  ( page_group: PageGroup
+  def group_pdfs(self
+  , page_group: PageGroup
   , out_dir: str = '.'
   ) -> None:
     """
@@ -163,6 +164,53 @@ class PlannerAssembler:
 
     combo_pdf_path: str = join(pdf_out_dir, page_group.group_pdf_name)
     Utils.combine_pdfs(pdf_paths, combo_pdf_path)
+
+    return
+
+  #_____________________________________________________________________
+  def make_page_groups\
+  ( self
+  , is_dbl_sided: bool = False
+  , is_preview: bool = False
+  ) -> None:
+    """
+    Sets page groups according to if pages are to be printed double-
+    sided or if they are for the preview.
+
+    """
+
+    self.page_groups: list = []
+
+    if(is_preview):
+      PageType = PreviewPages
+    elif (is_dbl_sided):
+      PageType = DblSidePages
+    else:
+      PageType = OneSidePages
+
+    group0: PageGroup =\
+      PageGroup\
+      ( group_name=PdfPrefix.INTR
+      , layouts=PageType.INTR_LAYOUTS_DICT
+      )
+
+    group1: PageGroup =\
+      PageGroup\
+      ( group_name=PdfPrefix.WEEK
+      , layouts=PageType.WEEK_LAYOUTS_DICT
+      )
+
+    group2: PageGroup =\
+      PageGroup\
+      ( group_name=PdfPrefix.XTRA
+      , layouts=OptionlPages.XTRA_LAYOUTS_DICT
+      )
+
+    self.page_groups: list =\
+    [ group0
+    , group1
+    , group2
+    ]
 
     return
 
