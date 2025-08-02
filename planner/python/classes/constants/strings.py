@@ -30,6 +30,7 @@ class PlannerStrings:
   """
   Strings used in planner.
   """
+
   SPACE: str =\
     '\u00A0\u00A0'
 
@@ -51,14 +52,39 @@ class PlannerStrings:
     + '20'\
     + 5 * SPACE
 
+  DAYS: str =\
+    'Mon' + 2 * SPACE +\
+    'Tue' + 2 * SPACE +\
+    'Wed' + 2 * SPACE +\
+    'Thu' + 2 * SPACE +\
+    'Fri' + 2 * SPACE +\
+    'Sat' + 2 * SPACE +\
+    'Sun' + DATE_STR
+
+  DATE_STR_MONO: str =\
+    4 * SPACE\
+    + '/'\
+    + 4 * SPACE\
+    + '/'\
+    + SPACE\
+    + '20'\
+    + 5 * SPACE
+
+  DAYS_MONO: str =\
+    'Mon' + 1 * SPACE +\
+    'Tue' + 1 * SPACE +\
+    'Wed' + 1 * SPACE +\
+    'Thu' + 1 * SPACE +\
+    'Fri' + 1 * SPACE +\
+    'Sat' + 1 * SPACE +\
+    'Sun' + 3 * SPACE +\
+    DATE_STR_MONO
+
   DEF_TABLE_HEADER_TXT: str =\
     'Table Header'
 
   DEF_PAGE_HEADER_TXT: str =\
     'Page Header'
-
-  DAILY_SCHEDULE_HEADER: str =\
-    'Time Well Spent'
 
   #_____________________________________________________________________
   # Default file names

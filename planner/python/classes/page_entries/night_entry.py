@@ -23,27 +23,29 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for week. Fills content for one half sheet.
+#   Nightly reflection
 #_______________________________________________________________________
 
 import svgwrite.container
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.base_element import VerticalStack
-from classes.elements.row_group import TextRowGroup
-from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
-from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
 
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
+
 
 #_______________________________________________________________________
-class HabitTracker(OnePageHalfLetter):
+class NightEntry(HalfPageLayout):
   """
   Daily entry layout.
   """
+
+  HEADER_TXT: str =\
+    'Nightly Reflection'
+
+  DAY_HEADER_TXT: str = Strings.DAYS_MONO
 
   #_____________________________________________________________________
   def __init__(self
@@ -54,9 +56,11 @@ class HabitTracker(OnePageHalfLetter):
     """
     Constructor for class. Assumes landscape orientation.
     """
+
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
+    , addl_args=addl_args
     )
 
     return
@@ -75,17 +79,24 @@ class HabitTracker(OnePageHalfLetter):
     """
     super().create_content()
 
-    fill_hght: int = self.calc_remaining_hght_per_element(4)
+    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
+    style.line_spc_=1
 
-    self.entries_: list = [
-      action_items_list: DualLineTable=\
-        DualLineTable\
-        ( total_wdth=self.content_wdth_
-        , total_hght=fill_hght
-        , header_txt='Action Items:'
-        , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
-        , show_outline=True
-        )
+    day_reflection = DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=4
+      , total_hght=136
+      , header_txt=self.DAY_HEADER_TXT
+      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , show_outline=True
+      )
+
+    self.entries_: list =\
+    [ day_reflection
+    , deepcopy(day_reflection)
+    , deepcopy(day_reflection)
+    , deepcopy(day_reflection)
+    , deepcopy(day_reflection)
     ]
 
     return
@@ -103,4 +114,4 @@ class HabitTracker(OnePageHalfLetter):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.HABIT_PAGE_HEADER_TXT)
+      (header_txt=self.HEADER_TXT)

@@ -34,11 +34,11 @@ from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
 
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
-class MonthEntry(OnePageHalfLetter):
+class MonthEntry(HalfPageLayout):
   """
   Daily entry layout.
   """

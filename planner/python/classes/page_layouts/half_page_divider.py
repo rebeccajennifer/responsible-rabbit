@@ -41,7 +41,7 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Keys
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
 from classes.page_layouts.page_layout import PageLayout
 from classes.page_entries.title_page import TitlePage
 

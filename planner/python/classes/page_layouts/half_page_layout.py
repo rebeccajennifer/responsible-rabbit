@@ -42,7 +42,7 @@ from classes.style.table_style import TextBoxStyle
 
 
 #_______________________________________________________________________
-class OnePageHalfLetter(svgwrite.container.Group):
+class HalfPageLayout(svgwrite.container.Group):
   """
   """
 
@@ -128,8 +128,10 @@ class OnePageHalfLetter(svgwrite.container.Group):
     x: int = self.page_header_insert_pt_x_
     y: int = self.page_header_insert_pt_y_
 
+    # Move page header to correct location on page
     self.page_header_['transform'] = f'translate({x}, {y})'
 
+    # Add border and/or page header
     if (self.show_page_border_):
       self.add(self.border_)
     if (self.show_page_header_):
@@ -147,6 +149,7 @@ class OnePageHalfLetter(svgwrite.container.Group):
       , outline_color=Colors.FLUX_GRN
       )
 
+    # Move page content to correct location
     content['transform'] = f'translate({insert_x}, {insert_y})'
 
     self.add(content)

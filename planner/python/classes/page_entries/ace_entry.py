@@ -23,33 +23,43 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for testing. Will not be used in final product.
+#   Nightly reflection
 #_______________________________________________________________________
 
 import svgwrite.container
-
 from copy import deepcopy
 
-from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.style.std_styles import StdTextBoxStyles
-from classes.style.style import PlannerFontStyle as Font
-
-from classes.elements.base_element import VerticalStack
-from classes.elements.base_element import HorizontalStack
-from classes.elements.row_group import TextRowGroup
 from classes.elements.table import DualLineTable
-from classes.elements.table import SingleLineTable
-from classes.elements.table import ColumnTable
+from classes.style.std_styles import StdTextBoxStyles
+from classes.elements.row_group import TextRowGroup
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
-class TestEntry(HalfPageLayout):
+class AceEntry(HalfPageLayout):
   """
-  Daily entry layout.
+  Layout for ACE exercise
   """
+
+  HEADER_TXT: str = str(
+    'Acknowlege - Connect - Engage : '
+    + 3 * Strings.SPACE
+    + 'Re-Regulation Practice'
+  )
+
+  ACKNOWLEDGE_HEADER  : str = 'Acknowledge'
+  CONNECT_HEADER      : str = 'Connect'
+  ENGAGE_HEADER       : str = '(Re-)Engage'
+
+  ACKN_PROMPT_MANFST: str = 'How is the dysregulation manifesting?'
+  ACKN_PROMPT_EMOTNS: str = 'What emotions are you experiencing?'
+  ACKN_PROMPT_BEFORE: str = 'What was happening before the trigger?'
+
+  CNCT_PROMPT_TECHNQU: str = 'Re-regulation technique to practice'
+  CNCT_PROMPT_REFLECT: str = 'Reflections after practice'
+  ENGA_PROMPT_ACTIVTY: str = 'What activity will you (re-)engage with?'
 
   #_____________________________________________________________________
   def __init__(self
@@ -83,50 +93,69 @@ class TestEntry(HalfPageLayout):
     """
     super().create_content()
 
-    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
-    style.line_spc_=1
+    header_style = deepcopy(StdTextBoxStyles.MED_BACK_HEADER_FONT)
+    header_style.font_size_ = 16
+    prompt_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
 
-    fill_hght: int = self.calc_remaining_hght_per_element(3)
-    fill_hght: int = self.calc_remaining_hght_per_element(2)
-    fill_hght: int = self.calc_remaining_hght_per_element(1)
-
-    test0=ColumnTable\
-          ( total_wdth=self.content_wdth_
-          #, total_hght=fill_hght
-          , total_hght=100
-          #, total_hght=self.content_hght_
-          , header_txt_lst=['','','']
-          , text_style=style
-          , row_count=2
-          , show_outline=True
-          )
-
-    test1= deepcopy(test0)
-    test2= deepcopy(test0)
-
-    obj_list=[test0, test1, test2]
-    obj_list=[test0]
-    obj_list=[test0, test1]
-
-    #x: VerticalStack = VerticalStack( add_top_pad=False, obj_list=obj_list)
-
-    #fill_hght: int = self.calc_remaining_hght_per_element(1)
-    #test1=ColumnTable\
-    #      ( total_wdth=self.content_wdth_
-    #      , total_hght=fill_hght
-    #      , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_0
-    #      , text_style=style
-    #      , row_count=2
-    #      , show_outline=True
-    #      )
-
-
-
-    #self.entries_.append(x)
-    self.entries_ = obj_list
-    #self.entries_.append(test0)
-    #self.entries_.append(test1)
-    #self.entries_.append(test2)
+    self.entries_: list =\
+    [ TextRowGroup\
+      ( text=self.ACKNOWLEDGE_HEADER
+      , total_wdth=self.content_wdth_
+      , style=header_style
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=3
+      , header_txt=self.ACKN_PROMPT_MANFST
+      , text_style=prompt_style
+      , show_outline=False
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=3
+      , header_txt=self.ACKN_PROMPT_EMOTNS
+      , text_style=prompt_style
+      , show_outline=False
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=3
+      , header_txt=self.ACKN_PROMPT_BEFORE
+      , text_style=prompt_style
+      , show_outline=False
+      )
+    , TextRowGroup\
+      ( text=self.CONNECT_HEADER
+      , total_wdth=self.content_wdth_
+      , style=header_style
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=1
+      , header_txt=self.CNCT_PROMPT_TECHNQU
+      , text_style=prompt_style
+      , show_outline=False
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=3
+      , header_txt=self.CNCT_PROMPT_REFLECT
+      , text_style=prompt_style
+      , show_outline=False
+      )
+    , TextRowGroup\
+      ( text=self.ENGAGE_HEADER
+      , total_wdth=self.content_wdth_
+      , style=header_style
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=2
+      , header_txt=self.ENGA_PROMPT_ACTIVTY
+      , text_style=prompt_style
+      , show_outline=False
+      )
+    ]
 
     return
 
@@ -143,4 +172,4 @@ class TestEntry(HalfPageLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.DEF_PAGE_HEADER_TXT)
+      (header_txt=self.HEADER_TXT)

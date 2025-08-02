@@ -40,26 +40,17 @@ from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
 from classes.elements.table import ColumnTable
 
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
-class DayEntry(OnePageHalfLetter):
+class DayEntry(HalfPageLayout):
   """
   Daily entry layout.
   """
 
   DEF_DAY_LAYOUT_PATH: str =\
     'day#-layout'
-
-  DAYS: str =\
-    'Mon' + 2 * Strings.SPACE +\
-    'Tue' + 2 * Strings.SPACE +\
-    'Wed' + 2 * Strings.SPACE +\
-    'Thu' + 2 * Strings.SPACE +\
-    'Fri' + 2 * Strings.SPACE +\
-    'Sat' + 2 * Strings.SPACE +\
-    'Sun' + Strings.DATE_STR
 
   DAY_PRIMARY_EFFORTS: list =\
     ['Primary Efforts', 'Alignment']
@@ -91,6 +82,9 @@ class DayEntry(OnePageHalfLetter):
 
   VALUES_HEADER: str =\
     'Values'
+
+  DAILY_SCHEDULE_HEADER: str =\
+    'Time Well Spent'
 
   #_____________________________________________________________________
   def __init__(self
@@ -250,4 +244,4 @@ class DayEntry(OnePageHalfLetter):
     """
 
     return super().create_page_header\
-      (header_txt=self.DAYS, font_family=Font.FONT_FAMILY_HEADER)
+      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_HEADER)

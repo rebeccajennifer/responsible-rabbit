@@ -34,7 +34,7 @@ from typing import Tuple
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
 from utils.utils import PlannerUtils as Utils
 
 
@@ -97,12 +97,12 @@ class PageLayout(svgwrite.Drawing):
 
     #___________________________________________________________________
     if (not entry_0_type):
-      self.entry_0_type_: type = OnePageHalfLetter
+      self.entry_0_type_: type = HalfPageLayout
     else:
       self.entry_0_type_: type = entry_0_type
 
     if (not entry_1_type):
-      self.entry_1_type_: type = OnePageHalfLetter
+      self.entry_1_type_: type = HalfPageLayout
     else:
       self.entry_1_type_: type = entry_1_type
 

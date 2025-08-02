@@ -109,7 +109,8 @@ class RowGroup(svgwrite.container.Group):
       self.total_hght_ = self.content_height_
 
     else:
-      self.total_hght_ = self.content_height_ + Font.TEXT_PADDING * (inner_pad_bot + inner_pad_top)
+      self.total_hght_ = self.content_height_\
+        + Font.TEXT_PADDING * (inner_pad_bot + inner_pad_top)
 
 
     self.add_content()
@@ -134,7 +135,8 @@ class RowGroup(svgwrite.container.Group):
     #___________________________________________________________________
     # Add outline and background
     #___________________________________________________________________
-    if (self.show_outline_ or (not self.show_outline_ and self.backgnd_color_ != 'none')):
+    if (self.show_outline_ or
+          (not self.show_outline_ and self.backgnd_color_ != 'none')):
       Utils.add_outline\
       ( container=self
       , hght=self.total_hght_
@@ -242,9 +244,6 @@ class TextRowGroup(RowGroup):
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , text: str = ''
-  , font_size: int = Font.NORMAL_SIZE
-  , font_family: int = Font.FONT_FAMILY_NORMAL
-  , font_color: str = Colors.NORMAL_TXT
   , line_spc: int = 1
   , style: TextBoxStyle = TextBoxStyle()
   , wrap_txt: bool = True
@@ -287,8 +286,8 @@ class TextRowGroup(RowGroup):
           Utils.split_txt_by_wdth\
           ( txt=text
           , px_wdth=content_width
-          , font_size=font_size
-          , font_family=font_family
+          , font_size=self.font_size_
+          , font_family=self.font_family_
           )
     else:
       split_text = [text]

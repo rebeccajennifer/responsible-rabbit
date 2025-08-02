@@ -39,7 +39,7 @@ from classes.elements.entry_table import EntryTable
 from classes.constants.error_strings import ErrorStrings as Err
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
-from classes.constants.strings import PlannerStrings as Strings
+
 
 #_______________________________________________________________________
 class DaySchedule(EntryTable):
@@ -51,6 +51,8 @@ class DaySchedule(EntryTable):
   DEF_STOP_12: str = '09:00'
   DEF_STRT_24: str = '05:00'
   DEF_STOP_24: str = '21:00'
+
+  DAILY_SCHEDULE_HEADER: str = 'Time Well Spent'
 
   def __init__(self
   , wdth: int = 0
@@ -87,7 +89,7 @@ class DaySchedule(EntryTable):
     super().__init__\
       ( wdth=wdth
       , hght=hght
-      , header_txt=[Strings.DAILY_SCHEDULE_HEADER]
+      , header_txt=[self.DAILY_SCHEDULE_HEADER]
       , font_color=Colors.NORMAL_TXT
       , font_size=Font.NORMAL_SIZE
       , font=Font.FONT_FAMILY_NORMAL
@@ -228,20 +230,3 @@ class DaySchedule(EntryTable):
       stop_datetime = dt.dt.combine(dt.dt.today(), stop_datetime.time())
 
     return strt_datetime, stop_datetime
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

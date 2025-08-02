@@ -30,11 +30,11 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.elements.row_group import TextRowGroup
 from classes.style.std_styles import StdTextBoxStyles
 
-from classes.page_layouts.half_letter_one_page import OnePageHalfLetter
+from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
-class TitlePage(OnePageHalfLetter):
+class TitlePage(HalfPageLayout):
   """
   Title page.
   """

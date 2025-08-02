@@ -29,6 +29,7 @@
 from os.path import isdir
 from os.path import dirname
 from os import mkdir
+from os import remove
 from pypdf import PdfReader
 from pypdf import PdfWriter
 
@@ -353,7 +354,11 @@ class PlannerUtils:
 
 
   #_____________________________________________________________________
-  def combine_pdfs(pdf_paths: list, combined_pdf_path: str) -> None:
+  def combine_pdfs\
+  ( pdf_paths: list
+  , combined_pdf_path: str
+  , remove_indv_pgs: bool = True
+  ) -> None:
     """
     Combines pdfs into one pdf. Order of pages in combined pdf
     determined by order of pdf_paths.
@@ -361,6 +366,7 @@ class PlannerUtils:
     Parameters:
     pdf_paths         : List of paths of pdfs to combine.
     combined_pdf_path : Path of combined pdf.
+    remove_indv_pgs   : True - remove individual pdfs after combining
 
     Side Effects:
     Creates a new pdf.
@@ -382,6 +388,13 @@ class PlannerUtils:
       ( combined_pdf_path, 'wb') as out:
 
       pdf_writer.write(out)
+
+    # Clean up pdfs
+    if(remove_indv_pgs):
+
+      # Loop through all files in the directory
+      for pdf in pdf_paths:
+          remove(pdf)
 
     print(str(
       f'\nCombined pdf successfully created! '
