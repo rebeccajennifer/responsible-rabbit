@@ -191,19 +191,19 @@ class PlannerAssembler:
     group0: PageGroup =\
       PageGroup\
       ( group_name=PdfPrefix.INTR
-      , layouts=PageType.INTR_LAYOUTS_DICT
+      , layouts=PageType.INTR_LAYOUTS
       )
 
     group1: PageGroup =\
       PageGroup\
       ( group_name=PdfPrefix.WEEK
-      , layouts=PageType.WEEK_LAYOUTS_DICT
+      , layouts=PageType.WEEK_LAYOUTS
       )
 
     group2: PageGroup =\
       PageGroup\
       ( group_name=PdfPrefix.XTRA
-      , layouts=OptionlPages.XTRA_LAYOUTS_DICT
+      , layouts=OptionlPages.XTRA_LAYOUTS
       )
 
     self.page_groups: list =\
