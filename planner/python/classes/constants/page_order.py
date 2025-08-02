@@ -35,6 +35,7 @@
 
 from classes.constants.entries import Entries
 from utils.utils import PlannerUtils as Utils
+from classes.constants.addl_arg_keys import AddlArgKeys as Keys
 
 
 #_______________________________________________________________________
@@ -64,6 +65,14 @@ class OptionlPages:
   , [Entries.ACEPG, Entries.ACEPG]
   ]
 
+  XTRA_LAYOUTS_DICT: list =\
+  [ {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
+  , {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
+  , {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
+  , {Keys.LEFT: Entries.ACERF, Keys.RGHT: Entries.ACERF}
+  , {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
+  ]
+
 #_______________________________________________________________________
 class PreviewPages:
   """
@@ -84,6 +93,19 @@ class PreviewPages:
   , [Entries.MONTH, Entries.MONTH]
   , [Entries.MONTH, Entries.DATES]
   ]
+
+  INTR_LAYOUTS_DICT: list =\
+  [ {Keys.LEFT: Entries.PREVW, Keys.RGHT: Entries.TITLE}
+  , {Keys.LEFT: Entries.YR5_0, Keys.RGHT: Entries.YR5_1}
+  , {Keys.LEFT: Entries.YR1_0, Keys.RGHT: Entries.YR1_1}
+  , {Keys.LEFT: Entries.WK_12, Keys.RGHT: Entries.NOACT}
+  , {Keys.LEFT: Entries.A_VOW, Keys.RGHT: Entries.BLANK}
+  , {Keys.LEFT: Entries.GOALS, Keys.RGHT: Entries.GOALS}
+  , {Keys.LEFT: Entries.GOALS, Keys.RGHT: Entries.GOALS}
+  , {Keys.LEFT: Entries.MONTH, Keys.RGHT: Entries.MONTH}
+  , {Keys.LEFT: Entries.MONTH, Keys.RGHT: Entries.DATES}
+  ]
+
 
   #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
@@ -171,86 +193,9 @@ class OneSidePages:
   , [Entries.QUT[6] , Entries.QUT[6]]
   ]
 
-#_______________________________________________________________________
-class PageGroup():
-  """
-  Represents a pdf page group.
+  #_____________________________________________________________________
 
-  Attributes:
-    group_pdf_name  : Name of combined pdf.
-
-    file_names      : List of file names for individual pdfs
-
-    pages           : List of page information containing individual
-                      file name - used in pdf and svg naming,
-                      entry type and entry arguments.
-
-                      Takes the form:
-
-                      [ [ 'group_0_pg_0'
-                        , {'entry_type': LeftEntry, 'entry_args: {}'}
-                        , {'entry_type': RghtEntry, 'entry_args: {}'}
-                        ]
-                      , [ 'group_0_pg_1'
-                        , {'entry_type': LeftEntry, 'entry_args: {}'}
-                        , {'entry_type': RghtEntry, 'entry_args: {}'}
-                        ]
-                      , [ 'group_1_pg_0'
-                        , {'entry_type': LeftEntry, 'entry_args: {}'}
-                        , {'entry_type': RghtEntry, 'entry_args: {}'}
-                        ]
-                      , [ 'group_1_pg_1'
-                        , {'entry_type': LeftEntry, 'entry_args: {}'}
-                        , {'entry_type': RghtEntry, 'entry_args: {}'}
-                        ]
-                      , [ 'group_2_pg_0'
-                        , {'entry_type': LeftEntry, 'entry_args: {}'}
-                        , {'entry_type': RghtEntry, 'entry_args: {}'}
-                        ]
-                      , [ 'group_2_pg_1'
-                        , {'entry_type': LeftEntry, 'entry_args: {}'}
-                        , {'entry_type': RghtEntry, 'entry_args: {}'}
-                        ]
-                      ]
-  """
-
-  group_counter = Utils.inc()
-
-  def __init__\
-  ( self
-  , group_name: str
-  , layouts: list
-  ):
-    """
-    Parameters:
-      group_name  : Used in naming individual and grouped pdf.
-      layouts     : List of layouts in the following form:
-                    [ [ {'entry_type': LeftEntry, 'entry_args: {}'}
-                      , {'entry_type': RghtEntry, 'entry_args: {}'}
-                      ]
-                    , [ {'entry_type': LeftEntry, 'entry_args: {}'}
-                      , {'entry_type': RghtEntry, 'entry_args: {}'}
-                      ]
-                    ]
-    """
-
-    self.group_pdf_name: str =\
-      f'__{str(next(self.group_counter))}__{group_name}.pdf'
-
-    self.pages      : list = []
-    self.file_names : list = []
-
-    counter = Utils.inc()
-
-    # Extra entry files
-    for i in range(len(layouts)):
-      file_name: str = f'{group_name}{next(counter):02}'
-      self.file_names.append(file_name)
-
-      page: list = [file_name] + layouts[i]
-      self.pages.append(page)
-
-    return
+  #_____________________________________________________________________
 
 #_______________________________________________________________________
 class PageOrder(list):
@@ -322,13 +267,6 @@ class PageOrder(list):
 
     self.xtra_file_names: list =\
       self.add_page_group(xtra_layouts, PdfPrefix.XTRA)
-
-
-    self.page_groups: list =\
-      [ PageGroup(PdfPrefix.INTR, intr_layouts)
-      , PageGroup(PdfPrefix.WEEK, week_layouts)
-      , PageGroup(PdfPrefix.XTRA, xtra_layouts)
-      ]
 
     return
 

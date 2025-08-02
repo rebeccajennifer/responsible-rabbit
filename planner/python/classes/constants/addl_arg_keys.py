@@ -44,3 +44,7 @@ class AddlArgKeys:
 
   ENTRY_TYPE  : str = 'entry_type'
   ENTRY_ARGS  : str = 'entry_args'
+
+  LEFT        : str = 'left_entry'
+  RGHT        : str = 'rght_entry'
+  NAME        : str = 'file_name'

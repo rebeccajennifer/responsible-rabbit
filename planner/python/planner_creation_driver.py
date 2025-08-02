@@ -32,6 +32,13 @@ from os.path import isfile
 from os import listdir
 from os import remove
 
+from classes.planner_assembler import PageGroup
+from classes.planner_assembler import PlannerAssembler
+from classes.constants.page_order import DblSidePages
+from classes.constants.page_order import OneSidePages
+from classes.constants.page_order import OptionlPages
+from classes.constants.page_order import PreviewPages
+
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.page_order import PageOrder
@@ -255,20 +262,32 @@ if __name__ == '__main__':
     join(args.out_dir, PageLayout.SVG_SUB_DIR)
 
   div_dir: str = join(args.out_dir ,'..', 'dividers')
-  generate_habit_tracker(is_portrait, div_dir)
-  generate_dividers(is_portrait, div_dir)
-  generate_pages(page_order, is_portrait, is_dbl_sided, args.out_dir)
-  group_pdfs(page_order=page_order, is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
+  #generate_habit_tracker(is_portrait, div_dir)
+  #generate_dividers(is_portrait, div_dir)
+  #generate_pages(page_order, is_portrait, is_dbl_sided, args.out_dir)
+  #group_pdfs(page_order=page_order, is_dbl_sided=is_dbl_sided, out_dir=pdf_out_dir)
 
-  test_layout=\
-    PageLayout\
-    ( is_portrait=False
-    , is_dbl_sided=is_dbl_sided
-    , file_name_no_ext='test'
-    #, out_dir='.'
-    , entry_0_type=AceEntry
-    )
-  test_layout.save_pdf()
+  #test_layout=\
+  #  PageLayout\
+  #  ( is_portrait=False
+  #  , is_dbl_sided=is_dbl_sided
+  #  , file_name_no_ext='test'
+  #  #, out_dir='.'
+  #  , entry_0_type=AceEntry
+  #  )
+  #test_layout.save_pdf()
+
+  group = PageGroup(group_name='xtra', layouts=OptionlPages.XTRA_LAYOUTS_DICT)
+  group = PageGroup(group_name='intr', layouts=PreviewPages.INTR_LAYOUTS_DICT)
+
+  page_groups: list = [group]
+
+  PlannerAssembler.assemble\
+  ( page_groups=page_groups
+  , is_portrait=is_portrait
+  , is_dbl_sided=is_dbl_sided
+  , out_dir=args.out_dir
+  )
 
 
 
