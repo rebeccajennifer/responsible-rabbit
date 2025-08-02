@@ -277,10 +277,10 @@ if __name__ == '__main__':
   #  )
   #test_layout.save_pdf()
 
-  group = PageGroup(group_name='xtra', layouts=OptionlPages.XTRA_LAYOUTS_DICT)
-  group = PageGroup(group_name='intr', layouts=PreviewPages.INTR_LAYOUTS_DICT)
+  group0 = PageGroup(group_name='intr', layouts=PreviewPages.INTR_LAYOUTS_DICT)
+  group1 = PageGroup(group_name='xtra', layouts=OptionlPages.XTRA_LAYOUTS_DICT)
 
-  page_groups: list = [group]
+  page_groups: list = [group0, group1]
 
   PlannerAssembler.assemble\
   ( page_groups=page_groups
@@ -289,6 +289,8 @@ if __name__ == '__main__':
   , out_dir=args.out_dir
   )
 
+  PlannerAssembler.group_pdfs(group0, args.out_dir)
+  PlannerAssembler.group_pdfs(group1, args.out_dir)
 
 
   new_line(10)

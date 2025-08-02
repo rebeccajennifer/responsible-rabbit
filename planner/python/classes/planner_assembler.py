@@ -1,3 +1,8 @@
+from os.path import isfile
+from os.path import join
+from os import listdir
+from os import remove
+
 from utils.utils import PlannerUtils as Utils
 from classes.constants.addl_arg_keys import AddlArgKeys as Keys
 from classes.constants.page_order import DblSidePages
@@ -115,17 +120,49 @@ class PlannerAssembler:
     # Iterate through list containing layout arguments and create
     # for each layout
     #_____________________________________________________________________
-    for pg in page_groups[0].pages:
+    for group in page_groups:
 
-      layout =\
-        PageLayout\
-        ( is_portrait=is_portrait
-        , is_dbl_sided=is_dbl_sided
-        , file_name_no_ext=pg[Keys.NAME]
-        , out_dir=out_dir
-        , entry_0_type=pg[Keys.LEFT][Keys.ENTRY_TYPE]
-        , entry_0_args=pg[Keys.LEFT][Keys.ENTRY_ARGS]
-        , entry_1_type=pg[Keys.RGHT][Keys.ENTRY_TYPE]
-        , entry_1_args=pg[Keys.RGHT][Keys.ENTRY_ARGS]
-        )
-      layout.save_pdf()
+      for pg in group.pages:
+
+        layout =\
+          PageLayout\
+          ( is_portrait=is_portrait
+          , is_dbl_sided=is_dbl_sided
+          , file_name_no_ext=pg[Keys.NAME]
+          , out_dir=out_dir
+          , entry_0_type=pg[Keys.LEFT][Keys.ENTRY_TYPE]
+          , entry_0_args=pg[Keys.LEFT][Keys.ENTRY_ARGS]
+          , entry_1_type=pg[Keys.RGHT][Keys.ENTRY_TYPE]
+          , entry_1_args=pg[Keys.RGHT][Keys.ENTRY_ARGS]
+          )
+        layout.save_pdf()
+
+  #_______________________________________________________________________
+  def group_pdfs\
+  ( page_group: PageGroup
+  , out_dir: str = '.'
+  ) -> None:
+    """
+    Combines pdfs in groups.
+
+    Parameters:
+      page_group: List of pages.
+      out_dir   : Output directory
+
+    Side Effects:
+      Creates combined pdfs. Removes original pdfs if that section is
+
+    Returns:
+      None
+    """
+
+    pdf_out_dir: str = join(out_dir, 'pdf')
+
+    pdf_paths: list =\
+      [join(pdf_out_dir, n + '.pdf') for n in page_group.file_names]
+
+    combo_pdf_path: str = join(pdf_out_dir, page_group.group_pdf_name)
+    Utils.combine_pdfs(pdf_paths, combo_pdf_path)
+
+    return
+
