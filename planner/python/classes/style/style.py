@@ -48,9 +48,9 @@ class PlannerColors:
   FLUX_BLK: str = '#5f5f5f'
   FLUX_GRY: str = '#444444'
 
-  PROMPT: str = FLUX_MAG
+  PROMPT: str     = FLUX_MAG
   NORMAL_TXT: str = FLUX_GRY
-  HEADING: str = FLUX_RED
+  HEADING: str    = FLUX_RED
 
   DEF_PAGE_HEADER_TXT_COLOR : str = 'none'
 
@@ -96,6 +96,6 @@ class PlannerFontStyle:
   # Empirically determined constants
   WDTH_MULTPLIER: dict =\
   { UBUNTU_MONO   : 1.75
-  , TREBUCHET_MS  : 2.3
+  , TREBUCHET_MS  : 1.95
   , ARIAL         : 2.3
   }

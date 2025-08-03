@@ -90,6 +90,27 @@ class TestEntry(HalfPageLayout):
     fill_hght: int = self.calc_remaining_hght_per_element(2)
     fill_hght: int = self.calc_remaining_hght_per_element(1)
 
+    style = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
+    style.font_size_=14
+
+    bleh0 = TextRowGroup(self.content_wdth_
+    , text='M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M '
+    , style=style
+    )
+
+    style1 = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
+    bleh1 = TextRowGroup(self.content_wdth_
+    , text='1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 79 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 '
+    , style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+    )
+
+    style2 = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
+    style2.font_size_=14
+    bleh2 = TextRowGroup(self.content_wdth_
+    , text='1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 79 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 '
+    , style=style2
+    )
+
     test0=ColumnTable\
           ( total_wdth=self.content_wdth_
           #, total_hght=fill_hght
@@ -105,8 +126,8 @@ class TestEntry(HalfPageLayout):
     test2= deepcopy(test0)
 
     obj_list=[test0, test1, test2]
-    obj_list=[test0]
     obj_list=[test0, test1]
+    obj_list=[bleh0, bleh1, bleh2]
 
     #x: VerticalStack = VerticalStack( add_top_pad=False, obj_list=obj_list)
 

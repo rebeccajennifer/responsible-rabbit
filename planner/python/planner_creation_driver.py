@@ -158,12 +158,6 @@ if __name__ == '__main__':
   if (args.preview):
     is_dbl_sided = True
 
-  #pdf_out_dir: str =\
-  #  join(args.out_dir, PageLayout.PDF_SUB_DIR)
-
-  #svg_out_dir: str =\
-  #  join(args.out_dir, PageLayout.SVG_SUB_DIR)
-
   div_dir: str = join(args.out_dir ,'..', 'dividers')
   generate_habit_tracker(is_portrait, div_dir)
   generate_dividers(is_portrait, div_dir)
@@ -173,9 +167,10 @@ if __name__ == '__main__':
   #  ( is_portrait=False
   #  , is_dbl_sided=is_dbl_sided
   #  , file_name_no_ext='test'
-  #  #, out_dir='.'
-  #  , entry_0_type=AceEntry
+  #  , out_dir='.'
+  #  , entry_0_type=TestEntry
   #  )
+
   #test_layout.save_pdf()
 
 
