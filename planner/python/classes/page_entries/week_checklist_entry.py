@@ -27,6 +27,7 @@
 #_______________________________________________________________________
 
 import svgwrite.container
+from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.table import ColumnTable
@@ -42,15 +43,15 @@ class WeekCheckList(HalfPageLayout):
   """
 
   PAGE_HEADER_TXT : str =\
-    'Weekly Checklist' + 6 * Strings.SPACE + 'Month #'
+    'Weekly Checklist' + 30 * Strings.SPACE + 'Month #'
 
   ACTION_ITEM     : str = 'Action Item'
 
   WEEKS: list =\
-  [ 'Week 1'
-  , 'Week 2'
-  , 'Week 3'
-  , 'Week 4'
+  [ 'Week:'
+  , 'Week:'
+  , 'Week:'
+  , 'Week:'
   ]
 
   #_____________________________________________________________________
@@ -85,14 +86,16 @@ class WeekCheckList(HalfPageLayout):
 
     fill_hght: int = self.calc_remaining_hght_per_element(1)
 
+    style = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
+
     self.entries_: list =\
     [ ColumnTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
       , header_txt_lst=[self.ACTION_ITEM] + self.WEEKS
-      , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
+      , text_style=style
       , row_count=20
-      , col_wdths=[-1] + 4 * [50]
+      , col_wdths=[-1] + 4 * [55]
       , inner_pad_lft=True
       , inner_pad_rgt=True
       , show_outline=True

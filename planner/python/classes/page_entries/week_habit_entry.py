@@ -42,6 +42,22 @@ class HabitTracker(HalfPageLayout):
   Daily entry layout.
   """
 
+  PAGE_HEADER_TXT: str =\
+    'Habit Tracking' + 30 * Strings.SPACE + 'Month #'
+
+  WEEK_HABIT_TRACKER_HEADINGS: list =\
+    [ 'Habits' + Strings.SPACE + 'Week #'
+    , 'Target'
+    , 'Mon'
+    , 'Tue'
+    , 'Wed'
+    , 'Thu'
+    , 'Fri'
+    , 'Sat'
+    , 'Sun'
+    , 'Tally'
+    ]
+
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0
@@ -78,7 +94,7 @@ class HabitTracker(HalfPageLayout):
       ColumnTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
-      , header_txt_lst=Strings.WEEK_HABIT_TRACKER_HEADINGS
+      , header_txt_lst=self.WEEK_HABIT_TRACKER_HEADINGS
       , text_style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
       , row_count=6
       , col_wdths=[-1, 40] + 7 * [25] + [40]
@@ -110,4 +126,4 @@ class HabitTracker(HalfPageLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.HABIT_PAGE_HEADER_TXT)
+      (header_txt=self.PAGE_HEADER_TXT)

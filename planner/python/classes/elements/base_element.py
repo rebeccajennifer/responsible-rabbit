@@ -40,6 +40,7 @@ class VerticalStack(svgwrite.container.Group):
   def __init__(self
   , obj_list: list = []
   , add_top_pad: bool = False
+  , pad_bet_elements: bool = False
   , show_outline: bool = False
   , outline_color: bool = Colors.BORDER_COLOR
   , total_hght: int = 0

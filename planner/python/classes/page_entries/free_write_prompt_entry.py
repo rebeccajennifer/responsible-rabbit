@@ -62,6 +62,7 @@ class FreeWritePromptEntry(HalfPageLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , pad_bet_elements=False
+    , pad_under_page_header=False
     )
 
     return

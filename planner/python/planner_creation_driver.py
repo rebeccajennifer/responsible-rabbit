@@ -160,19 +160,18 @@ if __name__ == '__main__':
 
   div_dir: str = join(args.out_dir ,'..', 'dividers')
   generate_habit_tracker(is_portrait, div_dir)
-  generate_dividers(is_portrait, div_dir)
+  #generate_dividers(is_portrait, div_dir)
 
-  #test_layout=\
-  #  PageLayout\
-  #  ( is_portrait=False
-  #  , is_dbl_sided=is_dbl_sided
-  #  , file_name_no_ext='test'
-  #  , out_dir='.'
-  #  , entry_0_type=TestEntry
-  #  )
+  test_layout=\
+    PageLayout\
+    ( is_portrait=False
+    , is_dbl_sided=is_dbl_sided
+    , file_name_no_ext='test'
+    , out_dir='.'
+    , entry_0_type=TestEntry
+    )
 
-  #test_layout.save_pdf()
-
+  test_layout.save_pdf()
 
   PlannerAssembler\
   ( is_portrait=is_portrait

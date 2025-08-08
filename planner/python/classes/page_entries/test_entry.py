@@ -65,6 +65,7 @@ class TestEntry(HalfPageLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , addl_args=addl_args
+    , pad_under_page_header=True
     )
 
     return

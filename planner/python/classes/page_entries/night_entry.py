@@ -45,7 +45,8 @@ class NightEntry(HalfPageLayout):
   HEADER_TXT: str =\
     'Nightly Reflection'
 
-  DAY_HEADER_TXT: str = Strings.DAYS_MONO
+  DAY_HEADER_TXT: str =\
+    Strings.DAYS_MONO + 8 * Strings.SPACE + Strings.DATE_STR_MONO
 
   #_____________________________________________________________________
   def __init__(self
@@ -82,17 +83,22 @@ class NightEntry(HalfPageLayout):
     style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
     style.line_spc_=1
 
+    style = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
+    style.font_size_ = 8
+
     day_reflection = DualLineTable\
       ( total_wdth=self.content_wdth_
-      , row_count=4
-      , total_hght=136
+      , row_count=3
+      , total_hght=105
       , header_txt=self.DAY_HEADER_TXT
-      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+      , text_style=style
       , show_outline=True
       )
 
     self.entries_: list =\
     [ day_reflection
+    , deepcopy(day_reflection)
+    , deepcopy(day_reflection)
     , deepcopy(day_reflection)
     , deepcopy(day_reflection)
     , deepcopy(day_reflection)
@@ -114,4 +120,5 @@ class NightEntry(HalfPageLayout):
     """
 
     return super().create_page_header\
-      (header_txt=self.HEADER_TXT)
+      ( header_txt=self.HEADER_TXT
+      , font_size=8)

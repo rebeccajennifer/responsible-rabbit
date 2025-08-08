@@ -1,7 +1,4 @@
-from os.path import isfile
 from os.path import join
-from os import listdir
-from os import remove
 
 from utils.utils import PlannerUtils as Utils
 from classes.constants.addl_arg_keys import AddlArgKeys as Keys
@@ -207,10 +204,10 @@ class PlannerAssembler:
       )
 
     self.page_groups: list =\
-    [ group0
-    , group1
-    , group2
-    ]
+      [ group0
+      , group1
+      , group2
+      ]
 
     return
 
