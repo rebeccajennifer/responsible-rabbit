@@ -46,6 +46,8 @@ class HalfPageLayout(svgwrite.container.Group):
   """
   """
 
+  PAGE_HEADER_TXT: str = 'Default Page Header Text'
+
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0
@@ -184,6 +186,7 @@ class HalfPageLayout(svgwrite.container.Group):
   , box_fill_color: str = 0
   , box_brdr_color: str = 0
   , wrap_txt: bool = False
+  , style = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
   ) -> TextRowGroup:
     """
     Creates page header and saves it to class variable.
@@ -195,7 +198,7 @@ class HalfPageLayout(svgwrite.container.Group):
       Text box for page header
     """
 
-    style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
+    style = deepcopy(style)
 
     #___________________________________________________________________
     # Modify header style

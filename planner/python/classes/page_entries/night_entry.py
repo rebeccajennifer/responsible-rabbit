@@ -42,7 +42,7 @@ class NightEntry(HalfPageLayout):
   Daily entry layout.
   """
 
-  HEADER_TXT: str =\
+  PAGE_HEADER_TXT: str =\
     'Nightly Reflection'
 
   DAY_HEADER_TXT: str =\
@@ -120,5 +120,5 @@ class NightEntry(HalfPageLayout):
     """
 
     return super().create_page_header\
-      ( header_txt=self.HEADER_TXT
+      ( header_txt=self.PAGE_HEADER_TXT
       , font_size=8)

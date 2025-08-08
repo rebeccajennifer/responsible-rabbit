@@ -43,7 +43,7 @@ class MonthEntry(HalfPageLayout):
   Daily entry layout.
   """
 
-  HEADER_TXT: str =\
+  PAGE_HEADER_TXT: str =\
     'Month #'\
     + Strings.DATE_STR\
     + Strings.RIGHT_ARROW\
@@ -119,4 +119,4 @@ class MonthEntry(HalfPageLayout):
     """
 
     return super().create_page_header\
-      (header_txt=self.HEADER_TXT)
+      (header_txt=self.PAGE_HEADER_TXT)

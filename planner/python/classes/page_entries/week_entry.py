@@ -45,6 +45,9 @@ class WeekEntry0(HalfPageLayout):
   Daily entry layout.
   """
 
+  PAGE_HEADER_TXT: str =\
+    'Week #' + 6 * Strings.SPACE + 'Reflections and Insights'
+
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0
@@ -141,13 +144,19 @@ class WeekEntry0(HalfPageLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.WEEK_PAGE_HEADER_TXT_0)
+      (header_txt=self.PAGE_HEADER_TXT)
 
 #_______________________________________________________________________
 class WeekEntry1(HalfPageLayout):
   """
   Daily entry layout.
   """
+
+  PAGE_HEADER_TXT: str = 'Week #'\
+    + 6 * Strings.SPACE + 'Prep'\
+    + 4 * Strings.SPACE + '|'\
+    + 4 * Strings.SPACE + 'Start:'\
+    + Strings.DATE_STR
 
   #_____________________________________________________________________
   def __init__(self
@@ -280,4 +289,4 @@ class WeekEntry1(HalfPageLayout):
 
     """
     return\
-      super().create_page_header(header_txt=Strings.WEEK_PAGE_HEADER_TXT_1)
+      super().create_page_header(header_txt=self.PAGE_HEADER_TXT)

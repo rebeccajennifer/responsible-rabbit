@@ -51,6 +51,8 @@ class TestEntry(HalfPageLayout):
   Daily entry layout.
   """
 
+  PAGE_HEADER_TXT: str = 'Test Entry Page Header'
+
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0

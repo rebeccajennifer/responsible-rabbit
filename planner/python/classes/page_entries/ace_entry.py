@@ -43,7 +43,7 @@ class AceEntry(HalfPageLayout):
   Layout for ACE exercise
   """
 
-  HEADER_TXT: str = str(
+  PAGE_HEADER_TXT: str = str(
     'Acknowlege - Connect - Engage : '
     + 3 * Strings.SPACE
     + 'Re-Regulation Practice'
@@ -172,4 +172,4 @@ class AceEntry(HalfPageLayout):
     """
 
     return super().create_page_header\
-      (header_txt=self.HEADER_TXT)
+      (header_txt=self.PAGE_HEADER_TXT)

@@ -49,6 +49,8 @@ class DayEntry(HalfPageLayout):
   Daily entry layout.
   """
 
+  PAGE_HEADER_TXT: str = Strings.DAYS
+
   DEF_DAY_LAYOUT_PATH: str =\
     'day#-layout'
 
@@ -244,4 +246,4 @@ class DayEntry(HalfPageLayout):
     """
 
     return super().create_page_header\
-      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_HEADER)
+      (header_txt=self.PAGE_HEADER_TXT, font_family=Font.FONT_FAMILY_HEADER)

@@ -41,6 +41,8 @@ class BlankWrite(HalfPageLayout):
   Free write layout.
   """
 
+  PAGE_HEADER_TXT: str = ''
+
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0

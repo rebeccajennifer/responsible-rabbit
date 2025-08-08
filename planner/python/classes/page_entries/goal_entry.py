@@ -43,8 +43,6 @@ class GoalStrings:
   #_____________________________________________________________________
   # Goal layout strings
   #_____________________________________________________________________
-  PAGE_HEADER_TXT: str =\
-    'Goal #'
 
   CHECKLIST: str =\
      '[] Specific'    + Strings.SPACE\
@@ -91,6 +89,7 @@ class GoalEntry(HalfPageLayout):
   """
   Daily entry layout.
   """
+  PAGE_HEADER_TXT: str = 'Goal #'
 
   #_____________________________________________________________________
   def __init__(self
@@ -204,6 +203,6 @@ class GoalEntry(HalfPageLayout):
     """
 
     return super().create_page_header\
-      ( header_txt=GoalStrings.PAGE_HEADER_TXT
+      ( header_txt=self.PAGE_HEADER_TXT
       , font_size=Font.GOAL_HEADER_TXT_SIZE
       )
