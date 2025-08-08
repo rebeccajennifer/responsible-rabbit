@@ -45,7 +45,8 @@ class NightEntry(HalfPageLayout):
   HEADER_TXT: str =\
     'Nightly Reflection'
 
-  DAY_HEADER_TXT: str = Strings.DAYS_MONO + 8 * Strings.SPACE + Strings.DATE_STR_MONO
+  DAY_HEADER_TXT: str =\
+    Strings.DAYS_MONO + 8 * Strings.SPACE + Strings.DATE_STR_MONO
 
   #_____________________________________________________________________
   def __init__(self
