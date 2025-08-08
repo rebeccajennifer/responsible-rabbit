@@ -26,6 +26,7 @@
 #   Entry for goal. Fills content for one half sheet.
 #_______________________________________________________________________
 
+from copy import deepcopy
 import svgwrite.container
 
 from classes.constants.strings import PlannerStrings as Strings
@@ -202,7 +203,10 @@ class GoalEntry(HalfPageLayout):
 
     """
 
+    style = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
+    style.font_size_ = Font.GOAL_HEADER_TXT_SIZE
+
     return super().create_page_header\
       ( header_txt=self.PAGE_HEADER_TXT
-      , font_size=Font.GOAL_HEADER_TXT_SIZE
+      , style=style
       )
