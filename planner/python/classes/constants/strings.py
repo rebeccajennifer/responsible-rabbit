@@ -77,8 +77,7 @@ class PlannerStrings:
     'Thu' + 1 * SPACE +\
     'Fri' + 1 * SPACE +\
     'Sat' + 1 * SPACE +\
-    'Sun' + 3 * SPACE +\
-    DATE_STR_MONO
+    'Sun' + 3 * SPACE
 
   DEF_TABLE_HEADER_TXT: str =\
     'Table Header'
@@ -237,22 +236,6 @@ class PlannerStrings:
 
   WEEK_LOOKING_FORWARD: str =\
     'In the coming week, I\'m eager to experience:'
-
-  WEEK_HABIT_TRACKER_HEADINGS: list =\
-    [ 'Habits' + SPACE + 'Week #'
-    , 'Target'
-    , 'Mon'
-    , 'Tue'
-    , 'Wed'
-    , 'Thu'
-    , 'Fri'
-    , 'Sat'
-    , 'Sun'
-    , 'Tally'
-    ]
-
-  HABIT_PAGE_HEADER_TXT: str =\
-    'Habit Tracking' + 3 * SPACE + 'Month #'
 
   #_____________________________________________________________________
   # Month layout strings

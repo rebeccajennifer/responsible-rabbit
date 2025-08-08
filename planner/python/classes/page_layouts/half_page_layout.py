@@ -94,7 +94,9 @@ class HalfPageLayout(svgwrite.container.Group):
     # TODO: fix hack
     if (self.show_page_header_):
       self.content_insert_pt_y_ : int =\
-        self.page_header_insert_pt_y_ + self.page_header_.total_hght_
+        self.page_header_insert_pt_y_ +\
+        self.page_header_.total_hght_ +\
+        pad_under_page_header * Dims.BRD_MARGIN_PX
     else:
       self.content_insert_pt_y_ : int = self.page_header_insert_pt_y_
 
@@ -143,7 +145,6 @@ class HalfPageLayout(svgwrite.container.Group):
     content: VerticalStack =\
       VerticalStack\
       ( obj_list=self.entries_
-      , add_top_pad=self.pad_bet_elements_
       , total_hght=self.content_hght_
       , show_outline=False
       , outline_color=Colors.FLUX_GRN
