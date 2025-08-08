@@ -153,18 +153,3 @@ class TestEntry(HalfPageLayout):
     #self.entries_.append(test2)
 
     return
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    return super().create_page_header\
-      (header_txt=Strings.DEF_PAGE_HEADER_TXT)

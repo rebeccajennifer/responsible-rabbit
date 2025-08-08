@@ -206,7 +206,4 @@ class GoalEntry(HalfPageLayout):
     style = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
     style.font_size_ = Font.GOAL_HEADER_TXT_SIZE
 
-    return super().create_page_header\
-      ( header_txt=self.PAGE_HEADER_TXT
-      , style=style
-      )
+    return super().create_page_header(style=style)

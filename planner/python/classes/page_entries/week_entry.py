@@ -131,21 +131,6 @@ class WeekEntry0(HalfPageLayout):
 
     return
 
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    return super().create_page_header\
-      (header_txt=self.PAGE_HEADER_TXT)
-
 #_______________________________________________________________________
 class WeekEntry1(HalfPageLayout):
   """
@@ -276,17 +261,3 @@ class WeekEntry1(HalfPageLayout):
     )
 
     return
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-    return\
-      super().create_page_header(header_txt=self.PAGE_HEADER_TXT)

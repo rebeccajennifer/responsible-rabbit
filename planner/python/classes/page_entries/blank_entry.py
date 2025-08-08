@@ -94,21 +94,3 @@ class BlankWrite(HalfPageLayout):
     """
 
     super().add_content()
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    page_header = super().create_page_header\
-      ( header_txt=self.header_txt_
-      )
-
-    return page_header

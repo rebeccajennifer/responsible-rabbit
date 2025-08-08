@@ -122,7 +122,4 @@ class NightEntry(HalfPageLayout):
     style = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
     style.font_size_ = 8
 
-    return super().create_page_header\
-      ( header_txt=self.PAGE_HEADER_TXT
-      , style=style
-      )
+    return super().create_page_header(style=style)

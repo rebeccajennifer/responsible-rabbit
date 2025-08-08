@@ -179,12 +179,7 @@ class HalfPageLayout(svgwrite.container.Group):
 
   #_____________________________________________________________________
   def create_page_header(self
-  , header_txt = Strings.DEF_PAGE_HEADER_TXT
-  , font_color: str = 0
-  , font_size: int = 0
-  , font_family: str = 0
-  , box_fill_color: str = 0
-  , box_brdr_color: str = 0
+  , header_txt = ''
   , wrap_txt: bool = False
   , style = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
   ) -> TextRowGroup:
@@ -198,22 +193,10 @@ class HalfPageLayout(svgwrite.container.Group):
       Text box for page header
     """
 
-    style = deepcopy(style)
+    if (not header_txt):
+      header_txt = self.PAGE_HEADER_TXT
 
-    #___________________________________________________________________
-    # Modify header style
-    #___________________________________________________________________
-    if (font_color):
-      style.font_color_ = font_color
-    if (font_size):
-      style.font_size_ = font_size
-    if (font_family):
-      style.font_family_ = font_family
-    if (box_fill_color):
-      style.backgnd_color_ = box_fill_color
-    if (box_brdr_color):
-      style.outline_color_ = box_brdr_color
-    #___________________________________________________________________
+    style = deepcopy(style)
 
     page_header: TextRowGroup =\
       TextRowGroup\
