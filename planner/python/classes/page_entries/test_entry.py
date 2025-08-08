@@ -68,6 +68,7 @@ class TestEntry(HalfPageLayout):
     , total_wdth=total_wdth
     , addl_args=addl_args
     , pad_under_page_header=True
+    , pad_bet_elements=True
     )
 
     return
@@ -89,35 +90,38 @@ class TestEntry(HalfPageLayout):
     style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
     style.line_spc_=1
 
-    fill_hght: int = self.calc_remaining_hght_per_element(3)
     fill_hght: int = self.calc_remaining_hght_per_element(2)
     fill_hght: int = self.calc_remaining_hght_per_element(1)
+    fill_hght: int = self.calc_remaining_hght_per_element(3)
 
     style = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
     style.font_size_=14
 
     bleh0 = TextRowGroup(self.content_wdth_
     , text='M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M '
-    , style=style
+    , style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
+    , total_hght=fill_hght
     )
 
     style1 = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
     bleh1 = TextRowGroup(self.content_wdth_
     , text='1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 79 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 '
-    , style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
+    , style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
+    , total_hght=fill_hght
     )
 
     style2 = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
     style2.font_size_=14
     bleh2 = TextRowGroup(self.content_wdth_
     , text='1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 79 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 '
-    , style=style2
+    , style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
+    , total_hght=fill_hght
     )
 
     test0=ColumnTable\
           ( total_wdth=self.content_wdth_
           #, total_hght=fill_hght
-          , total_hght=100
+          , total_hght=fill_hght
           #, total_hght=self.content_hght_
           , header_txt_lst=['','','']
           , text_style=style

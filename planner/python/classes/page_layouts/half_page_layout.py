@@ -150,6 +150,7 @@ class HalfPageLayout(svgwrite.container.Group):
       , total_hght=self.content_hght_
       , show_outline=False
       , outline_color=Colors.FLUX_GRN
+      , pad_bet_elements=self.pad_bet_elements_
       )
 
     # Move page content to correct location
@@ -232,7 +233,7 @@ class HalfPageLayout(svgwrite.container.Group):
 
     for entry in self.entries_:
       remaining_hght =\
-        remaining_hght - entry.total_hght_ - padding * self.pad_bet_elements_
+        remaining_hght - entry.total_hght_ - padding
 
     fill_hght: int = remaining_hght / elements_remaining
 

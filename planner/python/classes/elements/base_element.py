@@ -68,12 +68,18 @@ class VerticalStack(svgwrite.container.Group):
 
     content_hght: int = 0
 
+    #___________________________________________________________________
+    # Calculate total content height and width of object
+    # Total height is sum of all elements (not including padding)
+    # Total width is width of widest element
+    #___________________________________________________________________
     for i in range(len(obj_list)):
       content_hght += obj_list[i].total_hght_
 
       if (self.total_wdth_ < obj_list[i].total_wdth_):
         self.total_wdth_ = obj_list[i].total_wdth_
 
+    #___________________________________________________________________
     if (total_hght > 0 and len(obj_list) > 1):
       padding =\
         ( total_hght\
