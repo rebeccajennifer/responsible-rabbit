@@ -109,8 +109,7 @@ class TestEntry0(HalfPageLayout):
 
     x: VerticalStack =\
       VerticalStack\
-      ( add_top_pad=False
-      , obj_list=obj_list
+      ( obj_list=obj_list
       )
 
     #fill_hght: int = self.calc_remaining_hght_per_element(1)

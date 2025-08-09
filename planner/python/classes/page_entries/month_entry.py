@@ -91,7 +91,7 @@ class MonthEntry(HalfPageLayout):
     week_table = SingleLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=1
-      , total_hght=175
+      , total_hght=fill_hght
       , header_txt=self.WEEK_HEADER_TXT
       , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
       , show_outline=True

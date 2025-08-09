@@ -34,6 +34,7 @@ from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerFontStyle as Font
+from classes.style.style import PlannerColors as Colors
 
 from classes.elements.base_element import VerticalStack
 from classes.elements.base_element import HorizontalStack
@@ -67,8 +68,8 @@ class TestEntry(HalfPageLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , addl_args=addl_args
-    , pad_under_page_header=True
-    , pad_bet_elements=True
+    , pad_under_page_header=False
+    #, pad_bet_elements=False
     )
 
     return
@@ -90,51 +91,66 @@ class TestEntry(HalfPageLayout):
     style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
     style.line_spc_=1
 
-    fill_hght: int = self.calc_remaining_hght_per_element(2)
     fill_hght: int = self.calc_remaining_hght_per_element(1)
-    fill_hght: int = self.calc_remaining_hght_per_element(3)
 
     style = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
-    style.font_size_=14
+    style.font_size_=34
 
-    bleh0 = TextRowGroup(self.content_wdth_
-    , text='M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M '
-    , style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
+
+    bleh0 = SingleLineTable(row_count=1,
+      header_txt='bleh',
+      total_hght=40,
+      text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE,
+      show_outline=True, total_wdth=self.content_wdth_
+    )
+
+    self.entries_ = [bleh0]
+    fill_hght: int = self.calc_remaining_hght_per_element(3)
+
+    bleh1= TextRowGroup(self.content_wdth_
+    , text='M M M M M M M M M M M M '
+    , style=style
     , total_hght=fill_hght
     )
 
-    style1 = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
-    bleh1 = TextRowGroup(self.content_wdth_
-    , text='1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 79 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 '
-    , style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
+    style3 = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
+    style3.outline_color_=Colors.FLUX_BLK
+    bleh3 = TextRowGroup(self.content_wdth_
+    , text='1 3 5 7 9 1 3 5 7 9 1'
+    , style=style3
     , total_hght=fill_hght
     )
 
     style2 = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
-    style2.font_size_=14
+    style2.font_size_=24
+    style2.outline_color_=Colors.FLUX_GRN
     bleh2 = TextRowGroup(self.content_wdth_
-    , text='1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 79 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 '
-    , style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
+    , text='1 3 5 7 9 1 3 5 7 9 1 3'
     , total_hght=fill_hght
+    , style=style2
     )
 
-    test0=ColumnTable\
-          ( total_wdth=self.content_wdth_
-          #, total_hght=fill_hght
-          , total_hght=fill_hght
-          #, total_hght=self.content_hght_
-          , header_txt_lst=['','','']
-          , text_style=style
-          , row_count=2
-          , show_outline=True
-          )
+    self.entries_ = self.entries_ + [bleh1, bleh2, bleh3]
 
-    test1= deepcopy(test0)
-    test2= deepcopy(test0)
+    #test0=ColumnTable\
+    #      ( total_wdth=self.content_wdth_
+    #      #, total_hght=fill_hght
+    #      , total_hght=fill_hght
+    #      #, total_hght=self.content_hght_
+    #      , header_txt_lst=['','','']
+    #      , text_style=style
+    #      , row_count=2
+    #      , show_outline=True
+    #      )
 
-    obj_list=[test0, test1, test2]
-    obj_list=[test0, test1]
-    obj_list=[bleh0, bleh1, bleh2]
+    #test1= deepcopy(test0)
+    #test2= deepcopy(test0)
+
+    #obj_list=[test0, test1, test2]
+    #obj_list=[test0, test1]
+    #obj_list=[bleh0, bleh1, bleh2]
+    obj_list=[bleh1]
+    obj_list=[bleh1, bleh2]
 
     #x: VerticalStack = VerticalStack( add_top_pad=False, obj_list=obj_list)
 
@@ -148,10 +164,10 @@ class TestEntry(HalfPageLayout):
     #      , show_outline=True
     #      )
 
+    fill_hght: int = self.calc_remaining_hght_per_element(2)
 
 
     #self.entries_.append(x)
-    self.entries_ = obj_list
     #self.entries_.append(test0)
     #self.entries_.append(test1)
     #self.entries_.append(test2)

@@ -45,7 +45,7 @@ class AceEntry(HalfPageLayout):
 
   PAGE_HEADER_TXT: str = str(
     'Acknowlege - Connect - Engage : '
-    + 3 * Strings.SPACE
+    + 2 * Strings.SPACE
     + 'Re-Regulation Practice'
   )
 
@@ -98,12 +98,7 @@ class AceEntry(HalfPageLayout):
     prompt_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
 
     self.entries_: list =\
-    [ TextRowGroup\
-      ( text=self.ACKNOWLEDGE_HEADER
-      , total_wdth=self.content_wdth_
-      , style=header_style
-      )
-    , DualLineTable\
+    [ DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=3
       , header_txt=self.ACKN_PROMPT_MANFST
@@ -124,11 +119,6 @@ class AceEntry(HalfPageLayout):
       , text_style=prompt_style
       , show_outline=False
       )
-    , TextRowGroup\
-      ( text=self.CONNECT_HEADER
-      , total_wdth=self.content_wdth_
-      , style=header_style
-      )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=1
@@ -143,11 +133,6 @@ class AceEntry(HalfPageLayout):
       , text_style=prompt_style
       , show_outline=False
       )
-    , TextRowGroup\
-      ( text=self.ENGAGE_HEADER
-      , total_wdth=self.content_wdth_
-      , style=header_style
-      )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=2
@@ -156,5 +141,33 @@ class AceEntry(HalfPageLayout):
       , show_outline=False
       )
     ]
+
+    fill_hght: int = self.calc_remaining_hght_per_element(3)
+
+    a_header: TextRowGroup =\
+      TextRowGroup\
+      ( text=self.ACKNOWLEDGE_HEADER
+      , total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , style=header_style
+      )
+
+    e_header: TextRowGroup =\
+      TextRowGroup\
+      ( text=self.ENGAGE_HEADER
+      , total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , style=header_style
+      )
+
+    c_header: TextRowGroup =\
+      TextRowGroup\
+      ( text=self.CONNECT_HEADER
+      , total_wdth=self.content_wdth_
+      , style=header_style
+      , total_hght=fill_hght
+      )
+
+    self.entries_ = [a_header] + self.entries_[0:3] + [c_header] + self.entries_[3:5] + [e_header] + [self.entries_[5]]
 
     return

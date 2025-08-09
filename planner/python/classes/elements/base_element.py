@@ -39,7 +39,6 @@ class VerticalStack(svgwrite.container.Group):
 
   def __init__(self
   , obj_list: list = []
-  , add_top_pad: bool = False
   , pad_bet_elements: bool = False
   , show_outline: bool = False
   , outline_color: bool = Colors.BORDER_COLOR
@@ -60,9 +59,9 @@ class VerticalStack(svgwrite.container.Group):
     """
 
     super().__init__()
-    padding: int = Dims.BRD_MARGIN_PX * add_top_pad
+    padding: int = Dims.BRD_MARGIN_PX * pad_bet_elements
     insert_x: int = 0
-    insert_y: int = Dims.BRD_MARGIN_PX * add_top_pad
+    insert_y: int = 0
     self.total_hght_: int = 0
     self.total_wdth_: int = 0
 
@@ -78,19 +77,18 @@ class VerticalStack(svgwrite.container.Group):
 
       if (self.total_wdth_ < obj_list[i].total_wdth_):
         self.total_wdth_ = obj_list[i].total_wdth_
-
     #___________________________________________________________________
-    if (total_hght > 0 and len(obj_list) > 1):
-      padding =\
-        ( total_hght\
-        #- Dims.BRD_MARGIN_PX * add_top_pad\
-        - content_hght
-        ) / (len(obj_list)-1)
+    #if (total_hght > 0 and len(obj_list) > 1):
+    #  padding =\
+    #    ( total_hght\
+    #    #- Dims.BRD_MARGIN_PX * add_top_pad\
+    #    - content_hght
+    #    ) / (len(obj_list)-1)
 
-      self.total_hght_ = total_hght
+    #  self.total_hght_ = total_hght
 
-    else:
-      self.total_hght_ = content_hght + padding * (len(obj_list))
+    #else:
+    #  self.total_hght_ = content_hght + padding * (len(obj_list))
 
     for i in range(len(obj_list)):
 
@@ -129,10 +127,6 @@ class HorizontalStack(svgwrite.container.Group):
       obj_list    : List of SVG elements to be stacked. Each
                     element is expected to have a 'total_hght_'
                     attribute defining its height.
-
-      add_top_pad : If True, adds uniform vertical padding
-                    between elements. Padding is not added
-                    above the first or below the last element.
     """
 
     super().__init__()

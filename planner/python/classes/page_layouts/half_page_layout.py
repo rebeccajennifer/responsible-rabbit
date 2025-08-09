@@ -83,13 +83,16 @@ class HalfPageLayout(svgwrite.container.Group):
     #___________________________________________________________________
     # Content height is affected by generation of page header
     #___________________________________________________________________
-    # 2 * padding is for top and bottom padding - before page header
-    # and below content
+    # 2 * padding:
+    #   1) between top page border and page header
+    #   2) between bottom page border and bottom element
+    #
+    # pad_under_page_header reduces content height
     #___________________________________________________________________
     self.content_hght_: int = self.total_hght_\
       - 2 * padding\
-      - self.page_header_.total_hght_\
-      - pad_under_page_header * Dims.BRD_MARGIN_PX
+      - pad_under_page_header * Dims.BRD_MARGIN_PX\
+      - self.page_header_.total_hght_
 
     self.content_insert_pt_x_ : int = self.page_header_insert_pt_x_
 
@@ -225,15 +228,19 @@ class HalfPageLayout(svgwrite.container.Group):
 
     padding: int = self.pad_bet_elements_ * Dims.BRD_MARGIN_PX
 
+    if (len(self.entries_) == 0 and elements_remaining == 1):
+      return self.content_hght_
+
+    # Calculate the remaining height not including padding between elements
     remaining_hght: int = self.content_hght_\
       - padding * (elements_remaining - 1)
 
-    # Debugging
-    remaining_hght: int = self.content_hght_
+    remaining_hght: int = remaining_hght -\
+      (padding * (len(self.entries_)))
 
     for entry in self.entries_:
       remaining_hght =\
-        remaining_hght - entry.total_hght_ - padding
+        remaining_hght - entry.total_hght_
 
     fill_hght: int = remaining_hght / elements_remaining
 

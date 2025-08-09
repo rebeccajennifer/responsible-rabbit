@@ -108,10 +108,9 @@ class RowGroup(svgwrite.container.Group):
     if ((not inner_pad_top) and (not inner_pad_bot)):
       self.total_hght_ = self.content_height_
 
-    else:
+    elif(not total_hght):
       self.total_hght_ = self.content_height_\
         + Font.TEXT_PADDING * (inner_pad_bot + inner_pad_top)
-
 
     self.add_content()
 
