@@ -92,7 +92,6 @@ class RowGroup(svgwrite.container.Group):
 
     row_count     : int  = len(obj_list)
 
-
     #___________________________________________________________________
     # Determine heights based on given information
     #___________________________________________________________________
@@ -243,7 +242,6 @@ class TextRowGroup(RowGroup):
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , text: str = ''
-  , line_spc: int = 1
   , style: TextBoxStyle = TextBoxStyle()
   , wrap_txt: bool = True
   ):
@@ -272,7 +270,7 @@ class TextRowGroup(RowGroup):
     self.total_wdth_    : int  = total_wdth
 
     # Error handling for line space
-    if (line_spc < 1):
+    if (self.line_spc_ < 1):
       self.line_spc_ = 1
 
     self.row_hght_ = self.line_spc_ * self.font_size_

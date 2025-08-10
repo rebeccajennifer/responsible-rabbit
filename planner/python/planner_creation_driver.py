@@ -170,6 +170,8 @@ if __name__ == '__main__':
   test_layout.save_pdf()
 
 
+  """
+  """
   div_dir: str = join(args.out_dir ,'..', 'dividers')
   generate_habit_tracker(is_portrait, div_dir)
   generate_dividers(is_portrait, div_dir)
@@ -180,6 +182,8 @@ if __name__ == '__main__':
   , is_preview=args.preview
   , out_dir=args.out_dir
   )
+  """
+  """
 
   new_line(10)
   print("all done")
