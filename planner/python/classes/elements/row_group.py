@@ -239,7 +239,6 @@ class TextRowGroup(RowGroup):
   def __init__(self
   , total_wdth: int = 0
   , total_hght: int = 0
-  , y_offset: int = 0
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , text: str = ''
@@ -268,9 +267,9 @@ class TextRowGroup(RowGroup):
     self.font_family_   = style.font_family_
     self.font_size_     = style.font_size_
     self.line_spc_      = style.line_spc_
-    #self.y_offset_      = style.y_offset_
+    self.y_offset_      = style.y_offset_
 
-    #self.total_hght_    : int  = total_hght
+    self.total_hght_    : int  = total_hght
     self.total_wdth_    : int  = total_wdth
 
     # Error handling for line space
@@ -327,14 +326,12 @@ class TextRowGroup(RowGroup):
     return\
       super().__init__\
       ( total_wdth=total_wdth
-      #, total_hght=self.total_hght_
-      , total_hght=total_hght
+      , total_hght=self.total_hght_
       , show_outline=self.show_outline_
       , outline_color=self.outline_color_
       , backgnd_color=self.backgnd_color_
       , row_hght=self.row_hght_
-      #, y_offset=self.y_offset_
-      , y_offset=y_offset
+      , y_offset=self.y_offset_
       , inner_pad_top=self.inner_pad_top_
       , inner_pad_bot=self.inner_pad_bot_
       , inner_pad_lft=self.inner_pad_lft_
