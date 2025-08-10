@@ -26,8 +26,6 @@
 #   Entry for week. Fills content for one half sheet.
 #_______________________________________________________________________
 
-import svgwrite.container
-
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.base_element import VerticalStack
 from classes.elements.row_group import TextRowGroup

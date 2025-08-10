@@ -26,9 +26,7 @@
 #   Entry for month calendar.
 #_______________________________________________________________________
 
-import svgwrite.container
 from copy import deepcopy
-
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.table import SingleLineTable

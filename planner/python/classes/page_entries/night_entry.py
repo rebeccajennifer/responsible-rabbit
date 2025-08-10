@@ -26,7 +26,6 @@
 #   Nightly reflection
 #_______________________________________________________________________
 
-import svgwrite.container
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
@@ -62,6 +61,7 @@ class NightEntry(HalfPageLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , addl_args=addl_args
+    , pad_under_page_header=False
     , pad_bet_elements=False
     )
 
@@ -80,9 +80,6 @@ class NightEntry(HalfPageLayout):
       None
     """
     super().create_content()
-
-    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
-    style.line_spc_=1
 
     style = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
     style.font_size_ = 8
@@ -109,20 +106,3 @@ class NightEntry(HalfPageLayout):
     ]
 
     return
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    style = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
-    style.font_size_ = 8
-
-    return super().create_page_header(style=style)

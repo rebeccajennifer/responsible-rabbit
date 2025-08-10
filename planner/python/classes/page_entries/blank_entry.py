@@ -26,12 +26,8 @@
 #   Entry for future vision. Fills content for one half sheet.
 #_______________________________________________________________________
 
-import svgwrite.container
-
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.elements.row_group import DualLineRowGroup
-from classes.elements.row_group import LineRowGroup
-
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
 

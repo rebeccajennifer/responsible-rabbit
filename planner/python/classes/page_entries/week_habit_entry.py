@@ -26,7 +26,6 @@
 #   Entry for week. Fills content for one half sheet.
 #_______________________________________________________________________
 
-import svgwrite.container
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings

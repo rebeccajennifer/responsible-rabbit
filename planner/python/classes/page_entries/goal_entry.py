@@ -30,15 +30,13 @@ from copy import deepcopy
 import svgwrite.container
 
 from classes.constants.strings import PlannerStrings as Strings
-
 from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
+from classes.style.std_styles import StdTextBoxStyles
+from classes.style.style import PlannerFontStyle as Font
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
-
-from classes.style.style import PlannerFontStyle as Font
-from classes.style.std_styles import StdTextBoxStyles
 
 class GoalStrings:
   #_____________________________________________________________________

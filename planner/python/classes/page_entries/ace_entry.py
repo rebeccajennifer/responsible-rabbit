@@ -26,7 +26,6 @@
 #   Nightly reflection
 #_______________________________________________________________________
 
-import svgwrite.container
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
@@ -168,6 +167,11 @@ class AceEntry(HalfPageLayout):
       , total_hght=fill_hght
       )
 
-    self.entries_ = [a_header] + self.entries_[0:3] + [c_header] + self.entries_[3:5] + [e_header] + [self.entries_[5]]
+    self.entries_ = [a_header]  +\
+      self.entries_[0:3]        +\
+      [c_header]                +\
+      self.entries_[3:5]        +\
+      [e_header]                +\
+      [self.entries_[5]]
 
     return

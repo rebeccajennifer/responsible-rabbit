@@ -26,12 +26,9 @@
 #   Layout for daily entry.
 #_______________________________________________________________________
 
-import svgwrite.container
-
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.style.style import PlannerFontStyle as Font
 from classes.style.std_styles import StdLineRowGroupStyles
 from classes.style.std_styles import StdTextBoxStyles
 
