@@ -114,13 +114,6 @@ class WeekEntry0(HalfPageLayout):
       )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_THOUGHTS
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , row_count=8
-      , show_outline=True
-      )
-    , DualLineTable\
-      ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_GRATITUDE
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=1
@@ -128,6 +121,20 @@ class WeekEntry0(HalfPageLayout):
       , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
     ]
+
+    fill_hght: int = self.calc_remaining_hght_per_element(1)
+    self.entries_.insert(5
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , header_txt=Strings.WEEK_THOUGHTS
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , row_count=8
+      , show_outline=True
+      )
+    )
+
+
 
     return
 
@@ -248,7 +255,7 @@ class WeekEntry1(HalfPageLayout):
     fill_hght: int =\
       self.calc_remaining_hght_per_element()
 
-    self.entries_.insert(4,
+    self.entries_.append(
       DualLineTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
