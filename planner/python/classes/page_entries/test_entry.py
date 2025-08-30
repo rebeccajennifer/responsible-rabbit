@@ -45,14 +45,31 @@ from classes.elements.table import ColumnTable
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
+from classes.constants.debug_const import DebugConst
 
 #_______________________________________________________________________
 class TestEntry(HalfPageLayout):
   """
-  Daily entry layout.
+  Layout for ACE exercise
   """
 
-  PAGE_HEADER_TXT: str = 'Test Entry Page Header'
+  PAGE_HEADER_TXT: str = str(
+    'Acknowlege - Connect - Engage : '
+    + 2 * Strings.SPACE
+    + 'Re-Regulation Practice'
+  )
+
+  ACKNOWLEDGE_HEADER  : str = 'Acknowledge'
+  CONNECT_HEADER      : str = 'Connect'
+  ENGAGE_HEADER       : str = '(Re-)Engage'
+
+  ACKN_PROMPT_MANFST: str = 'How is the dysregulation manifesting?'
+  ACKN_PROMPT_EMOTNS: str = 'What emotions are you experiencing?'
+  ACKN_PROMPT_BEFORE: str = 'What was happening before the trigger?'
+
+  CNCT_PROMPT_TECHNQU: str = 'Re-regulation technique to practice'
+  CNCT_PROMPT_REFLECT: str = 'Reflections after practice'
+  ENGA_PROMPT_ACTIVTY: str = 'What activity will you (re-)engage with?'
 
   #_____________________________________________________________________
   def __init__(self
@@ -68,8 +85,6 @@ class TestEntry(HalfPageLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , addl_args=addl_args
-    , pad_under_page_header=False
-    #, pad_bet_elements=False
     )
 
     return
@@ -88,88 +103,25 @@ class TestEntry(HalfPageLayout):
     """
     super().create_content()
 
-    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
-    style.line_spc_=1
-
-    fill_hght: int = self.calc_remaining_hght_per_element(1)
-
-    style = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
-    style.font_size_=34
-
-
-    bleh0 = SingleLineTable(row_count=1,
-      header_txt='bleh',
-      total_hght=40,
-      text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE,
-      show_outline=True, total_wdth=self.content_wdth_
-    )
-
-    self.entries_ = [bleh0]
-    fill_hght: int = self.calc_remaining_hght_per_element(3)
-
-    bleh1= TextRowGroup(self.content_wdth_
-    , text='M M M M M M M M M M M M '
-    , style=style
-    , total_hght=fill_hght
-    )
+    header_style = deepcopy(StdTextBoxStyles.MED_BACK_HEADER_FONT)
+    header_style = deepcopy(StdTextBoxStyles.DRK_BACK_HEADER_FONT)
+    header_style.font_size_ = 16
+    prompt_style = deepcopy(StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE)
+    prompt_style.show_outline_ = True
 
     style3 = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
     style3.outline_color_=Colors.FLUX_BLK
+    style3.show_outline_=True
     bleh3 = TextRowGroup(self.content_wdth_
-    , text='1 3 5 7 9 1 3 5 7 9 1'
+    , text='MM 1M 1M 1M 1M 1 1 3 5 7 9 1 3 5 7 9 1'
     , style=style3
-    , total_hght=fill_hght
+    #, show_outline=True
+    , total_hght=30
     )
 
-    style2 = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
-    style2.font_size_=24
-    style2.outline_color_=Colors.FLUX_GRN
-    bleh2 = TextRowGroup(self.content_wdth_
-    , text='1 3 5 7 9 1 3 5 7 9 1 3'
-    , total_hght=fill_hght
-    , style=style2
-    )
+    self.entries_ = [bleh3]
+    #fill_hght: int = self.calc_remaining_hght_per_element(3)
 
-    self.entries_ = self.entries_ + [bleh1, bleh2, bleh3]
-
-    #test0=ColumnTable\
-    #      ( total_wdth=self.content_wdth_
-    #      #, total_hght=fill_hght
-    #      , total_hght=fill_hght
-    #      #, total_hght=self.content_hght_
-    #      , header_txt_lst=['','','']
-    #      , text_style=style
-    #      , row_count=2
-    #      , show_outline=True
-    #      )
-
-    #test1= deepcopy(test0)
-    #test2= deepcopy(test0)
-
-    #obj_list=[test0, test1, test2]
-    #obj_list=[test0, test1]
-    #obj_list=[bleh0, bleh1, bleh2]
-    obj_list=[bleh1]
-    obj_list=[bleh1, bleh2]
-
-    #x: VerticalStack = VerticalStack( add_top_pad=False, obj_list=obj_list)
-
-    #fill_hght: int = self.calc_remaining_hght_per_element(1)
-    #test1=ColumnTable\
-    #      ( total_wdth=self.content_wdth_
-    #      , total_hght=fill_hght
-    #      , header_txt_lst=Strings.WEEK_FULFILLMENT_AREAS_0
-    #      , text_style=style
-    #      , row_count=2
-    #      , show_outline=True
-    #      )
-
-    fill_hght: int = self.calc_remaining_hght_per_element(2)
-
-
-    #self.entries_.append(x)
-    #self.entries_.append(test0)
-    #self.entries_.append(test1)
-    #self.entries_.append(test2)
 
     return
+

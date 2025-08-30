@@ -27,6 +27,7 @@
 #_______________________________________________________________________
 
 import svgwrite.container
+from  copy import deepcopy
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
@@ -80,7 +81,7 @@ class FreeWritePromptEntry(HalfPageLayout):
     """
     super().create_content()
 
-    txt_box_test_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
+    txt_box_test_style = deepcopy(StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE)
     txt_box_test_style.line_spc_ = 1.2
 
     self.entries_: list =\

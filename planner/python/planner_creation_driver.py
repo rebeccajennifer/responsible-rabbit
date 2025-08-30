@@ -169,12 +169,11 @@ if __name__ == '__main__':
 
   test_layout.save_pdf()
 
-
-  """
-  """
   div_dir: str = join(args.out_dir ,'..', 'dividers')
   generate_habit_tracker(is_portrait, div_dir)
   generate_dividers(is_portrait, div_dir)
+  """
+  """
 
   PlannerAssembler\
   ( is_portrait=is_portrait

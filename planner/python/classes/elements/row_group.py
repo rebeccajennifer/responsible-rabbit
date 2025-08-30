@@ -43,6 +43,7 @@ from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
 from utils.utils import PlannerUtils as Utils
 
+from classes.constants.debug_const  import DebugConst
 
 #_______________________________________________________________________
 class RowGroup(svgwrite.container.Group):
@@ -77,6 +78,9 @@ class RowGroup(svgwrite.container.Group):
       inner_pad_rgt   : Pad right side of row inside border
     """
 
+    # Used for setting breakpoints while debugging
+    DebugConst.flag
+
     super().__init__()
 
     self.total_wdth_    : int  = total_wdth
@@ -96,6 +100,10 @@ class RowGroup(svgwrite.container.Group):
     # Determine heights based on given information
     #___________________________________________________________________
     self.total_hght_ = total_hght
+
+    # Used to pass to get_hght_from_rows
+    hght: int = total_hght
+
     #___________________________________________________________________
     # Determine content height
     #___________________________________________________________________
@@ -103,10 +111,17 @@ class RowGroup(svgwrite.container.Group):
       self.content_hght_ = total_hght -\
         Font.TEXT_PADDING * (inner_pad_top + inner_pad_bot)
 
-    self.content_hght_, self.row_hght_ =\
-      Utils.get_hght_from_rows(total_hght, row_count, row_hght)
+      # Used to pass to get_hght_from_rows, use calculated
+      # content height unless no height was given
+      hght = self.content_hght_
 
-    if ((not inner_pad_top) and (not inner_pad_bot)):
+    # If no height given, calculate content height based on
+    # row height and count. If height is provided, height is not
+    # recalculated.
+    self.content_hght_, self.row_hght_ =\
+      Utils.get_hght_from_rows(hght, row_count, row_hght)
+
+    if (not inner_pad_top and not inner_pad_bot):
       self.total_hght_ = self.content_hght_
 
     elif(not total_hght):

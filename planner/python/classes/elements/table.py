@@ -93,7 +93,7 @@ class DualLineTable(svgwrite.container.Group):
       line_row_hght = 0
 
     line_row_hght, row_hght = Utils.get_hght_from_rows\
-      ( total_hght=line_row_hght
+      ( hght=line_row_hght
       , row_count=row_count
       )
 
@@ -169,7 +169,7 @@ class SingleLineTable(svgwrite.container.Group):
       line_row_hght = 0
 
     line_row_hght, row_hght = Utils.get_hght_from_rows\
-      ( total_hght=line_row_hght
+      ( hght=line_row_hght
       , row_count=row_count
       )
 

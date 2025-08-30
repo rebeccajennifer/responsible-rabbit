@@ -23,7 +23,7 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Nightly reflection
+#   Entry for ACE exercise.
 #_______________________________________________________________________
 
 from copy import deepcopy
@@ -34,6 +34,8 @@ from classes.style.std_styles import StdTextBoxStyles
 from classes.elements.row_group import TextRowGroup
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
+
+from classes.constants.debug_const import DebugConst
 
 
 #_______________________________________________________________________
@@ -141,19 +143,12 @@ class AceEntry(HalfPageLayout):
       )
     ]
 
+    # Make header heights equal based on remaining height after prompts
     fill_hght: int = self.calc_remaining_hght_per_element(3)
 
     a_header: TextRowGroup =\
       TextRowGroup\
       ( text=self.ACKNOWLEDGE_HEADER
-      , total_wdth=self.content_wdth_
-      , total_hght=fill_hght
-      , style=header_style
-      )
-
-    e_header: TextRowGroup =\
-      TextRowGroup\
-      ( text=self.ENGAGE_HEADER
       , total_wdth=self.content_wdth_
       , total_hght=fill_hght
       , style=header_style
@@ -167,6 +162,15 @@ class AceEntry(HalfPageLayout):
       , total_hght=fill_hght
       )
 
+    e_header: TextRowGroup =\
+      TextRowGroup\
+      ( text=self.ENGAGE_HEADER
+      , total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , style=header_style
+      )
+
+    # Rearrange entries to include headers
     self.entries_ = [a_header]  +\
       self.entries_[0:3]        +\
       [c_header]                +\
