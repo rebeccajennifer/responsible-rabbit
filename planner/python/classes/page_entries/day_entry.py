@@ -26,12 +26,9 @@
 #   Layout for daily entry.
 #_______________________________________________________________________
 
-import svgwrite.container
-
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
-from classes.style.style import PlannerFontStyle as Font
 from classes.style.std_styles import StdLineRowGroupStyles
 from classes.style.std_styles import StdTextBoxStyles
 
@@ -48,6 +45,8 @@ class DayEntry(HalfPageLayout):
   """
   Daily entry layout.
   """
+
+  PAGE_HEADER_TXT: str = Strings.DAYS
 
   DEF_DAY_LAYOUT_PATH: str =\
     'day#-layout'
@@ -230,18 +229,3 @@ class DayEntry(HalfPageLayout):
     )
 
     return
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    return super().create_page_header\
-      (header_txt=Strings.DAYS, font_family=Font.FONT_FAMILY_HEADER)

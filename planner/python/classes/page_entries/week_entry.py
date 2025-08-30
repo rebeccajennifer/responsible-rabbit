@@ -26,8 +26,6 @@
 #   Entry for week. Fills content for one half sheet.
 #_______________________________________________________________________
 
-import svgwrite.container
-
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.base_element import VerticalStack
 from classes.elements.row_group import TextRowGroup
@@ -44,6 +42,9 @@ class WeekEntry0(HalfPageLayout):
   """
   Daily entry layout.
   """
+
+  PAGE_HEADER_TXT: str =\
+    'Week #' + 6 * Strings.SPACE + 'Reflections and Insights'
 
   #_____________________________________________________________________
   def __init__(self
@@ -111,13 +112,6 @@ class WeekEntry0(HalfPageLayout):
       )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
-      , header_txt=Strings.WEEK_THOUGHTS
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , row_count=8
-      , show_outline=True
-      )
-    , DualLineTable\
-      ( total_wdth=self.content_wdth_
       , header_txt=Strings.WEEK_GRATITUDE
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=1
@@ -126,28 +120,33 @@ class WeekEntry0(HalfPageLayout):
       )
     ]
 
+    fill_hght: int = self.calc_remaining_hght_per_element(1)
+    self.entries_.insert(5
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , header_txt=Strings.WEEK_THOUGHTS
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , row_count=8
+      , show_outline=True
+      )
+    )
+
+
+
     return
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    return super().create_page_header\
-      (header_txt=Strings.WEEK_PAGE_HEADER_TXT_0)
 
 #_______________________________________________________________________
 class WeekEntry1(HalfPageLayout):
   """
   Daily entry layout.
   """
+
+  PAGE_HEADER_TXT: str = 'Week #'\
+    + 6 * Strings.SPACE + 'Prep'\
+    + 4 * Strings.SPACE + '|'\
+    + 4 * Strings.SPACE + 'Start:'\
+    + Strings.DATE_STR
 
   #_____________________________________________________________________
   def __init__(self
@@ -254,7 +253,7 @@ class WeekEntry1(HalfPageLayout):
     fill_hght: int =\
       self.calc_remaining_hght_per_element()
 
-    self.entries_.insert(4,
+    self.entries_.append(
       DualLineTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
@@ -267,17 +266,3 @@ class WeekEntry1(HalfPageLayout):
     )
 
     return
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-    return\
-      super().create_page_header(header_txt=Strings.WEEK_PAGE_HEADER_TXT_1)

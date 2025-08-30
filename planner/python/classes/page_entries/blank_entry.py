@@ -26,12 +26,8 @@
 #   Entry for future vision. Fills content for one half sheet.
 #_______________________________________________________________________
 
-import svgwrite.container
-
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.elements.row_group import DualLineRowGroup
-from classes.elements.row_group import LineRowGroup
-
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
@@ -40,6 +36,8 @@ class BlankWrite(HalfPageLayout):
   """
   Free write layout.
   """
+
+  PAGE_HEADER_TXT: str = ''
 
   #_____________________________________________________________________
   def __init__(self
@@ -92,21 +90,3 @@ class BlankWrite(HalfPageLayout):
     """
 
     super().add_content()
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    page_header = super().create_page_header\
-      ( header_txt=self.header_txt_
-      )
-
-    return page_header

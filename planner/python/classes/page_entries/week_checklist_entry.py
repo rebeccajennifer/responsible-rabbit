@@ -26,7 +26,6 @@
 #   Entry for week. Fills content for one half sheet.
 #_______________________________________________________________________
 
-import svgwrite.container
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
@@ -104,17 +103,3 @@ class WeekCheckList(HalfPageLayout):
     ]
 
     return
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    return super().create_page_header(header_txt=self.PAGE_HEADER_TXT)

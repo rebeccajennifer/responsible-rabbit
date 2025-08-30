@@ -158,10 +158,6 @@ if __name__ == '__main__':
   if (args.preview):
     is_dbl_sided = True
 
-  div_dir: str = join(args.out_dir ,'..', 'dividers')
-  generate_habit_tracker(is_portrait, div_dir)
-  #generate_dividers(is_portrait, div_dir)
-
   test_layout=\
     PageLayout\
     ( is_portrait=False
@@ -173,12 +169,20 @@ if __name__ == '__main__':
 
   test_layout.save_pdf()
 
+  div_dir: str = join(args.out_dir ,'..', 'dividers')
+  generate_habit_tracker(is_portrait, div_dir)
+  generate_dividers(is_portrait, div_dir)
+  """
+  """
+
   PlannerAssembler\
   ( is_portrait=is_portrait
   , is_dbl_sided=is_dbl_sided
   , is_preview=args.preview
   , out_dir=args.out_dir
   )
+  """
+  """
 
   new_line(10)
   print("all done")

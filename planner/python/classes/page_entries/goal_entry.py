@@ -26,25 +26,22 @@
 #   Entry for goal. Fills content for one half sheet.
 #_______________________________________________________________________
 
+from copy import deepcopy
 import svgwrite.container
 
 from classes.constants.strings import PlannerStrings as Strings
-
 from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.elements.table import SingleLineTable
+from classes.style.std_styles import StdTextBoxStyles
+from classes.style.style import PlannerFontStyle as Font
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
-
-from classes.style.style import PlannerFontStyle as Font
-from classes.style.std_styles import StdTextBoxStyles
 
 class GoalStrings:
   #_____________________________________________________________________
   # Goal layout strings
   #_____________________________________________________________________
-  PAGE_HEADER_TXT: str =\
-    'Goal #'
 
   CHECKLIST: str =\
      '[] Specific'    + Strings.SPACE\
@@ -91,6 +88,7 @@ class GoalEntry(HalfPageLayout):
   """
   Daily entry layout.
   """
+  PAGE_HEADER_TXT: str = 'Goal #'
 
   #_____________________________________________________________________
   def __init__(self
@@ -203,7 +201,7 @@ class GoalEntry(HalfPageLayout):
 
     """
 
-    return super().create_page_header\
-      ( header_txt=GoalStrings.PAGE_HEADER_TXT
-      , font_size=Font.GOAL_HEADER_TXT_SIZE
-      )
+    style = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
+    style.font_size_ = Font.GOAL_HEADER_TXT_SIZE
+
+    return super().create_page_header(style=style)

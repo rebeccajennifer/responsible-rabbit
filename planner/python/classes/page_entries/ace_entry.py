@@ -23,10 +23,9 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Nightly reflection
+#   Entry for ACE exercise.
 #_______________________________________________________________________
 
-import svgwrite.container
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
@@ -36,6 +35,8 @@ from classes.elements.row_group import TextRowGroup
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
+from classes.constants.debug_const import DebugConst
+
 
 #_______________________________________________________________________
 class AceEntry(HalfPageLayout):
@@ -43,9 +44,9 @@ class AceEntry(HalfPageLayout):
   Layout for ACE exercise
   """
 
-  HEADER_TXT: str = str(
+  PAGE_HEADER_TXT: str = str(
     'Acknowlege - Connect - Engage : '
-    + 3 * Strings.SPACE
+    + 2 * Strings.SPACE
     + 'Re-Regulation Practice'
   )
 
@@ -98,12 +99,7 @@ class AceEntry(HalfPageLayout):
     prompt_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
 
     self.entries_: list =\
-    [ TextRowGroup\
-      ( text=self.ACKNOWLEDGE_HEADER
-      , total_wdth=self.content_wdth_
-      , style=header_style
-      )
-    , DualLineTable\
+    [ DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=3
       , header_txt=self.ACKN_PROMPT_MANFST
@@ -124,11 +120,6 @@ class AceEntry(HalfPageLayout):
       , text_style=prompt_style
       , show_outline=False
       )
-    , TextRowGroup\
-      ( text=self.CONNECT_HEADER
-      , total_wdth=self.content_wdth_
-      , style=header_style
-      )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=1
@@ -143,11 +134,6 @@ class AceEntry(HalfPageLayout):
       , text_style=prompt_style
       , show_outline=False
       )
-    , TextRowGroup\
-      ( text=self.ENGAGE_HEADER
-      , total_wdth=self.content_wdth_
-      , style=header_style
-      )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=2
@@ -157,19 +143,39 @@ class AceEntry(HalfPageLayout):
       )
     ]
 
+    # Make header heights equal based on remaining height after prompts
+    fill_hght: int = self.calc_remaining_hght_per_element(3)
+
+    a_header: TextRowGroup =\
+      TextRowGroup\
+      ( text=self.ACKNOWLEDGE_HEADER
+      , total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , style=header_style
+      )
+
+    c_header: TextRowGroup =\
+      TextRowGroup\
+      ( text=self.CONNECT_HEADER
+      , total_wdth=self.content_wdth_
+      , style=header_style
+      , total_hght=fill_hght
+      )
+
+    e_header: TextRowGroup =\
+      TextRowGroup\
+      ( text=self.ENGAGE_HEADER
+      , total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , style=header_style
+      )
+
+    # Rearrange entries to include headers
+    self.entries_ = [a_header]  +\
+      self.entries_[0:3]        +\
+      [c_header]                +\
+      self.entries_[3:5]        +\
+      [e_header]                +\
+      [self.entries_[5]]
+
     return
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    return super().create_page_header\
-      (header_txt=self.HEADER_TXT)

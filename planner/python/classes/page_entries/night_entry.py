@@ -26,7 +26,6 @@
 #   Nightly reflection
 #_______________________________________________________________________
 
-import svgwrite.container
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
@@ -42,7 +41,7 @@ class NightEntry(HalfPageLayout):
   Daily entry layout.
   """
 
-  HEADER_TXT: str =\
+  PAGE_HEADER_TXT: str =\
     'Nightly Reflection'
 
   DAY_HEADER_TXT: str =\
@@ -62,6 +61,8 @@ class NightEntry(HalfPageLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , addl_args=addl_args
+    , pad_under_page_header=False
+    , pad_bet_elements=False
     )
 
     return
@@ -80,16 +81,15 @@ class NightEntry(HalfPageLayout):
     """
     super().create_content()
 
-    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
-    style.line_spc_=1
-
     style = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
     style.font_size_ = 8
+
+    fill_hght: int = self.calc_remaining_hght_per_element(7)
 
     day_reflection = DualLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=3
-      , total_hght=105
+      , total_hght=fill_hght
       , header_txt=self.DAY_HEADER_TXT
       , text_style=style
       , show_outline=True
@@ -106,19 +106,3 @@ class NightEntry(HalfPageLayout):
     ]
 
     return
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    return super().create_page_header\
-      ( header_txt=self.HEADER_TXT
-      , font_size=8)

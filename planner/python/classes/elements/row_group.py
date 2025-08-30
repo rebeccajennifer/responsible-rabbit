@@ -43,6 +43,7 @@ from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
 from utils.utils import PlannerUtils as Utils
 
+from classes.constants.debug_const  import DebugConst
 
 #_______________________________________________________________________
 class RowGroup(svgwrite.container.Group):
@@ -77,6 +78,9 @@ class RowGroup(svgwrite.container.Group):
       inner_pad_rgt   : Pad right side of row inside border
     """
 
+    # Used for setting breakpoints while debugging
+    DebugConst.flag
+
     super().__init__()
 
     self.total_wdth_    : int  = total_wdth
@@ -92,26 +96,37 @@ class RowGroup(svgwrite.container.Group):
 
     row_count     : int  = len(obj_list)
 
-
     #___________________________________________________________________
     # Determine heights based on given information
     #___________________________________________________________________
     self.total_hght_ = total_hght
+
+    # Used to pass to get_hght_from_rows
+    hght: int = total_hght
+
+    #___________________________________________________________________
+    # Determine content height
     #___________________________________________________________________
     if (total_hght and (inner_pad_top or inner_pad_bot)):
-      self.content_height_ = total_hght -\
+      self.content_hght_ = total_hght -\
         Font.TEXT_PADDING * (inner_pad_top + inner_pad_bot)
 
-    self.content_height_, self.row_hght_ =\
-      Utils.get_hght_from_rows(total_hght, row_count, row_hght)
+      # Used to pass to get_hght_from_rows, use calculated
+      # content height unless no height was given
+      hght = self.content_hght_
 
-    if ((not inner_pad_top) and (not inner_pad_bot)):
-      self.total_hght_ = self.content_height_
+    # If no height given, calculate content height based on
+    # row height and count. If height is provided, height is not
+    # recalculated.
+    self.content_hght_, self.row_hght_ =\
+      Utils.get_hght_from_rows(hght, row_count, row_hght)
 
-    else:
-      self.total_hght_ = self.content_height_\
+    if (not inner_pad_top and not inner_pad_bot):
+      self.total_hght_ = self.content_hght_
+
+    elif(not total_hght):
+      self.total_hght_ = self.content_hght_\
         + Font.TEXT_PADDING * (inner_pad_bot + inner_pad_top)
-
 
     self.add_content()
 
@@ -232,19 +247,16 @@ class LineRowGroup(RowGroup):
 class TextRowGroup(RowGroup):
   """
   Breaks a string into multiple lines and arranges them as rows of text
-  elements. Designed for displaying paragraph-like content within an SVG
-  layout.
+  elements. Designed for displaying single or multi-line text.
   """
 
   #_____________________________________________________________________
   def __init__(self
   , total_wdth: int = 0
   , total_hght: int = 0
-  , y_offset: int = 0
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , text: str = ''
-  , line_spc: int = 1
   , style: TextBoxStyle = TextBoxStyle()
   , wrap_txt: bool = True
   ):
@@ -252,9 +264,11 @@ class TextRowGroup(RowGroup):
     Parameters:
       total_wdth    : Total width of group
       total_hght    : Total height of group
-      y_offset      : Offset positioning of objects
       inner_pad_lft : Left padding, impacts length and insertion
       inner_pad_rgt : Right padding, impacts length
+      text          : Text of object
+      style         : Style of text
+      wrap_txt      : True indicates to wrap text
     """
 
     self.show_outline_  = style.show_outline_
@@ -268,12 +282,13 @@ class TextRowGroup(RowGroup):
     self.font_family_   = style.font_family_
     self.font_size_     = style.font_size_
     self.line_spc_      = style.line_spc_
+    self.y_offset_      = style.y_offset_
 
-    #self.total_hght_    : int  = total_hght
+    self.total_hght_    : int  = total_hght
     self.total_wdth_    : int  = total_wdth
 
     # Error handling for line space
-    if (line_spc < 1):
+    if (self.line_spc_ < 1):
       self.line_spc_ = 1
 
     self.row_hght_ = self.line_spc_ * self.font_size_
@@ -281,6 +296,7 @@ class TextRowGroup(RowGroup):
     content_width: int =\
       total_wdth - Font.TEXT_PADDING * (inner_pad_lft + inner_pad_rgt)
 
+    # Convert text into list of strings to wrap text
     if (wrap_txt):
       split_text: list =\
           Utils.split_txt_by_wdth\
@@ -308,15 +324,29 @@ class TextRowGroup(RowGroup):
 
       text_array[i] = svg_text
 
+    """
+    # Center text for one line text
+    if (len(text_array) == 1):
+
+      #self.row_hght_ = self.font_size_ +\
+      #  Font.TEXT_PADDING *(self.inner_pad_bot_ + self.inner_pad_top_)
+
+      if (self.total_hght_):
+        half_hght: int = self.total_hght_ / 2
+        half_font: int = self.font_size_ / 2
+        insert_y: int = half_hght + half_font
+        #self.y_offset_ = self.total_hght_ - insert_y
+    """
+
     return\
       super().__init__\
       ( total_wdth=total_wdth
-      , total_hght=total_hght
+      , total_hght=self.total_hght_
       , show_outline=self.show_outline_
       , outline_color=self.outline_color_
       , backgnd_color=self.backgnd_color_
       , row_hght=self.row_hght_
-      , y_offset=y_offset
+      , y_offset=self.y_offset_
       , inner_pad_top=self.inner_pad_top_
       , inner_pad_bot=self.inner_pad_bot_
       , inner_pad_lft=self.inner_pad_lft_

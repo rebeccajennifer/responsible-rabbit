@@ -177,8 +177,6 @@ class PlannerStrings:
   #_____________________________________________________________________
   # Week layout strings
   #_____________________________________________________________________
-  WEEK_PAGE_HEADER_TXT_0: str =\
-    'Week #' + 6 * SPACE + 'Reflections and Insights'
 
   WEEK_MOMENTUM: str =\
     'Last week I built momentum:'\
@@ -191,12 +189,6 @@ class PlannerStrings:
     + SPACE + '+2'\
     + SPACE + 'agree'
 
-
-  WEEK_PAGE_HEADER_TXT_1: str = 'Week #'\
-    + 6 * SPACE + 'Prep'\
-    + 4 * SPACE + '|'\
-    + 4 * SPACE + 'Start:'\
-    + DATE_STR
 
   WEEK_ACCOMPLISHMENTS: str =\
     'Notable achievements from last week:'

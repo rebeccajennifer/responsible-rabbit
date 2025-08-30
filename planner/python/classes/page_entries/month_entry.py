@@ -26,9 +26,7 @@
 #   Entry for month calendar.
 #_______________________________________________________________________
 
-import svgwrite.container
 from copy import deepcopy
-
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.table import SingleLineTable
@@ -43,7 +41,7 @@ class MonthEntry(HalfPageLayout):
   Daily entry layout.
   """
 
-  HEADER_TXT: str =\
+  PAGE_HEADER_TXT: str =\
     'Month #'\
     + Strings.DATE_STR\
     + Strings.RIGHT_ARROW\
@@ -91,7 +89,7 @@ class MonthEntry(HalfPageLayout):
     week_table = SingleLineTable\
       ( total_wdth=self.content_wdth_
       , row_count=1
-      , total_hght=175
+      , total_hght=fill_hght
       , header_txt=self.WEEK_HEADER_TXT
       , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
       , show_outline=True
@@ -105,18 +103,3 @@ class MonthEntry(HalfPageLayout):
     ]
 
     return
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    return super().create_page_header\
-      (header_txt=self.HEADER_TXT)

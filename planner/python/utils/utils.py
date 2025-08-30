@@ -225,7 +225,7 @@ class PlannerUtils:
 
   #_____________________________________________________________________
   def get_hght_from_rows\
-  ( total_hght: int = 0
+  ( hght: int = 0
   , row_count: int = 1
   , row_hght: int = 30
   ) -> tuple:
@@ -244,16 +244,16 @@ class PlannerUtils:
       tuple       : (total height, row height)
     """
 
-    if ( (not row_count) or (not total_hght and not row_hght)):
+    if ( (not row_count) or (not hght and not row_hght)):
       raise ValueError(Err.INSUFFICIENT_ARGS)
 
-    if (total_hght):
-      row_hght = total_hght / row_count
+    if (hght):
+      row_hght = hght / row_count
 
     else:
-      total_hght = row_hght * row_count
+      hght = row_hght * row_count
 
-    return (total_hght, row_hght)
+    return (hght, row_hght)
 
   #_____________________________________________________________________
   def add_outline\
