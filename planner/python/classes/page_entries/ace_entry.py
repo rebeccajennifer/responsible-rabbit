@@ -45,14 +45,14 @@ class AceEntry(HalfPageLayout):
   """
 
   PAGE_HEADER_TXT: str = str(
-    'Acknowlege - Connect - Engage : '
-    + 2 * Strings.SPACE
-    + 'Re-Regulation Practice'
+    f'Acknowlege {Strings.BULLET_PT} '
+    f'Connect {Strings.BULLET_PT} '
+    f'Engage: {2 * Strings.SPACE} Re-Regulation Practice'
   )
 
-  ACKNOWLEDGE_HEADER  : str = 'Acknowledge'
-  CONNECT_HEADER      : str = 'Connect'
-  ENGAGE_HEADER       : str = '(Re-)Engage'
+  ACKNOWLEDGE_HEADER  : str = 'ACKNOWLEDGE'
+  CONNECT_HEADER      : str = 'CONNECT'
+  ENGAGE_HEADER       : str = '(RE-)ENGAGE'
 
   ACKN_PROMPT_MANFST: str = 'How is the dysregulation manifesting?'
   ACKN_PROMPT_EMOTNS: str = 'What emotions are you experiencing?'
@@ -95,7 +95,6 @@ class AceEntry(HalfPageLayout):
     super().create_content()
 
     header_style = deepcopy(StdTextBoxStyles.MED_BACK_HEADER_FONT)
-    header_style.font_size_ = 16
     prompt_style = StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
 
     self.entries_: list =\
@@ -150,8 +149,8 @@ class AceEntry(HalfPageLayout):
       TextRowGroup\
       ( text=self.ACKNOWLEDGE_HEADER
       , total_wdth=self.content_wdth_
-      , total_hght=fill_hght
       , style=header_style
+      ,total_hght=fill_hght
       )
 
     c_header: TextRowGroup =\
@@ -166,8 +165,8 @@ class AceEntry(HalfPageLayout):
       TextRowGroup\
       ( text=self.ENGAGE_HEADER
       , total_wdth=self.content_wdth_
-      , total_hght=fill_hght
       , style=header_style
+      , total_hght=fill_hght
       )
 
     # Rearrange entries to include headers

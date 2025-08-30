@@ -45,12 +45,16 @@ class OptionlPages:
   """
 
   XTRA_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
+  [ {Keys.LEFT: Entries.ACERF, Keys.RGHT: Entries.ACERF}
   , {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
-  , {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
-  , {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
-  #, {Keys.LEFT: Entries.ACERF, Keys.RGHT: Entries.ACERF}
   ]
+  #XTRA_LAYOUTS: list =\
+  #[ {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
+  #, {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
+  #, {Keys.LEFT: Entries.ACERF, Keys.RGHT: Entries.ACERF}
+  #, {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
+  #, {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
+  #]
 
 #_______________________________________________________________________
 class PreviewPages:

@@ -23,10 +23,10 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for a blank page with page header.
+#   Reference page for ACE method.
 #_______________________________________________________________________
 
-import svgwrite.container
+from copy import deepcopy
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
@@ -37,15 +37,18 @@ from classes.page_layouts.half_page_layout import HalfPageLayout
 from classes.elements.row_group import TextRowGroup
 from classes.style.std_styles import StdTextBoxStyles
 
-class AceStrings:
+
+#_______________________________________________________________________
+class AceReference(HalfPageLayout):
   """
   Strings used in the ACE Reference page.
   """
 
-  PAGE_HEADER_TXT: str =\
-    'Acknowlege ' + Strings.BULLET_PT\
-  + ' Connect ' + Strings.BULLET_PT\
-  + ' Engage'
+  PAGE_HEADER_TXT: str = str(
+    f'Acknowlege {Strings.BULLET_PT} '
+    f'Connect {Strings.BULLET_PT} '
+    f'Engage: {2 * Strings.SPACE} Worksheet Instructions'
+  )
 
   ABOUT_HEADER_TXT: str =\
     'About the ACE Method'
@@ -61,13 +64,16 @@ class AceStrings:
   USING_HEADER_TXT: str =\
     'How it works'
 
+  WKSHT_HEADER_TXT: str =\
+    'The Worksheet'
+
   USING_DESC: str = (
     'When you experience a triggering thought or feeling, pause and '
     'fill out the worksheet as described below.'
   )
 
   ACKNOWLEDGE_HEADER_TXT: str =\
-    'Acknowlege'
+    'ACKNOWLEGE'
   ACKNOWLEGE_DESC: str = (
     'Reference the list of Brene Brown\'s 87 Emotions and Experiences '
     'and identify the terms that most closely represent your current '
@@ -75,7 +81,7 @@ class AceStrings:
   )
 
   CONNECT_HEADER_TXT: str =\
-    'Connect to Re-Regulate'
+    'CONNECT to Re-Regulate'
   CONNECT_DESC: str = (
     'Connect with your physical body to re-regulate your nervous '
     'system. Engage in one of the exercises described below.'
@@ -103,7 +109,7 @@ class AceStrings:
   )
 
   REENGAGE_HEADER_TXT: str =\
-    '(Re-)Engage'
+    '(RE-)ENGAGE'
 
   REENGAGE_DESC: str = (
     'After executing the connection exercise, write down what activity '
@@ -114,33 +120,6 @@ class AceStrings:
     'a household chore, creating art, or starting a task you\'ve been '
     'avoiding.'
   )
-
-
-#_______________________________________________________________________
-class AceReference(HalfPageLayout):
-  """
-  Free write layout.
-  """
-
-  #_____________________________________________________________________
-  def __init__(self
-  , total_hght: int = 0
-  , total_wdth: int = 0
-  , addl_args: dict = {Key.HEADER_TXT: ''}
-  ):
-    """
-    Constructor for class. Assumes landscape orientation.
-    """
-
-    self.page_header_txt_: str = addl_args[Key.HEADER_TXT]
-
-    super().__init__\
-    ( total_hght=total_hght
-    , total_wdth=total_wdth
-    , pad_bet_elements=True
-    )
-
-    return
 
   #_____________________________________________________________________
   def create_content(self) -> None:
@@ -156,75 +135,114 @@ class AceReference(HalfPageLayout):
     """
     super().create_content()
 
+    # Style for reference section headers
+    ref_header_style: StdTextBoxStyles =\
+      deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
+    ref_header_style.font_size = 14
+
+    # Style for worksheet instruction headers
+    wksht_header_style: StdTextBoxStyles =\
+      deepcopy(StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE)
+
+    # Style for worksheet instructions
+    wksht_instructions_style: StdTextBoxStyles =\
+      deepcopy(StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE)
+
+    # List of objects for about section
     about_stack: list =\
-      [ TextRowGroup\
+      [
+        TextRowGroup\
         ( total_wdth=self.content_wdth_
-        , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
-        , text=AceStrings.ABOUT_HEADER_TXT
+        , style=ref_header_style
+        , text=self.ABOUT_HEADER_TXT
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-        , text=AceStrings.ABOUT
+        , text=self.ABOUT
         )
       ]
 
+    # List of objects for "how it works" section
     using_stack: list =\
       [ TextRowGroup\
         ( total_wdth=self.content_wdth_
-        , style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
-        , text=AceStrings.USING_HEADER_TXT
+        , style=ref_header_style
+        , text=self.USING_HEADER_TXT
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-        , text=AceStrings.USING_DESC
+        , text=self.USING_DESC
         )
       ]
 
+    # List of objects for acknowledge instruction section
     acknowlege_stack: list =\
       [ TextRowGroup\
         ( total_wdth=self.content_wdth_
-        , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
-        , text=AceStrings.ACKNOWLEDGE_HEADER_TXT
+        , style=wksht_header_style
+        , text=self.ACKNOWLEDGE_HEADER_TXT
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
-        , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-        , text=AceStrings.ACKNOWLEGE_DESC
+        , style=wksht_instructions_style
+        , text=self.ACKNOWLEGE_DESC
         )
       ]
 
+    # List of objects for connect instruction section
     connect_stack: list =\
      [ TextRowGroup\
         ( total_wdth=self.content_wdth_
-        , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
-        , text=AceStrings.CONNECT_HEADER_TXT
+        , style=wksht_header_style
+        , text=self.CONNECT_HEADER_TXT
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
-        , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-        , text=AceStrings.CONNECT_DESC
+        , style=wksht_instructions_style
+        , text=self.CONNECT_DESC
         )
      ]
 
+    # List of objects for re-engage instruction section
     reengage_stack: list =\
       [ TextRowGroup\
         ( total_wdth=self.content_wdth_
-        , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE
-        , text=AceStrings.REENGAGE_HEADER_TXT
+        , style=wksht_header_style
+        , text=self.REENGAGE_HEADER_TXT
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
-        , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-        , text=AceStrings.REENGAGE_DESC
+        , style=wksht_instructions_style
+        , text=self.REENGAGE_DESC
         )
       ]
 
     fill_hght = self.calc_remaining_hght_per_element(5)
 
-    stack_entries: list =\
-      [ VerticalStack\
+    worksheet_stack: list =\
+      [ TextRowGroup\
+        ( total_wdth=self.content_wdth_
+        , style=ref_header_style
+        , text=self.WKSHT_HEADER_TXT
+        )
+      , VerticalStack\
+        ( obj_list=acknowlege_stack
+        , show_outline=False
+        )
+      , VerticalStack\
+        ( obj_list=connect_stack
+        , show_outline=False
+        )
+      , VerticalStack\
+        ( obj_list=reengage_stack
+        , show_outline=False
+        )
+      ]
+
+    self.entries_: list =\
+      [  VerticalStack\
         ( obj_list=about_stack
         , show_outline=True
         )
@@ -233,43 +251,11 @@ class AceReference(HalfPageLayout):
         , show_outline=True
         )
       , VerticalStack\
-        ( obj_list=acknowlege_stack
+        ( obj_list=worksheet_stack
         , show_outline=True
-        )
-      , VerticalStack\
-        ( obj_list=connect_stack
-        , show_outline=True
-        )
-      , VerticalStack\
-        ( obj_list=reengage_stack
-        , show_outline=True
-        )
-     ]
-
-    self.entries_: list =\
-      [ VerticalStack\
-        ( obj_list=stack_entries
-        , show_outline=True
-        , total_hght=self.content_hght_
+        , pad_bet_elements=True
         )
       ]
+
+
     return
-
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters:
-      None
-
-    Returns:
-
-    """
-
-    page_header = super().create_page_header\
-      ( header_txt=AceStrings.PAGE_HEADER_TXT
-      )
-
-    return page_header
