@@ -36,6 +36,9 @@ from utils.utils import PlannerUtils as Utils
 
 #_______________________________________________________________________
 class VerticalStack(svgwrite.container.Group):
+  """
+  Stack objects vertically with optional padding between them.
+  """
 
   def __init__(self
   , obj_list: list = []
@@ -79,6 +82,11 @@ class VerticalStack(svgwrite.container.Group):
         self.total_wdth_ = obj_list[i].total_wdth_
     #___________________________________________________________________
 
+    if (total_hght > content_hght\
+        and len(obj_list) > 1\
+        and pad_bet_elements):
+      padding = (total_hght - content_hght) // (len(obj_list) - 1)
+
     for i in range(len(obj_list)):
 
       obj_list[i]['transform'] =\
@@ -105,6 +113,9 @@ class VerticalStack(svgwrite.container.Group):
 
 #_______________________________________________________________________
 class HorizontalStack(svgwrite.container.Group):
+  """
+  Stack objects horizontally with optional padding between them.
+  """
 
   def __init__(self
   , obj_list: list = []

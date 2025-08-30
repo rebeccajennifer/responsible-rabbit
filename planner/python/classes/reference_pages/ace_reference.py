@@ -28,14 +28,13 @@
 
 from copy import deepcopy
 
-from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.base_element import VerticalStack
-from classes.elements.row_group import DualLineRowGroup
-
-from classes.page_layouts.half_page_layout import HalfPageLayout
 from classes.elements.row_group import TextRowGroup
 from classes.style.std_styles import StdTextBoxStyles
+from classes.style.style import PlannerColors as Colors
+
+from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
@@ -62,7 +61,7 @@ class AceReference(HalfPageLayout):
   )
 
   USING_HEADER_TXT: str =\
-    'How it works'
+    'How It Works'
 
   WKSHT_HEADER_TXT: str =\
     'The Worksheet'
@@ -81,14 +80,20 @@ class AceReference(HalfPageLayout):
   )
 
   CONNECT_HEADER_TXT: str =\
-    'CONNECT to Re-Regulate'
+    'CONNECT'
   CONNECT_DESC: str = (
     'Connect with your physical body to re-regulate your nervous '
-    'system. Engage in one of the exercises described below.'
+    'system. You may choose from one of the exercises listed below or '
+    'use another practice to calm your body and mind.'
     '\n'
-    '5-4-3-2-1 GROUNDING TECHNIQUE: Identify 5 things you can see, '
-    '4 things you can touch, 3 distinct sounds, 2 scents, 1 thing you '
-    'can taste.'
+    '5-4-3-2-1 SENSE AWARENESS: '
+    'Identify 5 things you can see, 4 things you can touch, 3 distinct '
+    'sounds, 2 scents, 1 thing you can taste.'
+    '\n'
+    'GROUNDING THROUGH TOUCH: '
+    'Press your feet firmly into the floor or press your hands into a '
+    'solid surface (like a table or chair arms). Notice the pressure, '
+    'stability, and connection with the ground beneath you.'
     '\n'
     'PROGRESSIVE MUSCLE RELAXATION: Lay on your back and close your '
     'eyes. Systematically tense and release muscles starting from your '
@@ -99,13 +104,23 @@ class AceReference(HalfPageLayout):
     'hold for four seconds. Practice for at least ten breath cycles '
     ' or two to five minutes.'
     '\n'
-    'SHAKE: Stand with your feet hip-width apart and gently bounce '
+    'SHAKE: '
+    'Stand with your feet hip-width apart and gently bounce '
     'your heels while keeping the balls of your feet grounded. Allow '
     'the movement to naturally travel up through your body. Let your '
     'shoulders bounce, your arms and hands shake out, and your head '
     'move gently side to side or in small circles. Keep your body '
-    'relaxed and loose. Continue for 1-2 minutes, letting tension '
-    'release with each shake.'
+    'relaxed and loose. Continue for 1-2 minutes.'
+    '\n'
+    'HUMMING OR VIBRATION: '
+    'Take a deep breath and hum gently as you exhale. Feel the '
+    'vibration in your chest, throat, and face. Continue for 1-2 '
+    'minutes, letting the vibration soothe and regulate your body.'
+    '\n'
+    'SELF-HOLD: '
+    'Cross your arms and gently rest your hands on the opposite upper '
+    'arms or shoulders, as if giving yourself a hug. Hold for 30-60 '
+    'seconds while breathing slowly.'
   )
 
   REENGAGE_HEADER_TXT: str =\
@@ -113,8 +128,11 @@ class AceReference(HalfPageLayout):
 
   REENGAGE_DESC: str = (
     'After executing the connection exercise, write down what activity '
-    'you choose to (re)engage with. This can be what you were doing '
-    'before experiencing the trigger, or an intentional act of self '
+    'you choose to (re)engage with.'
+    '\n'
+    'This can be what you were doing before experiencing the trigger, '
+    'or an intentional act of self care.'
+    '\n'
     'Commonly understood acts of self care include going outside, '
     'physical activity, or journaling. Other acts of self care include '
     'a household chore, creating art, or starting a task you\'ve been '
@@ -137,16 +155,16 @@ class AceReference(HalfPageLayout):
 
     # Style for reference section headers
     ref_header_style: StdTextBoxStyles =\
-      deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
-    ref_header_style.font_size = 14
+      deepcopy(StdTextBoxStyles.DRK_BACK_HEADER_FONT)
+    ref_header_style.font_size_ = 16
 
     # Style for worksheet instruction headers
     wksht_header_style: StdTextBoxStyles =\
-      deepcopy(StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE)
+      deepcopy(StdTextBoxStyles.MED_BACK_HEADER_FONT)
 
     # Style for worksheet instructions
     wksht_instructions_style: StdTextBoxStyles =\
-      deepcopy(StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE)
+      deepcopy(StdTextBoxStyles.WHT_BACK_HEADER_FONT_NO_OUTLNE)
 
     # List of objects for about section
     about_stack: list =\
@@ -250,12 +268,18 @@ class AceReference(HalfPageLayout):
         ( obj_list=using_stack
         , show_outline=True
         )
-      , VerticalStack\
-        ( obj_list=worksheet_stack
-        , show_outline=True
-        , pad_bet_elements=True
-        )
-      ]
+    ]
+
+    fill_hght = self.calc_remaining_hght_per_element(1)
+
+    self.entries_.append(
+      VerticalStack\
+      ( obj_list=worksheet_stack
+      , show_outline=True
+      , pad_bet_elements=True
+      , total_hght=fill_hght
+      )
+    )
 
 
     return
