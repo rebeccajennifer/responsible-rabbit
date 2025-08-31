@@ -181,3 +181,28 @@ def test_is_pdf() -> None:
     Utils.is_pdf(test_pdf_name)
 
   return
+
+#_______________________________________________________________________
+def test_split_list_even() -> None:
+
+  test_list: list = [1,2,3,4,5,6]
+
+  list1, list2 = Utils.split_list(test_list, 2)
+
+  assert list1 == [1,2,3]
+  assert list2 == [4,5,6]
+
+  return
+
+#_______________________________________________________________________
+def test_split_list_odd() -> None:
+
+  test_list: list = [1,2,3,4,5,6,7]
+
+  list1, list2, list3 = Utils.split_list(test_list, 3)
+
+  assert list1 == [1,2,3]
+  assert list2 == [4,5]
+  assert list3 == [6,7]
+
+  return

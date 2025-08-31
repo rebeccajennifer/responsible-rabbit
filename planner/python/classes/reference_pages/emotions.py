@@ -26,7 +26,7 @@
 #   List of Brene Brown's 87 emotions.
 #_______________________________________________________________________
 
-class BreneBrownEmotionList:
+class EmotionStrings:
   """
   List of 87 human emotions and experiences from research by Brene Brown
   """

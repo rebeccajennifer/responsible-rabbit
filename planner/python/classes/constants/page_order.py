@@ -45,7 +45,7 @@ class OptionlPages:
   """
 
   XTRA_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.ACERF, Keys.RGHT: Entries.ACERF}
+  [ {Keys.LEFT: Entries.ACERF, Keys.RGHT: Entries.EMORF}
   , {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
   ]
   #XTRA_LAYOUTS: list =\

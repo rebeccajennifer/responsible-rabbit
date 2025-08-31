@@ -47,6 +47,7 @@ from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_entry import WeekEntry0
 from classes.page_entries.week_entry import WeekEntry1
 from classes.reference_pages.ace_reference import AceReference
+from classes.reference_pages.emotion_reference import EmotionReference
 from classes.page_entries.ace_entry import AceEntry
 
 
@@ -197,10 +198,15 @@ class Entries:
 
   ACERF: dict =\
     { Key.ENTRY_TYPE: AceReference
-    , Key.ENTRY_ARGS: {Key.HEADER_TXT: ''}
+    , Key.ENTRY_ARGS: {}
     }
 
   ACEPG: dict =\
     { Key.ENTRY_TYPE: AceEntry
+    , Key.ENTRY_ARGS: {}
+    }
+
+  EMORF: dict =\
+    { Key.ENTRY_TYPE: EmotionReference
     , Key.ENTRY_ARGS: {}
     }
