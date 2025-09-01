@@ -176,13 +176,13 @@ if __name__ == '__main__':
   generate_dividers(is_portrait, div_dir)
   """
 
-  """
   PlannerAssembler\
   ( is_portrait=is_portrait
   , is_dbl_sided=is_dbl_sided
   , is_preview=args.preview
   , out_dir=args.out_dir
   )
+  """
   """
 
   new_line(10)

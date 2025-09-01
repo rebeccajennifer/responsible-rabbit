@@ -29,6 +29,7 @@
 from copy import deepcopy
 
 from classes.elements.table import TextColumnTable
+from classes.elements.row_group import TextRowGroup
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerColors as Colors
 
@@ -45,6 +46,11 @@ class EmotionTable(TextColumnTable):
 
   #_____________________________________________________________________
   def __init__(self, emo_grp: dict, wdth: int) -> None:
+    """
+    Parameters:
+      emo_grp : Dictionary with 'header' and 'emotions' keys.
+      wdth    : Total width of table.
+    """
 
     header_style: StdTextBoxStyles =\
       deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
@@ -60,10 +66,10 @@ class EmotionTable(TextColumnTable):
       , txt_lst=emo_grp['emotions']
       , text_style=emotion_style
       , col_count=4
-      , col_wdths=[-1, -1, -1, 130]
+      , col_wdths=[-1, -1, -1, 125]
       , header_txt=emo_grp['header']
       , header_style=header_style
-      , show_outline=True
+      , show_outline=False
       )
 
 #_______________________________________________________________________
@@ -73,7 +79,28 @@ class EmotionReference(HalfPageLayout):
   """
 
   PAGE_HEADER_TXT: str =\
-    'List of 87 Emotions and Experiences from Brené Brown'
+    '87 Emotions and Experiences'
+
+  SOURCE_TXT: str =\
+    'Source: "Atlas of the Heart" by Brené Brown'
+
+  #_____________________________________________________________________
+  def __init__(self
+  , total_hght: int = 0
+  , total_wdth: int = 0
+  , addl_args: dict = {}
+  ):
+    """
+    Constructor for class. Assumes landscape orientation.
+    """
+    super().__init__\
+      ( total_hght=total_hght
+      , total_wdth=total_wdth
+      , addl_args=addl_args
+      , pad_under_page_header=False
+      )
+
+    return
 
   #_____________________________________________________________________
   def create_content(self) -> None:
@@ -90,7 +117,20 @@ class EmotionReference(HalfPageLayout):
     super().create_content()
 
 
+    source_style: StdTextBoxStyles =\
+      StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+
+    source_style.font_size_ = 8
+
     self.entries_: list =\
+    [ TextRowGroup\
+      (total_wdth=self.content_wdth_
+      , text=self.SOURCE_TXT
+      , style=source_style
+      )
+    ]
+
+    self.entries_ = self.entries_ +\
     [ EmotionTable(EmoStr.UNCERTAIN_DICT          , self.content_wdth_)
     , EmotionTable(EmoStr.COMPARE_DICT            , self.content_wdth_)
     , EmotionTable(EmoStr.UNPLANNED_DICT          , self.content_wdth_)

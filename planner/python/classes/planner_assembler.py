@@ -5,7 +5,10 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Keys
 from classes.constants.page_order import DblSidePages
 from classes.constants.page_order import OneSidePages
 from classes.constants.page_order import PreviewPages
-from classes.constants.page_order import OptionlPages
+from classes.constants.page_order import AceRefrPages
+from classes.constants.page_order import AceWkshPages
+from classes.constants.page_order import NightlyPages
+
 from classes.page_layouts.page_layout import PageLayout
 
 
@@ -18,10 +21,10 @@ class PdfPrefix:
   INTR: str = 'main-intr'
   WEEK: str = 'main-week'
 
-  XTRA: str = 'xtra-xtra'
   DAYS: str = 'xtra-days'
   NITE: str = 'xtra-nite'
-  ACE_: str = 'xtra-ace_'
+  ACER: str = 'ace_-ref_'
+  ACEW: str = 'ace_-wksh'
 
 
 #_______________________________________________________________________
@@ -185,28 +188,19 @@ class PlannerAssembler:
     else:
       PageType = OneSidePages
 
-    group0: PageGroup =\
-      PageGroup\
-      ( group_name=PdfPrefix.INTR
-      , layouts=PageType.INTR_LAYOUTS
-      )
+    group0: PageGroup = PageGroup(PdfPrefix.INTR, PageType.INTR_LAYOUTS)
+    group1: PageGroup = PageGroup(PdfPrefix.WEEK, PageType.WEEK_LAYOUTS)
 
-    group1: PageGroup =\
-      PageGroup\
-      ( group_name=PdfPrefix.WEEK
-      , layouts=PageType.WEEK_LAYOUTS
-      )
-
-    group2: PageGroup =\
-      PageGroup\
-      ( group_name=PdfPrefix.XTRA
-      , layouts=OptionlPages.XTRA_LAYOUTS
-      )
+    group2: PageGroup = PageGroup(PdfPrefix.NITE, NightlyPages.LAYOUTS)
+    group3: PageGroup = PageGroup(PdfPrefix.ACER, AceRefrPages.LAYOUTS)
+    group4: PageGroup = PageGroup(PdfPrefix.ACEW, AceWkshPages.LAYOUTS)
 
     self.page_groups: list =\
-      [ group2
+      [ group0
       , group1
       , group2
+      , group3
+      , group4
       ]
 
     return
