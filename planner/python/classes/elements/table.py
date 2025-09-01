@@ -218,12 +218,11 @@ class ColumnTable(svgwrite.container.Group):
   ):
     """
     Parameters:
-      header_txt_lst  : List of headers for table.
-
       total_wdth    : Total width of table
       total_hght    : Total height of table
       header_txt_lst: List of text in headers
       text_style    : Style used for text header
+      row_count     : Number of table rows
       col_wdths     : Width of columns,
                       -1 indicates to equally fill all available space
       show_outline  : If true, will outline the table
@@ -266,3 +265,114 @@ class ColumnTable(svgwrite.container.Group):
       Utils.add_outline(self, hght=self.total_hght_, wdth=self.total_wdth_)
 
 
+#_______________________________________________________________________
+class TextColumnTable(svgwrite.container.Group):
+  """
+  Table of text columns.
+  """
+
+  def __init__(self
+  , total_wdth: int = 0
+  , txt_lst: list = []
+  , text_style: TextBoxStyle = TextBoxStyle()
+  , header_txt: str = ''
+  , header_style: TextBoxStyle = TextBoxStyle()
+  , col_count: int = 2
+  , col_wdths: list = []
+  , show_outline: bool = False
+  , outline_color: str = Colors.BORDER_COLOR
+  ):
+    """
+    Parameters:
+      total_wdth    : Total width of table
+      txt_lst       : List of strings to be placed in columns
+      text_style    : Style used for text
+      header_txt    : Text contained in header
+      header_style  : Style used for header text
+      col_count     : Number of columns
+      show_outline  : If true, will outline the table
+    """
+
+    super().__init__()
+
+    self.total_wdth_ = total_wdth
+
+    # Used for column positioning
+    y_insert: int = 0
+
+    header_hght: int = 0
+
+    if (header_txt != ''):
+      self.header_: TextRowGroup =\
+        TextRowGroup\
+        ( text=header_txt
+        , total_wdth=total_wdth
+        , style=header_style
+        )
+
+      header_hght = self.header_.total_hght_
+      self.add(self.header_)
+
+      # Adjust insert position for subsequent elements
+      y_insert = self.header_.total_hght_
+
+    #___________________________________________________________________
+    # Calculate column widths
+    #___________________________________________________________________
+    # If no column widths specified,
+    # -1 indicates to equally fill all available space
+    if (not col_wdths):
+      col_wdths = [-1] * col_count
+
+    col_wdths: list = Utils.calc_col_wdths(total_wdth=total_wdth
+      , col_count=col_count
+      , col_wdths=col_wdths
+      )
+    #___________________________________________________________________
+
+    # Split text list into separate lists of approximately equal size
+    text_groups: list = Utils.split_list(txt_lst, col_count)
+
+    #___________________________________________________________________
+    # Construct columns
+    #___________________________________________________________________
+    max_col_hght: int = 0
+
+    # Used for column positioning
+    insert_x: int = 0
+
+    for i in range(len(text_groups)):
+
+      if (text_groups[i] == []):
+        text_groups[i] = ['']
+
+      col: TextRowGroup =\
+        TextRowGroup\
+        ( text=text_groups[i]
+        , total_wdth=col_wdths[i]
+        , style=text_style
+        )
+
+      # Update max column height
+      if (col.total_hght_ > max_col_hght):
+        max_col_hght = col.total_hght_
+
+      col['transform'] = f'translate({insert_x},{y_insert})'
+      insert_x += col_wdths[i]
+
+      self.add(col)
+
+    self.total_hght_: int = header_hght + max_col_hght
+
+    if (show_outline):
+      Utils.add_outline\
+      ( container=self
+      , hght=self.total_hght_
+      , wdth=self.total_wdth_
+      , outline_color=outline_color
+      )
+
+    return
+
+
+#_______________________________________________________________________

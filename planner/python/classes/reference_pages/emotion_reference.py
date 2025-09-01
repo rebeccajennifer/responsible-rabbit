@@ -28,18 +28,43 @@
 
 from copy import deepcopy
 
+from classes.elements.table import TextColumnTable
+from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerColors as Colors
-from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.base_element import HorizontalStack
-from classes.elements.row_group import DualLineRowGroup
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
-from classes.reference_pages.emotions import EmotionStrings
+from classes.reference_pages.emotions import EmotionStrings as EmoStr
 
-from classes.elements.row_group import TextRowGroup
-from classes.style.std_styles import StdTextBoxStyles
 
+#_______________________________________________________________________
+class EmotionTable(TextColumnTable):
+  """
+  Emotion group table with default styles for header and emotions.
+  """
+
+  #_____________________________________________________________________
+  def __init__(self, emo_grp: dict, wdth: int) -> None:
+
+    header_style: StdTextBoxStyles =\
+      deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
+    header_style.font_size_ = 10
+
+    emotion_style: StdTextBoxStyles =\
+      deepcopy(StdTextBoxStyles.WHT_BACK_NORMAL_FONT_W_OUTLNE)
+    emotion_style.show_outline_ = False
+    emotion_style.outline_color_ = Colors.FLUX_RED
+    emotion_style.font_size_ = 10
+
+    super().__init__(total_wdth=wdth
+      , txt_lst=emo_grp['emotions']
+      , text_style=emotion_style
+      , col_count=4
+      , col_wdths=[-1, -1, -1, 130]
+      , header_txt=emo_grp['header']
+      , header_style=header_style
+      , show_outline=True
+      )
 
 #_______________________________________________________________________
 class EmotionReference(HalfPageLayout):
@@ -64,104 +89,21 @@ class EmotionReference(HalfPageLayout):
     """
     super().create_content()
 
-    header_style: StdTextBoxStyles =\
-      deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
 
-    emotion_style: StdTextBoxStyles =\
-      deepcopy(StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE)
-    emotion_style.show_outline_ = True
-    emotion_style.outline_color_ = Colors.FLUX_RED
-
-    col_wdth: int = self.content_wdth_ // 4
-
-    uncertain: list =\
-      [ TextRowGroup\
-        (total_wdth=col_wdth
-        , text=EmotionStrings.UNCERTAIN[0:3]
-        , style=emotion_style
-        )
-      , TextRowGroup\
-        (total_wdth=col_wdth
-        , text=EmotionStrings.UNCERTAIN[3:6]
-        , style=emotion_style
-        )
-      , TextRowGroup\
-        (total_wdth=col_wdth
-        , text=EmotionStrings.UNCERTAIN[6:-1]
-        , style=emotion_style
-        )
-      ]
-
-    self.entries_ =\
-    [ TextRowGroup
-      (total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_UNCERTAIN
-      , style=header_style
-      )
-    , HorizontalStack\
-      ( obj_list=uncertain
-      , add_inner_pad=False
-      )
-    , TextRowGroup\
-      ( total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_COMPARE
-      , style=header_style
-      )
-    , TextRowGroup\
-      (  total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_UNPLANNED
-      , style=header_style
-      )
-    , TextRowGroup\
-      (   total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_BEYOND_US
-      , style=header_style
-      )
-    , TextRowGroup\
-      (    total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_NOT_WHAT_THEY_SEEM
-      , style=header_style
-      )
-    , TextRowGroup\
-      ( total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_HURT
-      , style=header_style
-      )
-    , TextRowGroup\
-      ( total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_OTHERS
-      , style=header_style
-      )
-    , TextRowGroup\
-      ( total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_FALL_SHORT
-      , style=header_style
-      )
-    , TextRowGroup\
-      ( total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_CONNECTION
-      , style=header_style
-      )
-    , TextRowGroup\
-      ( total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_OPEN
-      , style=header_style
-      )
-    , TextRowGroup\
-      (total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_GOOD
-      , style=header_style
-      )
-    , TextRowGroup\
-      (total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_WRONGED
-      , style=header_style
-      )
-    , TextRowGroup\
-      ( total_wdth=self.content_wdth_
-      , text=EmotionStrings.HEADER_SELF_ASSESS
-      , style=header_style
-      )
+    self.entries_: list =\
+    [ EmotionTable(EmoStr.UNCERTAIN_DICT          , self.content_wdth_)
+    , EmotionTable(EmoStr.COMPARE_DICT            , self.content_wdth_)
+    , EmotionTable(EmoStr.UNPLANNED_DICT          , self.content_wdth_)
+    , EmotionTable(EmoStr.BEYOND_US_DICT          , self.content_wdth_)
+    , EmotionTable(EmoStr.NOT_WHAT_THEY_SEEM_DICT , self.content_wdth_)
+    , EmotionTable(EmoStr.HURT_DICT               , self.content_wdth_)
+    , EmotionTable(EmoStr.OTHERS_DICT             , self.content_wdth_)
+    , EmotionTable(EmoStr.FALL_SHORT_DICT         , self.content_wdth_)
+    , EmotionTable(EmoStr.CONNECTION_DICT         , self.content_wdth_)
+    , EmotionTable(EmoStr.OPEN_DICT               , self.content_wdth_)
+    , EmotionTable(EmoStr.GOOD_DICT               , self.content_wdth_)
+    , EmotionTable(EmoStr.WRONGED_DICT            , self.content_wdth_)
+    , EmotionTable(EmoStr.SELF_ASSESS_DICT        , self.content_wdth_)
     ]
 
     return

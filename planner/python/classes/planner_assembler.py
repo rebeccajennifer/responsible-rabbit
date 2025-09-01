@@ -205,8 +205,8 @@ class PlannerAssembler:
 
     self.page_groups: list =\
       [ group2
-      # group1
-      # group2
+      , group1
+      , group2
       ]
 
     return
