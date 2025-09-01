@@ -74,7 +74,7 @@ class AceReference(HalfPageLayout):
   ACKNOWLEDGE_HEADER_TXT: str =\
     'ACKNOWLEGE'
   ACKNOWLEGE_DESC: str = (
-    'Reference the list of Brene Brown\'s 87 Emotions and Experiences '
+    'Reference the list of 87 Emotions and Experiences '
     'and identify the terms that most closely represent your current '
     'state.'
   )
@@ -83,7 +83,7 @@ class AceReference(HalfPageLayout):
     'CONNECT'
   CONNECT_DESC: str = (
     'Connect with your physical body to re-regulate your nervous '
-    'system. You may choose from one of the exercises listed below or '
+    'system. Choose from one of the exercises listed below or '
     'use another practice to calm your body and mind.'
     '\n'
     '5-4-3-2-1 SENSE AWARENESS: '
@@ -93,7 +93,7 @@ class AceReference(HalfPageLayout):
     'GROUNDING THROUGH TOUCH: '
     'Press your feet firmly into the floor or press your hands into a '
     'solid surface (like a table or chair arms). Notice the pressure, '
-    'stability, and connection with the ground beneath you.'
+    'stability, and connection with the ground.'
     '\n'
     'PROGRESSIVE MUSCLE RELAXATION: Lay on your back and close your '
     'eyes. Systematically tense and release muscles starting from your '
@@ -115,7 +115,7 @@ class AceReference(HalfPageLayout):
     'HUMMING OR VIBRATION: '
     'Take a deep breath and hum gently as you exhale. Feel the '
     'vibration in your chest, throat, and face. Continue for 1-2 '
-    'minutes, letting the vibration soothe and regulate your body.'
+    'minutes.'
     '\n'
     'SELF-HOLD: '
     'Cross your arms and gently rest your hands on the opposite upper '
@@ -156,15 +156,17 @@ class AceReference(HalfPageLayout):
     # Style for reference section headers
     ref_header_style: StdTextBoxStyles =\
       deepcopy(StdTextBoxStyles.DRK_BACK_HEADER_FONT)
-    ref_header_style.font_size_ = 16
+    ref_header_style.font_size_ = 13
 
     # Style for worksheet instruction headers
     wksht_header_style: StdTextBoxStyles =\
       deepcopy(StdTextBoxStyles.MED_BACK_HEADER_FONT)
+    wksht_header_style.font_size_ = 8
 
     # Style for worksheet instructions
     wksht_instructions_style: StdTextBoxStyles =\
-      deepcopy(StdTextBoxStyles.WHT_BACK_HEADER_FONT_NO_OUTLNE)
+      deepcopy(StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE)
+    wksht_instructions_style.font_size_ = 10
 
     # List of objects for about section
     about_stack: list =\
@@ -176,7 +178,7 @@ class AceReference(HalfPageLayout):
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
-        , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+        , style=wksht_instructions_style
         , text=self.ABOUT
         )
       ]
@@ -190,7 +192,7 @@ class AceReference(HalfPageLayout):
         )
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
-        , style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+        , style=wksht_instructions_style
         , text=self.USING_DESC
         )
       ]

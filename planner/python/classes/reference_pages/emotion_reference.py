@@ -118,8 +118,9 @@ class EmotionReference(HalfPageLayout):
 
 
     source_style: StdTextBoxStyles =\
-      StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      deepcopy(StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE)
 
+    source_style.inner_pad_lft_ = False
     source_style.font_size_ = 8
 
     self.entries_: list =\
