@@ -439,9 +439,25 @@ class PlannerUtils:
       list: A list containing n sublists, each representing a part of
       the original list.
     """
+
     if n <= 0:
         raise ValueError('Number of parts must be a positive integer.')
 
+    # Calculate the size of each part and the number of parts that need
+    # to be one element larger to account for any remainder
     k, m = divmod(len(lst), n)
 
-    return [lst[i * k + min(i, m):(i + 1) * k + min(i + 1, m)] for i in range(n)]
+    result = []
+
+    for i in range(n):
+
+        # Calculate the start index for the i-th sublist
+        # (i * k) gives the base start, min(i, m) distributes the
+        # remainder
+        start = i * k + min(i, m)
+
+        # Calculate the end index for the i-th sublist
+        end = (i + 1) * k + min(i + 1, m)
+
+        result.append(lst[start:end])
+    return result

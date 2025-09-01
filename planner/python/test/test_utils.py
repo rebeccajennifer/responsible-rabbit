@@ -197,12 +197,28 @@ def test_split_list_even() -> None:
 #_______________________________________________________________________
 def test_split_list_odd() -> None:
 
-  test_list: list = [1,2,3,4,5,6,7]
+  test_list: list = [1, 2, 3, 4, 5, 6, 7, 8]
 
+  # Run function under test
   list1, list2, list3 = Utils.split_list(test_list, 3)
 
-  assert list1 == [1,2,3]
-  assert list2 == [4,5]
-  assert list3 == [6,7]
+  assert list1 == [1, 2, 3]
+  assert list2 == [4, 5, 6]
+  assert list3 == [7, 8]
+
+  return
+
+#_______________________________________________________________________
+def test_split_list_n_less_than_elements() -> None:
+
+  test_list: list = [1, 2]
+
+  # Run function under test
+  list1, list2, list3, list4 = Utils.split_list(test_list, 4)
+
+  assert list1 == [1]
+  assert list2 == [2]
+  assert list3 == []
+  assert list4 == []
 
   return
