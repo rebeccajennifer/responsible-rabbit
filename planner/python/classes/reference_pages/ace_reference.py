@@ -49,6 +49,11 @@ class AceReference(HalfPageLayout):
     f'Engage: {2 * Strings.SPACE} Worksheet Instructions'
   )
 
+  SOURCE_TXT: str = str(
+    'Source: Adapted from methods developed by Dr. Russ Harris, author '
+    'of "The Happiness Trap" and Anna Runkle, author of "Re-Regulated"'
+  )
+
   ABOUT_HEADER_TXT: str =\
     'About the ACE Method'
 
@@ -101,8 +106,7 @@ class AceReference(HalfPageLayout):
     '\n'
     'BOX BREATHING: Sit comfortably and close your eyes. Inhale for '
     'four seconds, pause for four seconds, exhale for four seconds, '
-    'hold for four seconds. Practice for at least ten breath cycles '
-    ' or two to five minutes.'
+    'hold for four seconds. Practice for at least 10 breaths.'
     '\n'
     'SHAKE: '
     'Stand with your feet hip-width apart and gently bounce '
@@ -140,6 +144,24 @@ class AceReference(HalfPageLayout):
   )
 
   #_____________________________________________________________________
+  def __init__(self
+  , total_hght: int = 0
+  , total_wdth: int = 0
+  , addl_args: dict = {}
+  ):
+    """
+    Constructor for class. Assumes landscape orientation.
+    """
+    super().__init__\
+      ( total_hght=total_hght
+      , total_wdth=total_wdth
+      , addl_args=addl_args
+      , pad_under_page_header=False
+      )
+
+    return
+
+  #_____________________________________________________________________
   def create_content(self) -> None:
     """
     Parameters:
@@ -156,7 +178,7 @@ class AceReference(HalfPageLayout):
     # Style for reference section headers
     ref_header_style: StdTextBoxStyles =\
       deepcopy(StdTextBoxStyles.DRK_BACK_HEADER_FONT)
-    ref_header_style.font_size_ = 13
+    ref_header_style.font_size_ = 10
 
     # Style for worksheet instruction headers
     wksht_header_style: StdTextBoxStyles =\
@@ -262,7 +284,12 @@ class AceReference(HalfPageLayout):
       ]
 
     self.entries_: list =\
-      [  VerticalStack\
+      [ TextRowGroup\
+        ( total_wdth=self.content_wdth_
+        , text=self.SOURCE_TXT
+        , style=StdTextBoxStyles.REF_SRC
+        )
+      , VerticalStack\
         ( obj_list=about_stack
         , show_outline=True
         )

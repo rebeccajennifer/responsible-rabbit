@@ -169,6 +169,18 @@ class StdTextBoxStyles():
     , font_size=Font.DEF_PAGE_HEADER_TXT_SIZE
     )
 
+  REF_SRC: TextBoxStyle =\
+    TextBoxStyle\
+    ( backgnd_color='none'
+    , show_outline=False
+    , inner_pad_top=True
+    , inner_pad_bot=False
+    , inner_pad_lft=False
+    , inner_pad_rgt=False
+    , font_family=Font.FONT_FAMILY_NORMAL
+    , font_size=8
+    )
+
 #_______________________________________________________________________
 class StdLineRowGroupStyles():
 
