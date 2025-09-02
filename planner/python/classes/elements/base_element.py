@@ -26,16 +26,21 @@
 #   Base class for all table elements.
 #_______________________________________________________________________
 
+from copy import deepcopy
+
 import svgwrite.container
-import svgwrite.shapes
 
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.style import PlannerColors as Colors
+from classes.style.std_styles import StdTextBoxStyles
 from utils.utils import PlannerUtils as Utils
 
 
 #_______________________________________________________________________
 class VerticalStack(svgwrite.container.Group):
+  """
+  Stack objects vertically with optional padding between them.
+  """
 
   def __init__(self
   , obj_list: list = []
@@ -79,6 +84,11 @@ class VerticalStack(svgwrite.container.Group):
         self.total_wdth_ = obj_list[i].total_wdth_
     #___________________________________________________________________
 
+    if (total_hght > content_hght\
+        and len(obj_list) > 1\
+        and pad_bet_elements):
+      padding = (total_hght - content_hght) // (len(obj_list) - 1)
+
     for i in range(len(obj_list)):
 
       obj_list[i]['transform'] =\
@@ -105,11 +115,13 @@ class VerticalStack(svgwrite.container.Group):
 
 #_______________________________________________________________________
 class HorizontalStack(svgwrite.container.Group):
+  """
+  Stack objects horizontally with optional padding between them.
+  """
 
   def __init__(self
   , obj_list: list = []
   , add_inner_pad: bool = False
-  , total_hght: int = 0
   ) -> svgwrite.container.Group:
     """
     Creates a new svgwrite container with all objects stacked
@@ -139,6 +151,7 @@ class HorizontalStack(svgwrite.container.Group):
 
       self.total_wdth_ += obj_list[i].total_wdth_
 
+      # Determine the tallest object, which sets the height
       if ((obj_list[i].total_hght_) > (self.total_hght_)):
         self.total_hght_ = obj_list[i].total_hght_
 

@@ -425,3 +425,39 @@ class PlannerUtils:
       yield i
       #_________________________________________________________________
       i += 1
+
+  #_____________________________________________________________________
+  def split_list(lst: list, n: int) -> list:
+    """
+    Splits a list into n approximately equal parts.
+
+    Parameters:
+      lst (list): The list to be split.
+      n (int)   : The number of parts to split the list into.
+
+    Returns:
+      list: A list containing n sublists, each representing a part of
+      the original list.
+    """
+
+    if n <= 0:
+        raise ValueError('Number of parts must be a positive integer.')
+
+    # Calculate the size of each part and the number of parts that need
+    # to be one element larger to account for any remainder
+    k, m = divmod(len(lst), n)
+
+    result = []
+
+    for i in range(n):
+
+        # Calculate the start index for the i-th sublist
+        # (i * k) gives the base start, min(i, m) distributes the
+        # remainder
+        start = i * k + min(i, m)
+
+        # Calculate the end index for the i-th sublist
+        end = (i + 1) * k + min(i + 1, m)
+
+        result.append(lst[start:end])
+    return result

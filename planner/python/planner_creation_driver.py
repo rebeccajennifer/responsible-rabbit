@@ -36,6 +36,8 @@ from classes.page_entries.week_habit_entry import HabitTracker
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
 from classes.page_entries.test_entry import TestEntry
+from classes.reference_pages.emotion_reference import EmotionReference
+from classes.reference_pages.ace_reference import AceReference
 
 from classes.page_layouts.page_layout import PageLayout
 from classes.page_layouts.half_page_divider import HalfPageDivider
@@ -164,10 +166,11 @@ if __name__ == '__main__':
     , is_dbl_sided=is_dbl_sided
     , file_name_no_ext='test'
     , out_dir='.'
-    , entry_0_type=TestEntry
+    , entry_0_type=AceReference
+    , entry_1_type=EmotionReference
     )
 
-  test_layout.save_pdf()
+  #test_layout.save_pdf()
 
   div_dir: str = join(args.out_dir ,'..', 'dividers')
   generate_habit_tracker(is_portrait, div_dir)

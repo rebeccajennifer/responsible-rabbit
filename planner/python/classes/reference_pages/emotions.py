@@ -26,28 +26,26 @@
 #   List of Brene Brown's 87 emotions.
 #_______________________________________________________________________
 
-class BreneBrownEmotionList:
+class EmotionStrings:
   """
   List of 87 human emotions and experiences from research by Brene Brown
   """
 
   PREFIX: str = 'Places we go when...'
 
-  HEADER_UNCERTAIN         : str = 'Things are uncertain or too much'
-  HEADER_COMPARE           : str = 'We compare'
-  HEADER_UNPLANNED         : str = 'Things don\'t go as planned'
-  HEADER_BEYOND_US         : str = 'It\'s beyond us'
-  HEADER_NOT_WHAT_THEY_SEEM: str = 'Things aren\'t what they seem'
-  HEADER_HURT              : str = 'We\'re hurting'
-  HEADER_OTHERS            : str = 'With others'
-  HEADER_FALL_SHORT        : str = 'We fall short'
-  HEADER_CONNECTION        : str = 'We search for connection'
-  HEADER_OPEN              : str = 'The heart is open'
-  HEADER_GOOD              : str = 'Life is good'
-  HEADER_WRONGED           : str = 'We feel wronged'
-  HEADER_SELF_ASSESS       : str = 'To self-assess'
-
-
+  HDR_UNCERTAIN         : str = 'Things are uncertain or too much'
+  HDR_COMPARE           : str = 'We compare'
+  HDR_UNPLANNED         : str = 'Things don\'t go as planned'
+  HDR_BEYOND_US         : str = 'It\'s beyond us'
+  HDR_NOT_WHAT_THEY_SEEM: str = 'Things aren\'t what they seem'
+  HDR_HURT              : str = 'We\'re hurting'
+  HDR_OTHERS            : str = 'With others'
+  HDR_FALL_SHORT        : str = 'We fall short'
+  HDR_CONNECTION        : str = 'We search for connection'
+  HDR_OPEN              : str = 'The heart is open'
+  HDR_GOOD              : str = 'Life is good'
+  HDR_WRONGED           : str = 'We feel wronged'
+  HDR_SELF_ASSESS       : str = 'To self-assess'
 
   UNCERTAIN: list =\
     [ 'Stress'
@@ -74,12 +72,12 @@ class BreneBrownEmotionList:
 
   UNPLANNED: list =\
     [ 'Boredom'
-    , 'Disappointment'
     , 'Expectations'
     , 'Regret'
-    , 'Discouragement'
     , 'Resignation'
     , 'Frustration'
+    , 'Disappointment'
+    , 'Discouragement'
     ]
 
   BEYOND_US: list =\
@@ -93,12 +91,12 @@ class BreneBrownEmotionList:
 
   NOT_WHAT_THEY_SEEM: list =\
     [ 'Amusement'
-    , 'Bittersweetness'
     , 'Nostalgia'
-    , 'Cognitive Dissonance'
-    , 'Paradox'
     , 'Irony'
+    , 'Paradox'
     , 'Sarcasm'
+    , 'Bittersweetness'
+    , 'Cognitive Dissonance'
     ]
 
   HURT: list =\
@@ -120,11 +118,11 @@ class BreneBrownEmotionList:
 
   FALL_SHORT: list =\
     [ 'Shame'
-    , 'Self-Compassion'
     , 'Perfectionism'
     , 'Guilt'
     , 'Humiliation'
     , 'Embarrassment'
+    , 'Self-Compassion'
     ]
 
   CONNECTION: list =\
@@ -155,17 +153,17 @@ class BreneBrownEmotionList:
     , 'Calm'
     , 'Contentment'
     , 'Gratitude'
-    , 'Foreboding Joy'
     , 'Relief'
     , 'Tranquility'
+    , 'Foreboding Joy'
     ]
 
   WRONGED: list =\
     [ 'Anger'
     , 'Contempt'
     , 'Disgust'
-    , 'Dehumanization'
     , 'Hate'
+    , 'Dehumanization'
     , 'Self-Righteousness'
     ]
 
@@ -174,3 +172,17 @@ class BreneBrownEmotionList:
     , 'Hubris'
     , 'Humility'
     ]
+
+  UNCERTAIN_DICT          : dict = {'header': HDR_UNCERTAIN         , 'emotions': UNCERTAIN         }
+  COMPARE_DICT            : dict = {'header': HDR_COMPARE           , 'emotions': COMPARE           }
+  UNPLANNED_DICT          : dict = {'header': HDR_UNPLANNED         , 'emotions': UNPLANNED         }
+  BEYOND_US_DICT          : dict = {'header': HDR_BEYOND_US         , 'emotions': BEYOND_US         }
+  NOT_WHAT_THEY_SEEM_DICT : dict = {'header': HDR_NOT_WHAT_THEY_SEEM, 'emotions': NOT_WHAT_THEY_SEEM}
+  HURT_DICT               : dict = {'header': HDR_HURT              , 'emotions': HURT              }
+  OTHERS_DICT             : dict = {'header': HDR_OTHERS            , 'emotions': OTHERS            }
+  FALL_SHORT_DICT         : dict = {'header': HDR_FALL_SHORT        , 'emotions': FALL_SHORT        }
+  CONNECTION_DICT         : dict = {'header': HDR_CONNECTION        , 'emotions': CONNECTION        }
+  OPEN_DICT               : dict = {'header': HDR_OPEN              , 'emotions': OPEN              }
+  GOOD_DICT               : dict = {'header': HDR_GOOD              , 'emotions': GOOD              }
+  WRONGED_DICT            : dict = {'header': HDR_WRONGED           , 'emotions': WRONGED           }
+  SELF_ASSESS_DICT        : dict = {'header': HDR_SELF_ASSESS       , 'emotions': SELF_ASSESS       }

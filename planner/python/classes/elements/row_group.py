@@ -296,17 +296,22 @@ class TextRowGroup(RowGroup):
     content_width: int =\
       total_wdth - Font.TEXT_PADDING * (inner_pad_lft + inner_pad_rgt)
 
-    # Convert text into list of strings to wrap text
-    if (wrap_txt):
-      split_text: list =\
-          Utils.split_txt_by_wdth\
-          ( txt=text
-          , px_wdth=content_width
-          , font_size=self.font_size_
-          , font_family=self.font_family_
-          )
+    # Allow for input text to already be a list of strings
+    if (isinstance(text, list) ):
+      split_text: list = text
+
     else:
-      split_text = [text]
+      # Convert text into list of strings to wrap text
+      if (wrap_txt):
+        split_text: list =\
+            Utils.split_txt_by_wdth\
+            ( txt=text
+            , px_wdth=content_width
+            , font_size=self.font_size_
+            , font_family=self.font_family_
+            )
+      else:
+        split_text = [text]
 
     text_array: list = len(split_text) * ['']
 

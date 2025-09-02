@@ -36,21 +36,39 @@
 from classes.constants.entries import Entries
 from classes.constants.addl_arg_keys import AddlArgKeys as Keys
 
+#_______________________________________________________________________
+class NightlyPages:
+  """
+  Nightly reflection pages.
+  """
+
+  LAYOUTS: list =\
+  [ {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
+  , {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
+  ]
+
 
 #_______________________________________________________________________
-class OptionlPages:
+class AceRefrPages:
   """
-  Defines and organizes configuration data for additional optional
-  pages that can be inserted.
+  ACE reference pages.
   """
 
-  XTRA_LAYOUTS: list =\
+  LAYOUTS: list =\
+  [ {Keys.LEFT: Entries.ACERF, Keys.RGHT: Entries.EMORF}
+  ]
+
+
+#_______________________________________________________________________
+class AceWkshPages:
+  """
+  ACE worksheet pages.
+  """
+  LAYOUTS: list =\
   [ {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
   , {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
-  , {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
-  , {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
-  #, {Keys.LEFT: Entries.ACERF, Keys.RGHT: Entries.ACERF}
   ]
+
 
 #_______________________________________________________________________
 class PreviewPages:

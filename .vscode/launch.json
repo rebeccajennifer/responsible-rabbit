@@ -69,6 +69,15 @@
       , "--dbl_sided"
       ]
     }
-
+  , { "name": "pytest"
+    , "type": "debugpy"
+    , "request": "launch"
+    , "module": "pytest"
+    , "console": "integratedTerminal"
+    , "cwd": "${workspaceFolder}/planner/python"
+    , "args":
+      [ "test"
+      ]
+    }
   ]
 }

@@ -1,3 +1,31 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+#   DESCRIPTION
+#   Standard styles for text boxes and line row groups.
+#_______________________________________________________________________
+
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
 from classes.constants.dims import PlannerDims as Dims
@@ -139,6 +167,18 @@ class StdTextBoxStyles():
     , inner_pad_rgt=True
     , font_family=Font.FONT_FAMILY_HEADER
     , font_size=Font.DEF_PAGE_HEADER_TXT_SIZE
+    )
+
+  REF_SRC: TextBoxStyle =\
+    TextBoxStyle\
+    ( backgnd_color='none'
+    , show_outline=False
+    , inner_pad_top=True
+    , inner_pad_bot=False
+    , inner_pad_lft=False
+    , inner_pad_rgt=False
+    , font_family=Font.FONT_FAMILY_NORMAL
+    , font_size=8
     )
 
 #_______________________________________________________________________
