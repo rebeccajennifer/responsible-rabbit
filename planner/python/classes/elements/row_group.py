@@ -41,9 +41,11 @@ from classes.style.style import PlannerFontStyle as Font
 from classes.style.style import PlannerColors as Colors
 from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
+from classes.style.table_style import Align
 from utils.utils import PlannerUtils as Utils
 
 from classes.constants.debug_const  import DebugConst
+
 
 #_______________________________________________________________________
 class RowGroup(svgwrite.container.Group):
@@ -64,6 +66,7 @@ class RowGroup(svgwrite.container.Group):
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , obj_list: list = []
+  , horiz_align: str = Align.LEFT
   ):
     """
     Parameters:
@@ -88,7 +91,6 @@ class RowGroup(svgwrite.container.Group):
     self.inner_pad_bot_ : bool = inner_pad_bot
     self.inner_pad_lft_ : bool = inner_pad_lft
     self.inner_pad_rgt_ : bool = inner_pad_rgt
-    self.obj_list_      : list = obj_list
     self.show_outline_  : bool = show_outline
     self.outline_color_ : bool = outline_color
     self.backgnd_color_ : bool = backgnd_color
@@ -128,12 +130,12 @@ class RowGroup(svgwrite.container.Group):
       self.total_hght_ = self.content_hght_\
         + Font.TEXT_PADDING * (inner_pad_bot + inner_pad_top)
 
-    self.add_content()
+    self.add_content(obj_list=obj_list, align=horiz_align)
 
     return
 
   #_____________________________________________________________________
-  def add_content(self):
+  def add_content(self, obj_list: list = [], align: str = Align.LEFT):
     """
     Adds row objects and outline to group.
 
@@ -161,14 +163,24 @@ class RowGroup(svgwrite.container.Group):
       )
 
     #___________________________________________________________________
-    # Add rows
+    # Determine starting position based on alignment
     #___________________________________________________________________
-    insert_x: int = Font.TEXT_PADDING * self.inner_pad_lft_
+    if (align == Align.LEFT):
+      insert_x: int = Font.TEXT_PADDING * self.inner_pad_lft_
+    elif (align == Align.RIGHT):
+      insert_x: int = self.total_wdth_ -\
+        Font.TEXT_PADDING * self.inner_pad_rgt_
+    else: # Center
+      insert_x: int = self.total_wdth_ / 2
+
     insert_y: int = self.row_hght_\
       - self.y_offset_\
       + Font.TEXT_PADDING * self.inner_pad_top_
 
-    for obj in self.obj_list_:
+    #___________________________________________________________________
+    # Add rows
+    #___________________________________________________________________
+    for obj in obj_list:
       obj['transform'] =\
         f'translate({insert_x},{insert_y})'
       self.add(obj)
@@ -247,6 +259,7 @@ class TextRowGroup(RowGroup):
   , text: str = ''
   , style: TextBoxStyle = TextBoxStyle()
   , wrap_txt: bool = True
+  , text_align: str = Align.LEFT
   ):
     """
     Parameters:
@@ -255,7 +268,7 @@ class TextRowGroup(RowGroup):
       text          : Text of object
       style         : Style of text
       wrap_txt      : True indicates to wrap text
-      left_align    : True indicates left alignment
+      text_align    : Alignment of text within box
     """
 
     self.total_hght_    : int  = total_hght

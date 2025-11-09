@@ -3,6 +3,13 @@ from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
 
 #_______________________________________________________________________
+class Align:
+  LEFT   = 'left'
+  CENTER = 'middle'
+  RIGHT  = 'end'
+
+
+#_______________________________________________________________________
 class LineRowGroupStyle:
   """
   Encapsulates styling properties for row groups in a table.
