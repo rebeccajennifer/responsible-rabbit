@@ -1,3 +1,28 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
@@ -66,6 +91,10 @@ class TextBoxStyle():
   Contains style elements for text box.
   """
 
+  LEFT_ALIGN: str = 'start'
+  RGHT_ALIGN: str = 'end'
+  CNTR_ALIGN: str = 'middle'
+
   #_____________________________________________________________________
   def __init__(self
   , show_outline: bool = False
@@ -80,6 +109,7 @@ class TextBoxStyle():
   , font_family: int = Font.FONT_FAMILY_NORMAL
   , font_color: str = Colors.NORMAL_TXT
   , line_spc: int = Font.DEF_LINE_SPC
+  , alignment: str = LEFT_ALIGN
   ):
     """
     Parameters:
@@ -115,9 +145,9 @@ class TextBoxStyle():
     self.font_family_  : str   = font_family
     self.font_color_   : str   = font_color
     self.line_spc_     : int   = line_spc
+    self.alignment_    : str   = alignment
 
     return
-
 
   def set_font_color(self, x: str):
     self.font_color_ = x
@@ -130,9 +160,3 @@ class TextBoxStyle():
   def set_font_family(self, x: str):
     self.font_family_= x
     return
-
-#_______________________________________________________________________
-class TableRowStyle():
-  """
-  Contains style elements for tables.
-  """

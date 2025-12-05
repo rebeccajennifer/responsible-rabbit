@@ -65,10 +65,19 @@ class AceWkshPages:
   ACE worksheet pages.
   """
   LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
-  , {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.ACEPG}
+  [ {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.SENSE}
+  , {Keys.LEFT: Entries.SENSE, Keys.RGHT: Entries.ACEPG}
   ]
 
+#_______________________________________________________________________
+class SenseExPages:
+  """
+  Five Senses grounding exercise pages.
+  """
+  LAYOUTS: list =\
+  [ {Keys.LEFT: Entries.SENSE, Keys.RGHT: Entries.SENSE}
+  , {Keys.LEFT: Entries.SENSE, Keys.RGHT: Entries.SENSE}
+  ]
 
 #_______________________________________________________________________
 class PreviewPages:

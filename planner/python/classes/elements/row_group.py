@@ -250,12 +250,11 @@ class TextRowGroup(RowGroup):
   elements. Designed for displaying single or multi-line text.
   """
 
+
   #_____________________________________________________________________
   def __init__(self
   , total_wdth: int = 0
   , total_hght: int = 0
-  , inner_pad_lft: bool = False
-  , inner_pad_rgt: bool = False
   , text: str = ''
   , style: TextBoxStyle = TextBoxStyle()
   , wrap_txt: bool = True
@@ -264,11 +263,10 @@ class TextRowGroup(RowGroup):
     Parameters:
       total_wdth    : Total width of group
       total_hght    : Total height of group
-      inner_pad_lft : Left padding, impacts length and insertion
-      inner_pad_rgt : Right padding, impacts length
       text          : Text of object
       style         : Style of text
       wrap_txt      : True indicates to wrap text
+      left_align    : True indicates left alignment
     """
 
     self.show_outline_  = style.show_outline_
@@ -294,7 +292,8 @@ class TextRowGroup(RowGroup):
     self.row_hght_ = self.line_spc_ * self.font_size_
 
     content_width: int =\
-      total_wdth - Font.TEXT_PADDING * (inner_pad_lft + inner_pad_rgt)
+      total_wdth - Font.TEXT_PADDING\
+      * (self.inner_pad_lft_ + self.inner_pad_rgt_)
 
     # Allow for input text to already be a list of strings
     if (isinstance(text, list) ):
@@ -315,12 +314,29 @@ class TextRowGroup(RowGroup):
 
     text_array: list = len(split_text) * ['']
 
+    #-------------------------------------------------------------------
+    # alignment_baseline: adjustment relative to parent element
+    #
+    # text-after-edge
+    #   - aka text-top
+    #   - match top of box to top of parent
+    #
+    # text-before-edge
+    #   - aka text-bottom
+    #   - match bottom of box to bottom of parent
+    #-------------------------------------------------------------------
+    # text_anchor: justification of text
+    #
+    # start - left align
+    # end   - right align
+    #-------------------------------------------------------------------
+
     # Create list of text objects
     for i in range(len(split_text)):
       svg_text: svgwrite.text.Text =\
         svgwrite.text.Text\
         ( text=split_text[i]
-        , text_anchor='start'
+        , text_anchor=style.alignment_
         , alignment_baseline='text-after-edge'
         , fill=self.font_color_
         , font_size=self.font_size_

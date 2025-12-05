@@ -49,6 +49,7 @@ from classes.page_entries.week_entry import WeekEntry1
 from classes.reference_pages.ace_reference import AceReference
 from classes.reference_pages.emotion_reference import EmotionReference
 from classes.page_entries.ace_entry import AceEntry
+from classes.page_entries.senses_wksht import SensesWksht
 
 
 #_____________________________________________________________________
@@ -190,7 +191,6 @@ class Entries:
     , Key.ENTRY_ARGS: {}
     }
 
-
   DATES: dict =\
     { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
@@ -203,6 +203,11 @@ class Entries:
 
   ACEPG: dict =\
     { Key.ENTRY_TYPE: AceEntry
+    , Key.ENTRY_ARGS: {}
+    }
+
+  SENSE: dict =\
+    { Key.ENTRY_TYPE: SensesWksht
     , Key.ENTRY_ARGS: {}
     }
 

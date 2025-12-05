@@ -178,6 +178,10 @@ class PlannerStrings:
   # Free write strings
   #_____________________________________________________________________
 
+
+  TODAY_END = 15 * SPACE + DATE_STR
+
+
   PAGE_HEADER_TXT_FUT_5YR: str = 'Imagine a Future...'
   PAGE_HEADER_TXT_FUT_1YR: str = 'A Year of Growth'
   PAGE_HEADER_TXT_FUT_12W: str = '12 Week Potential'

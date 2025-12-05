@@ -1,13 +1,49 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+#   DESCRIPTION
+#
+#   This module contains the entry objects used to generate layouts.
+#
+#   Each entry is represented by a dictionary containing the entry
+#   type and any additional arguments it requires. These configurations
+#   enable automated generation of printable journal pages with
+#   consistent formatting and content.
+#_______________________________________________________________________
+
 from os.path import join
 
 from utils.utils import PlannerUtils as Utils
 from classes.constants.addl_arg_keys import AddlArgKeys as Keys
-from classes.constants.page_order import DblSidePages
-from classes.constants.page_order import OneSidePages
-from classes.constants.page_order import PreviewPages
+
 from classes.constants.page_order import AceRefrPages
 from classes.constants.page_order import AceWkshPages
+from classes.constants.page_order import DblSidePages
+from classes.constants.page_order import OneSidePages
 from classes.constants.page_order import NightlyPages
+from classes.constants.page_order import PreviewPages
+from classes.constants.page_order import SenseExPages
 
 from classes.page_layouts.page_layout import PageLayout
 
@@ -25,6 +61,7 @@ class PdfPrefix:
   NITE: str = 'xtra-nite'
   ACER: str = 'ace_-ref_'
   ACEW: str = 'ace_-wksh'
+  SENS: str = 'five-sens'
 
 
 #_______________________________________________________________________
@@ -194,6 +231,10 @@ class PlannerAssembler:
     group2: PageGroup = PageGroup(PdfPrefix.NITE, NightlyPages.LAYOUTS)
     group3: PageGroup = PageGroup(PdfPrefix.ACER, AceRefrPages.LAYOUTS)
     group4: PageGroup = PageGroup(PdfPrefix.ACEW, AceWkshPages.LAYOUTS)
+    group5: PageGroup = PageGroup(PdfPrefix.SENS, SenseExPages.LAYOUTS)
+
+    #self.page_groups: list =\
+    #  [ group5]
 
     self.page_groups: list =\
       [ group0
@@ -201,6 +242,7 @@ class PlannerAssembler:
       , group2
       , group3
       , group4
+      , group5
       ]
 
     return
