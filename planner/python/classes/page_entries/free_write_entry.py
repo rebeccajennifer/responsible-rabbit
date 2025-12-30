@@ -66,13 +66,13 @@ class FreeWriteEntry(HalfPageLayout):
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
-    Parameters:
+    Parameters
       None
 
-    Side Effects:
+    Side Effects
       Populates self.entries_ class variable.
 
-    Returns:
+    Returns
       None
     """
     super().create_content()
@@ -93,10 +93,10 @@ class FreeWriteEntry(HalfPageLayout):
     """
     Creates page header and saves it to class variable.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
 
     """
 

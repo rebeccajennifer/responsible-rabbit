@@ -62,10 +62,10 @@ class PlannerDims:
     """
     Converts integer value to string appended with 'in'.
 
-    Parameters:
+    Parameters
       dim: Dimension to convert
 
-    Returns:
+    Returns
       String indicating value appended with 'in'
     """
     return f'{dim}in'
@@ -75,10 +75,10 @@ class PlannerDims:
     """
     Converts integer value to string appended with 'px'.
 
-    Parameters:
+    Parameters
       dim: Dimension to convert
 
-    Returns:
+    Returns
       String indicating value appended with 'px'
     """
     return f'{dim}px'
@@ -89,10 +89,10 @@ class PlannerDims:
     Calculates the middle margin width. Doubles binder margin for
     double-sided print. Binder + standard margin for single-sided print.
 
-    Parameters:
+    Parameters
       dbl_sided: is the layout intended to be printed double-sided
 
-    Returns:
+    Returns
       Width of middle margin
     """
 
@@ -120,10 +120,10 @@ class PlannerDims:
     Portrait orientation means that each half sheet is of landscape
     orientation.
 
-    Parameters:
+    Parameters
       is_portrait:  is the page intended to be printed as a portrait
 
-    Returns:
+    Returns
       width, height of content
     """
 
@@ -153,10 +153,10 @@ class PlannerDims:
     """
     Converts inch unit to pixels.
 
-    Parameters:
+    Parameters
       inches: Value in inches
 
-    Returns:
+    Returns
       Value in pixels
     """
 

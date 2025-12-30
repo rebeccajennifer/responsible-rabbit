@@ -142,10 +142,10 @@ class PageLayout(svgwrite.Drawing):
     """
     Creates page borders, page header, content.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 
@@ -173,10 +173,10 @@ class PageLayout(svgwrite.Drawing):
     """
     Adds content as class variables to page.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 
@@ -198,7 +198,7 @@ class PageLayout(svgwrite.Drawing):
     """
     Determines top left insertion points for content boxes and borders.
 
-    Side Effects:
+    Side Effects
       Adds class variables for insertion points.
     """
 
@@ -250,13 +250,13 @@ class PageLayout(svgwrite.Drawing):
     """
     Saves layout as pdf.
 
-    Parameters:
+    Parameters
       out_dir: Path to output directory
 
-    Side Effects:
+    Side Effects
       Saves layout to pdf in output directory.
 
-    Returns:
+    Returns
       None
     """
 

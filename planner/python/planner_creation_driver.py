@@ -89,15 +89,15 @@ def generate_habit_tracker\
   """
   Create weekly habit bookmark.
 
-  Parameters:
+  Parameters
     is_portrait : True indicates the half page is in portrait
                   orientation
     out_dir     : Output directory
 
-  Side Effects:
+  Side Effects
     Creates svgs and pdfs for habit tracker bookmark.
 
-  Returns:
+  Returns
     None
   """
 

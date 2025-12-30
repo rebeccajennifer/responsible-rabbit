@@ -104,10 +104,10 @@ class HalfPageDivider(PageLayout):
     """
     Creates page borders, page header,
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 
@@ -186,10 +186,10 @@ class HalfPageDivider(PageLayout):
     """
     Adds content as class variables to page.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 

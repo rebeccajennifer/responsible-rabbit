@@ -64,13 +64,13 @@ class Helper:
     """
     Removes test directory.
 
-    Parameters:
+    Parameters
       dir_path: Path to directory to remove.
 
-    Side Effects:
+    Side Effects
       Removes test directory
 
-    Returns:
+    Returns
       None
     """
 

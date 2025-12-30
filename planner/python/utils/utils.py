@@ -84,14 +84,14 @@ class UtilErrors:
     """
     Raiese exception with descriptive message.
 
-    Parameters:
+    Parameters
       err   : Exception type.
       desc  : Error message.
 
-    Side Effects:
+    Side Effects
       Raises exception
 
-    Returns:
+    Returns
       None
     """
 
@@ -121,7 +121,7 @@ class PlannerUtils:
     """
     Calculates columns widths.
 
-    Parameters:
+    Parameters
       col_count: Number of columns
       col_wdths: List of column widths. One element of list should be -1
                  -1 indicates to span that column to the remaining width
@@ -171,13 +171,13 @@ class PlannerUtils:
     Splits a given string into a list of lines, where each line fits
     within the specified width.
 
-    Parameters:
+    Parameters
       txt         : Input text to wrap.
       px_wdth     : Maximum width (in pixels) allowed for each line.
       font_size   : Size of text font.
       font_family : Font of text.
 
-    Returns:
+    Returns
         List[str]: A list of strings, each representing a line of
         wrapped text.
     """
@@ -235,12 +235,12 @@ class PlannerUtils:
     total height if row height is given. If both total height and row
     height are given, will recalculate row height.
 
-    Parameters:
+    Parameters
       total_hght  : Total height of combined rows
       row_count   : Number of rows
       row_hght    : Height of rows
 
-    Returns:
+    Returns
       tuple       : (total height, row height)
     """
 
@@ -266,7 +266,7 @@ class PlannerUtils:
     """
     Creates rectangular outline around box.
 
-    Parameters:
+    Parameters
       None
     """
 
@@ -288,13 +288,13 @@ class PlannerUtils:
     """
     Creates a directory if it doesn't exist.
 
-    Parameters:
+    Parameters
       dir_path: Path to directory
 
-    Side Effects:
+    Side Effects
       Creates directory.
 
-    Returns:
+    Returns
       None
     """
 
@@ -324,13 +324,13 @@ class PlannerUtils:
     """
     Determines if file is a pdf.
 
-    Parameters:
+    Parameters
       file_path: path to file
 
-    Side Effects:
+    Side Effects
       None
 
-    Returns:
+    Returns
       bool indicating if file is pdf
     """
 
@@ -363,15 +363,15 @@ class PlannerUtils:
     Combines pdfs into one pdf. Order of pages in combined pdf
     determined by order of pdf_paths.
 
-    Parameters:
+    Parameters
     pdf_paths         : List of paths of pdfs to combine.
     combined_pdf_path : Path of combined pdf.
     remove_indv_pgs   : True - remove individual pdfs after combining
 
-    Side Effects:
+    Side Effects
     Creates a new pdf.
 
-    Returns:
+    Returns
     True  : No errors.
     False : Errors during creation.
     """
@@ -409,7 +409,7 @@ class PlannerUtils:
     """
     Generator that yields incrementing integers, similar to `i++` in C.
 
-    Parameters:
+    Parameters
       i (int): Starting value (default is 0).
 
     Yields:
@@ -431,11 +431,11 @@ class PlannerUtils:
     """
     Splits a list into n approximately equal parts.
 
-    Parameters:
+    Parameters
       lst (list): The list to be split.
       n (int)   : The number of parts to split the list into.
 
-    Returns:
+    Returns
       list: A list containing n sublists, each representing a part of
       the original list.
     """

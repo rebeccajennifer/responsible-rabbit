@@ -94,7 +94,7 @@ class PageGroup():
   #_____________________________________________________________________
   def __init__( self, group_name: str, layouts: list):
     """
-    Parameters:
+    Parameters
       group_name: Used in naming individual and grouped pdf.
 
       layouts   : List of layouts in the following form:
@@ -139,7 +139,7 @@ class PlannerAssembler:
   , out_dir: str = '.'
   ):
     """
-    Parameters:
+    Parameters
       is_portrait  : True - Full page to be printed in portrait
                      orientation.
 
@@ -183,14 +183,14 @@ class PlannerAssembler:
     """
     Combines pdfs in groups.
 
-    Parameters:
+    Parameters
       page_group: List of pages.
       out_dir   : Output directory
 
-    Side Effects:
+    Side Effects
       Creates combined pdfs. Removes original pdfs if that section is
 
-    Returns:
+    Returns
       None
     """
 
