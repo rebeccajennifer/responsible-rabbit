@@ -66,7 +66,7 @@ class RowGroup(svgwrite.container.Group):
   , obj_list: list = []
   ):
     """
-    Parameters:
+    Parameters
       wdth            : Width of table
       total_hght      : Height of table
       show_outline    : Show table outline
@@ -137,13 +137,13 @@ class RowGroup(svgwrite.container.Group):
     """
     Adds row objects and outline to group.
 
-    Parameters:
+    Parameters
       None
 
-    Side Effects:
+    Side Effects
       Adds objects in rows to self.
 
-    Returns:
+    Returns
       None
     """
 
@@ -191,7 +191,7 @@ class LineRowGroup(RowGroup):
   , style: LineRowGroupStyle = LineRowGroupStyle()
   ):
     """
-    Parameters:
+    Parameters
       total_wdth    : Total width of group
       total_hght    : Total height of group
       row_count     : Number of rows
@@ -250,17 +250,15 @@ class TextRowGroup(RowGroup):
   elements. Designed for displaying single or multi-line text.
   """
 
-
   #_____________________________________________________________________
   def __init__(self
   , total_wdth: int = 0
   , total_hght: int = 0
   , text: str = ''
   , style: TextBoxStyle = TextBoxStyle()
-  , wrap_txt: bool = True
   ):
     """
-    Parameters:
+    Parameters
       total_wdth    : Total width of group
       total_hght    : Total height of group
       text          : Text of object
@@ -281,6 +279,7 @@ class TextRowGroup(RowGroup):
     self.font_size_     = style.font_size_
     self.line_spc_      = style.line_spc_
     self.y_offset_      = style.y_offset_
+    wrap_txt            = style.wrap_txt_
 
     self.total_hght_    : int  = total_hght
     self.total_wdth_    : int  = total_wdth
@@ -398,7 +397,7 @@ class DualLineRowGroup(svgwrite.container.Group):
       StdLineRowGroupStyles.DOTTED
   ):
     """
-    Parameters:
+    Parameters
       total_wdth      : Total width of group
       total_hght      : Total height of group
       row_count       : Row count of table
