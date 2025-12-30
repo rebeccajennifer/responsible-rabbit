@@ -35,7 +35,7 @@ from typing import Tuple
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.page_layouts.half_page_layout import HalfPageLayout
-from flux_bunny_utils.file_utils import FileUtils
+from utils.flux_bunny_utils.file_utils import FileUtils
 from utils.utils import PlannerUtils as Utils
 
 

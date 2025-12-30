@@ -1,0 +1,63 @@
+//_____________________________________________________________________
+//_____________________________________________________________________
+//       _   __   _   _ _   _   _   _         _
+//  |   |_| | _  | | | V | | | | / |_/ |_| | /
+//  |__ | | |__| |_| |   | |_| | \ |   | | | \_
+//   _  _         _ ___  _       _ ___   _                    / /
+//  /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+//  \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+//_____________________________________________________________________
+//_____________________________________________________________________
+//
+//---------------------------------------------------------------------
+//  Copyright 2025, Rebecca Rashkin
+//  -------------------------------
+//  This code may be copied, redistributed, transformed, or built
+//  upon in any format for educational, non-commercial purposes.
+//
+//  Please give me appropriate credit should you choose to use this
+//  resource. Thank you :)
+//---------------------------------------------------------------------
+//
+//_____________________________________________________________________
+//  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+//_____________________________________________________________________
+//  DESCRIPTION
+//  Configuration file for VSCode debugger
+//_____________________________________________________________________
+
+{ "version":        "0.2.0"
+
+, "configurations":
+  [ { "name"    : "file-utils-unit-tests"
+    , "type"    : "debugpy"
+    , "request" : "launch"
+    , "module"  : "pytest"
+    , "console" : "integratedTerminal"
+    , "cwd"     : "${workspaceFolder}/.."
+    , "args":
+      [ "${workspaceFolder}/test_flux_bunny_utils/test_file_utils.py"
+      ]
+    }
+  , { "name"    : "list-utils-unit-tests"
+    , "type"    : "debugpy"
+    , "request" : "launch"
+    , "module"  : "pytest"
+    , "console" : "integratedTerminal"
+    , "cwd"     : "${workspaceFolder}/.."
+    , "args":
+      [ "${workspaceFolder}/test_flux_bunny_utils/test_list_utils.py"
+      ]
+    }
+  , { "name"    : "string-utils-unit-tests"
+    , "type"    : "debugpy"
+    , "request" : "launch"
+    , "module"  : "pytest"
+    , "console" : "integratedTerminal"
+    , "cwd"     : "${workspaceFolder}/.."
+    , "args":
+      [ "${workspaceFolder}/test_flux_bunny_utils/test_string_utils.py"
+      ]
+    }
+  ]
+}

@@ -46,7 +46,7 @@ from classes.planner_assembler import PlannerAssembler
 
 from utils.planner_parser import PlannerCreationParser
 
-from flux_bunny_utils.file_utils import FileUtils
+from utils.flux_bunny_utils.file_utils import FileUtils
 
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:

@@ -34,7 +34,7 @@
 
 from os.path import join
 
-from flux_bunny_utils.file_utils import FileUtils
+from utils.flux_bunny_utils.file_utils import FileUtils
 
 from utils.utils import PlannerUtils as Utils
 from classes.constants.addl_arg_keys import AddlArgKeys as Keys
