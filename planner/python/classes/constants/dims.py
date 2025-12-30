@@ -35,27 +35,27 @@ class PlannerDims:
 
   DPI: int = 96
 
-  LETTER_SIZE_LNGTH_IN: int = 11
-  LETTER_SIZE_WIDTH_IN: int = 8.5
+  LETTER_SIZE_LNGTH_IN  : int = 11
+  LETTER_SIZE_WIDTH_IN  : int = 8.5
+  BND_MARGIN_IN         : int = 1
+  STD_MARGIN_IN         : int = 0.25
 
-  BND_MARGIN_IN: int = 1
-  STD_MARGIN_IN: int = 0.25
+  LETTER_SIZE_LNGTH_PX  : int = DPI * LETTER_SIZE_LNGTH_IN
+  LETTER_SIZE_WIDTH_PX  : int = DPI * LETTER_SIZE_WIDTH_IN
+  BND_MARGIN_PX         : int = DPI * BND_MARGIN_IN
+  STD_MARGIN_PX         : int = DPI * STD_MARGIN_IN
+  BRD_MARGIN_PX         : int = 10
+  DEF_ROW_HGHT          : int = 30
 
-  LETTER_SIZE_LNGTH_PX: int = DPI * LETTER_SIZE_LNGTH_IN
-  LETTER_SIZE_WIDTH_PX: int = DPI * LETTER_SIZE_WIDTH_IN
+  CONTENT_LNTH_IN       : int = LETTER_SIZE_WIDTH_IN - (2 * STD_MARGIN_IN)
 
-  BND_MARGIN_PX: int = DPI * BND_MARGIN_IN
-  STD_MARGIN_PX: int = DPI * STD_MARGIN_IN
-
-  BRD_MARGIN_PX: int = 10
-
-  DEF_ROW_HGHT: int = 30
-
-  DIVIDER_COUNT: int = 7
-  CONTENT_LNTH_IN: int = LETTER_SIZE_WIDTH_IN - (2 * STD_MARGIN_IN)
-
-  DIVIDER_LGTH: int = CONTENT_LNTH_IN / DIVIDER_COUNT * DPI
-  DIVIDER_WDTH: int = 0.5  * DPI
+  #____________________________________________________________________
+  # Divider tab dimensions
+  #____________________________________________________________________
+  DIVIDER_WDTH_IN       : int = 0.5
+  DIVIDER_WDTH          : int = DIVIDER_WDTH_IN * DPI
+  DIVIDER_COUNT         : int = 7
+  DIVIDER_LGTH          : int = CONTENT_LNTH_IN / DIVIDER_COUNT * DPI
 
   #_____________________________________________________________________
   def to_in_str(dim: int) -> str:
@@ -63,7 +63,7 @@ class PlannerDims:
     Converts integer value to string appended with 'in'.
 
     Parameters
-      dim: Dimension to convert
+      dim : Dimension to convert
 
     Returns
       String indicating value appended with 'in'
