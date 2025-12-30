@@ -46,7 +46,7 @@ from classes.planner_assembler import PlannerAssembler
 
 from utils.planner_parser import PlannerCreationParser
 
-from utils.utils import PlannerUtils as Utils
+from flux_bunny_utils.file_utils import FileUtils
 
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:
@@ -137,7 +137,7 @@ def generate_habit_tracker\
     , join(pdf_out_dir, week_cklst.file_name_no_ext_ + '.pdf')
     ]
 
-  Utils.combine_pdfs(pdf_paths, join(pdf_out_dir, 'dvdr-0-today.pdf'))
+  FileUtils.combine_pdfs(pdf_paths, join(pdf_out_dir, 'dvdr-0-today.pdf'))
 
   return
 

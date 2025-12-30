@@ -35,6 +35,7 @@ from typing import Tuple
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.page_layouts.half_page_layout import HalfPageLayout
+from flux_bunny_utils.file_utils import FileUtils
 from utils.utils import PlannerUtils as Utils
 
 
@@ -83,14 +84,14 @@ class PageLayout(svgwrite.Drawing):
 
     #___________________________________________________________________
     # Verify directory
-    Utils.verify_dir(out_dir)
+    FileUtils.verify_dir(out_dir)
     self.out_dir_       : str   = out_dir
 
     self.pdf_dir_ : str = join(out_dir, self.PDF_SUB_DIR)
     svg_dir       : str = join(out_dir, self.SVG_SUB_DIR)
 
-    Utils.verify_dir(svg_dir)
-    Utils.verify_dir(self.pdf_dir_)
+    FileUtils.verify_dir(svg_dir)
+    FileUtils.verify_dir(self.pdf_dir_)
 
     self.svg_file_path_: str =\
       join(svg_dir, file_name_no_ext + '.svg')

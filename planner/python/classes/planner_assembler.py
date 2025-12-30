@@ -34,6 +34,8 @@
 
 from os.path import join
 
+from flux_bunny_utils.file_utils import FileUtils
+
 from utils.utils import PlannerUtils as Utils
 from classes.constants.addl_arg_keys import AddlArgKeys as Keys
 
@@ -200,7 +202,7 @@ class PlannerAssembler:
       [join(pdf_out_dir, n + '.pdf') for n in page_group.file_names]
 
     combo_pdf_path: str = join(pdf_out_dir, page_group.group_pdf_name)
-    Utils.combine_pdfs(pdf_paths, combo_pdf_path)
+    FileUtils.combine_pdfs(pdf_paths, combo_pdf_path)
 
     return
 
