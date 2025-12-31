@@ -53,7 +53,7 @@ class LineRowGroupStyle:
   , dash_array: str = '1,0'
   ):
     """
-    Parameters:
+    Parameters
       total_wdth    : Total width of group
       total_hght    : Total height of group
       row_hght      : Height of rows
@@ -109,10 +109,11 @@ class TextBoxStyle():
   , font_family: int = Font.FONT_FAMILY_NORMAL
   , font_color: str = Colors.NORMAL_TXT
   , line_spc: int = Font.DEF_LINE_SPC
+  , wrap_txt: bool = True
   , alignment: str = LEFT_ALIGN
   ):
     """
-    Parameters:
+    Parameters
       show_outline  : Show outline bool
       outline_color : Outline color
       backgnd_color : Background of box
@@ -146,6 +147,7 @@ class TextBoxStyle():
     self.font_color_   : str   = font_color
     self.line_spc_     : int   = line_spc
     self.alignment_    : str   = alignment
+    self.wrap_txt_     : bool  = wrap_txt
 
     return
 

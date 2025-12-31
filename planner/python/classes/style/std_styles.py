@@ -99,6 +99,7 @@ class StdTextBoxStyles():
     , inner_pad_lft=True
     , inner_pad_rgt=True
     , font_family=Font.FONT_FAMILY_HEADER
+    , wrap_txt=False
     )
 
   WHT_BACK_NORMAL_FONT_W_OUTLNE: TextBoxStyle =\

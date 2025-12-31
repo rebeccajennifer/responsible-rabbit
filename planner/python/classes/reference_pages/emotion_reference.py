@@ -47,7 +47,7 @@ class EmotionTable(TextColumnTable):
   #_____________________________________________________________________
   def __init__(self, emo_grp: dict, wdth: int) -> None:
     """
-    Parameters:
+    Parameters
       emo_grp : Dictionary with 'header' and 'emotions' keys.
       wdth    : Total width of table.
     """
@@ -105,13 +105,13 @@ class EmotionReference(HalfPageLayout):
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
-    Parameters:
+    Parameters
       None
 
-    Side Effects:
+    Side Effects
       Populates self.entries_ class variable.
 
-    Returns:
+    Returns
       None
     """
     super().create_content()

@@ -35,6 +35,7 @@ from typing import Tuple
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.page_layouts.half_page_layout import HalfPageLayout
+from utils.flux_bunny_utils.file_utils import FileUtils
 from utils.utils import PlannerUtils as Utils
 
 
@@ -83,14 +84,14 @@ class PageLayout(svgwrite.Drawing):
 
     #___________________________________________________________________
     # Verify directory
-    Utils.verify_dir(out_dir)
+    FileUtils.verify_dir(out_dir)
     self.out_dir_       : str   = out_dir
 
     self.pdf_dir_ : str = join(out_dir, self.PDF_SUB_DIR)
     svg_dir       : str = join(out_dir, self.SVG_SUB_DIR)
 
-    Utils.verify_dir(svg_dir)
-    Utils.verify_dir(self.pdf_dir_)
+    FileUtils.verify_dir(svg_dir)
+    FileUtils.verify_dir(self.pdf_dir_)
 
     self.svg_file_path_: str =\
       join(svg_dir, file_name_no_ext + '.svg')
@@ -142,10 +143,10 @@ class PageLayout(svgwrite.Drawing):
     """
     Creates page borders, page header, content.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 
@@ -173,10 +174,10 @@ class PageLayout(svgwrite.Drawing):
     """
     Adds content as class variables to page.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 
@@ -198,7 +199,7 @@ class PageLayout(svgwrite.Drawing):
     """
     Determines top left insertion points for content boxes and borders.
 
-    Side Effects:
+    Side Effects
       Adds class variables for insertion points.
     """
 
@@ -250,13 +251,13 @@ class PageLayout(svgwrite.Drawing):
     """
     Saves layout as pdf.
 
-    Parameters:
+    Parameters
       out_dir: Path to output directory
 
-    Side Effects:
+    Side Effects
       Saves layout to pdf in output directory.
 
-    Returns:
+    Returns
       None
     """
 

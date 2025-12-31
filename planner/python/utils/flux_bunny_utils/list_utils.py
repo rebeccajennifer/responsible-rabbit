@@ -10,7 +10,7 @@
 #_______________________________________________________________________
 #
 #-----------------------------------------------------------------------
-#   Copyright 2024, Rebecca Rashkin
+#   Copyright 2025, Rebecca Rashkin
 #   -------------------------------
 #   This code may be copied, redistributed, transformed, or built
 #   upon in any format for educational, non-commercial purposes.
@@ -23,70 +23,48 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for future vision. Fills content for one half sheet.
+#   List utility functions.
 #_______________________________________________________________________
-
-from classes.constants.addl_arg_keys import AddlArgKeys as Key
-from classes.elements.row_group import DualLineRowGroup
-from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
-class BlankWrite(HalfPageLayout):
+class ListUtils:
   """
-  Free write layout.
+  Utilities related to list operations.
   """
 
-  PAGE_HEADER_TXT: str = ''
-
   #_____________________________________________________________________
-  def __init__(self
-  , total_hght: int = 0
-  , total_wdth: int = 0
-  , addl_args: dict = {Key.HEADER_TXT: ''}
-  ):
+  def split_list(lst: list, n: int) -> list:
     """
-    Constructor for class. Assumes landscape orientation.
-    """
+    Splits a list into n approximately equal parts.
 
-    self.header_txt_: str      = addl_args[Key.HEADER_TXT]
+    Parameters:
+      lst (list): The list to be split.
+      n (int)   : The number of parts to split the list into.
 
-    super().__init__\
-    ( total_hght=total_hght
-    , total_wdth=total_wdth
-    , pad_bet_elements=False
-    )
-
-    return
-
-  #_____________________________________________________________________
-  def create_content(self) -> None:
-    """
-    Parameters
-      None
-
-    Side Effects
-      Populates self.entries_ class variable.
-
-    Returns
-      None
-    """
-    super().create_content()
-
-    self.entries_: list =\
-      [ DualLineRowGroup\
-        ( total_wdth=self.content_wdth_
-        , total_hght=self.content_hght_
-        , row_count=30
-        )
-      ]
-
-    return
-
-  #_____________________________________________________________________
-  def add_content(self) -> None:
-    """
-    Calls parent function, setting pad_bet_elements to True.
+    Returns:
+      list: A list containing n sublists, each representing a part of
+      the original list.
     """
 
-    super().add_content()
+    if n <= 0:
+        raise ValueError('Number of parts must be a positive integer.')
+
+    # Calculate the size of each part and the number of parts that need
+    # to be one element larger to account for any remainder
+    k, m = divmod(len(lst), n)
+
+    result = []
+
+    for i in range(n):
+
+        # Calculate the start index for the i-th sublist
+        # (i * k) gives the base start, min(i, m) distributes the
+        # remainder
+        start = i * k + min(i, m)
+
+        # Calculate the end index for the i-th sublist
+        end = (i + 1) * k + min(i + 1, m)
+
+        result.append(lst[start:end])
+    return result

@@ -32,7 +32,7 @@ from os.path import join
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 
-from classes.page_entries.week_habit_entry import HabitTracker
+from classes.page_entries.day_habit_tracker import HabitTracker
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
 from classes.page_entries.test_entry import TestEntry
@@ -46,7 +46,7 @@ from classes.planner_assembler import PlannerAssembler
 
 from utils.planner_parser import PlannerCreationParser
 
-from utils.utils import PlannerUtils as Utils
+from utils.flux_bunny_utils.file_utils import FileUtils
 
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:
@@ -89,15 +89,15 @@ def generate_habit_tracker\
   """
   Create weekly habit bookmark.
 
-  Parameters:
+  Parameters
     is_portrait : True indicates the half page is in portrait
                   orientation
     out_dir     : Output directory
 
-  Side Effects:
+  Side Effects
     Creates svgs and pdfs for habit tracker bookmark.
 
-  Returns:
+  Returns
     None
   """
 
@@ -137,7 +137,7 @@ def generate_habit_tracker\
     , join(pdf_out_dir, week_cklst.file_name_no_ext_ + '.pdf')
     ]
 
-  Utils.combine_pdfs(pdf_paths, join(pdf_out_dir, 'dvdr-0-today.pdf'))
+  FileUtils.combine_pdfs(pdf_paths, join(pdf_out_dir, 'dvdr-0-today.pdf'))
 
   return
 

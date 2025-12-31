@@ -1,0 +1,3 @@
+[submodule "planner/python/flux_bunny_utils"]
+	path = planner/python/flux_bunny_utils
+	url = git@github.com:rebeccajennifer/flux_bunny_utils.git

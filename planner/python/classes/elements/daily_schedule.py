@@ -63,7 +63,7 @@ class DaySchedule(EntryTable):
   , use_24: bool = True
   ):
     """
-      Parameters:
+      Parameters
         wdth         : width of container
         hght         : height of container
         strt_time_str: start time of schedule
@@ -123,10 +123,10 @@ class DaySchedule(EntryTable):
     entry is in 24 hour format, though printed strings will reflect
     selection for use_24.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       Group containing all rows.
     """
 
@@ -189,11 +189,11 @@ class DaySchedule(EntryTable):
     Checks if start time is greater than stop time. Converts times to
     datetime objects with dates. Assumes input is in 24 hour format
 
-    Parameters:
+    Parameters
       strt_time_str: start time of daily schedule
       stop_time_str: stop time of daily schedule
 
-    Returns:
+    Returns
       (datetime.datetime obj start, datetime.datetime obj stop)
     """
 

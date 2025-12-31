@@ -35,37 +35,37 @@ class PlannerDims:
 
   DPI: int = 96
 
-  LETTER_SIZE_LNGTH_IN: int = 11
-  LETTER_SIZE_WIDTH_IN: int = 8.5
+  LETTER_SIZE_LNGTH_IN  : int = 11
+  LETTER_SIZE_WIDTH_IN  : int = 8.5
+  BND_MARGIN_IN         : int = 1
+  STD_MARGIN_IN         : int = 0.25
 
-  BND_MARGIN_IN: int = 1
-  STD_MARGIN_IN: int = 0.25
+  LETTER_SIZE_LNGTH_PX  : int = DPI * LETTER_SIZE_LNGTH_IN
+  LETTER_SIZE_WIDTH_PX  : int = DPI * LETTER_SIZE_WIDTH_IN
+  BND_MARGIN_PX         : int = DPI * BND_MARGIN_IN
+  STD_MARGIN_PX         : int = DPI * STD_MARGIN_IN
+  BRD_MARGIN_PX         : int = 10
+  DEF_ROW_HGHT          : int = 30
 
-  LETTER_SIZE_LNGTH_PX: int = DPI * LETTER_SIZE_LNGTH_IN
-  LETTER_SIZE_WIDTH_PX: int = DPI * LETTER_SIZE_WIDTH_IN
+  CONTENT_LNTH_IN       : int = LETTER_SIZE_WIDTH_IN - (2 * STD_MARGIN_IN)
 
-  BND_MARGIN_PX: int = DPI * BND_MARGIN_IN
-  STD_MARGIN_PX: int = DPI * STD_MARGIN_IN
-
-  BRD_MARGIN_PX: int = 10
-
-  DEF_ROW_HGHT: int = 30
-
-  DIVIDER_COUNT: int = 7
-  CONTENT_LNTH_IN: int = LETTER_SIZE_WIDTH_IN - (2 * STD_MARGIN_IN)
-
-  DIVIDER_LGTH: int = CONTENT_LNTH_IN / DIVIDER_COUNT * DPI
-  DIVIDER_WDTH: int = 0.5  * DPI
+  #____________________________________________________________________
+  # Divider tab dimensions
+  #____________________________________________________________________
+  DIVIDER_WDTH_IN       : int = 0.5
+  DIVIDER_WDTH          : int = DIVIDER_WDTH_IN * DPI
+  DIVIDER_COUNT         : int = 7
+  DIVIDER_LGTH          : int = CONTENT_LNTH_IN / DIVIDER_COUNT * DPI
 
   #_____________________________________________________________________
   def to_in_str(dim: int) -> str:
     """
     Converts integer value to string appended with 'in'.
 
-    Parameters:
-      dim: Dimension to convert
+    Parameters
+      dim : Dimension to convert
 
-    Returns:
+    Returns
       String indicating value appended with 'in'
     """
     return f'{dim}in'
@@ -75,10 +75,10 @@ class PlannerDims:
     """
     Converts integer value to string appended with 'px'.
 
-    Parameters:
+    Parameters
       dim: Dimension to convert
 
-    Returns:
+    Returns
       String indicating value appended with 'px'
     """
     return f'{dim}px'
@@ -89,10 +89,10 @@ class PlannerDims:
     Calculates the middle margin width. Doubles binder margin for
     double-sided print. Binder + standard margin for single-sided print.
 
-    Parameters:
+    Parameters
       dbl_sided: is the layout intended to be printed double-sided
 
-    Returns:
+    Returns
       Width of middle margin
     """
 
@@ -120,10 +120,10 @@ class PlannerDims:
     Portrait orientation means that each half sheet is of landscape
     orientation.
 
-    Parameters:
+    Parameters
       is_portrait:  is the page intended to be printed as a portrait
 
-    Returns:
+    Returns
       width, height of content
     """
 
@@ -153,10 +153,10 @@ class PlannerDims:
     """
     Converts inch unit to pixels.
 
-    Parameters:
+    Parameters
       inches: Value in inches
 
-    Returns:
+    Returns
       Value in pixels
     """
 

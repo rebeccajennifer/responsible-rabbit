@@ -67,15 +67,17 @@ class HalfPageDivider(PageLayout):
   , entry_type: type = None
   , entry_args: dict = {}
   ):
-
     """
-    , is_portrait: bool = False
-    , is_dbl_sided: bool = False
-    , file_name_no_ext: str = Strings.DEF_LAYOUT_PATH
-    , out_dir: str = '.'
-    , entry_0_type: type = None
-    , entry_0_args: dict = {}
-    , rgt_bndr_mrgn: bool = False
+    Initializes half-page divider layout.
+
+    Parameters
+      is_portrait (bool)    : Whether layout is portrait or landscape.
+      file_name_no_ext (str): File name without extension.
+      out_dir (str)         : Output directory.
+      divider_pos (int)     : Position of divider on page (1-indexed).
+      divider_str (str)     : Text to display on divider tab.
+      entry_type (type)     : Type of entry to place on left side of divider page.
+      entry_args (dict)     : Arguments for entry on left side of divider page.
     """
 
     if (not file_name_no_ext):
@@ -104,10 +106,10 @@ class HalfPageDivider(PageLayout):
     """
     Creates page borders, page header,
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 
@@ -186,10 +188,10 @@ class HalfPageDivider(PageLayout):
     """
     Adds content as class variables to page.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 

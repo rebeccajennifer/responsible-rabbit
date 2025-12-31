@@ -83,13 +83,13 @@ class AceEntry(HalfPageLayout):
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
-    Parameters:
+    Parameters
       None
 
-    Side Effects:
+    Side Effects
       Populates self.entries_ class variable.
 
-    Returns:
+    Returns
       None
     """
     super().create_content()
