@@ -1,0 +1,18 @@
+---
+title: Sample PDF With Quarto & WeasyPrint
+format:
+  pdf:
+    pdf-engine: weasyprint
+    css: ../flux-bunny-style.css
+---
+
+## Heading 2
+
+This is some text
+
+You can use `{{{< pagebreak >}}}` to insert a page break.
+
+{{< pagebreak >}}
+
+## A New Page!
+
