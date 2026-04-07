@@ -32,6 +32,7 @@ from os.path import join
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 
+from classes.page_entries.daily_habit_tracker import DailyHabitTracker
 from classes.page_entries.week_habit_entry import HabitTracker
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
@@ -173,18 +174,30 @@ if __name__ == '__main__':
   #test_layout.save_pdf()
 
   div_dir: str = join(args.out_dir ,'..', 'dividers')
+
+  layout =\
+    PageLayout\
+    ( is_portrait=is_portrait
+    , is_dbl_sided=is_dbl_sided
+    , file_name_no_ext='daily-habit-tracker'
+    , out_dir=args.out_dir
+    , entry_0_type=DailyHabitTracker
+    , entry_1_type=DailyHabitTracker
+    )
+  layout.save_pdf()
+
+  """
   generate_habit_tracker(is_portrait, div_dir)
   generate_dividers(is_portrait, div_dir)
   """
-  """
 
+  """
   PlannerAssembler\
   ( is_portrait=is_portrait
   , is_dbl_sided=is_dbl_sided
   , is_preview=args.preview
   , out_dir=args.out_dir
   )
-  """
   """
 
   new_line(10)

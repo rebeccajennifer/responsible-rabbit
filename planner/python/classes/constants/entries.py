@@ -38,6 +38,7 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 
 from classes.page_entries.day_entry import DayEntry
+from classes.page_entries.daily_habit_tracker import DailyHabitTracker
 from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.goal_entry import GoalEntry
@@ -74,6 +75,14 @@ class Entries:
     { Key.HEADER_TXT: 'Book of Plans'
     }
   }
+
+  HABIT: dict =\
+  { Key.ENTRY_TYPE: DailyHabitTracker
+  , Key.ENTRY_ARGS:
+    { Key.HEADER_TXT: 'The Best Version of Me'
+    }
+  }
+
 
   BEST_: dict =\
   { Key.ENTRY_TYPE: TitlePage
