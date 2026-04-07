@@ -34,6 +34,8 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Key
 
 from classes.page_entries.daily_habit_tracker import DailyHabitTracker
 from classes.page_entries.week_habit_entry import HabitTracker
+from classes.page_entries.day_entry_1 import WorkDayEntry
+
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
 from classes.page_entries.test_entry import TestEntry
@@ -179,10 +181,10 @@ if __name__ == '__main__':
     PageLayout\
     ( is_portrait=is_portrait
     , is_dbl_sided=is_dbl_sided
-    , file_name_no_ext='daily-habit-tracker'
+    , file_name_no_ext='work-day-entry'
     , out_dir=args.out_dir
-    , entry_0_type=DailyHabitTracker
-    , entry_1_type=DailyHabitTracker
+    , entry_0_type=WorkDayEntry
+    , entry_1_type=WorkDayEntry
     )
   layout.save_pdf()
 

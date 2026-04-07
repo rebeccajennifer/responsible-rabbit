@@ -37,7 +37,7 @@ from utils.utils import PlannerUtils as Utils
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_entries.day_entry import DayEntry
+from classes.page_entries.day_entry_0 import DayEntry
 from classes.page_entries.daily_habit_tracker import DailyHabitTracker
 from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry

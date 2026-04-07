@@ -71,7 +71,7 @@ class PageLayout(svgwrite.Drawing):
                           e.g. day_entry, month_entry
       entry_0_args      : Arguments for left or top entry
       entry_1_type      : Type of entry on right or bottom of page
-                          e.g. day_entry, month_entry
+                          e.g. day_entry_0, month_entry
       entry_1_args      : Arguments for right or bottom entry
       rgt_bndr_mrgn     :  Use the binder margin on the right side
     """
