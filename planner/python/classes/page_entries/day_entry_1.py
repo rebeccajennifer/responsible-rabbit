@@ -141,6 +141,8 @@ class WorkDayEntry(HalfPageLayout):
       , hght=self.content_hght_
       , time_inc_min=30
       , use_24=True
+      , strt_time_str='06:00'
+      , stop_time_str='18:00'
       )
 
     self.entries_: list =\
@@ -174,14 +176,13 @@ class WorkDayEntry(HalfPageLayout):
     fill_hght: int = self.calc_remaining_hght_per_element(1)
 
     self.entries_.insert(1
-    , DualLineTable
+    , SingleLineTable
       ( total_wdth=self.main_content_wdth_
       , total_hght=fill_hght
       , header_txt=self.DAY_ACHIEVEMENT
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=1
       , show_outline=True
-      , pri_line_style=StdLineRowGroupStyles.DOTTED
       )
     )
 

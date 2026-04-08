@@ -198,8 +198,14 @@ class PageLayout(svgwrite.Drawing):
     """
     Determines top left insertion points for content boxes and borders.
 
+    Parameters:
+      None
+
     Side Effects:
       Adds class variables for insertion points.
+
+    Returns:
+      None
     """
 
     content_wdth: int = self.content_wdth_

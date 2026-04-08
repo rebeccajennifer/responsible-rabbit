@@ -23,10 +23,8 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for week. Fills content for one half sheet.
+#   Entry for one week of daily practices.
 #_______________________________________________________________________
-
-from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.table import ColumnTable
@@ -36,13 +34,13 @@ from classes.style.std_styles import StdTextBoxStyles
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
 #_______________________________________________________________________
-class DailyHabitTracker(HalfPageLayout):
+class DailyPracticeTracker(HalfPageLayout):
   """
   Daily entry layout.
   """
 
   PAGE_HEADER_TXT: str =\
-    'Habit Tracking' + 30 * Strings.SPACE + 'Week #'
+    'Practice Tracking: ' 'Week #'
 
   WEEK_HABIT_TRACKER_HEADINGS: list =\
     [ 'Practice'

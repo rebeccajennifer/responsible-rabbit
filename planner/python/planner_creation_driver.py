@@ -32,7 +32,7 @@ from os.path import join
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 
-from classes.page_entries.daily_habit_tracker import DailyHabitTracker
+from classes.page_entries.daily_habit_tracker import DailyPracticeTracker
 from classes.page_entries.week_habit_entry import HabitTracker
 from classes.page_entries.day_entry_1 import WorkDayEntry
 
