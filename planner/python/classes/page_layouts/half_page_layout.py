@@ -212,22 +212,24 @@ class HalfPageLayout(svgwrite.container.Group):
       , wrap_txt=wrap_txt
       )
 
-    date_style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
-    date_style.show_outline_ = False
+    if (add_date_block):
 
-    date_block: TextRowGroup =\
-      TextRowGroup\
-      ( total_wdth=self.content_wdth_ * 0.42
-      , text=Strings.DATE_STR
-      , style=date_style
-      , wrap_txt=False
-      )
+      date_style: TextBoxStyle = deepcopy(style)
+      date_style.show_outline_ = False
 
-    page_header.overlay_element\
-      ( date_block
-      , anchor_pt=AnchorPt.MID_RGHT
-      , padding=Dims.BRD_MARGIN_PX
-      )
+      date_block: TextRowGroup =\
+        TextRowGroup\
+        ( total_wdth=self.content_wdth_ * 0.42
+        , text=Strings.DATE_STR
+        , style=date_style
+        , wrap_txt=False
+        )
+
+      page_header.overlay_element\
+        ( date_block
+        , anchor_pt=AnchorPt.MID_RGHT
+        , padding=Dims.BRD_MARGIN_PX
+        )
 
     return page_header
 

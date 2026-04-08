@@ -29,6 +29,7 @@
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
+from classes.elements.row_group import TextRowGroup
 from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
 
@@ -103,3 +104,12 @@ class MonthEntry(HalfPageLayout):
     ]
 
     return
+
+  #_____________________________________________________________________
+  def create_page_header(self
+  ) -> TextRowGroup:
+    """
+    Page header. Overrides parent method to remove date block.
+    """
+
+    return super().create_page_header(add_date_block=False)

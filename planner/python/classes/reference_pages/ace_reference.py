@@ -312,3 +312,9 @@ class AceReference(HalfPageLayout):
 
 
     return
+
+  #_____________________________________________________________________
+  def create_page_header(self
+  ) -> TextRowGroup:
+
+    return super().create_page_header(add_date_block=False)

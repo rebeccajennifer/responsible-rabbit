@@ -42,6 +42,7 @@ class WeekStrings:
   """
   Strings used in the week entry pages.
   """
+
   WEEK_MOMENTUM: str =\
     'Last week I built momentum:'\
     + Strings.SPACE\
@@ -86,9 +87,6 @@ class WeekStrings:
 
   WEEK_FULFILLMENT_AREAS_1 =\
     ['Enjoyment', 'Job']
-
-  WEEK_CHECKLIST: list =\
-    ['[] Specific', '[] Measurable', '[] Achieveable']
 
   WEEK_LOOKING_FORWARD: str =\
     'In the coming week, I\'m eager to experience:'
@@ -202,24 +200,7 @@ class WeekEntry1(HalfPageLayout):
   PAGE_HEADER_TXT: str = 'Week #'\
     + 6 * Strings.SPACE + 'Prep'\
     + 4 * Strings.SPACE + '|'\
-    + 4 * Strings.SPACE + 'Start:'\
-    + Strings.DATE_STR
-
-  #_____________________________________________________________________
-  #def __init__(self
-  #, total_hght: int = 0
-  #, total_wdth: int = 0
-  #, addl_args: dict = {}
-  #):
-  #  """
-  #  Constructor for class. Assumes landscape orientation.
-  #  """
-  #  super().__init__\
-  #  ( total_hght=total_hght
-  #  , total_wdth=total_wdth
-  #  )
-
-  #  return
+    + 4 * Strings.SPACE + 'Week Start:'\
 
   #_____________________________________________________________________
   def create_content(self) -> None:
