@@ -35,6 +35,7 @@ import svgwrite.text
 
 from copy import deepcopy
 
+from classes.flux_svg_object import FluxSvgObject
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.std_styles import StdLineRowGroupStyles
 from classes.style.style import PlannerFontStyle as Font
@@ -48,7 +49,7 @@ from classes.constants.debug_const  import DebugConst
 
 
 #_______________________________________________________________________
-class RowGroup(svgwrite.container.Group):
+class RowGroup(FluxSvgObject):
   """
   Creates a group of objects, positioned in rows.
   """
@@ -84,7 +85,7 @@ class RowGroup(svgwrite.container.Group):
     # Used for setting breakpoints while debugging
     DebugConst.flag
 
-    super().__init__()
+    super().__init__(hght=total_hght, wdth=total_wdth)
 
     self.total_wdth_    : int  = total_wdth
     self.inner_pad_top_ : bool = inner_pad_top
@@ -131,6 +132,11 @@ class RowGroup(svgwrite.container.Group):
         + Font.TEXT_PADDING * (inner_pad_bot + inner_pad_top)
 
     self.add_content(obj_list=obj_list, align=horiz_align)
+
+    # TODO: Consider removing total_hght_ and total_wdth attributes
+    # and using hght_ and wdth_ instead.
+    self.hght_ = self.total_hght_
+    self.wdth_ = self.total_wdth_
 
     return
 

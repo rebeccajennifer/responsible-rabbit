@@ -59,7 +59,7 @@ class PlannerStrings:
     'Thu' + 2 * SPACE +\
     'Fri' + 2 * SPACE +\
     'Sat' + 2 * SPACE +\
-    'Sun' + DATE_STR
+    'Sun' #+ DATE_STR
 
   DATE_STR_MONO: str =\
     4 * SPACE\

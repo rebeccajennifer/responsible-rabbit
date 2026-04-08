@@ -32,6 +32,7 @@ from copy import deepcopy
 
 import svgwrite.container
 
+from classes.flux_svg_object import AnchorPt
 from classes.constants.dims import PlannerDims as Dims
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.row_group import TextRowGroup
@@ -186,6 +187,7 @@ class HalfPageLayout(svgwrite.container.Group):
   , header_txt = ''
   , wrap_txt: bool = False
   , style = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
+  , add_date_block = True
   ) -> TextRowGroup:
     """
     Creates page header and saves it to class variable.
@@ -208,6 +210,23 @@ class HalfPageLayout(svgwrite.container.Group):
       , text=header_txt
       , style=style
       , wrap_txt=wrap_txt
+      )
+
+    date_style: TextBoxStyle = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
+    date_style.show_outline_ = False
+
+    date_block: TextRowGroup =\
+      TextRowGroup\
+      ( total_wdth=self.content_wdth_ * 0.42
+      , text=Strings.DATE_STR
+      , style=date_style
+      , wrap_txt=False
+      )
+
+    page_header.overlay_element\
+      ( date_block
+      , anchor_pt=AnchorPt.MID_RGHT
+      , padding=Dims.BRD_MARGIN_PX
       )
 
     return page_header
