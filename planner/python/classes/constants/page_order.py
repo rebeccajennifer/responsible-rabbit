@@ -94,8 +94,8 @@ class PreviewPages:
   , {Keys.LEFT: Entries.YR1_0, Keys.RGHT: Entries.YR1_1}
   , {Keys.LEFT: Entries.WK_12, Keys.RGHT: Entries.NOACT}
   , {Keys.LEFT: Entries.A_VOW, Keys.RGHT: Entries.BLANK}
-  , {Keys.LEFT: Entries.GOALS, Keys.RGHT: Entries.GOALS}
-  , {Keys.LEFT: Entries.GOALS, Keys.RGHT: Entries.GOALS}
+  , {Keys.LEFT: Entries.PRJCT, Keys.RGHT: Entries.PRJCT}
+  , {Keys.LEFT: Entries.PRJCT, Keys.RGHT: Entries.PRJCT}
   , {Keys.LEFT: Entries.MONTH, Keys.RGHT: Entries.MONTH}
   , {Keys.LEFT: Entries.MONTH, Keys.RGHT: Entries.DATES}
   ]
@@ -123,10 +123,10 @@ class DblSidePages:
   # List of layouts
   #_____________________________________________________________________
   INTR_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.A_VOW, Keys.RGHT: Entries.GOALS}
-  , {Keys.LEFT: Entries.GOALS, Keys.RGHT: Entries.NOACT}
-  , {Keys.LEFT: Entries.WK_12, Keys.RGHT: Entries.GOALS}
-  , {Keys.LEFT: Entries.GOALS, Keys.RGHT: Entries.YR1_1}
+  [ {Keys.LEFT: Entries.A_VOW, Keys.RGHT: Entries.PRJCT}
+  , {Keys.LEFT: Entries.PRJCT, Keys.RGHT: Entries.NOACT}
+  , {Keys.LEFT: Entries.WK_12, Keys.RGHT: Entries.PRJCT}
+  , {Keys.LEFT: Entries.PRJCT, Keys.RGHT: Entries.YR1_1}
   , {Keys.LEFT: Entries.YR1_0, Keys.RGHT: Entries.MONTH}
   , {Keys.LEFT: Entries.MONTH, Keys.RGHT: Entries.YR5_1}
   , {Keys.LEFT: Entries.YR5_0, Keys.RGHT: Entries.MONTH}
@@ -157,10 +157,10 @@ class OneSidePages:
   # List of layouts
   #_____________________________________________________________________
   INTR_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.TITLE, Keys.RGHT: Entries.GOALS}
-  , {Keys.LEFT: Entries.YR5_0, Keys.RGHT: Entries.GOALS}
-  , {Keys.LEFT: Entries.YR5_1, Keys.RGHT: Entries.GOALS}
-  , {Keys.LEFT: Entries.YR1_0, Keys.RGHT: Entries.GOALS}
+  [ {Keys.LEFT: Entries.TITLE, Keys.RGHT: Entries.PRJCT}
+  , {Keys.LEFT: Entries.YR5_0, Keys.RGHT: Entries.PRJCT}
+  , {Keys.LEFT: Entries.YR5_1, Keys.RGHT: Entries.PRJCT}
+  , {Keys.LEFT: Entries.YR1_0, Keys.RGHT: Entries.PRJCT}
   , {Keys.LEFT: Entries.YR1_1, Keys.RGHT: Entries.MONTH}
   , {Keys.LEFT: Entries.WK_12, Keys.RGHT: Entries.MONTH}
   , {Keys.LEFT: Entries.NOACT, Keys.RGHT: Entries.MONTH}

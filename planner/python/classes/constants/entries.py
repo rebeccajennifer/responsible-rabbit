@@ -41,7 +41,7 @@ from classes.page_entries.day_entry_0 import DayEntry
 from classes.page_entries.daily_practice_tracker import DailyPracticeTracker
 from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
-from classes.page_entries.goal_entry import GoalEntry
+from classes.page_entries.project_entry import ProjectEntry
 from classes.page_entries.month_entry import MonthEntry
 from classes.page_entries.night_entry import NightEntry
 from classes.page_entries.title_page import TitlePage
@@ -195,8 +195,8 @@ class Entries:
     }
 
   #_____________________________________________________________________
-  GOALS: dict =\
-    { Key.ENTRY_TYPE: GoalEntry
+  PRJCT: dict =\
+    { Key.ENTRY_TYPE: ProjectEntry
     , Key.ENTRY_ARGS: {}
     }
 
