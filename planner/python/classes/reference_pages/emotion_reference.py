@@ -141,3 +141,12 @@ class EmotionReference(HalfPageLayout):
     ]
 
     return
+
+  #_____________________________________________________________________
+  def create_page_header(self
+  ) -> TextRowGroup:
+    """
+    Page header. Overrides parent method to remove date block.
+    """
+
+    return super().create_page_header(add_date_block=False)

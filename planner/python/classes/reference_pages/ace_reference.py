@@ -44,7 +44,7 @@ class AceReference(HalfPageLayout):
   """
 
   PAGE_HEADER_TXT: str = str(
-    f'Acknowlege {Strings.BULLET_PT} '
+    f'Acknowledge {Strings.BULLET_PT} '
     f'Connect {Strings.BULLET_PT} '
     f'Engage: {2 * Strings.SPACE} Worksheet Instructions'
   )
@@ -69,7 +69,7 @@ class AceReference(HalfPageLayout):
     'How It Works'
 
   WKSHT_HEADER_TXT: str =\
-    'The Worksheet'
+    'Worksheet Instructions'
 
   USING_DESC: str = (
     'When you experience a triggering thought or feeling, pause and '
@@ -77,8 +77,9 @@ class AceReference(HalfPageLayout):
   )
 
   ACKNOWLEDGE_HEADER_TXT: str =\
-    'ACKNOWLEGE'
-  ACKNOWLEGE_DESC: str = (
+    'ACKNOWLEDGE'
+
+  ACKNOWLEDGE_DESC: str = (
     'Reference the list of 87 Emotions and Experiences '
     'and identify the terms that most closely represent your current '
     'state.'
@@ -90,10 +91,6 @@ class AceReference(HalfPageLayout):
     'Connect with your physical body to re-regulate your nervous '
     'system. Choose from one of the exercises listed below or '
     'use another practice to calm your body and mind.'
-    '\n'
-    '5-4-3-2-1 SENSE AWARENESS: '
-    'Identify 5 things you can see, 4 things you can touch, 3 distinct '
-    'sounds, 2 scents, 1 thing you can taste.'
     '\n'
     'GROUNDING THROUGH TOUCH: '
     'Press your feet firmly into the floor or press your hands into a '
@@ -128,19 +125,21 @@ class AceReference(HalfPageLayout):
   )
 
   REENGAGE_HEADER_TXT: str =\
-    '(RE-)ENGAGE'
+    'ENGAGE'
 
-  REENGAGE_DESC: str = (
-    'After executing the connection exercise, write down what activity '
-    'you choose to (re)engage with.'
+  ENGAGE_DESC: str = (
+    'After practicing a connection exercise, engage with your '
+    'environment to be present in the moment. One example of '
+    'this is the 5-4-3-2-1 sense awareness exercise.'
     '\n'
-    'This can be what you were doing before experiencing the trigger, '
-    'or an intentional act of self care.'
-    '\n'
-    'Commonly understood acts of self care include going outside, '
-    'physical activity, or journaling. Other acts of self care include '
-    'a household chore, creating art, or starting a task you\'ve been '
-    'avoiding.'
+    '5-4-3-2-1 SENSE AWARENESS: '
+    'Identify 5 things you can see, 4 things you can touch, 3 distinct '
+    'sounds, 2 scents, 1 thing you can taste.'
+    #'\n'
+    #'Commonly understood acts of self care include going outside, '
+    #'physical activity, or journaling. Other acts of self care include '
+    #'a household chore, creating art, or starting a task you\'ve been '
+    #'avoiding.'
   )
 
   #_____________________________________________________________________
@@ -220,7 +219,7 @@ class AceReference(HalfPageLayout):
       ]
 
     # List of objects for acknowledge instruction section
-    acknowlege_stack: list =\
+    acknowledge_stack: list =\
       [ TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=wksht_header_style
@@ -229,7 +228,7 @@ class AceReference(HalfPageLayout):
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=wksht_instructions_style
-        , text=self.ACKNOWLEGE_DESC
+        , text=self.ACKNOWLEDGE_DESC
         )
       ]
 
@@ -247,7 +246,7 @@ class AceReference(HalfPageLayout):
         )
      ]
 
-    # List of objects for re-engage instruction section
+    # List of objects for engage instruction section
     reengage_stack: list =\
       [ TextRowGroup\
         ( total_wdth=self.content_wdth_
@@ -257,7 +256,7 @@ class AceReference(HalfPageLayout):
       , TextRowGroup\
         ( total_wdth=self.content_wdth_
         , style=wksht_instructions_style
-        , text=self.REENGAGE_DESC
+        , text=self.ENGAGE_DESC
         )
       ]
 
@@ -270,7 +269,7 @@ class AceReference(HalfPageLayout):
         , text=self.WKSHT_HEADER_TXT
         )
       , VerticalStack\
-        ( obj_list=acknowlege_stack
+        ( obj_list=acknowledge_stack
         , show_outline=False
         )
       , VerticalStack\
@@ -316,5 +315,8 @@ class AceReference(HalfPageLayout):
   #_____________________________________________________________________
   def create_page_header(self
   ) -> TextRowGroup:
+    """
+    Page header. Overrides parent method to remove date block.
+    """
 
     return super().create_page_header(add_date_block=False)
