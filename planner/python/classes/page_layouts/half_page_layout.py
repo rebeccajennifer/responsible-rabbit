@@ -188,6 +188,7 @@ class HalfPageLayout(svgwrite.container.Group):
   , wrap_txt: bool = False
   , style = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
   , add_date_block = True
+  , date_style = deepcopy(StdTextBoxStyles.DEF_PAGE_HEADER_TXT)
   ) -> TextRowGroup:
     """
     Creates page header and saves it to class variable.
@@ -214,7 +215,6 @@ class HalfPageLayout(svgwrite.container.Group):
 
     if (add_date_block):
 
-      date_style: TextBoxStyle = deepcopy(style)
       date_style.show_outline_ = False
 
       date_block: TextRowGroup =\

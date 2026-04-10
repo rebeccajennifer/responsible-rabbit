@@ -43,16 +43,6 @@ class ProjectStrings:
   # Goal layout strings
   #_____________________________________________________________________
 
-  CHECKLIST: str =\
-     '[] Specific'    + Strings.SPACE\
-   + '[] Measureable' + Strings.SPACE\
-   + '[] Achievable'  + Strings.SPACE\
-   + '[] Relevant'    + Strings.SPACE\
-   + '[] Challenging'
-
-  ACTIONS: str =\
-    'Critical Steps'
-
   MILESTONES: list =\
   [ 'Advancement'
   , 'Date'
