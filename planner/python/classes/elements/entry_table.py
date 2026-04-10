@@ -65,28 +65,28 @@ class EntryTable(svgwrite.container.Group):
   , show_outline: bool = True
   ):
     """
-      Parameters:
-        wdth            : width of table
-        hght            : height of table
-        header_txt      : list of headers
-        font_color      : color of header text
-        font_size       : size of header text
-        font            : font of header text
-        box_fill_color  : header fill color
-        box_brdr_color  : border color
-        row_count       : row count of table
-        row_hght        : height of row, optional
-        col_count       : column count of table
-        col_wdths       : width of rows, optional
-                          expect that number of elements = col_count
-        col_count       : column count of table
-        col_wdth        : width of rows, optional
-                          expect that number of elements = col_count
-        pad_top         : add padding to top
-        pad_bot         : add padding to bottom
-        pad_rgt         : add padding to right
-        pad_lft         : add padding to left
-        show_outline    : show table outline
+    Parameters
+      wdth            : width of table
+      hght            : height of table
+      header_txt      : list of headers
+      font_color      : color of header text
+      font_size       : size of header text
+      font            : font of header text
+      box_fill_color  : header fill color
+      box_brdr_color  : border color
+      row_count       : row count of table
+      row_hght        : height of row, optional
+      col_count       : column count of table
+      col_wdths       : width of rows, optional
+                        expect that number of elements = col_count
+      col_count       : column count of table
+      col_wdth        : width of rows, optional
+                        expect that number of elements = col_count
+      pad_top         : add padding to top
+      pad_bot         : add padding to bottom
+      pad_rgt         : add padding to right
+      pad_lft         : add padding to left
+      show_outline    : show table outline
     """
 
     super().__init__()
@@ -194,10 +194,10 @@ class EntryTable(svgwrite.container.Group):
     """
     Creates group containing all rows of content entry.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       Group containing all rows.
     """
 

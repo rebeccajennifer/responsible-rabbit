@@ -1,30 +1,30 @@
-#_______________________________________________________________________
-#_______________________________________________________________________
+#______________________________________________________________________
+#______________________________________________________________________
 #        _   __   _   _ _   _   _   _         _
 #   |   |_| | _  | | | V | | | | / |_/ |_| | /
 #   |__ | | |__| |_| |   | |_| | \ |   | | | \_
 #    _  _         _ ___  _       _ ___   _                    / /
 #   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
 #   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
-#_______________________________________________________________________
-#_______________________________________________________________________
+#______________________________________________________________________
+#______________________________________________________________________
 #
-#-----------------------------------------------------------------------
-#   Copyright 2024, Rebecca Rashkin
+#----------------------------------------------------------------------
+#   Copyright 2025, Rebecca Rashkin
 #   -------------------------------
 #   This code may be copied, redistributed, transformed, or built
 #   upon in any format for educational, non-commercial purposes.
 #
 #   Please give me appropriate credit should you choose to use this
 #   resource. Thank you :)
-#-----------------------------------------------------------------------
+#----------------------------------------------------------------------
 #
-#_______________________________________________________________________
+#______________________________________________________________________
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
-#_______________________________________________________________________
+#______________________________________________________________________
 #   DESCRIPTION
-#   Tests for utility functions.
-#_______________________________________________________________________
+#   Tests for file utility functions.
+#______________________________________________________________________
 
 import pytest
 
@@ -39,9 +39,10 @@ import svgwrite
 
 from shutil import rmtree
 
+from utils.flux_bunny_utils.file_utils import FileUtils
 
-from utils.utils import PlannerUtils as Utils
 
+#_______________________________________________________________________
 class TestConst:
   """
   Constants used in tests.
@@ -49,6 +50,7 @@ class TestConst:
 
   TEST_DIR_NAME         : str = 'test_name'
   TEST_DIR_PARENT       : str = join('flux', 'bunny')
+  TEST_DIR_GRANDPARENT  : str = 'flux'
   TEST_DIR_FULL_PATH    : str = join(TEST_DIR_PARENT, TEST_DIR_NAME)
   TEST_PDF_NAME         : str = 'test.pdf'
   TEST_SVG_NAME         : str = 'test.svg'
@@ -91,7 +93,7 @@ def test_mkdir_no_parent() -> None:
   Helper.rm_test_dir(parent)
 
   with pytest.raises(Exception):
-    Utils.verify_dir(TestConst.TEST_DIR_FULL_PATH)
+    FileUtils.verify_dir(TestConst.TEST_DIR_FULL_PATH)
 
   return
 
@@ -107,7 +109,7 @@ def test_mkdir_file_exists() -> None:
   open(test_path, 'a').close()
 
   with pytest.raises(Exception):
-    Utils.verify_dir(test_path)
+    FileUtils.verify_dir(test_path)
 
   # Clean up
   remove(test_path)
@@ -122,7 +124,7 @@ def test_mkdir_no_error() -> None:
   # Prep
   Helper.rm_test_dir(test_path)
 
-  assert Utils.verify_dir(TestConst.TEST_DIR_NAME) == True
+  assert FileUtils.verify_dir(TestConst.TEST_DIR_NAME) == True
 
   # Clean up
   Helper.rm_test_dir(test_path)
@@ -132,18 +134,20 @@ def test_mkdir_no_error() -> None:
 #_______________________________________________________________________
 def test_mkdir_long_path() -> None:
 
-  test_path : str = TestConst.TEST_DIR_FULL_PATH
-  parent    : str = TestConst.TEST_DIR_PARENT
+  test_path   : str = TestConst.TEST_DIR_FULL_PATH
+  parent      : str = TestConst.TEST_DIR_PARENT
+  grandparent : str = TestConst.TEST_DIR_GRANDPARENT
 
   # Prep
   Helper.rm_test_dir(test_path)
   Helper.rm_test_dir(parent)
+  Helper.rm_test_dir(grandparent)
   makedirs(parent)
 
-  assert Utils.verify_dir(test_path) == True
+  assert FileUtils.verify_dir(test_path) == True
 
   # Clean up
-  Helper.rm_test_dir(parent)
+  Helper.rm_test_dir(grandparent)
 
   return
 
@@ -171,52 +175,13 @@ def test_is_pdf() -> None:
   #_____________________________________________________________________
 
   # Run function under test
-  assert Utils.is_pdf(test_pdf_name) == True
+  assert FileUtils.is_pdf(test_pdf_name) == True
 
   # Clean up
   remove(test_pdf_name)
   remove(test_svg_name)
 
   with pytest.raises(Exception):
-    Utils.is_pdf(test_pdf_name)
-
-  return
-
-#_______________________________________________________________________
-def test_split_list_even() -> None:
-
-  test_list: list = [1,2,3,4,5,6]
-
-  list1, list2 = Utils.split_list(test_list, 2)
-
-  assert list1 == [1,2,3]
-  assert list2 == [4,5,6]
-
-  return
-
-#_______________________________________________________________________
-def test_split_list_odd() -> None:
-
-  test_list: list = [1, 2, 3, 4, 5, 6, 7, 8]
-
-  list1, list2, list3 = Utils.split_list(test_list, 3)
-
-  assert list1 == [1, 2, 3]
-  assert list2 == [4, 5, 6]
-  assert list3 == [7, 8]
-
-  return
-
-#_______________________________________________________________________
-def test_split_list_n_less_than_elements() -> None:
-
-  test_list: list = [1, 2]
-
-  list1, list2, list3, list4 = Utils.split_list(test_list, 4)
-
-  assert list1 == [1]
-  assert list2 == [2]
-  assert list3 == []
-  assert list4 == []
+    FileUtils.is_pdf(test_pdf_name)
 
   return

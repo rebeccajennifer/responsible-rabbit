@@ -45,66 +45,6 @@ import svgwrite
 from svgwrite.text import Text
 from svgwrite.container import Group
 
-#_____________________________________________________________________
-class UtilErrors:
-  """
-  Strings used in error messages
-  """
-
-  LINE: str =\
-    '\n________________________________________________________________'
-
-  ERROR: str =\
-    f'{LINE}'\
-    '\nUH OH! The program has encountered an error!'\
-    f'{LINE}'
-
-  ERROR_TYPE: str =\
-    f'{ERROR}'\
-    '\nERROR TYPE:  '
-
-  DESC_LABEL: str =\
-    '\nDESCRIPTION: '
-
-  MK_DIR_NO_PARENT_ERR: str =\
-    'Parent directory not found: '
-
-  FILE_WITH_DIR_NAME_ERR: str =\
-    'File exists with the same name: '
-
-  WRONG_FILE_TYPE: str =\
-    'Wrong file type.'
-
-  FILE_DNE: str =\
-    'File does not exist: '
-
-
-  #_____________________________________________________________________
-  def raise_exception_with_desc(err: Exception, desc: str) -> None:
-    """
-    Raiese exception with descriptive message.
-
-    Parameters:
-      err   : Exception type.
-      desc  : Error message.
-
-    Side Effects:
-      Raises exception
-
-    Returns:
-      None
-    """
-
-    err_type = type(err)
-
-    err_msg: str = str(
-      f'{UtilErrors.ERROR_TYPE}{err_type.__name__}'
-      f'{UtilErrors.DESC_LABEL}{desc}'
-      f'{UtilErrors.LINE}'
-    )
-
-    raise err_type(err_msg)
-
 
 #_____________________________________________________________________
 class PlannerUtils:
@@ -121,7 +61,7 @@ class PlannerUtils:
     """
     Calculates columns widths.
 
-    Parameters:
+    Parameters
       col_count: Number of columns
       col_wdths: List of column widths. One element of list should be -1
                  -1 indicates to span that column to the remaining width
@@ -171,13 +111,13 @@ class PlannerUtils:
     Splits a given string into a list of lines, where each line fits
     within the specified width.
 
-    Parameters:
+    Parameters
       txt         : Input text to wrap.
       px_wdth     : Maximum width (in pixels) allowed for each line.
       font_size   : Size of text font.
       font_family : Font of text.
 
-    Returns:
+    Returns
         List[str]: A list of strings, each representing a line of
         wrapped text.
     """
@@ -235,12 +175,12 @@ class PlannerUtils:
     total height if row height is given. If both total height and row
     height are given, will recalculate row height.
 
-    Parameters:
+    Parameters
       total_hght  : Total height of combined rows
       row_count   : Number of rows
       row_hght    : Height of rows
 
-    Returns:
+    Returns
       tuple       : (total height, row height)
     """
 
@@ -266,7 +206,7 @@ class PlannerUtils:
     """
     Creates rectangular outline around box.
 
-    Parameters:
+    Parameters
       None
     """
 
@@ -284,132 +224,11 @@ class PlannerUtils:
     return container
 
   #_____________________________________________________________________
-  def verify_dir(dir_path: str) -> bool:
-    """
-    Creates a directory if it doesn't exist.
-
-    Parameters:
-      dir_path: Path to directory
-
-    Side Effects:
-      Creates directory.
-
-    Returns:
-      None
-    """
-
-    if (not isdir(dir_path)):
-      try:
-        mkdir(dir_path)
-
-      except Exception as error:
-
-        err_type: Exception = type(error)
-        desc: str = ''
-
-        if (err_type == FileNotFoundError):
-          desc: str =\
-            f'{UtilErrors.MK_DIR_NO_PARENT_ERR}{dirname(dir_path)}'
-
-        if (err_type == FileExistsError):
-          desc: str =\
-            f'{UtilErrors.FILE_WITH_DIR_NAME_ERR}{dir_path}'
-
-        UtilErrors.raise_exception_with_desc(error, desc)
-
-    return True
-
-  #_____________________________________________________________________
-  def is_pdf(file_path: str) -> bool:
-    """
-    Determines if file is a pdf.
-
-    Parameters:
-      file_path: path to file
-
-    Side Effects:
-      None
-
-    Returns:
-      bool indicating if file is pdf
-    """
-
-    try:
-      with open(file_path, 'rb') as f:
-        header = f.read(4)
-        return header == b'%PDF'
-
-    except Exception as error:
-
-      err_type: Exception = type(error)
-      desc: str = ''
-
-      if (err_type == FileNotFoundError):
-        desc: str =\
-          f'{UtilErrors.FILE_DNE}{file_path}'
-
-      UtilErrors.raise_exception_with_desc(error, desc)
-
-    return True
-
-
-  #_____________________________________________________________________
-  def combine_pdfs\
-  ( pdf_paths: list
-  , combined_pdf_path: str
-  , remove_indv_pgs: bool = True
-  ) -> None:
-    """
-    Combines pdfs into one pdf. Order of pages in combined pdf
-    determined by order of pdf_paths.
-
-    Parameters:
-    pdf_paths         : List of paths of pdfs to combine.
-    combined_pdf_path : Path of combined pdf.
-    remove_indv_pgs   : True - remove individual pdfs after combining
-
-    Side Effects:
-    Creates a new pdf.
-
-    Returns:
-    True  : No errors.
-    False : Errors during creation.
-    """
-
-
-    pdf_writer = PdfWriter()
-
-    for pdf in pdf_paths:
-
-      with open (pdf, 'rb') as file:
-        pdf_writer.append(file)
-
-    with open\
-      ( combined_pdf_path, 'wb') as out:
-
-      pdf_writer.write(out)
-
-    # Clean up pdfs
-    if(remove_indv_pgs):
-
-      # Loop through all files in the directory
-      for pdf in pdf_paths:
-          remove(pdf)
-
-    print(str(
-      f'\nCombined pdf successfully created! '
-      f'\nOutput path: {combined_pdf_path}'
-      )
-    )
-
-    return
-
-  #_____________________________________________________________________
   def inc(i: int = 0):
     """
     Generator that yields incrementing integers, similar to `i++` in C.
 
-    Parameters:
+    Parameters
       i (int): Starting value (default is 0).
 
     Yields:
@@ -431,11 +250,11 @@ class PlannerUtils:
     """
     Splits a list into n approximately equal parts.
 
-    Parameters:
+    Parameters
       lst (list): The list to be split.
       n (int)   : The number of parts to split the list into.
 
-    Returns:
+    Returns
       list: A list containing n sublists, each representing a part of
       the original list.
     """

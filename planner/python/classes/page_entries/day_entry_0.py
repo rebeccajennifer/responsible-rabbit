@@ -110,10 +110,10 @@ class DayEntry(HalfPageLayout):
     """
     Add content to layout.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
     super().add_content()
@@ -137,13 +137,13 @@ class DayEntry(HalfPageLayout):
   def create_content(self) -> None:
     """
 
-    Side Effects:
+    Side Effects
       Populates the following class variables.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 

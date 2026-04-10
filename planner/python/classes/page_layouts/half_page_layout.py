@@ -126,10 +126,10 @@ class HalfPageLayout(svgwrite.container.Group):
     """
     Adds content to group.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 
@@ -167,10 +167,10 @@ class HalfPageLayout(svgwrite.container.Group):
   #_____________________________________________________________________
   def create_border(self) -> svgwrite.shapes.Rect:
     """
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       svgwrite.shapes.Rect: outline of half page
     """
 
@@ -193,10 +193,10 @@ class HalfPageLayout(svgwrite.container.Group):
     """
     Creates page header and saves it to class variable.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       Text box for page header
     """
 
@@ -210,7 +210,6 @@ class HalfPageLayout(svgwrite.container.Group):
       ( total_wdth=self.content_wdth_
       , text=header_txt
       , style=style
-      , wrap_txt=wrap_txt
       )
 
     if (add_date_block):
@@ -240,10 +239,10 @@ class HalfPageLayout(svgwrite.container.Group):
     """
     Compute the available vertical space per remaining element.
 
-    Parameters:
+    Parameters
       elements_remaining  : Number of elements yet to be added
                             to the layout.
-    Returns:
+    Returns
       Height allocated for each remaining element, adjusted for spacing.
     """
 

@@ -55,7 +55,7 @@ class VerticalStack(FluxSvgObject):
     Creates a new svgwrite container with all objects stacked
     vertically.
 
-    Parameters:
+    Parameters
       obj_list    : List of SVG elements to be stacked. Each
                     element is expected to have a 'total_hght_'
                     attribute defining its height.
@@ -134,7 +134,7 @@ class HorizontalStack(svgwrite.container.Group):
     Creates a new svgwrite container with all objects stacked
     vertically.
 
-    Parameters:
+    Parameters
       obj_list    : List of SVG elements to be stacked. Each
                     element is expected to have a 'total_hght_'
                     attribute defining its height.

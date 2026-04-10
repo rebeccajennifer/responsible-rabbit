@@ -64,7 +64,7 @@ class DualLineTable(svgwrite.container.Group):
 
   ):
     """
-    Parameters:
+    Parameters
       total_wdth    : Total width of table
       total_hght    : Total height of table
       header_txt    : Text contained in header
@@ -140,7 +140,7 @@ class SingleLineTable(svgwrite.container.Group):
   , inner_pad_rgt: bool = False
   ):
     """
-    Parameters:
+    Parameters
       total_wdth    : Total width of table
       total_hght    : Total height of table
       header_txt    : Text contained in header
@@ -217,7 +217,7 @@ class ColumnTable(svgwrite.container.Group):
   , TableType = 0
   ):
     """
-    Parameters:
+    Parameters
       total_wdth    : Total width of table
       total_hght    : Total height of table
       header_txt_lst: List of text in headers
@@ -283,7 +283,7 @@ class TextColumnTable(svgwrite.container.Group):
   , outline_color: str = Colors.BORDER_COLOR
   ):
     """
-    Parameters:
+    Parameters
       total_wdth    : Total width of table
       txt_lst       : List of strings to be placed in columns
       text_style    : Style used for text

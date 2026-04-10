@@ -70,7 +70,7 @@ class RowGroup(FluxSvgObject):
   , horiz_align: str = Align.LEFT
   ):
     """
-    Parameters:
+    Parameters
       wdth            : Width of table
       total_hght      : Height of table
       show_outline    : Show table outline
@@ -145,13 +145,13 @@ class RowGroup(FluxSvgObject):
     """
     Adds row objects and outline to group.
 
-    Parameters:
+    Parameters
       None
 
-    Side Effects:
+    Side Effects
       Adds objects in rows to self.
 
-    Returns:
+    Returns
       None
     """
 
@@ -209,7 +209,7 @@ class LineRowGroup(RowGroup):
   , style: LineRowGroupStyle = LineRowGroupStyle()
   ):
     """
-    Parameters:
+    Parameters
       total_wdth    : Total width of group
       total_hght    : Total height of group
       row_count     : Number of rows
@@ -264,17 +264,13 @@ class TextRowGroup(RowGroup):
   , total_hght: int = 0
   , text: str = ''
   , style: TextBoxStyle = TextBoxStyle()
-  , wrap_txt: bool = True
-  , text_align: str = Align.LEFT
   ):
     """
-    Parameters:
+    Parameters
       total_wdth    : Total width of group
       total_hght    : Total height of group
       text          : Text of object
       style         : Style of text
-      wrap_txt      : True indicates to wrap text
-      text_align    : Alignment of text within box
     """
 
     self.total_hght_    : int  = total_hght
@@ -379,7 +375,7 @@ class DualLineRowGroup(svgwrite.container.Group):
       StdLineRowGroupStyles.DOTTED
   ):
     """
-    Parameters:
+    Parameters
       total_wdth      : Total width of group
       total_hght      : Total height of group
       row_count       : Row count of table

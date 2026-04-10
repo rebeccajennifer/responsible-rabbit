@@ -100,13 +100,13 @@ class ProjectEntry(HalfPageLayout):
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
-    Side Effects:
+    Side Effects
       Populates self.entries_ class variable.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 
@@ -184,10 +184,10 @@ class ProjectEntry(HalfPageLayout):
     """
     Creates page header and saves it to class variable.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
 
     """
 

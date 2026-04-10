@@ -1,3 +1,28 @@
+#_______________________________________________________________________
+#_______________________________________________________________________
+#        _   __   _   _ _   _   _   _         _
+#   |   |_| | _  | | | V | | | | / |_/ |_| | /
+#   |__ | | |__| |_| |   | |_| | \ |   | | | \_
+#    _  _         _ ___  _       _ ___   _                    / /
+#   /  | | |\ |  \   |  | / | | /   |   \                    (^^)
+#   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o
+#_______________________________________________________________________
+#_______________________________________________________________________
+#
+#-----------------------------------------------------------------------
+#   Copyright 2024, Rebecca Rashkin
+#   -------------------------------
+#   This code may be copied, redistributed, transformed, or built
+#   upon in any format for educational, non-commercial purposes.
+#
+#   Please give me appropriate credit should you choose to use this
+#   resource. Thank you :)
+#-----------------------------------------------------------------------
+#
+#_______________________________________________________________________
+#   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
+#_______________________________________________________________________
+
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.style import PlannerColors as Colors
 from classes.style.style import PlannerFontStyle as Font
@@ -35,7 +60,7 @@ class LineRowGroupStyle:
   , dash_array: str = '1,0'
   ):
     """
-    Parameters:
+    Parameters
       total_wdth    : Total width of group
       total_hght    : Total height of group
       row_hght      : Height of rows
@@ -91,10 +116,11 @@ class TextBoxStyle():
   , font_family: int = Font.FONT_FAMILY_NORMAL
   , font_color: str = Colors.NORMAL_TXT
   , line_spc: int = Font.DEF_LINE_SPC
+  , wrap_txt: bool = True
   , alignment: str = LEFT_ALIGN
   ):
     """
-    Parameters:
+    Parameters
       show_outline  : Show outline bool
       outline_color : Outline color
       backgnd_color : Background of box
@@ -128,6 +154,7 @@ class TextBoxStyle():
     self.font_color_   : str   = font_color
     self.line_spc_     : int   = line_spc
     self.alignment_    : str   = alignment
+    self.wrap_txt_     : bool  = wrap_txt
 
     return
 
