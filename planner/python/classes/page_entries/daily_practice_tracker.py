@@ -23,42 +23,49 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Entry for a blank page with page header.
+#   Entry for one week of daily practices.
 #_______________________________________________________________________
 
-import svgwrite.container
-
-from classes.constants.addl_arg_keys import AddlArgKeys as Key
-from classes.elements.row_group import DualLineRowGroup
+from classes.constants.strings import PlannerStrings as Strings
+from classes.elements.table import ColumnTable
+from classes.elements.table import DualLineTable
+from classes.style.std_styles import StdTextBoxStyles
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
-
 #_______________________________________________________________________
-class FreeWriteEntry(HalfPageLayout):
+class DailyPracticeTracker(HalfPageLayout):
   """
-  Free write layout.
+  Daily entry layout.
   """
+
+  PAGE_HEADER_TXT: str =\
+    'Practice Tracking'
+
+  WEEK_HABIT_TRACKER_HEADINGS: list =\
+    [ 'Practice'
+    , 'Mon'
+    , 'Tue'
+    , 'Wed'
+    , 'Thu'
+    , 'Fri'
+    , 'Sat'
+    , 'Sun'
+    , 'Total'
+    ]
 
   #_____________________________________________________________________
   def __init__(self
   , total_hght: int = 0
   , total_wdth: int = 0
-  , addl_args: dict = {Key.HEADER_TXT: ''}
+  , addl_args: dict = {}
   ):
     """
     Constructor for class. Assumes landscape orientation.
     """
-
-    if (Key.HEADER_TXT not in addl_args.keys()):
-      addl_args[Key.HEADER_TXT] = ''
-
-    self.page_header_txt_: str = addl_args[Key.HEADER_TXT]
-
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
-    , pad_bet_elements=False
     )
 
     return
@@ -66,44 +73,35 @@ class FreeWriteEntry(HalfPageLayout):
   #_____________________________________________________________________
   def create_content(self) -> None:
     """
-    Parameters
+    Parameters:
       None
 
-    Side Effects
+    Side Effects:
       Populates self.entries_ class variable.
 
-    Returns
+    Returns:
       None
     """
     super().create_content()
 
-    self.entries_: list =\
-      [ DualLineRowGroup\
-        ( total_wdth=self.content_wdth_
-        , total_hght=self.content_hght_
-        , row_count=24
-        )
-      ]
+    fill_hght: int = self.calc_remaining_hght_per_element(1)
 
-    return
-
-
-  #_____________________________________________________________________
-  def create_page_header(self) -> svgwrite.container.Group:
-    """
-    Creates page header and saves it to class variable.
-
-    Parameters
-      None
-
-    Returns
-
-    """
-
-    page_header = super().create_page_header\
-      ( header_txt=self.page_header_txt_
-      , wrap_txt=True
-      , add_date_block=False
+    habit_tracker_table: ColumnTable =\
+      ColumnTable\
+      ( total_wdth=self.content_wdth_
+      , total_hght=fill_hght
+      , header_txt_lst=self.WEEK_HABIT_TRACKER_HEADINGS
+      , text_style=StdTextBoxStyles.LTE_BACK_HEADER_FONT
+      , row_count=30
+      , col_wdths=[-1] + 7 * [35] + [45]
+      , inner_pad_lft=True
+      , inner_pad_rgt=True
+      , show_outline=True
+      , TableType=DualLineTable
       )
 
-    return page_header
+    self.entries_: list =\
+    [ habit_tracker_table
+    ]
+
+    return

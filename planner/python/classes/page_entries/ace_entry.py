@@ -45,22 +45,21 @@ class AceEntry(HalfPageLayout):
   """
 
   PAGE_HEADER_TXT: str = str(
-    f'Acknowlege {Strings.BULLET_PT} '
-    f'Connect {Strings.BULLET_PT} '
-    f'Engage: {2 * Strings.SPACE} Re-Regulation Practice'
+    f'Acknowledge {Strings.BULLET_PT} Connect {Strings.BULLET_PT} Engage'
   )
 
   ACKNOWLEDGE_HEADER  : str = 'ACKNOWLEDGE'
   CONNECT_HEADER      : str = 'CONNECT'
-  ENGAGE_HEADER       : str = '(RE-)ENGAGE'
+  ENGAGE_HEADER       : str = 'ENGAGE'
+  REFLECTION_HEADER   : str = 'REFLECTION'
 
   ACKN_PROMPT_MANFST: str = 'How is the dysregulation manifesting?'
   ACKN_PROMPT_EMOTNS: str = 'What emotions are you experiencing?'
   ACKN_PROMPT_BEFORE: str = 'What was happening before the trigger?'
 
-  CNCT_PROMPT_TECHNQU: str = 'Re-regulation technique to practice'
+  CNCT_PROMPT_TECHNQU: str = 'How will you connect with your body?'
   CNCT_PROMPT_REFLECT: str = 'Reflections after practice'
-  ENGA_PROMPT_ACTIVTY: str = 'What activity will you (re-)engage with?'
+  ENGA_PROMPT_ACTIVTY: str = 'How will you engage with the environment?'
 
   #_____________________________________________________________________
   def __init__(self
@@ -107,7 +106,7 @@ class AceEntry(HalfPageLayout):
       )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
-      , row_count=3
+      , row_count=2
       , header_txt=self.ACKN_PROMPT_EMOTNS
       , text_style=prompt_style
       , show_outline=False
@@ -121,15 +120,8 @@ class AceEntry(HalfPageLayout):
       )
     , DualLineTable\
       ( total_wdth=self.content_wdth_
-      , row_count=1
+      , row_count=2
       , header_txt=self.CNCT_PROMPT_TECHNQU
-      , text_style=prompt_style
-      , show_outline=False
-      )
-    , DualLineTable\
-      ( total_wdth=self.content_wdth_
-      , row_count=3
-      , header_txt=self.CNCT_PROMPT_REFLECT
       , text_style=prompt_style
       , show_outline=False
       )
@@ -137,6 +129,13 @@ class AceEntry(HalfPageLayout):
       ( total_wdth=self.content_wdth_
       , row_count=2
       , header_txt=self.ENGA_PROMPT_ACTIVTY
+      , text_style=prompt_style
+      , show_outline=False
+      )
+    , DualLineTable\
+      ( total_wdth=self.content_wdth_
+      , row_count=3
+      , header_txt=self.CNCT_PROMPT_REFLECT
       , text_style=prompt_style
       , show_outline=False
       )
@@ -169,12 +168,23 @@ class AceEntry(HalfPageLayout):
       , total_hght=fill_hght
       )
 
+    r_header: TextRowGroup =\
+      TextRowGroup\
+      ( text=self.REFLECTION_HEADER
+      , total_wdth=self.content_wdth_
+      , style=header_style
+      , total_hght=fill_hght
+      )
+
     # Rearrange entries to include headers
     self.entries_ = [a_header]  +\
       self.entries_[0:3]        +\
       [c_header]                +\
-      self.entries_[3:5]        +\
+      self.entries_[3:4]        +\
       [e_header]                +\
+      [self.entries_[4]]        +\
+      [r_header]                +\
       [self.entries_[5]]
 
     return
+

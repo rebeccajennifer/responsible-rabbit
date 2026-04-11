@@ -38,20 +38,10 @@ from classes.style.style import PlannerFontStyle as Font
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
-class GoalStrings:
+class ProjectStrings:
   #_____________________________________________________________________
   # Goal layout strings
   #_____________________________________________________________________
-
-  CHECKLIST: str =\
-     '[] Specific'    + Strings.SPACE\
-   + '[] Measureable' + Strings.SPACE\
-   + '[] Achievable'  + Strings.SPACE\
-   + '[] Relevant'    + Strings.SPACE\
-   + '[] Challenging'
-
-  ACTIONS: str =\
-    'Critical Steps'
 
   MILESTONES: list =\
   [ 'Advancement'
@@ -84,11 +74,11 @@ class GoalStrings:
 
 
 #_______________________________________________________________________
-class GoalEntry(HalfPageLayout):
+class ProjectEntry(HalfPageLayout):
   """
   Daily entry layout.
   """
-  PAGE_HEADER_TXT: str = 'Goal #'
+  PAGE_HEADER_TXT: str = 'Project:'
 
   #_____________________________________________________________________
   def __init__(self
@@ -125,14 +115,14 @@ class GoalEntry(HalfPageLayout):
     self.entries_: list =\
     [ DualLineTable\
       ( total_wdth=self.content_wdth_
-      , header_txt=GoalStrings.VALUES
+      , header_txt=ProjectStrings.VALUES
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=3
       , show_outline=False
       )
     , ColumnTable\
       ( total_wdth=self.content_wdth_
-      , header_txt_lst=GoalStrings.MILESTONES
+      , header_txt_lst=ProjectStrings.MILESTONES
       , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_NO_OUTLNE
       , row_count=7
       , col_wdths=[275, -1]
@@ -142,7 +132,7 @@ class GoalEntry(HalfPageLayout):
 
     , DualLineTable\
       ( total_wdth=self.content_wdth_
-      , header_txt=GoalStrings.MEASUREMENT
+      , header_txt=ProjectStrings.MEASUREMENT
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=1
       , show_outline=False
@@ -150,7 +140,7 @@ class GoalEntry(HalfPageLayout):
 
     , DualLineTable\
       ( total_wdth=self.content_wdth_
-      , header_txt=GoalStrings.OBSTACLES
+      , header_txt=ProjectStrings.OBSTACLES
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , row_count=2
       , show_outline=True
@@ -158,7 +148,7 @@ class GoalEntry(HalfPageLayout):
 
     , DualLineTable\
       ( total_wdth=self.content_wdth_
-      , header_txt=GoalStrings.LIFE_IMPROVEMENT
+      , header_txt=ProjectStrings.LIFE_IMPROVEMENT
       , text_style=StdTextBoxStyles.MED_BACK_HEADER_FONT
       , row_count=2
       , show_outline=False
@@ -173,7 +163,7 @@ class GoalEntry(HalfPageLayout):
     [ SingleLineTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
-      , header_txt=GoalStrings.PLAN
+      , header_txt=ProjectStrings.PLAN
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , show_outline=True
       )
@@ -181,7 +171,7 @@ class GoalEntry(HalfPageLayout):
     , SingleLineTable\
       ( total_wdth=self.content_wdth_
       , total_hght=fill_hght
-      , header_txt=GoalStrings.REWARD
+      , header_txt=ProjectStrings.REWARD
       , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
       , show_outline=True
       )

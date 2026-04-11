@@ -35,18 +35,21 @@ import svgwrite.text
 
 from copy import deepcopy
 
+from classes.flux_svg_object import FluxSvgObject
 from classes.constants.dims import PlannerDims as Dims
 from classes.style.std_styles import StdLineRowGroupStyles
 from classes.style.style import PlannerFontStyle as Font
 from classes.style.style import PlannerColors as Colors
 from classes.style.table_style import LineRowGroupStyle
 from classes.style.table_style import TextBoxStyle
+from classes.style.table_style import Align
 from utils.utils import PlannerUtils as Utils
 
 from classes.constants.debug_const  import DebugConst
 
+
 #_______________________________________________________________________
-class RowGroup(svgwrite.container.Group):
+class RowGroup(FluxSvgObject):
   """
   Creates a group of objects, positioned in rows.
   """
@@ -64,6 +67,7 @@ class RowGroup(svgwrite.container.Group):
   , inner_pad_lft: bool = False
   , inner_pad_rgt: bool = False
   , obj_list: list = []
+  , horiz_align: str = Align.LEFT
   ):
     """
     Parameters
@@ -81,14 +85,13 @@ class RowGroup(svgwrite.container.Group):
     # Used for setting breakpoints while debugging
     DebugConst.flag
 
-    super().__init__()
+    super().__init__(hght=total_hght, wdth=total_wdth)
 
     self.total_wdth_    : int  = total_wdth
     self.inner_pad_top_ : bool = inner_pad_top
     self.inner_pad_bot_ : bool = inner_pad_bot
     self.inner_pad_lft_ : bool = inner_pad_lft
     self.inner_pad_rgt_ : bool = inner_pad_rgt
-    self.obj_list_      : list = obj_list
     self.show_outline_  : bool = show_outline
     self.outline_color_ : bool = outline_color
     self.backgnd_color_ : bool = backgnd_color
@@ -128,12 +131,17 @@ class RowGroup(svgwrite.container.Group):
       self.total_hght_ = self.content_hght_\
         + Font.TEXT_PADDING * (inner_pad_bot + inner_pad_top)
 
-    self.add_content()
+    self.add_content(obj_list=obj_list, align=horiz_align)
+
+    # TODO: Consider removing total_hght_ and total_wdth attributes
+    # and using hght_ and wdth_ instead.
+    self.hght_ = self.total_hght_
+    self.wdth_ = self.total_wdth_
 
     return
 
   #_____________________________________________________________________
-  def add_content(self):
+  def add_content(self, obj_list: list = [], align: str = Align.LEFT):
     """
     Adds row objects and outline to group.
 
@@ -161,14 +169,24 @@ class RowGroup(svgwrite.container.Group):
       )
 
     #___________________________________________________________________
-    # Add rows
+    # Determine starting position based on alignment
     #___________________________________________________________________
-    insert_x: int = Font.TEXT_PADDING * self.inner_pad_lft_
+    if (align == Align.LEFT):
+      insert_x: int = Font.TEXT_PADDING * self.inner_pad_lft_
+    elif (align == Align.RIGHT):
+      insert_x: int = self.total_wdth_ -\
+        Font.TEXT_PADDING * self.inner_pad_rgt_
+    else: # Center
+      insert_x: int = self.total_wdth_ / 2
+
     insert_y: int = self.row_hght_\
       - self.y_offset_\
       + Font.TEXT_PADDING * self.inner_pad_top_
 
-    for obj in self.obj_list_:
+    #___________________________________________________________________
+    # Add rows
+    #___________________________________________________________________
+    for obj in obj_list:
       obj['transform'] =\
         f'translate({insert_x},{insert_y})'
       self.add(obj)
@@ -198,32 +216,21 @@ class LineRowGroup(RowGroup):
       style         : Style of rows including color, padding, y offset
     """
 
-    self.y_offset_      : int   = style.y_offset_
-    self.line_wght_     : str   = style.line_wght_
-    self.line_color_    : str   = style.line_color_
-    self.outline_color_ : str   = style.outline_color_
-    self.show_outline_  : bool  = style.show_outline_
-    self.inner_pad_lft_ : bool  = style.inner_pad_lft_
-    self.inner_pad_rgt_ : bool  = style.inner_pad_rgt_
-    self.inner_pad_top_ : bool  = style.inner_pad_top_
-    self.inner_pad_bot_ : bool  = style.inner_pad_bot_
-    self.dash_array_    : str   = style.dash_array_
-
     self.total_wdth_    : int   = total_wdth
     self.total_hght_    : int   = total_hght
     self.row_count_     : int   = row_count
 
     line_len: int = self.total_wdth_\
       - Font.TEXT_PADDING\
-      * (self.inner_pad_lft_ + self.inner_pad_rgt_)
+      * (style.inner_pad_lft_ + style.inner_pad_rgt_)
 
     line: svgwrite.shapes.Line =\
       svgwrite.shapes.Line\
       ( start=(0,0)
       , end=(line_len, 0)
-      , stroke=self.line_color_
-      , stroke_width=self.line_wght_
-      , stroke_dasharray=self.dash_array_
+      , stroke=style.line_color_
+      , stroke_width=style.line_wght_
+      , stroke_dasharray=style.dash_array_
       )
 
     line_array: list =\
@@ -233,13 +240,13 @@ class LineRowGroup(RowGroup):
       super().__init__\
       ( total_wdth=self.total_wdth_
       , total_hght=self.total_hght_
-      , show_outline=self.show_outline_
-      , outline_color=self.outline_color_
-      , y_offset=self.y_offset_
-      , inner_pad_top=self.inner_pad_top_
-      , inner_pad_bot=self.inner_pad_bot_
-      , inner_pad_lft=self.inner_pad_lft_
-      , inner_pad_rgt=self.inner_pad_rgt_
+      , show_outline=style.show_outline_
+      , outline_color=style.outline_color_
+      , y_offset=style.y_offset_
+      , inner_pad_top=style.inner_pad_top_
+      , inner_pad_bot=style.inner_pad_bot_
+      , inner_pad_lft=style.inner_pad_lft_
+      , inner_pad_rgt=style.inner_pad_rgt_
       , obj_list=line_array
       )
 
@@ -250,12 +257,14 @@ class TextRowGroup(RowGroup):
   elements. Designed for displaying single or multi-line text.
   """
 
+
   #_____________________________________________________________________
   def __init__(self
   , total_wdth: int = 0
   , total_hght: int = 0
   , text: str = ''
   , style: TextBoxStyle = TextBoxStyle()
+  , wrap_txt: bool = True
   ):
     """
     Parameters
@@ -264,35 +273,20 @@ class TextRowGroup(RowGroup):
       text          : Text of object
       style         : Style of text
       wrap_txt      : True indicates to wrap text
-      left_align    : True indicates left alignment
     """
-
-    self.show_outline_  = style.show_outline_
-    self.outline_color_ = style.outline_color_
-    self.backgnd_color_ = style.backgnd_color_
-    self.inner_pad_top_ = style.inner_pad_top_
-    self.inner_pad_bot_ = style.inner_pad_bot_
-    self.inner_pad_lft_ = style.inner_pad_lft_
-    self.inner_pad_rgt_ = style.inner_pad_rgt_
-    self.font_color_    = style.font_color_
-    self.font_family_   = style.font_family_
-    self.font_size_     = style.font_size_
-    self.line_spc_      = style.line_spc_
-    self.y_offset_      = style.y_offset_
-    wrap_txt            = style.wrap_txt_
 
     self.total_hght_    : int  = total_hght
     self.total_wdth_    : int  = total_wdth
 
     # Error handling for line space
-    if (self.line_spc_ < 1):
+    if (style.line_spc_ < 1):
       self.line_spc_ = 1
 
-    self.row_hght_ = self.line_spc_ * self.font_size_
+    self.row_hght_ = style.line_spc_ * style.font_size_
 
     content_width: int =\
       total_wdth - Font.TEXT_PADDING\
-      * (self.inner_pad_lft_ + self.inner_pad_rgt_)
+      * (style.inner_pad_lft_ + style.inner_pad_rgt_)
 
     # Allow for input text to already be a list of strings
     if (isinstance(text, list) ):
@@ -305,8 +299,8 @@ class TextRowGroup(RowGroup):
             Utils.split_txt_by_wdth\
             ( txt=text
             , px_wdth=content_width
-            , font_size=self.font_size_
-            , font_family=self.font_family_
+            , font_size=style.font_size_
+            , font_family=style.font_family_
             )
       else:
         split_text = [text]
@@ -337,40 +331,26 @@ class TextRowGroup(RowGroup):
         ( text=split_text[i]
         , text_anchor=style.alignment_
         , alignment_baseline='text-after-edge'
-        , fill=self.font_color_
-        , font_size=self.font_size_
-        , font_family=self.font_family_
+        , fill=style.font_color_
+        , font_size=style.font_size_
+        , font_family=style.font_family_
         )
 
       text_array[i] = svg_text
-
-    """
-    # Center text for one line text
-    if (len(text_array) == 1):
-
-      #self.row_hght_ = self.font_size_ +\
-      #  Font.TEXT_PADDING *(self.inner_pad_bot_ + self.inner_pad_top_)
-
-      if (self.total_hght_):
-        half_hght: int = self.total_hght_ / 2
-        half_font: int = self.font_size_ / 2
-        insert_y: int = half_hght + half_font
-        #self.y_offset_ = self.total_hght_ - insert_y
-    """
 
     return\
       super().__init__\
       ( total_wdth=total_wdth
       , total_hght=self.total_hght_
-      , show_outline=self.show_outline_
-      , outline_color=self.outline_color_
-      , backgnd_color=self.backgnd_color_
+      , show_outline=style.show_outline_
+      , outline_color=style.outline_color_
+      , backgnd_color=style.backgnd_color_
       , row_hght=self.row_hght_
-      , y_offset=self.y_offset_
-      , inner_pad_top=self.inner_pad_top_
-      , inner_pad_bot=self.inner_pad_bot_
-      , inner_pad_lft=self.inner_pad_lft_
-      , inner_pad_rgt=self.inner_pad_rgt_
+      , y_offset=style.y_offset_
+      , inner_pad_top=style.inner_pad_top_
+      , inner_pad_bot=style.inner_pad_bot_
+      , inner_pad_lft=style.inner_pad_lft_
+      , inner_pad_rgt=style.inner_pad_rgt_
       , obj_list=text_array
       )
 

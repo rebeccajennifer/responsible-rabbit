@@ -30,6 +30,7 @@ from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.table import DualLineTable
+from classes.elements.row_group import TextRowGroup
 from classes.style.std_styles import StdTextBoxStyles
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
@@ -106,3 +107,12 @@ class NightEntry(HalfPageLayout):
     ]
 
     return
+
+  #_____________________________________________________________________
+  def create_page_header(self
+  ) -> TextRowGroup:
+    """
+    Page header. Overrides parent method to remove date block.
+    """
+
+    return super().create_page_header(add_date_block=False)

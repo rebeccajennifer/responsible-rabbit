@@ -28,6 +28,8 @@
 
 from copy import deepcopy
 
+from classes.flux_svg_object import FluxSvgObject
+
 import svgwrite.container
 
 from classes.constants.dims import PlannerDims as Dims
@@ -37,7 +39,7 @@ from utils.utils import PlannerUtils as Utils
 
 
 #_______________________________________________________________________
-class VerticalStack(svgwrite.container.Group):
+class VerticalStack(FluxSvgObject):
   """
   Stack objects vertically with optional padding between them.
   """
@@ -110,6 +112,11 @@ class VerticalStack(svgwrite.container.Group):
       , wdth=self.total_wdth_
       , outline_color=outline_color
       )
+
+    # TODO: Consider removing total_hght_ and total_wdth_ attributes
+    # and using hght_ and wdth_ instead.
+    self.hght_ = self.total_hght_
+    self.wdth_ = self.total_wdth_
 
     return
 

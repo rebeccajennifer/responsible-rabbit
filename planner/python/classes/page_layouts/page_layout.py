@@ -72,7 +72,7 @@ class PageLayout(svgwrite.Drawing):
                           e.g. day_entry, month_entry
       entry_0_args      : Arguments for left or top entry
       entry_1_type      : Type of entry on right or bottom of page
-                          e.g. day_entry, month_entry
+                          e.g. day_entry_0, month_entry
       entry_1_args      : Arguments for right or bottom entry
       rgt_bndr_mrgn     :  Use the binder margin on the right side
     """
@@ -199,8 +199,14 @@ class PageLayout(svgwrite.Drawing):
     """
     Determines top left insertion points for content boxes and borders.
 
-    Side Effects
+    Parameters:
+      None
+
+    Side Effects:
       Adds class variables for insertion points.
+
+    Returns:
+      None
     """
 
     content_wdth: int = self.content_wdth_
