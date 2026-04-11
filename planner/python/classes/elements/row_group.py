@@ -264,6 +264,7 @@ class TextRowGroup(RowGroup):
   , total_hght: int = 0
   , text: str = ''
   , style: TextBoxStyle = TextBoxStyle()
+  , wrap_txt: bool = True
   ):
     """
     Parameters
@@ -271,6 +272,7 @@ class TextRowGroup(RowGroup):
       total_hght    : Total height of group
       text          : Text of object
       style         : Style of text
+      wrap_txt      : True indicates to wrap text
     """
 
     self.total_hght_    : int  = total_hght

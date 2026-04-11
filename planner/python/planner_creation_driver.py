@@ -33,14 +33,11 @@ from os.path import join
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 
 from classes.page_entries.daily_practice_tracker import DailyPracticeTracker
-from classes.page_entries.week_habit_entry import HabitTracker
 from classes.page_entries.day_entry_1 import WorkDayEntry
 
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
-from classes.page_entries.test_entry import TestEntry
-from classes.reference_pages.emotion_reference import EmotionReference
-from classes.reference_pages.ace_reference import AceReference
+from classes.page_entries.day_habit_tracker import HabitTracker
 
 from classes.page_layouts.page_layout import PageLayout
 from classes.page_layouts.half_page_divider import HalfPageDivider
