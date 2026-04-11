@@ -40,7 +40,7 @@ class DailyPracticeTracker(HalfPageLayout):
   """
 
   PAGE_HEADER_TXT: str =\
-    'Practice Tracking: ' 'Week #'
+    'Practice Tracking'
 
   WEEK_HABIT_TRACKER_HEADINGS: list =\
     [ 'Practice'
