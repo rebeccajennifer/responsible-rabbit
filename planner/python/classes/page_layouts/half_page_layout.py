@@ -39,7 +39,6 @@ from classes.elements.row_group import TextRowGroup
 from classes.elements.base_element import VerticalStack
 from classes.style.std_styles import StdTextBoxStyles
 from classes.style.style import PlannerColors as Colors
-from classes.style.table_style import TextBoxStyle
 
 
 #_______________________________________________________________________

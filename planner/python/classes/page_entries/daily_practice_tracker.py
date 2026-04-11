@@ -26,7 +26,6 @@
 #   Entry for one week of daily practices.
 #_______________________________________________________________________
 
-from classes.constants.strings import PlannerStrings as Strings
 from classes.elements.table import ColumnTable
 from classes.elements.table import DualLineTable
 from classes.style.std_styles import StdTextBoxStyles

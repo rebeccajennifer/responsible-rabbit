@@ -26,24 +26,13 @@
 #   Utility functions.
 #_______________________________________________________________________
 
-from os.path import isdir
-from os.path import dirname
-from os import mkdir
-from os import remove
-from pypdf import PdfReader
-from pypdf import PdfWriter
-
 from classes.style.style import PlannerFontStyle as Font
 from classes.style.style import PlannerColors as Colors
 from classes.constants.error_strings import ErrorStrings as Err
-from classes.constants.dims import PlannerDims as Dims
 
 from math import floor
 
 import svgwrite
-
-from svgwrite.text import Text
-from svgwrite.container import Group
 
 
 #_____________________________________________________________________
@@ -279,4 +268,5 @@ class PlannerUtils:
         end = (i + 1) * k + min(i + 1, m)
 
         result.append(lst[start:end])
+
     return result
