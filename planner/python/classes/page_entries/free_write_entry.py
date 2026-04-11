@@ -103,6 +103,7 @@ class FreeWriteEntry(HalfPageLayout):
     page_header = super().create_page_header\
       ( header_txt=self.page_header_txt_
       , wrap_txt=True
+      , add_date_block=False
       )
 
     return page_header
