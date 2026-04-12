@@ -41,7 +41,7 @@ from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
-class WorkDayEntry(HalfPageLayout):
+class SimpleDayEntry(HalfPageLayout):
   """
   Daily entry layout.
   """
