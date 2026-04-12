@@ -57,36 +57,31 @@ class Entries:
 
   # Blank page
   BLANKPG: dict =\
-    { 'name': 'blank-page'
-    , Key.ENTRY_TYPE: TitlePage
+    { Key.ENTRY_TYPE: TitlePage
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
     }
 
   PREVIEW: dict =\
-    { 'name': 'preview-title'
-    , Key.ENTRY_TYPE: TitlePage
+    { Key.ENTRY_TYPE: TitlePage
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: 'Preview Only - Do Not Print'
       }
     }
 
   TITLEPG: dict =\
-    { 'name': 'title-page'
-    , Key.ENTRY_TYPE: TitlePage
+    { Key.ENTRY_TYPE: TitlePage
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: 'Book of Plans'
       }
     }
 
   TRACK_7: dict =\
-    { 'name': 'seven-day-tracker'
-    , Key.ENTRY_TYPE: SevenDayPracticeTracker
+    { Key.ENTRY_TYPE: SevenDayPracticeTracker
     , Key.ENTRY_ARGS: {}
     }
 
   VISION_: dict =\
-    { 'name': 'vision-title'
-    , Key.ENTRY_TYPE: TitlePage
+    { Key.ENTRY_TYPE: TitlePage
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: 'The Best Version of Me'
       }
@@ -94,8 +89,7 @@ class Entries:
 
   #_____________________________________________________________________
   YR_5__0: dict =\
-    { 'name': 'five-year-vision-pg-0'
-    , Key.ENTRY_TYPE: FreeWritePromptEntry
+    { Key.ENTRY_TYPE: FreeWritePromptEntry
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
       , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_5YR
@@ -103,16 +97,14 @@ class Entries:
     }
 
   YR_5__1: dict =\
-    { 'name': 'five-year-vision-pg-1'
-    , Key.ENTRY_TYPE: FreeWriteEntry
+    { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
       }
     }
 
   YR_1__0: dict =\
-    { 'name': 'one-year-vision-pg-0'
-    , Key.ENTRY_TYPE: FreeWritePromptEntry
+    { Key.ENTRY_TYPE: FreeWritePromptEntry
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
       , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_1YR
@@ -120,16 +112,14 @@ class Entries:
     }
 
   YR_1__1: dict =\
-    { 'name': 'one-year-vision-pg-1'
-    , Key.ENTRY_TYPE: FreeWriteEntry
+    { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
       }
     }
 
   WEEK_12: dict =\
-    { 'name': 'twelve-week-vision'
-    , Key.ENTRY_TYPE: FreeWritePromptEntry
+    { Key.ENTRY_TYPE: FreeWritePromptEntry
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_12W
       , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_12W
@@ -137,8 +127,7 @@ class Entries:
     }
 
   INACTIO: dict =\
-    { 'name': 'consequences'
-    , Key.ENTRY_TYPE: FreeWritePromptEntry
+    { Key.ENTRY_TYPE: FreeWritePromptEntry
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_BAD
       , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_BAD
@@ -147,17 +136,15 @@ class Entries:
 
   #_____________________________________________________________________
   COMMITM: dict =\
-    { 'name': 'commitment'
-    , Key.ENTRY_TYPE: FreeWritePromptEntry
+    { Key.ENTRY_TYPE: FreeWritePromptEntry
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
       , Key.PROMPT_TXT: Strings.COMMITM
       }
     }
 
-  ACTION_ITEMS: dict =\
-    { 'name': 'action-items'
-    , Key.ENTRY_TYPE: FreeWriteEntry
+  ACTIONS: dict =\
+    { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS:
       { Key.HEADER_TXT: 'Action Items: '
       }
@@ -166,17 +153,17 @@ class Entries:
   #_____________________________________________________________________
   # Populate day and quote pages with variable string
   #_____________________________________________________________________
-  DAY__ : list = []
-  QUOTE : list = []
+  DAY_ : list = []
+  QUOT : list = []
 
   for i in range(7):
-    DAY__.append\
+    DAY_.append\
     ( { Key.ENTRY_TYPE: DayEntry
       , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: i}
       }
     )
 
-    QUOTE.append\
+    QUOT.append\
     ( { Key.ENTRY_TYPE: FreeWriteEntry
       , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[i]}
       }
@@ -184,62 +171,78 @@ class Entries:
   #_____________________________________________________________________
 
   NIGHTLY: dict =\
-    { 'name': 'nightly-reflection'
-    , Key.ENTRY_TYPE: NightEntry
+    { Key.ENTRY_TYPE: NightEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Daily Reflection'}
     }
 
   CALENDR: dict =\
-    { 'name': 'calendar'
-    , Key.ENTRY_TYPE: MonthEntry
+    { Key.ENTRY_TYPE: MonthEntry
     , Key.ENTRY_ARGS: {}
     }
 
   #_____________________________________________________________________
-  WEEK___0: dict =\
-    { 'name': 'week-pg-0'
-    , Key.ENTRY_TYPE: WeekEntry0
+  WEEK__0: dict =\
+    { Key.ENTRY_TYPE: WeekEntry0
     , Key.ENTRY_ARGS: {}
     }
-  WEEK___1: dict =\
-    { 'name': 'week-pg-1'
-    , Key.ENTRY_TYPE: WeekEntry1
+  WEEK__1: dict =\
+    { Key.ENTRY_TYPE: WeekEntry1
     , Key.ENTRY_ARGS: {}
     }
 
   #_____________________________________________________________________
   PROJECT: dict =\
-    { 'name': 'project'
-    , Key.ENTRY_TYPE: ProjectEntry
+    { Key.ENTRY_TYPE: ProjectEntry
     , Key.ENTRY_ARGS: {}
     }
 
   DATES__: dict =\
-    { 'name': 'important-dates'
-    , Key.ENTRY_TYPE: FreeWriteEntry
+    { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
     }
 
   ACE_REF: dict =\
-    { 'name': 'ace-reference'
-    , Key.ENTRY_TYPE: AceReference
+    { Key.ENTRY_TYPE: AceReference
     , Key.ENTRY_ARGS: {}
     }
 
   ACEWKSH: dict =\
-    { 'name': 'ace-worksheet'
-    , Key.ENTRY_TYPE: AceEntry
+    { Key.ENTRY_TYPE: AceEntry
     , Key.ENTRY_ARGS: {}
     }
 
   SENSEEX: dict =\
-    { 'name': 'five-senses-worksheet'
-    , Key.ENTRY_TYPE: SensesWksht
+    { Key.ENTRY_TYPE: SensesWksht
     , Key.ENTRY_ARGS: {}
     }
 
   EMO_REF: dict =\
-    { 'name': 'emotion-reference'
-    , Key.ENTRY_TYPE: EmotionReference
+    { Key.ENTRY_TYPE: EmotionReference
     , Key.ENTRY_ARGS: {}
+    }
+
+  ENTRY_NAME_MAP: dict =\
+    { 'blank-page'             : BLANKPG
+    , 'preview-title'          : PREVIEW
+    , 'title-page'             : TITLEPG
+    , 'seven-day-tracker'      : TRACK_7
+    , 'vision-title'           : VISION_
+    , 'five-year-vision-pg-0'  : YR_5__0
+    , 'five-year-vision-pg-1'  : YR_5__1
+    , 'one-year-vision-pg-0'   : YR_1__0
+    , 'one-year-vision-pg-1'   : YR_1__1
+    , 'twelve-week-vision'     : WEEK_12
+    , 'consequences'           : INACTIO
+    , 'commitment'             : COMMITM
+    , 'action-items'           : ACTIONS
+    , 'nightly-reflection'     : NIGHTLY
+    , 'calendar'               : CALENDR
+    , 'week-pg-0'              : WEEK__0
+    , 'week-pg-1'              : WEEK__1
+    , 'project'                : PROJECT
+    , 'important-dates'        : DATES__
+    , 'ace-reference'          : ACE_REF
+    , 'ace-worksheet'          : ACEWKSH
+    , 'five-senses-worksheet'  : SENSEEX
+    , 'emotion-reference'      : EMO_REF
     }

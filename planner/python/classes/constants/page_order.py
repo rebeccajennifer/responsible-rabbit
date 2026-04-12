@@ -103,14 +103,14 @@ class PreviewPages:
 
   #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.WEEK___0 , Keys.RGHT: Entries.WEEK___1}
-  , {Keys.LEFT: Entries.DAY__[0] , Keys.RGHT: Entries.QUOTE[0]}
-  , {Keys.LEFT: Entries.DAY__[1] , Keys.RGHT: Entries.QUOTE[1]}
-  , {Keys.LEFT: Entries.DAY__[2] , Keys.RGHT: Entries.QUOTE[2]}
-  , {Keys.LEFT: Entries.DAY__[3] , Keys.RGHT: Entries.QUOTE[3]}
-  , {Keys.LEFT: Entries.DAY__[4] , Keys.RGHT: Entries.QUOTE[4]}
-  , {Keys.LEFT: Entries.DAY__[5] , Keys.RGHT: Entries.QUOTE[5]}
-  , {Keys.LEFT: Entries.DAY__[6] , Keys.RGHT: Entries.QUOTE[6]}
+  [ {Keys.LEFT: Entries.WEEK__0 , Keys.RGHT: Entries.WEEK__1}
+  , {Keys.LEFT: Entries.DAY_[0] , Keys.RGHT: Entries.QUOT[0]}
+  , {Keys.LEFT: Entries.DAY_[1] , Keys.RGHT: Entries.QUOT[1]}
+  , {Keys.LEFT: Entries.DAY_[2] , Keys.RGHT: Entries.QUOT[2]}
+  , {Keys.LEFT: Entries.DAY_[3] , Keys.RGHT: Entries.QUOT[3]}
+  , {Keys.LEFT: Entries.DAY_[4] , Keys.RGHT: Entries.QUOT[4]}
+  , {Keys.LEFT: Entries.DAY_[5] , Keys.RGHT: Entries.QUOT[5]}
+  , {Keys.LEFT: Entries.DAY_[6] , Keys.RGHT: Entries.QUOT[6]}
   ]
 
 
@@ -131,20 +131,20 @@ class DblSidePages:
   , {Keys.LEFT: Entries.CALENDR, Keys.RGHT: Entries.YR_5__1}
   , {Keys.LEFT: Entries.YR_5__0, Keys.RGHT: Entries.CALENDR}
   , {Keys.LEFT: Entries.DATES__, Keys.RGHT: Entries.VISION_}
-  , {Keys.LEFT: Entries.BLANKPG, Keys.RGHT: Entries.ACTION_ITEMS}
-  , {Keys.LEFT: Entries.ACTION_ITEMS, Keys.RGHT: Entries.TITLEPG}
+  , {Keys.LEFT: Entries.BLANKPG, Keys.RGHT: Entries.ACTIONS}
+  , {Keys.LEFT: Entries.ACTIONS, Keys.RGHT: Entries.TITLEPG}
   ]
 
   #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.DAY__[3] ,Keys.RGHT: Entries.QUOTE[3]}
-  , {Keys.LEFT: Entries.DAY__[4] ,Keys.RGHT: Entries.QUOTE[2]}
-  , {Keys.LEFT: Entries.DAY__[2] ,Keys.RGHT: Entries.QUOTE[4]}
-  , {Keys.LEFT: Entries.DAY__[5] ,Keys.RGHT: Entries.QUOTE[1]}
-  , {Keys.LEFT: Entries.DAY__[1] ,Keys.RGHT: Entries.QUOTE[5]}
-  , {Keys.LEFT: Entries.DAY__[6] ,Keys.RGHT: Entries.QUOTE[0]}
-  , {Keys.LEFT: Entries.DAY__[0] ,Keys.RGHT: Entries.QUOTE[6]}
-  , {Keys.LEFT: Entries.WEEK___0 ,Keys.RGHT: Entries.WEEK___1}
+  [ {Keys.LEFT: Entries.DAY_[3] ,Keys.RGHT: Entries.QUOT[3]}
+  , {Keys.LEFT: Entries.DAY_[4] ,Keys.RGHT: Entries.QUOT[2]}
+  , {Keys.LEFT: Entries.DAY_[2] ,Keys.RGHT: Entries.QUOT[4]}
+  , {Keys.LEFT: Entries.DAY_[5] ,Keys.RGHT: Entries.QUOT[1]}
+  , {Keys.LEFT: Entries.DAY_[1] ,Keys.RGHT: Entries.QUOT[5]}
+  , {Keys.LEFT: Entries.DAY_[6] ,Keys.RGHT: Entries.QUOT[0]}
+  , {Keys.LEFT: Entries.DAY_[0] ,Keys.RGHT: Entries.QUOT[6]}
+  , {Keys.LEFT: Entries.WEEK__0 ,Keys.RGHT: Entries.WEEK__1}
   ]
 
 
@@ -170,20 +170,20 @@ class OneSidePages:
 
   #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.WEEK___0 , Keys.RGHT: Entries.WEEK___0}
-  , {Keys.LEFT: Entries.WEEK___1 , Keys.RGHT: Entries.WEEK___1}
-  , {Keys.LEFT: Entries.DAY__[0] , Keys.RGHT: Entries.DAY__[0]}
-  , {Keys.LEFT: Entries.QUOTE[0] , Keys.RGHT: Entries.QUOTE[0]}
-  , {Keys.LEFT: Entries.DAY__[1] , Keys.RGHT: Entries.DAY__[1]}
-  , {Keys.LEFT: Entries.QUOTE[1] , Keys.RGHT: Entries.QUOTE[1]}
-  , {Keys.LEFT: Entries.DAY__[2] , Keys.RGHT: Entries.DAY__[2]}
-  , {Keys.LEFT: Entries.QUOTE[2] , Keys.RGHT: Entries.QUOTE[2]}
-  , {Keys.LEFT: Entries.DAY__[3] , Keys.RGHT: Entries.DAY__[3]}
-  , {Keys.LEFT: Entries.QUOTE[3] , Keys.RGHT: Entries.QUOTE[3]}
-  , {Keys.LEFT: Entries.DAY__[4] , Keys.RGHT: Entries.DAY__[4]}
-  , {Keys.LEFT: Entries.QUOTE[4] , Keys.RGHT: Entries.QUOTE[4]}
-  , {Keys.LEFT: Entries.DAY__[5] , Keys.RGHT: Entries.DAY__[5]}
-  , {Keys.LEFT: Entries.QUOTE[5] , Keys.RGHT: Entries.QUOTE[5]}
-  , {Keys.LEFT: Entries.DAY__[6] , Keys.RGHT: Entries.DAY__[6]}
-  , {Keys.LEFT: Entries.QUOTE[6] , Keys.RGHT: Entries.QUOTE[6]}
+  [ {Keys.LEFT: Entries.WEEK__0 , Keys.RGHT: Entries.WEEK__0}
+  , {Keys.LEFT: Entries.WEEK__1 , Keys.RGHT: Entries.WEEK__1}
+  , {Keys.LEFT: Entries.DAY_[0] , Keys.RGHT: Entries.DAY_[0]}
+  , {Keys.LEFT: Entries.QUOT[0] , Keys.RGHT: Entries.QUOT[0]}
+  , {Keys.LEFT: Entries.DAY_[1] , Keys.RGHT: Entries.DAY_[1]}
+  , {Keys.LEFT: Entries.QUOT[1] , Keys.RGHT: Entries.QUOT[1]}
+  , {Keys.LEFT: Entries.DAY_[2] , Keys.RGHT: Entries.DAY_[2]}
+  , {Keys.LEFT: Entries.QUOT[2] , Keys.RGHT: Entries.QUOT[2]}
+  , {Keys.LEFT: Entries.DAY_[3] , Keys.RGHT: Entries.DAY_[3]}
+  , {Keys.LEFT: Entries.QUOT[3] , Keys.RGHT: Entries.QUOT[3]}
+  , {Keys.LEFT: Entries.DAY_[4] , Keys.RGHT: Entries.DAY_[4]}
+  , {Keys.LEFT: Entries.QUOT[4] , Keys.RGHT: Entries.QUOT[4]}
+  , {Keys.LEFT: Entries.DAY_[5] , Keys.RGHT: Entries.DAY_[5]}
+  , {Keys.LEFT: Entries.QUOT[5] , Keys.RGHT: Entries.QUOT[5]}
+  , {Keys.LEFT: Entries.DAY_[6] , Keys.RGHT: Entries.DAY_[6]}
+  , {Keys.LEFT: Entries.QUOT[6] , Keys.RGHT: Entries.QUOT[6]}
   ]
