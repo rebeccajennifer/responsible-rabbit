@@ -57,99 +57,111 @@ class Entries:
 
   # Blank page
   BLANKPG: dict =\
-    { Key.ENTRY_TYPE: TitlePage
+    { 'name': 'blank-page'
+    , Key.ENTRY_TYPE: TitlePage
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
     }
 
   PREVIEW: dict =\
-  { Key.ENTRY_TYPE: TitlePage
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'Preview Only - Do Not Print'
+    { 'name': 'preview-title'
+    , Key.ENTRY_TYPE: TitlePage
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: 'Preview Only - Do Not Print'
+      }
     }
-  }
 
   TITLEPG: dict =\
-  { Key.ENTRY_TYPE: TitlePage
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'Book of Plans'
+    { 'name': 'title-page'
+    , Key.ENTRY_TYPE: TitlePage
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: 'Book of Plans'
+      }
     }
-  }
 
   TRACK_7: dict =\
-  { Key.ENTRY_TYPE: SevenDayPracticeTracker
-  , Key.ENTRY_ARGS: {}
-  }
-
+    { 'name': 'seven-day-tracker'
+    , Key.ENTRY_TYPE: SevenDayPracticeTracker
+    , Key.ENTRY_ARGS: {}
+    }
 
   VISION_: dict =\
-  { Key.ENTRY_TYPE: TitlePage
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'The Best Version of Me'
+    { 'name': 'vision-title'
+    , Key.ENTRY_TYPE: TitlePage
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: 'The Best Version of Me'
+      }
     }
-  }
 
   #_____________________________________________________________________
   YR_5__0: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_5YR
+    { 'name': 'five-year-vision-pg-0'
+    , Key.ENTRY_TYPE: FreeWritePromptEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
+      , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_5YR
+      }
     }
-  }
 
   YR_5__1: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
+    { 'name': 'five-year-vision-pg-1'
+    , Key.ENTRY_TYPE: FreeWriteEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
+      }
     }
-  }
 
   YR_1__0: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_1YR
+    { 'name': 'one-year-vision-pg-0'
+    , Key.ENTRY_TYPE: FreeWritePromptEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
+      , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_1YR
+      }
     }
-  }
 
   YR_1__1: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
+    { 'name': 'one-year-vision-pg-1'
+    , Key.ENTRY_TYPE: FreeWriteEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
+      }
     }
-  }
 
   WEEK_12: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_12W
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_12W
+    { 'name': 'twelve-week-vision'
+    , Key.ENTRY_TYPE: FreeWritePromptEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_12W
+      , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_12W
+      }
     }
-  }
 
   INACTIO: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_BAD
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_BAD
+    { 'name': 'consequences'
+    , Key.ENTRY_TYPE: FreeWritePromptEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_BAD
+      , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_BAD
+      }
     }
-  }
 
   #_____________________________________________________________________
   COMMITM: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
-    , Key.PROMPT_TXT: Strings.COMMITM
+    { 'name': 'commitment'
+    , Key.ENTRY_TYPE: FreeWritePromptEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
+      , Key.PROMPT_TXT: Strings.COMMITM
+      }
     }
-  }
 
   ACTION_ITEMS: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'Action Items: '
+    { 'name': 'action-items'
+    , Key.ENTRY_TYPE: FreeWriteEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: 'Action Items: '
+      }
     }
-  }
 
   #_____________________________________________________________________
   # Populate day and quote pages with variable string
@@ -172,52 +184,62 @@ class Entries:
   #_____________________________________________________________________
 
   NIGHTLY: dict =\
-    { Key.ENTRY_TYPE: NightEntry
+    { 'name': 'nightly-reflection'
+    , Key.ENTRY_TYPE: NightEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Daily Reflection'}
     }
 
   CALENDR: dict =\
-    { Key.ENTRY_TYPE: MonthEntry
+    { 'name': 'calendar'
+    , Key.ENTRY_TYPE: MonthEntry
     , Key.ENTRY_ARGS: {}
     }
 
   #_____________________________________________________________________
   WEEK___0: dict =\
-    { Key.ENTRY_TYPE: WeekEntry0
+    { 'name': 'week-pg-0'
+    , Key.ENTRY_TYPE: WeekEntry0
     , Key.ENTRY_ARGS: {}
     }
   WEEK___1: dict =\
-    { Key.ENTRY_TYPE: WeekEntry1
+    { 'name': 'week-pg-1'
+    , Key.ENTRY_TYPE: WeekEntry1
     , Key.ENTRY_ARGS: {}
     }
 
   #_____________________________________________________________________
   PROJECT: dict =\
-    { Key.ENTRY_TYPE: ProjectEntry
+    { 'name': 'project'
+    , Key.ENTRY_TYPE: ProjectEntry
     , Key.ENTRY_ARGS: {}
     }
 
   DATES__: dict =\
-    { Key.ENTRY_TYPE: FreeWriteEntry
+    { 'name': 'important-dates'
+    , Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
     }
 
   ACE_REF: dict =\
-    { Key.ENTRY_TYPE: AceReference
+    { 'name': 'ace-reference'
+    , Key.ENTRY_TYPE: AceReference
     , Key.ENTRY_ARGS: {}
     }
 
   ACEWKSH: dict =\
-    { Key.ENTRY_TYPE: AceEntry
+    { 'name': 'ace-worksheet'
+    , Key.ENTRY_TYPE: AceEntry
     , Key.ENTRY_ARGS: {}
     }
 
   SENSEEX: dict =\
-    { Key.ENTRY_TYPE: SensesWksht
+    { 'name': 'five-senses-worksheet'
+    , Key.ENTRY_TYPE: SensesWksht
     , Key.ENTRY_ARGS: {}
     }
 
   EMO_REF: dict =\
-    { Key.ENTRY_TYPE: EmotionReference
+    { 'name': 'emotion-reference'
+    , Key.ENTRY_TYPE: EmotionReference
     , Key.ENTRY_ARGS: {}
     }

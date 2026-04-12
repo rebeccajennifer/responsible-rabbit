@@ -50,8 +50,6 @@ from utils.planner_parser import PlannerCreationParser
 
 from utils.flux_bunny_utils.file_utils import FileUtils
 
-entry_type_keys: dict =\
-  {'seven-day-habit-tracker': Entries.TRACK_7}
 
 #_______________________________________________________________________
 def new_line (new_line_count: int = 1) -> None:
