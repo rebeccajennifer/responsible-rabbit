@@ -77,6 +77,8 @@
     , "args":
       [ "--out_dir"
       , "planner/layouts/single-sided"
+      , "--entry_cfg"
+      , "${workspaceFolder}/planner/python/config_files/sgl-side-entries.yaml"
       ]
     }
   , { "name": "pytest"

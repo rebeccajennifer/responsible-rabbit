@@ -77,6 +77,11 @@ if __name__ == '__main__':
   if (args.preview):
     is_dbl_sided = True
 
+  if (args.entry_cfg):
+    with open(args.entry_cfg, 'r') as f:
+      entry_cfg_data: dict = yaml.safe_load(f)
+      print(entry_cfg_data)
+
   project_layout =\
     PageLayout\
     ( is_portrait=is_portrait
