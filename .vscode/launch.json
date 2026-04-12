@@ -69,6 +69,16 @@
       , "--dbl_sided"
       ]
     }
+  , { "name": "individual_entry_driver"
+    , "type": "debugpy"
+    , "request": "launch"
+    , "program": "${workspaceFolder}/planner/python/individual_entry_driver.py"
+    , "console": "integratedTerminal"
+    , "args":
+      [ "--out_dir"
+      , "planner/layouts/single-sided"
+      ]
+    }
   , { "name": "pytest"
     , "type": "debugpy"
     , "request": "launch"
