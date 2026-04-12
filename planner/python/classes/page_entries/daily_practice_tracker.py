@@ -33,7 +33,7 @@ from classes.style.std_styles import StdTextBoxStyles
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
 #_______________________________________________________________________
-class DailyPracticeTracker(HalfPageLayout):
+class SevenDayPracticeTracker(HalfPageLayout):
   """
   Daily entry layout.
   """
