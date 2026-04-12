@@ -1,0 +1,11 @@
+double-sided: false
+pages:
+  page-0:
+    - name        : "page-0"
+      entry-type  : seven-day-practice-tracker
+
+  page-1:
+    - name        : "page-1"
+      entry-type  :
+        - day-entry-0
+        - day-entry-1
