@@ -54,6 +54,12 @@ from classes.page_entries.senses_wksht import SensesWksht
 
 #_____________________________________________________________________
 class Entries:
+  """
+  List of entry objects used to generate layouts.
+
+  When adding a new entry, add the entry to the name map at the bottom
+  of this class to enable use in configuration files.
+  """
 
   # Blank page
   BLANKPG: dict =\
@@ -221,6 +227,7 @@ class Entries:
     , Key.ENTRY_ARGS: {}
     }
 
+  # Name map used in configuration file
   ENTRY_NAME_MAP: dict =\
     { 'blank-page'             : BLANKPG
     , 'preview-title'          : PREVIEW
@@ -245,4 +252,18 @@ class Entries:
     , 'ace-worksheet'          : ACEWKSH
     , 'five-senses-worksheet'  : SENSEEX
     , 'emotion-reference'      : EMO_REF
+    , 'day-entry-0'            : DAY_[0]
+    , 'day-entry-1'            : DAY_[1]
+    , 'day-entry-2'            : DAY_[2]
+    , 'day-entry-3'            : DAY_[3]
+    , 'day-entry-4'            : DAY_[4]
+    , 'day-entry-5'            : DAY_[5]
+    , 'day-entry-6'            : DAY_[6]
+    , 'free-write-quote-0'     : QUOT[0]
+    , 'free-write-quote-1'     : QUOT[1]
+    , 'free-write-quote-2'     : QUOT[2]
+    , 'free-write-quote-3'     : QUOT[3]
+    , 'free-write-quote-4'     : QUOT[4]
+    , 'free-write-quote-5'     : QUOT[5]
+    , 'free-write-quote-6'     : QUOT[6]
     }

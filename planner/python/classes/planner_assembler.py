@@ -81,12 +81,12 @@ class PageGroup():
             Takes the form:
 
             [ { 'file_name': 'group_0_pg_0'
-              , 'LeftEntry': {'entry_type': EntryType, 'entry_args: {}'}
-              , 'RghtEntry': {'entry_type': EntryType, 'entry_args: {}'}
+              , 'left_entry': {'entry_type': EntryType, 'entry_args: {}'}
+              , 'rght_entry': {'entry_type': EntryType, 'entry_args: {}'}
               }
             , { 'file_name': 'group_0_pg_1'
-              , 'LeftEntry': {'entry_type': EntryType, 'entry_args: {}'}
-              , 'RghtEntry': {'entry_type': EntryType, 'entry_args: {}'}
+              , 'left_entry': {'entry_type': EntryType, 'entry_args: {}'}
+              , 'rght_entry': {'entry_type': EntryType, 'entry_args: {}'}
               }
             ]
   """
@@ -101,11 +101,11 @@ class PageGroup():
 
       layouts   : List of layouts in the following form:
 
-        [ { LeftEntry: {'entry_type': EntryType, 'entry_args: {}'}
-          , RghtEntry: {'entry_type': EntryType, 'entry_args: {}'}
+        [ { left_entry: {'entry_type': EntryType, 'entry_args: {}'}
+          , rght_entry: {'entry_type': EntryType, 'entry_args: {}'}
           }
-        , { LeftEntry: {'entry_type': EntryType, 'entry_args: {}'}
-          , RghtEntry: {'entry_type': EntryType, 'entry_args: {}'}
+        , { left_entry: {'entry_type': EntryType, 'entry_args: {}'}
+          , rght_entry: {'entry_type': EntryType, 'entry_args: {}'}
           }
         ]
     """
