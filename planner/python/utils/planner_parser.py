@@ -26,6 +26,11 @@ class ParserStrings:
     'intended to be printed.'
   )
 
+  ENTRY_CFG_DESC: str = str(
+    'Path to YAML file containing entry configurations. The data in '
+    'this file will take precedence over other command line arguments.'
+  )
+
 
 #_______________________________________________________________________
 class PlannerCreationParser:
@@ -40,6 +45,7 @@ class PlannerCreationParser:
     parser.description = ParserStrings.PROGRAM_DESC
 
     parser.add_argument( '--preview'
+      , '-p'
       , help=ParserStrings.PREVIEW_DESC
       , action='store_true'
       , required=False
@@ -47,6 +53,7 @@ class PlannerCreationParser:
     )
 
     parser.add_argument( '--dbl_sided'
+      , '-d'
       , help=ParserStrings.DBL_SIDED_DESC
       , action='store_true'
       , required=False
@@ -54,12 +61,20 @@ class PlannerCreationParser:
     )
 
     parser.add_argument( '--out_dir'
+      , '-o'
       , help=ParserStrings.OUT_DIR_DESC
       , action='store'
       , required=False
       , default='./'
     )
 
+    parser.add_argument( '--entry_cfg'
+      , '-c'
+      , help=ParserStrings.ENTRY_CFG_DESC
+      , action='store'
+      , required=False
+      , default=None
+    )
 
     return
 
