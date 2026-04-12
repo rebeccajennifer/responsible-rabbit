@@ -56,32 +56,32 @@ from classes.page_entries.senses_wksht import SensesWksht
 class Entries:
 
   # Blank page
-  BLANK: dict =\
+  BLANKPG: dict =\
     { Key.ENTRY_TYPE: TitlePage
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
     }
 
-  PREVW: dict =\
+  PREVIEW: dict =\
   { Key.ENTRY_TYPE: TitlePage
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: 'Preview Only - Do Not Print'
     }
   }
 
-  TITLE: dict =\
+  TITLEPG: dict =\
   { Key.ENTRY_TYPE: TitlePage
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: 'Book of Plans'
     }
   }
 
-  TRK_7: dict =\
+  TRACK_7: dict =\
   { Key.ENTRY_TYPE: SevenDayPracticeTracker
   , Key.ENTRY_ARGS: {}
   }
 
 
-  BEST_: dict =\
+  VISION_: dict =\
   { Key.ENTRY_TYPE: TitlePage
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: 'The Best Version of Me'
@@ -89,7 +89,7 @@ class Entries:
   }
 
   #_____________________________________________________________________
-  YR5_0: dict =\
+  YR_5__0: dict =\
   { Key.ENTRY_TYPE: FreeWritePromptEntry
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
@@ -97,14 +97,14 @@ class Entries:
     }
   }
 
-  YR5_1: dict =\
+  YR_5__1: dict =\
   { Key.ENTRY_TYPE: FreeWriteEntry
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
     }
   }
 
-  YR1_0: dict =\
+  YR_1__0: dict =\
   { Key.ENTRY_TYPE: FreeWritePromptEntry
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
@@ -112,14 +112,14 @@ class Entries:
     }
   }
 
-  YR1_1: dict =\
+  YR_1__1: dict =\
   { Key.ENTRY_TYPE: FreeWriteEntry
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
     }
   }
 
-  WK_12: dict =\
+  WEEK_12: dict =\
   { Key.ENTRY_TYPE: FreeWritePromptEntry
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_12W
@@ -127,7 +127,7 @@ class Entries:
     }
   }
 
-  NOACT: dict =\
+  INACTIO: dict =\
   { Key.ENTRY_TYPE: FreeWritePromptEntry
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_BAD
@@ -136,11 +136,11 @@ class Entries:
   }
 
   #_____________________________________________________________________
-  A_VOW: dict =\
+  COMMITM: dict =\
   { Key.ENTRY_TYPE: FreeWritePromptEntry
   , Key.ENTRY_ARGS:
     { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
-    , Key.PROMPT_TXT: Strings.A_VOW
+    , Key.PROMPT_TXT: Strings.COMMITM
     }
   }
 
@@ -154,70 +154,70 @@ class Entries:
   #_____________________________________________________________________
   # Populate day and quote pages with variable string
   #_____________________________________________________________________
-  DAY : list = []
-  QUT : list = []
+  DAY__ : list = []
+  QUOTE : list = []
 
   for i in range(7):
-    DAY.append\
+    DAY__.append\
     ( { Key.ENTRY_TYPE: DayEntry
       , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: i}
       }
     )
 
-    QUT.append\
+    QUOTE.append\
     ( { Key.ENTRY_TYPE: FreeWriteEntry
       , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[i]}
       }
     )
   #_____________________________________________________________________
 
-  NIGHT: dict =\
+  NIGHTLY: dict =\
     { Key.ENTRY_TYPE: NightEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Daily Reflection'}
     }
 
-  MONTH: dict =\
+  CALENDR: dict =\
     { Key.ENTRY_TYPE: MonthEntry
     , Key.ENTRY_ARGS: {}
     }
 
   #_____________________________________________________________________
-  WEEK_0: dict =\
+  WEEK___0: dict =\
     { Key.ENTRY_TYPE: WeekEntry0
     , Key.ENTRY_ARGS: {}
     }
-  WEEK_1: dict =\
+  WEEK___1: dict =\
     { Key.ENTRY_TYPE: WeekEntry1
     , Key.ENTRY_ARGS: {}
     }
 
   #_____________________________________________________________________
-  PRJCT: dict =\
+  PROJECT: dict =\
     { Key.ENTRY_TYPE: ProjectEntry
     , Key.ENTRY_ARGS: {}
     }
 
-  DATES: dict =\
+  DATES__: dict =\
     { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
     }
 
-  ACERF: dict =\
+  ACE_REF: dict =\
     { Key.ENTRY_TYPE: AceReference
     , Key.ENTRY_ARGS: {}
     }
 
-  ACEPG: dict =\
+  ACEWKSH: dict =\
     { Key.ENTRY_TYPE: AceEntry
     , Key.ENTRY_ARGS: {}
     }
 
-  SENSE: dict =\
+  SENSEEX: dict =\
     { Key.ENTRY_TYPE: SensesWksht
     , Key.ENTRY_ARGS: {}
     }
 
-  EMORF: dict =\
+  EMO_REF: dict =\
     { Key.ENTRY_TYPE: EmotionReference
     , Key.ENTRY_ARGS: {}
     }

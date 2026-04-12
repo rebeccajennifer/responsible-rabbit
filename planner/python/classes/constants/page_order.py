@@ -43,8 +43,8 @@ class NightlyPages:
   """
 
   LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
-  , {Keys.LEFT: Entries.NIGHT, Keys.RGHT: Entries.NIGHT}
+  [ {Keys.LEFT: Entries.NIGHTLY, Keys.RGHT: Entries.NIGHTLY}
+  , {Keys.LEFT: Entries.NIGHTLY, Keys.RGHT: Entries.NIGHTLY}
   ]
 
 
@@ -55,7 +55,7 @@ class AceRefrPages:
   """
 
   LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.ACERF, Keys.RGHT: Entries.EMORF}
+  [ {Keys.LEFT: Entries.ACE_REF, Keys.RGHT: Entries.EMO_REF}
   ]
 
 
@@ -65,8 +65,8 @@ class AceWkshPages:
   ACE worksheet pages.
   """
   LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.ACEPG, Keys.RGHT: Entries.SENSE}
-  , {Keys.LEFT: Entries.SENSE, Keys.RGHT: Entries.ACEPG}
+  [ {Keys.LEFT: Entries.ACEWKSH, Keys.RGHT: Entries.SENSEEX}
+  , {Keys.LEFT: Entries.SENSEEX, Keys.RGHT: Entries.ACEWKSH}
   ]
 
 #_______________________________________________________________________
@@ -75,8 +75,8 @@ class SenseExPages:
   Five Senses grounding exercise pages.
   """
   LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.SENSE, Keys.RGHT: Entries.SENSE}
-  , {Keys.LEFT: Entries.SENSE, Keys.RGHT: Entries.SENSE}
+  [ {Keys.LEFT: Entries.SENSEEX, Keys.RGHT: Entries.SENSEEX}
+  , {Keys.LEFT: Entries.SENSEEX, Keys.RGHT: Entries.SENSEEX}
   ]
 
 #_______________________________________________________________________
@@ -89,28 +89,28 @@ class PreviewPages:
   # List of layouts
   #_____________________________________________________________________
   INTR_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.PREVW, Keys.RGHT: Entries.TITLE}
-  , {Keys.LEFT: Entries.YR5_0, Keys.RGHT: Entries.YR5_1}
-  , {Keys.LEFT: Entries.YR1_0, Keys.RGHT: Entries.YR1_1}
-  , {Keys.LEFT: Entries.WK_12, Keys.RGHT: Entries.NOACT}
-  , {Keys.LEFT: Entries.A_VOW, Keys.RGHT: Entries.BLANK}
-  , {Keys.LEFT: Entries.PRJCT, Keys.RGHT: Entries.PRJCT}
-  , {Keys.LEFT: Entries.PRJCT, Keys.RGHT: Entries.PRJCT}
-  , {Keys.LEFT: Entries.MONTH, Keys.RGHT: Entries.MONTH}
-  , {Keys.LEFT: Entries.MONTH, Keys.RGHT: Entries.DATES}
+  [ {Keys.LEFT: Entries.PREVIEW, Keys.RGHT: Entries.TITLEPG}
+  , {Keys.LEFT: Entries.YR_5__0, Keys.RGHT: Entries.YR_5__1}
+  , {Keys.LEFT: Entries.YR_1__0, Keys.RGHT: Entries.YR_1__1}
+  , {Keys.LEFT: Entries.WEEK_12, Keys.RGHT: Entries.INACTIO}
+  , {Keys.LEFT: Entries.COMMITM, Keys.RGHT: Entries.BLANKPG}
+  , {Keys.LEFT: Entries.PROJECT, Keys.RGHT: Entries.PROJECT}
+  , {Keys.LEFT: Entries.PROJECT, Keys.RGHT: Entries.PROJECT}
+  , {Keys.LEFT: Entries.CALENDR, Keys.RGHT: Entries.CALENDR}
+  , {Keys.LEFT: Entries.CALENDR, Keys.RGHT: Entries.DATES__}
   ]
 
 
   #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.WEEK_0 , Keys.RGHT: Entries.WEEK_1}
-  , {Keys.LEFT: Entries.DAY[0] , Keys.RGHT: Entries.QUT[0]}
-  , {Keys.LEFT: Entries.DAY[1] , Keys.RGHT: Entries.QUT[1]}
-  , {Keys.LEFT: Entries.DAY[2] , Keys.RGHT: Entries.QUT[2]}
-  , {Keys.LEFT: Entries.DAY[3] , Keys.RGHT: Entries.QUT[3]}
-  , {Keys.LEFT: Entries.DAY[4] , Keys.RGHT: Entries.QUT[4]}
-  , {Keys.LEFT: Entries.DAY[5] , Keys.RGHT: Entries.QUT[5]}
-  , {Keys.LEFT: Entries.DAY[6] , Keys.RGHT: Entries.QUT[6]}
+  [ {Keys.LEFT: Entries.WEEK___0 , Keys.RGHT: Entries.WEEK___1}
+  , {Keys.LEFT: Entries.DAY__[0] , Keys.RGHT: Entries.QUOTE[0]}
+  , {Keys.LEFT: Entries.DAY__[1] , Keys.RGHT: Entries.QUOTE[1]}
+  , {Keys.LEFT: Entries.DAY__[2] , Keys.RGHT: Entries.QUOTE[2]}
+  , {Keys.LEFT: Entries.DAY__[3] , Keys.RGHT: Entries.QUOTE[3]}
+  , {Keys.LEFT: Entries.DAY__[4] , Keys.RGHT: Entries.QUOTE[4]}
+  , {Keys.LEFT: Entries.DAY__[5] , Keys.RGHT: Entries.QUOTE[5]}
+  , {Keys.LEFT: Entries.DAY__[6] , Keys.RGHT: Entries.QUOTE[6]}
   ]
 
 
@@ -123,28 +123,28 @@ class DblSidePages:
   # List of layouts
   #_____________________________________________________________________
   INTR_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.A_VOW, Keys.RGHT: Entries.PRJCT}
-  , {Keys.LEFT: Entries.PRJCT, Keys.RGHT: Entries.NOACT}
-  , {Keys.LEFT: Entries.WK_12, Keys.RGHT: Entries.PRJCT}
-  , {Keys.LEFT: Entries.PRJCT, Keys.RGHT: Entries.YR1_1}
-  , {Keys.LEFT: Entries.YR1_0, Keys.RGHT: Entries.MONTH}
-  , {Keys.LEFT: Entries.MONTH, Keys.RGHT: Entries.YR5_1}
-  , {Keys.LEFT: Entries.YR5_0, Keys.RGHT: Entries.MONTH}
-  , {Keys.LEFT: Entries.DATES, Keys.RGHT: Entries.BEST_}
-  , {Keys.LEFT: Entries.BLANK, Keys.RGHT: Entries.ACTION_ITEMS}
-  , {Keys.LEFT: Entries.ACTION_ITEMS, Keys.RGHT: Entries.TITLE}
+  [ {Keys.LEFT: Entries.COMMITM, Keys.RGHT: Entries.PROJECT}
+  , {Keys.LEFT: Entries.PROJECT, Keys.RGHT: Entries.INACTIO}
+  , {Keys.LEFT: Entries.WEEK_12, Keys.RGHT: Entries.PROJECT}
+  , {Keys.LEFT: Entries.PROJECT, Keys.RGHT: Entries.YR_1__1}
+  , {Keys.LEFT: Entries.YR_1__0, Keys.RGHT: Entries.CALENDR}
+  , {Keys.LEFT: Entries.CALENDR, Keys.RGHT: Entries.YR_5__1}
+  , {Keys.LEFT: Entries.YR_5__0, Keys.RGHT: Entries.CALENDR}
+  , {Keys.LEFT: Entries.DATES__, Keys.RGHT: Entries.VISION_}
+  , {Keys.LEFT: Entries.BLANKPG, Keys.RGHT: Entries.ACTION_ITEMS}
+  , {Keys.LEFT: Entries.ACTION_ITEMS, Keys.RGHT: Entries.TITLEPG}
   ]
 
   #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.DAY[3] ,Keys.RGHT: Entries.QUT[3]}
-  , {Keys.LEFT: Entries.DAY[4] ,Keys.RGHT: Entries.QUT[2]}
-  , {Keys.LEFT: Entries.DAY[2] ,Keys.RGHT: Entries.QUT[4]}
-  , {Keys.LEFT: Entries.DAY[5] ,Keys.RGHT: Entries.QUT[1]}
-  , {Keys.LEFT: Entries.DAY[1] ,Keys.RGHT: Entries.QUT[5]}
-  , {Keys.LEFT: Entries.DAY[6] ,Keys.RGHT: Entries.QUT[0]}
-  , {Keys.LEFT: Entries.DAY[0] ,Keys.RGHT: Entries.QUT[6]}
-  , {Keys.LEFT: Entries.WEEK_0 ,Keys.RGHT: Entries.WEEK_1}
+  [ {Keys.LEFT: Entries.DAY__[3] ,Keys.RGHT: Entries.QUOTE[3]}
+  , {Keys.LEFT: Entries.DAY__[4] ,Keys.RGHT: Entries.QUOTE[2]}
+  , {Keys.LEFT: Entries.DAY__[2] ,Keys.RGHT: Entries.QUOTE[4]}
+  , {Keys.LEFT: Entries.DAY__[5] ,Keys.RGHT: Entries.QUOTE[1]}
+  , {Keys.LEFT: Entries.DAY__[1] ,Keys.RGHT: Entries.QUOTE[5]}
+  , {Keys.LEFT: Entries.DAY__[6] ,Keys.RGHT: Entries.QUOTE[0]}
+  , {Keys.LEFT: Entries.DAY__[0] ,Keys.RGHT: Entries.QUOTE[6]}
+  , {Keys.LEFT: Entries.WEEK___0 ,Keys.RGHT: Entries.WEEK___1}
   ]
 
 
@@ -157,33 +157,33 @@ class OneSidePages:
   # List of layouts
   #_____________________________________________________________________
   INTR_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.TITLE, Keys.RGHT: Entries.PRJCT}
-  , {Keys.LEFT: Entries.YR5_0, Keys.RGHT: Entries.PRJCT}
-  , {Keys.LEFT: Entries.YR5_1, Keys.RGHT: Entries.PRJCT}
-  , {Keys.LEFT: Entries.YR1_0, Keys.RGHT: Entries.PRJCT}
-  , {Keys.LEFT: Entries.YR1_1, Keys.RGHT: Entries.MONTH}
-  , {Keys.LEFT: Entries.WK_12, Keys.RGHT: Entries.MONTH}
-  , {Keys.LEFT: Entries.NOACT, Keys.RGHT: Entries.MONTH}
-  , {Keys.LEFT: Entries.A_VOW, Keys.RGHT: Entries.DATES}
+  [ {Keys.LEFT: Entries.TITLEPG, Keys.RGHT: Entries.PROJECT}
+  , {Keys.LEFT: Entries.YR_5__0, Keys.RGHT: Entries.PROJECT}
+  , {Keys.LEFT: Entries.YR_5__1, Keys.RGHT: Entries.PROJECT}
+  , {Keys.LEFT: Entries.YR_1__0, Keys.RGHT: Entries.PROJECT}
+  , {Keys.LEFT: Entries.YR_1__1, Keys.RGHT: Entries.CALENDR}
+  , {Keys.LEFT: Entries.WEEK_12, Keys.RGHT: Entries.CALENDR}
+  , {Keys.LEFT: Entries.INACTIO, Keys.RGHT: Entries.CALENDR}
+  , {Keys.LEFT: Entries.COMMITM, Keys.RGHT: Entries.DATES__}
   ]
 
 
   #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.WEEK_0 , Keys.RGHT: Entries.WEEK_0}
-  , {Keys.LEFT: Entries.WEEK_1 , Keys.RGHT: Entries.WEEK_1}
-  , {Keys.LEFT: Entries.DAY[0] , Keys.RGHT: Entries.DAY[0]}
-  , {Keys.LEFT: Entries.QUT[0] , Keys.RGHT: Entries.QUT[0]}
-  , {Keys.LEFT: Entries.DAY[1] , Keys.RGHT: Entries.DAY[1]}
-  , {Keys.LEFT: Entries.QUT[1] , Keys.RGHT: Entries.QUT[1]}
-  , {Keys.LEFT: Entries.DAY[2] , Keys.RGHT: Entries.DAY[2]}
-  , {Keys.LEFT: Entries.QUT[2] , Keys.RGHT: Entries.QUT[2]}
-  , {Keys.LEFT: Entries.DAY[3] , Keys.RGHT: Entries.DAY[3]}
-  , {Keys.LEFT: Entries.QUT[3] , Keys.RGHT: Entries.QUT[3]}
-  , {Keys.LEFT: Entries.DAY[4] , Keys.RGHT: Entries.DAY[4]}
-  , {Keys.LEFT: Entries.QUT[4] , Keys.RGHT: Entries.QUT[4]}
-  , {Keys.LEFT: Entries.DAY[5] , Keys.RGHT: Entries.DAY[5]}
-  , {Keys.LEFT: Entries.QUT[5] , Keys.RGHT: Entries.QUT[5]}
-  , {Keys.LEFT: Entries.DAY[6] , Keys.RGHT: Entries.DAY[6]}
-  , {Keys.LEFT: Entries.QUT[6] , Keys.RGHT: Entries.QUT[6]}
+  [ {Keys.LEFT: Entries.WEEK___0 , Keys.RGHT: Entries.WEEK___0}
+  , {Keys.LEFT: Entries.WEEK___1 , Keys.RGHT: Entries.WEEK___1}
+  , {Keys.LEFT: Entries.DAY__[0] , Keys.RGHT: Entries.DAY__[0]}
+  , {Keys.LEFT: Entries.QUOTE[0] , Keys.RGHT: Entries.QUOTE[0]}
+  , {Keys.LEFT: Entries.DAY__[1] , Keys.RGHT: Entries.DAY__[1]}
+  , {Keys.LEFT: Entries.QUOTE[1] , Keys.RGHT: Entries.QUOTE[1]}
+  , {Keys.LEFT: Entries.DAY__[2] , Keys.RGHT: Entries.DAY__[2]}
+  , {Keys.LEFT: Entries.QUOTE[2] , Keys.RGHT: Entries.QUOTE[2]}
+  , {Keys.LEFT: Entries.DAY__[3] , Keys.RGHT: Entries.DAY__[3]}
+  , {Keys.LEFT: Entries.QUOTE[3] , Keys.RGHT: Entries.QUOTE[3]}
+  , {Keys.LEFT: Entries.DAY__[4] , Keys.RGHT: Entries.DAY__[4]}
+  , {Keys.LEFT: Entries.QUOTE[4] , Keys.RGHT: Entries.QUOTE[4]}
+  , {Keys.LEFT: Entries.DAY__[5] , Keys.RGHT: Entries.DAY__[5]}
+  , {Keys.LEFT: Entries.QUOTE[5] , Keys.RGHT: Entries.QUOTE[5]}
+  , {Keys.LEFT: Entries.DAY__[6] , Keys.RGHT: Entries.DAY__[6]}
+  , {Keys.LEFT: Entries.QUOTE[6] , Keys.RGHT: Entries.QUOTE[6]}
   ]

@@ -230,7 +230,7 @@ class PlannerStrings:
   VOW_HEADER_TXT: str =\
     'A Commitment to Growth'
 
-  A_VOW: str = (
+  COMMITM: str = (
     'I, (your name), vow to be true to my word and to live with '
     'intention. I will no longer treat my time as something to be '
     'taken for granted. From this moment on, I commit to striving for '
