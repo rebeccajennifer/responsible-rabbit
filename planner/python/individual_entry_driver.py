@@ -29,11 +29,14 @@
 import argparse
 import yaml
 
+from os.path import join
+
 from classes.constants.entries import Entries
 from classes.constants.addl_arg_keys import AddlArgKeys as Keys
 from classes.page_layouts.page_layout import PageLayout
 from classes.planner_assembler import PageGroup
 from utils.planner_parser import PlannerCreationParser
+from utils.flux_bunny_utils.file_utils import FileUtils
 
 
 #_______________________________________________________________________
@@ -112,6 +115,7 @@ if __name__ == '__main__':
       # , 'rght_entry': {'entry_type': EntryType, 'entry_args: {}'}
       # }
       #_________________________________________________________________
+
       layout =\
         PageLayout\
         ( is_portrait=is_portrait
@@ -124,6 +128,14 @@ if __name__ == '__main__':
         , entry_1_args=pg[Keys.RGHT][Keys.ENTRY_ARGS]
         )
       layout.save_pdf()
+
+      pdf_out_dir: str = join(out_dir, 'pdf')
+
+    pdf_paths: list =\
+      [join(pdf_out_dir, n + '.pdf') for n in group.file_names]
+
+    combo_pdf_path: str = join(pdf_out_dir, group.group_pdf_name)
+    FileUtils.combine_pdfs(pdf_paths, combo_pdf_path)
 
   new_line(10)
   print("all done")

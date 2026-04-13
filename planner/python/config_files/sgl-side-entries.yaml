@@ -10,8 +10,6 @@ pdfs:
         entry_args:
     1:
       left_entry:
-        entry_type: five-senses-worksheet
-        entry_args:
+        entry_type: five-year-vision-pg-0
       rght_entry:
-        entry_type: five-senses-worksheet
-        entry_args:
+        entry_type: five-year-vision-pg-1
