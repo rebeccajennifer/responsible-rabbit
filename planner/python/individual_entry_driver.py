@@ -29,26 +29,11 @@
 import argparse
 import yaml
 
-from os.path import join
-
-
 from classes.constants.entries import Entries
-
-from classes.constants.addl_arg_keys import AddlArgKeys as Key
-
-from classes.page_entries.daily_practice_tracker import SevenDayPracticeTracker
-from classes.page_entries.day_entry_1 import SimpleDayEntry
-
-from classes.page_entries.project_entry import ProjectEntry
-
+from classes.constants.addl_arg_keys import AddlArgKeys as Keys
 from classes.page_layouts.page_layout import PageLayout
-from classes.page_layouts.half_page_divider import HalfPageDivider
-
-from classes.planner_assembler import PlannerAssembler
-
+from classes.planner_assembler import PageGroup
 from utils.planner_parser import PlannerCreationParser
-
-from utils.flux_bunny_utils.file_utils import FileUtils
 
 
 #_______________________________________________________________________
@@ -68,8 +53,9 @@ if __name__ == '__main__':
 
   # These page layouts are intended to be constructed in landscape
   # orientation
-  is_portrait:  bool  = False
-  is_dbl_sided: bool  = args.dbl_sided
+  is_portrait   : bool  = False
+  is_dbl_sided  : bool  = args.dbl_sided
+  out_dir       : str   = args.out_dir
 
   # If generating a PDF preview, set to double sided
   if (args.preview):
@@ -80,16 +66,64 @@ if __name__ == '__main__':
       entry_cfg_data: dict = yaml.safe_load(f)
       print(entry_cfg_data)
 
-  project_layout =\
-    PageLayout\
-    ( is_portrait=is_portrait
-    , is_dbl_sided=is_dbl_sided
-    , file_name_no_ext='proj-entry'
-    , out_dir=args.out_dir
-    , entry_0_type=ProjectEntry
-    , entry_1_type=ProjectEntry
-    )
-  project_layout.save_pdf()
+  is_dbl_sided = entry_cfg_data['double-sided']
+
+  page_groups: list = []
+
+  #_____________________________________________________________________
+  for pdf_group_name in entry_cfg_data['pdfs']:
+
+    pdf_group: dict = entry_cfg_data['pdfs'][pdf_group_name]
+
+    page_list: list = []
+    # Get class type for left and right entries
+    # TODO: Add entry arguments to configuration file and use here
+    for page_name in pdf_group:
+      layout = pdf_group[page_name]
+      left_entry_type_str = layout['left_entry']['entry_type']
+      left_entry_type     = Entries.ENTRY_NAME_MAP[left_entry_type_str]
+      rght_entry_type_str = layout['rght_entry']['entry_type']
+      rght_entry_type     = Entries.ENTRY_NAME_MAP[rght_entry_type_str]
+
+      page: dict =\
+        { 'file_name' : page_name
+        , 'left_entry' : left_entry_type
+        , 'rght_entry' : rght_entry_type
+        }
+      page_list.append(page)
+
+    group: PageGroup = PageGroup\
+      ( group_name=pdf_group_name
+      , layouts=page_list
+      )
+
+    page_groups.append(group)
+
+  #_____________________________________________________________________
+  for group in page_groups:
+
+    for pg in group.pages:
+
+      #_________________________________________________________________
+      # pg takes the form
+      #_________________________________________________________________
+      # { 'file_name': 'group_0_pg_0'
+      # , 'left_entry': {'entry_type': EntryType, 'entry_args: {}'}
+      # , 'rght_entry': {'entry_type': EntryType, 'entry_args: {}'}
+      # }
+      #_________________________________________________________________
+      layout =\
+        PageLayout\
+        ( is_portrait=is_portrait
+        , is_dbl_sided=is_dbl_sided
+        , file_name_no_ext=pg[Keys.NAME]
+        , out_dir=out_dir
+        , entry_0_type=pg[Keys.LEFT][Keys.ENTRY_TYPE]
+        , entry_0_args=pg[Keys.LEFT][Keys.ENTRY_ARGS]
+        , entry_1_type=pg[Keys.RGHT][Keys.ENTRY_TYPE]
+        , entry_1_args=pg[Keys.RGHT][Keys.ENTRY_ARGS]
+        )
+      layout.save_pdf()
 
   new_line(10)
   print("all done")

@@ -1,11 +1,17 @@
 double-sided: false
-pages:
-  page-0:
-    - name        : "page-0"
-      entry-type  : seven-day-practice-tracker
-
-  page-1:
-    - name        : "page-1"
-      entry-type  :
-        - day-entry-0
-        - day-entry-1
+pdfs:
+  pdf-name-0:
+    0:
+      left_entry:
+        entry_type: seven-day-tracker
+        entry_args:
+      rght_entry:
+        entry_type: seven-day-tracker
+        entry_args:
+    1:
+      left_entry:
+        entry_type: five-senses-worksheet
+        entry_args:
+      rght_entry:
+        entry_type: five-senses-worksheet
+        entry_args:
