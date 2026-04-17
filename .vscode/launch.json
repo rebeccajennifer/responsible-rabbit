@@ -76,7 +76,7 @@
     , "console": "integratedTerminal"
     , "args":
       [ "--out_dir"
-      , "planner/layouts/single-sided"
+      , "planner/layouts/test"
       , "--entry_cfg"
       , "${workspaceFolder}/planner/python/config_files/sgl-side-entries.yaml"
       ]

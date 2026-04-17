@@ -235,7 +235,7 @@ class PlannerStrings:
     'intention. I will no longer treat my time as something to be '
     'taken for granted. From this moment on, I commit to striving for '
     'my fullest potential—for myself, for those I care about, and for '
-    'the greater good. I promise to dedicate time to this journal as'
+    'the greater good. I promise to dedicate time to this journal as '
     'often as I am able, and through this practice, to bring '
     'my dreams, my purpose, and my highest self into being.'
   )
