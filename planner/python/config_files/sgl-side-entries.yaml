@@ -36,6 +36,18 @@ pdfs:
       rght_entry:
         entry_type: project
 
+  calendar:
+    0:
+      left_entry:
+        entry_type: calendar
+      rght_entry:
+        entry_type: calendar
+    1:
+      left_entry:
+        entry_type: calendar
+      rght_entry:
+        entry_type: calendar
+
   week:
     0:
       left_entry:
