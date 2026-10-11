@@ -32,7 +32,7 @@ from os.path import join
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.page_entries.daily_practice_tracker import SevenDayPracticeTracker
-from classes.page_entries.day_entry_1 import SimpleDayEntry
+from classes.page_entries.log_day_simple import SimpleDayLog
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
 from classes.page_entries.day_habit_tracker import HabitTracker
@@ -187,8 +187,8 @@ if __name__ == '__main__':
     , is_dbl_sided=is_dbl_sided
     , file_name_no_ext='work-day-entry'
     , out_dir=args.out_dir
-    , entry_0_type=SimpleDayEntry
-    , entry_1_type=SimpleDayEntry
+    , entry_0_type=SimpleDayLog
+    , entry_1_type=SimpleDayLog
     )
   layout.save_pdf()
 

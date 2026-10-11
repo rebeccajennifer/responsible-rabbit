@@ -39,7 +39,7 @@ from classes.constants.debug_const import DebugConst
 
 
 #_______________________________________________________________________
-class AceEntry(HalfPageLayout):
+class AceWksht(HalfPageLayout):
   """
   Layout for ACE exercise
   """

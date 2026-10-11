@@ -93,29 +93,13 @@ class WeekStrings:
 
 
 #_______________________________________________________________________
-class WeekEntry0(HalfPageLayout):
+class LastWeekLog(HalfPageLayout):
   """
   Daily entry layout.
   """
 
   PAGE_HEADER_TXT: str =\
     'Week #' + 6 * Strings.SPACE + 'Reflections and Insights'
-
-  #_____________________________________________________________________
-  #def __init__(self
-  #, total_hght: int = 0
-  #, total_wdth: int = 0
-  #, addl_args: dict = {}
-  #):
-  #  """
-  #  Constructor for class. Assumes landscape orientation.
-  #  """
-  #  super().__init__\
-  #  ( total_hght=total_hght
-  #  , total_wdth=total_wdth
-  #  )
-
-  #  return
 
   #_____________________________________________________________________
   def create_content(self) -> None:
@@ -192,7 +176,7 @@ class WeekEntry0(HalfPageLayout):
     return
 
 #_______________________________________________________________________
-class WeekEntry1(HalfPageLayout):
+class NextWeekLog(HalfPageLayout):
   """
   Daily entry layout.
   """

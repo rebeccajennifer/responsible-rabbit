@@ -36,20 +36,20 @@
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_entries.day_entry_0 import DayEntry
+from classes.page_entries.log_day_detailed import DetailedDayLog
 from classes.page_entries.daily_practice_tracker import SevenDayPracticeTracker
 from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.project_entry import ProjectEntry
-from classes.page_entries.month_entry import MonthEntry
-from classes.page_entries.night_entry import NightEntry
+from classes.page_entries.log_month import MonthLog
+from classes.page_entries.log_day_multi import MultiDayLog
 from classes.page_entries.title_page import TitlePage
-from classes.page_entries.week_entry import WeekEntry0
-from classes.page_entries.week_entry import WeekEntry1
+from classes.page_entries.log_week import LastWeekLog
+from classes.page_entries.log_week import NextWeekLog
 from classes.reference_pages.ace_reference import AceReference
 from classes.reference_pages.emotion_reference import EmotionReference
-from classes.page_entries.ace_entry import AceEntry
-from classes.page_entries.senses_wksht import SensesWksht
+from classes.page_entries.wksht_ace import AceWksht
+from classes.page_entries.wksht_senses import SensesWksht
 
 
 #_____________________________________________________________________
@@ -164,7 +164,7 @@ class Entries:
 
   for i in range(7):
     DAY_.append\
-    ( { Key.ENTRY_TYPE: DayEntry
+    ( { Key.ENTRY_TYPE: DetailedDayLog
       , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: i}
       }
     )
@@ -177,22 +177,22 @@ class Entries:
   #_____________________________________________________________________
 
   NIGHTLY: dict =\
-    { Key.ENTRY_TYPE: NightEntry
+    { Key.ENTRY_TYPE: MultiDayLog
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Daily Reflection'}
     }
 
   CALENDR: dict =\
-    { Key.ENTRY_TYPE: MonthEntry
+    { Key.ENTRY_TYPE: MonthLog
     , Key.ENTRY_ARGS: {}
     }
 
   #_____________________________________________________________________
   WEEK__0: dict =\
-    { Key.ENTRY_TYPE: WeekEntry0
+    { Key.ENTRY_TYPE: LastWeekLog
     , Key.ENTRY_ARGS: {}
     }
   WEEK__1: dict =\
-    { Key.ENTRY_TYPE: WeekEntry1
+    { Key.ENTRY_TYPE: NextWeekLog
     , Key.ENTRY_ARGS: {}
     }
 
@@ -213,7 +213,7 @@ class Entries:
     }
 
   ACEWKSH: dict =\
-    { Key.ENTRY_TYPE: AceEntry
+    { Key.ENTRY_TYPE: AceWksht
     , Key.ENTRY_ARGS: {}
     }
 

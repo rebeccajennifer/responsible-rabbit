@@ -39,7 +39,7 @@ from classes.constants.addl_arg_keys import AddlArgKeys as Keys
 #_______________________________________________________________________
 class NightlyPages:
   """
-  Nightly reflection pages.
+  Daily / nightly reflection pages.
   """
 
   LAYOUTS: list =\
