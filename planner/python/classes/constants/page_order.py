@@ -65,8 +65,8 @@ class AceWkshPages:
   ACE worksheet pages.
   """
   LAYOUTS: list =\
-  [ {Keys.LEFT: Entries.ACEWKSH, Keys.RGHT: Entries.SENSEEX}
-  , {Keys.LEFT: Entries.SENSEEX, Keys.RGHT: Entries.ACEWKSH}
+  [ {Keys.LEFT: Entries.ACEWKSH, Keys.RGHT: Entries.ACEWKSH}
+  , {Keys.LEFT: Entries.ACEWKSH, Keys.RGHT: Entries.ACEWKSH}
   ]
 
 #_______________________________________________________________________
@@ -100,7 +100,6 @@ class PreviewPages:
   , {Keys.LEFT: Entries.CALENDR, Keys.RGHT: Entries.DATES__}
   ]
 
-
   #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
   [ {Keys.LEFT: Entries.WEEK__0 , Keys.RGHT: Entries.WEEK__1}
@@ -113,6 +112,10 @@ class PreviewPages:
   , {Keys.LEFT: Entries.DAY_[6] , Keys.RGHT: Entries.QUOT[6]}
   ]
 
+  #_____________________________________________________________________
+  WEEK_REFLECT: list =\
+  [ {Keys.LEFT: Entries.WEEK__0 ,Keys.RGHT: Entries.WEEK__1}
+  ]
 
 #_______________________________________________________________________
 class DblSidePages:
@@ -135,6 +138,7 @@ class DblSidePages:
   , {Keys.LEFT: Entries.ACTIONS, Keys.RGHT: Entries.TITLEPG}
   ]
 
+
   #_____________________________________________________________________
   WEEK_LAYOUTS: list =\
   [ {Keys.LEFT: Entries.DAY_[3] ,Keys.RGHT: Entries.QUOT[3]}
@@ -145,6 +149,12 @@ class DblSidePages:
   , {Keys.LEFT: Entries.DAY_[6] ,Keys.RGHT: Entries.QUOT[0]}
   , {Keys.LEFT: Entries.DAY_[0] ,Keys.RGHT: Entries.QUOT[6]}
   , {Keys.LEFT: Entries.WEEK__0 ,Keys.RGHT: Entries.WEEK__1}
+  ]
+
+
+  #_____________________________________________________________________
+  WEEK_REFLECT: list =\
+  [ {Keys.LEFT: Entries.WEEK__0 ,Keys.RGHT: Entries.WEEK__1}
   ]
 
 
@@ -186,4 +196,9 @@ class OneSidePages:
   , {Keys.LEFT: Entries.QUOT[5] , Keys.RGHT: Entries.QUOT[5]}
   , {Keys.LEFT: Entries.DAY_[6] , Keys.RGHT: Entries.DAY_[6]}
   , {Keys.LEFT: Entries.QUOT[6] , Keys.RGHT: Entries.QUOT[6]}
+  ]
+
+  WEEK_REFLECT: list =\
+  [ {Keys.LEFT: Entries.WEEK__0 , Keys.RGHT: Entries.WEEK__0}
+  , {Keys.LEFT: Entries.WEEK__1 , Keys.RGHT: Entries.WEEK__1}
   ]
