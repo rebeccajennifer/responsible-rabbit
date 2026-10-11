@@ -23,30 +23,32 @@
 #   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\
 #_______________________________________________________________________
 #   DESCRIPTION
-#   Nightly reflection
+#   Entry for month calendar.
 #_______________________________________________________________________
 
 from copy import deepcopy
 
 from classes.constants.strings import PlannerStrings as Strings
-from classes.elements.table import DualLineTable
 from classes.elements.row_group import TextRowGroup
+from classes.elements.table import SingleLineTable
 from classes.style.std_styles import StdTextBoxStyles
 
 from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
-class NightEntry(HalfPageLayout):
+class MonthLog(HalfPageLayout):
   """
   Daily entry layout.
   """
 
   PAGE_HEADER_TXT: str =\
-    'Nightly Reflection'
+    'Month #'\
+    + Strings.DATE_STR\
+    + Strings.RIGHT_ARROW\
+    + Strings.DATE_STR
 
-  DAY_HEADER_TXT: str =\
-    Strings.DAYS_MONO + 8 * Strings.SPACE + Strings.DATE_STR_MONO
+  WEEK_HEADER_TXT: str = 'Week #' + 24 * Strings.SPACE + '/'
 
   #_____________________________________________________________________
   def __init__(self
@@ -62,8 +64,6 @@ class NightEntry(HalfPageLayout):
     ( total_hght=total_hght
     , total_wdth=total_wdth
     , addl_args=addl_args
-    , pad_under_page_header=False
-    , pad_bet_elements=False
     )
 
     return
@@ -82,28 +82,25 @@ class NightEntry(HalfPageLayout):
     """
     super().create_content()
 
-    style = deepcopy(StdTextBoxStyles.LTE_BACK_NORMAL_FONT)
-    style.font_size_ = 8
+    style  = deepcopy(StdTextBoxStyles.LTE_BACK_HEADER_FONT)
+    style.line_spc_=1
 
-    fill_hght: int = self.calc_remaining_hght_per_element(7)
+    fill_hght: int = self.calc_remaining_hght_per_element(4)
 
-    day_reflection = DualLineTable\
+    week_table = SingleLineTable\
       ( total_wdth=self.content_wdth_
-      , row_count=3
+      , row_count=1
       , total_hght=fill_hght
-      , header_txt=self.DAY_HEADER_TXT
-      , text_style=style
+      , header_txt=self.WEEK_HEADER_TXT
+      , text_style=StdTextBoxStyles.LTE_BACK_NORMAL_FONT
       , show_outline=True
       )
 
     self.entries_: list =\
-    [ day_reflection
-    , deepcopy(day_reflection)
-    , deepcopy(day_reflection)
-    , deepcopy(day_reflection)
-    , deepcopy(day_reflection)
-    , deepcopy(day_reflection)
-    , deepcopy(day_reflection)
+    [ week_table
+    , deepcopy(week_table)
+    , deepcopy(week_table)
+    , deepcopy(week_table)
     ]
 
     return

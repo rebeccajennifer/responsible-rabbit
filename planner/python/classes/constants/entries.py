@@ -32,195 +32,238 @@
 #   consistent formatting and content.
 #_______________________________________________________________________
 
-from utils.utils import PlannerUtils as Utils
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
 from classes.constants.strings import PlannerStrings as Strings
 
-from classes.page_entries.day_entry_0 import DayEntry
-from classes.page_entries.daily_practice_tracker import DailyPracticeTracker
+from classes.page_entries.log_day_detailed import DetailedDayLog
+from classes.page_entries.daily_practice_tracker import SevenDayPracticeTracker
 from classes.page_entries.free_write_entry import FreeWriteEntry
 from classes.page_entries.free_write_prompt_entry import FreeWritePromptEntry
 from classes.page_entries.project_entry import ProjectEntry
-from classes.page_entries.month_entry import MonthEntry
-from classes.page_entries.night_entry import NightEntry
+from classes.page_entries.log_month import MonthLog
+from classes.page_entries.log_day_multi import MultiDayLog
 from classes.page_entries.title_page import TitlePage
-from classes.page_entries.week_entry import WeekEntry0
-from classes.page_entries.week_entry import WeekEntry1
+from classes.page_entries.log_week import LastWeekLog
+from classes.page_entries.log_week import NextWeekLog
 from classes.reference_pages.ace_reference import AceReference
 from classes.reference_pages.emotion_reference import EmotionReference
-from classes.page_entries.ace_entry import AceEntry
-from classes.page_entries.senses_wksht import SensesWksht
+from classes.page_entries.wksht_ace import AceWksht
+from classes.page_entries.wksht_senses import SensesWksht
 
 
 #_____________________________________________________________________
 class Entries:
+  """
+  List of entry objects used to generate layouts.
+
+  When adding a new entry, add the entry to the name map at the bottom
+  of this class to enable use in configuration files.
+  """
 
   # Blank page
-  BLANK: dict =\
+  BLANKPG: dict =\
     { Key.ENTRY_TYPE: TitlePage
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: ' '}
     }
 
-  PREVW: dict =\
-  { Key.ENTRY_TYPE: TitlePage
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'Preview Only - Do Not Print'
+  PREVIEW: dict =\
+    { Key.ENTRY_TYPE: TitlePage
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: 'Preview Only - Do Not Print'
+      }
     }
-  }
 
-  TITLE: dict =\
-  { Key.ENTRY_TYPE: TitlePage
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'Book of Plans'
+  TITLEPG: dict =\
+    { Key.ENTRY_TYPE: TitlePage
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: 'Book of Plans'
+      }
     }
-  }
 
-  HABIT: dict =\
-  { Key.ENTRY_TYPE: DailyPracticeTracker
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'The Best Version of Me'
+  TRACK_7: dict =\
+    { Key.ENTRY_TYPE: SevenDayPracticeTracker
+    , Key.ENTRY_ARGS: {}
     }
-  }
 
-
-  BEST_: dict =\
-  { Key.ENTRY_TYPE: TitlePage
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'The Best Version of Me'
+  VISION_: dict =\
+    { Key.ENTRY_TYPE: TitlePage
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: 'The Best Version of Me'
+      }
     }
-  }
 
   #_____________________________________________________________________
-  YR5_0: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_5YR
+  YR_5__0: dict =\
+    { Key.ENTRY_TYPE: FreeWritePromptEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
+      , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_5YR
+      }
     }
-  }
 
-  YR5_1: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
+  YR_5__1: dict =\
+    { Key.ENTRY_TYPE: FreeWriteEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_5YR
+      }
     }
-  }
 
-  YR1_0: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_1YR
+  YR_1__0: dict =\
+    { Key.ENTRY_TYPE: FreeWritePromptEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
+      , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_1YR
+      }
     }
-  }
 
-  YR1_1: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
+  YR_1__1: dict =\
+    { Key.ENTRY_TYPE: FreeWriteEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_1YR
+      }
     }
-  }
 
-  WK_12: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_12W
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_12W
+  WEEK_12: dict =\
+    { Key.ENTRY_TYPE: FreeWritePromptEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_12W
+      , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_12W
+      }
     }
-  }
 
-  NOACT: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_BAD
-    , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_BAD
+  INACTIO: dict =\
+    { Key.ENTRY_TYPE: FreeWritePromptEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.PAGE_HEADER_TXT_FUT_BAD
+      , Key.PROMPT_TXT: Strings.FREE_WRITE_FUT_BAD
+      }
     }
-  }
 
   #_____________________________________________________________________
-  A_VOW: dict =\
-  { Key.ENTRY_TYPE: FreeWritePromptEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
-    , Key.PROMPT_TXT: Strings.A_VOW
+  COMMITM: dict =\
+    { Key.ENTRY_TYPE: FreeWritePromptEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: Strings.VOW_HEADER_TXT
+      , Key.PROMPT_TXT: Strings.COMMITM
+      }
     }
-  }
 
-  ACTION_ITEMS: dict =\
-  { Key.ENTRY_TYPE: FreeWriteEntry
-  , Key.ENTRY_ARGS:
-    { Key.HEADER_TXT: 'Action Items: '
+  ACTIONS: dict =\
+    { Key.ENTRY_TYPE: FreeWriteEntry
+    , Key.ENTRY_ARGS:
+      { Key.HEADER_TXT: 'Action Items: '
+      }
     }
-  }
 
   #_____________________________________________________________________
   # Populate day and quote pages with variable string
   #_____________________________________________________________________
-  DAY : list = []
-  QUT : list = []
+  DAY_ : list = []
+  QUOT : list = []
 
   for i in range(7):
-    DAY.append\
-    ( { Key.ENTRY_TYPE: DayEntry
+    DAY_.append\
+    ( { Key.ENTRY_TYPE: DetailedDayLog
       , Key.ENTRY_ARGS: {Key.CYCLING_PROMPT_IDX: i}
       }
     )
 
-    QUT.append\
+    QUOT.append\
     ( { Key.ENTRY_TYPE: FreeWriteEntry
       , Key.ENTRY_ARGS: {Key.HEADER_TXT: Strings.QUOTES[i]}
       }
     )
   #_____________________________________________________________________
 
-  NIGHT: dict =\
-    { Key.ENTRY_TYPE: NightEntry
+  NIGHTLY: dict =\
+    { Key.ENTRY_TYPE: MultiDayLog
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Daily Reflection'}
     }
 
-  MONTH: dict =\
-    { Key.ENTRY_TYPE: MonthEntry
+  CALENDR: dict =\
+    { Key.ENTRY_TYPE: MonthLog
     , Key.ENTRY_ARGS: {}
     }
 
   #_____________________________________________________________________
-  WEEK_0: dict =\
-    { Key.ENTRY_TYPE: WeekEntry0
+  WEEK__0: dict =\
+    { Key.ENTRY_TYPE: LastWeekLog
     , Key.ENTRY_ARGS: {}
     }
-  WEEK_1: dict =\
-    { Key.ENTRY_TYPE: WeekEntry1
+  WEEK__1: dict =\
+    { Key.ENTRY_TYPE: NextWeekLog
     , Key.ENTRY_ARGS: {}
     }
 
   #_____________________________________________________________________
-  PRJCT: dict =\
+  PROJECT: dict =\
     { Key.ENTRY_TYPE: ProjectEntry
     , Key.ENTRY_ARGS: {}
     }
 
-  DATES: dict =\
+  DATES__: dict =\
     { Key.ENTRY_TYPE: FreeWriteEntry
     , Key.ENTRY_ARGS: {Key.HEADER_TXT: 'Important Dates'}
     }
 
-  ACERF: dict =\
+  ACE_REF: dict =\
     { Key.ENTRY_TYPE: AceReference
     , Key.ENTRY_ARGS: {}
     }
 
-  ACEPG: dict =\
-    { Key.ENTRY_TYPE: AceEntry
+  ACEWKSH: dict =\
+    { Key.ENTRY_TYPE: AceWksht
     , Key.ENTRY_ARGS: {}
     }
 
-  SENSE: dict =\
+  SENSEEX: dict =\
     { Key.ENTRY_TYPE: SensesWksht
     , Key.ENTRY_ARGS: {}
     }
 
-  EMORF: dict =\
+  EMO_REF: dict =\
     { Key.ENTRY_TYPE: EmotionReference
     , Key.ENTRY_ARGS: {}
+    }
+
+  # Name map used in configuration file
+  ENTRY_NAME_MAP: dict =\
+    { 'blank-page'             : BLANKPG
+    , 'preview-title'          : PREVIEW
+    , 'title-page'             : TITLEPG
+    , 'seven-day-tracker'      : TRACK_7
+    , 'vision-title'           : VISION_
+    , 'five-year-vision-pg-0'  : YR_5__0
+    , 'five-year-vision-pg-1'  : YR_5__1
+    , 'one-year-vision-pg-0'   : YR_1__0
+    , 'one-year-vision-pg-1'   : YR_1__1
+    , 'twelve-week-vision'     : WEEK_12
+    , 'consequences'           : INACTIO
+    , 'commitment'             : COMMITM
+    , 'action-items'           : ACTIONS
+    , 'nightly-reflection'     : NIGHTLY
+    , 'calendar'               : CALENDR
+    , 'week-pg-0'              : WEEK__0
+    , 'week-pg-1'              : WEEK__1
+    , 'project'                : PROJECT
+    , 'important-dates'        : DATES__
+    , 'ace-reference'          : ACE_REF
+    , 'ace-worksheet'          : ACEWKSH
+    , 'five-senses-worksheet'  : SENSEEX
+    , 'emotion-reference'      : EMO_REF
+    , 'day-entry-0'            : DAY_[0]
+    , 'day-entry-1'            : DAY_[1]
+    , 'day-entry-2'            : DAY_[2]
+    , 'day-entry-3'            : DAY_[3]
+    , 'day-entry-4'            : DAY_[4]
+    , 'day-entry-5'            : DAY_[5]
+    , 'day-entry-6'            : DAY_[6]
+    , 'free-write-quote-0'     : QUOT[0]
+    , 'free-write-quote-1'     : QUOT[1]
+    , 'free-write-quote-2'     : QUOT[2]
+    , 'free-write-quote-3'     : QUOT[3]
+    , 'free-write-quote-4'     : QUOT[4]
+    , 'free-write-quote-5'     : QUOT[5]
+    , 'free-write-quote-6'     : QUOT[6]
     }

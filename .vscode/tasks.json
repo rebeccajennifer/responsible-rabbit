@@ -1,0 +1,73 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "generate-preview",
+      "type": "shell",
+      "command": "python3",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "args": [
+        "${workspaceFolder}/planner/python/planner_creation_driver.py",
+        "--out_dir",
+        "planner/layouts/preview",
+        "--preview"
+      ],
+      "presentation": {
+        "close": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "generate-single-sided",
+      "type": "shell",
+      "command": "python3",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "args": [
+        "${workspaceFolder}/planner/python/planner_creation_driver.py",
+        "--out_dir",
+        "planner/layouts/single-sided"
+      ],
+      "presentation": {
+        "close": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "generate-double-sided",
+      "type": "shell",
+      "command": "python3",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "args": [
+        "${workspaceFolder}/planner/python/planner_creation_driver.py",
+        "--out_dir",
+        "planner/layouts/double-sided",
+        "--dbl_sided"
+      ],
+      "presentation": {
+        "close": true
+      },
+      "problemMatcher": []
+    },
+    {
+      // TODO: Figure out why this isn't working
+      "label": "generate-all",
+      "type": "shell",
+      "command": "",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOn": [
+        "generate-preview",
+        "generate-single-sided",
+        "generate-double-sided"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

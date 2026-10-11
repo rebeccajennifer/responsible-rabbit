@@ -1,0 +1,64 @@
+double-sided: false
+pdfs:
+  vision:
+    0:
+      left_entry:
+        entry_type: title-page
+      rght_entry:
+        entry_type: one-year-vision-pg-1
+    1:
+      left_entry:
+        entry_type: five-year-vision-pg-0
+      rght_entry:
+        entry_type: twelve-week-vision
+
+    2:
+      left_entry:
+        entry_type: five-year-vision-pg-1
+      rght_entry:
+        entry_type: consequences
+
+    3:
+      left_entry:
+        entry_type: one-year-vision-pg-0
+      rght_entry:
+        entry_type: commitment
+
+  projects:
+    0:
+      left_entry:
+        entry_type: project
+      rght_entry:
+        entry_type: project
+    1:
+      left_entry:
+        entry_type: project
+      rght_entry:
+        entry_type: project
+
+  calendar:
+    0:
+      left_entry:
+        entry_type: calendar
+      rght_entry:
+        entry_type: calendar
+    1:
+      left_entry:
+        entry_type: calendar
+      rght_entry:
+        entry_type: calendar
+
+  week:
+    0:
+      left_entry:
+        entry_type: week-pg-0
+      rght_entry:
+        entry_type: week-pg-1
+    1:
+      left_entry:
+        entry_type: seven-day-tracker
+        entry_args:
+      rght_entry:
+        entry_type: seven-day-tracker
+        entry_args:
+

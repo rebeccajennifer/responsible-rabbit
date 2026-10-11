@@ -26,15 +26,11 @@
 #   Base class for all table elements.
 #_______________________________________________________________________
 
-from copy import deepcopy
-
-from classes.flux_svg_object import FluxSvgObject
-
 import svgwrite.container
 
 from classes.constants.dims import PlannerDims as Dims
+from classes.flux_svg_object import FluxSvgObject
 from classes.style.style import PlannerColors as Colors
-from classes.style.std_styles import StdTextBoxStyles
 from utils.utils import PlannerUtils as Utils
 
 

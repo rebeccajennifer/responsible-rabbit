@@ -31,21 +31,16 @@ from os.path import join
 
 
 from classes.constants.addl_arg_keys import AddlArgKeys as Key
-
-from classes.page_entries.daily_practice_tracker import DailyPracticeTracker
-from classes.page_entries.day_entry_1 import WorkDayEntry
-
+from classes.page_entries.daily_practice_tracker import SevenDayPracticeTracker
+from classes.page_entries.log_day_simple import SimpleDayLog
 from classes.page_entries.title_page import TitlePage
 from classes.page_entries.week_checklist_entry import WeekCheckList
 from classes.page_entries.day_habit_tracker import HabitTracker
-
 from classes.page_layouts.page_layout import PageLayout
 from classes.page_layouts.half_page_divider import HalfPageDivider
-
 from classes.planner_assembler import PlannerAssembler
 
 from utils.planner_parser import PlannerCreationParser
-
 from utils.flux_bunny_utils.file_utils import FileUtils
 
 #_______________________________________________________________________
@@ -180,8 +175,8 @@ if __name__ == '__main__':
     , is_dbl_sided=is_dbl_sided
     , file_name_no_ext='daily-practice-tracker'
     , out_dir=args.out_dir
-    , entry_0_type=DailyPracticeTracker
-    , entry_1_type=DailyPracticeTracker
+    , entry_0_type=SevenDayPracticeTracker
+    , entry_1_type=SevenDayPracticeTracker
     )
   layout.save_pdf()
 
@@ -192,8 +187,8 @@ if __name__ == '__main__':
     , is_dbl_sided=is_dbl_sided
     , file_name_no_ext='work-day-entry'
     , out_dir=args.out_dir
-    , entry_0_type=WorkDayEntry
-    , entry_1_type=WorkDayEntry
+    , entry_0_type=SimpleDayLog
+    , entry_1_type=SimpleDayLog
     )
   layout.save_pdf()
 

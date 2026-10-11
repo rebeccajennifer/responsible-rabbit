@@ -41,7 +41,7 @@ from classes.page_layouts.half_page_layout import HalfPageLayout
 
 
 #_______________________________________________________________________
-class WorkDayEntry(HalfPageLayout):
+class DetailedDayLog(HalfPageLayout):
   """
   Daily entry layout.
   """
@@ -60,8 +60,24 @@ class WorkDayEntry(HalfPageLayout):
   DAY_FOCUS: str =\
     'Today I will pay most attention to:'
 
+  DAY_GRATITUDE: str =\
+    'Gratitude'
+
   DAY_ACHIEVEMENT: str =\
     'A tiny triumph or epic win...'
+
+  DAY_CHECK_IN: str =\
+    'Emotional and values check-in:'
+
+  DAY_PROMPTS: str =\
+    [ 'Where can I invite more ease?'
+    , 'What roadblock do I need to address?'
+    , 'How can I embrace discomfort?'
+    , 'What am I avoiding?'
+    , 'What can I let go of?'
+    , 'What am I learning about myself?'
+    , 'How can I care for myself today?'
+    ]
 
   VALUES_HEADER: str =\
     'Values'
@@ -79,6 +95,9 @@ class WorkDayEntry(HalfPageLayout):
     Constructor for class. Assumes landscape orientation.
     """
 
+    self.cycling_prompt_idx_: int =\
+      addl_args[Key.CYCLING_PROMPT_IDX]
+
     super().__init__\
     ( total_hght=total_hght
     , total_wdth=total_wdth
@@ -91,10 +110,10 @@ class WorkDayEntry(HalfPageLayout):
     """
     Add content to layout.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
     super().add_content()
@@ -118,20 +137,20 @@ class WorkDayEntry(HalfPageLayout):
   def create_content(self) -> None:
     """
 
-    Side Effects:
+    Side Effects
       Populates the following class variables.
 
-    Parameters:
+    Parameters
       None
 
-    Returns:
+    Returns
       None
     """
 
     super().create_content()
 
     # Width of daily schedule content group
-    self.schedule_wdth_: int = self.content_wdth_ * 0.50
+    self.schedule_wdth_: int = self.content_wdth_ * 0.30
     self.main_content_wdth_: int =\
       self.content_wdth_ - self.schedule_wdth_ - Dims.BRD_MARGIN_PX
 
@@ -141,8 +160,6 @@ class WorkDayEntry(HalfPageLayout):
       , hght=self.content_hght_
       , time_inc_min=30
       , use_24=True
-      , strt_time_str='06:00'
-      , stop_time_str='18:00'
       )
 
     self.entries_: list =\
@@ -168,20 +185,45 @@ class WorkDayEntry(HalfPageLayout):
     , DualLineTable
       ( total_wdth=self.main_content_wdth_
       , header_txt=self.DAY_TODO
-      , row_count=12
+      , row_count=6
       , text_style=StdTextBoxStyles.MED_BACK_NORMAL_FONT
+      )
+
+    , DualLineTable
+      ( total_wdth=self.main_content_wdth_
+      , header_txt=self.DAY_PROMPTS[self.cycling_prompt_idx_]
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , row_count=1
+      , show_outline=True
+      , pri_line_style=StdLineRowGroupStyles.DOTTED
+      )
+
+    , DualLineTable
+      ( total_wdth=self.main_content_wdth_
+      , header_txt=self.DAY_ACHIEVEMENT
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , row_count=1
+      , show_outline=True
+      , pri_line_style=StdLineRowGroupStyles.DOTTED
+      )
+
+    , DualLineTable
+      ( total_wdth=self.main_content_wdth_
+      , header_txt=self.DAY_CHECK_IN
+      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
+      , row_count=2
+      , show_outline=True
       )
     ]
 
     fill_hght: int = self.calc_remaining_hght_per_element(1)
 
-    self.entries_.insert(1
-    , SingleLineTable
+    self.entries_.insert(3
+    , SingleLineTable\
       ( total_wdth=self.main_content_wdth_
       , total_hght=fill_hght
-      , header_txt=self.DAY_ACHIEVEMENT
-      , text_style=StdTextBoxStyles.WHT_BACK_NORMAL_FONT_NO_OUTLNE
-      , row_count=1
+      , header_txt=self.DAY_GRATITUDE
+      , text_style=StdTextBoxStyles.WHT_BACK_HEADER_FONT_W_OUTLNE
       , show_outline=True
       )
     )

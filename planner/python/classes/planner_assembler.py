@@ -58,6 +58,7 @@ class PdfPrefix:
 
   INTR: str = 'main-intr'
   WEEK: str = 'main-week'
+  WKLG: str = 'week-plan'
 
   DAYS: str = 'xtra-days'
   NITE: str = 'xtra-nite'
@@ -81,12 +82,12 @@ class PageGroup():
             Takes the form:
 
             [ { 'file_name': 'group_0_pg_0'
-              , 'LeftEntry': {'entry_type': EntryType, 'entry_args: {}'}
-              , 'RghtEntry': {'entry_type': EntryType, 'entry_args: {}'}
+              , 'left_entry': {'entry_type': EntryType, 'entry_args: {}'}
+              , 'rght_entry': {'entry_type': EntryType, 'entry_args: {}'}
               }
             , { 'file_name': 'group_0_pg_1'
-              , 'LeftEntry': {'entry_type': EntryType, 'entry_args: {}'}
-              , 'RghtEntry': {'entry_type': EntryType, 'entry_args: {}'}
+              , 'left_entry': {'entry_type': EntryType, 'entry_args: {}'}
+              , 'rght_entry': {'entry_type': EntryType, 'entry_args: {}'}
               }
             ]
   """
@@ -101,11 +102,11 @@ class PageGroup():
 
       layouts   : List of layouts in the following form:
 
-        [ { LeftEntry: {'entry_type': EntryType, 'entry_args: {}'}
-          , RghtEntry: {'entry_type': EntryType, 'entry_args: {}'}
+        [ { left_entry: {'entry_type': EntryType, 'entry_args: {}'}
+          , rght_entry: {'entry_type': EntryType, 'entry_args: {}'}
           }
-        , { LeftEntry: {'entry_type': EntryType, 'entry_args: {}'}
-          , RghtEntry: {'entry_type': EntryType, 'entry_args: {}'}
+        , { left_entry: {'entry_type': EntryType, 'entry_args: {}'}
+          , rght_entry: {'entry_type': EntryType, 'entry_args: {}'}
           }
         ]
     """
@@ -154,10 +155,10 @@ class PlannerAssembler:
     ( is_dbl_sided=is_dbl_sided
     , is_preview=is_preview)
 
-    #_____________________________________________________________________
+    #___________________________________________________________________
     # Iterate through list containing layout arguments and create
     # for each layout
-    #_____________________________________________________________________
+    #___________________________________________________________________
     for group in self.page_groups:
 
       for pg in group.pages:
@@ -177,7 +178,7 @@ class PlannerAssembler:
 
       self.group_pdfs(group, out_dir)
 
-  #_______________________________________________________________________
+  #_____________________________________________________________________
   def group_pdfs(self
   , page_group: PageGroup
   , out_dir: str = '.'
@@ -215,7 +216,6 @@ class PlannerAssembler:
     """
     Sets page groups according to if pages are to be printed double-
     sided or if they are for the preview.
-
     """
 
     self.page_groups: list = []
@@ -229,14 +229,12 @@ class PlannerAssembler:
 
     group0: PageGroup = PageGroup(PdfPrefix.INTR, PageType.INTR_LAYOUTS)
     group1: PageGroup = PageGroup(PdfPrefix.WEEK, PageType.WEEK_LAYOUTS)
+    group2: PageGroup = PageGroup(PdfPrefix.WKLG, PageType.WEEK_REFLECT)
 
-    group2: PageGroup = PageGroup(PdfPrefix.NITE, NightlyPages.LAYOUTS)
-    group3: PageGroup = PageGroup(PdfPrefix.ACER, AceRefrPages.LAYOUTS)
-    group4: PageGroup = PageGroup(PdfPrefix.ACEW, AceWkshPages.LAYOUTS)
-    group5: PageGroup = PageGroup(PdfPrefix.SENS, SenseExPages.LAYOUTS)
-
-    #self.page_groups: list =\
-    #  [ group5]
+    group3: PageGroup = PageGroup(PdfPrefix.NITE, NightlyPages.LAYOUTS)
+    group4: PageGroup = PageGroup(PdfPrefix.ACER, AceRefrPages.LAYOUTS)
+    group5: PageGroup = PageGroup(PdfPrefix.ACEW, AceWkshPages.LAYOUTS)
+    group6: PageGroup = PageGroup(PdfPrefix.SENS, SenseExPages.LAYOUTS)
 
     self.page_groups: list =\
       [ group0
@@ -245,6 +243,7 @@ class PlannerAssembler:
       , group3
       , group4
       , group5
+      , group6
       ]
 
     return

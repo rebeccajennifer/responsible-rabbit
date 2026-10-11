@@ -44,8 +44,7 @@ class ProjectStrings:
   #_____________________________________________________________________
 
   MILESTONES: list =\
-  [ 'Advancement'
-  , 'Date'
+  [ 'Advancements'
   ]
 
   MEASUREMENT: str =\
