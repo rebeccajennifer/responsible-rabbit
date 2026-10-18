@@ -1,0 +1,109 @@
+/*_____________________________________________________________________|
+|______________________________________________________________________|
+|        _   __   _   _ _   _   _   _         _                        |
+|   |   |_| | _  | | | V | | | | / |_/ |_| | /                         |
+|   |__ | | |__| |_| |   | |_| | \ |   | | | \_                        |
+|    _  _         _ ___  _       _ ___   _                    / /      |
+|   /  | | |\ |  \   |  | / | | /   |   \                    (^^)      |
+|   \_ |_| | \| _/   |  | \ |_| \_  |  _/                    (____)o   |
+|______________________________________________________________________|
+|______________________________________________________________________|
+|                                                                      |
+|----------------------------------------------------------------------|
+|   Copyright 2026, Rebecca Rashkin                                    |
+|  -------------------------------                                     |
+|   This code may be copied, redistributed, transformed, or built      |
+|   upon in any format for educational, non-commercial purposes.       |
+|                                                                      |
+|   Please give me appropriate credit should you choose to use this    |
+|   resource. Thank you :)                                             |
+|----------------------------------------------------------------------|
+|                                                                      |
+|______________________________________________________________________|
+|   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\   |
+|_____________________________________________________________________*/
+/*  DESCRIPTION
+/*  CSS style sheet for headings.
+/*____________________________________________________________________*/
+
+@import "flux-bunny-colors-md.css";
+@import "flux-bunny-const-scaled-md.css";
+
+
+body
+{
+  font-family: var(--font-fam-normal);
+  font-size  : var(--sz-base);
+}
+
+p
+{
+  margin : 0px;
+  padding: 0px;
+  margin-bottom: var(--sz-smll);
+}
+
+strong
+{
+  color         : var(--flux-color-2);
+  font-style    : italic;
+  font-weight   : bold;
+}
+
+
+h1, h2, h3, h4, h5
+{
+  font-family: var(--font-fam-header);
+}
+
+h1
+{
+  font-size     : var(--size-h1);
+  color         : var(--flux-fg-norm);
+  font-variant  : small-caps;
+  border-bottom : var(--bord-h1);
+}
+
+h2
+{
+  font-size         : var(--size-h2);
+  color             : var(--flux-color-1);
+  font-variant      : small-caps;
+
+  margin-block-start: calc(0.75 * var(--sz-base));
+  margin-block-end  : calc(0.5 * var(--sz-base));
+
+  padding-top       : calc(0.5 * var(--sz-base));
+  padding-bottom    : 0px;
+
+  border-top        : var(--bord-h2);
+  border-bottom     : none;
+}
+
+h3
+{
+  font-size     : var(--size-h3);
+  color         : var(--flux-fg-mute);
+  border-top    : var(--bord-h3);
+  font-variant  : small-caps;
+}
+
+h4
+{
+  margin-left     : 0px;
+  text-decoration : underline;
+}
+
+h5
+{
+  font-family   : var(--font-fam-header);
+  color         : var(--flux-color-2);
+  font-weight   : bold;
+}
+
+pre-line
+{
+  font-family   : var(--font-fam-header);
+  color         : var(--flux-color-2);
+  font-weight   : bold;
+}
