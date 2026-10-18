@@ -30,80 +30,79 @@
 @import "flux-bunny-const-scaled-md.css";
 
 
-body
-{
+body {
   font-family: var(--font-fam-normal);
-  font-size  : var(--sz-base);
+  font-size: var(--sz-smll);
 }
 
-p
-{
-  margin : 0px;
+p {
+  margin: 0px;
   padding: 0px;
   margin-bottom: var(--sz-smll);
 }
 
-strong
-{
-  color         : var(--flux-color-2);
-  font-style    : italic;
-  font-weight   : bold;
+strong {
+  color: var(--flux-color-2);
+  font-style: italic;
+  font-weight: bold;
 }
 
-
-h1, h2, h3, h4, h5
-{
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: var(--font-fam-header);
 }
 
-h1
-{
-  font-size     : var(--size-h1);
-  color         : var(--flux-fg-norm);
-  font-variant  : small-caps;
-  border-bottom : var(--bord-h1);
+h1 {
+  font-size: var(--size-h1);
+  color: var(--flux-fg-norm);
+  font-variant: small-caps;
+  border-bottom: var(--bord-h1);
 }
 
-h2
-{
-  font-size         : var(--size-h2);
-  color             : var(--flux-color-1);
-  font-variant      : small-caps;
+h2 {
+  font-size: var(--size-h2);
+  color: var(--flux-color-1);
+  font-variant: small-caps;
 
   margin-block-start: calc(0.75 * var(--sz-base));
-  margin-block-end  : calc(0.5 * var(--sz-base));
+  margin-block-end: calc(0.5 * var(--sz-base));
 
-  padding-top       : calc(0.5 * var(--sz-base));
-  padding-bottom    : 0px;
+  padding-top: calc(0.5 * var(--sz-base));
+  padding-bottom: 0px;
 
-  border-top        : var(--bord-h2);
-  border-bottom     : none;
+  border-top: var(--bord-h2);
+  border-bottom: none;
 }
 
-h3
-{
-  font-size     : var(--size-h3);
-  color         : var(--flux-fg-mute);
-  border-top    : var(--bord-h3);
-  font-variant  : small-caps;
+h3 {
+  font-size: var(--size-h3);
+  color: var(--flux-fg-mute);
+  border-top: var(--bord-h3);
+  font-variant: small-caps;
 }
 
-h4
-{
-  margin-left     : 0px;
-  text-decoration : underline;
+h4 {
+  margin-left: 0px;
+  text-decoration: underline;
 }
 
-h5
-{
-  font-family   : var(--font-fam-header);
-  color         : var(--flux-color-2);
-  font-weight   : bold;
+h5 {
+  font-family: var(--font-fam-header);
+  color: var(--flux-color-2);
+  font-weight: bold;
 }
 
-pre-line
-{
-  font-family   : var(--font-fam-header);
-  color         : var(--flux-color-2);
-  font-weight   : bold;
+pre-line {
+  font-family: var(--font-fam-header);
+  color: var(--flux-color-2);
+  font-weight: bold;
+}
+
+div {
+  /* !needed */
+  padding: 0px !important;
+  color: var(--flux-fg-norm);
 }

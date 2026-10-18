@@ -26,7 +26,6 @@
 /*  Scale factor to be used by other CSS files.
 /*____________________________________________________________________*/
 
-:root
-{
-  --size-scale: 1.75;
+:root {
+  --size-scale: 2;
 }

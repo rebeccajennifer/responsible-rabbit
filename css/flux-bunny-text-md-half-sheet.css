@@ -23,45 +23,21 @@
 |   //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\  //\^.^/\\   |
 |_____________________________________________________________________*/
 /*  DESCRIPTION
-/*  CSS style sheet for constants.
+/*  CSS style sheet for half sheets.
 /*____________________________________________________________________*/
 
 @import "flux-bunny-colors-md.css";
+@import "flux-bunny-const-scaled-md.css";
+@import "flux-bunny-text-md.css";
 
-/*--------------------------------------------------------------------*/
-/* CONSTANTS
-/*--------------------------------------------------------------------*/
-:root {
-  /*------------------------------------------------------------------*/
-  /* Dimensions
-  /*------------------------------------------------------------------*/
-  --content-padding: 20px;
-  --toc-link-padding: 8px;
-  --pg-padding: 20px;
+h1 {
+  margin-top: 0%;
+}
 
-  --flux_button_txt: var(--flux-bg-norm);
-
-  --site-title-brdr: 16px solid var(--flux-color-3);
-
-  --content-border: 8px solid var(--flux-color-3);
-  --h2-border: 4px solid var(--flux-color-2);
-  --h3-border: 1px solid var(--flux-bg-bold);
-
-  --margin-site-title: 24pt;
-  --size-base: 10pt;
-  --size-small: 8pt;
-
-  --size-site-title: 24pt;
-  --size-h1: 18pt;
-  --size-h2: 20pt;
-  --size-h3: 12pt;
-  --size-h4: 10pt;
-
-  --size-code: 10pt;
-
-  --size-toc-top: clamp(12px, 1vw + 0.4rem, 16px);
-  --size-toc-gen: clamp(10px, 1vw + 0.2rem, 12px);
-
-  --font-fam-header: 'DIN Neuzeit Grotesk', 'Trebuchet MS';
-  --font-fam-normal: 'Consolas', monospace;
+body {
+  margin-left: 1in;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  margin-right: 0%;
+  padding: 0%;
 }
