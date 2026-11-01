@@ -45,9 +45,9 @@
   --sz-code: var(--sz-smll);
   --size-h1: var(--sz-titl);
 
-  --size-h2: calc(var(--size-scale) * 10pt);
-  --size-h3: calc(var(--size-scale) * 10pt);
-  --size-h4: calc(var(--size-scale) * 08pt);
+  --size-h2: calc(var(--sz-base) * 1.25);
+  --size-h3: calc(var(--sz-base) * 1);
+  --size-h4: calc(var(--sz-base) * 1);
 
   --bord-h1: 1px solid var(--flux-color-1);
   --bord-h2: 4px solid var(--flux-color-2);

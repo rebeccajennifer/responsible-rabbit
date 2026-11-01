@@ -60,28 +60,33 @@ h1 {
   color: var(--flux-fg-norm);
   font-variant: small-caps;
   border-bottom: var(--bord-h1);
+  margin-block: 0em;
 }
 
 h2 {
   font-size: var(--size-h2);
-  color: var(--flux-color-1);
-  font-variant: small-caps;
-
-  margin-block-start: calc(0.75 * var(--sz-base));
-  margin-block-end: calc(0.5 * var(--sz-base));
-
-  padding-top: calc(0.5 * var(--sz-base));
-  padding-bottom: 0px;
-
-  border-top: var(--bord-h2);
-  border-bottom: none;
-}
-
-h3 {
-  font-size: var(--size-h3);
-  color: var(--flux-fg-mute);
+  color: var(--flux-fg-norm);
   border-top: var(--bord-h3);
   font-variant: small-caps;
+  margin-block-start: 0em;
+  margin-block-end: .5em;
+  padding-top: .5em;
+}
+
+h3,
+h3-inline {
+  font-size: var(--size-h3);
+  color: var(--flux-fg-norm);
+  border-top: var(--bord-h3);
+  font-variant: small-caps;
+  margin-block-start: 0em;
+  margin-block-end: .5em;
+  padding-top: .5em;
+}
+
+h3-inline {
+  border: none;
+  display: inline;
 }
 
 h4 {
@@ -93,6 +98,12 @@ h5 {
   font-family: var(--font-fam-header);
   color: var(--flux-color-2);
   font-weight: bold;
+}
+
+mute {
+  font-size: var(--sz-smll);
+  color: var(--flux-fg-mute);
+  font-style: italic;
 }
 
 pre-line {
