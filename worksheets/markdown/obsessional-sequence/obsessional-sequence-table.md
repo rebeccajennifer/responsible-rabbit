@@ -15,8 +15,8 @@ FORMAT
 
 <!-- markdownlint-disable MD033 -->
 
-<link rel="stylesheet" href="../../css/flux-bunny-text-md-half-sheet.css">
-<link rel="stylesheet" href="../../css/flux-bunny-table-write-in.css">
+<link rel="stylesheet" href="../../../css/flux-bunny-text-md-half-sheet.css">
+<link rel="stylesheet" href="../../../css/flux-bunny-table-write-in.css">
 
 # Obsessional Sequences
 
@@ -24,29 +24,33 @@ FORMAT
 Trigger > Doubt > Consequence of Doubt > Distress > Compulsion
 ```
 
-Identify the steps in an obsessional sequence you experience. Start with the compulsion and work backward.
+| <h3-inline>Compulsion</h3-inline><mute> Behavior</mute> |
+| ------------------------------------------------------- |
+|                                                         |
+|                                                         |
 
-| Compulsion |
-| ---------- |
-|            |
+| <h3-inline>Doubt</h3-inline><mute> What if?</mute> |
+| -------------------------------------------------- |
+|                                                    |
+|                                                    |
+|                                                    |
+|                                                    |
+|                                                    |
 
-| Distress |
-| -------- |
-|          |
-|          |
+| <h3-inline>Consequence of Doubt</h3-inline><mute> If doubt is true...</mute> |
+| ---------------------------------------------------------------------------- |
+|                                                                              |
+|                                                                              |
+|                                                                              |
+|                                                                              |
+|                                                                              |
 
-| Consequence of Doubt |
-| -------------------- |
-|                      |
-|                      |
+| <h3-inline>Distress</h3-inline><mute> Unpleasant emotions</mute> |
+| ---------------------------------------------------------------- |
+|                                                                  |
+|                                                                  |
 
-| Doubt |
-| ----- |
-|       |
-|       |
-|       |
-
-| Trigger |
-| ------- |
-|         |
-|         |
+| <h3-inline>Trigger</h3-inline><mute> What prompted the doubt?</mute> |
+| -------------------------------------------------------------------- |
+|                                                                      |
+|                                                                      |
