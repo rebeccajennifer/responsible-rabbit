@@ -6,6 +6,7 @@
     "CALENDR"    , "cklst"      , "CNTR"       , "COMMITM"    , "dvdr"       ,
     "EMO_REF"    , "EMOTNS"     , "freewriting", "habt"       , "INACTIO"    ,
     "indv"       , "LNGTH"      , "mrgn"       , "OUTLNE"     , "PREVIEW"    ,
-    "Refr"       , "SENSEEX"    , "svgs"       , "TITLEPG"    , "Wksh"
+    "Refr"       , "SENSEEX"    , "svgs"       , "titl"       , "TITLEPG"    ,
+    "Wksh"
   ]
 }

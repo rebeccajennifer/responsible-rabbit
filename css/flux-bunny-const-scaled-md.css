@@ -31,8 +31,7 @@
 /*--------------------------------------------------------------------*/
 /* CONSTANTS
 /*--------------------------------------------------------------------*/
-:root
-{
+:root {
   --font-fam-header: 'DIN Neuzeit Grotesk', 'Trebuchet MS';
   --font-fam-normal: 'Consolas', monospace;
 
@@ -40,8 +39,8 @@
   /* Dimensions
   /*------------------------------------------------------------------*/
   --sz-base: calc(var(--size-scale) * 08pt);
-  --sz-smll: calc(var(--size-scale) * 06pt);;
-  --sz-titl: calc(var(--size-scale) * 14pt);
+  --sz-titl: calc(var(--sz-base) * 2);
+  --sz-smll: calc(var(--sz-base) * .75);
 
   --sz-code: var(--sz-smll);
   --size-h1: var(--sz-titl);

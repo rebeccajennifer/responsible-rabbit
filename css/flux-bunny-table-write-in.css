@@ -32,7 +32,7 @@
 table {
   width: 100%;
   border-bottom: 1px solid var(--flux-fg-mute);
-  margin-top: var(--size-h1);
+  margin-top: var(--sz-base);
 }
 
 td,
